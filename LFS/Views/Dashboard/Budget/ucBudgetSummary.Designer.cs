@@ -56,12 +56,11 @@ namespace LFS.Views.Dashboard.BudgetDashboard.BudgetSummary
             lblAppropriationsFE = new System.Windows.Forms.Label();
             label33 = new System.Windows.Forms.Label();
             label34 = new System.Windows.Forms.Label();
-            flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            btnRefresh = new System.Windows.Forms.Button();
-            dtAsOf = new System.Windows.Forms.DateTimePicker();
             cmbxFunds = new System.Windows.Forms.ComboBox();
-            cmbSubFPP = new System.Windows.Forms.ComboBox();
             cmbxFpp = new System.Windows.Forms.ComboBox();
+            cmbSubFPP = new System.Windows.Forms.ComboBox();
+            dtAsOf = new System.Windows.Forms.DateTimePicker();
+            btnRefresh = new System.Windows.Forms.Button();
             panel2 = new System.Windows.Forms.Panel();
             tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             panel12 = new System.Windows.Forms.Panel();
@@ -116,6 +115,7 @@ namespace LFS.Views.Dashboard.BudgetDashboard.BudgetSummary
             lblCONAppropriationsMOOE = new System.Windows.Forms.Label();
             label107 = new System.Windows.Forms.Label();
             label108 = new System.Windows.Forms.Label();
+            label10 = new System.Windows.Forms.Label();
             tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             panel5 = new System.Windows.Forms.Panel();
             label1 = new System.Windows.Forms.Label();
@@ -169,6 +169,7 @@ namespace LFS.Views.Dashboard.BudgetDashboard.BudgetSummary
             lblCYAppropriationsMOOE = new System.Windows.Forms.Label();
             label56 = new System.Windows.Forms.Label();
             label57 = new System.Windows.Forms.Label();
+            label11 = new System.Windows.Forms.Label();
             tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             panel4 = new System.Windows.Forms.Panel();
             lblGrandTotalAllotmentBalance = new System.Windows.Forms.Label();
@@ -185,13 +186,11 @@ namespace LFS.Views.Dashboard.BudgetDashboard.BudgetSummary
             panel16 = new System.Windows.Forms.Panel();
             lblGrandTotalAppropriations = new System.Windows.Forms.Label();
             label100 = new System.Windows.Forms.Label();
+            panel17 = new System.Windows.Forms.Panel();
             label9 = new System.Windows.Forms.Label();
-            label10 = new System.Windows.Forms.Label();
-            label11 = new System.Windows.Forms.Label();
             tableLayoutPanel2.SuspendLayout();
             panel1.SuspendLayout();
             panel3.SuspendLayout();
-            flowLayoutPanel1.SuspendLayout();
             panel2.SuspendLayout();
             tableLayoutPanel4.SuspendLayout();
             panel12.SuspendLayout();
@@ -209,6 +208,7 @@ namespace LFS.Views.Dashboard.BudgetDashboard.BudgetSummary
             panel11.SuspendLayout();
             panel10.SuspendLayout();
             panel16.SuspendLayout();
+            panel17.SuspendLayout();
             SuspendLayout();
             // 
             // tableLayoutPanel2
@@ -556,35 +556,40 @@ namespace LFS.Views.Dashboard.BudgetDashboard.BudgetSummary
             label34.Text = "FE";
             label34.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // flowLayoutPanel1
+            // cmbxFunds
             // 
-            flowLayoutPanel1.Controls.Add(btnRefresh);
-            flowLayoutPanel1.Controls.Add(dtAsOf);
-            flowLayoutPanel1.Controls.Add(cmbxFunds);
-            flowLayoutPanel1.Controls.Add(cmbSubFPP);
-            flowLayoutPanel1.Controls.Add(cmbxFpp);
-            flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
-            flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Padding = new System.Windows.Forms.Padding(4);
-            flowLayoutPanel1.Size = new System.Drawing.Size(1112, 37);
-            flowLayoutPanel1.TabIndex = 72;
+            cmbxFunds.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+            cmbxFunds.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            cmbxFunds.ForeColor = System.Drawing.Color.FromArgb(64, 64, 64);
+            cmbxFunds.FormattingEnabled = true;
+            cmbxFunds.Location = new System.Drawing.Point(297, 7);
+            cmbxFunds.Name = "cmbxFunds";
+            cmbxFunds.Size = new System.Drawing.Size(160, 23);
+            cmbxFunds.TabIndex = 80;
             // 
-            // btnRefresh
+            // cmbxFpp
             // 
-            btnRefresh.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
-            btnRefresh.ForeColor = System.Drawing.Color.FromArgb(64, 64, 64);
-            btnRefresh.Image = Properties.Resources.symbol_refresh_14px;
-            btnRefresh.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            btnRefresh.Location = new System.Drawing.Point(991, 7);
-            btnRefresh.Name = "btnRefresh";
-            btnRefresh.Size = new System.Drawing.Size(110, 23);
-            btnRefresh.TabIndex = 82;
-            btnRefresh.Text = "Refresh";
-            btnRefresh.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            btnRefresh.UseVisualStyleBackColor = true;
-            btnRefresh.Click += btnRefresh_Click;
+            cmbxFpp.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+            cmbxFpp.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            cmbxFpp.ForeColor = System.Drawing.Color.FromArgb(64, 64, 64);
+            cmbxFpp.FormattingEnabled = true;
+            cmbxFpp.Location = new System.Drawing.Point(463, 7);
+            cmbxFpp.Name = "cmbxFpp";
+            cmbxFpp.Size = new System.Drawing.Size(200, 23);
+            cmbxFpp.TabIndex = 79;
+            cmbxFpp.SelectedValueChanged += CmbxFpp_SelectedValueChanged;
+            cmbxFpp.KeyDown += cmbxFPP_KeyDown;
+            // 
+            // cmbSubFPP
+            // 
+            cmbSubFPP.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+            cmbSubFPP.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            cmbSubFPP.ForeColor = System.Drawing.Color.FromArgb(64, 64, 64);
+            cmbSubFPP.FormattingEnabled = true;
+            cmbSubFPP.Location = new System.Drawing.Point(669, 7);
+            cmbSubFPP.Name = "cmbSubFPP";
+            cmbSubFPP.Size = new System.Drawing.Size(200, 23);
+            cmbSubFPP.TabIndex = 83;
             // 
             // dtAsOf
             // 
@@ -593,63 +598,41 @@ namespace LFS.Views.Dashboard.BudgetDashboard.BudgetSummary
             dtAsOf.CalendarTitleForeColor = System.Drawing.Color.FromArgb(64, 64, 64);
             dtAsOf.CustomFormat = "MMM dd, yyyy";
             dtAsOf.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            dtAsOf.Location = new System.Drawing.Point(871, 7);
+            dtAsOf.Location = new System.Drawing.Point(875, 8);
             dtAsOf.Name = "dtAsOf";
             dtAsOf.Size = new System.Drawing.Size(114, 23);
             dtAsOf.TabIndex = 81;
             // 
-            // cmbxFunds
+            // btnRefresh
             // 
-            cmbxFunds.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
-            cmbxFunds.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            cmbxFunds.ForeColor = System.Drawing.Color.FromArgb(64, 64, 64);
-            cmbxFunds.FormattingEnabled = true;
-            cmbxFunds.Location = new System.Drawing.Point(705, 7);
-            cmbxFunds.Name = "cmbxFunds";
-            cmbxFunds.Size = new System.Drawing.Size(160, 23);
-            cmbxFunds.TabIndex = 80;
-            // 
-            // cmbSubFPP
-            // 
-            cmbSubFPP.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
-            cmbSubFPP.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            cmbSubFPP.ForeColor = System.Drawing.Color.FromArgb(64, 64, 64);
-            cmbSubFPP.FormattingEnabled = true;
-            cmbSubFPP.Location = new System.Drawing.Point(499, 7);
-            cmbSubFPP.Name = "cmbSubFPP";
-            cmbSubFPP.Size = new System.Drawing.Size(200, 23);
-            cmbSubFPP.TabIndex = 83;
-            // 
-            // cmbxFpp
-            // 
-            cmbxFpp.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
-            cmbxFpp.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            cmbxFpp.ForeColor = System.Drawing.Color.FromArgb(64, 64, 64);
-            cmbxFpp.FormattingEnabled = true;
-            cmbxFpp.Location = new System.Drawing.Point(293, 7);
-            cmbxFpp.Name = "cmbxFpp";
-            cmbxFpp.Size = new System.Drawing.Size(200, 23);
-            cmbxFpp.TabIndex = 79;
-            cmbxFpp.SelectedValueChanged += CmbxFpp_SelectedValueChanged;
-            cmbxFpp.KeyDown += cmbxFPP_KeyDown;
+            btnRefresh.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+            btnRefresh.ForeColor = System.Drawing.Color.FromArgb(64, 64, 64);
+            btnRefresh.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            btnRefresh.Location = new System.Drawing.Point(995, 7);
+            btnRefresh.Name = "btnRefresh";
+            btnRefresh.Size = new System.Drawing.Size(110, 24);
+            btnRefresh.TabIndex = 82;
+            btnRefresh.Text = "Refresh";
+            btnRefresh.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            btnRefresh.UseVisualStyleBackColor = true;
+            btnRefresh.Click += btnRefresh_Click;
             // 
             // panel2
             // 
             panel2.Controls.Add(tableLayoutPanel4);
-            panel2.Controls.Add(tableLayoutPanel3);
-            panel2.Controls.Add(tableLayoutPanel1);
-            panel2.Controls.Add(label9);
             panel2.Controls.Add(label10);
+            panel2.Controls.Add(tableLayoutPanel3);
             panel2.Controls.Add(label11);
+            panel2.Controls.Add(tableLayoutPanel1);
+            panel2.Controls.Add(panel17);
             panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            panel2.Location = new System.Drawing.Point(0, 37);
+            panel2.Location = new System.Drawing.Point(0, 0);
             panel2.Name = "panel2";
-            panel2.Size = new System.Drawing.Size(1112, 498);
+            panel2.Size = new System.Drawing.Size(1112, 535);
             panel2.TabIndex = 73;
             // 
             // tableLayoutPanel4
             // 
-            tableLayoutPanel4.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             tableLayoutPanel4.ColumnCount = 4;
             tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
@@ -659,7 +642,8 @@ namespace LFS.Views.Dashboard.BudgetDashboard.BudgetSummary
             tableLayoutPanel4.Controls.Add(panel13, 0, 0);
             tableLayoutPanel4.Controls.Add(panel14, 0, 0);
             tableLayoutPanel4.Controls.Add(panel15, 0, 0);
-            tableLayoutPanel4.Location = new System.Drawing.Point(1, 319);
+            tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Top;
+            tableLayoutPanel4.Location = new System.Drawing.Point(0, 306);
             tableLayoutPanel4.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             tableLayoutPanel4.Name = "tableLayoutPanel4";
             tableLayoutPanel4.RowCount = 1;
@@ -667,7 +651,7 @@ namespace LFS.Views.Dashboard.BudgetDashboard.BudgetSummary
             tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 180F));
             tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 180F));
             tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 180F));
-            tableLayoutPanel4.Size = new System.Drawing.Size(1110, 180);
+            tableLayoutPanel4.Size = new System.Drawing.Size(1112, 180);
             tableLayoutPanel4.TabIndex = 77;
             // 
             // panel12
@@ -687,10 +671,10 @@ namespace LFS.Views.Dashboard.BudgetDashboard.BudgetSummary
             panel12.Controls.Add(label68);
             panel12.Controls.Add(label69);
             panel12.Dock = System.Windows.Forms.DockStyle.Fill;
-            panel12.Location = new System.Drawing.Point(556, 3);
+            panel12.Location = new System.Drawing.Point(558, 3);
             panel12.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             panel12.Name = "panel12";
-            panel12.Size = new System.Drawing.Size(273, 174);
+            panel12.Size = new System.Drawing.Size(274, 174);
             panel12.TabIndex = 4;
             // 
             // label58
@@ -703,7 +687,7 @@ namespace LFS.Views.Dashboard.BudgetDashboard.BudgetSummary
             label58.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             label58.Name = "label58";
             label58.Padding = new System.Windows.Forms.Padding(2, 0, 0, 0);
-            label58.Size = new System.Drawing.Size(271, 20);
+            label58.Size = new System.Drawing.Size(272, 20);
             label58.TabIndex = 2;
             label58.Text = "Capital Outlay";
             label58.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -756,7 +740,7 @@ namespace LFS.Views.Dashboard.BudgetDashboard.BudgetSummary
             // 
             lblCONAllotmentBalanceCO.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
             lblCONAllotmentBalanceCO.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            lblCONAllotmentBalanceCO.Location = new System.Drawing.Point(187, 150);
+            lblCONAllotmentBalanceCO.Location = new System.Drawing.Point(188, 150);
             lblCONAllotmentBalanceCO.Margin = new System.Windows.Forms.Padding(5, 6, 9, 6);
             lblCONAllotmentBalanceCO.Name = "lblCONAllotmentBalanceCO";
             lblCONAllotmentBalanceCO.Size = new System.Drawing.Size(75, 16);
@@ -768,7 +752,7 @@ namespace LFS.Views.Dashboard.BudgetDashboard.BudgetSummary
             // 
             lbCONAppropriationBalanceCO.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
             lbCONAppropriationBalanceCO.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            lbCONAppropriationBalanceCO.Location = new System.Drawing.Point(187, 124);
+            lbCONAppropriationBalanceCO.Location = new System.Drawing.Point(188, 124);
             lbCONAppropriationBalanceCO.Margin = new System.Windows.Forms.Padding(5, 6, 9, 6);
             lbCONAppropriationBalanceCO.Name = "lbCONAppropriationBalanceCO";
             lbCONAppropriationBalanceCO.Size = new System.Drawing.Size(75, 16);
@@ -780,7 +764,7 @@ namespace LFS.Views.Dashboard.BudgetDashboard.BudgetSummary
             // 
             lblCONObligationsCO.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
             lblCONObligationsCO.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            lblCONObligationsCO.Location = new System.Drawing.Point(187, 97);
+            lblCONObligationsCO.Location = new System.Drawing.Point(188, 97);
             lblCONObligationsCO.Margin = new System.Windows.Forms.Padding(5, 6, 9, 6);
             lblCONObligationsCO.Name = "lblCONObligationsCO";
             lblCONObligationsCO.Size = new System.Drawing.Size(75, 16);
@@ -792,7 +776,7 @@ namespace LFS.Views.Dashboard.BudgetDashboard.BudgetSummary
             // 
             lblCONAllotmentsCO.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
             lblCONAllotmentsCO.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            lblCONAllotmentsCO.Location = new System.Drawing.Point(187, 70);
+            lblCONAllotmentsCO.Location = new System.Drawing.Point(188, 70);
             lblCONAllotmentsCO.Margin = new System.Windows.Forms.Padding(5, 6, 9, 6);
             lblCONAllotmentsCO.Name = "lblCONAllotmentsCO";
             lblCONAllotmentsCO.Size = new System.Drawing.Size(75, 16);
@@ -804,7 +788,7 @@ namespace LFS.Views.Dashboard.BudgetDashboard.BudgetSummary
             // 
             lblCONAppropriationsCO.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
             lblCONAppropriationsCO.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            lblCONAppropriationsCO.Location = new System.Drawing.Point(187, 44);
+            lblCONAppropriationsCO.Location = new System.Drawing.Point(188, 44);
             lblCONAppropriationsCO.Margin = new System.Windows.Forms.Padding(5, 6, 9, 6);
             lblCONAppropriationsCO.Name = "lblCONAppropriationsCO";
             lblCONAppropriationsCO.Size = new System.Drawing.Size(75, 16);
@@ -833,7 +817,7 @@ namespace LFS.Views.Dashboard.BudgetDashboard.BudgetSummary
             label69.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             label69.Name = "label69";
             label69.Padding = new System.Windows.Forms.Padding(2, 0, 0, 0);
-            label69.Size = new System.Drawing.Size(271, 18);
+            label69.Size = new System.Drawing.Size(272, 18);
             label69.TabIndex = 0;
             label69.Text = "CO";
             label69.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -855,10 +839,10 @@ namespace LFS.Views.Dashboard.BudgetDashboard.BudgetSummary
             panel13.Controls.Add(label80);
             panel13.Controls.Add(label81);
             panel13.Dock = System.Windows.Forms.DockStyle.Fill;
-            panel13.Location = new System.Drawing.Point(833, 3);
+            panel13.Location = new System.Drawing.Point(836, 3);
             panel13.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             panel13.Name = "panel13";
-            panel13.Size = new System.Drawing.Size(275, 174);
+            panel13.Size = new System.Drawing.Size(274, 174);
             panel13.TabIndex = 3;
             // 
             // label70
@@ -871,7 +855,7 @@ namespace LFS.Views.Dashboard.BudgetDashboard.BudgetSummary
             label70.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             label70.Name = "label70";
             label70.Padding = new System.Windows.Forms.Padding(2, 0, 0, 0);
-            label70.Size = new System.Drawing.Size(273, 20);
+            label70.Size = new System.Drawing.Size(272, 20);
             label70.TabIndex = 2;
             label70.Text = "Financial Expenses";
             label70.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -924,7 +908,7 @@ namespace LFS.Views.Dashboard.BudgetDashboard.BudgetSummary
             // 
             lblCONAllotmentBalanceFE.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
             lblCONAllotmentBalanceFE.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            lblCONAllotmentBalanceFE.Location = new System.Drawing.Point(189, 150);
+            lblCONAllotmentBalanceFE.Location = new System.Drawing.Point(188, 150);
             lblCONAllotmentBalanceFE.Margin = new System.Windows.Forms.Padding(5, 6, 9, 6);
             lblCONAllotmentBalanceFE.Name = "lblCONAllotmentBalanceFE";
             lblCONAllotmentBalanceFE.Size = new System.Drawing.Size(75, 16);
@@ -936,7 +920,7 @@ namespace LFS.Views.Dashboard.BudgetDashboard.BudgetSummary
             // 
             lblCONAppropriationBalanceFE.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
             lblCONAppropriationBalanceFE.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            lblCONAppropriationBalanceFE.Location = new System.Drawing.Point(189, 124);
+            lblCONAppropriationBalanceFE.Location = new System.Drawing.Point(188, 124);
             lblCONAppropriationBalanceFE.Margin = new System.Windows.Forms.Padding(5, 6, 9, 6);
             lblCONAppropriationBalanceFE.Name = "lblCONAppropriationBalanceFE";
             lblCONAppropriationBalanceFE.Size = new System.Drawing.Size(75, 16);
@@ -948,7 +932,7 @@ namespace LFS.Views.Dashboard.BudgetDashboard.BudgetSummary
             // 
             lblCONObligationsFE.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
             lblCONObligationsFE.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            lblCONObligationsFE.Location = new System.Drawing.Point(189, 97);
+            lblCONObligationsFE.Location = new System.Drawing.Point(188, 97);
             lblCONObligationsFE.Margin = new System.Windows.Forms.Padding(5, 6, 9, 6);
             lblCONObligationsFE.Name = "lblCONObligationsFE";
             lblCONObligationsFE.Size = new System.Drawing.Size(75, 16);
@@ -960,7 +944,7 @@ namespace LFS.Views.Dashboard.BudgetDashboard.BudgetSummary
             // 
             lblCONAllotmentsFE.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
             lblCONAllotmentsFE.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            lblCONAllotmentsFE.Location = new System.Drawing.Point(189, 70);
+            lblCONAllotmentsFE.Location = new System.Drawing.Point(188, 70);
             lblCONAllotmentsFE.Margin = new System.Windows.Forms.Padding(5, 6, 9, 6);
             lblCONAllotmentsFE.Name = "lblCONAllotmentsFE";
             lblCONAllotmentsFE.Size = new System.Drawing.Size(75, 16);
@@ -972,7 +956,7 @@ namespace LFS.Views.Dashboard.BudgetDashboard.BudgetSummary
             // 
             lblCONAppropriationsFE.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
             lblCONAppropriationsFE.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            lblCONAppropriationsFE.Location = new System.Drawing.Point(189, 44);
+            lblCONAppropriationsFE.Location = new System.Drawing.Point(188, 44);
             lblCONAppropriationsFE.Margin = new System.Windows.Forms.Padding(5, 6, 9, 6);
             lblCONAppropriationsFE.Name = "lblCONAppropriationsFE";
             lblCONAppropriationsFE.Size = new System.Drawing.Size(75, 16);
@@ -1001,7 +985,7 @@ namespace LFS.Views.Dashboard.BudgetDashboard.BudgetSummary
             label81.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             label81.Name = "label81";
             label81.Padding = new System.Windows.Forms.Padding(2, 0, 0, 0);
-            label81.Size = new System.Drawing.Size(273, 18);
+            label81.Size = new System.Drawing.Size(272, 18);
             label81.TabIndex = 0;
             label81.Text = "FE";
             label81.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1026,7 +1010,7 @@ namespace LFS.Views.Dashboard.BudgetDashboard.BudgetSummary
             panel14.Location = new System.Drawing.Point(2, 3);
             panel14.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             panel14.Name = "panel14";
-            panel14.Size = new System.Drawing.Size(273, 174);
+            panel14.Size = new System.Drawing.Size(274, 174);
             panel14.TabIndex = 2;
             // 
             // label82
@@ -1039,7 +1023,7 @@ namespace LFS.Views.Dashboard.BudgetDashboard.BudgetSummary
             label82.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             label82.Name = "label82";
             label82.Padding = new System.Windows.Forms.Padding(2, 0, 0, 0);
-            label82.Size = new System.Drawing.Size(271, 20);
+            label82.Size = new System.Drawing.Size(272, 20);
             label82.TabIndex = 2;
             label82.Text = "Personnel Services";
             label82.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1092,7 +1076,7 @@ namespace LFS.Views.Dashboard.BudgetDashboard.BudgetSummary
             // 
             lblCONAllotmentBalancePS.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
             lblCONAllotmentBalancePS.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            lblCONAllotmentBalancePS.Location = new System.Drawing.Point(190, 150);
+            lblCONAllotmentBalancePS.Location = new System.Drawing.Point(191, 150);
             lblCONAllotmentBalancePS.Margin = new System.Windows.Forms.Padding(5, 6, 9, 6);
             lblCONAllotmentBalancePS.Name = "lblCONAllotmentBalancePS";
             lblCONAllotmentBalancePS.Size = new System.Drawing.Size(75, 16);
@@ -1104,7 +1088,7 @@ namespace LFS.Views.Dashboard.BudgetDashboard.BudgetSummary
             // 
             lblCONAppropriationBalancePS.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
             lblCONAppropriationBalancePS.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            lblCONAppropriationBalancePS.Location = new System.Drawing.Point(190, 124);
+            lblCONAppropriationBalancePS.Location = new System.Drawing.Point(191, 124);
             lblCONAppropriationBalancePS.Margin = new System.Windows.Forms.Padding(5, 6, 9, 6);
             lblCONAppropriationBalancePS.Name = "lblCONAppropriationBalancePS";
             lblCONAppropriationBalancePS.Size = new System.Drawing.Size(75, 16);
@@ -1116,7 +1100,7 @@ namespace LFS.Views.Dashboard.BudgetDashboard.BudgetSummary
             // 
             lblCONObligationsPS.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
             lblCONObligationsPS.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            lblCONObligationsPS.Location = new System.Drawing.Point(190, 97);
+            lblCONObligationsPS.Location = new System.Drawing.Point(191, 97);
             lblCONObligationsPS.Margin = new System.Windows.Forms.Padding(5, 6, 9, 6);
             lblCONObligationsPS.Name = "lblCONObligationsPS";
             lblCONObligationsPS.Size = new System.Drawing.Size(75, 16);
@@ -1128,7 +1112,7 @@ namespace LFS.Views.Dashboard.BudgetDashboard.BudgetSummary
             // 
             lblCONAllotmentsPS.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
             lblCONAllotmentsPS.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            lblCONAllotmentsPS.Location = new System.Drawing.Point(190, 70);
+            lblCONAllotmentsPS.Location = new System.Drawing.Point(191, 70);
             lblCONAllotmentsPS.Margin = new System.Windows.Forms.Padding(5, 6, 9, 6);
             lblCONAllotmentsPS.Name = "lblCONAllotmentsPS";
             lblCONAllotmentsPS.Size = new System.Drawing.Size(75, 16);
@@ -1140,7 +1124,7 @@ namespace LFS.Views.Dashboard.BudgetDashboard.BudgetSummary
             // 
             lblCONAppropriationsPS.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
             lblCONAppropriationsPS.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            lblCONAppropriationsPS.Location = new System.Drawing.Point(190, 44);
+            lblCONAppropriationsPS.Location = new System.Drawing.Point(191, 44);
             lblCONAppropriationsPS.Margin = new System.Windows.Forms.Padding(5, 6, 9, 6);
             lblCONAppropriationsPS.Name = "lblCONAppropriationsPS";
             lblCONAppropriationsPS.Size = new System.Drawing.Size(75, 16);
@@ -1169,7 +1153,7 @@ namespace LFS.Views.Dashboard.BudgetDashboard.BudgetSummary
             label93.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             label93.Name = "label93";
             label93.Padding = new System.Windows.Forms.Padding(2, 0, 0, 0);
-            label93.Size = new System.Drawing.Size(271, 18);
+            label93.Size = new System.Drawing.Size(272, 18);
             label93.TabIndex = 0;
             label93.Text = "PS";
             label93.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1191,10 +1175,10 @@ namespace LFS.Views.Dashboard.BudgetDashboard.BudgetSummary
             panel15.Controls.Add(label107);
             panel15.Controls.Add(label108);
             panel15.Dock = System.Windows.Forms.DockStyle.Fill;
-            panel15.Location = new System.Drawing.Point(279, 3);
+            panel15.Location = new System.Drawing.Point(280, 3);
             panel15.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             panel15.Name = "panel15";
-            panel15.Size = new System.Drawing.Size(273, 174);
+            panel15.Size = new System.Drawing.Size(274, 174);
             panel15.TabIndex = 1;
             // 
             // label94
@@ -1207,7 +1191,7 @@ namespace LFS.Views.Dashboard.BudgetDashboard.BudgetSummary
             label94.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             label94.Name = "label94";
             label94.Padding = new System.Windows.Forms.Padding(2, 0, 0, 0);
-            label94.Size = new System.Drawing.Size(271, 20);
+            label94.Size = new System.Drawing.Size(272, 20);
             label94.TabIndex = 2;
             label94.Text = "Maintenance and Other Operating Expenses";
             label94.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1260,7 +1244,7 @@ namespace LFS.Views.Dashboard.BudgetDashboard.BudgetSummary
             // 
             lblCONAllotmentBalanceMOOE.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
             lblCONAllotmentBalanceMOOE.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            lblCONAllotmentBalanceMOOE.Location = new System.Drawing.Point(190, 150);
+            lblCONAllotmentBalanceMOOE.Location = new System.Drawing.Point(191, 150);
             lblCONAllotmentBalanceMOOE.Margin = new System.Windows.Forms.Padding(5, 6, 9, 6);
             lblCONAllotmentBalanceMOOE.Name = "lblCONAllotmentBalanceMOOE";
             lblCONAllotmentBalanceMOOE.Size = new System.Drawing.Size(75, 16);
@@ -1272,7 +1256,7 @@ namespace LFS.Views.Dashboard.BudgetDashboard.BudgetSummary
             // 
             lblCONAppropriationBalanceMOOE.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
             lblCONAppropriationBalanceMOOE.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            lblCONAppropriationBalanceMOOE.Location = new System.Drawing.Point(190, 124);
+            lblCONAppropriationBalanceMOOE.Location = new System.Drawing.Point(191, 124);
             lblCONAppropriationBalanceMOOE.Margin = new System.Windows.Forms.Padding(5, 6, 9, 6);
             lblCONAppropriationBalanceMOOE.Name = "lblCONAppropriationBalanceMOOE";
             lblCONAppropriationBalanceMOOE.Size = new System.Drawing.Size(75, 16);
@@ -1284,7 +1268,7 @@ namespace LFS.Views.Dashboard.BudgetDashboard.BudgetSummary
             // 
             lblCONObligationsMOOE.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
             lblCONObligationsMOOE.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            lblCONObligationsMOOE.Location = new System.Drawing.Point(190, 97);
+            lblCONObligationsMOOE.Location = new System.Drawing.Point(191, 97);
             lblCONObligationsMOOE.Margin = new System.Windows.Forms.Padding(5, 6, 9, 6);
             lblCONObligationsMOOE.Name = "lblCONObligationsMOOE";
             lblCONObligationsMOOE.Size = new System.Drawing.Size(75, 16);
@@ -1296,7 +1280,7 @@ namespace LFS.Views.Dashboard.BudgetDashboard.BudgetSummary
             // 
             lblCONAllotmentsMOOE.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
             lblCONAllotmentsMOOE.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            lblCONAllotmentsMOOE.Location = new System.Drawing.Point(190, 70);
+            lblCONAllotmentsMOOE.Location = new System.Drawing.Point(191, 70);
             lblCONAllotmentsMOOE.Margin = new System.Windows.Forms.Padding(5, 6, 9, 6);
             lblCONAllotmentsMOOE.Name = "lblCONAllotmentsMOOE";
             lblCONAllotmentsMOOE.Size = new System.Drawing.Size(75, 16);
@@ -1308,7 +1292,7 @@ namespace LFS.Views.Dashboard.BudgetDashboard.BudgetSummary
             // 
             lblCONAppropriationsMOOE.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
             lblCONAppropriationsMOOE.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            lblCONAppropriationsMOOE.Location = new System.Drawing.Point(190, 44);
+            lblCONAppropriationsMOOE.Location = new System.Drawing.Point(191, 44);
             lblCONAppropriationsMOOE.Margin = new System.Windows.Forms.Padding(5, 6, 9, 6);
             lblCONAppropriationsMOOE.Name = "lblCONAppropriationsMOOE";
             lblCONAppropriationsMOOE.Size = new System.Drawing.Size(75, 16);
@@ -1337,14 +1321,26 @@ namespace LFS.Views.Dashboard.BudgetDashboard.BudgetSummary
             label108.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             label108.Name = "label108";
             label108.Padding = new System.Windows.Forms.Padding(2, 0, 0, 0);
-            label108.Size = new System.Drawing.Size(271, 18);
+            label108.Size = new System.Drawing.Size(272, 18);
             label108.TabIndex = 0;
             label108.Text = "MOOE";
             label108.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // label10
+            // 
+            label10.AutoSize = true;
+            label10.Dock = System.Windows.Forms.DockStyle.Top;
+            label10.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
+            label10.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            label10.Location = new System.Drawing.Point(0, 289);
+            label10.Margin = new System.Windows.Forms.Padding(2, 16, 2, 0);
+            label10.Name = "label10";
+            label10.Size = new System.Drawing.Size(90, 17);
+            label10.TabIndex = 73;
+            label10.Text = "CONTINUING";
+            // 
             // tableLayoutPanel3
             // 
-            tableLayoutPanel3.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             tableLayoutPanel3.ColumnCount = 4;
             tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
             tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
@@ -1354,12 +1350,13 @@ namespace LFS.Views.Dashboard.BudgetDashboard.BudgetSummary
             tableLayoutPanel3.Controls.Add(panel6, 0, 0);
             tableLayoutPanel3.Controls.Add(panel7, 0, 0);
             tableLayoutPanel3.Controls.Add(panel8, 0, 0);
-            tableLayoutPanel3.Location = new System.Drawing.Point(1, 107);
+            tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Top;
+            tableLayoutPanel3.Location = new System.Drawing.Point(0, 109);
             tableLayoutPanel3.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             tableLayoutPanel3.Name = "tableLayoutPanel3";
             tableLayoutPanel3.RowCount = 1;
             tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            tableLayoutPanel3.Size = new System.Drawing.Size(1110, 180);
+            tableLayoutPanel3.Size = new System.Drawing.Size(1112, 180);
             tableLayoutPanel3.TabIndex = 76;
             // 
             // panel5
@@ -1379,10 +1376,10 @@ namespace LFS.Views.Dashboard.BudgetDashboard.BudgetSummary
             panel5.Controls.Add(label16);
             panel5.Controls.Add(label17);
             panel5.Dock = System.Windows.Forms.DockStyle.Fill;
-            panel5.Location = new System.Drawing.Point(556, 3);
+            panel5.Location = new System.Drawing.Point(558, 3);
             panel5.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             panel5.Name = "panel5";
-            panel5.Size = new System.Drawing.Size(273, 174);
+            panel5.Size = new System.Drawing.Size(274, 174);
             panel5.TabIndex = 4;
             // 
             // label1
@@ -1395,7 +1392,7 @@ namespace LFS.Views.Dashboard.BudgetDashboard.BudgetSummary
             label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             label1.Name = "label1";
             label1.Padding = new System.Windows.Forms.Padding(2, 0, 0, 0);
-            label1.Size = new System.Drawing.Size(271, 20);
+            label1.Size = new System.Drawing.Size(272, 20);
             label1.TabIndex = 2;
             label1.Text = "Capital Outlay";
             label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1448,7 +1445,7 @@ namespace LFS.Views.Dashboard.BudgetDashboard.BudgetSummary
             // 
             lblCYAllotmentBalanceCO.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
             lblCYAllotmentBalanceCO.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            lblCYAllotmentBalanceCO.Location = new System.Drawing.Point(187, 150);
+            lblCYAllotmentBalanceCO.Location = new System.Drawing.Point(188, 150);
             lblCYAllotmentBalanceCO.Margin = new System.Windows.Forms.Padding(5, 6, 9, 6);
             lblCYAllotmentBalanceCO.Name = "lblCYAllotmentBalanceCO";
             lblCYAllotmentBalanceCO.Size = new System.Drawing.Size(75, 16);
@@ -1460,7 +1457,7 @@ namespace LFS.Views.Dashboard.BudgetDashboard.BudgetSummary
             // 
             lblCYAppropriationBalanceCO.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
             lblCYAppropriationBalanceCO.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            lblCYAppropriationBalanceCO.Location = new System.Drawing.Point(187, 124);
+            lblCYAppropriationBalanceCO.Location = new System.Drawing.Point(188, 124);
             lblCYAppropriationBalanceCO.Margin = new System.Windows.Forms.Padding(5, 6, 9, 6);
             lblCYAppropriationBalanceCO.Name = "lblCYAppropriationBalanceCO";
             lblCYAppropriationBalanceCO.Size = new System.Drawing.Size(75, 16);
@@ -1472,7 +1469,7 @@ namespace LFS.Views.Dashboard.BudgetDashboard.BudgetSummary
             // 
             lblCYObligationsCO.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
             lblCYObligationsCO.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            lblCYObligationsCO.Location = new System.Drawing.Point(187, 97);
+            lblCYObligationsCO.Location = new System.Drawing.Point(188, 97);
             lblCYObligationsCO.Margin = new System.Windows.Forms.Padding(5, 6, 9, 6);
             lblCYObligationsCO.Name = "lblCYObligationsCO";
             lblCYObligationsCO.Size = new System.Drawing.Size(75, 16);
@@ -1484,7 +1481,7 @@ namespace LFS.Views.Dashboard.BudgetDashboard.BudgetSummary
             // 
             lblCYAllotmentsCO.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
             lblCYAllotmentsCO.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            lblCYAllotmentsCO.Location = new System.Drawing.Point(187, 70);
+            lblCYAllotmentsCO.Location = new System.Drawing.Point(188, 70);
             lblCYAllotmentsCO.Margin = new System.Windows.Forms.Padding(5, 6, 9, 6);
             lblCYAllotmentsCO.Name = "lblCYAllotmentsCO";
             lblCYAllotmentsCO.Size = new System.Drawing.Size(75, 16);
@@ -1496,7 +1493,7 @@ namespace LFS.Views.Dashboard.BudgetDashboard.BudgetSummary
             // 
             lblCYAppropriationsCO.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
             lblCYAppropriationsCO.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            lblCYAppropriationsCO.Location = new System.Drawing.Point(187, 44);
+            lblCYAppropriationsCO.Location = new System.Drawing.Point(188, 44);
             lblCYAppropriationsCO.Margin = new System.Windows.Forms.Padding(5, 6, 9, 6);
             lblCYAppropriationsCO.Name = "lblCYAppropriationsCO";
             lblCYAppropriationsCO.Size = new System.Drawing.Size(75, 16);
@@ -1525,7 +1522,7 @@ namespace LFS.Views.Dashboard.BudgetDashboard.BudgetSummary
             label17.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             label17.Name = "label17";
             label17.Padding = new System.Windows.Forms.Padding(2, 0, 0, 0);
-            label17.Size = new System.Drawing.Size(271, 18);
+            label17.Size = new System.Drawing.Size(272, 18);
             label17.TabIndex = 0;
             label17.Text = "CO";
             label17.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1547,10 +1544,10 @@ namespace LFS.Views.Dashboard.BudgetDashboard.BudgetSummary
             panel6.Controls.Add(label40);
             panel6.Controls.Add(label41);
             panel6.Dock = System.Windows.Forms.DockStyle.Fill;
-            panel6.Location = new System.Drawing.Point(833, 3);
+            panel6.Location = new System.Drawing.Point(836, 3);
             panel6.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             panel6.Name = "panel6";
-            panel6.Size = new System.Drawing.Size(275, 174);
+            panel6.Size = new System.Drawing.Size(274, 174);
             panel6.TabIndex = 3;
             // 
             // label18
@@ -1563,7 +1560,7 @@ namespace LFS.Views.Dashboard.BudgetDashboard.BudgetSummary
             label18.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             label18.Name = "label18";
             label18.Padding = new System.Windows.Forms.Padding(2, 0, 0, 0);
-            label18.Size = new System.Drawing.Size(273, 20);
+            label18.Size = new System.Drawing.Size(272, 20);
             label18.TabIndex = 2;
             label18.Text = "Financial Expenses";
             label18.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1616,7 +1613,7 @@ namespace LFS.Views.Dashboard.BudgetDashboard.BudgetSummary
             // 
             lblCYAllotmentBalanceFE.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
             lblCYAllotmentBalanceFE.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            lblCYAllotmentBalanceFE.Location = new System.Drawing.Point(189, 150);
+            lblCYAllotmentBalanceFE.Location = new System.Drawing.Point(188, 150);
             lblCYAllotmentBalanceFE.Margin = new System.Windows.Forms.Padding(5, 6, 9, 6);
             lblCYAllotmentBalanceFE.Name = "lblCYAllotmentBalanceFE";
             lblCYAllotmentBalanceFE.Size = new System.Drawing.Size(75, 16);
@@ -1628,7 +1625,7 @@ namespace LFS.Views.Dashboard.BudgetDashboard.BudgetSummary
             // 
             lblCYAppropriationBalanceFE.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
             lblCYAppropriationBalanceFE.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            lblCYAppropriationBalanceFE.Location = new System.Drawing.Point(189, 124);
+            lblCYAppropriationBalanceFE.Location = new System.Drawing.Point(188, 124);
             lblCYAppropriationBalanceFE.Margin = new System.Windows.Forms.Padding(5, 6, 9, 6);
             lblCYAppropriationBalanceFE.Name = "lblCYAppropriationBalanceFE";
             lblCYAppropriationBalanceFE.Size = new System.Drawing.Size(75, 16);
@@ -1640,7 +1637,7 @@ namespace LFS.Views.Dashboard.BudgetDashboard.BudgetSummary
             // 
             lblCYObligationsFE.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
             lblCYObligationsFE.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            lblCYObligationsFE.Location = new System.Drawing.Point(189, 97);
+            lblCYObligationsFE.Location = new System.Drawing.Point(188, 97);
             lblCYObligationsFE.Margin = new System.Windows.Forms.Padding(5, 6, 9, 6);
             lblCYObligationsFE.Name = "lblCYObligationsFE";
             lblCYObligationsFE.Size = new System.Drawing.Size(75, 16);
@@ -1652,7 +1649,7 @@ namespace LFS.Views.Dashboard.BudgetDashboard.BudgetSummary
             // 
             lblCYAllotmentsFE.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
             lblCYAllotmentsFE.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            lblCYAllotmentsFE.Location = new System.Drawing.Point(189, 70);
+            lblCYAllotmentsFE.Location = new System.Drawing.Point(188, 70);
             lblCYAllotmentsFE.Margin = new System.Windows.Forms.Padding(5, 6, 9, 6);
             lblCYAllotmentsFE.Name = "lblCYAllotmentsFE";
             lblCYAllotmentsFE.Size = new System.Drawing.Size(75, 16);
@@ -1664,7 +1661,7 @@ namespace LFS.Views.Dashboard.BudgetDashboard.BudgetSummary
             // 
             lblCYAppropriationsFE.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
             lblCYAppropriationsFE.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            lblCYAppropriationsFE.Location = new System.Drawing.Point(189, 44);
+            lblCYAppropriationsFE.Location = new System.Drawing.Point(188, 44);
             lblCYAppropriationsFE.Margin = new System.Windows.Forms.Padding(5, 6, 9, 6);
             lblCYAppropriationsFE.Name = "lblCYAppropriationsFE";
             lblCYAppropriationsFE.Size = new System.Drawing.Size(75, 16);
@@ -1693,7 +1690,7 @@ namespace LFS.Views.Dashboard.BudgetDashboard.BudgetSummary
             label41.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             label41.Name = "label41";
             label41.Padding = new System.Windows.Forms.Padding(2, 0, 0, 0);
-            label41.Size = new System.Drawing.Size(273, 18);
+            label41.Size = new System.Drawing.Size(272, 18);
             label41.TabIndex = 0;
             label41.Text = "FE";
             label41.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1718,7 +1715,7 @@ namespace LFS.Views.Dashboard.BudgetDashboard.BudgetSummary
             panel7.Location = new System.Drawing.Point(2, 3);
             panel7.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             panel7.Name = "panel7";
-            panel7.Size = new System.Drawing.Size(273, 174);
+            panel7.Size = new System.Drawing.Size(274, 174);
             panel7.TabIndex = 2;
             // 
             // label42
@@ -1731,7 +1728,7 @@ namespace LFS.Views.Dashboard.BudgetDashboard.BudgetSummary
             label42.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             label42.Name = "label42";
             label42.Padding = new System.Windows.Forms.Padding(2, 0, 0, 0);
-            label42.Size = new System.Drawing.Size(271, 20);
+            label42.Size = new System.Drawing.Size(272, 20);
             label42.TabIndex = 2;
             label42.Text = "Personnel Services";
             label42.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1784,7 +1781,7 @@ namespace LFS.Views.Dashboard.BudgetDashboard.BudgetSummary
             // 
             lblCYAllotmentBalancePS.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
             lblCYAllotmentBalancePS.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            lblCYAllotmentBalancePS.Location = new System.Drawing.Point(187, 150);
+            lblCYAllotmentBalancePS.Location = new System.Drawing.Point(188, 150);
             lblCYAllotmentBalancePS.Margin = new System.Windows.Forms.Padding(5, 6, 9, 6);
             lblCYAllotmentBalancePS.Name = "lblCYAllotmentBalancePS";
             lblCYAllotmentBalancePS.Size = new System.Drawing.Size(75, 16);
@@ -1796,7 +1793,7 @@ namespace LFS.Views.Dashboard.BudgetDashboard.BudgetSummary
             // 
             lblCYAppropriationBalancePS.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
             lblCYAppropriationBalancePS.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            lblCYAppropriationBalancePS.Location = new System.Drawing.Point(187, 124);
+            lblCYAppropriationBalancePS.Location = new System.Drawing.Point(188, 124);
             lblCYAppropriationBalancePS.Margin = new System.Windows.Forms.Padding(5, 6, 9, 6);
             lblCYAppropriationBalancePS.Name = "lblCYAppropriationBalancePS";
             lblCYAppropriationBalancePS.Size = new System.Drawing.Size(75, 16);
@@ -1808,7 +1805,7 @@ namespace LFS.Views.Dashboard.BudgetDashboard.BudgetSummary
             // 
             lblCYObligationsPS.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
             lblCYObligationsPS.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            lblCYObligationsPS.Location = new System.Drawing.Point(187, 97);
+            lblCYObligationsPS.Location = new System.Drawing.Point(188, 97);
             lblCYObligationsPS.Margin = new System.Windows.Forms.Padding(5, 6, 9, 6);
             lblCYObligationsPS.Name = "lblCYObligationsPS";
             lblCYObligationsPS.Size = new System.Drawing.Size(75, 16);
@@ -1820,7 +1817,7 @@ namespace LFS.Views.Dashboard.BudgetDashboard.BudgetSummary
             // 
             lblCYAllotmentsPS.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
             lblCYAllotmentsPS.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            lblCYAllotmentsPS.Location = new System.Drawing.Point(187, 70);
+            lblCYAllotmentsPS.Location = new System.Drawing.Point(188, 70);
             lblCYAllotmentsPS.Margin = new System.Windows.Forms.Padding(5, 6, 9, 6);
             lblCYAllotmentsPS.Name = "lblCYAllotmentsPS";
             lblCYAllotmentsPS.Size = new System.Drawing.Size(75, 16);
@@ -1832,7 +1829,7 @@ namespace LFS.Views.Dashboard.BudgetDashboard.BudgetSummary
             // 
             lblCYAppropriationsPS.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
             lblCYAppropriationsPS.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            lblCYAppropriationsPS.Location = new System.Drawing.Point(187, 44);
+            lblCYAppropriationsPS.Location = new System.Drawing.Point(188, 44);
             lblCYAppropriationsPS.Margin = new System.Windows.Forms.Padding(5, 6, 9, 6);
             lblCYAppropriationsPS.Name = "lblCYAppropriationsPS";
             lblCYAppropriationsPS.Size = new System.Drawing.Size(75, 16);
@@ -1861,7 +1858,7 @@ namespace LFS.Views.Dashboard.BudgetDashboard.BudgetSummary
             label50.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             label50.Name = "label50";
             label50.Padding = new System.Windows.Forms.Padding(2, 0, 0, 0);
-            label50.Size = new System.Drawing.Size(271, 18);
+            label50.Size = new System.Drawing.Size(272, 18);
             label50.TabIndex = 0;
             label50.Text = "PS";
             label50.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1883,10 +1880,10 @@ namespace LFS.Views.Dashboard.BudgetDashboard.BudgetSummary
             panel8.Controls.Add(label56);
             panel8.Controls.Add(label57);
             panel8.Dock = System.Windows.Forms.DockStyle.Fill;
-            panel8.Location = new System.Drawing.Point(279, 3);
+            panel8.Location = new System.Drawing.Point(280, 3);
             panel8.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             panel8.Name = "panel8";
-            panel8.Size = new System.Drawing.Size(273, 174);
+            panel8.Size = new System.Drawing.Size(274, 174);
             panel8.TabIndex = 1;
             // 
             // label51
@@ -1899,7 +1896,7 @@ namespace LFS.Views.Dashboard.BudgetDashboard.BudgetSummary
             label51.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             label51.Name = "label51";
             label51.Padding = new System.Windows.Forms.Padding(2, 0, 0, 0);
-            label51.Size = new System.Drawing.Size(271, 20);
+            label51.Size = new System.Drawing.Size(272, 20);
             label51.TabIndex = 2;
             label51.Text = "Maintenance and Other Operating Expenses";
             label51.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1952,7 +1949,7 @@ namespace LFS.Views.Dashboard.BudgetDashboard.BudgetSummary
             // 
             lblCYAllotmentBalanceMOOE.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
             lblCYAllotmentBalanceMOOE.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            lblCYAllotmentBalanceMOOE.Location = new System.Drawing.Point(190, 150);
+            lblCYAllotmentBalanceMOOE.Location = new System.Drawing.Point(191, 150);
             lblCYAllotmentBalanceMOOE.Margin = new System.Windows.Forms.Padding(5, 6, 9, 6);
             lblCYAllotmentBalanceMOOE.Name = "lblCYAllotmentBalanceMOOE";
             lblCYAllotmentBalanceMOOE.Size = new System.Drawing.Size(75, 16);
@@ -1964,7 +1961,7 @@ namespace LFS.Views.Dashboard.BudgetDashboard.BudgetSummary
             // 
             lblCYAppropriationBalanceMOOE.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
             lblCYAppropriationBalanceMOOE.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            lblCYAppropriationBalanceMOOE.Location = new System.Drawing.Point(190, 124);
+            lblCYAppropriationBalanceMOOE.Location = new System.Drawing.Point(191, 124);
             lblCYAppropriationBalanceMOOE.Margin = new System.Windows.Forms.Padding(5, 6, 9, 6);
             lblCYAppropriationBalanceMOOE.Name = "lblCYAppropriationBalanceMOOE";
             lblCYAppropriationBalanceMOOE.Size = new System.Drawing.Size(75, 16);
@@ -1976,7 +1973,7 @@ namespace LFS.Views.Dashboard.BudgetDashboard.BudgetSummary
             // 
             lblCYObligationsMOOE.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
             lblCYObligationsMOOE.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            lblCYObligationsMOOE.Location = new System.Drawing.Point(190, 97);
+            lblCYObligationsMOOE.Location = new System.Drawing.Point(191, 97);
             lblCYObligationsMOOE.Margin = new System.Windows.Forms.Padding(5, 6, 9, 6);
             lblCYObligationsMOOE.Name = "lblCYObligationsMOOE";
             lblCYObligationsMOOE.Size = new System.Drawing.Size(75, 16);
@@ -1988,7 +1985,7 @@ namespace LFS.Views.Dashboard.BudgetDashboard.BudgetSummary
             // 
             lblCYAllotmentsMOOE.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
             lblCYAllotmentsMOOE.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            lblCYAllotmentsMOOE.Location = new System.Drawing.Point(190, 70);
+            lblCYAllotmentsMOOE.Location = new System.Drawing.Point(191, 70);
             lblCYAllotmentsMOOE.Margin = new System.Windows.Forms.Padding(5, 6, 9, 6);
             lblCYAllotmentsMOOE.Name = "lblCYAllotmentsMOOE";
             lblCYAllotmentsMOOE.Size = new System.Drawing.Size(75, 16);
@@ -2000,7 +1997,7 @@ namespace LFS.Views.Dashboard.BudgetDashboard.BudgetSummary
             // 
             lblCYAppropriationsMOOE.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
             lblCYAppropriationsMOOE.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            lblCYAppropriationsMOOE.Location = new System.Drawing.Point(190, 44);
+            lblCYAppropriationsMOOE.Location = new System.Drawing.Point(191, 44);
             lblCYAppropriationsMOOE.Margin = new System.Windows.Forms.Padding(5, 6, 9, 6);
             lblCYAppropriationsMOOE.Name = "lblCYAppropriationsMOOE";
             lblCYAppropriationsMOOE.Size = new System.Drawing.Size(75, 16);
@@ -2029,14 +2026,26 @@ namespace LFS.Views.Dashboard.BudgetDashboard.BudgetSummary
             label57.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             label57.Name = "label57";
             label57.Padding = new System.Windows.Forms.Padding(2, 0, 0, 0);
-            label57.Size = new System.Drawing.Size(271, 18);
+            label57.Size = new System.Drawing.Size(272, 18);
             label57.TabIndex = 0;
             label57.Text = "MOOE";
             label57.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // label11
+            // 
+            label11.AutoSize = true;
+            label11.Dock = System.Windows.Forms.DockStyle.Top;
+            label11.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
+            label11.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            label11.Location = new System.Drawing.Point(0, 92);
+            label11.Margin = new System.Windows.Forms.Padding(2, 16, 2, 0);
+            label11.Name = "label11";
+            label11.Size = new System.Drawing.Size(102, 17);
+            label11.TabIndex = 74;
+            label11.Text = "CURRENT YEAR";
+            // 
             // tableLayoutPanel1
             // 
-            tableLayoutPanel1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             tableLayoutPanel1.ColumnCount = 5;
             tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 48.39506F));
             tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 51.60494F));
@@ -2048,13 +2057,14 @@ namespace LFS.Views.Dashboard.BudgetDashboard.BudgetSummary
             tableLayoutPanel1.Controls.Add(panel11, 2, 0);
             tableLayoutPanel1.Controls.Add(panel10, 1, 0);
             tableLayoutPanel1.Controls.Add(panel16, 0, 0);
-            tableLayoutPanel1.Location = new System.Drawing.Point(1, 21);
+            tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
+            tableLayoutPanel1.Location = new System.Drawing.Point(0, 37);
             tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
             tableLayoutPanel1.MinimumSize = new System.Drawing.Size(887, 55);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
             tableLayoutPanel1.RowCount = 1;
             tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            tableLayoutPanel1.Size = new System.Drawing.Size(1110, 55);
+            tableLayoutPanel1.Size = new System.Drawing.Size(1112, 55);
             tableLayoutPanel1.TabIndex = 75;
             // 
             // panel4
@@ -2064,10 +2074,10 @@ namespace LFS.Views.Dashboard.BudgetDashboard.BudgetSummary
             panel4.Controls.Add(lblGrandTotalAllotmentBalance);
             panel4.Controls.Add(label2);
             panel4.Dock = System.Windows.Forms.DockStyle.Fill;
-            panel4.Location = new System.Drawing.Point(889, 3);
+            panel4.Location = new System.Drawing.Point(890, 3);
             panel4.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             panel4.Name = "panel4";
-            panel4.Size = new System.Drawing.Size(219, 49);
+            panel4.Size = new System.Drawing.Size(220, 49);
             panel4.TabIndex = 4;
             // 
             // lblGrandTotalAllotmentBalance
@@ -2090,7 +2100,7 @@ namespace LFS.Views.Dashboard.BudgetDashboard.BudgetSummary
             label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             label2.Name = "label2";
             label2.Padding = new System.Windows.Forms.Padding(2, 0, 0, 0);
-            label2.Size = new System.Drawing.Size(217, 20);
+            label2.Size = new System.Drawing.Size(218, 20);
             label2.TabIndex = 1;
             label2.Text = "Allotment Balance";
             label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -2102,7 +2112,7 @@ namespace LFS.Views.Dashboard.BudgetDashboard.BudgetSummary
             panel9.Controls.Add(lblGrandTotalAppropriationBalance);
             panel9.Controls.Add(label4);
             panel9.Dock = System.Windows.Forms.DockStyle.Fill;
-            panel9.Location = new System.Drawing.Point(667, 3);
+            panel9.Location = new System.Drawing.Point(668, 3);
             panel9.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             panel9.Name = "panel9";
             panel9.Size = new System.Drawing.Size(218, 49);
@@ -2140,7 +2150,7 @@ namespace LFS.Views.Dashboard.BudgetDashboard.BudgetSummary
             panel11.Controls.Add(lblGrandTotalObligations);
             panel11.Controls.Add(label102);
             panel11.Dock = System.Windows.Forms.DockStyle.Fill;
-            panel11.Location = new System.Drawing.Point(445, 3);
+            panel11.Location = new System.Drawing.Point(446, 3);
             panel11.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             panel11.Name = "panel11";
             panel11.Size = new System.Drawing.Size(218, 49);
@@ -2178,7 +2188,7 @@ namespace LFS.Views.Dashboard.BudgetDashboard.BudgetSummary
             panel10.Controls.Add(lblGrandTotalAllotments);
             panel10.Controls.Add(label101);
             panel10.Dock = System.Windows.Forms.DockStyle.Fill;
-            panel10.Location = new System.Drawing.Point(216, 3);
+            panel10.Location = new System.Drawing.Point(217, 3);
             panel10.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             panel10.Name = "panel10";
             panel10.Size = new System.Drawing.Size(225, 49);
@@ -2219,7 +2229,7 @@ namespace LFS.Views.Dashboard.BudgetDashboard.BudgetSummary
             panel16.Location = new System.Drawing.Point(2, 3);
             panel16.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             panel16.Name = "panel16";
-            panel16.Size = new System.Drawing.Size(210, 49);
+            panel16.Size = new System.Drawing.Size(211, 49);
             panel16.TabIndex = 0;
             // 
             // lblGrandTotalAppropriations
@@ -2242,52 +2252,42 @@ namespace LFS.Views.Dashboard.BudgetDashboard.BudgetSummary
             label100.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             label100.Name = "label100";
             label100.Padding = new System.Windows.Forms.Padding(2, 0, 0, 0);
-            label100.Size = new System.Drawing.Size(208, 20);
+            label100.Size = new System.Drawing.Size(209, 20);
             label100.TabIndex = 1;
             label100.Text = "Appropriations";
             label100.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // panel17
+            // 
+            panel17.Controls.Add(cmbxFunds);
+            panel17.Controls.Add(btnRefresh);
+            panel17.Controls.Add(cmbxFpp);
+            panel17.Controls.Add(dtAsOf);
+            panel17.Controls.Add(label9);
+            panel17.Controls.Add(cmbSubFPP);
+            panel17.Dock = System.Windows.Forms.DockStyle.Top;
+            panel17.Location = new System.Drawing.Point(0, 0);
+            panel17.Name = "panel17";
+            panel17.Padding = new System.Windows.Forms.Padding(4);
+            panel17.Size = new System.Drawing.Size(1112, 37);
+            panel17.TabIndex = 84;
             // 
             // label9
             // 
             label9.AutoSize = true;
             label9.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
             label9.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            label9.Location = new System.Drawing.Point(3, 0);
+            label9.Location = new System.Drawing.Point(6, 9);
             label9.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             label9.Name = "label9";
             label9.Size = new System.Drawing.Size(98, 17);
             label9.TabIndex = 72;
             label9.Text = "GRAND TOTAL";
             // 
-            // label10
-            // 
-            label10.AutoSize = true;
-            label10.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
-            label10.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            label10.Location = new System.Drawing.Point(3, 295);
-            label10.Margin = new System.Windows.Forms.Padding(2, 16, 2, 0);
-            label10.Name = "label10";
-            label10.Size = new System.Drawing.Size(90, 17);
-            label10.TabIndex = 73;
-            label10.Text = "CONTINUING";
-            // 
-            // label11
-            // 
-            label11.AutoSize = true;
-            label11.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
-            label11.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            label11.Location = new System.Drawing.Point(3, 83);
-            label11.Margin = new System.Windows.Forms.Padding(2, 16, 2, 0);
-            label11.Name = "label11";
-            label11.Size = new System.Drawing.Size(102, 17);
-            label11.TabIndex = 74;
-            label11.Text = "CURRENT YEAR";
-            // 
             // ucBudgetSummary
             // 
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             Controls.Add(panel2);
-            Controls.Add(flowLayoutPanel1);
             Margin = new System.Windows.Forms.Padding(0);
             Name = "ucBudgetSummary";
             Size = new System.Drawing.Size(1112, 535);
@@ -2296,7 +2296,6 @@ namespace LFS.Views.Dashboard.BudgetDashboard.BudgetSummary
             panel1.PerformLayout();
             panel3.ResumeLayout(false);
             panel3.PerformLayout();
-            flowLayoutPanel1.ResumeLayout(false);
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
             tableLayoutPanel4.ResumeLayout(false);
@@ -2323,6 +2322,8 @@ namespace LFS.Views.Dashboard.BudgetDashboard.BudgetSummary
             panel11.ResumeLayout(false);
             panel10.ResumeLayout(false);
             panel16.ResumeLayout(false);
+            panel17.ResumeLayout(false);
+            panel17.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -2354,7 +2355,6 @@ namespace LFS.Views.Dashboard.BudgetDashboard.BudgetSummary
         internal System.Windows.Forms.Label lblAppropriationsFE;
         internal System.Windows.Forms.Label label33;
         internal System.Windows.Forms.Label label34;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         internal System.Windows.Forms.Button btnRefresh;
         internal System.Windows.Forms.DateTimePicker dtAsOf;
         internal System.Windows.Forms.ComboBox cmbxFunds;
@@ -2486,5 +2486,6 @@ namespace LFS.Views.Dashboard.BudgetDashboard.BudgetSummary
         internal System.Windows.Forms.Label label9;
         internal System.Windows.Forms.Label label10;
         internal System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Panel panel17;
     }
 }

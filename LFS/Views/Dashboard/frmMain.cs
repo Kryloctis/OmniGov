@@ -77,7 +77,7 @@ namespace LFS.Views.Dashboard
             switch (tabControl.SelectedTab.Name)
             {
                 case "tabPageBudget":
-                    ucBudget.OnloadEvent();
+                    ucBudget.OnLoad();
                     radBudget.Checked = true;
                     break;
 

@@ -28,69 +28,65 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ucBudget));
             ucBudgetSummary1 = new LFS.Views.Dashboard.BudgetDashboard.BudgetSummary.ucBudgetSummary();
             toolStrip1 = new System.Windows.Forms.ToolStrip();
-            transactionsTstrpDrpDwnBtn = new System.Windows.Forms.ToolStripDropDownButton();
-            appropriationsTStrpMnuItm = new System.Windows.Forms.ToolStripMenuItem();
-            allotmentReleaseTStrpMnuItm = new System.Windows.Forms.ToolStripMenuItem();
-            obligationsTStrpMnuItm = new System.Windows.Forms.ToolStripMenuItem();
+            tlStrpBtnAppropriations = new System.Windows.Forms.ToolStripButton();
+            tlStrpBtnAlltmntRelease = new System.Windows.Forms.ToolStripButton();
+            tlStrpBtnObligations = new System.Windows.Forms.ToolStripButton();
             toolStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // ucBudgetSummary1
             // 
             ucBudgetSummary1.Dock = System.Windows.Forms.DockStyle.Fill;
-            ucBudgetSummary1.Location = new System.Drawing.Point(0, 30);
+            ucBudgetSummary1.Location = new System.Drawing.Point(0, 47);
             ucBudgetSummary1.Margin = new System.Windows.Forms.Padding(0);
             ucBudgetSummary1.Name = "ucBudgetSummary1";
-            ucBudgetSummary1.Size = new System.Drawing.Size(1195, 558);
+            ucBudgetSummary1.Size = new System.Drawing.Size(1195, 541);
             ucBudgetSummary1.TabIndex = 7;
             // 
             // toolStrip1
             // 
             toolStrip1.BackColor = System.Drawing.Color.Transparent;
             toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { transactionsTstrpDrpDwnBtn });
+            toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { tlStrpBtnAppropriations, tlStrpBtnAlltmntRelease, tlStrpBtnObligations });
             toolStrip1.Location = new System.Drawing.Point(0, 0);
             toolStrip1.Name = "toolStrip1";
-            toolStrip1.Padding = new System.Windows.Forms.Padding(4);
+            toolStrip1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 20);
             toolStrip1.ShowItemToolTips = false;
-            toolStrip1.Size = new System.Drawing.Size(1195, 30);
+            toolStrip1.Size = new System.Drawing.Size(1195, 47);
             toolStrip1.TabIndex = 6;
             toolStrip1.Text = "toolStrip1";
             // 
-            // transactionsTstrpDrpDwnBtn
+            // tlStrpBtnAppropriations
             // 
-            transactionsTstrpDrpDwnBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            transactionsTstrpDrpDwnBtn.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { appropriationsTStrpMnuItm, allotmentReleaseTStrpMnuItm, obligationsTStrpMnuItm });
-            transactionsTstrpDrpDwnBtn.Image = (System.Drawing.Image)resources.GetObject("transactionsTstrpDrpDwnBtn.Image");
-            transactionsTstrpDrpDwnBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
-            transactionsTstrpDrpDwnBtn.Margin = new System.Windows.Forms.Padding(0, 1, 10, 2);
-            transactionsTstrpDrpDwnBtn.Name = "transactionsTstrpDrpDwnBtn";
-            transactionsTstrpDrpDwnBtn.Size = new System.Drawing.Size(95, 19);
-            transactionsTstrpDrpDwnBtn.Text = "● Transactions";
+            tlStrpBtnAppropriations.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            tlStrpBtnAppropriations.Image = Properties.Resources.folder_filled_20px;
+            tlStrpBtnAppropriations.ImageTransparentColor = System.Drawing.Color.Magenta;
+            tlStrpBtnAppropriations.Name = "tlStrpBtnAppropriations";
+            tlStrpBtnAppropriations.Size = new System.Drawing.Size(106, 20);
+            tlStrpBtnAppropriations.Text = "Appropriations";
+            tlStrpBtnAppropriations.Click += tlStrpBtnAppropriations_Click;
             // 
-            // appropriationsTStrpMnuItm
+            // tlStrpBtnAlltmntRelease
             // 
-            appropriationsTStrpMnuItm.Name = "appropriationsTStrpMnuItm";
-            appropriationsTStrpMnuItm.Size = new System.Drawing.Size(178, 22);
-            appropriationsTStrpMnuItm.Text = "Appropriations...";
-            appropriationsTStrpMnuItm.Click += appropriationsTStrpMnuItm_Click;
+            tlStrpBtnAlltmntRelease.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            tlStrpBtnAlltmntRelease.Image = Properties.Resources.folder_filled_20px;
+            tlStrpBtnAlltmntRelease.ImageTransparentColor = System.Drawing.Color.Magenta;
+            tlStrpBtnAlltmntRelease.Name = "tlStrpBtnAlltmntRelease";
+            tlStrpBtnAlltmntRelease.Size = new System.Drawing.Size(122, 20);
+            tlStrpBtnAlltmntRelease.Text = "Allotment Release";
+            tlStrpBtnAlltmntRelease.Click += tlStrpBtnAlltmntRelease_Click;
             // 
-            // allotmentReleaseTStrpMnuItm
+            // tlStrpBtnObligations
             // 
-            allotmentReleaseTStrpMnuItm.Name = "allotmentReleaseTStrpMnuItm";
-            allotmentReleaseTStrpMnuItm.Size = new System.Drawing.Size(178, 22);
-            allotmentReleaseTStrpMnuItm.Text = "Allotment Release...";
-            allotmentReleaseTStrpMnuItm.Click += allotmentReleaseTStrpMnuItm_Click;
-            // 
-            // obligationsTStrpMnuItm
-            // 
-            obligationsTStrpMnuItm.Name = "obligationsTStrpMnuItm";
-            obligationsTStrpMnuItm.Size = new System.Drawing.Size(178, 22);
-            obligationsTStrpMnuItm.Text = "Obligations...";
-            obligationsTStrpMnuItm.Click += obligationsTStrpMnuItm_Click;
+            tlStrpBtnObligations.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            tlStrpBtnObligations.Image = Properties.Resources.folder_filled_20px;
+            tlStrpBtnObligations.ImageTransparentColor = System.Drawing.Color.Magenta;
+            tlStrpBtnObligations.Name = "tlStrpBtnObligations";
+            tlStrpBtnObligations.Size = new System.Drawing.Size(88, 20);
+            tlStrpBtnObligations.Text = "Obligations";
+            tlStrpBtnObligations.Click += tlStrpBtnObligations_Click;
             // 
             // ucBudget
             // 
@@ -112,9 +108,8 @@
 
         private BudgetDashboard.BudgetSummary.ucBudgetSummary ucBudgetSummary1;
         private System.Windows.Forms.ToolStrip toolStrip1;
-        private System.Windows.Forms.ToolStripDropDownButton transactionsTstrpDrpDwnBtn;
-        private System.Windows.Forms.ToolStripMenuItem appropriationsTStrpMnuItm;
-        private System.Windows.Forms.ToolStripMenuItem allotmentReleaseTStrpMnuItm;
-        private System.Windows.Forms.ToolStripMenuItem obligationsTStrpMnuItm;
+        private System.Windows.Forms.ToolStripButton tlStrpBtnAlltmntRelease;
+        private System.Windows.Forms.ToolStripButton tlStrpBtnObligations;
+        private System.Windows.Forms.ToolStripButton tlStrpBtnAppropriations;
     }
 }

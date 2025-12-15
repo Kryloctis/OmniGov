@@ -18,15 +18,23 @@ namespace LFS.Views.Dashboard.Budget
             ucBudgetSummary = ucBudgetSummary1;
         }
 
-        internal void OnloadEvent()
+        private void VerifyUserPrivileges()
+        {
+            tlStrpBtnAppropriations.Enabled = PrivilegesHelper.HasPrivilege(Privileges.MngBudgetApprops);
+            tlStrpBtnAlltmntRelease.Enabled = PrivilegesHelper.HasPrivilege(Privileges.MngAllotReleases);
+            tlStrpBtnObligations.Enabled = PrivilegesHelper.HasPrivilege(Privileges.TransObligationReq);
+        }
+
+        internal void OnLoad()
         {
             if (!DesignMode)
             {
                 ucBudgetSummary.OnLoad();
+                VerifyUserPrivileges();
             }
         }
 
-        private void appropriationsTStrpMnuItm_Click(object sender, EventArgs e)
+        private void tlStrpBtnAppropriations_Click(object sender, EventArgs e)
         {
             try
             {
@@ -35,7 +43,7 @@ namespace LFS.Views.Dashboard.Budget
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private void allotmentReleaseTStrpMnuItm_Click(object sender, EventArgs e)
+        private void tlStrpBtnAlltmntRelease_Click(object sender, EventArgs e)
         {
             try
             {
@@ -44,7 +52,7 @@ namespace LFS.Views.Dashboard.Budget
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private void obligationsTStrpMnuItm_Click(object sender, EventArgs e)
+        private void tlStrpBtnObligations_Click(object sender, EventArgs e)
         {
             try
             {
