@@ -92,7 +92,6 @@ namespace LFS.Views.Transactions.ObligationRequest
                 }
 
                 GetObligationStatus();
-                ClearAllErrors();
 
                 if (createById == UserHelper.loggedUser.Id)
                 {
@@ -111,16 +110,6 @@ namespace LFS.Views.Transactions.ObligationRequest
             {
                 Helper.MessageBoxError(ex.Message);
             }
-        }
-
-        private void ClearAllErrors()
-        {
-            Helper.ClearErrorComboBox(uc.epFPP, uc.cmbxFPP);
-            Helper.ClearMaskedTextboxError(uc.epObligationNo, uc.mskTxtObligationNoTemplate);
-            Helper.ClearMaskedTextboxError(uc.epObligationRequest, uc.mskTxtObligationNoTemplate);
-            Helper.ClearErrorTextBox(uc.epPayee, uc.txtPayee);
-            Helper.ClearErrorTextBox(uc.epReferenceNo, uc.txtReferenceNo);
-            Helper.ClearErrorTextBox(uc.epExplanation, uc.txtExplanation);
         }
 
         private bool SetObligationStatus(string status)

@@ -1,5 +1,4 @@
 ﻿using ACC.Data;
-using ACC.Domain.Interfaces;
 using LFS.Helpers;
 using System;
 using System.Collections.Generic;
@@ -55,16 +54,17 @@ namespace LFS.Views.Transactions.ObligationRequest
 
         internal string GetFormErrors()
         {
-            var errorArray = new string[6];
-            errorArray[0] = epFPP.GetError(cmbxFPP);
-            errorArray[1] = epObligationNo.GetError(mskTxtObligationNoTemplate);
-            errorArray[2] = epReferenceNo.GetError(txtReferenceNo);
-            errorArray[3] = epPayee.GetError(txtPayee);
-            errorArray[4] = epExplanation.GetError(txtExplanation);
-            errorArray[5] = dgObligationRequests.Tag == null ? string.Empty : dgObligationRequests.Tag.ToString();
+            var errorArray = new string[]
+            {
+                errorProvider1.GetError(cmbxFPP),
+                errorProvider1.GetError(mskTxtObligationNoTemplate),
+                errorProvider1.GetError(txtReferenceNo),
+                errorProvider1.GetError(txtPayee),
+                errorProvider1.GetError(txtExplanation),
+                dgObligationRequests.Tag == null ? string.Empty : dgObligationRequests.Tag.ToString(),
+            };
 
-            IError _errors = AccFactory.CreateErrors(errorArray);
-            return _errors.GenerateErrorMessage();
+            return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
         }
 
         internal void ResetForm()
@@ -180,7 +180,6 @@ namespace LFS.Views.Transactions.ObligationRequest
             EnableDisableButtons();
         }
 
-        //FPP COMBOBOX
         private DataTable DataTableFPP()
         {
             DataTable dtFPP;
@@ -261,7 +260,6 @@ namespace LFS.Views.Transactions.ObligationRequest
                 radioButton.Image = null;
         }
 
-        //FUNDS
         internal void LoadFunds()
         {
             var funds = AccFactory.FundsRepository().GetRecords();
@@ -277,7 +275,6 @@ namespace LFS.Views.Transactions.ObligationRequest
                     TextImageRelation = TextImageRelation.ImageBeforeText
                 };
 
-                // making general fund as default
                 if (Convert.ToInt32(fund["id"]) == 1)
                 {
                     radFund.Checked = true;
@@ -305,7 +302,6 @@ namespace LFS.Views.Transactions.ObligationRequest
             ShowCheckIcon(radFund);
         }
 
-        //ALLOTMENT CLASSES
         internal void LoadAllotmentClasses()
         {
             var dtAllotmentClass = AccFactory.AllotmentClassesRepository().GetRecords();
@@ -347,7 +343,6 @@ namespace LFS.Views.Transactions.ObligationRequest
             ShowCheckIcon(allotmentClass);
         }
 
-        //GENERATE OBLIGATION REQUEST NO.
         internal string GenerateObligationRequestNoTemplate()
         {
             string fundCode = AccFactory.FundsRepository().GetRecordByID(fundId)["fund_code"];
@@ -373,35 +368,28 @@ namespace LFS.Views.Transactions.ObligationRequest
                 EnableDisableComponents(true);
         }
 
-        //ADD
         internal string GetFormErrorsAdd()
         {
-            var errorArray = new string[1];
-            errorArray[0] = epFPP.GetError(cmbxFPP);
+            var errorArray = new string[]
+            {
+                errorProvider1.GetError(cmbxFPP)
+            };
 
-            IError _errors = AccFactory.CreateErrors(errorArray);
-            return _errors.GenerateErrorMessage();
+            return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
         }
 
         private bool Validation()
         {
-            try
+            if (ShowErrorFPPNameNotExist() || Helper.ShowErrorComboBoxEmpty(errorProvider1, cmbxFPP, "FPP"))
             {
-                if (ShowErrorFPPNameNotExist() || Helper.ShowErrorComboBoxEmpty(epFPP, cmbxFPP, "FPP"))
-                {
-                    Helper.MessageBoxError(GetFormErrorsAdd());
-                    return false;
-                }
-
-                Helper.ClearErrorComboBox(epFPP, cmbxFPP);
-
+                Helper.MessageBoxError(GetFormErrorsAdd());
+                return false;
+            }
+            else
+            {
+                Helper.ClearErrorComboBox(errorProvider1, cmbxFPP);
                 return true;
             }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
-            return false;
         }
 
         private void ShowObligationRequestAdd()
@@ -422,10 +410,13 @@ namespace LFS.Views.Transactions.ObligationRequest
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            ShowObligationRequestAdd();
+            try
+            {
+                ShowObligationRequestAdd();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        //EDIT
         private void ShowObligationRequestEdit()
         {
             if (Validation())
@@ -455,32 +446,33 @@ namespace LFS.Views.Transactions.ObligationRequest
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            ShowObligationRequestEdit();
-        }
-
-        #region VALIDATIONS
-
-        //OBLIGATION LIST EMPTY
-        internal bool ShowErrorObligationRequestsListEmpty()
-        {
             try
             {
-                if (dgObligationRequests.Rows.Count == 0)
-                {
-                    dgObligationRequests.Tag = "Obligation request list is empty.";
-                    return true;
-                }
+                ShowObligationRequestEdit();
             }
-            catch (Exception ex)
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        internal bool ShowErrorObligationRequestsListEmpty()
+        {
+            if (dgObligationRequests.Rows.Count == 0)
             {
-                Helper.MessageBoxError(ex.Message);
+                dgObligationRequests.Tag = "Obligation request list is empty.";
+                return true;
             }
-            return false;
+            else
+            {
+                return false;
+            }
         }
 
         private void dgObligationRequests_Validating(object sender, CancelEventArgs e)
         {
-            e.Cancel = ShowErrorObligationRequestsListEmpty();
+            try
+            {
+                e.Cancel = ShowErrorObligationRequestsListEmpty();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void dgObligationRequests_Validated(object sender, EventArgs e)
@@ -488,45 +480,40 @@ namespace LFS.Views.Transactions.ObligationRequest
             dgObligationRequests.Tag = string.Empty;
         }
 
-        //FPP
         private bool ShowErrorFPPNameNotExist()
         {
-            try
-            {
-                string fppName = cmbxFPP.Text;
+            string fppName = cmbxFPP.Text;
 
-                if (cmbxFPP.FindStringExact(fppName) < 0 && !string.IsNullOrEmpty(fppName))
-                {
-                    epFPP.SetError(cmbxFPP, "FPP you entered doesn't exist on your record.");
-                    return true;
-                }
-            }
-            catch (Exception ex)
+            if (cmbxFPP.FindStringExact(fppName) < 0 && !string.IsNullOrEmpty(fppName))
             {
-                Helper.MessageBoxError(ex.Message);
+                errorProvider1.SetError(cmbxFPP, "FPP you entered doesn't exist on your record.");
+                return true;
             }
-            return false;
+            else { return false; }
         }
 
         private void cmbxFPP_Validating(object sender, CancelEventArgs e)
         {
-            if (string.IsNullOrEmpty(cmbxFPP.Text))
-                e.Cancel = Helper.ShowErrorComboBoxEmpty(epFPP, cmbxFPP, "FPP.");
-            else
-                e.Cancel = ShowErrorFPPNameNotExist();
+            try
+            {
+                if (string.IsNullOrEmpty(cmbxFPP.Text))
+                    e.Cancel = Helper.ShowErrorComboBoxEmpty(errorProvider1, cmbxFPP, "FPP.");
+                else
+                    e.Cancel = ShowErrorFPPNameNotExist();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void cmbxFPP_Validated(object sender, EventArgs e)
         {
-            Helper.ClearErrorComboBox(epFPP, cmbxFPP);
+            Helper.ClearErrorComboBox(errorProvider1, cmbxFPP);
         }
 
-        //OBLIGATION NO.
         private bool ShowErrorObligationRequestNoEmpty()
         {
             if (!mskTxtObligationNoSeries.MaskCompleted)
             {
-                epObligationNo.SetError(mskTxtObligationNoTemplate, "Please enter an obligation no.");
+                errorProvider1.SetError(mskTxtObligationNoTemplate, "Please enter an obligation no.");
                 return true;
             }
             else
@@ -535,76 +522,80 @@ namespace LFS.Views.Transactions.ObligationRequest
 
         private bool ShowErrorObligationRequestNoExist()
         {
-            try
+            string obligationNo = $"{mskTxtObligationNoSeries.Text}-{GenerateObligationRequestNoTemplate()}";
+
+            bool obligationRequestNoExist;
+
+            if (obligationRequestId == 0)
+                obligationRequestNoExist = AccFactory.ObligationRequestRepository().ObligationRequestNoExist(obligationNo);
+            else
+                obligationRequestNoExist = AccFactory.ObligationRequestRepository().ObligationRequestNoExist(obligationRequestId, obligationNo);
+
+            if (obligationRequestNoExist)
             {
-                string obligationNo = $"{mskTxtObligationNoSeries.Text}-{GenerateObligationRequestNoTemplate()}";
-
-                bool obligationRequestNoExist;
-
-                if (obligationRequestId == 0)
-                    obligationRequestNoExist = AccFactory.ObligationRequestRepository().ObligationRequestNoExist(obligationNo);
-                else
-                    obligationRequestNoExist = AccFactory.ObligationRequestRepository().ObligationRequestNoExist(obligationRequestId, obligationNo);
-
-                if (obligationRequestNoExist)
-                {
-                    epObligationNo.SetError(mskTxtObligationNoTemplate, "Obligation request no. is already exist on your record.");
-                    return true;
-                }
+                errorProvider1.SetError(mskTxtObligationNoTemplate, "Obligation request no. is already exist on your record.");
+                return true;
             }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
-            return false;
+            else { return false; }
         }
 
         private void mskTxtObligationNoSeries_Validating(object sender, CancelEventArgs e)
         {
-            if (ShowErrorObligationRequestNoEmpty())
-                e.Cancel = ShowErrorObligationRequestNoEmpty();
-            else if (ShowErrorObligationRequestNoExist())
-                e.Cancel = ShowErrorObligationRequestNoExist();
+            try
+            {
+                if (ShowErrorObligationRequestNoEmpty())
+                    e.Cancel = ShowErrorObligationRequestNoEmpty();
+                else if (ShowErrorObligationRequestNoExist())
+                    e.Cancel = ShowErrorObligationRequestNoExist();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void mskTxtObligationNoSeries_Validated(object sender, EventArgs e)
         {
-            Helper.ClearMaskedTextboxError(epObligationNo, mskTxtObligationNoTemplate);
+            Helper.ClearMaskedTextboxError(errorProvider1, mskTxtObligationNoTemplate);
         }
 
-        //REFERENCE NO.
         private void txtReferenceNo_Validating(object sender, CancelEventArgs e)
         {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(epReferenceNo, txtReferenceNo, "Reference No.");
+            try
+            {
+                e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtReferenceNo, "Reference No.");
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void txtReferenceNo_Validated(object sender, EventArgs e)
         {
-            Helper.ClearErrorTextBox(epReferenceNo, txtReferenceNo);
+            Helper.ClearErrorTextBox(errorProvider1, txtReferenceNo);
         }
 
-        //PAYEE
         private void txtPayee_Validating(object sender, CancelEventArgs e)
         {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(epPayee, txtPayee, "Payee.");
+            try
+            {
+                e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtPayee, "Payee.");
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void txtPayee_Validated(object sender, EventArgs e)
         {
-            Helper.ClearErrorTextBox(epPayee, txtPayee);
+            Helper.ClearErrorTextBox(errorProvider1, txtPayee);
         }
 
-        //EXPLANATION
         private void txtExplanation_Validating(object sender, CancelEventArgs e)
         {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(epExplanation, txtExplanation, "Explanation.");
+            try
+            {
+                e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtExplanation, "Explanation.");
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void txtExplanation_Validated(object sender, EventArgs e)
         {
-            Helper.ClearErrorTextBox(epExplanation, txtExplanation);
+            Helper.ClearErrorTextBox(errorProvider1, txtExplanation);
         }
-
-        #endregion VALIDATIONS
     }
 }
