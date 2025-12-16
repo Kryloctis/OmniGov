@@ -160,7 +160,7 @@ namespace LFS.Views.Transactions.RCI
 
         private void btnAddObligation_Click(object sender, EventArgs e)
         {
-            _ = new frmObligations(this).ShowDialog();
+            _ = new frmChckIssOblgtns(this).ShowDialog();
         }
 
         private void btnAddDeductions_Click(object sender, EventArgs e)

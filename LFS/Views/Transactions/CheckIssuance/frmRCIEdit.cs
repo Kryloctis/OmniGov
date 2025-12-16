@@ -26,7 +26,7 @@ namespace LFS.Views.Transactions.RCI
 
         private void LoadRCIObligations()
         {
-            frmObligations frmObligations = new(uc);
+            frmChckIssOblgtns frmObligations = new(uc);
 
             var rciObligationsRepo = AccFactory.RCIObligationsRepository();
             var dtRCIObligations = rciObligationsRepo.GetRecordsByRCIId(_rciID);

@@ -6,11 +6,11 @@ using System.Windows.Forms;
 namespace LFS.Views.Transactions.CheckIssuance.Obligations
 
 {
-    public partial class frmObligations : Form
+    public partial class frmChckIssOblgtns : Form
     {
         private readonly ucRCI _uc;
 
-        public frmObligations(ucRCI uc)
+        public frmChckIssOblgtns(ucRCI uc)
         {
             InitializeComponent();
             Helper.DatagridFullRowSelectStyle(dgObligation);

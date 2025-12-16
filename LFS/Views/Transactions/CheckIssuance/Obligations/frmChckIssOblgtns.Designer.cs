@@ -1,7 +1,7 @@
 ﻿
 namespace LFS.Views.Transactions.CheckIssuance.Obligations
 {
-    partial class frmObligations
+    partial class frmChckIssOblgtns
     {
         /// <summary>
         /// Required designer variable.
