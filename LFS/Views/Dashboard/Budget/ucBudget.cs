@@ -2,7 +2,9 @@
 using LFS.Views.Dashboard.BudgetDashboard.BudgetSummary;
 using LFS.Views.Manage.AllotmentRelease;
 using LFS.Views.Manage.BudgetAppropriations;
+using LFS.Views.Transactions.CheckIssuance.Obligations;
 using LFS.Views.Transactions.ObligationRequest;
+using LFS.Views.Transactions.Obligations;
 using System;
 using System.Windows.Forms;
 
@@ -56,7 +58,7 @@ namespace LFS.Views.Dashboard.Budget
         {
             try
             {
-                _ = new frmObligationRequestMain().ShowDialog();
+                _ = new frmObligations().ShowDialog();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }

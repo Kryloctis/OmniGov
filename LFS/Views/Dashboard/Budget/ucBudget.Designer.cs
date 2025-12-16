@@ -42,7 +42,7 @@
             ucBudgetSummary1.Location = new System.Drawing.Point(0, 47);
             ucBudgetSummary1.Margin = new System.Windows.Forms.Padding(0);
             ucBudgetSummary1.Name = "ucBudgetSummary1";
-            ucBudgetSummary1.Size = new System.Drawing.Size(1195, 541);
+            ucBudgetSummary1.Size = new System.Drawing.Size(1125, 541);
             ucBudgetSummary1.TabIndex = 7;
             // 
             // toolStrip1
@@ -54,7 +54,7 @@
             toolStrip1.Name = "toolStrip1";
             toolStrip1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 20);
             toolStrip1.ShowItemToolTips = false;
-            toolStrip1.Size = new System.Drawing.Size(1195, 47);
+            toolStrip1.Size = new System.Drawing.Size(1125, 47);
             toolStrip1.TabIndex = 6;
             toolStrip1.Text = "toolStrip1";
             // 
@@ -97,7 +97,7 @@
             Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
             Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             Name = "ucBudget";
-            Size = new System.Drawing.Size(1195, 588);
+            Size = new System.Drawing.Size(1125, 588);
             toolStrip1.ResumeLayout(false);
             toolStrip1.PerformLayout();
             ResumeLayout(false);
