@@ -1655,34 +1655,21 @@ namespace LFS
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        internal static void ObligationRequestDatagridView(DataTable dataTable, DataGridView dataGridView)
+        internal static void DgvOblgtnRqst(DataTable dataTable, DataGridView dataGridView)
         {
-            try
-            {
-                dataGridView.DataSource = dataTable;
-                dataGridView.Columns["id"].Visible = false;
-                dataGridView.Columns["obligation_no"].HeaderText = "Obligation No.";
-                dataGridView.Columns["date_requested"].HeaderText = "Date Requested";
-                dataGridView.Columns["payee"].HeaderText = "Payee";
-                dataGridView.Columns["explanation"].HeaderText = "Explanation";
-                dataGridView.Columns["reference_no"].HeaderText = "Reference No.";
-                dataGridView.Columns["total_obligations_amount"].HeaderText = "Total Obligations";
-                dataGridView.Columns["status"].HeaderText = "Status";
-                dataGridView.Columns["created_at"].Visible = false;
-                dataGridView.Columns["created_by_id"].Visible = false;
-                dataGridView.Columns["created_by_full_name"].HeaderText = "Created By";
-                dataGridView.Columns["updated_at"].Visible = false;
-                dataGridView.Columns["updated_by_id"].Visible = false;
-                dataGridView.Columns["updated_by_full_name"].Visible = false;
-
-                dataGridView.Columns["status"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-
-                dataGridView.ClearSelection();
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
+            dataGridView.DataSource = dataTable;
+            dataGridView.Columns["id"].Visible = false;
+            dataGridView.Columns["trnsction_no"].HeaderText = "Trans. No.";
+            dataGridView.Columns["obligation_no"].HeaderText = "Obligation No.";
+            dataGridView.Columns["date_requested"].HeaderText = "Date Requested";
+            dataGridView.Columns["date_requested"].DefaultCellStyle.Format = "MMM dd, yyyy";
+            dataGridView.Columns["payee"].HeaderText = "Payee";
+            dataGridView.Columns["created_at"].Visible = false;
+            dataGridView.Columns["created_by_id"].Visible = false;
+            dataGridView.Columns["created_by_name"].HeaderText = "Created By";
+            dataGridView.Columns["updated_at"].Visible = false;
+            dataGridView.Columns["updated_by_id"].Visible = false;
+            dataGridView.Columns["updated_by_name"].Visible = false;
         }
 
         internal static void JevDatagridView(DataGridView datagrid, DataTable dataTable)

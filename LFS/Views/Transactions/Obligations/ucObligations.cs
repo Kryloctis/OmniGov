@@ -73,7 +73,7 @@ namespace LFS.Views.Transactions.ObligationRequest
         {
             try
             {
-                mskTxtOblgtnNo.Text = AccFactory.ObligationRequestRepository().GetLeastAllotmentReleaseNumber();
+                mskTxtOblgtnNo.Text = AccFactory.ObligationRequestRepository().GetLeastOblgtnNo();
             }
             catch (Exception ex)
             {

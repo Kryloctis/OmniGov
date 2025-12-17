@@ -7,6 +7,34 @@ namespace ACC.Domain.Interfaces
 {
     public interface IObligationRequestRepository : IAccRepository<ObligationRequestModel>
     {
+        DataTable GetRecords(string srchKey,
+                            string status,
+                            DateTime dtFrom,
+                            DateTime dtTo,
+                            int rowLimit);
+
+        DataTable GetViewRecords(int budgetAppropriationId, DateTime dateRequested);
+
+        DataTable GetViewRecordsById(int Id);
+
+        DataTable GetViewRecordsByBudgetAppropriationId(int budgetAppropriationId);
+
+        DataTable GetViewRecordsBySearchAndStatus(string searchText,
+                                                string status,
+                                                int fundId,
+                                                int allotmentClassId,
+                                                DateTime dateOfRequest);
+
+        Dictionary<string, string> GetViewRecordById(int Id);
+
+        decimal GetSumObligationsByAppropriationId(int appropriationId, DateTime dateRequested);
+
+        decimal GetSumObligations(string fppId, string subFPPId, int fundId, DateTime dateIssued, int allotmentClassId, byte isContinuing);
+
+        decimal GetSumObligationsByBudgetAppropriationAndStatus(int budgetAppropriationsId);
+
+        decimal GetSumObligationsById(int obligationRequestId);
+
         bool ObligationRequestNoExist(string obligationNo);
 
         bool ObligationRequestNoExist(int Id, string obligationNo);
@@ -17,31 +45,10 @@ namespace ACC.Domain.Interfaces
 
         bool Delete(int obligationRequestId);
 
-        //SAAOB and SAAOBB
-        DataTable GetViewRecords(int budgetAppropriationId, DateTime dateRequested);
-
-        //DASHBOARD
-
-        decimal GetSumObligationsByAppropriationId(int appropriationId, DateTime dateRequested);
-
-        decimal GetSumObligations(string fppId, string subFPPId, int fundId, DateTime dateIssued, int allotmentClassId, byte isContinuing);
-
-        decimal GetSumObligationsByBudgetAppropriationAndStatus(int budgetAppropriationsId);
-
-        decimal GetSumObligationsById(int obligationRequestId);
-
-        Dictionary<string, string> GetViewRecordById(int Id);
-
-        DataTable GetViewRecordsById(int Id);
-
-        DataTable GetViewRecordsByBudgetAppropriationId(int budgetAppropriationId);
-
-        DataTable GetViewRecordsBySearchAndStatus(string searchText, string status, int fundId, int allotmentClassId, DateTime dateOfRequest);
-
         bool SetObligationRequestStatus(int obligationRequestId, string status, string dissaprovalMessage = null);
 
         string GetObligationRequestStatus(int obligationRequestId);
 
-        string GetLeastAllotmentReleaseNumber();
+        string GetLeastOblgtnNo();
     }
 }

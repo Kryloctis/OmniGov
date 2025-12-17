@@ -13,32 +13,22 @@ namespace LFS.Views.Transactions.Obligations
         public frmObligations()
         {
             InitializeComponent();
+            Helper.LoadFormIcon(this);
+            Helper.DatagridFullRowSelectStyle(dgvMain, true);
         }
 
         private void frmObligations_Load(object sender, EventArgs e)
         {
             try
             {
-                LoadAlltmntClss();
-                LoadFunds();
                 HelperLoadRecords.ComboboxRowLimitFilter(tlStrpCmbxLimit.ComboBox);
-                //tlStrpCmbxLimit.ComboBox.SelectionChangeCommitted += (s, ev) => LoadJevRecords();
+                tlStrpCmbxLimit.ComboBox.SelectionChangeCommitted += (s, ev) => LoadObligationRecords();
+                LoadObligationRecords();
+                dtPckrFrom.Value = dtPckrTo.Value.AddYears(-1);
                 MonitorControlChanges(panel1, btnApplyFltr);
                 EnableDisableButtons(dgvMain, tlStrpBtnCreate, tlStrpBtnUpdate, tlStrpBtnDelete, tlStrpBtnView, tlStrpBtnAudit);
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        private void LoadFunds()
-        {
-            var dtFunds = AccFactory.FundsRepository().GetRecords();
-            HelperLoadRecords.FundsComboBox(dtFunds, cmbxFunds, "id", "fund_name");
-        }
-
-        private void LoadAlltmntClss()
-        {
-            var dtAlltmntClss = AccFactory.AllotmentClassesRepository().GetRecords();
-            HelperLoadRecords.FundsComboBox(dtAlltmntClss, cmbxAlltmntClss, "id", "allotment_name");
         }
 
         private void MonitorControlChanges(Control parent, Button targetButton)
@@ -46,19 +36,19 @@ namespace LFS.Views.Transactions.Obligations
             foreach (Control ctrl in parent.Controls)
             {
                 if (ctrl is TextBox tb)
-                    tb.TextChanged += (s, e) => btnApplyFltr.Enabled = true;
+                    tb.TextChanged += (s, e) => targetButton.Enabled = true;
                 else if (ctrl is RadioButton rb)
-                    rb.CheckedChanged += (s, e) => btnApplyFltr.Enabled = true;
+                    rb.CheckedChanged += (s, e) => targetButton.Enabled = true;
                 else if (ctrl is ComboBox cb)
-                    cb.SelectedIndexChanged += (s, e) => btnApplyFltr.Enabled = true;
+                    cb.SelectedIndexChanged += (s, e) => targetButton.Enabled = true;
                 else if (ctrl is CheckBox chk)
-                    chk.CheckedChanged += (s, e) => btnApplyFltr.Enabled = true;
+                    chk.CheckedChanged += (s, e) => targetButton.Enabled = true;
                 else if (ctrl is DateTimePicker dp)
-                    dp.ValueChanged += (s, e) => btnApplyFltr.Enabled = true;
+                    dp.ValueChanged += (s, e) => targetButton.Enabled = true;
 
                 // Recurse into child containers
                 if (ctrl.HasChildren)
-                    MonitorControlChanges(ctrl, btnApplyFltr);
+                    MonitorControlChanges(ctrl, targetButton);
             }
         }
 
@@ -148,6 +138,8 @@ namespace LFS.Views.Transactions.Obligations
         {
             try
             {
+                LoadObligationRecords();
+                btnApplyFltr.Enabled = false;
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -156,6 +148,7 @@ namespace LFS.Views.Transactions.Obligations
         {
             try
             {
+                LoadObligationRecords();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -271,27 +264,39 @@ namespace LFS.Views.Transactions.Obligations
             if (!backgroundWorker1.IsBusy)
             {
                 pbLoadRecords.Value = 0;
-                int rowLimit = Convert.ToInt32(tlStrpCmbxLimit.ComboBox.SelectedValue);
 
-                var parameters = new (string name, object value)[]
-                {
-                    ("search_key", tlStrpTxtSearch.Text),
-                    ("status", GetFltrStatus()),
-                    ("allotmnt_class", cmbxAlltmntClss.Text),
-                    ("fund", cmbxFunds.Text),
-                    ("date_from", dtPckrFrom.Value),
-                    ("date_to", dtPckrTo.Value),
-                    ("row_limit", rowLimit),
-                };
-                backgroundWorker1.RunWorkerAsync();
+                (string srchKey,
+                string status,
+                DateTime dtFrom,
+                DateTime dtTo,
+                int rowLimit)
+                parameters =
+                (
+                    tlStrpTxtSearch.Text,
+                    GetFltrStatus(),
+                    dtPckrFrom.Value,
+                    dtPckrTo.Value,
+                    Convert.ToInt32(tlStrpCmbxLimit.ComboBox.SelectedValue)
+                );
+
+                backgroundWorker1.RunWorkerAsync(parameters);
             }
+        }
+
+        private string GetUserFullName(string userId)
+        {
+            if (string.IsNullOrEmpty(userId))
+                return string.Empty;
+
+            var userData = Helper.GetUserDataById(Convert.ToInt32(userId));
+            return userData?["user_full_name"] ?? string.Empty;
         }
 
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
             try
             {
-                var parameters = ((string srchKey, string status, string alltmntClss, string fund, DateTime dtFrom, DateTime dtTo, int rowLimit))e.Argument;
+                var parameters = ((string srchKey, string status, DateTime dtFrom, DateTime dtTo, int rowLimit))e.Argument;
 
                 var dataTable = new DataTable();
                 dataTable.Columns.AddRange(new[]
@@ -310,12 +315,39 @@ namespace LFS.Views.Transactions.Obligations
                 });
 
                 var dtObligations = AccFactory.ObligationRequestRepository().GetRecords(parameters.srchKey,
-                                                                 parameters.status,
-                                                                 parameters.alltmntClss,
-                                                                 parameters.fund,
-                                                                 parameters.dtFrom,
-                                                                 parameters.dtTo,
-                                                                 parameters.rowLimit);
+                                                 parameters.status.ToLower(),
+                                                 parameters.dtFrom,
+                                                 parameters.dtTo,
+                                                 parameters.rowLimit);
+
+                int totalRowCount = dtObligations.Rows.Count;
+                int progressCount = 0;
+
+                foreach (DataRow dtRow in dtObligations.Rows)
+                {
+                    var newRow = dataTable.NewRow();
+                    newRow["id"] = dtRow["id"];
+                    //newRow["trnsction_no"] = dtRow["trns_no"];
+                    newRow["obligation_no"] = dtRow["obligation_no"];
+                    newRow["date_requested"] = dtRow["date_requested"];
+                    newRow["payee"] = dtRow["payee"];
+
+                    string createdById = dtRow["created_by"]?.ToString();
+                    string updatedById = dtRow["updated_by"]?.ToString();
+
+                    newRow["created_at"] = dtRow["created_at"];
+                    newRow["created_by_id"] = dtRow["created_by"];
+                    newRow["created_by_name"] = GetUserFullName(createdById);
+                    newRow["updated_at"] = dtRow["updated_at"];
+                    newRow["updated_by_id"] = dtRow["updated_by"];
+                    newRow["updated_by_name"] = GetUserFullName(updatedById);
+
+                    progressCount++;
+                    dataTable.Rows.Add(newRow);
+                    Helper.ProgressCounter(backgroundWorker1, totalRowCount, progressCount);
+                }
+
+                e.Result = dataTable;
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -333,6 +365,12 @@ namespace LFS.Views.Transactions.Obligations
         {
             try
             {
+                if (e.Result is DataTable dataTable)
+                {
+                    if (dataTable.Rows.Count < 1) pbLoadRecords.Value = 100;
+                    HelperLoadRecords.DgvOblgtnRqst(dataTable, dgvMain);
+                    dgvMain.CurrentCell = dgvMain.FirstDisplayedCell;
+                }
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }

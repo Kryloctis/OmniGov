@@ -431,10 +431,55 @@ namespace ACC.Data
             return Convert.ToDecimal(mySqlGenericCommandsLFS.ExecuteScalar(query, parameters));
         }
 
-        public string GetLeastAllotmentReleaseNumber()
+        public string GetLeastOblgtnNo()
         {
             string query = $"SELECT COALESCE(LPAD(MAX(obligation_no)+1, 4, '0'),'0001') AS obligation_no FROM {viewTableName}";
             return mySqlGenericCommandsLFS.ExecuteScalar(query);
+        }
+
+        public DataTable GetRecords(string srchKey,
+                                string status,
+                                DateTime dtFrom,
+                                DateTime dtTo,
+                                int rowLimit)
+        {
+            var parameters = new object[][]
+            {
+                new object[] {"@search_key", DbType.String, $"%{srchKey}%"},
+                new object[] {"@status", DbType.String, status},
+                new object[] {"@dt_from", DbType.DateTime, dtFrom},
+                new object[] {"@dt_to", DbType.DateTime, dtTo},
+                new object[] {"@row_limit", DbType.Int32, rowLimit},
+            };
+
+            string statusQuery;
+
+            switch (status)
+            {
+                case "pending":
+                    statusQuery = $"is_approved = 0 AND is_disapproved = 0 AND is_cancelled = 0 AND ";
+                    break;
+
+                case "approved":
+                    statusQuery = $"is_approved = 1 AND is_disapproved = 0 AND is_cancelled = 0 AND ";
+                    break;
+
+                case "disapproved":
+                    statusQuery = $"is_approved = 0 AND is_disapproved = 1 AND is_cancelled = 0 AND ";
+                    break;
+
+                case "cancelled":
+                    statusQuery = $"is_cancelled = 1 AND ";
+                    break;
+
+                default:
+                    statusQuery = string.Empty;
+                    break;
+            }
+
+            string query = $"SELECT * FROM {tableName} WHERE {statusQuery}(obligation_no LIKE @search_key OR payee LIKE @search_key) AND (date_requested BETWEEN @dt_from AND @dt_to) LIMIT @row_limit";
+
+            return mySqlGenericCommandsLFS.FillBySearch(query, new DataTable(), parameters);
         }
     }
 }

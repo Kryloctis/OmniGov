@@ -45,11 +45,7 @@
             radDisapproved = new System.Windows.Forms.RadioButton();
             radCancelled = new System.Windows.Forms.RadioButton();
             label4 = new System.Windows.Forms.Label();
-            label3 = new System.Windows.Forms.Label();
-            label2 = new System.Windows.Forms.Label();
             label1 = new System.Windows.Forms.Label();
-            cmbxFunds = new System.Windows.Forms.ComboBox();
-            cmbxAlltmntClss = new System.Windows.Forms.ComboBox();
             label5 = new System.Windows.Forms.Label();
             toolStrip2 = new System.Windows.Forms.ToolStrip();
             tlStrpCmbxLimit = new System.Windows.Forms.ToolStripComboBox();
@@ -194,11 +190,7 @@
             panel1.Controls.Add(label6);
             panel1.Controls.Add(flowLayoutPanel1);
             panel1.Controls.Add(label4);
-            panel1.Controls.Add(label3);
-            panel1.Controls.Add(label2);
             panel1.Controls.Add(label1);
-            panel1.Controls.Add(cmbxFunds);
-            panel1.Controls.Add(cmbxAlltmntClss);
             panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             panel1.Location = new System.Drawing.Point(0, 31);
             panel1.Name = "panel1";
@@ -210,7 +202,7 @@
             // 
             dtPckrTo.CustomFormat = "MMM dd, yyyy";
             dtPckrTo.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            dtPckrTo.Location = new System.Drawing.Point(23, 275);
+            dtPckrTo.Location = new System.Drawing.Point(23, 163);
             dtPckrTo.Margin = new System.Windows.Forms.Padding(3, 3, 3, 20);
             dtPckrTo.Name = "dtPckrTo";
             dtPckrTo.Size = new System.Drawing.Size(209, 23);
@@ -220,7 +212,7 @@
             // 
             dtPckrFrom.CustomFormat = "MMM dd, yyyy";
             dtPckrFrom.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            dtPckrFrom.Location = new System.Drawing.Point(23, 219);
+            dtPckrFrom.Location = new System.Drawing.Point(23, 107);
             dtPckrFrom.Margin = new System.Windows.Forms.Padding(3, 3, 3, 15);
             dtPckrFrom.Name = "dtPckrFrom";
             dtPckrFrom.Size = new System.Drawing.Size(209, 23);
@@ -229,7 +221,7 @@
             // btnApplyFltr
             // 
             btnApplyFltr.Cursor = System.Windows.Forms.Cursors.Hand;
-            btnApplyFltr.Location = new System.Drawing.Point(23, 321);
+            btnApplyFltr.Location = new System.Drawing.Point(23, 209);
             btnApplyFltr.Name = "btnApplyFltr";
             btnApplyFltr.Size = new System.Drawing.Size(209, 23);
             btnApplyFltr.TabIndex = 35;
@@ -240,7 +232,7 @@
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new System.Drawing.Point(23, 257);
+            label6.Location = new System.Drawing.Point(23, 145);
             label6.Name = "label6";
             label6.Size = new System.Drawing.Size(48, 15);
             label6.TabIndex = 33;
@@ -303,29 +295,11 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new System.Drawing.Point(23, 201);
+            label4.Location = new System.Drawing.Point(23, 89);
             label4.Name = "label4";
             label4.Size = new System.Drawing.Size(63, 15);
             label4.TabIndex = 33;
             label4.Text = "Date from:";
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Location = new System.Drawing.Point(23, 145);
-            label3.Name = "label3";
-            label3.Size = new System.Drawing.Size(78, 15);
-            label3.TabIndex = 33;
-            label3.Text = "Type of Fund:";
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Location = new System.Drawing.Point(23, 89);
-            label2.Name = "label2";
-            label2.Size = new System.Drawing.Size(93, 15);
-            label2.TabIndex = 32;
-            label2.Text = "Allotment Class:";
             // 
             // label1
             // 
@@ -335,26 +309,6 @@
             label1.Size = new System.Drawing.Size(42, 15);
             label1.TabIndex = 31;
             label1.Text = "Status:";
-            // 
-            // cmbxFunds
-            // 
-            cmbxFunds.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            cmbxFunds.FormattingEnabled = true;
-            cmbxFunds.Location = new System.Drawing.Point(23, 163);
-            cmbxFunds.Margin = new System.Windows.Forms.Padding(3, 3, 3, 15);
-            cmbxFunds.Name = "cmbxFunds";
-            cmbxFunds.Size = new System.Drawing.Size(209, 23);
-            cmbxFunds.TabIndex = 30;
-            // 
-            // cmbxAlltmntClss
-            // 
-            cmbxAlltmntClss.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            cmbxAlltmntClss.FormattingEnabled = true;
-            cmbxAlltmntClss.Location = new System.Drawing.Point(23, 107);
-            cmbxAlltmntClss.Margin = new System.Windows.Forms.Padding(3, 3, 3, 15);
-            cmbxAlltmntClss.Name = "cmbxAlltmntClss";
-            cmbxAlltmntClss.Size = new System.Drawing.Size(209, 23);
-            cmbxAlltmntClss.TabIndex = 29;
             // 
             // label5
             // 
@@ -727,6 +681,8 @@
             // 
             // backgroundWorker1
             // 
+            backgroundWorker1.WorkerReportsProgress = true;
+            backgroundWorker1.WorkerSupportsCancellation = true;
             backgroundWorker1.DoWork += backgroundWorker1_DoWork;
             backgroundWorker1.ProgressChanged += backgroundWorker1_ProgressChanged;
             backgroundWorker1.RunWorkerCompleted += backgroundWorker1_RunWorkerCompleted;
@@ -807,11 +763,7 @@
         private System.Windows.Forms.RadioButton radDisapproved;
         private System.Windows.Forms.RadioButton radCancelled;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox cmbxFunds;
-        internal System.Windows.Forms.ComboBox cmbxAlltmntClss;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TabPage tbPgView;
         private System.Windows.Forms.TabPage tbPgAudit;

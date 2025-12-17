@@ -155,7 +155,7 @@ namespace LFS.Views.Transactions.ObligationRequest
         {
             try
             {
-                HelperLoadRecords.ObligationRequestDatagridView(ObligationRequestsDatatable(), dgObligationRequests);
+                HelperLoadRecords.DgvOblgtnRqst(ObligationRequestsDatatable(), dgObligationRequests);
                 LoadStatusColors();
             }
             catch (Exception ex)

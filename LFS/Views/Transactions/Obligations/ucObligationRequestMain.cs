@@ -44,7 +44,7 @@ namespace LFS.Views.Transactions.ObligationRequest
         {
             try
             {
-                mskTxtObligationNoSeries.Text = AccFactory.ObligationRequestRepository().GetLeastAllotmentReleaseNumber();
+                mskTxtObligationNoSeries.Text = AccFactory.ObligationRequestRepository().GetLeastOblgtnNo();
             }
             catch (Exception ex)
             {
