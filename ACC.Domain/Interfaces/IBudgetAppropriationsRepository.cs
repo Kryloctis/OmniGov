@@ -31,7 +31,7 @@ namespace ACC.Domain.Interfaces
 
         DataTable GetViewRecordsByFPPIdAndFundIdAndAllotmentClassIdAndDateEntryAndBudgetAppropriationId(string fppId, int? subFPPId, int funds_id, int allotment_class_id, DateTime date_entry, int budget_id);
 
-        DataTable GetViewRecordsByIds(BudgetAppropriationsModel entity);
+        DataTable GetViewRecords(int fppId, int? subFppId, int alltmntClssId, int fundId);
 
         DataTable GetViewRecordsByIdsSearch(BudgetAppropriationsModel entity, string searchTxt);
 
