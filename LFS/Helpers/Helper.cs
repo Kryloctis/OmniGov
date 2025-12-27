@@ -297,8 +297,9 @@ namespace LFS.Helpers
             dgv.AdvancedColumnHeadersBorderStyle.Bottom = DataGridViewAdvancedCellBorderStyle.Outset;
             dgv.DefaultCellStyle.SelectionBackColor = Color.FromKnownColor(KnownColor.Control);
             dgv.DefaultCellStyle.SelectionForeColor = Color.Black;
-            dgv.RowTemplate.MinimumHeight = 30;
+            dgv.RowTemplate.MinimumHeight = 25;
             dgv.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
+            dgv.AutoResizeRows(DataGridViewAutoSizeRowsMode.AllCells);
             dgv.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             dgv.ShowCellToolTips = false;
             dgv.AutoSizeColumnsMode = Fill ? DataGridViewAutoSizeColumnsMode.Fill : DataGridViewAutoSizeColumnsMode.None;
@@ -841,25 +842,6 @@ namespace LFS.Helpers
 
         #endregion EnableDisableButtons
 
-        public static Dictionary<int, string> MonthsDatasource()
-        {
-            var month = new Dictionary<int, string>();
-            month.Add(1, "January");
-            month.Add(2, "February");
-            month.Add(3, "March");
-            month.Add(4, "April");
-            month.Add(5, "May");
-            month.Add(6, "June");
-            month.Add(7, "July");
-            month.Add(8, "August");
-            month.Add(9, "September");
-            month.Add(10, "October");
-            month.Add(11, "November");
-            month.Add(12, "December");
-
-            return month;
-        }
-
         public static void ShowRecordTimestamp(DataGridView dataGridView, byte[] index, ToolStripStatusLabel lblCreatedAt, ToolStripStatusLabel lblUpdatedAt)
         {
             string placeHolder = "--";
@@ -895,11 +877,6 @@ namespace LFS.Helpers
                 lblCreatedAt.Text = string.Empty;
                 lblUpdatedAt.Text = string.Empty;
             }
-        }
-
-        public static string TruncateString(string myString, int maxLength)
-        {
-            return myString.Length > maxLength ? $"{myString.Substring(0, 20)}..." : $"{myString}";
         }
     }
 }
