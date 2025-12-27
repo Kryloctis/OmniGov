@@ -10,10 +10,10 @@ namespace ACC.Data
     {
         private AccGenericCommands mySqlGenericCommandsLFS;
         private readonly string tableName = "general_ledger_accounts";
-        private readonly string tableName2 = "account_group";
-        private readonly string tableName3 = "major_account_group";
-        private readonly string tableName4 = "sub_major_account_group";
-        private readonly string viewTableName = "view_general_ledger_accounts";
+        private readonly string tblAccGroup = "account_group";
+        private readonly string tblMajAccGroup = "major_account_group";
+        private readonly string tblSubMajAccGroup = "sub_major_account_group";
+        private readonly string viewGenLedgrAccs = "view_general_ledger_accounts";
 
         public GeneralLedgerAccountsRepository(AccGenericCommands mySqlGenericCommandsLFS)
         {
@@ -29,7 +29,7 @@ namespace ACC.Data
                 new object[] { "@general_ledger_accounts_id", DbType.UInt16, generalLedgerId},
             };
 
-            string query = $"SELECT sub_major_account_group_id, account_code, ledger_code, ledger_name, is_contra_account, created_at, updated_at FROM {viewTableName} WHERE general_ledger_accounts_id = @general_ledger_accounts_id";
+            string query = $"SELECT sub_major_account_group_id, account_code, ledger_code, ledger_name, is_contra_account, created_at, updated_at FROM {viewGenLedgrAccs} WHERE general_ledger_accounts_id = @general_ledger_accounts_id";
 
             DataTable dataTable = mySqlGenericCommandsLFS.ExecuteReader(query, parameters);
 
@@ -78,7 +78,7 @@ namespace ACC.Data
 
         public DataTable GetViewRecords()
         {
-            string query = $"SELECT account_group_id, account_group_code, account_group_name, major_account_group_id, maj_acc_group_code, maj_acc_group_name, sub_maj_acc_group_code, sub_maj_acc_group_name, sub_major_account_group_id, general_ledger_accounts_id, account_code, ledger_code, ledger_name, is_contra_account, created_at, updated_at FROM {viewTableName}";
+            string query = $"SELECT account_group_id, account_group_code, account_group_name, major_account_group_id, maj_acc_group_code, maj_acc_group_name, sub_maj_acc_group_code, sub_maj_acc_group_name, sub_major_account_group_id, general_ledger_accounts_id, account_code, ledger_code, ledger_name, is_contra_account, created_at, updated_at FROM {viewGenLedgrAccs}";
 
             var dtJournals = new DataTable();
             return mySqlGenericCommandsLFS.Fill(query, dtJournals);
@@ -91,7 +91,7 @@ namespace ACC.Data
                 new object[] { "@searchText", DbType.String, $"%{searchText}%" },
             };
 
-            string query = $"SELECT general_ledger_accounts_id, account_code, ledger_name, sub_maj_acc_group_name, created_at, updated_at FROM {viewTableName} WHERE account_code LIKE @searchText OR REPLACE(account_code, '-', '') LIKE @searchText OR ledger_name LIKE @searchText";
+            string query = $"SELECT general_ledger_accounts_id, account_code, ledger_name, sub_maj_acc_group_name, created_at, updated_at FROM {viewGenLedgrAccs} WHERE account_code LIKE @searchText OR REPLACE(account_code, '-', '') LIKE @searchText OR ledger_name LIKE @searchText";
 
             var dtGeneralLedgers = new DataTable();
             return mySqlGenericCommandsLFS.FillBySearch(query, dtGeneralLedgers, parameters);
@@ -143,7 +143,7 @@ namespace ACC.Data
                 new object[] { "@search_txt", DbType.String, $"%{searchText}%" }
             };
 
-            string query = $"SELECT {tableName}.id,CONCAT({tableName2}.account_group_code,'-',{tableName3}.maj_acc_group_code,'-',{tableName4}.sub_maj_acc_group_code,'-',{tableName}.ledger_code) AS account_code,{tableName}.ledger_name FROM {tableName} LEFT JOIN {tableName4} ON {tableName}.sub_major_account_group_id={tableName4}.id LEFT JOIN {tableName3} ON {tableName4}.major_account_group_id={tableName3}.id LEFT JOIN {tableName2} ON ({tableName3}.account_group_id={tableName2}.id AND {tableName2}.id='4') WHERE CONCAT({tableName2}.account_group_code,'-',{tableName3}.maj_acc_group_code,'-',{tableName4}.sub_maj_acc_group_code,'-',{tableName}.ledger_code) IS NOT NULL AND (CONCAT({tableName2}.account_group_code,'-',{tableName3}.maj_acc_group_code,'-',{tableName4}.sub_maj_acc_group_code,'-',{tableName}.ledger_code) LIKE @search_txt OR ledger_name LIKE @search_txt)";
+            string query = $"SELECT {tableName}.id,CONCAT({tblAccGroup}.account_group_code,'-',{tblMajAccGroup}.maj_acc_group_code,'-',{tblSubMajAccGroup}.sub_maj_acc_group_code,'-',{tableName}.ledger_code) AS account_code,{tableName}.ledger_name FROM {tableName} LEFT JOIN {tblSubMajAccGroup} ON {tableName}.sub_major_account_group_id={tblSubMajAccGroup}.id LEFT JOIN {tblMajAccGroup} ON {tblSubMajAccGroup}.major_account_group_id={tblMajAccGroup}.id LEFT JOIN {tblAccGroup} ON ({tblMajAccGroup}.account_group_id={tblAccGroup}.id AND {tblAccGroup}.id='4') WHERE CONCAT({tblAccGroup}.account_group_code,'-',{tblMajAccGroup}.maj_acc_group_code,'-',{tblSubMajAccGroup}.sub_maj_acc_group_code,'-',{tableName}.ledger_code) IS NOT NULL AND (CONCAT({tblAccGroup}.account_group_code,'-',{tblMajAccGroup}.maj_acc_group_code,'-',{tblSubMajAccGroup}.sub_maj_acc_group_code,'-',{tableName}.ledger_code) LIKE @search_txt OR ledger_name LIKE @search_txt)";
             return mySqlGenericCommandsLFS.FillBySearch(query, new DataTable());
         }
 
@@ -154,7 +154,7 @@ namespace ACC.Data
                 new object[] { "@maj_acc_group_name", DbType.String, majAccGroupName},
             };
 
-            string query = $"SELECT general_ledger_accounts_id, account_group_id, account_group_code, account_group_name, major_account_group_id, maj_acc_group_code, maj_acc_group_name, sub_maj_acc_group_code, sub_maj_acc_group_name, sub_major_account_group_id, general_ledger_accounts_id, account_code, ledger_code, ledger_name, is_contra_account, created_at, updated_at FROM {viewTableName} WHERE maj_acc_group_name = @maj_acc_group_name";
+            string query = $"SELECT general_ledger_accounts_id, account_group_id, account_group_code, account_group_name, major_account_group_id, maj_acc_group_code, maj_acc_group_name, sub_maj_acc_group_code, sub_maj_acc_group_name, sub_major_account_group_id, general_ledger_accounts_id, account_code, ledger_code, ledger_name, is_contra_account, created_at, updated_at FROM {viewGenLedgrAccs} WHERE maj_acc_group_name = @maj_acc_group_name";
 
             return mySqlGenericCommandsLFS.FillBySearch(query, new DataTable(), parameters);
         }
@@ -167,7 +167,7 @@ namespace ACC.Data
                 new object[] { "@searchText", DbType.String, $"%{searchText}%" }
             };
 
-            string query = $"SELECT general_ledger_accounts_id, account_group_id, account_group_code, account_group_name, major_account_group_id, maj_acc_group_code, maj_acc_group_name, sub_maj_acc_group_code, sub_maj_acc_group_name, sub_major_account_group_id, general_ledger_accounts_id, account_code, ledger_code, ledger_name, is_contra_account, created_at, updated_at FROM {viewTableName} WHERE maj_acc_group_name = @maj_acc_group_name AND (account_code LIKE @searchText OR REPLACE(account_code, '-', '') LIKE @searchText OR ledger_name LIKE @searchText)";
+            string query = $"SELECT general_ledger_accounts_id, account_group_id, account_group_code, account_group_name, major_account_group_id, maj_acc_group_code, maj_acc_group_name, sub_maj_acc_group_code, sub_maj_acc_group_name, sub_major_account_group_id, general_ledger_accounts_id, account_code, ledger_code, ledger_name, is_contra_account, created_at, updated_at FROM {viewGenLedgrAccs} WHERE maj_acc_group_name = @maj_acc_group_name AND (account_code LIKE @searchText OR REPLACE(account_code, '-', '') LIKE @searchText OR ledger_name LIKE @searchText)";
 
             return mySqlGenericCommandsLFS.FillBySearch(query, new DataTable(), parameters);
         }
@@ -179,7 +179,7 @@ namespace ACC.Data
                 new object[] { "@account_group_name", DbType.String, accountGroupName},
             };
 
-            string query = $"SELECT general_ledger_accounts_id, account_group_id, account_group_code, account_group_name, major_account_group_id, maj_acc_group_code, maj_acc_group_name, sub_maj_acc_group_code, sub_maj_acc_group_name, sub_major_account_group_id, general_ledger_accounts_id, account_code, ledger_code, ledger_name, is_contra_account, created_at, updated_at FROM {viewTableName} WHERE account_group_name = @account_group_name ";
+            string query = $"SELECT * FROM {viewGenLedgrAccs} WHERE account_group_name = @account_group_name ";
 
             return mySqlGenericCommandsLFS.FillBySearch(query, new DataTable(), parameters);
         }
@@ -192,7 +192,7 @@ namespace ACC.Data
                 new object[] { "@searchText", DbType.String, $"%{searchText}%" }
             };
 
-            string query = $"SELECT general_ledger_accounts_id, account_group_id, account_group_code, account_group_name, major_account_group_id, maj_acc_group_code, maj_acc_group_name, sub_maj_acc_group_code, sub_maj_acc_group_name, sub_major_account_group_id, general_ledger_accounts_id, account_code, ledger_code, ledger_name, is_contra_account, created_at, updated_at FROM {viewTableName} WHERE account_group_name = @account_group_name AND (account_code LIKE @searchText OR REPLACE(account_code, '-', '') LIKE @searchText OR ledger_name LIKE @searchText)";
+            string query = $"SELECT * FROM {viewGenLedgrAccs} WHERE account_group_name = @account_group_name AND (account_code LIKE @searchText OR REPLACE(account_code, '-', '') LIKE @searchText OR ledger_name LIKE @searchText)";
 
             return mySqlGenericCommandsLFS.FillBySearch(query, new DataTable(), parameters);
         }
@@ -205,7 +205,7 @@ namespace ACC.Data
                 new object[] { "@account_group_id", DbType.Int32, accountGroupId}
             };
 
-            string query = $"SELECT general_ledger_accounts_id, account_code, ledger_name, created_at, updated_at FROM {viewTableName} WHERE account_group_id = @account_group_id";
+            string query = $"SELECT general_ledger_accounts_id, account_code, ledger_name, created_at, updated_at FROM {viewGenLedgrAccs} WHERE account_group_id = @account_group_id";
 
             return mySqlGenericCommandsLFS.FillBySearch(query, new DataTable(), parameters);
         }
@@ -218,7 +218,7 @@ namespace ACC.Data
                 new object[] { "@searchText", DbType.String, $"%{searchText}%" }
             };
 
-            string query = $"SELECT general_ledger_accounts_id, account_code, ledger_name, created_at, updated_at FROM {viewTableName} WHERE account_group_id = @account_group_id AND (account_code LIKE @searchText OR REPLACE(account_code, '-', '') LIKE @searchText OR ledger_name LIKE @searchText)";
+            string query = $"SELECT general_ledger_accounts_id, account_code, ledger_name, created_at, updated_at FROM {viewGenLedgrAccs} WHERE account_group_id = @account_group_id AND (account_code LIKE @searchText OR REPLACE(account_code, '-', '') LIKE @searchText OR ledger_name LIKE @searchText)";
 
             return mySqlGenericCommandsLFS.FillBySearch(query, new DataTable(), parameters);
         }
@@ -232,7 +232,7 @@ namespace ACC.Data
                 new object[] { "@limit", DbType.Int32, limit}
             };
 
-            string query = $"SELECT general_ledger_accounts_id, account_code, ledger_name, created_at, updated_at FROM {viewTableName} WHERE account_group_id = @account_group_id AND (account_code LIKE @searchText OR REPLACE(account_code, '-', '') LIKE @searchText OR ledger_name LIKE @searchText) LIMIT @limit";
+            string query = $"SELECT general_ledger_accounts_id, account_code, ledger_name, created_at, updated_at FROM {viewGenLedgrAccs} WHERE account_group_id = @account_group_id AND (account_code LIKE @searchText OR REPLACE(account_code, '-', '') LIKE @searchText OR ledger_name LIKE @searchText) LIMIT @limit";
 
             return mySqlGenericCommandsLFS.FillBySearch(query, new DataTable(), parameters);
         }
@@ -244,14 +244,14 @@ namespace ACC.Data
                 new object[] { "@searchText", DbType.String, $"%{searchText}%"}
             };
 
-            string query = $"SELECT * FROM {viewTableName} WHERE account_group_code LIKE @searchText OR ledger_name LIKE @searchText AND account_group_code=4";
+            string query = $"SELECT * FROM {viewGenLedgrAccs} WHERE account_group_code LIKE @searchText OR ledger_name LIKE @searchText AND account_group_code=4";
 
             return mySqlGenericCommandsLFS.FillBySearch(query, new DataTable(), parameters);
         }
 
         public DataTable GetGeneralLedgerAccountsIncomeRecords()
         {
-            string query = $"SELECT * FROM {viewTableName} WHERE account_group_code=4";
+            string query = $"SELECT * FROM {viewGenLedgrAccs} WHERE account_group_code=4";
             return mySqlGenericCommandsLFS.Fill(query, new DataTable());
         }
     }
