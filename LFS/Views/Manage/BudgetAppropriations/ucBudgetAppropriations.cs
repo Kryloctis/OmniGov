@@ -1,6 +1,7 @@
 ﻿using ACC.Data;
 using LFS;
 using LFS.Helpers;
+using LFS.Helpers.Budget;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -235,59 +236,32 @@ namespace BudgetSystem.Views.BudgetAppropriations
 
         #region General Ledgers Accounts
 
-        private DataTable DatatableAccounts()
-        {
-            var allotmentClassRepo = AccFactory.AllotmentClassesRepository().GetRecordByID(allotmentClassId);
-            string accountGroupName = allotmentClassRepo["allotment_name"];
-
-            DataTable dtAccounts;
-
-            if (string.IsNullOrEmpty(cmbxAccount.Text))
-            {
-                if (Convert.ToInt32(allotmentClassId) == 4)
-                    dtAccounts = AccFactory.GeneralLedgerAccountsRepository().GetViewRecordsByAccountGroupName("Assets");
-                else
-                    dtAccounts = AccFactory.GeneralLedgerAccountsRepository().GetViewRecordsByMajorAccGroupName(accountGroupName);
-            }
-            else
-            {
-                if (Convert.ToInt32(allotmentClassId) == 4)
-                    dtAccounts = AccFactory.GeneralLedgerAccountsRepository().GetViewRecordsByAccountGroupNameSearch("Assets", cmbxAccount.Text);
-                else
-                    dtAccounts = AccFactory.GeneralLedgerAccountsRepository().GetViewRecordsByMajorAccGroupNameSearch(accountGroupName, cmbxAccount.Text);
-            }
-
-            return dtAccounts;
-        }
-
         private void LoadAccounts()
         {
-            try
+            cmbxAccount.DroppedDown = false;
+
+            string searchKey = cmbxAccount.Text;
+            string allotmentClass = txtAllotmentClass.Text;
+            int lastIndex = allotmentClass.IndexOf('-');
+            string allotmentClassName = allotmentClass.Substring(lastIndex + 1).Trim();
+            var dataSource = BudgetHelper.GetAccountsByAllotmentClass(allotmentClassName, searchKey);
+
+            if (dataSource.Rows.Count == 0) return;
+
+            var accountDict = new Dictionary<int, string>();
+            foreach (DataRow item in dataSource.Rows)
             {
-                cmbxAccount.DroppedDown = false;
+                int accountId = Convert.ToInt32(item["general_ledger_accounts_id"]);
+                string accountName = $"{item["account_code"]} - {item["ledger_name"]}";
 
-                if (DatatableAccounts().Rows.Count == 0) return;
-
-                var accountDict = new Dictionary<int, string>();
-                foreach (DataRow item in DatatableAccounts().Rows)
-                {
-                    int accountId = Convert.ToInt32(item["general_ledger_accounts_id"]);
-                    string accountName = $"{item["account_code"]} - {item["ledger_name"]}";
-
-                    accountDict.Add(accountId, accountName);
-                }
-
-                cmbxAccount.DataSource = new BindingSource(accountDict, null);
-                cmbxAccount.DisplayMember = "value";
-                cmbxAccount.ValueMember = "key";
-                Cursor.Current = Cursors.Default;
-
-                Helper.ClearErrorComboBox(epGeneralLedgerAcc, cmbxAccount);
+                accountDict.Add(accountId, accountName);
             }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
+
+            cmbxAccount.DataSource = new BindingSource(accountDict, null);
+            cmbxAccount.DisplayMember = "value";
+            cmbxAccount.ValueMember = "key";
+
+            Helper.ClearErrorComboBox(epGeneralLedgerAcc, cmbxAccount);
         }
 
         private void CmbxLedgerAccout_TextChanged(object sender, EventArgs e)

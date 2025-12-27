@@ -294,14 +294,14 @@ namespace ACC.Data
             return mySqlGenericCommandsLFS.FillBySearch(query, new DataTable(), parameters);
         }
 
-        public DataTable GetViewRecordsByIds(BudgetAppropriationsModel entity)
+        public DataTable GetViewRecords(int fppId, int? subFppId, int alltmntClssId, int fundId)
         {
             var parameters = new object[][]
             {
-                new object[] { "@fpp_id", DbType.Int32, entity.FunctionProgramProjectId},
-                new object[] { "@others_fpp_id", DbType.String, entity.OthersFPPId },
-                new object[] { "@allotment_class_id", DbType.Int32, entity.AllotmentClassesId},
-                new object[] { "@funds_id", DbType.Int32, entity.FundsId},
+                new object[] { "@fpp_id", DbType.Int32, fppId},
+                new object[] { "@others_fpp_id", DbType.String, subFppId},
+                new object[] { "@allotment_class_id", DbType.Int32, alltmntClssId},
+                new object[] { "@funds_id", DbType.Int32, fundId},
             };
 
             string query = $"SELECT * FROM {viewTableName} WHERE fpp_id = @fpp_id AND allotment_class_id = @allotment_class_id AND others_fpp_id <=> @others_fpp_id AND funds_id = @funds_id ";
