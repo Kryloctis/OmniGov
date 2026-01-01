@@ -185,6 +185,37 @@ namespace ACC.Data
         }
 
         // DataTable methods
+        public DataTable GetGenLdgrAccs(int fppId, int? othersFppId, int allotmentClassId, string searchKey)
+        {
+            var parameters = new object[][]
+            {
+                new object[] { "@search_key", DbType.String, $"%{searchKey}%"},
+                new object[] { "@allotment_class_id", DbType.Int32, allotmentClassId},
+                new object[] { "@fpp_id", DbType.Int32, fppId},
+                new object[] { "@others_fpp_id", DbType.Int32, othersFppId}
+            };
+
+            string query = $@"SELECT
+                                    general_ledger_accounts_id,
+                                    account_code,
+                                    general_ledger_accounts_name
+                                FROM {viewTableName}
+                                WHERE fpp_id = @fpp_id
+                                    AND CASE
+                                        WHEN @others_fpp_id IS NULL AND others_fpp_id IS NULL THEN 1
+                                        WHEN others_fpp_id = @others_fpp_id THEN 1
+                                        ELSE 0
+                                        END = 1
+                                    AND allotment_class_id = @allotment_class_id
+                                    AND general_ledger_accounts_name LIKE @search_key
+                                GROUP BY
+                                    general_ledger_accounts_id,
+                                    account_code,
+                                    general_ledger_accounts_name";
+
+            return mySqlGenericCommandsLFS.FillBySearch(query, new DataTable(), parameters);
+        }
+
         public DataTable GetHeaderOthersFPP(string fppId, int allotment_classes_id, int funds_id, short year)
         {
             var parameters = new object[][]

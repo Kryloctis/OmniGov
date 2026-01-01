@@ -37,6 +37,8 @@ namespace ACC.Domain.Interfaces
 
         DataTable GetViewRecordsByIdsYear(BudgetAppropriationsModel entity);
 
+        DataTable GetGenLdgrAccs(int fppId, int? othersFppId, int allotmentClassId, string searchKey);
+
         // decimal methods
         decimal GetSumBudgetAppropriations(string fppId, string subFPPId, int fundId, DateTime dateEntry, int allotment_classes_id, byte isContinuing);
 

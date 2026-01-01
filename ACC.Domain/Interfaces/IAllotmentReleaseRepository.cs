@@ -33,18 +33,14 @@ namespace ACC.Domain.Interfaces
 
         DataTable GetViewRecordsById(int Id);
 
-        //DASHBOARD
-
-        #region BUDGET DASHBOARD
-
-        //SUMMARY
+        //DASHBOARD SUMMARY
         decimal GetSumAllotments(int budgetAppropriationId, DateTime dateIssued);
 
-        //DETAILED
+        //DASHBOARD DETAILED
         decimal GetSumAllotments(string fppId, string subFPPId, int fundId, DateTime dateIssued, int allotmentClassId, byte isContinuing);
 
-        #endregion BUDGET DASHBOARD
-
         string GetLeastAllotmentReleaseNumber();
+
+        DataTable GetViewRecords(int fppId, int? othersFppId, int allotmentClssId, string searchKey);
     }
 }
