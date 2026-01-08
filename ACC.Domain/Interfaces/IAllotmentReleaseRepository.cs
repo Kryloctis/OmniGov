@@ -42,5 +42,7 @@ namespace ACC.Domain.Interfaces
         string GetLeastAllotmentReleaseNumber();
 
         DataTable GetViewRecords(int fppId, int? othersFppId, int allotmentClssId, string searchKey);
+
+        DataTable GetViewRecords(int id);
     }
 }

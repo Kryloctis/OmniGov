@@ -365,5 +365,16 @@ namespace ACC.Data
 
             return mySqlGenericCommandsLFS.FillBySearch(query, new DataTable(), parameters);
         }
+
+        public DataTable GetViewRecords(int id)
+        {
+            var parameters = new object[][]
+            {
+                new object[] { "@allotment_release_id", DbType.Int32, id },
+            };
+
+            string query = $"SELECT * FROM {viewTableName} WHERE allotment_release_id = @allotment_release_id";
+            return mySqlGenericCommandsLFS.FillBySearch(query, new DataTable(), parameters);
+        }
     }
 }
