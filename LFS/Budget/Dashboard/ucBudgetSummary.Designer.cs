@@ -1,5 +1,6 @@
-﻿
-namespace LFS.Views.Dashboard.BudgetDashboard.BudgetSummary
+﻿using LFS.Budget.Dashboard;
+
+namespace LFS.Budget.Dashboard
 {
     partial class ucBudgetSummary
     {

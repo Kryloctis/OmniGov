@@ -39,7 +39,7 @@
             tabControlMain = new System.Windows.Forms.TabControl();
             tabPageBudget = new System.Windows.Forms.TabPage();
             panel2 = new System.Windows.Forms.Panel();
-            ucBudget1 = new LFS.Views.Dashboard.Budget.ucBudget();
+            ucBudget1 = new LFS.Budget.Dashboard.ucBudget();
             label4 = new System.Windows.Forms.Label();
             tabPageAccounting = new System.Windows.Forms.TabPage();
             panel3 = new System.Windows.Forms.Panel();
@@ -616,7 +616,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ToolStripMenuItem taxRatesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem discountRatesToolStripMenuItem;
-        private Budget.ucBudget ucBudget1;
+        private LFS.Budget.Dashboard.ucBudget ucBudget1;
         private Accounting.ucAccounting ucAccounting1;
         private Treasury.ucTreasury ucTreasury1;
         private Manage.ucManage ucManage1;

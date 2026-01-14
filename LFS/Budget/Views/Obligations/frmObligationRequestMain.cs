@@ -34,7 +34,6 @@ namespace LFS.Views.Transactions.ObligationRequest
 
                 var obligationAccountModel = new ObligationAccountModel()
                 {
-                    BudgetAppropriationId = budgetAppropriationId,
                     Amount = obligationAmount
                 };
 

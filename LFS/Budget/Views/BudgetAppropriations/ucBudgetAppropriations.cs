@@ -1,7 +1,7 @@
 ﻿using ACC.Data;
 using LFS;
+using LFS.Budget.Helpers;
 using LFS.Helpers;
-using LFS.Helpers.Budget;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

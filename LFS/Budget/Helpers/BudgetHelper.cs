@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LFS.Helpers.Budget
+namespace LFS.Budget.Helpers
 {
     public static class BudgetHelper
     {

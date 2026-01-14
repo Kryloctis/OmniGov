@@ -1,6 +1,5 @@
 ﻿using LFS.Helpers;
 using LFS.Views.Dashboard.Accounting;
-using LFS.Views.Dashboard.Budget;
 using LFS.Views.Dashboard.Manage;
 using LFS.Views.Dashboard.MyAccount;
 using LFS.Views.Dashboard.Reports;
@@ -9,6 +8,7 @@ using LFS.Views.SignIn;
 using System;
 using System.Diagnostics;
 using System.Windows.Forms;
+using LFS.Budget.Dashboard;
 
 namespace LFS.Views.Dashboard
 {

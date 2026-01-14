@@ -114,7 +114,7 @@
             customTabControl1.Location = new System.Drawing.Point(0, 0);
             customTabControl1.Name = "customTabControl1";
             customTabControl1.SelectedIndex = 0;
-            customTabControl1.Size = new System.Drawing.Size(826, 506);
+            customTabControl1.Size = new System.Drawing.Size(826, 558);
             customTabControl1.TabIndex = 0;
             // 
             // tbPgMain
@@ -441,7 +441,7 @@
             tbPgCrud.Controls.Add(toolStrip3);
             tbPgCrud.Location = new System.Drawing.Point(4, 24);
             tbPgCrud.Name = "tbPgCrud";
-            tbPgCrud.Size = new System.Drawing.Size(818, 478);
+            tbPgCrud.Size = new System.Drawing.Size(818, 530);
             tbPgCrud.TabIndex = 1;
             tbPgCrud.Text = "tbPgCrud";
             // 
@@ -451,7 +451,7 @@
             ucObligationsCrud.Dock = System.Windows.Forms.DockStyle.Fill;
             ucObligationsCrud.Location = new System.Drawing.Point(0, 47);
             ucObligationsCrud.Name = "ucObligationsCrud";
-            ucObligationsCrud.Size = new System.Drawing.Size(818, 388);
+            ucObligationsCrud.Size = new System.Drawing.Size(818, 440);
             ucObligationsCrud.TabIndex = 24;
             // 
             // panel2
@@ -459,7 +459,7 @@
             panel2.Controls.Add(btnCrudSubmit);
             panel2.Controls.Add(btnSubmit);
             panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            panel2.Location = new System.Drawing.Point(0, 435);
+            panel2.Location = new System.Drawing.Point(0, 487);
             panel2.Name = "panel2";
             panel2.Padding = new System.Windows.Forms.Padding(4);
             panel2.Size = new System.Drawing.Size(818, 43);
@@ -691,7 +691,7 @@
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(826, 506);
+            ClientSize = new System.Drawing.Size(826, 558);
             Controls.Add(customTabControl1);
             MinimizeBox = false;
             Name = "frmObligations";

@@ -59,12 +59,14 @@ namespace LFS.Views.Transactions.Obligations
             if (isEdit)
             {
                 int rowIndex = dgvMain.CurrentCell.RowIndex;
-                int jevId = Convert.ToInt32(dgvMain.Rows[rowIndex].Cells["id"].Value);
+                int oblgtnRqstId = Convert.ToInt32(dgvMain.Rows[rowIndex].Cells["id"].Value);
+                ucObligationsCrud.OnLoad(true, oblgtnRqstId);
                 customTabControl1.SelectedTab = tbPgCrud;
                 crudIndct = "Update Obligation Request";
             }
             else
             {
+                ucObligationsCrud.OnLoad(false);
                 customTabControl1.SelectedTab = tbPgCrud;
                 crudIndct = "Create Obligation Request";
             }

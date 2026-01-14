@@ -1,5 +1,4 @@
 ﻿using LFS.Helpers;
-using LFS.Views.Dashboard.BudgetDashboard.BudgetSummary;
 using LFS.Views.Manage.AllotmentRelease;
 using LFS.Views.Manage.BudgetAppropriations;
 using LFS.Views.Transactions.CheckIssuance.Obligations;
@@ -7,8 +6,9 @@ using LFS.Views.Transactions.ObligationRequest;
 using LFS.Views.Transactions.Obligations;
 using System;
 using System.Windows.Forms;
+using LFS.Budget.Dashboard;
 
-namespace LFS.Views.Dashboard.Budget
+namespace LFS.Budget.Dashboard
 {
     public partial class ucBudget : UserControl
     {

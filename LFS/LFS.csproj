@@ -96,7 +96,6 @@
 		<None Remove="Reports\status-of-appropriations-allotments-and-obligation.rdlc" />
 		<None Remove="Reports\subsidiary-ledger.rdlc" />
 		<None Remove="Reports\transaction_log.rdlc" />
-		<None Remove="Views\Dashboard\Budget\ucBudgetSummary.resx~RF15fbe303.TMP" />
 		<None Remove="Views\Transactions\Payments\4ln2x4sd.4uw~" />
 	</ItemGroup>
 	<ItemGroup>
@@ -260,7 +259,7 @@
 		<Content Include="Reports\schedule-of-unreleased-cheques.rdlc">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Content>
-		<Content Include="Reports\statement-of-appropriations-allotments-obligations-and-balances.rdlc">
+		<Content Include="Budget\Reports\saaob.rdlc">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
 		<Content Include="Reports\statement-of-changes-in-net-assets-equity.rdlc">
@@ -275,7 +274,7 @@
 		<Content Include="Reports\statement_of_cash_flows.rdlc">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
-		<Content Include="Reports\status-of-appropriations-allotments-and-obligation.rdlc">
+		<Content Include="Budget\Reports\saao.rdlc">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
 		<Content Include="Reports\Ledgers\subsidiary-ledger.rdlc">
@@ -321,9 +320,9 @@
 			<AutoGen>True</AutoGen>
 			<DependentUpon>Settings.settings</DependentUpon>
 		</Compile>
-		<Compile Update="Views\Manage\BudgetAppropriations\frmBudgetAppropriationsAdd.cs" />
-		<Compile Update="Views\Manage\BudgetAppropriations\frmBudgetAppropriationsEdit.cs" />
-		<Compile Update="Views\Manage\BudgetAppropriations\ucBudgetAppropriations.cs" />
+		<Compile Update="Budget\Views\BudgetAppropriations\frmBudgetAppropriationsAdd.cs" />
+		<Compile Update="Budget\Views\BudgetAppropriations\frmBudgetAppropriationsEdit.cs" />
+		<Compile Update="Budget\Views\BudgetAppropriations\ucBudgetAppropriations.cs" />
 		<Compile Update="Views\Manage\RealProperties\ucRealProperties.cs" />
 		<Compile Update="Views\Reports\Ltoms\frmLtom22.cs">
 		  <SubType>Form</SubType>

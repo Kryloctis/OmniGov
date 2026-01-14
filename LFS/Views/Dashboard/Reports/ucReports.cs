@@ -11,8 +11,8 @@ using LFS.Views.Reports.Rcd;
 using LFS.Views.Reports.RCI;
 using LFS.Views.Reports.ReleasedAndUnreleasedCheques;
 using LFS.Views.Reports.RptReports;
+using LFS.Views.Reports.Saao;
 using LFS.Views.Reports.Saaob;
-using LFS.Views.Reports.Saaobb;
 using LFS.Views.Reports.TaxClearance;
 using LFS.Views.Reports.TrialBalance;
 using System;
@@ -36,8 +36,8 @@ namespace LFS.Views.Dashboard.Reports
 
         private void ValidateAccountingPermissions()
         {
-            btnSaaob.Enabled = PrivilegesHelper.HasPrivilege(Privileges.RptSAAOB);
-            btnSaaobb.Enabled = PrivilegesHelper.HasPrivilege(Privileges.RptSAAOBB);
+            btnSaao.Enabled = PrivilegesHelper.HasPrivilege(Privileges.RptSAAOB);
+            btnSaaob.Enabled = PrivilegesHelper.HasPrivilege(Privileges.RptSAAOBB);
             btnJevRprt.Enabled = PrivilegesHelper.HasPrivilege(Privileges.RptJEVs);
 
             var rptJrnlsPrivileges = new List<bool>
@@ -133,7 +133,7 @@ namespace LFS.Views.Dashboard.Reports
         {
             try
             {
-                _ = new frmSaaob().ShowDialog();
+                _ = new frmSAAO().ShowDialog();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -142,7 +142,7 @@ namespace LFS.Views.Dashboard.Reports
         {
             try
             {
-                _ = new frmSaaobb().ShowDialog();
+                _ = new frmSAAOB().ShowDialog();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }

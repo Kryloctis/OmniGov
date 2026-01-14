@@ -56,7 +56,7 @@ namespace LFS.Views.Manage.AllotmentRelease
             string searchTxt = cmbxBudgetAppropriations.Text.Trim();
 
             if (string.IsNullOrEmpty(cmbxBudgetAppropriations.Text))
-                dtBudgetAppropriation = AccFactory.BudgetAppropriationsRepository().GetViewRecordsByIds(budgetAppropriationsModel);
+                dtBudgetAppropriation = AccFactory.BudgetAppropriationsRepository().GetViewRecords(fppId, othersFPPId, allotmentClassId, fundId);
             else
                 dtBudgetAppropriation = AccFactory.BudgetAppropriationsRepository().GetViewRecordsByIdsSearch(budgetAppropriationsModel, searchTxt);
 
@@ -213,7 +213,6 @@ namespace LFS.Views.Manage.AllotmentRelease
             txtRemainingBal.Text = GetRemainingBalance().ToString("N2");
         }
 
-        #region VALIDATIONS
 
         private void nudYear_Validating(object sender, CancelEventArgs e)
         {
@@ -353,6 +352,5 @@ namespace LFS.Views.Manage.AllotmentRelease
             Helper.ClearErrorComboBox(errorProvider1, cmbxBudgetAppropriations);
         }
 
-        #endregion VALIDATIONS
     }
 }

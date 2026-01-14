@@ -1,4 +1,5 @@
-﻿namespace LFS.Views.Dashboard.Budget
+﻿using LFS.Budget.Dashboard;
+namespace LFS.Budget.Dashboard
 {
     partial class ucBudget
     {
@@ -28,7 +29,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            ucBudgetSummary1 = new LFS.Views.Dashboard.BudgetDashboard.BudgetSummary.ucBudgetSummary();
+            ucBudgetSummary1 = new LFS.Budget.Dashboard.ucBudgetSummary();
             toolStrip1 = new System.Windows.Forms.ToolStrip();
             tlStrpBtnAppropriations = new System.Windows.Forms.ToolStripButton();
             tlStrpBtnAlltmntRelease = new System.Windows.Forms.ToolStripButton();
@@ -106,7 +107,7 @@
 
         #endregion
 
-        private BudgetDashboard.BudgetSummary.ucBudgetSummary ucBudgetSummary1;
+        private Budget.Dashboard.ucBudgetSummary ucBudgetSummary1;
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton tlStrpBtnAlltmntRelease;
         private System.Windows.Forms.ToolStripButton tlStrpBtnObligations;

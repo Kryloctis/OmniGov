@@ -94,22 +94,29 @@ namespace LFS.Views.Transactions.ObligationRequest
 
         private void ucObligationRequest_Load(object sender, EventArgs e)
         {
-            if (!DesignMode)
+            try
             {
-                //SUB FPP
-                LoadSubFPPCombobox();
+                if (!DesignMode)
+                {
+                    //SUB FPP
+                    LoadSubFPPCombobox();
 
-                txtUnobligatedBalance.Text = GetAllotmentReleaseBalance().ToString("N2");
-                txtRemainingBalance.Text = GetCurrentBalance().ToString("N2");
+                    txtUnobligatedBalance.Text = GetAllotmentReleaseBalance().ToString("N2");
+                    txtRemainingBalance.Text = GetCurrentBalance().ToString("N2");
+                }
             }
+            catch (Exception ex) { Helper.MessageBoxError(ex.StackTrace); }
         }
 
         private void nudAmount_ValueChanged(object sender, EventArgs e)
         {
-            txtRemainingBalance.Text = GetCurrentBalance().ToString("N2");
+            try
+            {
+                txtRemainingBalance.Text = GetCurrentBalance().ToString("N2");
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        #region SUB FPP COMBOBOX
 
         private DataTable DataTableSubFPP()
         {
@@ -163,26 +170,35 @@ namespace LFS.Views.Transactions.ObligationRequest
 
         private void cmbxSubFPP_TextChanged(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(cmbxSubFPP.Text)) LoadSubFPPCombobox();
+            try
+            {
+                if (string.IsNullOrEmpty(cmbxSubFPP.Text)) LoadSubFPPCombobox();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.StackTrace); }
         }
 
         private void cmbxSubFPP_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.F1 && cmbxSubFPP.FindStringExact(cmbxSubFPP.Text) == -1 && !string.IsNullOrEmpty(cmbxSubFPP.Text))
+            try
             {
-                LoadSubFPP();
-                cmbxSubFPP.DroppedDown = true;
+                if (e.KeyCode == Keys.F1 && cmbxSubFPP.FindStringExact(cmbxSubFPP.Text) == -1 && !string.IsNullOrEmpty(cmbxSubFPP.Text))
+                {
+                    LoadSubFPP();
+                    cmbxSubFPP.DroppedDown = true;
+                }
             }
+            catch (Exception ex) { Helper.MessageBoxError(ex.StackTrace); }
         }
 
         private void cmbxSubFPP_SelectedValueChanged(object sender, EventArgs e)
         {
-            LoadObjectOfExpendituresCombobox();
+            try
+            {
+                LoadObjectOfExpendituresCombobox();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.StackTrace); }
         }
 
-        #endregion SUB FPP COMBOBOX
-
-        #region OBJECT OF EXPENDITURES COMBOBOX
 
         private DataTable DatatableObjectOfExpenditures()
         {
@@ -201,7 +217,7 @@ namespace LFS.Views.Transactions.ObligationRequest
             string searchTxt = cmbxObjectOfExpenditure.Text.Trim();
 
             if (string.IsNullOrEmpty(cmbxObjectOfExpenditure.Text))
-                dtBudgetAppropriation = AccFactory.BudgetAppropriationsRepository().GetViewRecordsByIds(budgetAppropriationsModel);
+                dtBudgetAppropriation = AccFactory.BudgetAppropriationsRepository().GetViewRecords(budgetAppropriationsModel.FunctionProgramProjectId, budgetAppropriationsModel.OthersFPPId, budgetAppropriationsModel.AllotmentClassesId, budgetAppropriationsModel.FundsId);
             else
                 dtBudgetAppropriation = AccFactory.BudgetAppropriationsRepository().GetViewRecordsByIdsSearch(budgetAppropriationsModel, searchTxt);
 
@@ -260,30 +276,39 @@ namespace LFS.Views.Transactions.ObligationRequest
 
         private void cmbxObjectOfExpenditure_SelectedValueChanged(object sender, EventArgs e)
         {
-            txtUnobligatedBalance.Text = GetAllotmentReleaseBalance().ToString("N2");
-            txtRemainingBalance.Text = GetCurrentBalance().ToString("N2");
+            try
+            {
+                txtUnobligatedBalance.Text = GetAllotmentReleaseBalance().ToString("N2");
+                txtRemainingBalance.Text = GetCurrentBalance().ToString("N2");
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.StackTrace); }
         }
 
         private void CmbxObjectOfExpenditure_TextChanged(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(cmbxObjectOfExpenditure.Text)) LoadObjectOfExpendituresCombobox();
+            try
+            {
+                if (string.IsNullOrEmpty(cmbxObjectOfExpenditure.Text)) LoadObjectOfExpendituresCombobox();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.StackTrace); }
         }
 
         private void cmbxObjectOfExpenditure_KeyDown(object sender, KeyEventArgs e)
         {
-            string searchTxt = cmbxObjectOfExpenditure.Text;
-
-            if (e.KeyCode == Keys.F1 && cmbxObjectOfExpenditure.FindStringExact(searchTxt) == -1 && !string.IsNullOrEmpty(searchTxt))
+            try
             {
-                LoadObjectOfExpenditures();
-                cmbxObjectOfExpenditure.SelectedIndex = cmbxObjectOfExpenditure.Items.Count == 0 ? -1 : 0;
-                cmbxObjectOfExpenditure.DroppedDown = true;
+                string searchTxt = cmbxObjectOfExpenditure.Text;
+
+                if (e.KeyCode == Keys.F1 && cmbxObjectOfExpenditure.FindStringExact(searchTxt) == -1 && !string.IsNullOrEmpty(searchTxt))
+                {
+                    LoadObjectOfExpenditures();
+                    cmbxObjectOfExpenditure.SelectedIndex = cmbxObjectOfExpenditure.Items.Count == 0 ? -1 : 0;
+                    cmbxObjectOfExpenditure.DroppedDown = true;
+                }
             }
+            catch (Exception ex) { Helper.MessageBoxError(ex.StackTrace); }
         }
 
-        #endregion OBJECT OF EXPENDITURES COMBOBOX
-
-        #region VALIDATIONS
 
         private bool ShowErrorObjectExpenditureNotExist()
         {
@@ -338,12 +363,16 @@ namespace LFS.Views.Transactions.ObligationRequest
 
         private void cmbxObjectOfExpenditure_Validating(object sender, CancelEventArgs e)
         {
-            if (string.IsNullOrEmpty(cmbxObjectOfExpenditure.Text))
-                e.Cancel = Helper.ShowErrorComboBoxEmpty(epObjectOfExpenditure, cmbxObjectOfExpenditure, "Object of Expenditure.");
-            else if (ShowErrorObjectExpenditureNotExist())
-                e.Cancel = ShowErrorObjectExpenditureNotExist();
-            else
-                e.Cancel = ShowErrorObjectExpenditureExistOnList();
+            try
+            {
+                if (string.IsNullOrEmpty(cmbxObjectOfExpenditure.Text))
+                    e.Cancel = Helper.ShowErrorComboBoxEmpty(epObjectOfExpenditure, cmbxObjectOfExpenditure, "Object of Expenditure.");
+                else if (ShowErrorObjectExpenditureNotExist())
+                    e.Cancel = ShowErrorObjectExpenditureNotExist();
+                else
+                    e.Cancel = ShowErrorObjectExpenditureExistOnList();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.StackTrace); }
         }
 
         private void cmbxObjectOfExpenditure_Validated(object sender, EventArgs e)
@@ -387,12 +416,16 @@ namespace LFS.Views.Transactions.ObligationRequest
 
         private void nudAmount_Validating(object sender, CancelEventArgs e)
         {
-            if (string.IsNullOrEmpty(nudAmount.Text))
-                e.Cancel = Helper.ShowErrorNumericUpDownEmpty(epAmount, nudAmount, "Amount");
-            else if (ShowErrorAmountIsZero())
-                e.Cancel = ShowErrorAmountIsZero();
-            else
-                e.Cancel = ShowErrorAmountExceeds();
+            try
+            {
+                if (string.IsNullOrEmpty(nudAmount.Text))
+                    e.Cancel = Helper.ShowErrorNumericUpDownEmpty(epAmount, nudAmount, "Amount");
+                else if (ShowErrorAmountIsZero())
+                    e.Cancel = ShowErrorAmountIsZero();
+                else
+                    e.Cancel = ShowErrorAmountExceeds();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.StackTrace); }
         }
 
         private void nudAmount_Validated(object sender, EventArgs e)
@@ -400,6 +433,5 @@ namespace LFS.Views.Transactions.ObligationRequest
             Helper.ClearErrorNumericUpDown(epAmount, nudAmount);
         }
 
-        #endregion VALIDATIONS
     }
 }

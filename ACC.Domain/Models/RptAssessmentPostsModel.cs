@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace RPT.Domain.Models
+namespace ACC.Domain.Models
 {
     public class RptAssessmentPostsModel
     {
