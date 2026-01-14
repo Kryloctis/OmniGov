@@ -8,11 +8,11 @@ using System.Data;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace LFS.Views.Reports.Saaobb
+namespace LFS.Views.Reports.Saaob
 {
-    public partial class frmSaaobb : Form
+    public partial class frmSAAOB : Form
     {
-        public frmSaaobb()
+        public frmSAAOB()
         {
             InitializeComponent();
             Helper.LoadFormIcon(this);
@@ -236,7 +236,7 @@ namespace LFS.Views.Reports.Saaobb
                 var localReport = reportViewer1.LocalReport;
 
                 // Set the path to the RDLC report definition file (.rdlc)
-                localReport.ReportPath = $"{Application.StartupPath}\\Reports\\statement-of-appropriations-allotments-obligations-and-balances.rdlc";
+                localReport.ReportPath = $"{Application.StartupPath}\\Reports\\saaob.rdlc";
 
                 // Clear any existing data sources attached to the report to avoid conflicts or duplication
                 localReport.DataSources.Clear();

@@ -1,7 +1,7 @@
 ﻿
-namespace LFS.Views.Reports.Saaobb
+namespace LFS.Views.Reports.Saaob
 {
-    partial class frmSaaobb
+    partial class frmSAAOB
     {
         /// <summary>
         /// Required designer variable.
