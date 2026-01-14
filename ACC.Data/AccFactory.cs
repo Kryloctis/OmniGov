@@ -1,5 +1,4 @@
 ﻿using ACC.Domain.Interfaces;
-using RPT.Domain.Interfaces;
 using System;
 
 namespace ACC.Data
