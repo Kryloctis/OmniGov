@@ -1,5 +1,6 @@
-﻿
-namespace LFS.Views.Manage.Realignment
+﻿using LFS.Budget.Views.Realignment;
+
+namespace LFS.Budget.Views.Realignment
 {
     partial class frmRealignmentAdd
     {

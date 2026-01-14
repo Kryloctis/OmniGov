@@ -1,7 +1,7 @@
-﻿using System.Windows.Forms;
-using LFS.Budget.Views.BudgetAppropriations;
+﻿using LFS.Budget.Views.BudgetAppropriations;
+using System.Windows.Forms;
 
-namespace LFS.Views.Manage.Realignment
+namespace LFS.Budget.Views.Realignment
 {
     public partial class frmRealignmentAdd : Form
     {

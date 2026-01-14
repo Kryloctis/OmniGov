@@ -1,9 +1,9 @@
-﻿using LFS.Helpers;
+﻿using LFS.Budget.Views.BudgetAppropriations;
+using LFS.Helpers;
 using System;
 using System.Windows.Forms;
-using LFS.Budget.Views.BudgetAppropriations;
 
-namespace LFS.Views.Manage.Realignment
+namespace LFS.Budget.Views.Realignment
 {
     public partial class frmRealignment : Form
     {

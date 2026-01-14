@@ -6,7 +6,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
 
-namespace LFS.Views.Manage.Realignment
+namespace LFS.Budget.Views.Realignment
 {
     public partial class ucRealignment : UserControl
     {

@@ -1,5 +1,5 @@
 ﻿
-namespace LFS.Views.Manage.Realignment
+namespace LFS.Budget.Views.Realignment
 {
     partial class ucRealignment
     {
