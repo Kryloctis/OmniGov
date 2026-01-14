@@ -1,5 +1,5 @@
 ﻿
-namespace LFS.Views.Manage.SupplementalAppropriations
+namespace LFS.Budget.Views.SupplementalAppropriations
 {
     partial class ucSupplementalAppropriations
     {

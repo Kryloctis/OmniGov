@@ -1,14 +1,14 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
+using LFS.Budget.Views.BudgetAppropriations;
 using LFS.Helpers;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
-using LFS.Budget.Views.BudgetAppropriations;
 
-namespace LFS.Views.Manage.SupplementalAppropriations
+namespace LFS.Budget.Views.SupplementalAppropriations
 {
     public partial class frmSupplementalAppropriationsMain : Form
     {

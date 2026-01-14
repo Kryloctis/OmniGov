@@ -1,5 +1,6 @@
-﻿
-namespace LFS.Views.Manage.SupplementalAppropriations
+﻿using LFS.Budget.Views.SupplementalAppropriations;
+
+namespace LFS.Budget.Views.SupplementalAppropriations
 {
     partial class frmSupplementalAppropriationsEdit
     {
@@ -29,7 +30,7 @@ namespace LFS.Views.Manage.SupplementalAppropriations
         /// </summary>
         private void InitializeComponent()
         {
-            this.ucSupplementalAppropriations1 = new LFS.Views.Manage.SupplementalAppropriations.ucSupplementalAppropriations();
+            this.ucSupplementalAppropriations1 = new LFS.Budget.Views.SupplementalAppropriations.ucSupplementalAppropriations();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnOk = new System.Windows.Forms.Button();
             this.flowLayoutPanel1.SuspendLayout();
