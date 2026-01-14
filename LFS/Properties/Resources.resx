@@ -1396,4 +1396,19 @@
   <data name="symbol-forbidden@24px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\symbol-forbidden@24px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="settings-horizontal-filled@20px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\settings-horizontal-filled@20px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="settings-horizontal-filled@24px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\settings-horizontal-filled@24px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="settings-horizontal-filled@32px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\settings-horizontal-filled@32px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="settings-horizontal-filled@14px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\settings-horizontal-filled@14px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="settings-horizontal-filled@16px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\settings-horizontal-filled@16px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>
