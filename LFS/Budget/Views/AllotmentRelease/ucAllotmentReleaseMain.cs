@@ -7,7 +7,7 @@ using System.Data;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace LFS.Views.Manage.AllotmentRelease
+namespace LFS.Budget.Views.AllotmentRelease
 {
     public partial class ucAllotmentReleaseMain : UserControl
     {

@@ -3,7 +3,7 @@ using LFS.Helpers;
 using System;
 using System.Windows.Forms;
 
-namespace LFS.Views.Manage.AllotmentRelease
+namespace LFS.Budget.Views.AllotmentRelease
 {
     public partial class frmAllotmentReleaseEdit : Form
     {

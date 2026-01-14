@@ -1,5 +1,5 @@
 ﻿
-namespace LFS.Views.Manage.AllotmentRelease
+namespace LFS.Budget.Views.AllotmentRelease
 {
     partial class ucAllotmentReleaseMain
     {

@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Windows.Forms;
 
-namespace LFS.Views.Manage.AllotmentRelease
+namespace LFS.Budget.Views.AllotmentRelease
 {
     public partial class frmAllotmentReleaseMain : Form
     {

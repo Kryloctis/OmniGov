@@ -1,5 +1,6 @@
-﻿
-namespace LFS.Views.Manage.AllotmentRelease
+﻿using LFS.Budget.Views.AllotmentRelease;
+
+namespace LFS.Budget.Views.AllotmentRelease
 {
     partial class frmAllotmentReleaseEdit
     {
@@ -32,7 +33,7 @@ namespace LFS.Views.Manage.AllotmentRelease
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnOk = new System.Windows.Forms.Button();
-            this.ucAllotmentRelease1 = new LFS.Views.Manage.AllotmentRelease.ucAllotmentRelease();
+            this.ucAllotmentRelease1 = new LFS.Budget.Views.AllotmentRelease.ucAllotmentRelease();
             this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 

@@ -7,7 +7,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
 
-namespace LFS.Views.Manage.AllotmentRelease
+namespace LFS.Budget.Views.AllotmentRelease
 {
     public partial class ucAllotmentRelease : UserControl
     {
@@ -213,7 +213,6 @@ namespace LFS.Views.Manage.AllotmentRelease
             txtRemainingBal.Text = GetRemainingBalance().ToString("N2");
         }
 
-
         private void nudYear_Validating(object sender, CancelEventArgs e)
         {
             e.Cancel = Helper.ShowErrorNumericUpDownEmpty(errorProvider1, nudYear, "Year");
@@ -351,6 +350,5 @@ namespace LFS.Views.Manage.AllotmentRelease
         {
             Helper.ClearErrorComboBox(errorProvider1, cmbxBudgetAppropriations);
         }
-
     }
 }

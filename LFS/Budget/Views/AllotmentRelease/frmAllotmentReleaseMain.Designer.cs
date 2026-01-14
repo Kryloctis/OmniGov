@@ -1,5 +1,6 @@
-﻿
-namespace LFS.Views.Manage.AllotmentRelease
+﻿using LFS.Budget.Views.AllotmentRelease;
+
+namespace LFS.Budget.Views.AllotmentRelease
 {
     partial class frmAllotmentReleaseMain
     {
@@ -36,7 +37,7 @@ namespace LFS.Views.Manage.AllotmentRelease
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.btnCancel = new System.Windows.Forms.ToolStripButton();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.ucAllotmentReleaseMain1 = new LFS.Views.Manage.AllotmentRelease.ucAllotmentReleaseMain();
+            this.ucAllotmentReleaseMain1 = new LFS.Budget.Views.AllotmentRelease.ucAllotmentReleaseMain();
             this.toolStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
