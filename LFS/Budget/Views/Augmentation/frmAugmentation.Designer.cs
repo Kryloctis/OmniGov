@@ -1,5 +1,6 @@
-﻿
-namespace LFS.Views.Manage.Augmentation
+﻿using LFS.Views.Manage.Augmentation;
+
+namespace LFS.Budget.Views.Augmentation
 {
     partial class frmAugmentation
     {
