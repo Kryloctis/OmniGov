@@ -29,7 +29,7 @@ namespace LFS.Budget.Dashboard
         /// </summary>
         private void InitializeComponent()
         {
-            ucBudgetSummary1 = new LFS.Budget.Dashboard.ucBudgetSummary();
+            ucBudgetSummary1 = new ucBudgetSummary();
             toolStrip1 = new System.Windows.Forms.ToolStrip();
             tlStrpBtnAppropriations = new System.Windows.Forms.ToolStripButton();
             tlStrpBtnAlltmntRelease = new System.Windows.Forms.ToolStripButton();
@@ -61,7 +61,6 @@ namespace LFS.Budget.Dashboard
             // 
             // tlStrpBtnAppropriations
             // 
-            tlStrpBtnAppropriations.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             tlStrpBtnAppropriations.Image = Properties.Resources.folder_filled_20px;
             tlStrpBtnAppropriations.ImageTransparentColor = System.Drawing.Color.Magenta;
             tlStrpBtnAppropriations.Name = "tlStrpBtnAppropriations";
@@ -71,7 +70,6 @@ namespace LFS.Budget.Dashboard
             // 
             // tlStrpBtnAlltmntRelease
             // 
-            tlStrpBtnAlltmntRelease.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             tlStrpBtnAlltmntRelease.Image = Properties.Resources.folder_filled_20px;
             tlStrpBtnAlltmntRelease.ImageTransparentColor = System.Drawing.Color.Magenta;
             tlStrpBtnAlltmntRelease.Name = "tlStrpBtnAlltmntRelease";
@@ -81,7 +79,6 @@ namespace LFS.Budget.Dashboard
             // 
             // tlStrpBtnObligations
             // 
-            tlStrpBtnObligations.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             tlStrpBtnObligations.Image = Properties.Resources.folder_filled_20px;
             tlStrpBtnObligations.ImageTransparentColor = System.Drawing.Color.Magenta;
             tlStrpBtnObligations.Name = "tlStrpBtnObligations";

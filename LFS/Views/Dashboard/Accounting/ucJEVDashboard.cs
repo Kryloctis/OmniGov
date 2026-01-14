@@ -141,13 +141,17 @@ namespace LFS.Views.Dashboard
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private void btnRecordJev_Click(object sender, EventArgs e)
+        private void tlStrpBtnJev_Click(object sender, EventArgs e)
         {
             try
             {
                 _ = new frmJevList(this).ShowDialog();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
         }
     }
 }

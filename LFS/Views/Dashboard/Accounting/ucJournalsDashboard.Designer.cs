@@ -30,6 +30,7 @@ namespace LFS.Views.Dashboard.AccountingDashboard
         private void InitializeComponent()
         {
             flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            numdYear = new System.Windows.Forms.NumericUpDown();
             cmbxFunds = new System.Windows.Forms.ComboBox();
             tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             panel3 = new System.Windows.Forms.Panel();
@@ -50,8 +51,8 @@ namespace LFS.Views.Dashboard.AccountingDashboard
             panel2 = new System.Windows.Forms.Panel();
             lnkADAdisbursementsJournal = new System.Windows.Forms.LinkLabel();
             lblADADisbursementsJournal = new System.Windows.Forms.Label();
-            numdYear = new System.Windows.Forms.NumericUpDown();
             flowLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)numdYear).BeginInit();
             tableLayoutPanel1.SuspendLayout();
             panel3.SuspendLayout();
             pnlPendingJEV.SuspendLayout();
@@ -59,7 +60,6 @@ namespace LFS.Views.Dashboard.AccountingDashboard
             pnlJEV.SuspendLayout();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)numdYear).BeginInit();
             SuspendLayout();
             // 
             // flowLayoutPanel1
@@ -74,6 +74,15 @@ namespace LFS.Views.Dashboard.AccountingDashboard
             flowLayoutPanel1.Padding = new System.Windows.Forms.Padding(4);
             flowLayoutPanel1.Size = new System.Drawing.Size(938, 37);
             flowLayoutPanel1.TabIndex = 0;
+            // 
+            // numdYear
+            // 
+            numdYear.Location = new System.Drawing.Point(807, 7);
+            numdYear.Maximum = new decimal(new int[] { 999999999, 0, 0, 0 });
+            numdYear.Name = "numdYear";
+            numdYear.Size = new System.Drawing.Size(120, 23);
+            numdYear.TabIndex = 1;
+            numdYear.ValueChanged += numdYear_ValueChanged;
             // 
             // cmbxFunds
             // 
@@ -373,15 +382,6 @@ namespace LFS.Views.Dashboard.AccountingDashboard
             lblADADisbursementsJournal.Text = "0";
             lblADADisbursementsJournal.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
-            // numdYear
-            // 
-            numdYear.Location = new System.Drawing.Point(807, 7);
-            numdYear.Maximum = new decimal(new int[] { 999999999, 0, 0, 0 });
-            numdYear.Name = "numdYear";
-            numdYear.Size = new System.Drawing.Size(120, 23);
-            numdYear.TabIndex = 1;
-            numdYear.ValueChanged += numdYear_ValueChanged;
-            // 
             // ucJournalsDashboard
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -392,6 +392,7 @@ namespace LFS.Views.Dashboard.AccountingDashboard
             Name = "ucJournalsDashboard";
             Size = new System.Drawing.Size(938, 135);
             flowLayoutPanel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)numdYear).EndInit();
             tableLayoutPanel1.ResumeLayout(false);
             panel3.ResumeLayout(false);
             pnlPendingJEV.ResumeLayout(false);
@@ -399,7 +400,6 @@ namespace LFS.Views.Dashboard.AccountingDashboard
             pnlJEV.ResumeLayout(false);
             panel1.ResumeLayout(false);
             panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)numdYear).EndInit();
             ResumeLayout(false);
             PerformLayout();
 

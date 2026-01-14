@@ -111,11 +111,11 @@ namespace LFS.Budget.Views.Obligations
             // dgvEntries
             // 
             dgvEntries.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvEntries.Dock = System.Windows.Forms.DockStyle.Top;
+            dgvEntries.Dock = System.Windows.Forms.DockStyle.Fill;
             dgvEntries.Location = new System.Drawing.Point(20, 45);
             dgvEntries.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
             dgvEntries.Name = "dgvEntries";
-            dgvEntries.Size = new System.Drawing.Size(702, 208);
+            dgvEntries.Size = new System.Drawing.Size(702, 221);
             dgvEntries.TabIndex = 12;
             dgvEntries.CellEndEdit += dgvEntries_CellEndEdit;
             dgvEntries.CellValueChanged += dgvEntries_CellValueChanged;
@@ -126,11 +126,13 @@ namespace LFS.Budget.Views.Obligations
             // label9
             // 
             label9.AutoSize = true;
+            label9.Dock = System.Windows.Forms.DockStyle.Bottom;
             label9.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
             label9.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            label9.Location = new System.Drawing.Point(20, 263);
+            label9.Location = new System.Drawing.Point(20, 266);
             label9.Name = "label9";
-            label9.Size = new System.Drawing.Size(87, 21);
+            label9.Padding = new System.Windows.Forms.Padding(0, 4, 0, 4);
+            label9.Size = new System.Drawing.Size(87, 29);
             label9.TabIndex = 17;
             label9.Text = "Total: 0.00";
             // 
@@ -288,7 +290,7 @@ namespace LFS.Budget.Views.Obligations
             tbPgDetails.Location = new System.Drawing.Point(4, 28);
             tbPgDetails.Name = "tbPgDetails";
             tbPgDetails.Padding = new System.Windows.Forms.Padding(3);
-            tbPgDetails.Size = new System.Drawing.Size(748, 257);
+            tbPgDetails.Size = new System.Drawing.Size(748, 321);
             tbPgDetails.TabIndex = 0;
             tbPgDetails.Text = "Details";
             tbPgDetails.UseVisualStyleBackColor = true;
@@ -300,7 +302,7 @@ namespace LFS.Budget.Views.Obligations
             panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             panel2.Location = new System.Drawing.Point(3, 3);
             panel2.Name = "panel2";
-            panel2.Size = new System.Drawing.Size(742, 251);
+            panel2.Size = new System.Drawing.Size(742, 315);
             panel2.TabIndex = 23;
             // 
             // panel3
