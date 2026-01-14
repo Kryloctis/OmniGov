@@ -1,9 +1,7 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
-using BudgetSystem.Views.BudgetAppropriations;
-using BudgetSystem.Views.Manage.BudgetAppropriations;
+using LFS.Budget.Views.Augmentation;
 using LFS.Helpers;
-using LFS.Views.Manage.Augmentation;
 using LFS.Views.Manage.Realignment;
 using LFS.Views.Manage.SupplementalAppropriations;
 using MySql.Data.MySqlClient;
@@ -13,7 +11,7 @@ using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace LFS.Views.Manage.BudgetAppropriations
+namespace LFS.Budget.Views.BudgetAppropriations
 {
     public partial class frmBudgetAppropriations : Form
     {

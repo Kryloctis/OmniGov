@@ -1,5 +1,5 @@
 ﻿
-namespace BudgetSystem.Views.Manage.BudgetAppropriations
+namespace LFS.Budget.Views.BudgetAppropriations
 {
     partial class frmBudgetAppropriationsEdit
     {
@@ -32,7 +32,7 @@ namespace BudgetSystem.Views.Manage.BudgetAppropriations
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
-            this.ucBudgetAppropriations1 = new BudgetSystem.Views.BudgetAppropriations.ucBudgetAppropriations();
+            this.ucBudgetAppropriations1 = new LFS.Budget.Views.BudgetAppropriations.ucBudgetAppropriations();
             this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 

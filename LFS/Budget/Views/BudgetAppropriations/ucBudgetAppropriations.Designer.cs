@@ -1,5 +1,5 @@
 ﻿
-namespace BudgetSystem.Views.BudgetAppropriations
+namespace LFS.Budget.Views.BudgetAppropriations
 {
     partial class ucBudgetAppropriations
     {

@@ -1,12 +1,12 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
 using LFS.Helpers;
-using LFS.Views.Manage.BudgetAppropriations;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
+using LFS.Budget.Views.BudgetAppropriations;
 
 namespace LFS.Views.Manage.SupplementalAppropriations
 {

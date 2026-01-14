@@ -1,12 +1,10 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
-using BudgetSystem.Views.BudgetAppropriations;
 using LFS.Helpers;
-using LFS.Views.Manage.BudgetAppropriations;
 using System;
 using System.Windows.Forms;
 
-namespace BudgetSystem.Views.Manage.BudgetAppropriations
+namespace LFS.Budget.Views.BudgetAppropriations
 {
     public partial class frmBudgetAppropriationsEdit : Form
     {

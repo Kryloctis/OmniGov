@@ -1,15 +1,13 @@
 ﻿using ACC.Data;
-using LFS;
 using LFS.Budget.Helpers;
 using LFS.Helpers;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace BudgetSystem.Views.BudgetAppropriations
+namespace LFS.Budget.Views.BudgetAppropriations
 {
     public partial class ucBudgetAppropriations : UserControl
     {

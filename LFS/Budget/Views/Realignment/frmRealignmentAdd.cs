@@ -1,5 +1,5 @@
-﻿using LFS.Views.Manage.BudgetAppropriations;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
+using LFS.Budget.Views.BudgetAppropriations;
 
 namespace LFS.Views.Manage.Realignment
 {
