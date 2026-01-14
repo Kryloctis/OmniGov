@@ -49,6 +49,7 @@ namespace LFS.Budget.Views.Reports
             backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             panel3 = new System.Windows.Forms.Panel();
             progressBar1 = new System.Windows.Forms.ProgressBar();
+            reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
             panel1.SuspendLayout();
             flwPnlCoverage.SuspendLayout();
             panel3.SuspendLayout();
@@ -269,7 +270,26 @@ namespace LFS.Budget.Views.Reports
             progressBar1.Size = new System.Drawing.Size(535, 5);
             progressBar1.TabIndex = 7;
             // 
-            // frmSAOB
+            // reportViewer1
+            // 
+            reportViewer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            reportViewer1.Location = new System.Drawing.Point(0, 0);
+            reportViewer1.Name = "ReportViewer";
+            reportViewer1.ServerReport.BearerToken = null;
+            reportViewer1.ShowBackButton = false;
+            reportViewer1.ShowCredentialPrompts = false;
+            reportViewer1.ShowDocumentMapButton = false;
+            reportViewer1.ShowFindControls = false;
+            reportViewer1.ShowPageNavigationControls = false;
+            reportViewer1.ShowParameterPrompts = false;
+            reportViewer1.ShowProgress = false;
+            reportViewer1.ShowPromptAreaButton = false;
+            reportViewer1.ShowStopButton = false;
+            reportViewer1.Size = new System.Drawing.Size(396, 246);
+            reportViewer1.TabIndex = 0;
+            reportViewer1.ZoomPercent = 50;
+            // 
+            // frmSAAO
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -279,11 +299,11 @@ namespace LFS.Budget.Views.Reports
             Controls.Add(panel1);
             Controls.Add(statusStrip1);
             MinimizeBox = false;
-            Name = "frmSAOB";
+            Name = "frmSAAO";
             ShowIcon = false;
             ShowInTaskbar = false;
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            Text = "Reports > Status of Apporpriations, Allotments and Obligation (SAOB)";
+            Text = "Reports > Status of Apporpriations, Allotments and Obligation (SAAO)";
             Load += frmSAAOB_Load;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
@@ -316,5 +336,6 @@ namespace LFS.Budget.Views.Reports
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.FlowLayoutPanel flwPnlCoverage;
         private System.Windows.Forms.ProgressBar progressBar1;
+        private Microsoft.Reporting.WinForms.ReportViewer reportViewer1;
     }
 }

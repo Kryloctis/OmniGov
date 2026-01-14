@@ -30,9 +30,7 @@ namespace LFS.Budget.Views.Reports
         private void InitializeComponent()
         {
             panel1 = new System.Windows.Forms.Panel();
-            panel3 = new System.Windows.Forms.Panel();
-            pictureBox1 = new System.Windows.Forms.PictureBox();
-            label3 = new System.Windows.Forms.Label();
+            label4 = new System.Windows.Forms.Label();
             label2 = new System.Windows.Forms.Label();
             label1 = new System.Windows.Forms.Label();
             chkbxSpecialAccounts = new System.Windows.Forms.CheckBox();
@@ -45,65 +43,46 @@ namespace LFS.Budget.Views.Reports
             backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             panel2 = new System.Windows.Forms.Panel();
             progressBar1 = new System.Windows.Forms.ProgressBar();
-            lblProgress = new System.Windows.Forms.Label();
             panel1.SuspendLayout();
-            panel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             panel2.SuspendLayout();
             SuspendLayout();
             // 
             // panel1
             // 
             panel1.BackColor = System.Drawing.SystemColors.Control;
-            panel1.Controls.Add(panel3);
+            panel1.Controls.Add(label4);
             panel1.Controls.Add(label2);
             panel1.Controls.Add(label1);
             panel1.Controls.Add(chkbxSpecialAccounts);
             panel1.Controls.Add(dtAsOf);
             panel1.Controls.Add(cmbxFund);
             panel1.Controls.Add(btnRetrieve);
-            panel1.Dock = System.Windows.Forms.DockStyle.Left;
-            panel1.Location = new System.Drawing.Point(0, 0);
+            panel1.Dock = System.Windows.Forms.DockStyle.Right;
+            panel1.Location = new System.Drawing.Point(535, 0);
             panel1.Name = "panel1";
-            panel1.Padding = new System.Windows.Forms.Padding(4);
-            panel1.Size = new System.Drawing.Size(225, 535);
+            panel1.Padding = new System.Windows.Forms.Padding(20);
+            panel1.Size = new System.Drawing.Size(247, 515);
             panel1.TabIndex = 1;
             // 
-            // panel3
+            // label4
             // 
-            panel3.Controls.Add(pictureBox1);
-            panel3.Controls.Add(label3);
-            panel3.Dock = System.Windows.Forms.DockStyle.Top;
-            panel3.Location = new System.Drawing.Point(4, 4);
-            panel3.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
-            panel3.Name = "panel3";
-            panel3.Size = new System.Drawing.Size(217, 40);
-            panel3.TabIndex = 9;
-            // 
-            // pictureBox1
-            // 
-            pictureBox1.Image = Properties.Resources.filter_20px;
-            pictureBox1.Location = new System.Drawing.Point(8, 8);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new System.Drawing.Size(23, 24);
-            pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            pictureBox1.TabIndex = 12;
-            pictureBox1.TabStop = false;
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            label3.Location = new System.Drawing.Point(37, 13);
-            label3.Name = "label3";
-            label3.Size = new System.Drawing.Size(40, 15);
-            label3.TabIndex = 11;
-            label3.Text = "FILTER";
+            label4.Dock = System.Windows.Forms.DockStyle.Top;
+            label4.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
+            label4.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            label4.Image = Properties.Resources.settings_horizontal_filled_20px;
+            label4.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            label4.Location = new System.Drawing.Point(20, 20);
+            label4.Margin = new System.Windows.Forms.Padding(3, 0, 3, 40);
+            label4.Name = "label4";
+            label4.Size = new System.Drawing.Size(207, 20);
+            label4.TabIndex = 10;
+            label4.Text = "Report Parameters";
+            label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new System.Drawing.Point(12, 137);
+            label2.Location = new System.Drawing.Point(24, 158);
             label2.Name = "label2";
             label2.Size = new System.Drawing.Size(37, 15);
             label2.TabIndex = 8;
@@ -112,22 +91,22 @@ namespace LFS.Budget.Views.Reports
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new System.Drawing.Point(12, 86);
+            label1.Location = new System.Drawing.Point(24, 102);
             label1.Name = "label1";
-            label1.Size = new System.Drawing.Size(64, 15);
+            label1.Size = new System.Drawing.Size(37, 15);
             label1.TabIndex = 8;
-            label1.Text = "Fund Type:";
+            label1.Text = "Fund:";
             // 
             // chkbxSpecialAccounts
             // 
             chkbxSpecialAccounts.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
             chkbxSpecialAccounts.AutoSize = true;
-            chkbxSpecialAccounts.Location = new System.Drawing.Point(93, 57);
-            chkbxSpecialAccounts.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
+            chkbxSpecialAccounts.Location = new System.Drawing.Point(108, 83);
+            chkbxSpecialAccounts.Margin = new System.Windows.Forms.Padding(3, 3, 3, 15);
             chkbxSpecialAccounts.Name = "chkbxSpecialAccounts";
-            chkbxSpecialAccounts.Size = new System.Drawing.Size(119, 19);
+            chkbxSpecialAccounts.Size = new System.Drawing.Size(116, 19);
             chkbxSpecialAccounts.TabIndex = 7;
-            chkbxSpecialAccounts.Text = "Special Accounts ";
+            chkbxSpecialAccounts.Text = "Special Accounts";
             chkbxSpecialAccounts.UseVisualStyleBackColor = true;
             // 
             // dtAsOf
@@ -135,8 +114,8 @@ namespace LFS.Budget.Views.Reports
             dtAsOf.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
             dtAsOf.CustomFormat = "MMM dd, yyyy";
             dtAsOf.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            dtAsOf.Location = new System.Drawing.Point(12, 155);
-            dtAsOf.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
+            dtAsOf.Location = new System.Drawing.Point(24, 176);
+            dtAsOf.Margin = new System.Windows.Forms.Padding(3, 3, 3, 30);
             dtAsOf.Name = "dtAsOf";
             dtAsOf.Size = new System.Drawing.Size(200, 23);
             dtAsOf.TabIndex = 6;
@@ -146,8 +125,8 @@ namespace LFS.Budget.Views.Reports
             cmbxFund.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
             cmbxFund.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             cmbxFund.FormattingEnabled = true;
-            cmbxFund.Location = new System.Drawing.Point(12, 104);
-            cmbxFund.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
+            cmbxFund.Location = new System.Drawing.Point(24, 120);
+            cmbxFund.Margin = new System.Windows.Forms.Padding(3, 3, 3, 15);
             cmbxFund.Name = "cmbxFund";
             cmbxFund.Size = new System.Drawing.Size(200, 23);
             cmbxFund.TabIndex = 5;
@@ -156,7 +135,7 @@ namespace LFS.Budget.Views.Reports
             // 
             btnRetrieve.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
             btnRetrieve.Cursor = System.Windows.Forms.Cursors.Hand;
-            btnRetrieve.Location = new System.Drawing.Point(12, 198);
+            btnRetrieve.Location = new System.Drawing.Point(24, 239);
             btnRetrieve.Margin = new System.Windows.Forms.Padding(3, 10, 3, 3);
             btnRetrieve.Name = "btnRetrieve";
             btnRetrieve.Size = new System.Drawing.Size(200, 27);
@@ -168,16 +147,16 @@ namespace LFS.Budget.Views.Reports
             // panelReport
             // 
             panelReport.Dock = System.Windows.Forms.DockStyle.Fill;
-            panelReport.Location = new System.Drawing.Point(4, 24);
+            panelReport.Location = new System.Drawing.Point(0, 5);
             panelReport.Name = "panelReport";
-            panelReport.Size = new System.Drawing.Size(580, 507);
+            panelReport.Size = new System.Drawing.Size(535, 510);
             panelReport.TabIndex = 2;
             // 
             // statusStrip1
             // 
-            statusStrip1.Location = new System.Drawing.Point(0, 535);
+            statusStrip1.Location = new System.Drawing.Point(0, 515);
             statusStrip1.Name = "statusStrip1";
-            statusStrip1.Size = new System.Drawing.Size(813, 22);
+            statusStrip1.Size = new System.Drawing.Size(782, 22);
             statusStrip1.TabIndex = 3;
             statusStrip1.Text = "statusStrip1";
             // 
@@ -187,8 +166,16 @@ namespace LFS.Budget.Views.Reports
             reportViewer1.Location = new System.Drawing.Point(0, 0);
             reportViewer1.Name = "ReportViewer";
             reportViewer1.ServerReport.BearerToken = null;
+            reportViewer1.ShowBackButton = false;
+            reportViewer1.ShowCredentialPrompts = false;
+            reportViewer1.ShowFindControls = false;
+            reportViewer1.ShowPageNavigationControls = false;
+            reportViewer1.ShowParameterPrompts = false;
+            reportViewer1.ShowProgress = false;
+            reportViewer1.ShowStopButton = false;
             reportViewer1.Size = new System.Drawing.Size(396, 246);
             reportViewer1.TabIndex = 0;
+            reportViewer1.ZoomPercent = 50;
             // 
             // backgroundWorker1
             // 
@@ -202,55 +189,38 @@ namespace LFS.Budget.Views.Reports
             // 
             panel2.Controls.Add(panelReport);
             panel2.Controls.Add(progressBar1);
-            panel2.Controls.Add(lblProgress);
             panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            panel2.Location = new System.Drawing.Point(225, 0);
+            panel2.Location = new System.Drawing.Point(0, 0);
             panel2.Name = "panel2";
-            panel2.Padding = new System.Windows.Forms.Padding(4);
-            panel2.Size = new System.Drawing.Size(588, 535);
+            panel2.Size = new System.Drawing.Size(535, 515);
             panel2.TabIndex = 4;
             // 
             // progressBar1
             // 
             progressBar1.Dock = System.Windows.Forms.DockStyle.Top;
-            progressBar1.Location = new System.Drawing.Point(4, 19);
+            progressBar1.Location = new System.Drawing.Point(0, 0);
             progressBar1.Name = "progressBar1";
-            progressBar1.Size = new System.Drawing.Size(580, 5);
+            progressBar1.Size = new System.Drawing.Size(535, 5);
             progressBar1.TabIndex = 6;
             // 
-            // lblProgress
-            // 
-            lblProgress.Dock = System.Windows.Forms.DockStyle.Top;
-            lblProgress.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            lblProgress.Location = new System.Drawing.Point(4, 4);
-            lblProgress.Name = "lblProgress";
-            lblProgress.Size = new System.Drawing.Size(580, 15);
-            lblProgress.TabIndex = 7;
-            lblProgress.Text = "0%";
-            lblProgress.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // frmSaaobb
+            // frmSAAOB
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
-            ClientSize = new System.Drawing.Size(813, 557);
+            ClientSize = new System.Drawing.Size(782, 537);
             Controls.Add(panel2);
             Controls.Add(panel1);
             Controls.Add(statusStrip1);
             MinimizeBox = false;
-            MinimumSize = new System.Drawing.Size(829, 596);
-            Name = "frmSaaobb";
+            Name = "frmSAAOB";
             ShowIcon = false;
             ShowInTaskbar = false;
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            Text = "Reports > Statement of Appropriations, Allotments, Obligations and Balances (SAAOBB)";
+            Text = "Reports > Statement of Appropriations, Allotments, Obligations and Balances (SAAOB)";
             Load += frmSAAOBB_Load;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
-            panel3.ResumeLayout(false);
-            panel3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             panel2.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
@@ -271,9 +241,6 @@ namespace LFS.Budget.Views.Reports
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.ProgressBar progressBar1;
-        private System.Windows.Forms.Label lblProgress;
-        private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
     }
 }

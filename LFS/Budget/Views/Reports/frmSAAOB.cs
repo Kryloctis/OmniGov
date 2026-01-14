@@ -29,15 +29,6 @@ namespace LFS.Budget.Views.Reports
             }
         }
 
-        private void LoadReport()
-        {
-            int fundId = Convert.ToInt32(cmbxFund.SelectedValue);
-            DateTime AsOf = dtAsOf.Value;
-            var workerArgs = (FundId: fundId, dtAsOf: AsOf);
-            lblProgress.Text = "0%";
-            backgroundWorker1.RunWorkerAsync(workerArgs);
-        }
-
         private void LoadFunds()
         {
             var dtFunds = AccFactory.FundsRepository().GetRecords();
@@ -62,15 +53,25 @@ namespace LFS.Budget.Views.Reports
             catch (Exception ex) { Helper.MessageBoxError(ex.StackTrace); }
         }
 
+        private void LoadReport()
+        {
+            progressBar1.Value = 0;
+            int fundId = Convert.ToInt32(cmbxFund.SelectedValue);
+            DateTime AsOf = dtAsOf.Value;
+            int ffpIsSpecial = chkbxSpecialAccounts.Checked ? 1 : 0;
+
+            var workerArgs = (FundId: fundId, dtAsOf: AsOf, fppIsSpecial: ffpIsSpecial);
+            backgroundWorker1.RunWorkerAsync(workerArgs);
+        }
+
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
             try
             {
-                var args = ((int fundId, DateTime dtAsOf))e.Argument;
+                var args = ((int fundId, DateTime dtAsOf, int fppIsSpecial))e.Argument;
 
                 DataTable dtSAAOBB = new dsLFS().dtSAAOBB;
-                int ffpIsSpecial = chkbxSpecialAccounts.Checked ? 1 : 0;
-                var dtBudgetAppropriations = AccFactory.BudgetAppropriationsRepository().GetViewRecords(args.fundId, args.dtAsOf, (byte)ffpIsSpecial);
+                var dtBudgetAppropriations = AccFactory.BudgetAppropriationsRepository().GetViewRecords(args.fundId, args.dtAsOf, (byte)args.fppIsSpecial);
 
                 int totalProgress = dtBudgetAppropriations.AsEnumerable().Count(row => Convert.ToBoolean(row["continuing"]) || Convert.ToInt16(row["year"]) == args.dtAsOf.Year); ;
 
@@ -211,69 +212,29 @@ namespace LFS.Budget.Views.Reports
 
                 e.Result = (parameters, dtSAAOBB);
             }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError($"An error occurred: {ex.Message}{Environment.NewLine}{ex.StackTrace}");
-            }
+            catch (Exception ex) { Helper.MessageBoxError($"An error occurred: {ex.Message}{Environment.NewLine}{ex.StackTrace}"); }
         }
 
         private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             progressBar1.Value = e.ProgressPercentage;
-            lblProgress.Text = $"{e.ProgressPercentage}%";
         }
 
         private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             try
             {
-                // Cast the result of the background worker to a tuple:
-                // - parameters: array of ReportParameter for filtering or headers
-                // - dataTable: the actual data to be displayed in the report
                 var result = ((ReportParameter[] parameters, DataTable dataTable))e.Result;
 
-                // Reference the LocalReport instance of the ReportViewer control
                 var localReport = reportViewer1.LocalReport;
-
-                // Set the path to the RDLC report definition file (.rdlc)
-                localReport.ReportPath = $"{Application.StartupPath}\\Reports\\saaob.rdlc";
-
-                // Clear any existing data sources attached to the report to avoid conflicts or duplication
+                localReport.ReportPath = $"{Application.StartupPath}\\Budget\\Reports\\saaob.rdlc";
                 localReport.DataSources.Clear();
-
-                // Add the new data source that contains the appropriation data (from result.dataTable)
                 localReport.DataSources.Add(new ReportDataSource("dtSAAOBB", result.dataTable));
-
-                // Set report parameters (e.g., filters like date range, fund, etc.)
                 localReport.SetParameters(result.parameters);
-
-                // Configure the display mode of the ReportViewer:
-                // - Show the report in print layout
-                // - Zoom to fit the page width
                 reportViewer1.SetDisplayMode(DisplayMode.PrintLayout);
-                reportViewer1.ZoomMode = ZoomMode.PageWidth;
-
-                // Refresh the report to apply changes and display it
                 reportViewer1.RefreshReport();
-
-                // Update the progress label if all success conditions are met:
-                // - Data table exists and has rows
-                // - ReportViewer has data sources
-                // - Report path is correctly pointing to the expected report
-                if (result.dataTable != null &&
-                    result.dataTable.Rows.Count > 0 &&
-                    reportViewer1.LocalReport.DataSources.Count > 0 &&
-                    reportViewer1.LocalReport.ReportPath != null &&
-                    reportViewer1.LocalReport.ReportPath.EndsWith("statement-of-appropriations-allotments-obligations-and-balances.rdlc", StringComparison.OrdinalIgnoreCase))
-                {
-                    lblProgress.Text = "Done";
-                }
             }
-            catch (Exception ex)
-            {
-                // Handle any exceptions and show an error message box with the exception message and stack trace
-                Helper.MessageBoxError($"An error occurred: {ex.Message}{Environment.NewLine}{ex.StackTrace}");
-            }
+            catch (Exception ex) { Helper.MessageBoxError($"An error occurred: {ex.Message}{Environment.NewLine}{ex.StackTrace}"); }
         }
     }
 }

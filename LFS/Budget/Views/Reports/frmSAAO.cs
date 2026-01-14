@@ -11,23 +11,12 @@ namespace LFS.Budget.Views.Reports;
 
 public partial class frmSAAO : Form
 {
-    private readonly ReportViewer reportViewer;
-
     public frmSAAO()
     {
         InitializeComponent();
         Helper.LoadFormIcon(this);
-        reportViewer = new ReportViewer();
-        reportViewer.Dock = DockStyle.Fill;
-        reportViewer.BorderStyle = BorderStyle.None;
-        reportViewer.ShowPageNavigationControls = false;
-        reportViewer.ShowFindControls = false;
-        reportViewer.ShowDocumentMapButton = false;
-        reportViewer.ShowBackButton = false;
-        reportViewer.ShowStopButton = false;
-        reportViewer.ShowParameterPrompts = false;
-        reportViewer.KeepSessionAlive = true;
-        panel2.Controls.Add(reportViewer);
+        reportViewer1.Dock = DockStyle.Fill;
+        panel2.Controls.Add(reportViewer1);
         flwPnlCoverage.Enabled = false;
     }
 
@@ -70,7 +59,7 @@ public partial class frmSAAO : Form
     {
         var parameters = new[] { new ReportParameter("paramFilterLevel", filterLevel.ToString()) };
         report.SetParameters(parameters);
-        reportViewer.RefreshReport();
+        reportViewer1.RefreshReport();
     }
 
     private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
@@ -160,7 +149,7 @@ public partial class frmSAAO : Form
 
             if (result is DataTable)
             {
-                var localReport = reportViewer.LocalReport;
+                var localReport = reportViewer1.LocalReport;
                 var dictSignatory = Helper.GetSigtryByRefDoc("Certified Correct", "SAAOB");
                 string certifiedCorrectSignatory = string.Empty;
                 string certifiedCorrectSignatoryTitle = string.Empty;
@@ -179,15 +168,13 @@ public partial class frmSAAO : Form
                     new ReportParameter("paramFPPIsSpecial", (chkbxSpecialFPP.Checked? 1 : 0).ToString())
                 };
 
-                localReport.ReportPath = $"{Application.StartupPath}\\Reports\\Budget\\saao.rdlc";
+                localReport.ReportPath = $"{Application.StartupPath}\\Budget\\Reports\\saao.rdlc";
                 localReport.DataSources.Clear();
                 localReport.DataSources.Add(new ReportDataSource("dtSAAOB", result));
                 localReport.SetParameters(parameters);
                 flwPnlCoverage.Enabled = true;
-                reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
-                reportViewer.ZoomMode = ZoomMode.Percent;
-                reportViewer.ZoomPercent = 50;
-                reportViewer.RefreshReport();
+                reportViewer1.SetDisplayMode(DisplayMode.PrintLayout);
+                reportViewer1.RefreshReport();
             }
         }
         catch (Exception ex) { Helper.MessageBoxError(ex.StackTrace); }
@@ -214,26 +201,26 @@ public partial class frmSAAO : Form
     //FILTER
     private void radBtn1_CheckedChanged(object sender, EventArgs e)
     {
-        FilterReport(1, reportViewer.LocalReport);
+        FilterReport(1, reportViewer1.LocalReport);
     }
 
     private void radBtn2_CheckedChanged(object sender, EventArgs e)
     {
-        FilterReport(2, reportViewer.LocalReport);
+        FilterReport(2, reportViewer1.LocalReport);
     }
 
     private void radBtn3_CheckedChanged(object sender, EventArgs e)
     {
-        FilterReport(3, reportViewer.LocalReport);
+        FilterReport(3, reportViewer1.LocalReport);
     }
 
     private void radBtn4_CheckedChanged(object sender, EventArgs e)
     {
-        FilterReport(4, reportViewer.LocalReport);
+        FilterReport(4, reportViewer1.LocalReport);
     }
 
     private void radBtn5_CheckedChanged(object sender, EventArgs e)
     {
-        FilterReport(5, reportViewer.LocalReport);
+        FilterReport(5, reportViewer1.LocalReport);
     }
 }
