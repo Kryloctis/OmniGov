@@ -6,7 +6,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
 
-namespace LFS.Views.Transactions.Obligations
+namespace LFS.Budget.Views.Obligations
 {
     public partial class frmObligations : Form
     {

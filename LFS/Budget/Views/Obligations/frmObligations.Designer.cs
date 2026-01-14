@@ -1,4 +1,4 @@
-﻿namespace LFS.Views.Transactions.Obligations
+﻿namespace LFS.Budget.Views.Obligations
 {
     partial class frmObligations
     {
@@ -60,7 +60,7 @@
             tlStrpBtnAudit = new System.Windows.Forms.ToolStripButton();
             statusStrip1 = new System.Windows.Forms.StatusStrip();
             tbPgCrud = new System.Windows.Forms.TabPage();
-            ucObligationsCrud = new LFS.Views.Transactions.ObligationRequest.ucObligations();
+            ucObligationsCrud = new LFS.Budget.Views.Obligations.ucObligations();
             panel2 = new System.Windows.Forms.Panel();
             btnCrudSubmit = new System.Windows.Forms.Button();
             btnSubmit = new System.Windows.Forms.Button();
@@ -68,12 +68,12 @@
             tlStrpBtnCrudBack = new System.Windows.Forms.ToolStripButton();
             lblCrudStat = new System.Windows.Forms.ToolStripLabel();
             tbPgView = new System.Windows.Forms.TabPage();
-            ucObligationsView = new LFS.Views.Transactions.ObligationRequest.ucObligations();
+            ucObligationsView = new LFS.Budget.Views.Obligations.ucObligations();
             toolStrip4 = new System.Windows.Forms.ToolStrip();
             tlsStrpBtnBckView = new System.Windows.Forms.ToolStripButton();
             toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             tbPgAudit = new System.Windows.Forms.TabPage();
-            ucObligationsAudit = new LFS.Views.Transactions.ObligationRequest.ucObligations();
+            ucObligationsAudit = new LFS.Budget.Views.Obligations.ucObligations();
             flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             btnApprove = new System.Windows.Forms.Button();
             btnDisapprove = new System.Windows.Forms.Button();
@@ -776,7 +776,7 @@
         private System.Windows.Forms.ToolStrip toolStrip4;
         private System.Windows.Forms.ToolStripButton tlsStrpBtnBckView;
         private System.Windows.Forms.ToolStripLabel toolStripLabel1;
-        private ObligationRequest.ucObligations ucObligationsView;
+        private ucObligations ucObligationsView;
         private System.Windows.Forms.ToolStrip toolStrip5;
         private System.Windows.Forms.ToolStripButton tlStrpBtnBckAudit;
         private System.Windows.Forms.ToolStripLabel toolStripLabel2;
@@ -784,11 +784,11 @@
         private System.Windows.Forms.Button btnApprove;
         private System.Windows.Forms.Button btnDisapprove;
         private System.Windows.Forms.Button btnCancel;
-        private ObligationRequest.ucObligations ucObligationsAudit;
+        private ucObligations ucObligationsAudit;
         private System.Windows.Forms.DateTimePicker dtPckrFrom;
         private System.Windows.Forms.DateTimePicker dtPckrTo;
         private System.Windows.Forms.Label label6;
-        private ObligationRequest.ucObligations ucObligationsCrud;
+        private ucObligations ucObligationsCrud;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
     }
 }

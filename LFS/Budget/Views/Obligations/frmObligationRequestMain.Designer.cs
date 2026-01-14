@@ -1,5 +1,6 @@
-﻿
-namespace LFS.Views.Transactions.ObligationRequest
+﻿using LFS.Budget.Views.Obligations;
+
+namespace LFS.Budget.Views.Obligations
 {
     partial class frmObligationRequestMain
     {
@@ -48,7 +49,7 @@ namespace LFS.Views.Transactions.ObligationRequest
             this.toolStripStatusLabel4 = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblCreatedBy = new System.Windows.Forms.ToolStripStatusLabel();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.ucObligationRequestMain1 = new LFS.Views.Transactions.ObligationRequest.ucObligationRequestMain();
+            this.ucObligationRequestMain1 = new LFS.Budget.Views.Obligations.ucObligationRequestMain();
             this.toolStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.statusStrip2.SuspendLayout();

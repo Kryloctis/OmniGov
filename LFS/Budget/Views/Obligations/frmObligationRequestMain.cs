@@ -9,7 +9,7 @@ using System.Drawing;
 using System.Transactions;
 using System.Windows.Forms;
 
-namespace LFS.Views.Transactions.ObligationRequest
+namespace LFS.Budget.Views.Obligations
 {
     public partial class frmObligationRequestMain : Form
     {

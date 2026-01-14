@@ -5,7 +5,7 @@ using System;
 using System.ComponentModel;
 using System.Windows.Forms;
 
-namespace LFS.Views.Transactions.ObligationRequest
+namespace LFS.Budget.Views.Obligations
 {
     public partial class frmObligationRequestDisapproval : Form
     {

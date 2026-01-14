@@ -8,7 +8,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
 
-namespace LFS.Views.Transactions.ObligationRequest
+namespace LFS.Budget.Views.Obligations
 {
     public partial class ucObligationRequest : UserControl
     {
@@ -117,7 +117,6 @@ namespace LFS.Views.Transactions.ObligationRequest
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-
         private DataTable DataTableSubFPP()
         {
             DataTable dtSubFPP;
@@ -198,7 +197,6 @@ namespace LFS.Views.Transactions.ObligationRequest
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.StackTrace); }
         }
-
 
         private DataTable DatatableObjectOfExpenditures()
         {
@@ -308,7 +306,6 @@ namespace LFS.Views.Transactions.ObligationRequest
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.StackTrace); }
         }
-
 
         private bool ShowErrorObjectExpenditureNotExist()
         {
@@ -432,6 +429,5 @@ namespace LFS.Views.Transactions.ObligationRequest
         {
             Helper.ClearErrorNumericUpDown(epAmount, nudAmount);
         }
-
     }
 }

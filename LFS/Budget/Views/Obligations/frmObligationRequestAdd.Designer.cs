@@ -1,5 +1,6 @@
-﻿
-namespace LFS.Views.Transactions.ObligationRequest
+﻿using LFS.Budget.Views.Obligations;
+
+namespace LFS.Budget.Views.Obligations
 {
     partial class frmObligationRequestAdd
     {
@@ -29,7 +30,7 @@ namespace LFS.Views.Transactions.ObligationRequest
         /// </summary>
         private void InitializeComponent()
         {
-            this.ucObligationRequest1 = new LFS.Views.Transactions.ObligationRequest.ucObligationRequest();
+            this.ucObligationRequest1 = new LFS.Budget.Views.Obligations.ucObligationRequest();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnAddToList = new System.Windows.Forms.Button();
