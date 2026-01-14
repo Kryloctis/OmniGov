@@ -8,7 +8,7 @@ using System.Data;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace LFS.Views.Reports.Saaob
+namespace LFS.Budget.Views.Reports
 {
     public partial class frmSAAOB : Form
     {

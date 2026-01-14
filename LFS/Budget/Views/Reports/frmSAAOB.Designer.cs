@@ -1,5 +1,5 @@
 ﻿
-namespace LFS.Views.Reports.Saaob
+namespace LFS.Budget.Views.Reports
 {
     partial class frmSAAOB
     {
