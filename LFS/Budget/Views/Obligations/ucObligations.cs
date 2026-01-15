@@ -123,20 +123,11 @@ namespace LFS.Budget.Views.Obligations
             dgvEntries.ReadOnly = isReadOnly;
         }
 
-        private decimal GetTotalObligations()
-        {
-            decimal totalObligation = 0;
-
-            foreach (DataGridViewRow row in dgvEntries.Rows)
-                totalObligation += Convert.ToDecimal(row.Cells["obligation_amount"].Value);
-
-            return totalObligation;
-        }
-
         private void dgvEntries_SelectionChanged(object sender, EventArgs e)
         {
             try
             {
+                ToggleEntriesButtons(dgvEntries, tlStrpBtnEntrRemove);
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -244,6 +235,20 @@ namespace LFS.Budget.Views.Obligations
             HelperLoadRecords.FundsComboBox(dataTable, cmbxFund, "id", "fund");
         }
 
+        private bool Validation()
+        {
+            if (ShowErrorFPPNameNotExist() || Helper.ShowErrorComboBoxEmpty(errorProvider1, cmbxFPP, "FPP"))
+            {
+                Helper.MessageBoxError(GetFormErrorsAdd());
+                return false;
+            }
+            else
+            {
+                Helper.ClearErrorComboBox(errorProvider1, cmbxFPP);
+                return true;
+            }
+        }
+
         private string GenerateObligationRequestNoTemplate()
         {
             string fundCode = AccFactory.FundsRepository().GetRecordByID(fundId)["fund_code"];
@@ -265,20 +270,6 @@ namespace LFS.Budget.Views.Obligations
             };
 
             return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
-        }
-
-        private bool Validation()
-        {
-            if (ShowErrorFPPNameNotExist() || Helper.ShowErrorComboBoxEmpty(errorProvider1, cmbxFPP, "FPP"))
-            {
-                Helper.MessageBoxError(GetFormErrorsAdd());
-                return false;
-            }
-            else
-            {
-                Helper.ClearErrorComboBox(errorProvider1, cmbxFPP);
-                return true;
-            }
         }
 
         private bool ShowErrorFPPNameNotExist()
@@ -526,6 +517,16 @@ namespace LFS.Budget.Views.Obligations
             return dataTable;
         }
 
+        private decimal GetTotalObligations(DataGridViewRowCollection dataGridViewRowCollection)
+        {
+            decimal totalObligation = 0;
+
+            foreach (DataGridViewRow row in dataGridViewRowCollection)
+                totalObligation += Convert.ToDecimal(row.Cells["amount"].Value);
+
+            return totalObligation;
+        }
+
         private void PopulateAllotmentReleaseCell(int rowIndex, DataGridView dataGridView)
         {
             // Build DataSource
@@ -609,6 +610,26 @@ namespace LFS.Budget.Views.Obligations
 
                 if (col == "account")
                     GetUnobligatedBalance(e.RowIndex, dgvEntries);
+
+                var cellAmount = dgvEntries.Rows[e.RowIndex].Cells["amount"];
+                var cellBalance = dgvEntries.Rows[e.RowIndex].Cells["unoblgtd_bal"];
+
+                //If input is not numeric it resets to 0
+                if (cellAmount.Value == null || !decimal.TryParse(cellAmount.Value.ToString(), out var result))
+                {
+                    cellAmount.Value = 0m;
+                }
+                else
+                {
+                    bool oblgtnBalIsValid = !decimal.TryParse(cellBalance.Value.ToString(), out var oblgtnBal);
+
+                    if (result > oblgtnBal)
+                        cellAmount.Value = cellBalance.Value;
+                    else
+                        cellAmount.Value = result;
+                }
+
+                lblTotalOblgtnAmount.Text = $"Total: {GetTotalObligations(dgvEntries.Rows).ToString("N2")}";
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -627,19 +648,10 @@ namespace LFS.Budget.Views.Obligations
 
         private void dgvEntries_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
-            if (dgvEntries.Columns[e.ColumnIndex].Name == "amount")
+            try
             {
-                var cell = dgvEntries.Rows[e.RowIndex].Cells[e.ColumnIndex];
-
-                if (cell.Value == null || !decimal.TryParse(cell.Value.ToString(), out var result))
-                {
-                    cell.Value = 0m;
-                }
-                else
-                {
-                    cell.Value = result;
-                }
             }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }

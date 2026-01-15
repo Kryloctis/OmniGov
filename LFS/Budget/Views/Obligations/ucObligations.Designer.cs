@@ -33,7 +33,7 @@ namespace LFS.Budget.Views.Obligations
             mskTxtOblgtnNo = new System.Windows.Forms.MaskedTextBox();
             label5 = new System.Windows.Forms.Label();
             dgvEntries = new System.Windows.Forms.DataGridView();
-            label9 = new System.Windows.Forms.Label();
+            lblTotalOblgtnAmount = new System.Windows.Forms.Label();
             errorProvider1 = new System.Windows.Forms.ErrorProvider(components);
             panel1 = new System.Windows.Forms.Panel();
             toolStrip1 = new System.Windows.Forms.ToolStrip();
@@ -123,18 +123,18 @@ namespace LFS.Budget.Views.Obligations
             dgvEntries.DataError += dgvEntries_DataError;
             dgvEntries.SelectionChanged += dgvEntries_SelectionChanged;
             // 
-            // label9
+            // lblTotalOblgtnAmount
             // 
-            label9.AutoSize = true;
-            label9.Dock = System.Windows.Forms.DockStyle.Bottom;
-            label9.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
-            label9.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            label9.Location = new System.Drawing.Point(20, 266);
-            label9.Name = "label9";
-            label9.Padding = new System.Windows.Forms.Padding(0, 4, 0, 4);
-            label9.Size = new System.Drawing.Size(87, 29);
-            label9.TabIndex = 17;
-            label9.Text = "Total: 0.00";
+            lblTotalOblgtnAmount.AutoSize = true;
+            lblTotalOblgtnAmount.Dock = System.Windows.Forms.DockStyle.Bottom;
+            lblTotalOblgtnAmount.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
+            lblTotalOblgtnAmount.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            lblTotalOblgtnAmount.Location = new System.Drawing.Point(20, 266);
+            lblTotalOblgtnAmount.Name = "lblTotalOblgtnAmount";
+            lblTotalOblgtnAmount.Padding = new System.Windows.Forms.Padding(0, 4, 0, 4);
+            lblTotalOblgtnAmount.Size = new System.Drawing.Size(87, 29);
+            lblTotalOblgtnAmount.TabIndex = 17;
+            lblTotalOblgtnAmount.Text = "Total: 0.00";
             // 
             // errorProvider1
             // 
@@ -146,7 +146,7 @@ namespace LFS.Budget.Views.Obligations
             panel1.BackColor = System.Drawing.Color.Transparent;
             panel1.Controls.Add(dgvEntries);
             panel1.Controls.Add(toolStrip1);
-            panel1.Controls.Add(label9);
+            panel1.Controls.Add(lblTotalOblgtnAmount);
             panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             panel1.Location = new System.Drawing.Point(3, 3);
             panel1.Name = "panel1";
@@ -373,6 +373,7 @@ namespace LFS.Budget.Views.Obligations
             // splitContainer2
             // 
             splitContainer2.Dock = System.Windows.Forms.DockStyle.Top;
+            splitContainer2.IsSplitterFixed = true;
             splitContainer2.Location = new System.Drawing.Point(0, 0);
             splitContainer2.Name = "splitContainer2";
             // 
@@ -579,7 +580,7 @@ namespace LFS.Budget.Views.Obligations
         internal System.Windows.Forms.MaskedTextBox mskTxtOblgtnNo;
         internal System.Windows.Forms.Label label5;
         internal System.Windows.Forms.DataGridView dgvEntries;
-        internal System.Windows.Forms.Label label9;
+        internal System.Windows.Forms.Label lblTotalOblgtnAmount;
         private System.Windows.Forms.ErrorProvider errorProvider1;
         private CustomTools.CustomTabControl customTabControl1;
         private System.Windows.Forms.TabPage tbPgEntries;
