@@ -32,13 +32,7 @@ namespace LFS.Budget.Views.Obligations
             components = new System.ComponentModel.Container();
             mskTxtOblgtnNo = new System.Windows.Forms.MaskedTextBox();
             label5 = new System.Windows.Forms.Label();
-            dgvEntries = new System.Windows.Forms.DataGridView();
-            lblTotalOblgtnAmount = new System.Windows.Forms.Label();
             errorProvider1 = new System.Windows.Forms.ErrorProvider(components);
-            panel1 = new System.Windows.Forms.Panel();
-            toolStrip1 = new System.Windows.Forms.ToolStrip();
-            tlStrpBtnEntrRemove = new System.Windows.Forms.ToolStripButton();
-            tlStrpBtnEntrAdd = new System.Windows.Forms.ToolStripButton();
             mskTxtTransNo = new System.Windows.Forms.MaskedTextBox();
             label2 = new System.Windows.Forms.Label();
             lblStatIndctr = new System.Windows.Forms.Label();
@@ -68,10 +62,12 @@ namespace LFS.Budget.Views.Obligations
             label8 = new System.Windows.Forms.Label();
             txtPayee = new System.Windows.Forms.TextBox();
             tbPgEntries = new System.Windows.Forms.TabPage();
-            ((System.ComponentModel.ISupportInitialize)dgvEntries).BeginInit();
+            dgvEntries = new System.Windows.Forms.DataGridView();
+            lblTotalOblgtn = new System.Windows.Forms.Label();
+            toolStrip1 = new System.Windows.Forms.ToolStrip();
+            tlStrpBtnEntrRemove = new System.Windows.Forms.ToolStripButton();
+            tlStrpBtnEntrAdd = new System.Windows.Forms.ToolStripButton();
             ((System.ComponentModel.ISupportInitialize)errorProvider1).BeginInit();
-            panel1.SuspendLayout();
-            toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
             splitContainer1.Panel2.SuspendLayout();
@@ -85,6 +81,8 @@ namespace LFS.Budget.Views.Obligations
             splitContainer2.Panel2.SuspendLayout();
             splitContainer2.SuspendLayout();
             tbPgEntries.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dgvEntries).BeginInit();
+            toolStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // mskTxtOblgtnNo
@@ -108,82 +106,10 @@ namespace LFS.Budget.Views.Obligations
             label5.TabIndex = 10;
             label5.Text = "Obligation No.";
             // 
-            // dgvEntries
-            // 
-            dgvEntries.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvEntries.Dock = System.Windows.Forms.DockStyle.Fill;
-            dgvEntries.Location = new System.Drawing.Point(20, 45);
-            dgvEntries.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
-            dgvEntries.Name = "dgvEntries";
-            dgvEntries.Size = new System.Drawing.Size(702, 221);
-            dgvEntries.TabIndex = 12;
-            dgvEntries.CellEndEdit += dgvEntries_CellEndEdit;
-            dgvEntries.CellValueChanged += dgvEntries_CellValueChanged;
-            dgvEntries.CurrentCellDirtyStateChanged += dgvEntries_CurrentCellDirtyStateChanged;
-            dgvEntries.DataError += dgvEntries_DataError;
-            dgvEntries.SelectionChanged += dgvEntries_SelectionChanged;
-            // 
-            // lblTotalOblgtnAmount
-            // 
-            lblTotalOblgtnAmount.AutoSize = true;
-            lblTotalOblgtnAmount.Dock = System.Windows.Forms.DockStyle.Bottom;
-            lblTotalOblgtnAmount.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
-            lblTotalOblgtnAmount.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            lblTotalOblgtnAmount.Location = new System.Drawing.Point(20, 266);
-            lblTotalOblgtnAmount.Name = "lblTotalOblgtnAmount";
-            lblTotalOblgtnAmount.Padding = new System.Windows.Forms.Padding(0, 4, 0, 4);
-            lblTotalOblgtnAmount.Size = new System.Drawing.Size(87, 29);
-            lblTotalOblgtnAmount.TabIndex = 17;
-            lblTotalOblgtnAmount.Text = "Total: 0.00";
-            // 
             // errorProvider1
             // 
             errorProvider1.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
             errorProvider1.ContainerControl = this;
-            // 
-            // panel1
-            // 
-            panel1.BackColor = System.Drawing.Color.Transparent;
-            panel1.Controls.Add(dgvEntries);
-            panel1.Controls.Add(toolStrip1);
-            panel1.Controls.Add(lblTotalOblgtnAmount);
-            panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            panel1.Location = new System.Drawing.Point(3, 3);
-            panel1.Name = "panel1";
-            panel1.Padding = new System.Windows.Forms.Padding(20);
-            panel1.Size = new System.Drawing.Size(742, 315);
-            panel1.TabIndex = 0;
-            // 
-            // toolStrip1
-            // 
-            toolStrip1.BackColor = System.Drawing.Color.Transparent;
-            toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { tlStrpBtnEntrRemove, tlStrpBtnEntrAdd });
-            toolStrip1.Location = new System.Drawing.Point(20, 20);
-            toolStrip1.Name = "toolStrip1";
-            toolStrip1.Size = new System.Drawing.Size(702, 25);
-            toolStrip1.TabIndex = 13;
-            toolStrip1.Text = "toolStrip1";
-            // 
-            // tlStrpBtnEntrRemove
-            // 
-            tlStrpBtnEntrRemove.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            tlStrpBtnEntrRemove.Image = Properties.Resources.symbol_cancel_16px;
-            tlStrpBtnEntrRemove.ImageTransparentColor = System.Drawing.Color.Magenta;
-            tlStrpBtnEntrRemove.Name = "tlStrpBtnEntrRemove";
-            tlStrpBtnEntrRemove.Size = new System.Drawing.Size(70, 22);
-            tlStrpBtnEntrRemove.Text = "Remove";
-            tlStrpBtnEntrRemove.Click += tlStrpBtnEntrRemove_Click;
-            // 
-            // tlStrpBtnEntrAdd
-            // 
-            tlStrpBtnEntrAdd.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            tlStrpBtnEntrAdd.Image = Properties.Resources.symbol_add_16px;
-            tlStrpBtnEntrAdd.ImageTransparentColor = System.Drawing.Color.Magenta;
-            tlStrpBtnEntrAdd.Name = "tlStrpBtnEntrAdd";
-            tlStrpBtnEntrAdd.Size = new System.Drawing.Size(49, 22);
-            tlStrpBtnEntrAdd.Text = "Add";
-            tlStrpBtnEntrAdd.Click += tlStrpBtnEntrAdd_Click;
             // 
             // mskTxtTransNo
             // 
@@ -530,14 +456,74 @@ namespace LFS.Budget.Views.Obligations
             // 
             // tbPgEntries
             // 
-            tbPgEntries.Controls.Add(panel1);
+            tbPgEntries.Controls.Add(dgvEntries);
+            tbPgEntries.Controls.Add(lblTotalOblgtn);
+            tbPgEntries.Controls.Add(toolStrip1);
             tbPgEntries.Location = new System.Drawing.Point(4, 28);
             tbPgEntries.Name = "tbPgEntries";
-            tbPgEntries.Padding = new System.Windows.Forms.Padding(3);
+            tbPgEntries.Padding = new System.Windows.Forms.Padding(20);
             tbPgEntries.Size = new System.Drawing.Size(748, 321);
             tbPgEntries.TabIndex = 1;
             tbPgEntries.Text = "Entries";
             tbPgEntries.UseVisualStyleBackColor = true;
+            // 
+            // dgvEntries
+            // 
+            dgvEntries.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvEntries.Dock = System.Windows.Forms.DockStyle.Fill;
+            dgvEntries.Location = new System.Drawing.Point(20, 45);
+            dgvEntries.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
+            dgvEntries.Name = "dgvEntries";
+            dgvEntries.Size = new System.Drawing.Size(708, 214);
+            dgvEntries.TabIndex = 12;
+            dgvEntries.CellValueChanged += dgvEntries_CellValueChanged;
+            dgvEntries.CurrentCellDirtyStateChanged += dgvEntries_CurrentCellDirtyStateChanged;
+            dgvEntries.DataError += dgvEntries_DataError;
+            dgvEntries.SelectionChanged += dgvEntries_SelectionChanged;
+            // 
+            // lblTotalOblgtn
+            // 
+            lblTotalOblgtn.Dock = System.Windows.Forms.DockStyle.Bottom;
+            lblTotalOblgtn.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
+            lblTotalOblgtn.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            lblTotalOblgtn.Location = new System.Drawing.Point(20, 259);
+            lblTotalOblgtn.Name = "lblTotalOblgtn";
+            lblTotalOblgtn.Padding = new System.Windows.Forms.Padding(0, 15, 0, 0);
+            lblTotalOblgtn.Size = new System.Drawing.Size(708, 42);
+            lblTotalOblgtn.TabIndex = 14;
+            lblTotalOblgtn.Text = "Total: 0.00";
+            lblTotalOblgtn.Click += lblTotalOblgtn_Click;
+            // 
+            // toolStrip1
+            // 
+            toolStrip1.BackColor = System.Drawing.Color.Transparent;
+            toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { tlStrpBtnEntrRemove, tlStrpBtnEntrAdd });
+            toolStrip1.Location = new System.Drawing.Point(20, 20);
+            toolStrip1.Name = "toolStrip1";
+            toolStrip1.Size = new System.Drawing.Size(708, 25);
+            toolStrip1.TabIndex = 13;
+            toolStrip1.Text = "toolStrip1";
+            // 
+            // tlStrpBtnEntrRemove
+            // 
+            tlStrpBtnEntrRemove.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            tlStrpBtnEntrRemove.Image = Properties.Resources.symbol_cancel_16px;
+            tlStrpBtnEntrRemove.ImageTransparentColor = System.Drawing.Color.Magenta;
+            tlStrpBtnEntrRemove.Name = "tlStrpBtnEntrRemove";
+            tlStrpBtnEntrRemove.Size = new System.Drawing.Size(70, 22);
+            tlStrpBtnEntrRemove.Text = "Remove";
+            tlStrpBtnEntrRemove.Click += tlStrpBtnEntrRemove_Click;
+            // 
+            // tlStrpBtnEntrAdd
+            // 
+            tlStrpBtnEntrAdd.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            tlStrpBtnEntrAdd.Image = Properties.Resources.symbol_add_16px;
+            tlStrpBtnEntrAdd.ImageTransparentColor = System.Drawing.Color.Magenta;
+            tlStrpBtnEntrAdd.Name = "tlStrpBtnEntrAdd";
+            tlStrpBtnEntrAdd.Size = new System.Drawing.Size(49, 22);
+            tlStrpBtnEntrAdd.Text = "Add";
+            tlStrpBtnEntrAdd.Click += tlStrpBtnEntrAdd_Click;
             // 
             // ucObligations
             // 
@@ -548,12 +534,7 @@ namespace LFS.Budget.Views.Obligations
             Controls.Add(splitContainer1);
             Name = "ucObligations";
             Size = new System.Drawing.Size(756, 452);
-            ((System.ComponentModel.ISupportInitialize)dgvEntries).EndInit();
             ((System.ComponentModel.ISupportInitialize)errorProvider1).EndInit();
-            panel1.ResumeLayout(false);
-            panel1.PerformLayout();
-            toolStrip1.ResumeLayout(false);
-            toolStrip1.PerformLayout();
             splitContainer1.Panel1.ResumeLayout(false);
             splitContainer1.Panel1.PerformLayout();
             splitContainer1.Panel2.ResumeLayout(false);
@@ -572,6 +553,10 @@ namespace LFS.Budget.Views.Obligations
             ((System.ComponentModel.ISupportInitialize)splitContainer2).EndInit();
             splitContainer2.ResumeLayout(false);
             tbPgEntries.ResumeLayout(false);
+            tbPgEntries.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dgvEntries).EndInit();
+            toolStrip1.ResumeLayout(false);
+            toolStrip1.PerformLayout();
             ResumeLayout(false);
 
         }
@@ -579,15 +564,8 @@ namespace LFS.Budget.Views.Obligations
         #endregion
         internal System.Windows.Forms.MaskedTextBox mskTxtOblgtnNo;
         internal System.Windows.Forms.Label label5;
-        internal System.Windows.Forms.DataGridView dgvEntries;
-        internal System.Windows.Forms.Label lblTotalOblgtnAmount;
         private System.Windows.Forms.ErrorProvider errorProvider1;
         private System.Windows.Forms.TabPage tbPgEntries;
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.ToolStrip toolStrip1;
-        private System.Windows.Forms.ToolStripButton tlStrpBtnEntrAdd;
-        private System.Windows.Forms.ToolStripButton tlStrpBtnEntrRemove;
         private System.Windows.Forms.MaskedTextBox mskTxtTransNo;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label lblStatIndctr;
@@ -596,6 +574,7 @@ namespace LFS.Budget.Views.Obligations
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tbPgDetails;
+        private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Label label11;
         internal System.Windows.Forms.TextBox txtRemarks;
@@ -604,16 +583,21 @@ namespace LFS.Budget.Views.Obligations
         internal System.Windows.Forms.Label label7;
         private System.Windows.Forms.SplitContainer splitContainer2;
         internal System.Windows.Forms.ComboBox cmbxFPP;
-        internal System.Windows.Forms.Label label6;
+        internal System.Windows.Forms.ComboBox cmbxAlltmntClss;
         internal System.Windows.Forms.ComboBox cmbxFund;
-        internal System.Windows.Forms.TextBox txtPayee;
+        internal System.Windows.Forms.Label label12;
         internal System.Windows.Forms.Label label1;
         internal System.Windows.Forms.Label label4;
         internal System.Windows.Forms.DateTimePicker dtDateRequest;
+        internal System.Windows.Forms.Label label6;
         internal System.Windows.Forms.TextBox txtReferenceNo;
         internal System.Windows.Forms.Label label3;
         internal System.Windows.Forms.Label label8;
-        internal System.Windows.Forms.ComboBox cmbxAlltmntClss;
-        internal System.Windows.Forms.Label label12;
+        internal System.Windows.Forms.TextBox txtPayee;
+        internal System.Windows.Forms.DataGridView dgvEntries;
+        private System.Windows.Forms.ToolStrip toolStrip1;
+        private System.Windows.Forms.ToolStripButton tlStrpBtnEntrRemove;
+        private System.Windows.Forms.ToolStripButton tlStrpBtnEntrAdd;
+        private System.Windows.Forms.Label lblTotalOblgtn;
     }
 }

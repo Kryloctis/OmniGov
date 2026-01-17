@@ -515,27 +515,23 @@ namespace LFS.Budget.Views.Obligations
                         cellAmount.Value = result;
                 }
 
-                lblTotalOblgtnAmount.Text = $"Total: {GetTotalObligations(dgvEntries.Rows).ToString("N2")}";
+                lblTotalOblgtn.Text = $"Total: {GetTotalObligations(dgvEntries.Rows).ToString("N2")}";
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void dgvEntries_DataError(object sender, DataGridViewDataErrorEventArgs e)
         {
-            if (dgvEntries.Columns[e.ColumnIndex].Name == "amount")
-            {
-                // Replace invalid value with zero
-                dgvEntries.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = 0m;
-
-                e.ThrowException = false;
-                e.Cancel = true;
-            }
-        }
-
-        private void dgvEntries_CellEndEdit(object sender, DataGridViewCellEventArgs e)
-        {
             try
             {
+                if (dgvEntries.Columns[e.ColumnIndex].Name == "amount")
+                {
+                    // Replace invalid value with zero
+                    dgvEntries.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = 0m;
+
+                    e.ThrowException = false;
+                    e.Cancel = true;
+                }
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -679,5 +675,9 @@ namespace LFS.Budget.Views.Obligations
         }
 
         #endregion Validation Events
+
+        private void lblTotalOblgtn_Click(object sender, EventArgs e)
+        {
+        }
     }
 }
