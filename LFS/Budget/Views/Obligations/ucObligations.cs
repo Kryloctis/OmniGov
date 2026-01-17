@@ -19,10 +19,52 @@ namespace LFS.Budget.Views.Obligations
         public ucObligations()
         {
             InitializeComponent();
+            //Don't recommend putting any code here since it will be triggered on design stage of user control that causes ERRORS!
         }
 
-        /* Models */
+        private void OnLoad()
+        {
+            Helper.DatagridEditableRowStyle(dgvEntries, true);
+            dgvEntries.RowTemplate.Height = 30;
 
+            /*
+            Note: The auto-validate in designer should be disabled in default. It causes designer error when navigating user control.
+            Enable auto-validation here in OnLoad function so that auto-validate will not be triggered when in design stage.
+             */
+            this.AutoValidate = AutoValidate.EnableAllowFocusChange;
+
+            /*Pre-load fields*/
+            LoadFPP();
+            LoadAlltmntClss();
+            LoadFunds();
+
+            /*Initializes datagridview columns*/
+            InitializeEntriesTbl();
+            dgvEntries.AutoResizeRows(DataGridViewAutoSizeRowsMode.AllCells);
+            ToggleEntriesButtons(dgvEntries, tlStrpBtnEntrRemove);
+        }
+
+        internal void LoadCrudMode(bool isEdit, int? oblgtnRqstId = null)
+        {
+            OnLoad();
+            if (isEdit)
+                this.oblgtnRqstId = oblgtnRqstId.Value;
+        }
+
+        internal void LoadViewMode(int oblgtnRqstId)
+        {
+            SetControlsReadOnly(tabControl1, true);
+            OnLoad();
+            this.oblgtnRqstId = oblgtnRqstId;
+        }
+
+        internal void LoadAuditMode(int oblgtnRqstId)
+        {
+            OnLoad();
+            this.oblgtnRqstId = oblgtnRqstId;
+        }
+
+        //Models
         internal (ObligationRequestModel oblgtnRqstModel, List<ObligationAccountModel> oblgtnAccsModel) ObligationRequestModel()
         {
             var oblgtnRqst = new ObligationRequestModel()
@@ -51,26 +93,6 @@ namespace LFS.Budget.Views.Obligations
             }
 
             return (oblgtnRqst, oblgtnAccs);
-        }
-
-        internal void OnLoad(bool isEdit, int? oblgtnRqstId = null)
-        {
-            Helper.DatagridEditableRowStyle(dgvEntries, true);
-            dgvEntries.RowTemplate.Height = 30;
-
-            this.AutoValidate = AutoValidate.EnableAllowFocusChange;
-            LoadFPP();
-            LoadAlltmntClss();
-            LoadFunds();
-            //GetTotalObligations();
-
-            if (isEdit)
-            {
-                this.oblgtnRqstId = oblgtnRqstId.Value;
-            }
-            InitializeEntriesTbl();
-            dgvEntries.AutoResizeRows(DataGridViewAutoSizeRowsMode.AllCells);
-            ToggleEntriesButtons(dgvEntries, tlStrpBtnEntrRemove);
         }
 
         private void ToggleEntriesButtons(DataGridView dgv, ToolStripButton btnRemove)
@@ -124,28 +146,32 @@ namespace LFS.Budget.Views.Obligations
 
         private void SetControlsReadOnly(Control parent, bool isReadOnly)
         {
-            foreach (var c in parent.Controls.Cast<Control>()
-                         .Where(c => c is ComboBox || c is DateTimePicker || c is TextBoxBase || c is LinkLabel))
+            foreach (Control item in parent.Controls)
             {
-                if (c is TextBoxBase tb)
-                {
+                if (item is TextBoxBase tb)
                     tb.ReadOnly = isReadOnly;
-                    continue;
+                else if (item is DataGridView dgv)
+                    dgv.ReadOnly = isReadOnly;
+                else if (item is ComboBox || item is DateTimePicker || item is LinkLabel)
+                {
+                    item.Enabled = !isReadOnly;
                 }
 
-                c.Enabled = !isReadOnly;
+                //Using recursive action to child containers
+                if (item.HasChildren)
+                    SetControlsReadOnly(item, isReadOnly);
             }
 
             dgvEntries.SelectionChanged -= dgvEntries_SelectionChanged;
         }
 
-        private void dgvEntries_SelectionChanged(object sender, EventArgs e)
+        private string GenerateObligationRequestNoTemplate()
         {
-            try
-            {
-                ToggleEntriesButtons(dgvEntries, tlStrpBtnEntrRemove);
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            string fundCode = AccFactory.FundsRepository().GetRecordByID(fundId)["fund_code"];
+
+            string obligationNoTemplate = $"{dtDateRequest.Value.ToString("MM")}-{dtDateRequest.Value.ToString("yy")}-{fundCode}";
+
+            return obligationNoTemplate;
         }
 
         private void LoadAlltmntClss()
@@ -171,18 +197,6 @@ namespace LFS.Budget.Views.Obligations
             cmbxAlltmntClss.DisplayMember = "alltmntClss";
         }
 
-        private DataTable DtFpp()
-        {
-            DataTable dtFPP;
-
-            if (string.IsNullOrWhiteSpace(cmbxFPP.Text))
-                dtFPP = AccFactory.FunctionProgramProjectRepository().GetViewRecords();
-            else
-                dtFPP = AccFactory.FunctionProgramProjectRepository().GetRecordsByCodeName(cmbxFPP.Text.Trim());
-
-            return dtFPP;
-        }
-
         private void LoadFPP()
         {
             cmbxFPP.DroppedDown = false;
@@ -203,34 +217,6 @@ namespace LFS.Budget.Views.Obligations
             cmbxFPP.DropDownHeight = 200;
         }
 
-        private void cmbxFPP_TextChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                if (string.IsNullOrEmpty(cmbxFPP.Text))
-                {
-                    cmbxFPP.TextChanged -= new EventHandler(cmbxFPP_TextChanged);
-                    LoadFPP();
-                    cmbxFPP.SelectedIndex = -1;
-                    cmbxFPP.TextChanged += new EventHandler(cmbxFPP_TextChanged);
-                }
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        private void cmbxFPP_KeyDown(object sender, KeyEventArgs e)
-        {
-            try
-            {
-                if (e.KeyCode == Keys.F1 && cmbxFPP.FindStringExact(cmbxFPP.Text) == -1 && !string.IsNullOrEmpty(cmbxFPP.Text))
-                {
-                    LoadFPP();
-                    cmbxFPP.DroppedDown = true;
-                }
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
         private void LoadFunds()
         {
             var dtFunds = AccFactory.FundsRepository().GetRecords();
@@ -249,43 +235,6 @@ namespace LFS.Budget.Views.Obligations
                 );
 
             HelperLoadRecords.FundsComboBox(dataTable, cmbxFund, "id", "fund");
-        }
-
-        private bool Validation()
-        {
-            if (ShowErrorFPPNameNotExist() || Helper.ShowErrorComboBoxEmpty(errorProvider1, cmbxFPP, "FPP"))
-            {
-                Helper.MessageBoxError(GetFormErrorsAdd());
-                return false;
-            }
-            else
-            {
-                Helper.ClearErrorComboBox(errorProvider1, cmbxFPP);
-                return true;
-            }
-        }
-
-        private string GenerateObligationRequestNoTemplate()
-        {
-            string fundCode = AccFactory.FundsRepository().GetRecordByID(fundId)["fund_code"];
-
-            string obligationNoTemplate = $"{dtDateRequest.Value.ToString("MM")}-{dtDateRequest.Value.ToString("yy")}-{fundCode}";
-
-            return obligationNoTemplate;
-        }
-
-        private void dtDateRequest_ValueChanged(object sender, EventArgs e)
-        {
-        }
-
-        internal string GetFormErrorsAdd()
-        {
-            var errorArray = new string[]
-            {
-                errorProvider1.GetError(cmbxFPP)
-            };
-
-            return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
         }
 
         private bool ShowErrorFPPNameNotExist()
@@ -309,207 +258,6 @@ namespace LFS.Budget.Views.Obligations
                 dgvEntries.Columns.Clear();
                 dgvEntries.Columns.AddRange(dgColumns.ToArray());
             }
-        }
-
-        private List<DataGridViewColumn> DgvColumns()
-        {
-            var dtColumns = new List<DataGridViewColumn>
-            {
-                new DataGridViewComboBoxColumn ()
-                {
-                    HeaderText = "Sub FPP",
-                    Name = "sub_fpp",
-                    ValueMember = "id",
-                    DisplayMember = "others_fpp",
-                    DataSource = DtSubFpp(),
-                    FlatStyle = FlatStyle.Flat,
-                    MinimumWidth = 120,
-                },
-
-                new DataGridViewComboBoxColumn ()
-                {
-                    HeaderText = "ARO No.",
-                    Name = "aro_no",
-                    ValueMember = "id",
-                    DisplayMember = "aro_no",
-                    FlatStyle = FlatStyle.Flat,
-                    MinimumWidth = 80,
-                },
-
-                new DataGridViewComboBoxColumn()
-                {
-                    HeaderText = "Account",
-                    Name = "account",
-                    ValueMember = "id",
-                    DisplayMember = "account",
-                    FlatStyle = FlatStyle.Flat,
-                    MinimumWidth = 200
-                },
-
-                new DataGridViewTextBoxColumn ()
-                {
-                    HeaderText = "Unobligated Bal.",
-                    Name = "unoblgtd_bal",
-                    MinimumWidth = 100,
-                    ReadOnly = true,
-                    ValueType = typeof(decimal),
-                    DefaultCellStyle = {Format = "N2",
-                                        NullValue = "0.00"}
-                },
-
-                new DataGridViewTextBoxColumn()
-                {
-                    HeaderText = "Amount",
-                    Name = "amount",
-                    MinimumWidth = 200,
-                    DefaultCellStyle = {Format = "N2",
-                                        NullValue = 0m},
-                },
-            };
-
-            return dtColumns;
-        }
-
-        private void tlStrpBtnEntrAdd_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                //string jrnlType = cmbxJournal.Text;
-                //var validateRow = RowsValidated(dgAccounts, jrnlType);
-
-                //if (!validateRow.isValidated)
-                //{
-                //    var errMssg = AccFactory.CreateErrors(validateRow.errors).GenerateErrorMessage();
-                //    Helper.MessageBoxError(errMssg);
-                //    return;
-                //}
-
-                int r = dgvEntries.Rows.Add();
-                dgvEntries.Rows[r].Cells["sub_fpp"].Value = 0;
-                dgvEntries.CurrentCell = dgvEntries.Rows[r].Cells["sub_fpp"];
-                dgvEntries.BeginEdit(true);
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        private void tlStrpBtnEntrRemove_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                int count = dgvEntries.SelectedRows.Count;
-                if (count == 0) return;
-
-                string msg = $"Are you sure you want to remove {(count == 1 ? "the entry" : $"{count} accounting entries")}?";
-
-                if (MessageBox.Show(msg, "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
-                {
-                    foreach (DataGridViewRow dgvRow in dgvEntries.SelectedRows)
-                    {
-                        dgvEntries.Rows.RemoveAt(dgvRow.Index);
-                    }
-                }
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        private void cmbxFPP_SelectionChangeCommitted(object sender, EventArgs e)
-        {
-            try
-            {
-                dgvEntries.Rows.Clear();
-                DataGridViewComboBoxColumn dgvColumn = (DataGridViewComboBoxColumn)dgvEntries.Columns["sub_fpp"];
-                dgvColumn.DataSource = null;
-                dgvColumn.DataSource = DtSubFpp();
-                dgvColumn.ValueMember = "id";
-                dgvColumn.DisplayMember = "others_fpp";
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        private void dgvEntries_CurrentCellDirtyStateChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                if (dgvEntries.IsCurrentCellDirty)
-                    dgvEntries.CommitEdit(DataGridViewDataErrorContexts.Commit);
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        private DataTable DtSubFpp()
-        {
-            bool fppValid = int.TryParse(cmbxFPP.SelectedValue.ToString(), out int fppId);
-            var dtSubFpp = AccFactory.SubFPPRepository().GetRecordsByFppId(fppId);
-            var dt = new DataTable();
-            var dtColmns = new DataColumn[]
-            {
-                new DataColumn(Name = "id", typeof(int)),
-                new DataColumn(Name = "others_fpp", typeof(string)),
-            };
-
-            dt.Columns.AddRange(dtColmns);
-            dt.Rows.Add(0, "N/A");
-
-            foreach (DataRow dr in dtSubFpp.Rows)
-                dt.Rows.Add(dr["id"], $"{dr["others_fpp_code"]}{dr["name"]}");
-
-            return dt;
-        }
-
-        private DataTable DtAllotmentRelease(string searchKey, int othersFppId)
-        {
-            bool fppValid = int.TryParse(cmbxFPP.SelectedValue.ToString(), out int fppId);
-            bool alltmntClssValid = int.TryParse(cmbxAlltmntClss.SelectedValue.ToString(), out int alltmntClssId);
-            bool fundValid = int.TryParse(cmbxFund.SelectedValue.ToString(), out int fundId);
-            var dbDtAllotmentRelease = AccFactory.AllotmentReleaseRepository().GetViewRecords(fppId, othersFppId == 0 ? null : othersFppId, alltmntClssId, searchKey);
-
-            var dtAllotmntRelease = dbDtAllotmentRelease.AsEnumerable().GroupBy(x => x.Field<UInt32>("allotment_release_id")).ToList();
-
-            var dataTable = new DataTable();
-            dataTable.Columns.Add("id", typeof(int));
-            dataTable.Columns.Add("aro_no", typeof(string));
-
-            dataTable.Rows.Add(0, "Select...");
-            foreach (var row in dtAllotmntRelease)
-            {
-                dataTable.Rows.Add(
-                        row.First().Field<UInt32>("allotment_release_id"),
-                        row.First().Field<string>("full_aro_no")
-                    );
-            }
-
-            return dataTable;
-        }
-
-        private DataTable DtAllotmentAccounts(string searchKey, int alltmntRlsId)
-        {
-            var dtAccs = AccFactory.AllotmentReleaseRepository().GetViewRecords(alltmntRlsId);
-
-            var dataTable = new DataTable();
-            var dataColumns = new DataColumn[]
-            {
-                new DataColumn(Name = "id", typeof(int)),
-                new DataColumn(Name = "account", typeof(string)),
-                new DataColumn(Name = "amount", typeof(decimal)),
-            };
-            dataTable.Columns.AddRange(dataColumns);
-
-            dataTable.Rows.Add(0, "Select...");
-            foreach (DataRow dtRow in dtAccs.Rows)
-                dataTable.Rows.Add(dtRow["allotment_account_id"],
-                                $"{dtRow["account_code"]}-{dtRow["ledger_name"]}",
-                                dtRow["amount"]);
-            return dataTable;
-        }
-
-        private decimal GetTotalObligations(DataGridViewRowCollection dataGridViewRowCollection)
-        {
-            decimal totalObligation = 0;
-
-            foreach (DataGridViewRow row in dataGridViewRowCollection)
-                totalObligation += Convert.ToDecimal(row.Cells["amount"].Value);
-
-            return totalObligation;
         }
 
         private void PopulateAllotmentReleaseCell(int rowIndex, DataGridView dataGridView)
@@ -579,6 +327,159 @@ namespace LFS.Budget.Views.Obligations
                 cellUnobligatedBal.Value = 0.00m;
         }
 
+        private decimal GetTotalObligations(DataGridViewRowCollection dataGridViewRowCollection)
+        {
+            decimal totalObligation = 0;
+
+            foreach (DataGridViewRow row in dataGridViewRowCollection)
+                totalObligation += Convert.ToDecimal(row.Cells["amount"].Value);
+
+            return totalObligation;
+        }
+
+        private List<DataGridViewColumn> DgvColumns()
+        {
+            var dtColumns = new List<DataGridViewColumn>
+            {
+                new DataGridViewComboBoxColumn ()
+                {
+                    HeaderText = "Sub FPP",
+                    Name = "sub_fpp",
+                    ValueMember = "id",
+                    DisplayMember = "others_fpp",
+                    DataSource = DtSubFpp(),
+                    FlatStyle = FlatStyle.Flat,
+                    MinimumWidth = 120,
+                },
+
+                new DataGridViewComboBoxColumn ()
+                {
+                    HeaderText = "ARO No.",
+                    Name = "aro_no",
+                    ValueMember = "id",
+                    DisplayMember = "aro_no",
+                    FlatStyle = FlatStyle.Flat,
+                    MinimumWidth = 80,
+                },
+
+                new DataGridViewComboBoxColumn()
+                {
+                    HeaderText = "Account",
+                    Name = "account",
+                    ValueMember = "id",
+                    DisplayMember = "account",
+                    FlatStyle = FlatStyle.Flat,
+                    MinimumWidth = 200
+                },
+
+                new DataGridViewTextBoxColumn ()
+                {
+                    HeaderText = "Unobligated Bal.",
+                    Name = "unoblgtd_bal",
+                    MinimumWidth = 100,
+                    ReadOnly = true,
+                    ValueType = typeof(decimal),
+                    DefaultCellStyle = {Format = "N2",
+                                        NullValue = "0.00"}
+                },
+
+                new DataGridViewTextBoxColumn()
+                {
+                    HeaderText = "Amount",
+                    Name = "amount",
+                    MinimumWidth = 200,
+                    DefaultCellStyle = {Format = "N2",
+                                        NullValue = 0m},
+                },
+            };
+
+            return dtColumns;
+        }
+
+        #region DataSources
+
+        private DataTable DtFpp()
+        {
+            DataTable dtFPP;
+
+            if (string.IsNullOrWhiteSpace(cmbxFPP.Text))
+                dtFPP = AccFactory.FunctionProgramProjectRepository().GetViewRecords();
+            else
+                dtFPP = AccFactory.FunctionProgramProjectRepository().GetRecordsByCodeName(cmbxFPP.Text.Trim());
+
+            return dtFPP;
+        }
+
+        private DataTable DtSubFpp()
+        {
+            bool fppValid = int.TryParse(cmbxFPP.SelectedValue.ToString(), out int fppId);
+            var dtSubFpp = AccFactory.SubFPPRepository().GetRecordsByFppId(fppId);
+            var dt = new DataTable();
+            var dtColmns = new DataColumn[]
+            {
+                new DataColumn(Name = "id", typeof(int)),
+                new DataColumn(Name = "others_fpp", typeof(string)),
+            };
+
+            dt.Columns.AddRange(dtColmns);
+            dt.Rows.Add(0, "N/A");
+
+            foreach (DataRow dr in dtSubFpp.Rows)
+                dt.Rows.Add(dr["id"], $"{dr["others_fpp_code"]}{dr["name"]}");
+
+            return dt;
+        }
+
+        private DataTable DtAllotmentRelease(string searchKey, int othersFppId)
+        {
+            bool fppValid = int.TryParse(cmbxFPP.SelectedValue.ToString(), out int fppId);
+            bool alltmntClssValid = int.TryParse(cmbxAlltmntClss.SelectedValue.ToString(), out int alltmntClssId);
+            bool fundValid = int.TryParse(cmbxFund.SelectedValue.ToString(), out int fundId);
+            var dbDtAllotmentRelease = AccFactory.AllotmentReleaseRepository().GetViewRecords(fppId, othersFppId == 0 ? null : othersFppId, alltmntClssId, searchKey);
+
+            var dtAllotmntRelease = dbDtAllotmentRelease.AsEnumerable().GroupBy(x => x.Field<UInt32>("allotment_release_id")).ToList();
+
+            var dataTable = new DataTable();
+            dataTable.Columns.Add("id", typeof(int));
+            dataTable.Columns.Add("aro_no", typeof(string));
+
+            dataTable.Rows.Add(0, "Select...");
+            foreach (var row in dtAllotmntRelease)
+            {
+                dataTable.Rows.Add(
+                        row.First().Field<UInt32>("allotment_release_id"),
+                        row.First().Field<string>("full_aro_no")
+                    );
+            }
+
+            return dataTable;
+        }
+
+        private DataTable DtAllotmentAccounts(string searchKey, int alltmntRlsId)
+        {
+            var dtAccs = AccFactory.AllotmentReleaseRepository().GetViewRecords(alltmntRlsId);
+
+            var dataTable = new DataTable();
+            var dataColumns = new DataColumn[]
+            {
+                new DataColumn(Name = "id", typeof(int)),
+                new DataColumn(Name = "account", typeof(string)),
+                new DataColumn(Name = "amount", typeof(decimal)),
+            };
+            dataTable.Columns.AddRange(dataColumns);
+
+            dataTable.Rows.Add(0, "Select...");
+            foreach (DataRow dtRow in dtAccs.Rows)
+                dataTable.Rows.Add(dtRow["allotment_account_id"],
+                                $"{dtRow["account_code"]}-{dtRow["ledger_name"]}",
+                                dtRow["amount"]);
+            return dataTable;
+        }
+
+        #endregion DataSources
+
+        #region Events
+
         private void dgvEntries_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
             try
@@ -639,7 +540,112 @@ namespace LFS.Budget.Views.Obligations
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        /* Validations */
+        private void tlStrpBtnEntrAdd_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                //string jrnlType = cmbxJournal.Text;
+                //var validateRow = RowsValidated(dgAccounts, jrnlType);
+
+                //if (!validateRow.isValidated)
+                //{
+                //    var errMssg = AccFactory.CreateErrors(validateRow.errors).GenerateErrorMessage();
+                //    Helper.MessageBoxError(errMssg);
+                //    return;
+                //}
+
+                int r = dgvEntries.Rows.Add();
+                dgvEntries.Rows[r].Cells["sub_fpp"].Value = 0;
+                dgvEntries.CurrentCell = dgvEntries.Rows[r].Cells["sub_fpp"];
+                dgvEntries.BeginEdit(true);
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void tlStrpBtnEntrRemove_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                int count = dgvEntries.SelectedRows.Count;
+                if (count == 0) return;
+
+                string msg = $"Are you sure you want to remove {(count == 1 ? "the entry" : $"{count} accounting entries")}?";
+
+                if (MessageBox.Show(msg, "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                {
+                    foreach (DataGridViewRow dgvRow in dgvEntries.SelectedRows)
+                    {
+                        dgvEntries.Rows.RemoveAt(dgvRow.Index);
+                    }
+                }
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void cmbxFPP_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            try
+            {
+                dgvEntries.Rows.Clear();
+                DataGridViewComboBoxColumn dgvColumn = (DataGridViewComboBoxColumn)dgvEntries.Columns["sub_fpp"];
+                dgvColumn.DataSource = null;
+                dgvColumn.DataSource = DtSubFpp();
+                dgvColumn.ValueMember = "id";
+                dgvColumn.DisplayMember = "others_fpp";
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void dgvEntries_CurrentCellDirtyStateChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (dgvEntries.IsCurrentCellDirty)
+                    dgvEntries.CommitEdit(DataGridViewDataErrorContexts.Commit);
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void cmbxFPP_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(cmbxFPP.Text))
+                {
+                    cmbxFPP.TextChanged -= new EventHandler(cmbxFPP_TextChanged);
+                    LoadFPP();
+                    cmbxFPP.SelectedIndex = -1;
+                    cmbxFPP.TextChanged += new EventHandler(cmbxFPP_TextChanged);
+                }
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void cmbxFPP_KeyDown(object sender, KeyEventArgs e)
+        {
+            try
+            {
+                if (e.KeyCode == Keys.F1 && cmbxFPP.FindStringExact(cmbxFPP.Text) == -1 && !string.IsNullOrEmpty(cmbxFPP.Text))
+                {
+                    LoadFPP();
+                    cmbxFPP.DroppedDown = true;
+                }
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void dgvEntries_SelectionChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                ToggleEntriesButtons(dgvEntries, tlStrpBtnEntrRemove);
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        #endregion Events
+
+        #region Validation Events
 
         private void cmbxFPP_Validating(object sender, CancelEventArgs e)
         {
@@ -671,5 +677,7 @@ namespace LFS.Budget.Views.Obligations
         {
             Helper.ClearErrorTextBox(errorProvider1, txtPayee);
         }
+
+        #endregion Validation Events
     }
 }

@@ -50,7 +50,7 @@ namespace LFS.Budget.Views.Obligations
             panel2 = new System.Windows.Forms.Panel();
             panel3 = new System.Windows.Forms.Panel();
             label11 = new System.Windows.Forms.Label();
-            textBox1 = new System.Windows.Forms.TextBox();
+            txtRemarks = new System.Windows.Forms.TextBox();
             label10 = new System.Windows.Forms.Label();
             txtExplanation = new System.Windows.Forms.TextBox();
             label7 = new System.Windows.Forms.Label();
@@ -308,7 +308,7 @@ namespace LFS.Budget.Views.Obligations
             // panel3
             // 
             panel3.Controls.Add(label11);
-            panel3.Controls.Add(textBox1);
+            panel3.Controls.Add(txtRemarks);
             panel3.Controls.Add(label10);
             panel3.Controls.Add(txtExplanation);
             panel3.Controls.Add(label7);
@@ -331,15 +331,15 @@ namespace LFS.Budget.Views.Obligations
             label11.TabIndex = 42;
             label11.Text = "Section for approval, disapproval, or cancellation remarks.";
             // 
-            // textBox1
+            // txtRemarks
             // 
-            textBox1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            textBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            textBox1.Location = new System.Drawing.Point(99, 52);
-            textBox1.Multiline = true;
-            textBox1.Name = "textBox1";
-            textBox1.Size = new System.Drawing.Size(620, 23);
-            textBox1.TabIndex = 38;
+            txtRemarks.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            txtRemarks.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            txtRemarks.Location = new System.Drawing.Point(99, 52);
+            txtRemarks.Multiline = true;
+            txtRemarks.Name = "txtRemarks";
+            txtRemarks.Size = new System.Drawing.Size(620, 23);
+            txtRemarks.TabIndex = 38;
             // 
             // label10
             // 
@@ -403,6 +403,7 @@ namespace LFS.Budget.Views.Obligations
             // cmbxFPP
             // 
             cmbxFPP.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            cmbxFPP.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             cmbxFPP.FormattingEnabled = true;
             cmbxFPP.Location = new System.Drawing.Point(99, 22);
             cmbxFPP.Margin = new System.Windows.Forms.Padding(3, 3, 3, 15);
@@ -477,7 +478,6 @@ namespace LFS.Budget.Views.Obligations
             dtDateRequest.Name = "dtDateRequest";
             dtDateRequest.Size = new System.Drawing.Size(239, 23);
             dtDateRequest.TabIndex = 8;
-            dtDateRequest.ValueChanged += dtDateRequest_ValueChanged;
             // 
             // label6
             // 
@@ -582,7 +582,6 @@ namespace LFS.Budget.Views.Obligations
         internal System.Windows.Forms.DataGridView dgvEntries;
         internal System.Windows.Forms.Label lblTotalOblgtnAmount;
         private System.Windows.Forms.ErrorProvider errorProvider1;
-        private CustomTools.CustomTabControl customTabControl1;
         private System.Windows.Forms.TabPage tbPgEntries;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel1;
@@ -599,7 +598,7 @@ namespace LFS.Budget.Views.Obligations
         private System.Windows.Forms.TabPage tbPgDetails;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Label label11;
-        internal System.Windows.Forms.TextBox textBox1;
+        internal System.Windows.Forms.TextBox txtRemarks;
         internal System.Windows.Forms.Label label10;
         internal System.Windows.Forms.TextBox txtExplanation;
         internal System.Windows.Forms.Label label7;

@@ -127,13 +127,13 @@ namespace LFS.Budget.Views.Obligations
             {
                 int rowIndex = dgvMain.CurrentCell.RowIndex;
                 int oblgtnRqstId = Convert.ToInt32(dgvMain.Rows[rowIndex].Cells["id"].Value);
-                ucObligationsCrud.OnLoad(true, oblgtnRqstId);
+                ucObligationsCrud.LoadCrudMode(true, oblgtnRqstId);
                 customTabControl1.SelectedTab = tbPgCrud;
                 crudIndct = "Update Obligation Request";
             }
             else
             {
-                ucObligationsCrud.OnLoad(false);
+                ucObligationsCrud.LoadCrudMode(false);
                 customTabControl1.SelectedTab = tbPgCrud;
                 crudIndct = "Create Obligation Request";
             }
@@ -144,9 +144,8 @@ namespace LFS.Budget.Views.Obligations
         private void ToggleView()
         {
             int rowIndex = dgvMain.CurrentCell.RowIndex;
-            int jevId = Convert.ToInt32(dgvMain.Rows[rowIndex].Cells["id"].Value);
-            //ucobl.OnLoad(true, jevId);
-            //ucJevView.SetJevReadOnly(true);
+            int oblgtnId = Convert.ToInt32(dgvMain.Rows[rowIndex].Cells["id"].Value);
+            ucObligationsView.LoadViewMode(oblgtnId);
             customTabControl1.SelectedTab = tbPgView;
         }
 
@@ -213,6 +212,8 @@ namespace LFS.Budget.Views.Obligations
             else
                 return AccFactory.ObligationRequestRepository().Update(models.oblgtnRqstModel, models.oblgtnAccModels);
         }
+
+        #region Events
 
         private void tlStrpBtnCreate_Click(object sender, EventArgs e)
         {
@@ -443,5 +444,7 @@ namespace LFS.Budget.Views.Obligations
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
+
+        #endregion Events
     }
 }
