@@ -1,9 +1,11 @@
 ﻿using ACC.Data;
+using ACC.Domain.Models;
 using LFS.Helpers;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace LFS.Budget.Views.Obligations
@@ -22,162 +24,11 @@ namespace LFS.Budget.Views.Obligations
             try
             {
                 HelperLoadRecords.ComboboxRowLimitFilter(tlStrpCmbxLimit.ComboBox);
-                tlStrpCmbxLimit.ComboBox.SelectionChangeCommitted += (s, ev) => LoadObligationRecords();
-                LoadObligationRecords();
+                tlStrpCmbxLimit.ComboBox.SelectionChangeCommitted += (s, ev) => LoadOblgtnRecords();
                 dtPckrFrom.Value = dtPckrTo.Value.AddYears(-1);
                 MonitorControlChanges(panel1, btnApplyFltr);
                 EnableDisableButtons(dgvMain, tlStrpBtnCreate, tlStrpBtnUpdate, tlStrpBtnDelete, tlStrpBtnView, tlStrpBtnAudit);
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        private void MonitorControlChanges(Control parent, Button targetButton)
-        {
-            foreach (Control ctrl in parent.Controls)
-            {
-                if (ctrl is TextBox tb)
-                    tb.TextChanged += (s, e) => targetButton.Enabled = true;
-                else if (ctrl is RadioButton rb)
-                    rb.CheckedChanged += (s, e) => targetButton.Enabled = true;
-                else if (ctrl is ComboBox cb)
-                    cb.SelectedIndexChanged += (s, e) => targetButton.Enabled = true;
-                else if (ctrl is CheckBox chk)
-                    chk.CheckedChanged += (s, e) => targetButton.Enabled = true;
-                else if (ctrl is DateTimePicker dp)
-                    dp.ValueChanged += (s, e) => targetButton.Enabled = true;
-
-                // Recurse into child containers
-                if (ctrl.HasChildren)
-                    MonitorControlChanges(ctrl, targetButton);
-            }
-        }
-
-        private void ToggleCrud(bool isEdit)
-        {
-            string crudIndct;
-
-            if (isEdit)
-            {
-                int rowIndex = dgvMain.CurrentCell.RowIndex;
-                int oblgtnRqstId = Convert.ToInt32(dgvMain.Rows[rowIndex].Cells["id"].Value);
-                ucObligationsCrud.OnLoad(true, oblgtnRqstId);
-                customTabControl1.SelectedTab = tbPgCrud;
-                crudIndct = "Update Obligation Request";
-            }
-            else
-            {
-                ucObligationsCrud.OnLoad(false);
-                customTabControl1.SelectedTab = tbPgCrud;
-                crudIndct = "Create Obligation Request";
-            }
-
-            lblCrudStat.Text = crudIndct;
-        }
-
-        private void tlStrpBtnCreate_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                ToggleCrud(false);
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        private void tlStrpBtnUpdate_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                ToggleCrud(true);
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        private void ToggleView()
-        {
-            int rowIndex = dgvMain.CurrentCell.RowIndex;
-            int jevId = Convert.ToInt32(dgvMain.Rows[rowIndex].Cells["id"].Value);
-            //ucobl.OnLoad(true, jevId);
-            //ucJevView.SetJevReadOnly(true);
-            customTabControl1.SelectedTab = tbPgView;
-        }
-
-        private void tlStrpBtnView_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                ToggleView();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        private void tlStrpBtnDelete_Click(object sender, EventArgs e)
-        {
-            try
-            {
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        private void ToggleAudit()
-        {
-            int rowIndex = dgvMain.CurrentCell.RowIndex;
-            int jevId = Convert.ToInt32(dgvMain.Rows[rowIndex].Cells["id"].Value);
-            //ucJevAudit.OnLoad(true, jevId);
-            //ucJevAudit.SetJevReadOnly(true);
-            customTabControl1.SelectedTab = tbPgAudit;
-        }
-
-        private void tlStrpBtnAudit_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                ToggleAudit();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        private void btnApplyFltr_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                LoadObligationRecords();
-                btnApplyFltr.Enabled = false;
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        private void tlStrpBtnSearch_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                LoadObligationRecords();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        private void tlStrpBtnCrudBack_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                customTabControl1.SelectedTab = tbPgMain;
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        private void tlsStrpBtnBckView_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                customTabControl1.SelectedTab = tbPgMain;
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        private void tlStrpBtnBckAudit_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                customTabControl1.SelectedTab = tbPgMain;
+                LoadOblgtnRecords();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -194,12 +45,7 @@ namespace LFS.Budget.Views.Obligations
                 return "Pending";
         }
 
-        private void EnableDisableButtons(DataGridView dgv,
-                                  ToolStripButton btnCrt,
-                                  ToolStripButton btnEdit,
-                                  ToolStripButton btnDelete,
-                                  ToolStripButton btnView,
-                                  ToolStripButton btnAudit)
+        private void EnableDisableButtons(DataGridView dgv, ToolStripButton btnCrt, ToolStripButton btnEdit, ToolStripButton btnDelete, ToolStripButton btnView, ToolStripButton btnAudit)
         {
             int selected = dgv.SelectedRows.Count;
 
@@ -252,20 +98,95 @@ namespace LFS.Budget.Views.Obligations
             btnAudit.Enabled = auditFromStatus && hasPrivilege && selected > 0;
         }
 
-        private void dgJEV_SelectionChanged(object sender, EventArgs e)
+        private void MonitorControlChanges(Control parent, Button targetButton)
         {
-            try
+            foreach (Control ctrl in parent.Controls)
             {
-                EnableDisableButtons(dgvMain, tlStrpBtnCreate, tlStrpBtnUpdate, tlStrpBtnDelete, tlStrpBtnView, tlStrpBtnAudit);
+                if (ctrl is TextBox tb)
+                    tb.TextChanged += (s, e) => targetButton.Enabled = true;
+                else if (ctrl is RadioButton rb)
+                    rb.CheckedChanged += (s, e) => targetButton.Enabled = true;
+                else if (ctrl is ComboBox cb)
+                    cb.SelectedIndexChanged += (s, e) => targetButton.Enabled = true;
+                else if (ctrl is CheckBox chk)
+                    chk.CheckedChanged += (s, e) => targetButton.Enabled = true;
+                else if (ctrl is DateTimePicker dp)
+                    dp.ValueChanged += (s, e) => targetButton.Enabled = true;
+
+                // Recurse into child containers
+                if (ctrl.HasChildren)
+                    MonitorControlChanges(ctrl, targetButton);
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private void LoadObligationRecords()
+        private void ToggleCrud(bool isEdit)
+        {
+            string crudIndct;
+
+            if (isEdit)
+            {
+                int rowIndex = dgvMain.CurrentCell.RowIndex;
+                int oblgtnRqstId = Convert.ToInt32(dgvMain.Rows[rowIndex].Cells["id"].Value);
+                ucObligationsCrud.OnLoad(true, oblgtnRqstId);
+                customTabControl1.SelectedTab = tbPgCrud;
+                crudIndct = "Update Obligation Request";
+            }
+            else
+            {
+                ucObligationsCrud.OnLoad(false);
+                customTabControl1.SelectedTab = tbPgCrud;
+                crudIndct = "Create Obligation Request";
+            }
+
+            lblCrudStat.Text = crudIndct;
+        }
+
+        private void ToggleView()
+        {
+            int rowIndex = dgvMain.CurrentCell.RowIndex;
+            int jevId = Convert.ToInt32(dgvMain.Rows[rowIndex].Cells["id"].Value);
+            //ucobl.OnLoad(true, jevId);
+            //ucJevView.SetJevReadOnly(true);
+            customTabControl1.SelectedTab = tbPgView;
+        }
+
+        private void ToggleAudit()
+        {
+            int rowIndex = dgvMain.CurrentCell.RowIndex;
+            int jevId = Convert.ToInt32(dgvMain.Rows[rowIndex].Cells["id"].Value);
+            //ucJevAudit.OnLoad(true, jevId);
+            //ucJevAudit.SetJevReadOnly(true);
+            customTabControl1.SelectedTab = tbPgAudit;
+        }
+
+        private bool DeleteData(List<int> oblgtnIds)
+        {
+            var models = new List<ObligationRequestModel>();
+
+            foreach (int oblgtnId in oblgtnIds)
+            {
+                var model = new ObligationRequestModel() { Id = oblgtnId };
+                models.Add(model);
+            }
+
+            return AccFactory.ObligationRequestRepository().Delete(models);
+        }
+
+        private string GetUserFullName(string userId)
+        {
+            if (string.IsNullOrEmpty(userId))
+                return string.Empty;
+
+            var userData = Helper.GetUserDataById(Convert.ToInt32(userId));
+            return userData?["user_full_name"] ?? string.Empty;
+        }
+
+        private void LoadOblgtnRecords()
         {
             if (!backgroundWorker1.IsBusy)
             {
                 pbLoadRecords.Value = 0;
+                btnApplyFltr.Enabled = false;
 
                 (string srchKey,
                 string status,
@@ -285,13 +206,159 @@ namespace LFS.Budget.Views.Obligations
             }
         }
 
-        private string GetUserFullName(string userId)
+        private bool SaveOblgtnRqst((ObligationRequestModel oblgtnRqstModel, List<ObligationAccountModel> oblgtnAccModels) models)
         {
-            if (string.IsNullOrEmpty(userId))
-                return string.Empty;
+            if (models.oblgtnRqstModel.Id == 0)
+                return AccFactory.ObligationRequestRepository().Insert(models.oblgtnRqstModel, models.oblgtnAccModels);
+            else
+                return AccFactory.ObligationRequestRepository().Update(models.oblgtnRqstModel, models.oblgtnAccModels);
+        }
 
-            var userData = Helper.GetUserDataById(Convert.ToInt32(userId));
-            return userData?["user_full_name"] ?? string.Empty;
+        private void tlStrpBtnCreate_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ToggleCrud(false);
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void tlStrpBtnUpdate_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ToggleCrud(true);
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void tlStrpBtnView_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ToggleView();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void tlStrpBtnAudit_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ToggleAudit();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void tlStrpBtnDelete_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var slctdRow = dgvMain.SelectedRows;
+                List<int> oblgtnRqstIds = dgvMain.SelectedRows
+                                                .Cast<DataGridViewRow>()
+                                                .Select(r => Convert.ToInt32(r.Cells["id"].Value)).ToList();
+
+                if (Helper.MessageBoxConfirmDelete(slctdRow.Count))
+                {
+                    if (DeleteData(oblgtnRqstIds))
+                    {
+                        LoadOblgtnRecords();
+                        EnableDisableButtons(dgvMain, tlStrpBtnCreate, tlStrpBtnUpdate, tlStrpBtnDelete, tlsStrpBtnBckView, tlStrpBtnAudit);
+                    }
+                }
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void btnApplyFltr_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                LoadOblgtnRecords();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void tlStrpBtnSearch_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                LoadOblgtnRecords();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void tlStrpBtnCrudBack_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                customTabControl1.SelectedTab = tbPgMain;
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void tlsStrpBtnBckView_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                customTabControl1.SelectedTab = tbPgMain;
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void tlStrpBtnBckAudit_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                customTabControl1.SelectedTab = tbPgMain;
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void btnCrudSubmit_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var models = ucObligationsCrud.ObligationRequestModel();
+
+                if (SaveOblgtnRqst(models))
+                {
+                    string message = $"Obligation Request (Transaction No. {models.oblgtnRqstModel.TransactionNo})";
+
+                    if (models.oblgtnRqstModel.Id == 0)
+                    {
+                        Helper.MessageBoxSuccess($"{message} has been submitted");
+                    }
+                    else
+                    {
+                        Helper.MessageBoxSuccess($"{message} modification has been submitted");
+                        customTabControl1.SelectedTab = tbPgMain;
+                    }
+
+                    ucObligationsCrud.ResetForm();
+                    LoadOblgtnRecords();
+                }
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void dgJEV_SelectionChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                EnableDisableButtons(dgvMain, tlStrpBtnCreate, tlStrpBtnUpdate, tlStrpBtnDelete, tlStrpBtnView, tlStrpBtnAudit);
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void dtPckrFrom_ValueChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                dtPckrTo.MinDate = dtPckrFrom.Value;
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
@@ -304,7 +371,7 @@ namespace LFS.Budget.Views.Obligations
                 dataTable.Columns.AddRange(new[]
                 {
                     new DataColumn("id", typeof(int)),
-                    new DataColumn("trnsction_no", typeof(string)),
+                    new DataColumn("transaction_no", typeof(string)),
                     new DataColumn("obligation_no", typeof(string)),
                     new DataColumn("date_requested", typeof(DateTime)),
                     new DataColumn("payee", typeof(string)),
@@ -329,7 +396,7 @@ namespace LFS.Budget.Views.Obligations
                 {
                     var newRow = dataTable.NewRow();
                     newRow["id"] = dtRow["id"];
-                    //newRow["trnsction_no"] = dtRow["trns_no"];
+                    newRow["transaction_no"] = dtRow["transaction_no"];
                     newRow["obligation_no"] = dtRow["obligation_no"];
                     newRow["date_requested"] = dtRow["date_requested"];
                     newRow["payee"] = dtRow["payee"];

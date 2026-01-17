@@ -1659,7 +1659,7 @@ namespace LFS
         {
             dataGridView.DataSource = dataTable;
             dataGridView.Columns["id"].Visible = false;
-            dataGridView.Columns["trnsction_no"].HeaderText = "Trans. No.";
+            dataGridView.Columns["transaction_no"].HeaderText = "Transaction No.";
             dataGridView.Columns["obligation_no"].HeaderText = "Obligation No.";
             dataGridView.Columns["date_requested"].HeaderText = "Date Requested";
             dataGridView.Columns["date_requested"].DefaultCellStyle.Format = "MMM dd, yyyy";

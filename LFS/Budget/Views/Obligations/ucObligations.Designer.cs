@@ -205,9 +205,9 @@ namespace LFS.Budget.Views.Obligations
             label2.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             label2.Location = new System.Drawing.Point(23, 20);
             label2.Name = "label2";
-            label2.Size = new System.Drawing.Size(67, 15);
+            label2.Size = new System.Drawing.Size(97, 15);
             label2.TabIndex = 64;
-            label2.Text = "Trans. No. *";
+            label2.Text = "Transaction No. *";
             // 
             // lblStatIndctr
             // 

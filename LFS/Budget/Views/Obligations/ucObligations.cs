@@ -1,4 +1,5 @@
 ﻿using ACC.Data;
+using ACC.Domain.Models;
 using LFS.Helpers;
 using System;
 using System.Collections.Generic;
@@ -18,6 +19,38 @@ namespace LFS.Budget.Views.Obligations
         public ucObligations()
         {
             InitializeComponent();
+        }
+
+        /* Models */
+
+        internal (ObligationRequestModel oblgtnRqstModel, List<ObligationAccountModel> oblgtnAccsModel) ObligationRequestModel()
+        {
+            var oblgtnRqst = new ObligationRequestModel()
+            {
+                TransactionNo = AccFactory.ObligationRequestRepository().GetTransactionNo(dtDateRequest.Value.Year),
+                Explanation = txtExplanation.Text.Trim(),
+                DateRequested = dtDateRequest.Value,
+                Payee = txtPayee.Text.Trim(),
+                ReferenceNo = txtReferenceNo.Text.Trim(),
+                CreatedBy = UserHelper.loggedUser.Id,
+            };
+
+            if (this.isEdit) oblgtnRqst.Id = oblgtnRqstId;
+
+            var oblgtnAccs = new List<ObligationAccountModel>();
+
+            foreach (DataGridViewRow dataGridViewRow in dgvEntries.Rows)
+            {
+                var oblgtnAccModel = new ObligationAccountModel()
+                {
+                    AllotmentAccountId = Convert.ToInt32(dataGridViewRow.Cells["account"].Value),
+                    Amount = Convert.ToDecimal(dataGridViewRow.Cells["amount"].Value),
+                };
+
+                oblgtnAccs.Add(oblgtnAccModel);
+            }
+
+            return (oblgtnRqst, oblgtnAccs);
         }
 
         internal void OnLoad(bool isEdit, int? oblgtnRqstId = null)
@@ -81,9 +114,9 @@ namespace LFS.Budget.Views.Obligations
             var errorArray = new string[]
             {
                 errorProvider1.GetError(cmbxFPP),
-                errorProvider1.GetError(txtReferenceNo),
+                errorProvider1.GetError(cmbxFund),
+                errorProvider1.GetError(cmbxAlltmntClss),
                 errorProvider1.GetError(txtPayee),
-                errorProvider1.GetError(txtExplanation),
             };
 
             return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
@@ -104,23 +137,6 @@ namespace LFS.Budget.Views.Obligations
             }
 
             dgvEntries.SelectionChanged -= dgvEntries_SelectionChanged;
-        }
-
-        internal void SetFieldsReadOnly(bool isReadOnly)
-        {
-            var parents = new Control[]
-            {
-                splitContainer2.Panel1,
-                panel2,
-            };
-
-            foreach (var p in parents)
-                SetControlsReadOnly(p, isReadOnly);
-
-            tlStrpBtnEntrAdd.Enabled = !isReadOnly;
-            tlStrpBtnEntrRemove.Enabled = !isReadOnly;
-            txtExplanation.ReadOnly = isReadOnly;
-            dgvEntries.ReadOnly = isReadOnly;
         }
 
         private void dgvEntries_SelectionChanged(object sender, EventArgs e)
@@ -282,37 +298,6 @@ namespace LFS.Budget.Views.Obligations
                 return true;
             }
             else { return false; }
-        }
-
-        private void cmbxFPP_Validating(object sender, CancelEventArgs e)
-        {
-            try
-            {
-                if (string.IsNullOrEmpty(cmbxFPP.Text))
-                    e.Cancel = Helper.ShowErrorComboBoxEmpty(errorProvider1, cmbxFPP, "FPP.");
-                else
-                    e.Cancel = ShowErrorFPPNameNotExist();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        private void cmbxFPP_Validated(object sender, EventArgs e)
-        {
-            Helper.ClearErrorComboBox(errorProvider1, cmbxFPP);
-        }
-
-        private void txtPayee_Validating(object sender, CancelEventArgs e)
-        {
-            try
-            {
-                e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtPayee, "Payee.");
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        private void txtPayee_Validated(object sender, EventArgs e)
-        {
-            Helper.ClearErrorTextBox(errorProvider1, txtPayee);
         }
 
         private void InitializeEntriesTbl()
@@ -652,6 +637,39 @@ namespace LFS.Budget.Views.Obligations
             {
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        /* Validations */
+
+        private void cmbxFPP_Validating(object sender, CancelEventArgs e)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(cmbxFPP.Text))
+                    e.Cancel = Helper.ShowErrorComboBoxEmpty(errorProvider1, cmbxFPP, "FPP.");
+                else
+                    e.Cancel = ShowErrorFPPNameNotExist();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void cmbxFPP_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorComboBox(errorProvider1, cmbxFPP);
+        }
+
+        private void txtPayee_Validating(object sender, CancelEventArgs e)
+        {
+            try
+            {
+                e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtPayee, "Payee.");
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void txtPayee_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorTextBox(errorProvider1, txtPayee);
         }
     }
 }

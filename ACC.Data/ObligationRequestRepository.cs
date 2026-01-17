@@ -76,7 +76,36 @@ namespace ACC.Data
 
         public bool Delete(List<ObligationRequestModel> entityList)
         {
-            throw new NotImplementedException();
+            using (var scope = new TransactionScope())
+            {
+                foreach (var model in entityList)
+                {
+                    _ = DeleteById(model.Id);
+                }
+
+                scope.Complete();
+                return true;
+            }
+        }
+
+        public bool DeleteById(int obligationRequestId)
+        {
+            using (var scope = new TransactionScope())
+            {
+                obligationAccountRepository.DeleteByOblgtnId(obligationRequestId);
+
+                var parameters = new object[][]
+                {
+                    new object[] { "@id", DbType.Int32, obligationRequestId}
+                };
+
+                string query = $"DELETE FROM {tableName} WHERE id = @id";
+
+                _ = mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
+
+                scope.Complete();
+                return true;
+            }
         }
 
         public bool Update(ObligationRequestModel entity)
@@ -192,10 +221,15 @@ namespace ACC.Data
             return Convert.ToDecimal(mySqlGenericCommandsLFS.ExecuteScalar(query, parameters));
         }
 
-        private int GetLastInsertedID()
+        private int GetLastInsertedId(int createdById)
         {
-            string query = $"SELECT MAX(id) FROM {tableName}";
-            return int.Parse(mySqlGenericCommandsLFS.ExecuteScalar(query));
+            var parameters = new object[][]
+            {
+                new object[]{ "@created_by", DbType.Int32, createdById}
+            };
+
+            string query = $"SELECT MAX(id) FROM {tableName} WHERE created_by = @created_by";
+            return int.Parse(mySqlGenericCommandsLFS.ExecuteScalar(query, parameters));
         }
 
         public bool Insert(ObligationRequestModel entity, List<ObligationAccountModel> obligationAccountModels)
@@ -204,24 +238,24 @@ namespace ACC.Data
             {
                 object[][] parameters = new object[][]
                 {
-                    new object[] { "@obligation_no", DbType.String, entity.ObligationNo },
                     new object[] { "@payee", DbType.String, entity.Payee },
+                    new object[] { "@transaction_no", DbType.String, entity.TransactionNo },
                     new object[] { "@explanation", DbType.String, entity.Explanation },
                     new object[] { "@reference_no", DbType.String, entity.ReferenceNo },
                     new object[] { "@date_requested", DbType.Date, entity.DateRequested.Date },
-                    new object[] { "@is_approved", DbType.Boolean, entity.IsApproved},
-                    new object[] { "@is_disapproved", DbType.Boolean, entity.IsDisapproved},
-                    new object[] { "@is_cancelled", DbType.Boolean, entity.IsCancelled},
                     new object[] { "@created_by", DbType.Int32, entity.CreatedBy },
                 };
 
-                string query = $"INSERT INTO {tableName} (obligation_no, payee, explanation, reference_no, date_requested, is_approved, is_disapproved, is_cancelled, created_by) VALUES (@obligation_no, @payee, @explanation, @reference_no, @date_requested, @is_approved, @is_disapproved, @is_cancelled, @created_by)";
+                string query = $@"INSERT INTO {tableName}
+                                (payee, transaction_no, explanation, reference_no, date_requested, created_by) VALUES
+                                (@payee, @transaction_no, @explanation, @reference_no, @date_requested, @created_by)";
 
                 _ = mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
 
                 foreach (var obligationAccounts in obligationAccountModels)
                 {
-                    obligationAccounts.ObligationRequestId = GetLastInsertedID();
+                    int lstInsrtdId = GetLastInsertedId(entity.CreatedBy);
+                    obligationAccounts.ObligationRequestId = lstInsrtdId;
                     _ = obligationAccountRepository.Insert(obligationAccounts);
                 }
 
@@ -237,7 +271,6 @@ namespace ACC.Data
                 var parameters = new object[][]
                 {
                     new object[] { "@id",DbType.Int32, entity.Id},
-                    new object[] { "@obligation_no", DbType.String, entity.ObligationNo },
                     new object[] { "@payee", DbType.String, entity.Payee },
                     new object[] { "@explanation", DbType.String, entity.Explanation },
                     new object[] { "@reference_no", DbType.String, entity.ReferenceNo },
@@ -245,37 +278,22 @@ namespace ACC.Data
                     new object[] { "@updated_by", DbType.Int32, entity.UpdatedBy },
                 };
 
-                string query = $"UPDATE {tableName} SET obligation_no = @obligation_no, payee = @payee, explanation = @explanation, reference_no = @reference_no, date_requested = @date_requested, updated_by = @updated_by WHERE id = @id";
+                string query = $@"UPDATE {tableName} SET
+                                payee = @payee,
+                                explanation = @explanation,
+                                reference_no = @reference_no,
+                                date_requested = @date_requested,
+                                updated_by = @updated_by WHERE id = @id";
 
                 _ = mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
 
-                _ = obligationAccountRepository.DeleteByObligationRequestId(entity.Id);
+                _ = obligationAccountRepository.DeleteByOblgtnId(entity.Id);
 
                 foreach (var obligationAccounts in obligationAccountModels)
                 {
                     obligationAccounts.ObligationRequestId = entity.Id;
                     _ = obligationAccountRepository.Insert(obligationAccounts);
                 }
-
-                scope.Complete();
-                return true;
-            }
-        }
-
-        public bool Delete(int obligationRequestId)
-        {
-            using (var scope = new TransactionScope())
-            {
-                obligationAccountRepository.DeleteByObligationRequestId(obligationRequestId);
-
-                var parameters = new object[][]
-                {
-                    new object[] { "@id", DbType.Int32, obligationRequestId}
-                };
-
-                string query = $"DELETE FROM {tableName} WHERE id = @id";
-
-                _ = mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
 
                 scope.Complete();
                 return true;
@@ -437,18 +455,14 @@ namespace ACC.Data
             return mySqlGenericCommandsLFS.ExecuteScalar(query);
         }
 
-        public DataTable GetRecords(string srchKey,
-                                string status,
-                                DateTime dtFrom,
-                                DateTime dtTo,
-                                int rowLimit)
+        public DataTable GetRecords(string srchKey, string status, DateTime dtFrom, DateTime dtTo, int rowLimit)
         {
             var parameters = new object[][]
             {
                 new object[] {"@search_key", DbType.String, $"%{srchKey}%"},
                 new object[] {"@status", DbType.String, status},
-                new object[] {"@dt_from", DbType.DateTime, dtFrom},
-                new object[] {"@dt_to", DbType.DateTime, dtTo},
+                new object[] {"@dt_from", DbType.DateTime, dtFrom.Date},
+                new object[] {"@dt_to", DbType.DateTime, dtTo.Date},
                 new object[] {"@row_limit", DbType.Int32, rowLimit},
             };
 
@@ -477,9 +491,30 @@ namespace ACC.Data
                     break;
             }
 
-            string query = $"SELECT * FROM {tableName} WHERE {statusQuery}(obligation_no LIKE @search_key OR payee LIKE @search_key) AND (date_requested BETWEEN @dt_from AND @dt_to) LIMIT @row_limit";
+            string query = $@"SELECT * FROM {tableName}
+                                WHERE {statusQuery}
+                                (obligation_no LIKE @search_key OR payee LIKE @search_key) AND
+                                (date_requested >= @dt_from AND date_requested <= @dt_to) LIMIT @row_limit";
 
             return mySqlGenericCommandsLFS.FillBySearch(query, new DataTable(), parameters);
+        }
+
+        public string GetTransactionNo(int year)
+        {
+            var parameters = new object[][]
+            {
+                new object[] {"@year", DbType.Int32, year},
+            };
+
+            string query = $@"SELECT
+                                 LPAD(COALESCE(MAX(CAST(SUBSTRING_INDEX(transaction_no, '-', - 1) AS UNSIGNED)), 0) + 1, 4, '0') AS next_seq
+                            FROM
+                                {tableName}
+                            WHERE
+                               YEAR(created_at) = @year";
+
+            string seqNo = mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
+            return $"{year}-{seqNo}";
         }
     }
 }

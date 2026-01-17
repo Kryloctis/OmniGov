@@ -41,6 +41,7 @@ namespace ACC.Data
             throw new NotImplementedException();
         }
 
+
         public bool IdExist(int id)
         {
             throw new NotImplementedException();
@@ -56,16 +57,18 @@ namespace ACC.Data
             var parameters = new object[][]
             {
                 new object[] { "@obligation_request_id",DbType.Int32, entity.ObligationRequestId },
-                new object[] { "@allotment_release_id", DbType.Int32, entity.AllotmentReleaseId},
+                new object[] { "@allotment_account_id", DbType.Int32, entity.AllotmentAccountId},
                 new object[] { "@amount", DbType.Decimal, entity.Amount}
             };
 
-            string query = $@"INSERT INTO {tableName} (obligation_request_id, allotment_release_id, amount) VALUES (@obligation_request_id, @allotment_release_id, @amount)";
+            string query = $@"INSERT INTO {tableName}
+                            (obligation_request_id, allotment_account_id, amount) VALUES
+                            (@obligation_request_id, @allotment_account_id, @amount)";
 
             return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
         }
 
-        public bool DeleteByObligationRequestId(int ObligationRequestId)
+        public bool DeleteByOblgtnId(int ObligationRequestId)
         {
             var parameters = new object[][]
             {

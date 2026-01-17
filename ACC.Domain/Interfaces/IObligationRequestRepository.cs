@@ -43,12 +43,14 @@ namespace ACC.Domain.Interfaces
 
         bool Update(ObligationRequestModel entity, List<ObligationAccountModel> obligationAccountModels);
 
-        bool Delete(int obligationRequestId);
+        bool DeleteById(int obligationRequestId);
 
         bool SetObligationRequestStatus(int obligationRequestId, string status, string dissaprovalMessage = null);
 
         string GetObligationRequestStatus(int obligationRequestId);
 
         string GetLeastOblgtnNo();
+
+        public string GetTransactionNo(int year);
     }
 }

@@ -60,7 +60,7 @@
             tlStrpBtnAudit = new System.Windows.Forms.ToolStripButton();
             statusStrip1 = new System.Windows.Forms.StatusStrip();
             tbPgCrud = new System.Windows.Forms.TabPage();
-            ucObligationsCrud = new LFS.Budget.Views.Obligations.ucObligations();
+            ucObligationsCrud = new ucObligations();
             panel2 = new System.Windows.Forms.Panel();
             btnCrudSubmit = new System.Windows.Forms.Button();
             btnSubmit = new System.Windows.Forms.Button();
@@ -68,12 +68,12 @@
             tlStrpBtnCrudBack = new System.Windows.Forms.ToolStripButton();
             lblCrudStat = new System.Windows.Forms.ToolStripLabel();
             tbPgView = new System.Windows.Forms.TabPage();
-            ucObligationsView = new LFS.Budget.Views.Obligations.ucObligations();
+            ucObligationsView = new ucObligations();
             toolStrip4 = new System.Windows.Forms.ToolStrip();
             tlsStrpBtnBckView = new System.Windows.Forms.ToolStripButton();
             toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             tbPgAudit = new System.Windows.Forms.TabPage();
-            ucObligationsAudit = new LFS.Budget.Views.Obligations.ucObligations();
+            ucObligationsAudit = new ucObligations();
             flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             btnApprove = new System.Windows.Forms.Button();
             btnDisapprove = new System.Windows.Forms.Button();
@@ -125,7 +125,7 @@
             tbPgMain.Controls.Add(statusStrip1);
             tbPgMain.Location = new System.Drawing.Point(4, 24);
             tbPgMain.Name = "tbPgMain";
-            tbPgMain.Size = new System.Drawing.Size(818, 478);
+            tbPgMain.Size = new System.Drawing.Size(818, 530);
             tbPgMain.TabIndex = 0;
             tbPgMain.Text = "tbPgMain";
             tbPgMain.UseVisualStyleBackColor = true;
@@ -148,7 +148,7 @@
             splitContainer1.Panel2.BackColor = System.Drawing.SystemColors.Control;
             splitContainer1.Panel2.Controls.Add(panel1);
             splitContainer1.Panel2.Controls.Add(label5);
-            splitContainer1.Size = new System.Drawing.Size(818, 390);
+            splitContainer1.Size = new System.Drawing.Size(818, 442);
             splitContainer1.SplitterDistance = 560;
             splitContainer1.TabIndex = 19;
             // 
@@ -160,7 +160,7 @@
             panel7.Location = new System.Drawing.Point(0, 0);
             panel7.Name = "panel7";
             panel7.Padding = new System.Windows.Forms.Padding(4);
-            panel7.Size = new System.Drawing.Size(560, 390);
+            panel7.Size = new System.Drawing.Size(560, 442);
             panel7.TabIndex = 9;
             // 
             // dgvMain
@@ -170,7 +170,7 @@
             dgvMain.Location = new System.Drawing.Point(4, 9);
             dgvMain.Margin = new System.Windows.Forms.Padding(1);
             dgvMain.Name = "dgvMain";
-            dgvMain.Size = new System.Drawing.Size(552, 377);
+            dgvMain.Size = new System.Drawing.Size(552, 429);
             dgvMain.TabIndex = 7;
             dgvMain.SelectionChanged += dgJEV_SelectionChanged;
             // 
@@ -195,7 +195,7 @@
             panel1.Location = new System.Drawing.Point(0, 31);
             panel1.Name = "panel1";
             panel1.Padding = new System.Windows.Forms.Padding(20);
-            panel1.Size = new System.Drawing.Size(254, 359);
+            panel1.Size = new System.Drawing.Size(254, 411);
             panel1.TabIndex = 13;
             // 
             // dtPckrTo
@@ -217,6 +217,7 @@
             dtPckrFrom.Name = "dtPckrFrom";
             dtPckrFrom.Size = new System.Drawing.Size(209, 23);
             dtPckrFrom.TabIndex = 36;
+            dtPckrFrom.ValueChanged += dtPckrFrom_ValueChanged;
             // 
             // btnApplyFltr
             // 
@@ -427,7 +428,7 @@
             // 
             // statusStrip1
             // 
-            statusStrip1.Location = new System.Drawing.Point(0, 456);
+            statusStrip1.Location = new System.Drawing.Point(0, 508);
             statusStrip1.Name = "statusStrip1";
             statusStrip1.Size = new System.Drawing.Size(818, 22);
             statusStrip1.TabIndex = 0;
@@ -475,6 +476,7 @@
             btnCrudSubmit.TabIndex = 1;
             btnCrudSubmit.Text = "Submit";
             btnCrudSubmit.UseVisualStyleBackColor = true;
+            btnCrudSubmit.Click += btnCrudSubmit_Click;
             // 
             // btnSubmit
             // 
@@ -526,7 +528,7 @@
             tbPgView.Controls.Add(toolStrip4);
             tbPgView.Location = new System.Drawing.Point(4, 24);
             tbPgView.Name = "tbPgView";
-            tbPgView.Size = new System.Drawing.Size(818, 478);
+            tbPgView.Size = new System.Drawing.Size(818, 530);
             tbPgView.TabIndex = 2;
             tbPgView.Text = "tbPgView";
             // 
@@ -536,7 +538,7 @@
             ucObligationsView.Dock = System.Windows.Forms.DockStyle.Fill;
             ucObligationsView.Location = new System.Drawing.Point(0, 47);
             ucObligationsView.Name = "ucObligationsView";
-            ucObligationsView.Size = new System.Drawing.Size(818, 431);
+            ucObligationsView.Size = new System.Drawing.Size(818, 483);
             ucObligationsView.TabIndex = 25;
             // 
             // toolStrip4
@@ -579,7 +581,7 @@
             tbPgAudit.Controls.Add(toolStrip5);
             tbPgAudit.Location = new System.Drawing.Point(4, 24);
             tbPgAudit.Name = "tbPgAudit";
-            tbPgAudit.Size = new System.Drawing.Size(818, 478);
+            tbPgAudit.Size = new System.Drawing.Size(818, 530);
             tbPgAudit.TabIndex = 3;
             tbPgAudit.Text = "tbPgAudit";
             // 
@@ -589,7 +591,7 @@
             ucObligationsAudit.Dock = System.Windows.Forms.DockStyle.Fill;
             ucObligationsAudit.Location = new System.Drawing.Point(0, 47);
             ucObligationsAudit.Name = "ucObligationsAudit";
-            ucObligationsAudit.Size = new System.Drawing.Size(818, 388);
+            ucObligationsAudit.Size = new System.Drawing.Size(818, 440);
             ucObligationsAudit.TabIndex = 26;
             // 
             // flowLayoutPanel2
@@ -599,7 +601,7 @@
             flowLayoutPanel2.Controls.Add(btnCancel);
             flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Bottom;
             flowLayoutPanel2.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            flowLayoutPanel2.Location = new System.Drawing.Point(0, 435);
+            flowLayoutPanel2.Location = new System.Drawing.Point(0, 487);
             flowLayoutPanel2.Name = "flowLayoutPanel2";
             flowLayoutPanel2.Padding = new System.Windows.Forms.Padding(4);
             flowLayoutPanel2.Size = new System.Drawing.Size(818, 43);

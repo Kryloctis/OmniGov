@@ -248,7 +248,7 @@ namespace LFS.Budget.Views.Obligations
             {
                 if (Helper.MessageBoxConfirmDelete(1))
                 {
-                    _ = AccFactory.ObligationRequestRepository().Delete(uc.obligationRequestId);
+                    _ = AccFactory.ObligationRequestRepository().DeleteById(uc.obligationRequestId);
                     uc.ResetForm();
                     ResetControls();
                     btnSave.Text = "&Save";
@@ -281,7 +281,7 @@ namespace LFS.Budget.Views.Obligations
                     obligationRequestModel.IsApproved = true;
                     obligationRequestModel.IsDisapproved = false;
                     obligationRequestModel.IsCancelled = false;
-                    obligationRequestModel.DisapprovalMessage = string.Empty;
+                    obligationRequestModel.Remarks = string.Empty;
                 }
 
                 message = "Obligation Request has been saved.";
@@ -324,7 +324,7 @@ namespace LFS.Budget.Views.Obligations
                     if (ObligationRequestStatus.ToLower() == "disapproved")
                     {
                         _ = AccFactory.ObligationRequestRepository().SetObligationRequestStatus(uc.obligationRequestId, "pending");
-                        obligationRequestModel.DisapprovalMessage = string.Empty;
+                        obligationRequestModel.Remarks = string.Empty;
                         message = "Obligation request updated and will be send back to pending.";
                     }
                     else
