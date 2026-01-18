@@ -152,9 +152,8 @@ namespace LFS.Budget.Views.Obligations
         private void ToggleAudit()
         {
             int rowIndex = dgvMain.CurrentCell.RowIndex;
-            int jevId = Convert.ToInt32(dgvMain.Rows[rowIndex].Cells["id"].Value);
-            //ucJevAudit.OnLoad(true, jevId);
-            //ucJevAudit.SetJevReadOnly(true);
+            int oblgtnId = Convert.ToInt32(dgvMain.Rows[rowIndex].Cells["id"].Value);
+            ucObligationsAudit.LoadAuditMode(oblgtnId);
             customTabControl1.SelectedTab = tbPgAudit;
         }
 

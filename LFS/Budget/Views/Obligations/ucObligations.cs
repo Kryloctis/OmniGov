@@ -53,15 +53,18 @@ namespace LFS.Budget.Views.Obligations
 
         internal void LoadViewMode(int oblgtnRqstId)
         {
-            SetControlsReadOnly(tabControl1, true);
+            SetControlsReadOnly(true, tabControl1, null);
             OnLoad();
             this.oblgtnRqstId = oblgtnRqstId;
         }
 
         internal void LoadAuditMode(int oblgtnRqstId)
         {
+            var exemptCtrls = new List<Control>() { txtRemarks };
+            SetControlsReadOnly(true, tabControl1, exemptCtrls);
             OnLoad();
             this.oblgtnRqstId = oblgtnRqstId;
+            txtRemarks.ReadOnly = false;
         }
 
         //Models
@@ -144,22 +147,26 @@ namespace LFS.Budget.Views.Obligations
             return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
         }
 
-        private void SetControlsReadOnly(Control parent, bool isReadOnly)
+        private void SetControlsReadOnly(bool isReadOnly, Control parent, List<Control> exemptCtrls = null)
         {
             foreach (Control item in parent.Controls)
             {
-                if (item is TextBoxBase tb)
-                    tb.ReadOnly = isReadOnly;
-                else if (item is DataGridView dgv)
-                    dgv.ReadOnly = isReadOnly;
-                else if (item is ComboBox || item is DateTimePicker || item is LinkLabel)
+                bool isExempt = exemptCtrls?.Contains(item) == true;
+
+                switch (item)
                 {
-                    item.Enabled = !isReadOnly;
+                    case TextBoxBase tb:
+                        tb.ReadOnly = isReadOnly && !isExempt;
+                        break;
+
+                    case ComboBox or DateTimePicker or LinkLabel or DataGridView or ToolStrip:
+                        item.Enabled = !isReadOnly || isExempt;
+                        break;
                 }
 
                 //Using recursive action to child containers
                 if (item.HasChildren)
-                    SetControlsReadOnly(item, isReadOnly);
+                    SetControlsReadOnly(isReadOnly, item, exemptCtrls);
             }
 
             dgvEntries.SelectionChanged -= dgvEntries_SelectionChanged;
@@ -675,9 +682,5 @@ namespace LFS.Budget.Views.Obligations
         }
 
         #endregion Validation Events
-
-        private void lblTotalOblgtn_Click(object sender, EventArgs e)
-        {
-        }
     }
 }

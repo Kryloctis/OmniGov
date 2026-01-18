@@ -492,7 +492,6 @@ namespace LFS.Budget.Views.Obligations
             lblTotalOblgtn.Size = new System.Drawing.Size(708, 42);
             lblTotalOblgtn.TabIndex = 14;
             lblTotalOblgtn.Text = "Total: 0.00";
-            lblTotalOblgtn.Click += lblTotalOblgtn_Click;
             // 
             // toolStrip1
             // 
