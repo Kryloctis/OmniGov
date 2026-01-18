@@ -1,5 +1,5 @@
-﻿using ACC.Domain.Interfaces;
-using ACC.Domain.Models;
+﻿using ACC.Domain.Budget.Interfaces;
+using ACC.Domain.Budget.Models;
 using Org.BouncyCastle.Crypto.Agreement;
 using System;
 using System.Collections.Generic;
@@ -7,7 +7,7 @@ using System.Data;
 using System.Diagnostics;
 using System.Transactions;
 
-namespace ACC.Data
+namespace ACC.Data.Budget
 {
     public class AllotmentReleaseRepository : IAllotmentReleaseRepository
     {
@@ -18,7 +18,7 @@ namespace ACC.Data
 
         public AllotmentReleaseRepository(AccGenericCommands mySqlGenericCommandsLFSLFS, IAllotmentAccountRepository allotmentAccountRepository)
         {
-            this.mySqlGenericCommandsLFS = mySqlGenericCommandsLFSLFS;
+            mySqlGenericCommandsLFS = mySqlGenericCommandsLFSLFS;
             this.allotmentAccountRepository = allotmentAccountRepository;
         }
 

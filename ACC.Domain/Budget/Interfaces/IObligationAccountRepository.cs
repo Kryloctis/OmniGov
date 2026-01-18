@@ -1,6 +1,8 @@
-﻿using ACC.Domain.Models;
+﻿using ACC.Domain.Budget.Models;
+using ACC.Domain.Interfaces;
+using System.Data;
 
-namespace ACC.Domain.Interfaces
+namespace ACC.Domain.Budget.Interfaces
 {
     public interface IObligationAccountRepository : IAccRepository<ObligationAccountModel>
     {

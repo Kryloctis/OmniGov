@@ -1,10 +1,10 @@
-﻿using ACC.Domain.Interfaces;
-using ACC.Domain.Models;
+﻿using ACC.Domain.Budget.Interfaces;
+using ACC.Domain.Budget.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
 
-namespace ACC.Data
+namespace ACC.Data.Budget
 {
     public class ObligationAccountRepository : IObligationAccountRepository
     {
@@ -40,7 +40,6 @@ namespace ACC.Data
         {
             throw new NotImplementedException();
         }
-
 
         public bool IdExist(int id)
         {

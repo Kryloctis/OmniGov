@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ACC.Domain.Models
+namespace ACC.Domain.Budget.Models
 {
     public class BudgetAppropriationsModel
     {

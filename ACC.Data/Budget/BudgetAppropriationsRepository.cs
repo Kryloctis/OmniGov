@@ -1,11 +1,13 @@
-﻿using ACC.Domain.Interfaces;
+﻿using ACC.Domain.Budget.Interfaces;
+using ACC.Domain.Budget.Models;
+using ACC.Domain.Interfaces;
 using ACC.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Transactions;
 
-namespace ACC.Data
+namespace ACC.Data.Budget
 {
     public class BudgetAppropriationsRepository : IBudgetAppropriationsRepository
     {

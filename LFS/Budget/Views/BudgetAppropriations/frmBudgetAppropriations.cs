@@ -1,5 +1,4 @@
 ﻿using ACC.Data;
-using ACC.Domain.Models;
 using LFS.Budget.Views.Augmentation;
 using LFS.Helpers;
 using MySql.Data.MySqlClient;
@@ -10,6 +9,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using LFS.Budget.Views.Realignment;
 using LFS.Budget.Views.SupplementalAppropriations;
+using ACC.Domain.Budget.Models;
 
 namespace LFS.Budget.Views.BudgetAppropriations
 {

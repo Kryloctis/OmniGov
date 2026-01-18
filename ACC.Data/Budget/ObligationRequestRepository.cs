@@ -1,11 +1,11 @@
-﻿using ACC.Domain.Interfaces;
-using ACC.Domain.Models;
+﻿using ACC.Domain.Budget.Interfaces;
+using ACC.Domain.Budget.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Transactions;
 
-namespace ACC.Data
+namespace ACC.Data.Budget
 {
     public class ObligationRequestRepository : IObligationRequestRepository
     {
@@ -71,7 +71,41 @@ namespace ACC.Data
 
         public bool Insert(ObligationRequestModel entity)
         {
-            throw new NotImplementedException();
+            object[][] parameters = new object[][]
+            {
+                new object[] { "@payee", DbType.String, entity.Payee },
+                new object[] { "@function_program_project_id", DbType.Int32,entity.FppId },
+                new object[] { "@allotment_classes_id", DbType.Int32, entity.AllotmentClassId },
+                new object[] { "@funds_id", DbType.Int32, entity.FundId },
+                new object[] { "@transaction_no", DbType.String, entity.TransactionNo },
+                new object[] { "@explanation", DbType.String, entity.Explanation },
+                new object[] { "@reference_no", DbType.String, entity.ReferenceNo },
+                new object[] { "@date_requested", DbType.Date, entity.DateRequested.Date },
+                new object[] { "@created_by", DbType.Int32, entity.CreatedBy },
+            };
+
+            string query = $@"INSERT INTO {tableName}
+                            (payee,
+                            function_program_project_id,
+                            allotment_classes_id,
+                            funds_id,
+                            transaction_no,
+                            explanation,
+                            reference_no,
+                            date_requested,
+                            created_by)
+                            VALUES
+                            (@payee,
+                            @function_program_project_id,
+                            @allotment_classes_id,
+                            @funds_id,
+                            @transaction_no,
+                            @explanation,
+                            @reference_no,
+                            @date_requested,
+                            @created_by)";
+
+            return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
         }
 
         public bool Delete(List<ObligationRequestModel> entityList)
@@ -110,7 +144,30 @@ namespace ACC.Data
 
         public bool Update(ObligationRequestModel entity)
         {
-            throw new NotImplementedException();
+            var parameters = new object[][]
+            {
+                new object[] { "@id",DbType.Int32, entity.Id},
+                new object[] { "@function_program_project_id", DbType.Int32,entity.FppId },
+                new object[] { "@allotment_classes_id", DbType.Int32, entity.AllotmentClassId },
+                new object[] { "@funds_id", DbType.Int32, entity.FundId },
+                new object[] { "@payee", DbType.String, entity.Payee },
+                new object[] { "@reference_no", DbType.String, entity.ReferenceNo },
+                new object[] { "@explanation", DbType.String, entity.Explanation },
+                new object[] { "@date_requested", DbType.Date, entity.DateRequested.Date },
+                new object[] { "@updated_by", DbType.Int32, entity.UpdatedBy },
+            };
+
+            string query = $@"UPDATE {tableName} SET
+                            function_program_project_id = @function_program_project_id,
+                            allotment_classes_id = @allotment_classes_id,
+                            funds_id = @funds_id,
+                            payee = @payee,
+                            explanation = @explanation,
+                            reference_no = @reference_no,
+                            date_requested = @date_requested,
+                            updated_by = @updated_by WHERE id = @id";
+
+            return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
         }
 
         public Dictionary<string, string> GetViewRecordById(int Id)
@@ -150,19 +207,6 @@ namespace ACC.Data
             return mySqlGenericCommandsLFS.FillBySearch(query, dataTable, parameters);
         }
 
-        public DataTable GetViewRecordsByBudgetAppropriationId(int budgetAppropriationId)
-        {
-            var parameters = new object[][]
-            {
-                new object[] { "@budget_appropriations_id", DbType.Int32, budgetAppropriationId }
-            };
-
-            string query = $"SELECT * FROM {viewTableName} WHERE budget_appropriations_id = @budget_appropriations_id";
-
-            var dtObligationRequests = new DataTable();
-            return mySqlGenericCommandsLFS.FillBySearch(query, dtObligationRequests, parameters);
-        }
-
         public DataTable GetViewRecords(int budgetAppropriationId, DateTime dateRequested)
         {
             var parameters = new object[][]
@@ -198,7 +242,7 @@ namespace ACC.Data
                 new object[] { "@others_fpp_id", DbType.String, subFPPId},
                 new object[] { "@funds_id", DbType.Int32, fundId },
                 new object[] { "@date_requested", DbType.Date, dateIssued.Date },
-                new object[] { "@allotment_classes_id", DbType.Int32, allotmentClassId},
+                new object[] { "@allotment_class_id", DbType.Int32, allotmentClassId},
                 new object[] { "@continuing", DbType.Byte, isContinuing},
                 new object[] { "@year", DbType.Int16, dateIssued.Year}
             };
@@ -216,7 +260,16 @@ namespace ACC.Data
             else
                 subFPPQuery = "others_fpp_id = @others_fpp_id AND";
 
-            string query = $"SELECT COALESCE(SUM(amount), 0) AS amount FROM {viewTableName} WHERE {fppWhereQuery} {subFPPQuery} funds_id = @funds_id AND date_requested <= @date_requested AND allotment_classes_id = @allotment_classes_id AND continuing = @continuing AND {isContinuingQuery} AND is_cancelled = 0";
+            string query = $@"SELECT COALESCE(SUM(amount), 0) AS amount FROM {viewTableName}
+                            WHERE
+                            {fppWhereQuery}
+                            {subFPPQuery}
+                            funds_id = @funds_id
+                            AND date_requested <= @date_requested
+                            AND allotment_class_id = @allotment_class_id
+                            AND continuing = @continuing
+                            AND {isContinuingQuery}
+                            AND is_cancelled = 0";
 
             return Convert.ToDecimal(mySqlGenericCommandsLFS.ExecuteScalar(query, parameters));
         }
@@ -236,25 +289,11 @@ namespace ACC.Data
         {
             using (var scope = new TransactionScope())
             {
-                object[][] parameters = new object[][]
-                {
-                    new object[] { "@payee", DbType.String, entity.Payee },
-                    new object[] { "@transaction_no", DbType.String, entity.TransactionNo },
-                    new object[] { "@explanation", DbType.String, entity.Explanation },
-                    new object[] { "@reference_no", DbType.String, entity.ReferenceNo },
-                    new object[] { "@date_requested", DbType.Date, entity.DateRequested.Date },
-                    new object[] { "@created_by", DbType.Int32, entity.CreatedBy },
-                };
-
-                string query = $@"INSERT INTO {tableName}
-                                (payee, transaction_no, explanation, reference_no, date_requested, created_by) VALUES
-                                (@payee, @transaction_no, @explanation, @reference_no, @date_requested, @created_by)";
-
-                _ = mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
+                _ = Insert(entity);
+                int lstInsrtdId = GetLastInsertedId(entity.CreatedBy);
 
                 foreach (var obligationAccounts in obligationAccountModels)
                 {
-                    int lstInsrtdId = GetLastInsertedId(entity.CreatedBy);
                     obligationAccounts.ObligationRequestId = lstInsrtdId;
                     _ = obligationAccountRepository.Insert(obligationAccounts);
                 }
@@ -268,25 +307,7 @@ namespace ACC.Data
         {
             using (var scope = new TransactionScope())
             {
-                var parameters = new object[][]
-                {
-                    new object[] { "@id",DbType.Int32, entity.Id},
-                    new object[] { "@payee", DbType.String, entity.Payee },
-                    new object[] { "@explanation", DbType.String, entity.Explanation },
-                    new object[] { "@reference_no", DbType.String, entity.ReferenceNo },
-                    new object[] { "@date_requested", DbType.Date, entity.DateRequested.Date },
-                    new object[] { "@updated_by", DbType.Int32, entity.UpdatedBy },
-                };
-
-                string query = $@"UPDATE {tableName} SET
-                                payee = @payee,
-                                explanation = @explanation,
-                                reference_no = @reference_no,
-                                date_requested = @date_requested,
-                                updated_by = @updated_by WHERE id = @id";
-
-                _ = mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
-
+                _ = Update(entity);
                 _ = obligationAccountRepository.DeleteByOblgtnId(entity.Id);
 
                 foreach (var obligationAccounts in obligationAccountModels)
@@ -416,11 +437,22 @@ namespace ACC.Data
             {
                 new object[] { "@searchText", DbType.String, $"%{searchText}%" },
                 new object[] { "@funds_id", DbType.Int32, fundId},
-                new object[] { "@allotment_classes_id", DbType.Int32, allotmentClassId },
+                new object[] { "@allotment_class_id", DbType.Int32, allotmentClassId },
                 new object[] { "@date_requested", DbType.Date, dateOfRequest.Date}
             };
 
-            string query = $"SELECT * FROM {viewTableName} WHERE funds_id = @funds_id AND allotment_classes_id = @allotment_classes_id AND  date_requested <= @date_requested AND YEAR(date_requested) = YEAR(@date_requested) AND {Status()} (obligation_no LIKE @searchText OR payee LIKE @searchText OR explanation = @searchText OR reference_no LIKE @searchText) GROUP BY obligation_request_id ORDER BY obligation_no";
+            string query = $@"SELECT * FROM {viewTableName}
+                            WHERE funds_id = @funds_id
+                            AND allotment_class_id = @allotment_class_id
+                            AND  date_requested <= @date_requested
+                            AND YEAR(date_requested) = YEAR(@date_requested)
+                            AND {Status()}
+                            (obligation_no LIKE @searchText
+                                OR payee LIKE @searchText
+                                OR explanation = @searchText
+                                OR reference_no LIKE @searchText)
+                            GROUP BY obligation_request_id
+                            ORDER BY obligation_no";
 
             return mySqlGenericCommandsLFS.FillBySearch(query, new DataTable(), parameters);
         }

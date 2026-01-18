@@ -1,4 +1,6 @@
-﻿using ACC.Domain.Interfaces;
+﻿using ACC.Data.Budget;
+using ACC.Domain.Budget.Interfaces;
+using ACC.Domain.Interfaces;
 using System;
 
 namespace ACC.Data

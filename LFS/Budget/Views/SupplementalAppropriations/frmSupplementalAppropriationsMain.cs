@@ -1,4 +1,5 @@
 ﻿using ACC.Data;
+using ACC.Domain.Budget.Models;
 using ACC.Domain.Models;
 using LFS.Budget.Views.BudgetAppropriations;
 using LFS.Helpers;

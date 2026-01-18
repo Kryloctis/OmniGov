@@ -1,9 +1,10 @@
-﻿using ACC.Domain.Models;
+﻿using ACC.Domain.Budget.Models;
+using ACC.Domain.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace ACC.Domain.Interfaces
+namespace ACC.Domain.Budget.Interfaces
 {
     public interface IBudgetAppropriationHasAugmentations : IAccRepository<BudgetAppropriationHasAugmentationsModel>
     {

@@ -1,19 +1,19 @@
-﻿using ACC.Domain.Interfaces;
-using ACC.Domain.Models;
+﻿using ACC.Domain.Budget.Interfaces;
+using ACC.Domain.Budget.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Text;
 using System.Transactions;
 
-namespace ACC.Data
+namespace ACC.Data.Budget
 {
-    public class BudgetAppropriationsHasRealignmentsRepository : IBudgetAppropriationsHasRealignments
+    public class BudgetAppropriationHasAugmentationsRepository : IBudgetAppropriationHasAugmentations
     {
-        private readonly string tableName = "budget_appropriations_has_realignments";
+        private readonly string tableName = "budget_appropriation_has_augmentations";
         private AccGenericCommands mySqlGenericCommandsLFS;
 
-        public BudgetAppropriationsHasRealignmentsRepository(AccGenericCommands mySqlGenericCommandsLFS)
+        public BudgetAppropriationHasAugmentationsRepository(AccGenericCommands mySqlGenericCommandsLFS)
         {
             this.mySqlGenericCommandsLFS = mySqlGenericCommandsLFS;
         }
@@ -23,13 +23,13 @@ namespace ACC.Data
             throw new NotImplementedException();
         }
 
-        public bool Delete(List<BudgetAppropriationsHasRealignmentsModel> entityList)
+        public bool Delete(List<BudgetAppropriationHasAugmentationsModel> entityList)
         {
             using (var scope = new TransactionScope())
             {
                 foreach (var item in entityList)
                 {
-                    var parameters = new object[] { new object[] { "@id", DbType.Int32, item.Id } };
+                    var parameters = new object[][] { new object[] { "@id", DbType.Int32, item.Id } };
                     string query = $"DELETE FROM {tableName} WHERE id = @id";
                     _ = mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
                 }
@@ -59,21 +59,21 @@ namespace ACC.Data
             throw new NotImplementedException();
         }
 
-        public bool Insert(BudgetAppropriationsHasRealignmentsModel entity)
+        public bool Insert(BudgetAppropriationHasAugmentationsModel entity)
         {
             var parameters = new object[][]
             {
-                new object[] { "@realignments_id", DbType.Int32, entity.RealignmentsId},
+                new object[] { "@augmentations_id", DbType.Int32, entity.AugmentationsId},
                 new object[] { "@budget_appropriations_id", DbType.Int32, entity.BudgetAppropriationsId},
                 new object[] { "@date_entry", DbType.DateTime, entity.DateEntry},
-                new object[] { "@remarks", DbType.String, entity.Remarks},
+                new object[] { "@remarks", DbType.String, entity.Remarks}
             };
 
-            string query = $"INSERT INTO {tableName} (realignments_id, budget_appropriations_id, date_entry, remarks) VALUES (@realignments_id, @budget_appropriations_id, @date_entry, @remarks)";
+            string query = $"INSERT INTO {tableName} (augmentations_id, budget_appropriations_id, date_entry, remarks) VALUES (@augmentations_id, @budget_appropriations_id, @date_entry, @remarks)";
             return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
         }
 
-        public bool Update(BudgetAppropriationsHasRealignmentsModel entity)
+        public bool Update(BudgetAppropriationHasAugmentationsModel entity)
         {
             throw new NotImplementedException();
         }

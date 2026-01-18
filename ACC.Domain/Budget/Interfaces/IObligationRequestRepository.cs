@@ -1,9 +1,10 @@
-﻿using ACC.Domain.Models;
+﻿using ACC.Domain.Budget.Models;
+using ACC.Domain.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Data;
 
-namespace ACC.Domain.Interfaces
+namespace ACC.Domain.Budget.Interfaces
 {
     public interface IObligationRequestRepository : IAccRepository<ObligationRequestModel>
     {
@@ -16,8 +17,6 @@ namespace ACC.Domain.Interfaces
         DataTable GetViewRecords(int budgetAppropriationId, DateTime dateRequested);
 
         DataTable GetViewRecordsById(int Id);
-
-        DataTable GetViewRecordsByBudgetAppropriationId(int budgetAppropriationId);
 
         DataTable GetViewRecordsBySearchAndStatus(string searchText,
                                                 string status,

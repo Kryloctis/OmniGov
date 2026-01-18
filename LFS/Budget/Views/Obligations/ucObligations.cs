@@ -1,5 +1,5 @@
 ﻿using ACC.Data;
-using ACC.Domain.Models;
+using ACC.Domain.Budget.Models;
 using LFS.Helpers;
 using System;
 using System.Collections.Generic;
@@ -73,6 +73,9 @@ namespace LFS.Budget.Views.Obligations
             var oblgtnRqst = new ObligationRequestModel()
             {
                 TransactionNo = AccFactory.ObligationRequestRepository().GetTransactionNo(dtDateRequest.Value.Year),
+                FppId = Convert.ToInt32(cmbxFPP.SelectedValue),
+                AllotmentClassId = Convert.ToInt32(cmbxAlltmntClss.SelectedValue),
+                FundId = Convert.ToInt32(cmbxFund.SelectedValue),
                 Explanation = txtExplanation.Text.Trim(),
                 DateRequested = dtDateRequest.Value,
                 Payee = txtPayee.Text.Trim(),
@@ -96,6 +99,11 @@ namespace LFS.Budget.Views.Obligations
             }
 
             return (oblgtnRqst, oblgtnAccs);
+        }
+
+        private void LoadSelectedRecord(int oblgtnRqstId)
+        {
+            var dictOblgtnRqst = AccFactory.ObligationRequestRepository().GetViewRecordById(oblgtnRqstId);
         }
 
         private void ToggleEntriesButtons(DataGridView dgv, ToolStripButton btnRemove)
@@ -181,29 +189,6 @@ namespace LFS.Budget.Views.Obligations
             return obligationNoTemplate;
         }
 
-        private void LoadAlltmntClss()
-        {
-            var dtAlltmntClss = AccFactory.AllotmentClassesRepository().GetRecords();
-
-            var dataTable = new DataTable();
-            dataTable.Columns.Add("id", typeof(byte));
-            dataTable.Columns.Add("alltmntClss", typeof(string));
-
-            dtAlltmntClss
-                .AsEnumerable()
-                .ToList()
-                .ForEach(row =>
-                    dataTable.Rows.Add(
-                        row.Field<byte>("id"),
-                        $"{row.Field<string>("allotment_code")} - {row.Field<string>("allotment_name")}"
-                    )
-                );
-
-            cmbxAlltmntClss.DataSource = dataTable;
-            cmbxAlltmntClss.ValueMember = "id";
-            cmbxAlltmntClss.DisplayMember = "alltmntClss";
-        }
-
         private void LoadFPP()
         {
             cmbxFPP.DroppedDown = false;
@@ -242,6 +227,29 @@ namespace LFS.Budget.Views.Obligations
                 );
 
             HelperLoadRecords.FundsComboBox(dataTable, cmbxFund, "id", "fund");
+        }
+
+        private void LoadAlltmntClss()
+        {
+            var dtAlltmntClss = AccFactory.AllotmentClassesRepository().GetRecords();
+
+            var dataTable = new DataTable();
+            dataTable.Columns.Add("id", typeof(byte));
+            dataTable.Columns.Add("alltmntClss", typeof(string));
+
+            dtAlltmntClss
+                .AsEnumerable()
+                .ToList()
+                .ForEach(row =>
+                    dataTable.Rows.Add(
+                        row.Field<byte>("id"),
+                        $"{row.Field<string>("allotment_code")} - {row.Field<string>("allotment_name")}"
+                    )
+                );
+
+            cmbxAlltmntClss.DataSource = dataTable;
+            cmbxAlltmntClss.ValueMember = "id";
+            cmbxAlltmntClss.DisplayMember = "alltmntClss";
         }
 
         private bool ShowErrorFPPNameNotExist()
