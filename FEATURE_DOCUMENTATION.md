@@ -6,7 +6,7 @@ The **Local Financial System (LFS)** is an enterprise-grade ERP solution designe
 ### Key Pillars of the System:
 *   **Fiscal Discipline**: Strict enforcement of budgetary controls and obligation tracking.
 *   **Revenue Optimization**: Advanced Real Property Tax (RPT) and Business Tax management with automated penalty/discount logic.
-*   **Transparency & Compliance**: Full double-entry accounting with audit trails and COA-compliant reporting.
+*   **Transparency & Compliance**: Full double-entry accounting with audit trails and COA-compliant reporting (aligned with the Philippine New Government Accounting System - NGAS).
 *   **Operational Efficiency**: Automated synchronization of data and streamlined workflows for treasury and registry operations.
 
 ---
@@ -19,6 +19,7 @@ Ensures that all LGU spending is authorized and funded.
 *   **Allotment Release**: Manages the release of funds to specific departments or projects.
 *   **Obligation Requests (ObR)**: Preregistration of expenses against specific budget lines (PS, MOOE, CO).
 *   **Augmentations & Realignments**: Facilities for shifting funds between budget items within legal limits.
+*   **Budget Monitoring**: Real-time tracking of Appropriation vs. Allotment vs. Obligation.
 
 ### 2.2. Advanced Accounting (JEV System)
 A robust accounting engine that supports complex government bookkeeping.
@@ -33,11 +34,12 @@ The most comprehensive module, managing properties from assessment to potential 
 *   **Tax Billing**: Intelligent calculation of Basic and SEF taxes with automated prompt/advance discounts.
 *   **Delinquency Management**:
     *   **Automatic Penalty Calculation**: 2% monthly penalty for late payments.
-    *   **Delinquency Notices**: Automated generation of notification letters to delinquent taxpayers.
+    *   **Delinquency Notices**: Automated generation of statutory notification letters (LTOM Series).
     *   **Warrant of Levy**: Legal document generation for seizing properties due to long-term delinquency.
 *   **RPT Auctions & Biddings**:
     *   **Auction Scheduling**: Categorizing and listing properties for public auction.
     *   **Bidding System**: Managing bidders and recording winning bids for delinquent properties.
+    *   **Redemption & Final Deeds**: Managing the 1-year redemption period and final transfer of ownership.
 
 ### 2.4. Treasury & Specialized Collections
 *   **Official Receipts (OR)**: Support for multiple accountable forms (AF 51, AF 56, etc.).
@@ -46,75 +48,103 @@ The most comprehensive module, managing properties from assessment to potential 
 *   **Business Tax & Fees**: Configurable business categories and add-on charges for local licensing.
 *   **Bank Management**: Detailed tracking of Bank Accounts, Deposits, and formal Bank Statements reconciliation.
 
-### 2.5. Loans & Amortization
-*   **Loan Tracking**: Recording of bank loans and amounts released to the LGU.
-*   **Amortization Schedules**: Automated calculation of principal and interest repayments over the loan term.
+---
+
+## 3. Detailed Reporting System
+The system features an extensive reporting engine generating over 60+ statutory and management reports.
+
+### 3.1. Financial Statements (NGAS Compliant)
+*   **Statement of Financial Position**: Consolidated assets, liabilities, and equity.
+*   **Statement of Financial Performance**: Detailed revenue and expenditure breakdown.
+*   **Statement of Cash Flows**: Direct method tracking of operating, investing, and financing activities.
+*   **Statement of Changes in Net Assets/Equity**: Tracking movements in government equity.
+*   **Trial Balances**: Support for both Pre-Trial and Post-Trial balance reports.
+
+### 3.2. Books of Accounts & Journals
+*   **General Ledger**: Central record for all accounts.
+*   **Subsidiary Ledger**: Detailed breakdown for specific entities, employees, or projects.
+*   **Cash Receipts Journal (CRJ)**: Chronological record of all collections.
+*   **Cash Disbursements Journal (CDJ)**: Record of all cash payments.
+*   **Check Disbursements Journal (CkDJ)**: Record of all check-based payments.
+*   **General Journal**: Record of non-cash adjustments and closing entries.
+*   **Procurements Received Journal**: Tracking of goods and services formally received.
+
+### 3.3. Treasury & Cashiering Reports
+*   **Report of Collections and Deposits (RCD)**: Daily summary of receipts and bank deposits.
+*   **Cashbook**: Daily record of cash on hand balances.
+*   **Daily Cash Position Report**: Management report for monitoring available liquid funds.
+*   **Consolidated Receipts**: Summary of collections across multiple funds.
+*   **Schedule of Released/Unreleased Checks**: Monitoring of disbursement activity.
+*   **Check Issued Report**: Detail of all checks printed and distributed.
+
+### 3.4. RPT Legal & Statutory Documents (LTOM Series)
+Highly specialized documents for tax enforcement (Local Treasury Operations Manual compliant):
+*   **LTOM 16**: Notice of Delinquency in the Payment of Real Property Tax.
+*   **LTOM 17-19**: Sequential Notices of Delinquency for persistent cases.
+*   **LTOM 20**: Warrant of Levy.
+*   **LTOM 21**: Notice of Levy.
+*   **LTOM 22**: Report of Levy.
+*   **LTOM 23-24**: Notice of Publication and Auction Sale.
+*   **LTOM 25**: Public Auction Registration Form.
+*   **LTOM 26**: List of Registered Bidders.
+*   **LTOM 29**: Certificate of Sale.
+*   **LTOM 30**: Declaration of Forfeiture.
+*   **LTOM 32**: Certificate of Redemption.
+*   **LTOM 34**: Final Deed of Sale.
+
+### 3.5. Budget Monitoring Reports
+*   **SAAOB (Statement of Appropriation, Allotment, and Obligation)**: Comprehensive status of LGU spending capability.
+*   **SAAO**: High-level summary of budget status.
+
+### 3.6. Accountable Forms & Certifications
+*   **AF 51 / AF 56 / AF 58**: Official government receipts for general and tax collections.
+*   **Real Property Tax Due Bill**: Formal billing statement for property owners.
+*   **Certificate of Tax Clearance**: Official document certifying no outstanding tax liabilities.
+*   **Abstract of General Collection**: Periodic summary of all types of income collected.
 
 ---
 
-## 3. High-Level Workflows
+## 4. Key Workflows
 
-### 3.1. The Expenditure Workflow (Budget to Payment)
+### 4.1. JEV Disbursement Workflow
 ```mermaid
 graph TD
-    A[Budget Appropriation] --> B[Allotment Release]
-    B --> C[Obligation Request - ObR]
-    C --> D{Verify Budget Balance}
-    D -- Insufficient --> E[Block Transaction]
-    D -- Sufficient --> F[Create JEV - Disbursement]
-    F --> G[Check Issuance]
-    G --> H[Check Release]
-    H --> I[Post to Ledger]
+    A[Budget Approp] --> B[Allotment Release]
+    B --> C[ObR - Obligation Request]
+    C --> D[Process JEV Disbursement]
+    D --> E[Check Printing]
+    E --> F[Check Issuance/Release]
+    F --> G[Post to Ledger]
 ```
 
-### 3.2. RPT Delinquency to Auction Workflow
+### 4.2. RPT Enforcement Workflow
 ```mermaid
 graph TD
-    A[Identify Unpaid Taxes] --> B[Generate Delinquency Notice]
-    B --> C{Payment Received?}
-    C -- No --> D[Issue Warrant of Levy]
-    D --> E[Schedule Property for Auction]
-    E --> F[Public Bidding Event]
-    F --> G[Award to Winning Bidder]
-    G --> H[Update Property Ownership]
+    A[Tax Delinquency Detected] --> B[Issue LTOM 16/17 Notice]
+    B --> C{Payment Made?}
+    C -- No --> D[Issue LTOM 20 Warrant of Levy]
+    D --> E[Auction Publication]
+    E --> F[Auction Sale]
+    F --> G[Redemption Period - 1 Year]
+    G --> H{Redeemed?}
+    H -- No --> I[Issue Final Deed of Sale]
+    H -- Yes --> J[Issue Certificate of Redemption]
 ```
 
 ---
 
-## 4. Technical Computations & Rules
+## 5. Technical Computations
 
-### 4.1. RPT Penalty & Discount Matrix
-| State | Trigger | Calculation |
-| :--- | :--- | :--- |
-| **Advance** | Paid before Jan 1 | `Tax * 20% Discount` |
-| **Prompt** | Paid within Quarter | `Tax * 10% Discount` |
-| **Delinquent** | Paid after Quarter | `Tax * (2% * Months Delayed)` |
-
-### 4.2. Community Tax (Cedula) Formula
-$$ \text{Total Tax} = \text{Basic Fee} + \left( \frac{\text{Business Gross} + \text{Salaries} + \text{Property Income}}{1000} \right) $$
-*Note: The "Additional Tax" component is capped at a maximum of 5,000 PHP.*
-
-### 4.3. Amortization Logic
-The system generates schedules based on:
-1.  **Principal Amount**: The total loan released.
-2.  **Annual Interest Rate**: Distributed across monthly or quarterly payments.
-3.  **Term**: Total duration (e.g., 5 years, 10 years).
+### 5.1. Real Property Tax (RPT)
+*   **Basic Tax**: $$ AV \times 1\% $$
+*   **SEF Tax**: $$ AV \times 1\% $$
+*   **Prompt Discount**: 10% (if paid within the quarter).
+*   **Advance Discount**: 20% (if paid for the next year).
+*   **Delinquency Penalty**: 2% per month (max 72% / 36 months).
 
 ---
 
-## 5. Administrative & Governance Features
-*   **Database Synchronization**: A specialized tool to sync local RPT assessment data with the main LFS database, ensuring assessors and collectors work on consistent data.
-*   **Role-Based Access Control (RBAC)**: Fine-grained permissions (e.g., `TransJEVApproval`, `RptPaymentPost`) to ensure segregation of duties.
-*   **Signatories Management**: Centralized management of authorized officials for automated report signing.
-*   **Audit Logging**: Internal tracking of who created or updated specific financial records.
-
----
-
-## 6. Official Government Reports (RDLC)
-| Module | Key Reports |
-| :--- | :--- |
-| **Budget** | Statement of Appropriation, Allotments, and Obligations (SAAOB) |
-| **Accounting** | General Ledger, Trial Balance, Balance Sheet, Income Statement |
-| **Treasury** | Report of Collections and Deposits (RCD), Cash Book, Check Issued Journal |
-| **RPT** | Certified List of Delinquencies, Notice of Delinquency, Warrant of Levy, Auction List |
-| **Civil Registry** | Marriage License, Burial Permit, Cattle Ownership Certificate |
+## 6. System Governance
+*   **Database Synchronization**: Keeps local assessment data in sync with the central LFS database.
+*   **Role-Based Access Control**: Ensures only authorized personnel can approve JEVs or post payments.
+*   **Audit Trail**: Logs all critical transactions and modifications for accountability.
