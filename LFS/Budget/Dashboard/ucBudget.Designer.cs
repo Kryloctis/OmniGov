@@ -33,7 +33,7 @@ namespace LFS.Budget.Dashboard
             toolStrip1 = new System.Windows.Forms.ToolStrip();
             tlStrpBtnAppropriations = new System.Windows.Forms.ToolStripButton();
             tlStrpBtnAlltmntRelease = new System.Windows.Forms.ToolStripButton();
-            tlStrpBtnObligations = new System.Windows.Forms.ToolStripButton();
+            tlStrpBtnObligationRequest = new System.Windows.Forms.ToolStripButton();
             toolStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -50,7 +50,7 @@ namespace LFS.Budget.Dashboard
             // 
             toolStrip1.BackColor = System.Drawing.Color.Transparent;
             toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { tlStrpBtnAppropriations, tlStrpBtnAlltmntRelease, tlStrpBtnObligations });
+            toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { tlStrpBtnAppropriations, tlStrpBtnAlltmntRelease, tlStrpBtnObligationRequest });
             toolStrip1.Location = new System.Drawing.Point(0, 0);
             toolStrip1.Name = "toolStrip1";
             toolStrip1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 20);
@@ -77,14 +77,14 @@ namespace LFS.Budget.Dashboard
             tlStrpBtnAlltmntRelease.Text = "Allotment Release";
             tlStrpBtnAlltmntRelease.Click += tlStrpBtnAlltmntRelease_Click;
             // 
-            // tlStrpBtnObligations
+            // tlStrpBtnObligationRequest
             // 
-            tlStrpBtnObligations.Image = Properties.Resources.folder_filled_20px;
-            tlStrpBtnObligations.ImageTransparentColor = System.Drawing.Color.Magenta;
-            tlStrpBtnObligations.Name = "tlStrpBtnObligations";
-            tlStrpBtnObligations.Size = new System.Drawing.Size(88, 20);
-            tlStrpBtnObligations.Text = "Obligations";
-            tlStrpBtnObligations.Click += tlStrpBtnObligations_Click;
+            tlStrpBtnObligationRequest.Image = Properties.Resources.folder_filled_20px;
+            tlStrpBtnObligationRequest.ImageTransparentColor = System.Drawing.Color.Magenta;
+            tlStrpBtnObligationRequest.Name = "tlStrpBtnObligationRequest";
+            tlStrpBtnObligationRequest.Size = new System.Drawing.Size(128, 20);
+            tlStrpBtnObligationRequest.Text = "Obligation Request";
+            tlStrpBtnObligationRequest.Click += tlStrpBtnObligations_Click;
             // 
             // ucBudget
             // 
@@ -107,7 +107,7 @@ namespace LFS.Budget.Dashboard
         private Budget.Dashboard.ucBudgetSummary ucBudgetSummary1;
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton tlStrpBtnAlltmntRelease;
-        private System.Windows.Forms.ToolStripButton tlStrpBtnObligations;
+        private System.Windows.Forms.ToolStripButton tlStrpBtnObligationRequest;
         private System.Windows.Forms.ToolStripButton tlStrpBtnAppropriations;
     }
 }

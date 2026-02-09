@@ -258,8 +258,8 @@ namespace LFS.Views.Transactions.JEV
             tlStrpBtnAudit.Image = Properties.Resources.document_text_ok_filled_20px;
             tlStrpBtnAudit.ImageTransparentColor = System.Drawing.Color.Magenta;
             tlStrpBtnAudit.Name = "tlStrpBtnAudit";
-            tlStrpBtnAudit.Size = new System.Drawing.Size(60, 24);
-            tlStrpBtnAudit.Text = "Audit";
+            tlStrpBtnAudit.Size = new System.Drawing.Size(68, 24);
+            tlStrpBtnAudit.Text = "Review";
             tlStrpBtnAudit.Click += tlStrpBtnAudit_Click;
             // 
             // splitContainer1
@@ -666,7 +666,7 @@ namespace LFS.Views.Transactions.JEV
             // 
             btnCancel.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
             btnCancel.Cursor = System.Windows.Forms.Cursors.Hand;
-            btnCancel.Image = Properties.Resources.symbol_forbidden_16px;
+            btnCancel.Image = Properties.Resources.symbolForbidden16px;
             btnCancel.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             btnCancel.Location = new System.Drawing.Point(495, 7);
             btnCancel.Name = "btnCancel";

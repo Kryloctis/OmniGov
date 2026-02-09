@@ -318,6 +318,7 @@ namespace LFS.Helpers
             dgv.AllowUserToDeleteRows = false;
             dgv.AllowUserToOrderColumns = false;
             dgv.AllowUserToResizeColumns = true;
+            dgv.ForeColor = Color.FromKnownColor(KnownColor.ControlDarkDark);
             dgv.BackgroundColor = Color.White;
             dgv.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
             dgv.GridColor = Color.FromKnownColor(KnownColor.Control);

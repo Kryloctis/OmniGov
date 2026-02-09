@@ -23,7 +23,7 @@ namespace LFS.Budget.Dashboard
         {
             tlStrpBtnAppropriations.Enabled = PrivilegesHelper.HasPrivilege(Privileges.MngBudgetApprops);
             tlStrpBtnAlltmntRelease.Enabled = PrivilegesHelper.HasPrivilege(Privileges.MngAllotReleases);
-            tlStrpBtnObligations.Enabled = PrivilegesHelper.HasPrivilege(Privileges.TransObligationReq);
+            tlStrpBtnObligationRequest.Enabled = PrivilegesHelper.HasPrivilege(Privileges.TransObligationReq);
         }
 
         internal void OnLoad()

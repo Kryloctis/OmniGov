@@ -1,6 +1,8 @@
 ﻿using ACC.Data;
 using ACC.Domain.Budget.Models;
+using LFS.Budget.Helpers;
 using LFS.Helpers;
+using LFS.Views.Transactions.JEV;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -48,23 +50,29 @@ namespace LFS.Budget.Views.Obligations
         {
             OnLoad();
             if (isEdit)
+            {
                 this.oblgtnRqstId = oblgtnRqstId.Value;
+                var exemptCtrls = new List<Control>() { txtExplanation };
+                SetControlsReadOnly(true, panel3, exemptCtrls);
+                LoadSelectedRecord(oblgtnRqstId.Value);
+            }
         }
 
         internal void LoadViewMode(int oblgtnRqstId)
         {
-            SetControlsReadOnly(true, tabControl1, null);
-            OnLoad();
             this.oblgtnRqstId = oblgtnRqstId;
+            OnLoad();
+            SetControlsReadOnly(true, tabControl1, null);
+            LoadSelectedRecord(oblgtnRqstId);
         }
 
-        internal void LoadAuditMode(int oblgtnRqstId)
+        internal void LoadReviewMode(int oblgtnRqstId)
         {
-            var exemptCtrls = new List<Control>() { txtRemarks };
-            SetControlsReadOnly(true, tabControl1, exemptCtrls);
-            OnLoad();
             this.oblgtnRqstId = oblgtnRqstId;
-            txtRemarks.ReadOnly = false;
+            var exemptCtrls = new List<Control>() { txtRemarks };
+            OnLoad();
+            SetControlsReadOnly(true, tabControl1, exemptCtrls);
+            LoadSelectedRecord(oblgtnRqstId);
         }
 
         //Models
@@ -104,6 +112,30 @@ namespace LFS.Budget.Views.Obligations
         private void LoadSelectedRecord(int oblgtnRqstId)
         {
             var dictOblgtnRqst = AccFactory.ObligationRequestRepository().GetViewRecordById(oblgtnRqstId);
+            int fppId = Convert.ToInt32(dictOblgtnRqst["fpp_id"]);
+
+            mskTxtTransNo.Text = BudgetHelper.GenTransactionNo(dictOblgtnRqst["transaction_no"]);
+            cmbxFPP.SelectedValue = fppId;
+            cmbxFund.SelectedValue = dictOblgtnRqst["funds_id"];
+            cmbxAlltmntClss.SelectedValue = dictOblgtnRqst["allotment_class_id"];
+            txtPayee.Text = dictOblgtnRqst["payee"];
+            dtDateRequest.Value = Convert.ToDateTime(dictOblgtnRqst["date_requested"]);
+            txtReferenceNo.Text = dictOblgtnRqst["reference_no"];
+            txtExplanation.Text = dictOblgtnRqst["explanation"];
+
+            LoadOblgtnEntries(oblgtnRqstId, dgvEntries);
+        }
+
+        private void LoadOblgtnEntries(int oblgtnRqstId, DataGridView dgv)
+        {
+            var dtOblgtnAccs = AccFactory.ObligationRequestRepository().GetViewRecordsById(oblgtnRqstId);
+
+            foreach (DataRow row in dtOblgtnAccs.Rows)
+            {
+                int newIndex = dgv.Rows.Add(
+                    int.TryParse(row["sub_fpp"].ToString(), out int subfpp) ? subfpp : 0
+                );
+            }
         }
 
         private void ToggleEntriesButtons(DataGridView dgv, ToolStripButton btnRemove)
@@ -191,22 +223,21 @@ namespace LFS.Budget.Views.Obligations
 
         private void LoadFPP()
         {
-            cmbxFPP.DroppedDown = false;
+            var dtFpp = AccFactory.FunctionProgramProjectRepository().GetViewRecords();
+            var dataTable = new DataTable();
+            dataTable.Columns.Add("id", typeof(uint));
+            dataTable.Columns.Add("fpp_code_name", typeof(string));
 
-            var dt = DtFpp();
-            if (dt.Rows.Count == 0) return;
+            dtFpp.AsEnumerable()
+                 .ToList()
+                 .ForEach(row =>
+                            dataTable.Rows.Add(
+                                row.Field<uint>("id"),
+                                $"{row.Field<string>("fpp_code")} - {row.Field<string>("fpp_name")}"
+                                )
+                            );
 
-            var fppDict = dt
-                .AsEnumerable()
-                .ToDictionary(
-                    r => r.Field<UInt32>("id"),
-                    r => $"{r.Field<string>("fpp_code")} - {r.Field<string>("fpp_name")}"
-                );
-
-            cmbxFPP.DataSource = new BindingSource(fppDict, null);
-            cmbxFPP.DisplayMember = "value";
-            cmbxFPP.ValueMember = "key";
-            cmbxFPP.DropDownHeight = 200;
+            HelperLoadRecords.FppCombobox(dataTable, cmbxFPP, "fpp_code_name", "id");
         }
 
         private void LoadFunds()
@@ -413,18 +444,6 @@ namespace LFS.Budget.Views.Obligations
 
         #region DataSources
 
-        private DataTable DtFpp()
-        {
-            DataTable dtFPP;
-
-            if (string.IsNullOrWhiteSpace(cmbxFPP.Text))
-                dtFPP = AccFactory.FunctionProgramProjectRepository().GetViewRecords();
-            else
-                dtFPP = AccFactory.FunctionProgramProjectRepository().GetRecordsByCodeName(cmbxFPP.Text.Trim());
-
-            return dtFPP;
-        }
-
         private DataTable DtSubFpp()
         {
             bool fppValid = int.TryParse(cmbxFPP.SelectedValue.ToString(), out int fppId);
@@ -617,32 +636,8 @@ namespace LFS.Budget.Views.Obligations
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private void cmbxFPP_TextChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                if (string.IsNullOrEmpty(cmbxFPP.Text))
-                {
-                    cmbxFPP.TextChanged -= new EventHandler(cmbxFPP_TextChanged);
-                    LoadFPP();
-                    cmbxFPP.SelectedIndex = -1;
-                    cmbxFPP.TextChanged += new EventHandler(cmbxFPP_TextChanged);
-                }
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
         private void cmbxFPP_KeyDown(object sender, KeyEventArgs e)
         {
-            try
-            {
-                if (e.KeyCode == Keys.F1 && cmbxFPP.FindStringExact(cmbxFPP.Text) == -1 && !string.IsNullOrEmpty(cmbxFPP.Text))
-                {
-                    LoadFPP();
-                    cmbxFPP.DroppedDown = true;
-                }
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void dgvEntries_SelectionChanged(object sender, EventArgs e)
@@ -690,5 +685,9 @@ namespace LFS.Budget.Views.Obligations
         }
 
         #endregion Validation Events
+
+        private void ucObligations_Load(object sender, EventArgs e)
+        {
+        }
     }
 }

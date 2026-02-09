@@ -523,7 +523,7 @@ namespace LFS.Budget.Views.BudgetAppropriations
         {
             try
             {
-                HelperLoadRecords.BudgetApproprationsFPPCombobox(DataTableFPP(), cmbxFPP, "fpp_code_name", "id");
+                HelperLoadRecords.FppCombobox(DataTableFPP(), cmbxFPP, "fpp_code_name", "id");
                 LoadBudgetAppropriationRecords();
             }
             catch (Exception ex)

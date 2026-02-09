@@ -1273,7 +1273,7 @@ namespace LFS
             }
         }
 
-        internal static void BudgetApproprationsFPPCombobox(DataTable dataTable, ComboBox comboBox, string displayMember, string valueMember)
+        internal static void FppCombobox(DataTable dataTable, ComboBox comboBox, string displayMember, string valueMember)
         {
             comboBox.DataSource = dataTable;
             comboBox.ValueMember = valueMember;

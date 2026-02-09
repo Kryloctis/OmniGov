@@ -543,7 +543,7 @@ namespace ACC.Data.Budget
                             FROM
                                 {tableName}
                             WHERE
-                               YEAR(created_at) = @year";
+                               transaction_no REGEXP CONCAT('^', @year, '-')";
 
             string seqNo = mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
             return $"{year}-{seqNo}";

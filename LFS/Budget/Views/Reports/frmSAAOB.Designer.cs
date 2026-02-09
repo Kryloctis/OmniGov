@@ -69,7 +69,6 @@ namespace LFS.Budget.Views.Reports
             label4.Dock = System.Windows.Forms.DockStyle.Top;
             label4.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
             label4.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            label4.Image = Properties.Resources.settings_horizontal_filled_20px;
             label4.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             label4.Location = new System.Drawing.Point(20, 20);
             label4.Margin = new System.Windows.Forms.Padding(3, 0, 3, 40);

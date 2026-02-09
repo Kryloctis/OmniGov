@@ -3493,56 +3493,6 @@ namespace LFS.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap settings_horizontal_filled_14px {
-            get {
-                object obj = ResourceManager.GetObject("settings-horizontal-filled@14px", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap settings_horizontal_filled_16px {
-            get {
-                object obj = ResourceManager.GetObject("settings-horizontal-filled@16px", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap settings_horizontal_filled_20px {
-            get {
-                object obj = ResourceManager.GetObject("settings-horizontal-filled@20px", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap settings_horizontal_filled_24px {
-            get {
-                object obj = ResourceManager.GetObject("settings-horizontal-filled@24px", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap settings_horizontal_filled_32px {
-            get {
-                object obj = ResourceManager.GetObject("settings-horizontal-filled@32px", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap subject_writing_filled_16px {
             get {
                 object obj = ResourceManager.GetObject("subject_writing_filled_16px", resourceCulture);
@@ -3733,46 +3683,6 @@ namespace LFS.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap symbol_forbidden_16px {
-            get {
-                object obj = ResourceManager.GetObject("symbol-forbidden@16px", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap symbol_forbidden_20px {
-            get {
-                object obj = ResourceManager.GetObject("symbol-forbidden@20px", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap symbol_forbidden_24px {
-            get {
-                object obj = ResourceManager.GetObject("symbol-forbidden@24px", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap symbol_forbidden_32px {
-            get {
-                object obj = ResourceManager.GetObject("symbol-forbidden@32px", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap symbol_ok_18px {
             get {
                 object obj = ResourceManager.GetObject("symbol_ok_18px", resourceCulture);
@@ -3853,6 +3763,56 @@ namespace LFS.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap symbolForbidden14px {
+            get {
+                object obj = ResourceManager.GetObject("symbolForbidden14px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap symbolForbidden16px {
+            get {
+                object obj = ResourceManager.GetObject("symbolForbidden16px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap symbolForbidden20px {
+            get {
+                object obj = ResourceManager.GetObject("symbolForbidden20px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap symbolForbidden24px {
+            get {
+                object obj = ResourceManager.GetObject("symbolForbidden24px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap symbolForbidden32px {
+            get {
+                object obj = ResourceManager.GetObject("symbolForbidden32px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap task_list_pin_14px {
             get {
                 object obj = ResourceManager.GetObject("task_list_pin_14px", resourceCulture);
@@ -3916,6 +3876,56 @@ namespace LFS.Properties {
         internal static System.Drawing.Bitmap task_list_pin_32px {
             get {
                 object obj = ResourceManager.GetObject("task_list_pin_32px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap time_14px {
+            get {
+                object obj = ResourceManager.GetObject("time@14px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap time_16px {
+            get {
+                object obj = ResourceManager.GetObject("time@16px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap time_20px {
+            get {
+                object obj = ResourceManager.GetObject("time@20px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap time_24px {
+            get {
+                object obj = ResourceManager.GetObject("time@24px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap time_32px {
+            get {
+                object obj = ResourceManager.GetObject("time@32px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

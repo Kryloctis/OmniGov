@@ -1,5 +1,6 @@
 ﻿using ACC.Data;
 using ACC.Domain.Budget.Models;
+using LFS.Budget.Helpers;
 using LFS.Helpers;
 using System;
 using System.Collections.Generic;
@@ -23,11 +24,10 @@ namespace LFS.Budget.Views.Obligations
         {
             try
             {
-                HelperLoadRecords.ComboboxRowLimitFilter(tlStrpCmbxLimit.ComboBox);
-                tlStrpCmbxLimit.ComboBox.SelectionChangeCommitted += (s, ev) => LoadOblgtnRecords();
+                //HelperLoadRecords.ComboboxRowLimitFilter(tlStrpCmbxLimit.ComboBox);
                 dtPckrFrom.Value = dtPckrTo.Value.AddYears(-1);
-                MonitorControlChanges(panel1, btnApplyFltr);
-                EnableDisableButtons(dgvMain, tlStrpBtnCreate, tlStrpBtnUpdate, tlStrpBtnDelete, tlStrpBtnView, tlStrpBtnAudit);
+                MonitorControlChanges(panel1);
+                EnableDisableButtons(dgvMain, tlStrpBtnCreate, tlStrpBtnUpdate, tlStrpBtnDelete, tlStrpBtnView, tlStrpBtnReview);
                 LoadOblgtnRecords();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
@@ -45,7 +45,7 @@ namespace LFS.Budget.Views.Obligations
                 return "Pending";
         }
 
-        private void EnableDisableButtons(DataGridView dgv, ToolStripButton btnCrt, ToolStripButton btnEdit, ToolStripButton btnDelete, ToolStripButton btnView, ToolStripButton btnAudit)
+        private void EnableDisableButtons(DataGridView dgv, ToolStripButton btnCrt, ToolStripButton btnEdit, ToolStripButton btnDelete, ToolStripButton btnView, ToolStripButton btnReview)
         {
             int selected = dgv.SelectedRows.Count;
 
@@ -60,7 +60,7 @@ namespace LFS.Budget.Views.Obligations
 
                 btnDelete.Enabled = false;
 
-                btnAudit.Enabled = false;
+                btnReview.Enabled = false;
 
                 return;
             }
@@ -72,7 +72,7 @@ namespace LFS.Budget.Views.Obligations
             var config = new Dictionary<string, (bool create,
                                                  bool viewVisible, bool viewEnabled,
                                                  bool editVisible, bool editEnabled,
-                                                 bool deleteEnabled, bool auditEnabled)>
+                                                 bool deleteEnabled, bool reviewEnabled)>
             {
                 ["approved"] = (true, true, true, false, false, false, false),
                 ["cancelled"] = (true, false, false, true, false, false, true),
@@ -92,30 +92,30 @@ namespace LFS.Budget.Views.Obligations
 
             btnDelete.Enabled = c.deleteEnabled && selected > 0;
 
-            bool auditFromStatus = c.auditEnabled;
+            bool auditFromStatus = c.reviewEnabled;
             bool hasPrivilege = PrivilegesHelper.HasPrivilege(Privileges.TransJEVApproval);
 
-            btnAudit.Enabled = auditFromStatus && hasPrivilege && selected > 0;
+            btnReview.Enabled = auditFromStatus && hasPrivilege && selected > 0;
         }
 
-        private void MonitorControlChanges(Control parent, Button targetButton)
+        private void MonitorControlChanges(Control parent)
         {
             foreach (Control ctrl in parent.Controls)
             {
                 if (ctrl is TextBox tb)
-                    tb.TextChanged += (s, e) => targetButton.Enabled = true;
+                    tb.TextChanged += (s, e) => LoadOblgtnRecords();
                 else if (ctrl is RadioButton rb)
-                    rb.CheckedChanged += (s, e) => targetButton.Enabled = true;
+                    rb.CheckedChanged += (s, e) => LoadOblgtnRecords();
                 else if (ctrl is ComboBox cb)
-                    cb.SelectedIndexChanged += (s, e) => targetButton.Enabled = true;
+                    cb.SelectedIndexChanged += (s, e) => LoadOblgtnRecords();
                 else if (ctrl is CheckBox chk)
-                    chk.CheckedChanged += (s, e) => targetButton.Enabled = true;
+                    chk.CheckedChanged += (s, e) => LoadOblgtnRecords();
                 else if (ctrl is DateTimePicker dp)
-                    dp.ValueChanged += (s, e) => targetButton.Enabled = true;
+                    dp.ValueChanged += (s, e) => LoadOblgtnRecords();
 
                 // Recurse into child containers
                 if (ctrl.HasChildren)
-                    MonitorControlChanges(ctrl, targetButton);
+                    MonitorControlChanges(ctrl);
             }
         }
 
@@ -149,12 +149,12 @@ namespace LFS.Budget.Views.Obligations
             customTabControl1.SelectedTab = tbPgView;
         }
 
-        private void ToggleAudit()
+        private void ToggleReview()
         {
             int rowIndex = dgvMain.CurrentCell.RowIndex;
             int oblgtnId = Convert.ToInt32(dgvMain.Rows[rowIndex].Cells["id"].Value);
-            ucObligationsAudit.LoadAuditMode(oblgtnId);
-            customTabControl1.SelectedTab = tbPgAudit;
+            ucObligationsAudit.LoadReviewMode(oblgtnId);
+            customTabControl1.SelectedTab = tbPgReview;
         }
 
         private bool DeleteData(List<int> oblgtnIds)
@@ -184,7 +184,6 @@ namespace LFS.Budget.Views.Obligations
             if (!backgroundWorker1.IsBusy)
             {
                 pbLoadRecords.Value = 0;
-                btnApplyFltr.Enabled = false;
 
                 (string srchKey,
                 string status,
@@ -193,11 +192,11 @@ namespace LFS.Budget.Views.Obligations
                 int rowLimit)
                 parameters =
                 (
-                    tlStrpTxtSearch.Text,
+                    txtSearch.Text,
                     GetFltrStatus(),
                     dtPckrFrom.Value,
                     dtPckrTo.Value,
-                    Convert.ToInt32(tlStrpCmbxLimit.ComboBox.SelectedValue)
+                    100
                 );
 
                 backgroundWorker1.RunWorkerAsync(parameters);
@@ -245,7 +244,7 @@ namespace LFS.Budget.Views.Obligations
         {
             try
             {
-                ToggleAudit();
+                ToggleReview();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -264,27 +263,9 @@ namespace LFS.Budget.Views.Obligations
                     if (DeleteData(oblgtnRqstIds))
                     {
                         LoadOblgtnRecords();
-                        EnableDisableButtons(dgvMain, tlStrpBtnCreate, tlStrpBtnUpdate, tlStrpBtnDelete, tlsStrpBtnBckView, tlStrpBtnAudit);
+                        EnableDisableButtons(dgvMain, tlStrpBtnCreate, tlStrpBtnUpdate, tlStrpBtnDelete, tlsStrpBtnBckView, tlStrpBtnReview);
                     }
                 }
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        private void btnApplyFltr_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                LoadOblgtnRecords();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        private void tlStrpBtnSearch_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                LoadOblgtnRecords();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -343,11 +324,11 @@ namespace LFS.Budget.Views.Obligations
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private void dgJEV_SelectionChanged(object sender, EventArgs e)
+        private void dgvMain_SelectionChanged(object sender, EventArgs e)
         {
             try
             {
-                EnableDisableButtons(dgvMain, tlStrpBtnCreate, tlStrpBtnUpdate, tlStrpBtnDelete, tlStrpBtnView, tlStrpBtnAudit);
+                EnableDisableButtons(dgvMain, tlStrpBtnCreate, tlStrpBtnUpdate, tlStrpBtnDelete, tlStrpBtnView, tlStrpBtnReview);
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -394,9 +375,11 @@ namespace LFS.Budget.Views.Obligations
 
                 foreach (DataRow dtRow in dtObligations.Rows)
                 {
+                    string transactionNo = dtRow["transaction_no"].ToString();
+
                     var newRow = dataTable.NewRow();
                     newRow["id"] = dtRow["id"];
-                    newRow["transaction_no"] = dtRow["transaction_no"];
+                    newRow["transaction_no"] = BudgetHelper.GenTransactionNo(transactionNo);
                     newRow["obligation_no"] = dtRow["obligation_no"];
                     newRow["date_requested"] = dtRow["date_requested"];
                     newRow["payee"] = dtRow["payee"];
@@ -440,6 +423,63 @@ namespace LFS.Budget.Views.Obligations
                     HelperLoadRecords.DgvOblgtnRqst(dataTable, dgvMain);
                     dgvMain.CurrentCell = dgvMain.FirstDisplayedCell;
                 }
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void TxtSearch_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                string searchTxt = txtSearch.Text.Trim();
+
+                if (searchTxt.Length > 3 || searchTxt.Length < 1)
+                    LoadOblgtnRecords();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void radPending_CheckedChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                LoadOblgtnRecords();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void radApproved_CheckedChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                LoadOblgtnRecords();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void radDisapproved_CheckedChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                LoadOblgtnRecords();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void radCancelled_CheckedChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                LoadOblgtnRecords();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void dtPckrTo_ValueChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                LoadOblgtnRecords();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
