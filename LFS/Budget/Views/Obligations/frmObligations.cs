@@ -26,7 +26,7 @@ namespace LFS.Budget.Views.Obligations
             {
                 //HelperLoadRecords.ComboboxRowLimitFilter(tlStrpCmbxLimit.ComboBox);
                 dtPckrFrom.Value = dtPckrTo.Value.AddYears(-1);
-                MonitorControlChanges(panel1);
+
                 EnableDisableButtons(dgvMain, tlStrpBtnCreate, tlStrpBtnUpdate, tlStrpBtnDelete, tlStrpBtnView, tlStrpBtnReview);
                 LoadOblgtnRecords();
             }
@@ -96,27 +96,6 @@ namespace LFS.Budget.Views.Obligations
             bool hasPrivilege = PrivilegesHelper.HasPrivilege(Privileges.TransJEVApproval);
 
             btnReview.Enabled = auditFromStatus && hasPrivilege && selected > 0;
-        }
-
-        private void MonitorControlChanges(Control parent)
-        {
-            foreach (Control ctrl in parent.Controls)
-            {
-                if (ctrl is TextBox tb)
-                    tb.TextChanged += (s, e) => LoadOblgtnRecords();
-                else if (ctrl is RadioButton rb)
-                    rb.CheckedChanged += (s, e) => LoadOblgtnRecords();
-                else if (ctrl is ComboBox cb)
-                    cb.SelectedIndexChanged += (s, e) => LoadOblgtnRecords();
-                else if (ctrl is CheckBox chk)
-                    chk.CheckedChanged += (s, e) => LoadOblgtnRecords();
-                else if (ctrl is DateTimePicker dp)
-                    dp.ValueChanged += (s, e) => LoadOblgtnRecords();
-
-                // Recurse into child containers
-                if (ctrl.HasChildren)
-                    MonitorControlChanges(ctrl);
-            }
         }
 
         private void ToggleCrud(bool isEdit)
@@ -210,8 +189,6 @@ namespace LFS.Budget.Views.Obligations
             else
                 return AccFactory.ObligationRequestRepository().Update(models.oblgtnRqstModel, models.oblgtnAccModels);
         }
-
-        #region Events
 
         private void tlStrpBtnCreate_Click(object sender, EventArgs e)
         {
@@ -483,7 +460,5 @@ namespace LFS.Budget.Views.Obligations
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
-
-        #endregion Events
     }
 }

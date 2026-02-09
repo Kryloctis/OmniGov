@@ -609,7 +609,7 @@
             // 
             // ucObligationsView
             // 
-            ucObligationsView.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
+            ucObligationsView.AutoValidate = System.Windows.Forms.AutoValidate.Disable;
             ucObligationsView.Dock = System.Windows.Forms.DockStyle.Fill;
             ucObligationsView.Location = new System.Drawing.Point(0, 47);
             ucObligationsView.Name = "ucObligationsView";
@@ -662,7 +662,7 @@
             // 
             // ucObligationsAudit
             // 
-            ucObligationsAudit.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
+            ucObligationsAudit.AutoValidate = System.Windows.Forms.AutoValidate.Disable;
             ucObligationsAudit.Dock = System.Windows.Forms.DockStyle.Fill;
             ucObligationsAudit.Location = new System.Drawing.Point(0, 47);
             ucObligationsAudit.Name = "ucObligationsAudit";
@@ -835,8 +835,6 @@
         private System.Windows.Forms.TabPage tbPgView;
         private System.Windows.Forms.TabPage tbPgReview;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.ToolStrip toolStrip3;
-        private System.Windows.Forms.ToolStripButton tlStrpBtnCrudBack;
         private System.Windows.Forms.Button btnCrudSubmit;
         private System.Windows.Forms.ToolStrip toolStrip4;
         private System.Windows.Forms.ToolStripButton tlsStrpBtnBckView;
@@ -867,5 +865,7 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.ToolStrip toolStrip3;
+        private System.Windows.Forms.ToolStripButton tlStrpBtnCrudBack;
     }
 }
