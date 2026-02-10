@@ -30,6 +30,7 @@
         {
             customTabControl1 = new LFS.CustomTools.CustomTabControl();
             tbPgMain = new System.Windows.Forms.TabPage();
+            panel10 = new System.Windows.Forms.Panel();
             panel7 = new System.Windows.Forms.Panel();
             dgvMain = new System.Windows.Forms.DataGridView();
             panel6 = new System.Windows.Forms.Panel();
@@ -37,6 +38,16 @@
             button2 = new System.Windows.Forms.Button();
             button1 = new System.Windows.Forms.Button();
             pbLoadRecords = new System.Windows.Forms.ProgressBar();
+            toolStrip1 = new System.Windows.Forms.ToolStrip();
+            tlStrpBtnReview = new System.Windows.Forms.ToolStripButton();
+            toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            tlStrpBtnDelete = new System.Windows.Forms.ToolStripButton();
+            tlStrpBtnView = new System.Windows.Forms.ToolStripButton();
+            tlStrpBtnUpdate = new System.Windows.Forms.ToolStripButton();
+            tlStrpBtnCreate = new System.Windows.Forms.ToolStripButton();
+            panel4 = new System.Windows.Forms.Panel();
+            label10 = new System.Windows.Forms.Label();
+            label3 = new System.Windows.Forms.Label();
             panel1 = new System.Windows.Forms.Panel();
             txtSearch = new System.Windows.Forms.TextBox();
             label2 = new System.Windows.Forms.Label();
@@ -57,10 +68,15 @@
             btnCrudSubmit = new System.Windows.Forms.Button();
             toolStrip3 = new System.Windows.Forms.ToolStrip();
             tlStrpBtnCrudBack = new System.Windows.Forms.ToolStripButton();
+            panel5 = new System.Windows.Forms.Panel();
+            label11 = new System.Windows.Forms.Label();
+            lblCrudStat = new System.Windows.Forms.Label();
             tbPgView = new System.Windows.Forms.TabPage();
             ucObligationsView = new ucObligations();
             toolStrip4 = new System.Windows.Forms.ToolStrip();
             tlsStrpBtnBckView = new System.Windows.Forms.ToolStripButton();
+            panel8 = new System.Windows.Forms.Panel();
+            label8 = new System.Windows.Forms.Label();
             tbPgReview = new System.Windows.Forms.TabPage();
             ucObligationsAudit = new ucObligations();
             flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
@@ -69,41 +85,31 @@
             btnCancel = new System.Windows.Forms.Button();
             toolStrip5 = new System.Windows.Forms.ToolStrip();
             tlStrpBtnBckAudit = new System.Windows.Forms.ToolStripButton();
-            backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            panel4 = new System.Windows.Forms.Panel();
-            label3 = new System.Windows.Forms.Label();
-            tlStrpBtnReview = new System.Windows.Forms.ToolStripButton();
-            toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            tlStrpBtnDelete = new System.Windows.Forms.ToolStripButton();
-            tlStrpBtnView = new System.Windows.Forms.ToolStripButton();
-            tlStrpBtnUpdate = new System.Windows.Forms.ToolStripButton();
-            tlStrpBtnCreate = new System.Windows.Forms.ToolStripButton();
-            toolStrip1 = new System.Windows.Forms.ToolStrip();
-            panel5 = new System.Windows.Forms.Panel();
-            lblCrudStat = new System.Windows.Forms.Label();
-            panel8 = new System.Windows.Forms.Panel();
-            label8 = new System.Windows.Forms.Label();
             panel9 = new System.Windows.Forms.Panel();
             label9 = new System.Windows.Forms.Label();
+            backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            label12 = new System.Windows.Forms.Label();
+            label13 = new System.Windows.Forms.Label();
             customTabControl1.SuspendLayout();
             tbPgMain.SuspendLayout();
+            panel10.SuspendLayout();
             panel7.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvMain).BeginInit();
             panel6.SuspendLayout();
+            toolStrip1.SuspendLayout();
+            panel4.SuspendLayout();
             panel1.SuspendLayout();
             panel3.SuspendLayout();
             tbPgCrud.SuspendLayout();
             panel2.SuspendLayout();
             toolStrip3.SuspendLayout();
+            panel5.SuspendLayout();
             tbPgView.SuspendLayout();
             toolStrip4.SuspendLayout();
+            panel8.SuspendLayout();
             tbPgReview.SuspendLayout();
             flowLayoutPanel2.SuspendLayout();
             toolStrip5.SuspendLayout();
-            panel4.SuspendLayout();
-            toolStrip1.SuspendLayout();
-            panel5.SuspendLayout();
-            panel8.SuspendLayout();
             panel9.SuspendLayout();
             SuspendLayout();
             // 
@@ -123,9 +129,7 @@
             // tbPgMain
             // 
             tbPgMain.BackColor = System.Drawing.SystemColors.Control;
-            tbPgMain.Controls.Add(panel7);
-            tbPgMain.Controls.Add(toolStrip1);
-            tbPgMain.Controls.Add(panel4);
+            tbPgMain.Controls.Add(panel10);
             tbPgMain.Controls.Add(panel1);
             tbPgMain.Location = new System.Drawing.Point(4, 24);
             tbPgMain.Name = "tbPgMain";
@@ -133,26 +137,38 @@
             tbPgMain.TabIndex = 0;
             tbPgMain.Text = "tbPgMain";
             // 
+            // panel10
+            // 
+            panel10.Controls.Add(panel7);
+            panel10.Controls.Add(toolStrip1);
+            panel10.Controls.Add(panel4);
+            panel10.Dock = System.Windows.Forms.DockStyle.Fill;
+            panel10.Location = new System.Drawing.Point(227, 0);
+            panel10.Name = "panel10";
+            panel10.Padding = new System.Windows.Forms.Padding(20);
+            panel10.Size = new System.Drawing.Size(647, 595);
+            panel10.TabIndex = 15;
+            // 
             // panel7
             // 
             panel7.Controls.Add(dgvMain);
             panel7.Controls.Add(panel6);
             panel7.Controls.Add(pbLoadRecords);
             panel7.Dock = System.Windows.Forms.DockStyle.Fill;
-            panel7.Location = new System.Drawing.Point(227, 75);
+            panel7.Location = new System.Drawing.Point(20, 106);
             panel7.Name = "panel7";
-            panel7.Padding = new System.Windows.Forms.Padding(10);
-            panel7.Size = new System.Drawing.Size(647, 520);
+            panel7.Padding = new System.Windows.Forms.Padding(4);
+            panel7.Size = new System.Drawing.Size(607, 469);
             panel7.TabIndex = 9;
             // 
             // dgvMain
             // 
             dgvMain.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvMain.Dock = System.Windows.Forms.DockStyle.Fill;
-            dgvMain.Location = new System.Drawing.Point(10, 12);
+            dgvMain.Location = new System.Drawing.Point(4, 6);
             dgvMain.Margin = new System.Windows.Forms.Padding(1);
             dgvMain.Name = "dgvMain";
-            dgvMain.Size = new System.Drawing.Size(627, 466);
+            dgvMain.Size = new System.Drawing.Size(599, 427);
             dgvMain.TabIndex = 7;
             dgvMain.SelectionChanged += dgvMain_SelectionChanged;
             // 
@@ -162,9 +178,9 @@
             panel6.Controls.Add(button2);
             panel6.Controls.Add(button1);
             panel6.Dock = System.Windows.Forms.DockStyle.Bottom;
-            panel6.Location = new System.Drawing.Point(10, 478);
+            panel6.Location = new System.Drawing.Point(4, 433);
             panel6.Name = "panel6";
-            panel6.Size = new System.Drawing.Size(627, 32);
+            panel6.Size = new System.Drawing.Size(599, 32);
             panel6.TabIndex = 26;
             // 
             // label7
@@ -172,7 +188,7 @@
             label7.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
             label7.AutoSize = true;
             label7.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            label7.Location = new System.Drawing.Point(495, 8);
+            label7.Location = new System.Drawing.Point(467, 8);
             label7.Name = "label7";
             label7.Size = new System.Drawing.Size(65, 15);
             label7.TabIndex = 1;
@@ -182,7 +198,7 @@
             // 
             button2.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
             button2.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            button2.Location = new System.Drawing.Point(566, 4);
+            button2.Location = new System.Drawing.Point(538, 4);
             button2.Name = "button2";
             button2.Size = new System.Drawing.Size(26, 23);
             button2.TabIndex = 0;
@@ -193,7 +209,7 @@
             // 
             button1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
             button1.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            button1.Location = new System.Drawing.Point(598, 4);
+            button1.Location = new System.Drawing.Point(570, 4);
             button1.Name = "button1";
             button1.Size = new System.Drawing.Size(26, 23);
             button1.TabIndex = 0;
@@ -203,14 +219,118 @@
             // pbLoadRecords
             // 
             pbLoadRecords.Dock = System.Windows.Forms.DockStyle.Top;
-            pbLoadRecords.Location = new System.Drawing.Point(10, 10);
+            pbLoadRecords.Location = new System.Drawing.Point(4, 4);
             pbLoadRecords.Name = "pbLoadRecords";
-            pbLoadRecords.Size = new System.Drawing.Size(627, 2);
+            pbLoadRecords.Size = new System.Drawing.Size(599, 2);
             pbLoadRecords.TabIndex = 25;
+            // 
+            // toolStrip1
+            // 
+            toolStrip1.BackColor = System.Drawing.SystemColors.Control;
+            toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            toolStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { tlStrpBtnReview, toolStripSeparator2, tlStrpBtnDelete, tlStrpBtnView, tlStrpBtnUpdate, tlStrpBtnCreate });
+            toolStrip1.Location = new System.Drawing.Point(20, 71);
+            toolStrip1.Name = "toolStrip1";
+            toolStrip1.Padding = new System.Windows.Forms.Padding(4);
+            toolStrip1.Size = new System.Drawing.Size(607, 35);
+            toolStrip1.TabIndex = 12;
+            toolStrip1.Text = "toolStrip1";
+            // 
+            // tlStrpBtnReview
+            // 
+            tlStrpBtnReview.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            tlStrpBtnReview.Image = Properties.Resources.document_text_ok_filled_20px;
+            tlStrpBtnReview.ImageTransparentColor = System.Drawing.Color.Magenta;
+            tlStrpBtnReview.Name = "tlStrpBtnReview";
+            tlStrpBtnReview.Size = new System.Drawing.Size(113, 24);
+            tlStrpBtnReview.Text = "Review Request";
+            tlStrpBtnReview.Click += tlStrpBtnAudit_Click;
+            // 
+            // toolStripSeparator2
+            // 
+            toolStripSeparator2.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            toolStripSeparator2.Name = "toolStripSeparator2";
+            toolStripSeparator2.Size = new System.Drawing.Size(6, 27);
+            // 
+            // tlStrpBtnDelete
+            // 
+            tlStrpBtnDelete.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            tlStrpBtnDelete.AutoToolTip = false;
+            tlStrpBtnDelete.Image = Properties.Resources.button_rounded_remove_20px;
+            tlStrpBtnDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
+            tlStrpBtnDelete.Name = "tlStrpBtnDelete";
+            tlStrpBtnDelete.Size = new System.Drawing.Size(64, 24);
+            tlStrpBtnDelete.Text = "Delete";
+            tlStrpBtnDelete.Click += tlStrpBtnDelete_Click;
+            // 
+            // tlStrpBtnView
+            // 
+            tlStrpBtnView.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            tlStrpBtnView.Image = Properties.Resources.details_20px;
+            tlStrpBtnView.ImageTransparentColor = System.Drawing.Color.Magenta;
+            tlStrpBtnView.Name = "tlStrpBtnView";
+            tlStrpBtnView.Size = new System.Drawing.Size(56, 24);
+            tlStrpBtnView.Text = "View";
+            tlStrpBtnView.Click += tlStrpBtnView_Click;
+            // 
+            // tlStrpBtnUpdate
+            // 
+            tlStrpBtnUpdate.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            tlStrpBtnUpdate.AutoToolTip = false;
+            tlStrpBtnUpdate.Image = Properties.Resources.button_rounded_edit_20px;
+            tlStrpBtnUpdate.ImageTransparentColor = System.Drawing.Color.Magenta;
+            tlStrpBtnUpdate.Name = "tlStrpBtnUpdate";
+            tlStrpBtnUpdate.Size = new System.Drawing.Size(69, 24);
+            tlStrpBtnUpdate.Text = "Update";
+            tlStrpBtnUpdate.Click += tlStrpBtnUpdate_Click;
+            // 
+            // tlStrpBtnCreate
+            // 
+            tlStrpBtnCreate.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            tlStrpBtnCreate.AutoToolTip = false;
+            tlStrpBtnCreate.Image = Properties.Resources.button_rounded_add_20px;
+            tlStrpBtnCreate.ImageTransparentColor = System.Drawing.Color.Magenta;
+            tlStrpBtnCreate.Name = "tlStrpBtnCreate";
+            tlStrpBtnCreate.Size = new System.Drawing.Size(65, 24);
+            tlStrpBtnCreate.Text = "Create";
+            tlStrpBtnCreate.Click += tlStrpBtnCreate_Click;
+            // 
+            // panel4
+            // 
+            panel4.Controls.Add(label10);
+            panel4.Controls.Add(label3);
+            panel4.Dock = System.Windows.Forms.DockStyle.Top;
+            panel4.Location = new System.Drawing.Point(20, 20);
+            panel4.Name = "panel4";
+            panel4.Padding = new System.Windows.Forms.Padding(0, 0, 0, 15);
+            panel4.Size = new System.Drawing.Size(607, 51);
+            panel4.TabIndex = 14;
+            // 
+            // label10
+            // 
+            label10.AutoSize = true;
+            label10.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            label10.Location = new System.Drawing.Point(3, 21);
+            label10.Name = "label10";
+            label10.Size = new System.Drawing.Size(297, 15);
+            label10.TabIndex = 1;
+            label10.Text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit";
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
+            label3.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            label3.Location = new System.Drawing.Point(3, 0);
+            label3.Name = "label3";
+            label3.Size = new System.Drawing.Size(158, 21);
+            label3.TabIndex = 0;
+            label3.Text = "Obligation Requests";
             // 
             // panel1
             // 
-            panel1.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            panel1.BackColor = System.Drawing.SystemColors.Window;
             panel1.Controls.Add(txtSearch);
             panel1.Controls.Add(label2);
             panel1.Controls.Add(panel3);
@@ -266,7 +386,7 @@
             radCancelled.Appearance = System.Windows.Forms.Appearance.Button;
             radCancelled.Dock = System.Windows.Forms.DockStyle.Top;
             radCancelled.FlatAppearance.BorderSize = 0;
-            radCancelled.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ButtonFace;
+            radCancelled.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ControlLight;
             radCancelled.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.ControlLight;
             radCancelled.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             radCancelled.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
@@ -287,7 +407,7 @@
             radDisapproved.Appearance = System.Windows.Forms.Appearance.Button;
             radDisapproved.Dock = System.Windows.Forms.DockStyle.Top;
             radDisapproved.FlatAppearance.BorderSize = 0;
-            radDisapproved.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ButtonFace;
+            radDisapproved.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ControlLight;
             radDisapproved.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.ControlLight;
             radDisapproved.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             radDisapproved.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
@@ -308,7 +428,7 @@
             radApproved.Appearance = System.Windows.Forms.Appearance.Button;
             radApproved.Dock = System.Windows.Forms.DockStyle.Top;
             radApproved.FlatAppearance.BorderSize = 0;
-            radApproved.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ButtonFace;
+            radApproved.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ControlLight;
             radApproved.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.ControlLight;
             radApproved.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             radApproved.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
@@ -330,7 +450,7 @@
             radPending.Checked = true;
             radPending.Dock = System.Windows.Forms.DockStyle.Top;
             radPending.FlatAppearance.BorderSize = 0;
-            radPending.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ButtonFace;
+            radPending.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ControlLight;
             radPending.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.ControlLight;
             radPending.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             radPending.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
@@ -432,13 +552,14 @@
             // 
             ucObligationsCrud.AutoValidate = System.Windows.Forms.AutoValidate.Disable;
             ucObligationsCrud.Dock = System.Windows.Forms.DockStyle.Fill;
-            ucObligationsCrud.Location = new System.Drawing.Point(0, 67);
+            ucObligationsCrud.Location = new System.Drawing.Point(0, 98);
             ucObligationsCrud.Name = "ucObligationsCrud";
-            ucObligationsCrud.Size = new System.Drawing.Size(874, 485);
+            ucObligationsCrud.Size = new System.Drawing.Size(874, 454);
             ucObligationsCrud.TabIndex = 24;
             // 
             // panel2
             // 
+            panel2.BackColor = System.Drawing.Color.Transparent;
             panel2.Controls.Add(btnCrudSubmit);
             panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
             panel2.Location = new System.Drawing.Point(0, 552);
@@ -465,7 +586,7 @@
             toolStrip3.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             toolStrip3.ImageScalingSize = new System.Drawing.Size(20, 20);
             toolStrip3.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { tlStrpBtnCrudBack });
-            toolStrip3.Location = new System.Drawing.Point(0, 40);
+            toolStrip3.Location = new System.Drawing.Point(0, 71);
             toolStrip3.Name = "toolStrip3";
             toolStrip3.Padding = new System.Windows.Forms.Padding(0, 0, 20, 0);
             toolStrip3.Size = new System.Drawing.Size(874, 27);
@@ -483,6 +604,39 @@
             tlStrpBtnCrudBack.Text = "Back";
             tlStrpBtnCrudBack.Click += tlStrpBtnCrudBack_Click;
             // 
+            // panel5
+            // 
+            panel5.AutoSize = true;
+            panel5.Controls.Add(label11);
+            panel5.Controls.Add(lblCrudStat);
+            panel5.Dock = System.Windows.Forms.DockStyle.Top;
+            panel5.Location = new System.Drawing.Point(0, 0);
+            panel5.Name = "panel5";
+            panel5.Padding = new System.Windows.Forms.Padding(20, 20, 20, 15);
+            panel5.Size = new System.Drawing.Size(874, 71);
+            panel5.TabIndex = 25;
+            // 
+            // label11
+            // 
+            label11.AutoSize = true;
+            label11.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            label11.Location = new System.Drawing.Point(23, 41);
+            label11.Name = "label11";
+            label11.Size = new System.Drawing.Size(297, 15);
+            label11.TabIndex = 2;
+            label11.Text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit";
+            // 
+            // lblCrudStat
+            // 
+            lblCrudStat.AutoSize = true;
+            lblCrudStat.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
+            lblCrudStat.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            lblCrudStat.Location = new System.Drawing.Point(23, 20);
+            lblCrudStat.Name = "lblCrudStat";
+            lblCrudStat.Size = new System.Drawing.Size(52, 21);
+            lblCrudStat.TabIndex = 0;
+            lblCrudStat.Text = "CRUD";
+            // 
             // tbPgView
             // 
             tbPgView.BackColor = System.Drawing.SystemColors.Control;
@@ -499,9 +653,9 @@
             // 
             ucObligationsView.AutoValidate = System.Windows.Forms.AutoValidate.Disable;
             ucObligationsView.Dock = System.Windows.Forms.DockStyle.Fill;
-            ucObligationsView.Location = new System.Drawing.Point(0, 67);
+            ucObligationsView.Location = new System.Drawing.Point(0, 98);
             ucObligationsView.Name = "ucObligationsView";
-            ucObligationsView.Size = new System.Drawing.Size(874, 528);
+            ucObligationsView.Size = new System.Drawing.Size(874, 497);
             ucObligationsView.TabIndex = 25;
             // 
             // toolStrip4
@@ -510,7 +664,7 @@
             toolStrip4.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             toolStrip4.ImageScalingSize = new System.Drawing.Size(20, 20);
             toolStrip4.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { tlsStrpBtnBckView });
-            toolStrip4.Location = new System.Drawing.Point(0, 40);
+            toolStrip4.Location = new System.Drawing.Point(0, 71);
             toolStrip4.Name = "toolStrip4";
             toolStrip4.Padding = new System.Windows.Forms.Padding(0, 0, 20, 0);
             toolStrip4.Size = new System.Drawing.Size(874, 27);
@@ -527,6 +681,29 @@
             tlsStrpBtnBckView.Size = new System.Drawing.Size(56, 24);
             tlsStrpBtnBckView.Text = "Back";
             tlsStrpBtnBckView.Click += tlsStrpBtnBckView_Click;
+            // 
+            // panel8
+            // 
+            panel8.AutoSize = true;
+            panel8.Controls.Add(label12);
+            panel8.Controls.Add(label8);
+            panel8.Dock = System.Windows.Forms.DockStyle.Top;
+            panel8.Location = new System.Drawing.Point(0, 0);
+            panel8.Name = "panel8";
+            panel8.Padding = new System.Windows.Forms.Padding(20, 20, 20, 15);
+            panel8.Size = new System.Drawing.Size(874, 71);
+            panel8.TabIndex = 26;
+            // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
+            label8.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            label8.Location = new System.Drawing.Point(23, 20);
+            label8.Name = "label8";
+            label8.Size = new System.Drawing.Size(190, 21);
+            label8.TabIndex = 0;
+            label8.Text = "View Obligation Request";
             // 
             // tbPgReview
             // 
@@ -545,13 +722,14 @@
             // 
             ucObligationsAudit.AutoValidate = System.Windows.Forms.AutoValidate.Disable;
             ucObligationsAudit.Dock = System.Windows.Forms.DockStyle.Fill;
-            ucObligationsAudit.Location = new System.Drawing.Point(0, 67);
+            ucObligationsAudit.Location = new System.Drawing.Point(0, 98);
             ucObligationsAudit.Name = "ucObligationsAudit";
-            ucObligationsAudit.Size = new System.Drawing.Size(874, 485);
+            ucObligationsAudit.Size = new System.Drawing.Size(874, 454);
             ucObligationsAudit.TabIndex = 26;
             // 
             // flowLayoutPanel2
             // 
+            flowLayoutPanel2.BackColor = System.Drawing.SystemColors.ControlLightLight;
             flowLayoutPanel2.Controls.Add(btnApprove);
             flowLayoutPanel2.Controls.Add(btnDisapprove);
             flowLayoutPanel2.Controls.Add(btnCancel);
@@ -611,7 +789,7 @@
             toolStrip5.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             toolStrip5.ImageScalingSize = new System.Drawing.Size(20, 20);
             toolStrip5.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { tlStrpBtnBckAudit });
-            toolStrip5.Location = new System.Drawing.Point(0, 40);
+            toolStrip5.Location = new System.Drawing.Point(0, 71);
             toolStrip5.Name = "toolStrip5";
             toolStrip5.Padding = new System.Windows.Forms.Padding(0, 0, 20, 0);
             toolStrip5.Size = new System.Drawing.Size(874, 27);
@@ -629,6 +807,29 @@
             tlStrpBtnBckAudit.Text = "Back";
             tlStrpBtnBckAudit.Click += tlStrpBtnBckAudit_Click;
             // 
+            // panel9
+            // 
+            panel9.AutoSize = true;
+            panel9.Controls.Add(label13);
+            panel9.Controls.Add(label9);
+            panel9.Dock = System.Windows.Forms.DockStyle.Top;
+            panel9.Location = new System.Drawing.Point(0, 0);
+            panel9.Name = "panel9";
+            panel9.Padding = new System.Windows.Forms.Padding(20, 20, 20, 15);
+            panel9.Size = new System.Drawing.Size(874, 71);
+            panel9.TabIndex = 27;
+            // 
+            // label9
+            // 
+            label9.AutoSize = true;
+            label9.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
+            label9.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            label9.Location = new System.Drawing.Point(23, 20);
+            label9.Name = "label9";
+            label9.Size = new System.Drawing.Size(207, 21);
+            label9.TabIndex = 0;
+            label9.Text = "Review Obligation Request";
+            // 
             // backgroundWorker1
             // 
             backgroundWorker1.WorkerReportsProgress = true;
@@ -637,161 +838,25 @@
             backgroundWorker1.ProgressChanged += backgroundWorker1_ProgressChanged;
             backgroundWorker1.RunWorkerCompleted += backgroundWorker1_RunWorkerCompleted;
             // 
-            // panel4
+            // label12
             // 
-            panel4.Controls.Add(label3);
-            panel4.Dock = System.Windows.Forms.DockStyle.Top;
-            panel4.Location = new System.Drawing.Point(227, 0);
-            panel4.Name = "panel4";
-            panel4.Padding = new System.Windows.Forms.Padding(10);
-            panel4.Size = new System.Drawing.Size(647, 40);
-            panel4.TabIndex = 14;
+            label12.AutoSize = true;
+            label12.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            label12.Location = new System.Drawing.Point(23, 41);
+            label12.Name = "label12";
+            label12.Size = new System.Drawing.Size(297, 15);
+            label12.TabIndex = 3;
+            label12.Text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit";
             // 
-            // label3
+            // label13
             // 
-            label3.AutoSize = true;
-            label3.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
-            label3.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            label3.Location = new System.Drawing.Point(13, 10);
-            label3.Name = "label3";
-            label3.Size = new System.Drawing.Size(158, 21);
-            label3.TabIndex = 0;
-            label3.Text = "Obligation Requests";
-            // 
-            // tlStrpBtnReview
-            // 
-            tlStrpBtnReview.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            tlStrpBtnReview.Image = Properties.Resources.document_text_ok_filled_20px;
-            tlStrpBtnReview.ImageTransparentColor = System.Drawing.Color.Magenta;
-            tlStrpBtnReview.Name = "tlStrpBtnReview";
-            tlStrpBtnReview.Size = new System.Drawing.Size(113, 24);
-            tlStrpBtnReview.Text = "Review Request";
-            tlStrpBtnReview.Click += tlStrpBtnAudit_Click;
-            // 
-            // toolStripSeparator2
-            // 
-            toolStripSeparator2.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            toolStripSeparator2.Name = "toolStripSeparator2";
-            toolStripSeparator2.Size = new System.Drawing.Size(6, 27);
-            // 
-            // tlStrpBtnDelete
-            // 
-            tlStrpBtnDelete.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            tlStrpBtnDelete.AutoToolTip = false;
-            tlStrpBtnDelete.Image = Properties.Resources.button_rounded_remove_20px;
-            tlStrpBtnDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
-            tlStrpBtnDelete.Name = "tlStrpBtnDelete";
-            tlStrpBtnDelete.Size = new System.Drawing.Size(64, 24);
-            tlStrpBtnDelete.Text = "Delete";
-            tlStrpBtnDelete.Click += tlStrpBtnDelete_Click;
-            // 
-            // tlStrpBtnView
-            // 
-            tlStrpBtnView.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            tlStrpBtnView.Image = Properties.Resources.details_20px;
-            tlStrpBtnView.ImageTransparentColor = System.Drawing.Color.Magenta;
-            tlStrpBtnView.Name = "tlStrpBtnView";
-            tlStrpBtnView.Size = new System.Drawing.Size(56, 24);
-            tlStrpBtnView.Text = "View";
-            tlStrpBtnView.Click += tlStrpBtnView_Click;
-            // 
-            // tlStrpBtnUpdate
-            // 
-            tlStrpBtnUpdate.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            tlStrpBtnUpdate.AutoToolTip = false;
-            tlStrpBtnUpdate.Image = Properties.Resources.button_rounded_edit_20px;
-            tlStrpBtnUpdate.ImageTransparentColor = System.Drawing.Color.Magenta;
-            tlStrpBtnUpdate.Name = "tlStrpBtnUpdate";
-            tlStrpBtnUpdate.Size = new System.Drawing.Size(69, 24);
-            tlStrpBtnUpdate.Text = "Update";
-            tlStrpBtnUpdate.Click += tlStrpBtnUpdate_Click;
-            // 
-            // tlStrpBtnCreate
-            // 
-            tlStrpBtnCreate.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            tlStrpBtnCreate.AutoToolTip = false;
-            tlStrpBtnCreate.Image = Properties.Resources.button_rounded_add_20px;
-            tlStrpBtnCreate.ImageTransparentColor = System.Drawing.Color.Magenta;
-            tlStrpBtnCreate.Name = "tlStrpBtnCreate";
-            tlStrpBtnCreate.Size = new System.Drawing.Size(65, 24);
-            tlStrpBtnCreate.Text = "Create";
-            tlStrpBtnCreate.Click += tlStrpBtnCreate_Click;
-            // 
-            // toolStrip1
-            // 
-            toolStrip1.BackColor = System.Drawing.SystemColors.Control;
-            toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            toolStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { tlStrpBtnReview, toolStripSeparator2, tlStrpBtnDelete, tlStrpBtnView, tlStrpBtnUpdate, tlStrpBtnCreate });
-            toolStrip1.Location = new System.Drawing.Point(227, 40);
-            toolStrip1.Name = "toolStrip1";
-            toolStrip1.Padding = new System.Windows.Forms.Padding(4, 4, 10, 4);
-            toolStrip1.Size = new System.Drawing.Size(647, 35);
-            toolStrip1.TabIndex = 12;
-            toolStrip1.Text = "toolStrip1";
-            // 
-            // panel5
-            // 
-            panel5.Controls.Add(lblCrudStat);
-            panel5.Dock = System.Windows.Forms.DockStyle.Top;
-            panel5.Location = new System.Drawing.Point(0, 0);
-            panel5.Name = "panel5";
-            panel5.Padding = new System.Windows.Forms.Padding(10);
-            panel5.Size = new System.Drawing.Size(874, 40);
-            panel5.TabIndex = 25;
-            // 
-            // lblCrudStat
-            // 
-            lblCrudStat.AutoSize = true;
-            lblCrudStat.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
-            lblCrudStat.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            lblCrudStat.Location = new System.Drawing.Point(13, 10);
-            lblCrudStat.Name = "lblCrudStat";
-            lblCrudStat.Size = new System.Drawing.Size(52, 21);
-            lblCrudStat.TabIndex = 0;
-            lblCrudStat.Text = "CRUD";
-            // 
-            // panel8
-            // 
-            panel8.Controls.Add(label8);
-            panel8.Dock = System.Windows.Forms.DockStyle.Top;
-            panel8.Location = new System.Drawing.Point(0, 0);
-            panel8.Name = "panel8";
-            panel8.Padding = new System.Windows.Forms.Padding(10);
-            panel8.Size = new System.Drawing.Size(874, 40);
-            panel8.TabIndex = 26;
-            // 
-            // label8
-            // 
-            label8.AutoSize = true;
-            label8.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
-            label8.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            label8.Location = new System.Drawing.Point(13, 10);
-            label8.Name = "label8";
-            label8.Size = new System.Drawing.Size(190, 21);
-            label8.TabIndex = 0;
-            label8.Text = "View Obligation Request";
-            // 
-            // panel9
-            // 
-            panel9.Controls.Add(label9);
-            panel9.Dock = System.Windows.Forms.DockStyle.Top;
-            panel9.Location = new System.Drawing.Point(0, 0);
-            panel9.Name = "panel9";
-            panel9.Padding = new System.Windows.Forms.Padding(10);
-            panel9.Size = new System.Drawing.Size(874, 40);
-            panel9.TabIndex = 27;
-            // 
-            // label9
-            // 
-            label9.AutoSize = true;
-            label9.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
-            label9.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            label9.Location = new System.Drawing.Point(13, 10);
-            label9.Name = "label9";
-            label9.Size = new System.Drawing.Size(190, 21);
-            label9.TabIndex = 0;
-            label9.Text = "View Obligation Request";
+            label13.AutoSize = true;
+            label13.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            label13.Location = new System.Drawing.Point(23, 41);
+            label13.Name = "label13";
+            label13.Size = new System.Drawing.Size(297, 15);
+            label13.TabIndex = 4;
+            label13.Text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit";
             // 
             // frmObligations
             // 
@@ -804,15 +869,20 @@
             ShowIcon = false;
             ShowInTaskbar = false;
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            Text = "frmObligations";
+            Text = "Budget System > Obligation Request";
             Load += frmObligations_Load;
             customTabControl1.ResumeLayout(false);
             tbPgMain.ResumeLayout(false);
-            tbPgMain.PerformLayout();
+            panel10.ResumeLayout(false);
+            panel10.PerformLayout();
             panel7.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dgvMain).EndInit();
             panel6.ResumeLayout(false);
             panel6.PerformLayout();
+            toolStrip1.ResumeLayout(false);
+            toolStrip1.PerformLayout();
+            panel4.ResumeLayout(false);
+            panel4.PerformLayout();
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             panel3.ResumeLayout(false);
@@ -821,23 +891,19 @@
             panel2.ResumeLayout(false);
             toolStrip3.ResumeLayout(false);
             toolStrip3.PerformLayout();
+            panel5.ResumeLayout(false);
+            panel5.PerformLayout();
             tbPgView.ResumeLayout(false);
             tbPgView.PerformLayout();
             toolStrip4.ResumeLayout(false);
             toolStrip4.PerformLayout();
+            panel8.ResumeLayout(false);
+            panel8.PerformLayout();
             tbPgReview.ResumeLayout(false);
             tbPgReview.PerformLayout();
             flowLayoutPanel2.ResumeLayout(false);
             toolStrip5.ResumeLayout(false);
             toolStrip5.PerformLayout();
-            panel4.ResumeLayout(false);
-            panel4.PerformLayout();
-            toolStrip1.ResumeLayout(false);
-            toolStrip1.PerformLayout();
-            panel5.ResumeLayout(false);
-            panel5.PerformLayout();
-            panel8.ResumeLayout(false);
-            panel8.PerformLayout();
             panel9.ResumeLayout(false);
             panel9.PerformLayout();
             ResumeLayout(false);
@@ -902,5 +968,10 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Panel panel9;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Panel panel10;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label label13;
     }
 }
