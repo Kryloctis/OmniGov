@@ -325,58 +325,15 @@ namespace LFS.Budget.Views.Obligations
             {
                 var parameters = ((string srchKey, string status, DateTime dtFrom, DateTime dtTo, int rowLimit))e.Argument;
 
-                var dataTable = new DataTable();
-                dataTable.Columns.AddRange(new[]
-                {
-                    new DataColumn("id", typeof(int)),
-                    new DataColumn("transaction_no", typeof(string)),
-                    new DataColumn("obligation_no", typeof(string)),
-                    new DataColumn("date_requested", typeof(DateTime)),
-                    new DataColumn("payee", typeof(string)),
-                    new DataColumn("created_at", typeof(string)),
-                    new DataColumn("created_by_id", typeof(string)),
-                    new DataColumn("created_by_name", typeof(string)),
-                    new DataColumn("updated_at", typeof(string)),
-                    new DataColumn("updated_by_id", typeof(string)),
-                    new DataColumn("updated_by_name", typeof(string)),
-                });
-
-                var dtObligations = AccFactory.ObligationRequestRepository().GetRecords(parameters.srchKey,
-                                                 parameters.status.ToLower(),
-                                                 parameters.dtFrom,
-                                                 parameters.dtTo,
-                                                 parameters.rowLimit);
-
-                int totalRowCount = dtObligations.Rows.Count;
-                int progressCount = 0;
-
-                foreach (DataRow dtRow in dtObligations.Rows)
-                {
-                    string transactionNo = dtRow["transaction_no"].ToString();
-
-                    var newRow = dataTable.NewRow();
-                    newRow["id"] = dtRow["id"];
-                    newRow["transaction_no"] = BudgetHelper.GenTransactionNo(transactionNo);
-                    newRow["obligation_no"] = dtRow["obligation_no"];
-                    newRow["date_requested"] = dtRow["date_requested"];
-                    newRow["payee"] = dtRow["payee"];
-
-                    string createdById = dtRow["created_by"]?.ToString();
-                    string updatedById = dtRow["updated_by"]?.ToString();
-
-                    newRow["created_at"] = dtRow["created_at"];
-                    newRow["created_by_id"] = dtRow["created_by"];
-                    newRow["created_by_name"] = GetUserFullName(createdById);
-                    newRow["updated_at"] = dtRow["updated_at"];
-                    newRow["updated_by_id"] = dtRow["updated_by"];
-                    newRow["updated_by_name"] = GetUserFullName(updatedById);
-
-                    progressCount++;
-                    dataTable.Rows.Add(newRow);
-                    Helper.ProgressCounter(backgroundWorker1, totalRowCount, progressCount);
-                }
-
-                e.Result = dataTable;
+                var service = new Services.ObligationService();
+                e.Result = service.GetObligationRequests(
+                    parameters.srchKey,
+                    parameters.status,
+                    parameters.dtFrom,
+                    parameters.dtTo,
+                    parameters.rowLimit,
+                    (current, total) => Helper.ProgressCounter(backgroundWorker1, total, current)
+                );
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }

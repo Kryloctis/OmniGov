@@ -76,6 +76,7 @@
             toolStrip4 = new System.Windows.Forms.ToolStrip();
             tlsStrpBtnBckView = new System.Windows.Forms.ToolStripButton();
             panel8 = new System.Windows.Forms.Panel();
+            label12 = new System.Windows.Forms.Label();
             label8 = new System.Windows.Forms.Label();
             tbPgReview = new System.Windows.Forms.TabPage();
             ucObligationsAudit = new ucObligations();
@@ -86,10 +87,9 @@
             toolStrip5 = new System.Windows.Forms.ToolStrip();
             tlStrpBtnBckAudit = new System.Windows.Forms.ToolStripButton();
             panel9 = new System.Windows.Forms.Panel();
+            label13 = new System.Windows.Forms.Label();
             label9 = new System.Windows.Forms.Label();
             backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            label12 = new System.Windows.Forms.Label();
-            label13 = new System.Windows.Forms.Label();
             customTabControl1.SuspendLayout();
             tbPgMain.SuspendLayout();
             panel10.SuspendLayout();
@@ -128,7 +128,7 @@
             // 
             // tbPgMain
             // 
-            tbPgMain.BackColor = System.Drawing.SystemColors.Control;
+            tbPgMain.BackColor = System.Drawing.Color.Transparent;
             tbPgMain.Controls.Add(panel10);
             tbPgMain.Controls.Add(panel1);
             tbPgMain.Location = new System.Drawing.Point(4, 24);
@@ -226,7 +226,7 @@
             // 
             // toolStrip1
             // 
-            toolStrip1.BackColor = System.Drawing.SystemColors.Control;
+            toolStrip1.BackColor = System.Drawing.Color.Transparent;
             toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             toolStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { tlStrpBtnReview, toolStripSeparator2, tlStrpBtnDelete, tlStrpBtnView, tlStrpBtnUpdate, tlStrpBtnCreate });
@@ -694,6 +694,16 @@
             panel8.Size = new System.Drawing.Size(874, 71);
             panel8.TabIndex = 26;
             // 
+            // label12
+            // 
+            label12.AutoSize = true;
+            label12.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            label12.Location = new System.Drawing.Point(23, 41);
+            label12.Name = "label12";
+            label12.Size = new System.Drawing.Size(297, 15);
+            label12.TabIndex = 3;
+            label12.Text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit";
+            // 
             // label8
             // 
             label8.AutoSize = true;
@@ -819,6 +829,16 @@
             panel9.Size = new System.Drawing.Size(874, 71);
             panel9.TabIndex = 27;
             // 
+            // label13
+            // 
+            label13.AutoSize = true;
+            label13.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            label13.Location = new System.Drawing.Point(23, 41);
+            label13.Name = "label13";
+            label13.Size = new System.Drawing.Size(297, 15);
+            label13.TabIndex = 4;
+            label13.Text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit";
+            // 
             // label9
             // 
             label9.AutoSize = true;
@@ -837,26 +857,6 @@
             backgroundWorker1.DoWork += backgroundWorker1_DoWork;
             backgroundWorker1.ProgressChanged += backgroundWorker1_ProgressChanged;
             backgroundWorker1.RunWorkerCompleted += backgroundWorker1_RunWorkerCompleted;
-            // 
-            // label12
-            // 
-            label12.AutoSize = true;
-            label12.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            label12.Location = new System.Drawing.Point(23, 41);
-            label12.Name = "label12";
-            label12.Size = new System.Drawing.Size(297, 15);
-            label12.TabIndex = 3;
-            label12.Text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit";
-            // 
-            // label13
-            // 
-            label13.AutoSize = true;
-            label13.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            label13.Location = new System.Drawing.Point(23, 41);
-            label13.Name = "label13";
-            label13.Size = new System.Drawing.Size(297, 15);
-            label13.TabIndex = 4;
-            label13.Text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit";
             // 
             // frmObligations
             // 

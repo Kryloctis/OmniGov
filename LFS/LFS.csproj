@@ -359,4 +359,10 @@
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
 	</ItemGroup>
+	<ItemGroup>
+	  <Folder Include="Accounting\Helpers\" />
+	  <Folder Include="Accounting\Services\" />
+	  <Folder Include="Accounting\Reports\" />
+	  <Folder Include="Treasury\" />
+	</ItemGroup>
 </Project>
