@@ -6,4 +6,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Accounting.Domain\Accounting.Domain.csproj" />
+    <ProjectReference Include="..\OmniGov.Core\OmniGov.Core.csproj" />
+  </ItemGroup>
+
 </Project>
