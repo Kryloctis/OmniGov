@@ -1,6 +1,6 @@
 ﻿using ACC.Data;
 using MySql.Data.MySqlClient;
-using RPT.Data;
+using RPT.Data.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
