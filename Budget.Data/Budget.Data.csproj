@@ -6,4 +6,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Budget.Domain\Budget.Domain.csproj" />
+    <ProjectReference Include="..\OmniGov.Core\OmniGov.Core.csproj" />
+  </ItemGroup>
+
 </Project>
