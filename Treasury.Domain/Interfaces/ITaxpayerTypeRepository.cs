@@ -1,0 +1,16 @@
+﻿using OmniGov.Core.Interfaces;
+using Treasury.Domain.Entities;
+
+namespace Treasury.Domain.Interfaces
+{
+    public interface ITaxpayerTypeRepository : IRepository<TaxpayerTypeModel>
+    {
+        bool NameExist(string name);
+
+        bool NameExist(string name, int id);
+
+        int GetLastInsertedId();
+
+        int GetIdByName(string name);
+    }
+}

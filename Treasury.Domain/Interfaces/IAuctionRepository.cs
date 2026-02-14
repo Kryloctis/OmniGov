@@ -1,0 +1,15 @@
+﻿using OmniGov.Core.Interfaces;
+using System.Data;
+using Treasury.Domain.Entities;
+
+namespace Treasury.Domain.Interfaces
+{
+    public interface IAuctionRepository : IRepository<AuctionModel>
+    {
+        Dictionary<string, string> GetRecordById(int auctionId);
+
+        DataTable GetViewRecords(string searchKey, DateTime date, int rowFilter);
+
+        DataTable GetAuctionSchedule();
+    }
+}
