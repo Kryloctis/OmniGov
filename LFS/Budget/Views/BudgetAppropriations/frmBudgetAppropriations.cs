@@ -9,7 +9,6 @@ using System.Drawing;
 using System.Windows.Forms;
 using LFS.Budget.Views.Realignment;
 using LFS.Budget.Views.SupplementalAppropriations;
-using ACC.Domain.Budget.Models;
 
 namespace LFS.Budget.Views.BudgetAppropriations
 {
