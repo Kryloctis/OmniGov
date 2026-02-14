@@ -1,7 +1,7 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
 using LFS.Helpers;
-using RPT.Data;
+using RPT.Data.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Data;
