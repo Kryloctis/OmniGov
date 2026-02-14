@@ -2,7 +2,4 @@
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
   </PropertyGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\ACC.Domain\ACC.Domain.csproj" />
-  </ItemGroup>
 </Project>
