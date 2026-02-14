@@ -1,7 +1,7 @@
 ﻿using RPT.Domain.Interfaces;
 using System.Transactions;
 
-namespace RPT.Data
+namespace RPT.Data.Repositories
 {
     public class RptServerRepository : IServer
     {
@@ -24,7 +24,7 @@ namespace RPT.Data
 
         public bool TestConnection(string connectionString)
         {
-            this.mySqlGenericCommandsRPT = new RptGenericCommands(connectionString);
+            mySqlGenericCommandsRPT = new RptGenericCommands(connectionString);
             return mySqlGenericCommandsRPT.TestConnection(connectionString);
         }
     }

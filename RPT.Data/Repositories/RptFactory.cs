@@ -1,6 +1,6 @@
 ﻿using RPT.Domain.Interfaces;
 
-namespace RPT.Data
+namespace RPT.Data.Repositories
 {
     public class RptFactory
     {

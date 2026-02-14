@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 
-namespace RPT.Data
+namespace RPT.Data.Repositories
 {
     public class PreviousAssessmentRepository : IPreviousAssessment
     {
