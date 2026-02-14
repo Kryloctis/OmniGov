@@ -1,10 +1,11 @@
-﻿using ACC.Data;
-using ACC.Domain.Models;
-using LFS.Helpers;
+﻿using LFS.Helpers;
+using OmniGov.Core.Repositories;
 using System;
 using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
+using Treasury.Data;
+using Treasury.Domain.Entities;
 
 namespace LFS.Views.Manage.TaxPayers
 {
@@ -25,12 +26,12 @@ namespace LFS.Views.Manage.TaxPayers
                 errorProvider1.GetError(cmbxRepresentative),
             };
 
-            return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
+            return Factory.CreateErrors(errorArray).GenerateErrorMessage();
         }
 
         internal void LoadTaxPayersType()
         {
-            var dtTaxpayerType = AccFactory.TaxpayerTypeRepository().GetRecords();
+            var dtTaxpayerType = TreasuryFactory.TaxpayerTypeRepository().GetRecords();
 
             cmbxTaxPayerType.DataSource = dtTaxpayerType;
             cmbxTaxPayerType.ValueMember = "id";
@@ -76,7 +77,7 @@ namespace LFS.Views.Manage.TaxPayers
             var dataTable = new DataTable();
             dataTable.Columns.AddRange(registryColumn);
 
-            var dtRegistry = AccFactory.RegistryRepository().GetRecords();
+            var dtRegistry = Factory.RegistryRepository().GetRecords();
 
             foreach (DataRow row in dtRegistry.Rows)
             {
@@ -96,7 +97,7 @@ namespace LFS.Views.Manage.TaxPayers
 
         private void LoadSelectedRecord(int taxpayerId)
         {
-            var dictTaxpayer = AccFactory.TaxpayersRepository().GetRecordByID(taxpayerId);
+            var dictTaxpayer = TreasuryFactory.TaxpayersRepository().GetRecordByID(taxpayerId);
 
             txtTIN.Text = dictTaxpayer["tin"];
             txtName.Text = dictTaxpayer["name"];

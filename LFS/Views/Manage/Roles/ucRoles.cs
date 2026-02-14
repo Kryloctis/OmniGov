@@ -1,6 +1,6 @@
-﻿using ACC.Data;
-using ACC.Domain.Models;
-using LFS.Helpers;
+﻿using LFS.Helpers;
+using OmniGov.Core.Entities;
+using OmniGov.Core.Repositories;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -27,7 +27,7 @@ namespace LFS.Views.Manage.Users.Roles
                 epName.GetError(txtName)
             };
 
-            return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
+            return Factory.CreateErrors(errorArray).GenerateErrorMessage();
         }
 
         internal RolesModel RolesModel()
@@ -56,8 +56,8 @@ namespace LFS.Views.Manage.Users.Roles
 
         private void LoadSelectedRole()
         {
-            var roleDict = AccFactory.RolesRepository().GetRecordByID(roleId);
-            var rolePermissionIds = AccFactory.RolesPermissionsRepository()
+            var roleDict = Factory.RolesRepository().GetRecordByID(roleId);
+            var rolePermissionIds = Factory.RolesPermissionsRepository()
                                     .GetViewRecordsByRoleId(roleId)
                                     .AsEnumerable()
                                     .Select(row => Convert.ToInt32(row["permissions_id"]))
@@ -98,7 +98,7 @@ namespace LFS.Views.Manage.Users.Roles
 
         internal void LoadPermissions()
         {
-            var dtPermissions = AccFactory.PermissionsRepository().GetRecords();
+            var dtPermissions = Factory.PermissionsRepository().GetRecords();
 
             chkBxPermissions.Items.Clear(); // Clear any existing items
             chkBxPermissions.DisplayMember = "Value"; // Display the permission name
@@ -120,7 +120,7 @@ namespace LFS.Views.Manage.Users.Roles
 
             if (Helper.ShowErrorTextBoxEmpty(errorProvider, textBox, "Name"))
                 return false;
-            else if (isEdit ? AccFactory.RolesRepository().NameExist(roleName, roleId) : AccFactory.RolesRepository().NameExist(roleName))
+            else if (isEdit ? Factory.RolesRepository().NameExist(roleName, roleId) : Factory.RolesRepository().NameExist(roleName))
             {
                 errorProvider.SetError(textBox, "Role name already exist");
                 return false;

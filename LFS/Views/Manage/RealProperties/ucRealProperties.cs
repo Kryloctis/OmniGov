@@ -1,12 +1,14 @@
-﻿using ACC.Data;
-using ACC.Domain.Models;
-using LFS.Helpers;
+﻿using LFS.Helpers;
+using OmniGov.Core.Entities;
+using OmniGov.Core.Repositories;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Linq;
 using System.Windows.Forms;
+using Treasury.Data;
+using Treasury.Domain.Entities;
 
 namespace LFS.Views.Manage.TaxPayers
 {
@@ -40,8 +42,8 @@ namespace LFS.Views.Manage.TaxPayers
 
         private void LoadSelectedRecord()
         {
-            var dictRpt = AccFactory.RealPropertiesRepository().GetViewRecordById(rptId);
-            var dtPrevRptDb = AccFactory.RptPreviousAssessmentRepository().GetRecordsByRptId(rptId);
+            var dictRpt = TreasuryFactory.RealPropertiesRepository().GetViewRecordById(rptId);
+            var dtPrevRptDb = TreasuryFactory.RptPreviousAssessmentRepository().GetRecordsByRptId(rptId);
 
             chckTaxable.Checked = (dictRpt["is_taxable"] == "1");
             chckCancelled.Checked = (dictRpt["is_cancelled"] == "1");
@@ -118,7 +120,7 @@ namespace LFS.Views.Manage.TaxPayers
             {
                 int prevRptId = Convert.ToInt32(row["real_property_id"]);
                 int prevTaxpayerId = Convert.ToInt32(row["taxpayers_id"]);
-                var dictPrevRpt = AccFactory.RealPropertiesRepository().GetViewRecordById(prevRptId);
+                var dictPrevRpt = TreasuryFactory.RealPropertiesRepository().GetViewRecordById(prevRptId);
                 decimal assessedValue = Convert.ToDecimal(dictPrevRpt["assessed_value"]);
                 decimal otherImprovements = Convert.ToDecimal(dictPrevRpt["other_improvements"]);
 
@@ -162,7 +164,7 @@ namespace LFS.Views.Manage.TaxPayers
                 errorProvider1.GetError(cmbxTaxpayer)
             };
 
-            return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
+            return Factory.CreateErrors(errorArray).GenerateErrorMessage();
         }
 
         internal void ResetForm()
@@ -209,38 +211,38 @@ namespace LFS.Views.Manage.TaxPayers
 
         private void LoadBarangay()
         {
-            var dtBarangay = AccFactory.BarangayRepository().GetRecords();
+            var dtBarangay = Factory.BarangayRepository().GetRecords();
             HelperLoadRecords.BarangaysCombobox(dtBarangay, cmbxBarangays, "name", "id");
         }
 
         private void LoadActualUseCodes()
         {
-            var dtActualUse = AccFactory.ActualUseCodesRepository().GetRecords();
+            var dtActualUse = Factory.ActualUseCodesRepository().GetRecords();
             HelperLoadRecords.ActualUseCombobox(dtActualUse, cmbxActualUse, "id", "name");
         }
 
         private void LoadClassifications()
         {
-            var dtClassfications = AccFactory.ClassificationCodesRepository().GetRecords();
+            var dtClassfications = Factory.ClassificationCodesRepository().GetRecords();
             HelperLoadRecords.ClassificationCombobox(dtClassfications, cmbxClassification, "id", "name");
         }
 
         private void LoadTaxpayers()
         {
-            var dtTaxpayers = AccFactory.TaxpayersRepository().GetRecords();
+            var dtTaxpayers = TreasuryFactory.TaxpayersRepository().GetRecords();
             HelperLoadRecords.SearchableCombobox2(dtTaxpayers, cmbxTaxpayer, "id", "name");
             HelperLoadRecords.SearchableCombobox2(dtTaxpayers, cmbxPreviousTaxpayer, "id", "name");
         }
 
         private void LoadSelectedTaxpayer(int taxpayerId)
         {
-            var dictTaxpayer = AccFactory.TaxpayersRepository().GetViewRecordById(taxpayerId);
+            var dictTaxpayer = TreasuryFactory.TaxpayersRepository().GetViewRecordById(taxpayerId);
             txtRepresentative.Text = dictTaxpayer["representative_name"];
         }
 
         private bool ArpNoValidated(bool isEdit, string arpNo, int rptId)
         {
-            bool arpNoExist = isEdit ? AccFactory.RealPropertiesRepository().CompleteArpNoExist(arpNo, rptId) : AccFactory.RealPropertiesRepository().CompleteArpNoExist(arpNo);
+            bool arpNoExist = isEdit ? TreasuryFactory.RealPropertiesRepository().CompleteArpNoExist(arpNo, rptId) : TreasuryFactory.RealPropertiesRepository().CompleteArpNoExist(arpNo);
 
             if (Helper.ShowErrorTextBoxEmpty(errorProvider1, txtArpNo, "ARP No."))
                 return false;
@@ -264,7 +266,7 @@ namespace LFS.Views.Manage.TaxPayers
             var dataTable = new DataTable();
             dataTable.Columns.AddRange(registryColumn);
 
-            var dtRealPropertiesFromDB = isEdit ? AccFactory.RealPropertiesRepository().GetRecordNotExistedPreviousRpt(rptId) : AccFactory.RealPropertiesRepository().GetRecordNotExistedPreviousRpt();
+            var dtRealPropertiesFromDB = isEdit ? TreasuryFactory.RealPropertiesRepository().GetRecordNotExistedPreviousRpt(rptId) : TreasuryFactory.RealPropertiesRepository().GetRecordNotExistedPreviousRpt();
 
             foreach (DataRow row in dtRealPropertiesFromDB.Rows)
             {
@@ -422,7 +424,7 @@ namespace LFS.Views.Manage.TaxPayers
                 if (IsDuplicateRow(rptId, dataSource))
                 {
                     var errors = new string[] { "Real propertie already recorded to the list" };
-                    var errorMessage = AccFactory.CreateErrors(errors).GenerateErrorMessage();
+                    var errorMessage = Factory.CreateErrors(errors).GenerateErrorMessage();
 
                     Helper.MessageBoxWarning(errorMessage);
                     return;

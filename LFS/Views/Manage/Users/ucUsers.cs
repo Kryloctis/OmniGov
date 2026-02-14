@@ -1,8 +1,8 @@
-﻿using ACC.Data;
-using ACC.Domain.Models;
-using LFS.CustomTools;
+﻿using LFS.CustomTools;
 using LFS.Helpers;
 using LFS.Properties;
+using OmniGov.Core.Entities;
+using OmniGov.Core.Repositories;
 using System;
 using System.ComponentModel;
 using System.Data;
@@ -55,9 +55,9 @@ namespace LFS.Views.Manage.Users
 
         private void LoadSelectedRecord(int userId)
         {
-            var dictUser = AccFactory.UsersRepository().GetViewRecordById(userId);
+            var dictUser = Factory.UsersRepository().GetViewRecordById(userId);
             bool isRoleIdValid = int.TryParse(dictUser["roles_id"], out int roleId);
-            var dictRoles = AccFactory.RolesRepository().GetRecordByID(roleId);
+            var dictRoles = Factory.RolesRepository().GetRecordByID(roleId);
 
             var radioButtons = flwLytPnlRole.Controls.OfType<RadioButton>();
 
@@ -92,7 +92,7 @@ namespace LFS.Views.Manage.Users
         internal void LoadRoles(FlowLayoutPanel flowLayoutPanel)
         {
             flowLayoutPanel.Controls.Clear();
-            DataTable dtRole = AccFactory.RolesRepository().GetRecords();
+            DataTable dtRole = Factory.RolesRepository().GetRecords();
 
             foreach (DataRow dtRow in dtRole.Rows)
             {
@@ -132,7 +132,7 @@ namespace LFS.Views.Manage.Users
                 errorProvider1.GetError(txtConfirmPassword),
             };
 
-            return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
+            return Factory.CreateErrors(errorArray).GenerateErrorMessage();
         }
 
         internal void ResetForm()
@@ -156,7 +156,7 @@ namespace LFS.Views.Manage.Users
             {
                 e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtUsername, "username");
 
-                var usersRepository = AccFactory.UsersRepository();
+                var usersRepository = Factory.UsersRepository();
                 string userName = txtUsername.Text.Trim();
                 bool userNameExist;
 

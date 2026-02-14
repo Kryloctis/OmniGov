@@ -1,6 +1,6 @@
-﻿using ACC.Data;
-using ACC.Domain.Models;
-using LFS.Helpers;
+﻿using LFS.Helpers;
+using OmniGov.Core.Entities;
+using OmniGov.Core.Repositories;
 using System;
 using System.ComponentModel;
 using System.Windows.Forms;
@@ -30,7 +30,7 @@ namespace LFS.Views.Manage.Registry
                 errorProvider1.GetError(txtCountry)
             };
 
-            return AccFactory.CreateErrors(errors).GenerateErrorMessage();
+            return Factory.CreateErrors(errors).GenerateErrorMessage();
         }
 
         internal void ResetFields()
@@ -77,7 +77,7 @@ namespace LFS.Views.Manage.Registry
 
         internal void LoadSelectedRecord()
         {
-            var dictRegistry = AccFactory.RegistryRepository().GetRecordByID(registryId);
+            var dictRegistry = Factory.RegistryRepository().GetRecordByID(registryId);
 
             txtFirstName.Text = dictRegistry["first_name"];
             txtMiddleName.Text = dictRegistry["middle_name"];
