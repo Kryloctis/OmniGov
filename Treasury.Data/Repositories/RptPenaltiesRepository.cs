@@ -1,0 +1,148 @@
+﻿using OmniGov.Core.Repositories;
+using System.Data;
+using System.Transactions;
+using Treasury.Domain.Entities;
+using Treasury.Domain.Interfaces;
+
+namespace Treasury.Data.Repositories
+{
+    public class RptPenaltiesRepository : IRptPenaltiesRepository
+    {
+        private GenericCommands _mySqlGenericCommandsLFS;
+        private readonly string tableName = "rpt_penalties";
+
+        public RptPenaltiesRepository(GenericCommands mySqlGenericCommandsLFS)
+        {
+            _mySqlGenericCommandsLFS = mySqlGenericCommandsLFS;
+        }
+
+        public int CountRecords()
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Delete(List<RptPenaltiesModel> entityList)
+        {
+            using (var scope = new TransactionScope())
+            {
+                foreach (var entity in entityList)
+                {
+                    var parameters = new object[][]
+                    {
+                        new object[] { @"id", DbType.Int32, entity.Id}
+                    };
+
+                    string query = $"DELETE FROM {tableName} WHERE id = @id";
+                    _ = _mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
+                }
+
+                scope.Complete();
+                return true;
+            }
+        }
+
+        public Dictionary<string, string> GetRecordByID(int Id)
+        {
+            var dict = new Dictionary<string, string>();
+
+            var parameters = new object[][]
+            {
+                new object[] { "@id", DbType.Int32, Id}
+            };
+
+            string query = $"SELECT * FROM {tableName} WHERE id = @id";
+
+            using (var items = _mySqlGenericCommandsLFS.ExecuteReader(query, parameters))
+            {
+                if (items.Rows.Count < 1)
+                    return dict;
+
+                foreach (DataRow item in items.Rows)
+                {
+                    dict.Add("frequency", item["frequency"].ToString());
+                    dict.Add("description", item["description"].ToString());
+                    dict.Add("rate", item["rate"].ToString());
+                }
+
+                return dict;
+            }
+        }
+
+        public DataTable GetRecords()
+        {
+            string query = $"SELECT * FROM {tableName}";
+            var dataTable = new DataTable();
+            return _mySqlGenericCommandsLFS.Fill(query, dataTable);
+        }
+
+        public DataTable GetRecordsBySearch(string searchText)
+        {
+            var parameters = new object[][]
+            {
+                new object[] { "@searchText", DbType.String, $"%{searchText}%"}
+            };
+
+            string query = $"SELECT * FROM {tableName} WHERE description LIKE @searchText";
+            var dataTable = new DataTable();
+            return _mySqlGenericCommandsLFS.FillBySearch(query, dataTable, parameters);
+        }
+
+        public bool IdExist(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Insert(RptPenaltiesModel entity)
+        {
+            var parameters = new object[][]
+            {
+                new object[] { "@description", DbType.String, entity.Description},
+                new object[] { "@rate", DbType.Decimal, entity.Rate / 100},
+                new object[] { "@frequency", DbType.String, entity.Frequency}
+            };
+
+            string query = $"INSERT INTO {tableName} (description, rate, frequency) VALUES (@description, @rate, @frequency)";
+            return _mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
+        }
+
+        public bool Update(RptPenaltiesModel entity)
+        {
+            var parameters = new object[][]
+            {
+                new object[] { "@id", DbType.Int32, entity.Id},
+                new object[] { "@description", DbType.String, entity.Description},
+                new object[] { "@rate", DbType.Decimal, entity.Rate / 100},
+                new object[] { "@frequency", DbType.String, entity.Frequency}
+            };
+
+            string query = $"UPDATE {tableName} SET description = @description, rate = @rate, frequency = @frequency WHERE id = @id";
+            return _mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
+        }
+
+        public Dictionary<string, string> GetRecordByDescription(string description)
+        {
+            var dict = new Dictionary<string, string>();
+
+            var parameters = new object[][]
+            {
+                new object[] { "@description", DbType.String, description}
+            };
+
+            string query = $"SELECT id, description, frequency, rate FROM {tableName} WHERE description = @description";
+            using (var reader = _mySqlGenericCommandsLFS.ExecuteReader(query, parameters))
+            {
+                if (reader.Rows.Count < 1)
+                    return dict;
+
+                foreach (DataRow row in reader.Rows)
+                {
+                    dict.Add("id", row["id"].ToString());
+                    dict.Add("description", row["description"].ToString());
+                    dict.Add("frequency", row["frequency"].ToString());
+                    dict.Add("rate", row["rate"].ToString());
+                }
+                return dict;
+            }
+        }
+    }
+}
