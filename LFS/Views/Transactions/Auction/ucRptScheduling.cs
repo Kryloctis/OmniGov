@@ -1,8 +1,9 @@
-﻿using ACC.Data;
-using ACC.Domain.Models;
-using LFS.Helpers;
+﻿using LFS.Helpers;
+using OmniGov.Core.Repositories;
 using System;
 using System.Windows.Forms;
+using Treasury.Data;
+using Treasury.Domain.Entities;
 
 namespace LFS.Views.Transactions.Auction
 {
@@ -24,7 +25,7 @@ namespace LFS.Views.Transactions.Auction
                 errorProvider1.GetError(cmbxProperty),
             };
 
-            return AccFactory.CreateErrors(errors).GenerateErrorMessage();
+            return Factory.CreateErrors(errors).GenerateErrorMessage();
         }
 
         internal void OnLoad(bool isEdit, int? rptScheduleId)
@@ -49,12 +50,12 @@ namespace LFS.Views.Transactions.Auction
                 return false;
             }
 
-            return isEdit ? AccFactory.RptAuctionRepository().Update(RptAuctionModel()) : AccFactory.RptAuctionRepository().Insert(RptAuctionModel());
+            return isEdit ? TreasuryFactory.RptAuctionRepository().Update(RptAuctionModel()) : TreasuryFactory.RptAuctionRepository().Insert(RptAuctionModel());
         }
 
         private void LoadAuctionSchedule()
         {
-            var dtAuctionSchedule = AccFactory.AuctionRepository().GetAuctionSchedule();
+            var dtAuctionSchedule = TreasuryFactory.AuctionRepository().GetAuctionSchedule();
             HelperLoadRecords.AuctionScheduleCombobox(dtAuctionSchedule, cmbxAuctionSchedule, "date", "id");
         }
 
@@ -87,7 +88,7 @@ namespace LFS.Views.Transactions.Auction
 
         private void LoadProperties()
         {
-            var deliquentRpt = AccFactory.DelinquentNoticeRepository().GetViewRecords("3rd Notice");
+            var deliquentRpt = TreasuryFactory.DelinquentNoticeRepository().GetViewRecords("3rd Notice");
 
             cmbxProperty.DataSource = deliquentRpt;
             cmbxProperty.ValueMember = "real_properties_id";
@@ -96,7 +97,7 @@ namespace LFS.Views.Transactions.Auction
 
         private void LoadSelectedRecord(int rptScheduleId)
         {
-            var dictRptSchedule = AccFactory.RptAuctionRepository().GetRecordByID(rptScheduleId);
+            var dictRptSchedule = TreasuryFactory.RptAuctionRepository().GetRecordByID(rptScheduleId);
 
             cmbxAuctionSchedule.SelectedValue = dictRptSchedule["auction_id"];
             cmbxProperty.SelectedValue = dictRptSchedule["real_properties_id"];

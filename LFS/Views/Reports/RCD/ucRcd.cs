@@ -1,11 +1,13 @@
-﻿using ACC.Data;
-using ACC.Domain.Models;
-using LFS.Helpers;
+﻿using LFS.Helpers;
+using OmniGov.Core.Entities;
+using OmniGov.Core.Repositories;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
+using Treasury.Data;
+using Treasury.Domain.Entities;
 
 namespace LFS.Views.Reports.Rcd
 {
@@ -33,7 +35,7 @@ namespace LFS.Views.Reports.Rcd
 
         private void LoadSelectedRecord(int rcdId)
         {
-            var dictRcd = AccFactory.RcdRepository().GetViewRecord(rcdId);
+            var dictRcd = TreasuryFactory.RcdRepository().GetViewRecord(rcdId);
             txtReportNo.Text = dictRcd["report_no"];
             if (string.IsNullOrWhiteSpace(dictRcd["fund_id"]))
             {
@@ -70,7 +72,7 @@ namespace LFS.Views.Reports.Rcd
                 errorProvider1.GetError(checkBox1),
             };
 
-            return AccFactory.CreateErrors(errors).GenerateErrorMessage();
+            return Factory.CreateErrors(errors).GenerateErrorMessage();
         }
 
         private DataTable RcdCollectionsDataTable(bool isEdit)
@@ -79,13 +81,13 @@ namespace LFS.Views.Reports.Rcd
             {
                 var rcdModel = new RcdModel() { Id = rcdId.Value };
                 var rcdCollectionsModel = new RcdCollectionsModel() { RcdModel = rcdModel };
-                return AccFactory.PaymentCollectionsRepository().GetViewConsolidatedRcdRecords(rcdCollectionsModel);
+                return TreasuryFactory.PaymentCollectionsRepository().GetViewConsolidatedRcdRecords(rcdCollectionsModel);
             }
             else
             {
                 var date = dtDate.Value;
                 var userModel = new UsersModel() { Id = UserHelper.loggedUser.Id };
-                return AccFactory.PaymentCollectionsRepository().GetViewConsolidatedRcdRecords(date, userModel);
+                return TreasuryFactory.PaymentCollectionsRepository().GetViewConsolidatedRcdRecords(date, userModel);
             }
         }
 
@@ -130,13 +132,13 @@ namespace LFS.Views.Reports.Rcd
             {
                 var rcdModel = new RcdModel() { Id = rcdId.Value };
                 var rcdDepositsModel = new RcdDepositsModel() { RcdModel = rcdModel };
-                return AccFactory.BankDepositsRepository().GetViewRcdRecord(rcdDepositsModel);
+                return TreasuryFactory.BankDepositsRepository().GetViewRcdRecord(rcdDepositsModel);
             }
             else
             {
                 var date = dtDate.Value;
                 var userModel = new UsersModel() { Id = UserHelper.loggedUser.Id };
-                return AccFactory.BankDepositsRepository().GetViewRcdRecord(date, userModel);
+                return TreasuryFactory.BankDepositsRepository().GetViewRcdRecord(date, userModel);
             }
         }
 
@@ -175,7 +177,7 @@ namespace LFS.Views.Reports.Rcd
         private bool ReportNoValidated(ErrorProvider errorProvider, TextBox textBox)
         {
             bool isValidated;
-            bool reportNoExist = isEdit ? AccFactory.RcdRepository().reportNoExist(textBox.Text.Trim(), rcdId.Value) : AccFactory.RcdRepository().reportNoExist(textBox.Text.Trim());
+            bool reportNoExist = isEdit ? TreasuryFactory.RcdRepository().reportNoExist(textBox.Text.Trim(), rcdId.Value) : TreasuryFactory.RcdRepository().reportNoExist(textBox.Text.Trim());
 
             isValidated = !Helper.ShowErrorTextBoxEmpty(errorProvider, textBox, "Report No.") && !reportNoExist;
             errorProvider.SetError(textBox, reportNoExist ? "Report No. exist." : errorProvider.GetError(textBox));
@@ -206,7 +208,7 @@ namespace LFS.Views.Reports.Rcd
             bool isToggled = checkBox1.Checked;
             if (isToggled)
             {
-                var dtFunds = AccFactory.FundsRepository().GetRecords();
+                var dtFunds = Factory.FundsRepository().GetRecords();
                 cmbxFunds.Enabled = true;
                 HelperLoadRecords.FundsComboBox(dtFunds, cmbxFunds, "id", "fund_name");
             }
@@ -274,13 +276,13 @@ namespace LFS.Views.Reports.Rcd
             if (isEdit)
             {
                 var rcdModel = new RcdModel() { Id = rcdId.Value };
-                return AccFactory.PaymentCollectionsRepository().GetRcdCollections(rcdModel);
+                return TreasuryFactory.PaymentCollectionsRepository().GetRcdCollections(rcdModel);
             }
             else
             {
                 var date = dtDate.Value;
                 var userModel = new UsersModel() { Id = UserHelper.loggedUser.Id };
-                return AccFactory.PaymentCollectionsRepository().GetRcdCollections(date, userModel);
+                return TreasuryFactory.PaymentCollectionsRepository().GetRcdCollections(date, userModel);
             }
         }
 
@@ -307,7 +309,7 @@ namespace LFS.Views.Reports.Rcd
                 return false;
             }
 
-            return this.isEdit ? AccFactory.RcdRepository().UpdateWithCollectionsDeposits(RcdModel(), RcdCollectionsModels(), RcdDepositsModels()) : AccFactory.RcdRepository().InsertWithCollectionsDeposits(RcdModel(), RcdCollectionsModels(), RcdDepositsModels());
+            return this.isEdit ? TreasuryFactory.RcdRepository().UpdateWithCollectionsDeposits(RcdModel(), RcdCollectionsModels(), RcdDepositsModels()) : TreasuryFactory.RcdRepository().InsertWithCollectionsDeposits(RcdModel(), RcdCollectionsModels(), RcdDepositsModels());
         }
 
         private void dtDate_ValueChanged(object sender, EventArgs e)

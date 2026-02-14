@@ -1,9 +1,10 @@
-﻿using ACC.Data;
-using ACC.Domain.Models;
-using LFS.Helpers;
+﻿using LFS.Helpers;
+using OmniGov.Core.Repositories;
 using System;
 using System.ComponentModel;
 using System.Windows.Forms;
+using Treasury.Data;
+using Treasury.Domain.Entities;
 
 namespace LFS.Views.Transactions.Payments.OtherPayments.CattleTransferOfOwnership
 {
@@ -58,8 +59,8 @@ namespace LFS.Views.Transactions.Payments.OtherPayments.CattleTransferOfOwnershi
                 DateTime dateTransfer,
                 decimal amountPurchase) GetCattleTransferReceiptContent()
         {
-            var dictOldOwner = AccFactory.TaxpayersRepository().GetViewRecordById(Convert.ToInt32(cmbxOldOwner.SelectedValue));
-            var dictNewOwner = AccFactory.TaxpayersRepository().GetViewRecordById(Convert.ToInt32(cmbxNewOwner.SelectedValue));
+            var dictOldOwner = TreasuryFactory.TaxpayersRepository().GetViewRecordById(Convert.ToInt32(cmbxOldOwner.SelectedValue));
+            var dictNewOwner = TreasuryFactory.TaxpayersRepository().GetViewRecordById(Convert.ToInt32(cmbxNewOwner.SelectedValue));
 
             return (oldOwnerName: dictOldOwner["taxpayers_name"],
                     oldOwnerAddress: dictOldOwner["taxpayers_address"],
@@ -110,7 +111,7 @@ namespace LFS.Views.Transactions.Payments.OtherPayments.CattleTransferOfOwnershi
                 errorProvider1.GetError(nudAmountOfPurchase)
             };
 
-            return AccFactory.CreateErrors(errors).GenerateErrorMessage();
+            return Factory.CreateErrors(errors).GenerateErrorMessage();
         }
 
         private bool ComboboxValueValidated(ErrorProvider errorProvider, ComboBox comboBox, string fieldName)
@@ -125,19 +126,19 @@ namespace LFS.Views.Transactions.Payments.OtherPayments.CattleTransferOfOwnershi
 
         private void LoadOwners(ComboBox comboBox)
         {
-            var dtOwners = AccFactory.TaxpayersRepository().GetRecords();
+            var dtOwners = TreasuryFactory.TaxpayersRepository().GetRecords();
             HelperLoadRecords.SearchableCombobox2(dtOwners, comboBox, "id", "name");
         }
 
         private void LoadCattles(int taxpayersId)
         {
-            var dtCattle = AccFactory.CattleOwnershipRepository().GetRecordByTaxpayerId(taxpayersId);
+            var dtCattle = TreasuryFactory.CattleOwnershipRepository().GetRecordByTaxpayerId(taxpayersId);
             HelperLoadRecords.SearchableCombobox2(dtCattle, cmbxCattle, "id", "cattle_name");
         }
 
         private void LoadCattleDetails(int id)
         {
-            var dictCattle = AccFactory.CattleOwnershipRepository().GetRecordByID(id);
+            var dictCattle = TreasuryFactory.CattleOwnershipRepository().GetRecordByID(id);
             bool isMale = dictCattle["cattle_sex"] == "Male";
             int Age = Convert.ToInt32(dictCattle["cattle_age"]);
             int Years = Convert.ToInt32(dictCattle["cattle_years"]);

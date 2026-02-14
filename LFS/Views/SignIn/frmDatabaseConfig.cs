@@ -1,6 +1,6 @@
 ﻿using ACC.Data;
 using LFS.Helpers;
-using RPT.Data;
+using RPT.Data.Repositories;
 using System;
 using System.ComponentModel;
 using System.Data;

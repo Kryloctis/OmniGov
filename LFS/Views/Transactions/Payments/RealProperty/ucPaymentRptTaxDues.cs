@@ -1,7 +1,6 @@
-﻿using ACC.Data;
-using ACC.Domain.Models;
-using LFS.Helpers;
+﻿using LFS.Helpers;
 using LFS.Views.Shared;
+using OmniGov.Core.Repositories;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -10,6 +9,8 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using Treasury.Data;
+using Treasury.Domain.Entities;
 
 namespace LFS.Views.Transactions.Payments.RealProperty
 {
@@ -56,7 +57,7 @@ namespace LFS.Views.Transactions.Payments.RealProperty
                 dgTaxDues.Tag.ToString(),
             };
 
-            return AccFactory.CreateErrors(errorStrings).GenerateErrorMessage();
+            return Factory.CreateErrors(errorStrings).GenerateErrorMessage();
         }
 
         internal void OnLoad(int taxpayerId)
@@ -84,7 +85,7 @@ namespace LFS.Views.Transactions.Payments.RealProperty
         private DataTable DataTablePostedProperties()
         {
             bool showCancelled = chckBxCancelled.Checked;
-            var dtAssessmentPosts = AccFactory.RptAssessmentPostsRepository().GetRecordsByRealTaxpayersId(taxpayerId, showCancelled);
+            var dtAssessmentPosts = TreasuryFactory.RptAssessmentPostsRepository().GetRecordsByRealTaxpayersId(taxpayerId, showCancelled);
             var dataTable = new DataTable();
             dataTable.Columns.AddRange(DataColumnsPostedProperties());
 
@@ -234,7 +235,7 @@ namespace LFS.Views.Transactions.Payments.RealProperty
                                                                         decimal basicTaxDue,
                                                                         decimal sefTaxDue)
         {
-            var dictPrevAssmnt = AccFactory.RptAssessmentPostsRepository().GetViewRecentAssessmentRecord(currentAssmntParameters.compelteArpNo, currentAssmntParameters.assessmentYear);
+            var dictPrevAssmnt = TreasuryFactory.RptAssessmentPostsRepository().GetViewRecentAssessmentRecord(currentAssmntParameters.compelteArpNo, currentAssmntParameters.assessmentYear);
 
             int? prevAssmntYear = null;
 
@@ -272,7 +273,7 @@ namespace LFS.Views.Transactions.Payments.RealProperty
 
             foreach (string completeArpNo in completeArpNoList)
             {
-                var dtAssessmentPosting = AccFactory.RptAssessmentPostsRepository().GetViewRecordsByTaxpayerIdArpNoShowPaid(taxPayersId, calendarYear, completeArpNo, chckShowPaidUnpaid.Checked);
+                var dtAssessmentPosting = TreasuryFactory.RptAssessmentPostsRepository().GetViewRecordsByTaxpayerIdArpNoShowPaid(taxPayersId, calendarYear, completeArpNo, chckShowPaidUnpaid.Checked);
                 foreach (DataRow row in dtAssessmentPosting.Rows)
                 {
                     decimal assessedValue = Convert.ToDecimal(row["assessed_value"]);

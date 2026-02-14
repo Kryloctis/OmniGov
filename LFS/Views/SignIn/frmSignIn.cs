@@ -2,7 +2,7 @@
 using LFS.Helpers;
 using LFS.Properties;
 using LFS.Views.Dashboard;
-using RPT.Data;
+using RPT.Data.Repositories;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
