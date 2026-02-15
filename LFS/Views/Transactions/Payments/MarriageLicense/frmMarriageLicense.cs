@@ -1,10 +1,11 @@
-﻿using ACC.Data;
-using ACC.Domain.Models;
-using LFS.Helpers;
+﻿using LFS.Helpers;
 using LFS.Views.Transactions.Payments.BurialPermit;
+using OmniGov.Core.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using Treasury.Data;
+using Treasury.Domain.Entities;
 
 namespace LFS.Views.Transactions.Payments.MarriageLicense
 {
@@ -120,8 +121,8 @@ namespace LFS.Views.Transactions.Payments.MarriageLicense
             int groomId = ucSpouseInfoGroom.GetSpouseInfo().SpouseRegistryId;
             int brideId = ucSpouseInfoBride.GetSpouseInfo().SpouseRegistryId;
 
-            var dictGroomInfo = AccFactory.RegistryRepository().GetRecordByID(groomId);
-            var dictBrideInfo = AccFactory.RegistryRepository().GetRecordByID(brideId);
+            var dictGroomInfo = Factory.RegistryRepository().GetRecordByID(groomId);
+            var dictBrideInfo = Factory.RegistryRepository().GetRecordByID(brideId);
 
             string groomName = Helper.GenerateFullName(string.Empty, dictGroomInfo["first_name"], dictGroomInfo["middle_name"], dictGroomInfo["last_name"], string.Empty);
 
@@ -150,7 +151,7 @@ namespace LFS.Views.Transactions.Payments.MarriageLicense
 
         private bool ConfirmPayment()
         {
-            return AccFactory.PaymentCollectionsRepository().InsertWithMarriageLicensePayment(ucPayment.PaymentCollectionsModel(), null, MarriageLicenseModel(), ucPaymentFeesCharges.PaymentFeesChargesModels());
+            return TreasuryFactory.PaymentCollectionsRepository().InsertWithMarriageLicensePayment(ucPayment.PaymentCollectionsModel(), null, MarriageLicenseModel(), ucPaymentFeesCharges.PaymentFeesChargesModels());
         }
 
         private void LoadTabContents()

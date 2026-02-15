@@ -1,12 +1,13 @@
-﻿using ACC.Data;
-using ACC.Domain.Models;
-using LFS.Helpers;
+﻿using LFS.Helpers;
+using OmniGov.Core.Repositories;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Linq;
 using System.Windows.Forms;
+using Treasury.Data;
+using Treasury.Domain.Entities;
 
 namespace LFS.Views.Transactions.Payments
 {
@@ -94,7 +95,7 @@ namespace LFS.Views.Transactions.Payments
         {
             var feesChargesNodeParameter = GetNodeParameters(treeNode);
 
-            var dictFeesCharges = AccFactory.OtherPaymentRatesRepository().GetRecordByID(feesChargesNodeParameter.paramId);
+            var dictFeesCharges = TreasuryFactory.OtherPaymentRatesRepository().GetRecordByID(feesChargesNodeParameter.paramId);
             sbyte isEditable = Convert.ToSByte(dictFeesCharges["is_rate_editable"]);
             DataTable dtPaymentFees = (DataTable)dataGridView.DataSource;
 
@@ -161,7 +162,7 @@ namespace LFS.Views.Transactions.Payments
         private bool LoadFeesChargesNodes(int feesChargesClassificationId, bool isDeleted, TreeNode nodeFeesChargesClassification)
         {
             string searchText = tStrpTxtSearch.Text.Trim();
-            var dtFeesCharges = AccFactory.OtherPaymentRatesRepository().GetRecordsByTaxTypeIDAndDescription(feesChargesClassificationId, searchText);
+            var dtFeesCharges = TreasuryFactory.OtherPaymentRatesRepository().GetRecordsByTaxTypeIDAndDescription(feesChargesClassificationId, searchText);
             bool hasFeesCharges = false;
 
             foreach (DataRow row in dtFeesCharges.Rows)
@@ -220,7 +221,7 @@ namespace LFS.Views.Transactions.Payments
                 };
 
                 mainTreeView.ExpandAll();
-                var dtTaxTypes = AccFactory.TaxTypesRepository().GetRecords();
+                var dtTaxTypes = TreasuryFactory.TaxTypesRepository().GetRecords();
                 var parentNodes = dtTaxTypes.AsEnumerable().Where(row => row.Field<dynamic>("parent") == null);
 
                 int progressCount = 0;
@@ -319,7 +320,7 @@ namespace LFS.Views.Transactions.Payments
                 dgPaymentFeesCharges.Tag is null? string.Empty : dgPaymentFeesCharges.Tag.ToString()
             };
 
-            return AccFactory.CreateErrors(errors).GenerateErrorMessage();
+            return Factory.CreateErrors(errors).GenerateErrorMessage();
         }
 
         internal decimal ComputeTotalAmountPayable()

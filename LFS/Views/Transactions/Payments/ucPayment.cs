@@ -1,12 +1,13 @@
-﻿using ACC.Data;
-using ACC.Domain.Models;
-using LFS.Helpers;
+﻿using LFS.Helpers;
+using OmniGov.Core.Repositories;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Linq;
 using System.Windows.Forms;
+using Treasury.Data;
+using Treasury.Domain.Entities;
 using Color = System.Drawing.Color;
 
 namespace LFS.Views.Transactions.Payments
@@ -50,21 +51,21 @@ namespace LFS.Views.Transactions.Payments
 
         private (int? JobOrderId, int CollectingOfficerId, bool isCollector) GetCollectorInfo()
         {
-            bool isUserCollectingOfficer = AccFactory.CollectingOfficerRepository().IsUserCollectingOfficer(userId);
-            bool isUserJobOrder = AccFactory.JobOrderRepository().IsUserJobOrder(userId);
+            bool isUserCollectingOfficer = TreasuryFactory.CollectingOfficerRepository().IsUserCollectingOfficer(userId);
+            bool isUserJobOrder = TreasuryFactory.JobOrderRepository().IsUserJobOrder(userId);
 
             if (isUserJobOrder)
             {
-                var dictJobOrder = AccFactory.JobOrderRepository().GetRecordByUserID(userId);
+                var dictJobOrder = TreasuryFactory.JobOrderRepository().GetRecordByUserID(userId);
                 if (int.TryParse(dictJobOrder.GetValueOrDefault("id"), out int jobOrderId))
                 {
-                    var collectingOfficerId = AccFactory.CollectingOfficerHasJobOrdersRepository().GetCollectingOfficerIDByJobOrderId(jobOrderId);
+                    var collectingOfficerId = TreasuryFactory.CollectingOfficerHasJobOrdersRepository().GetCollectingOfficerIDByJobOrderId(jobOrderId);
                     return (jobOrderId, collectingOfficerId, true);
                 }
             }
             else if (isUserCollectingOfficer)
             {
-                var dictCollectingOfficer = AccFactory.CollectingOfficerRepository().GetRecordByUserID(userId);
+                var dictCollectingOfficer = TreasuryFactory.CollectingOfficerRepository().GetRecordByUserID(userId);
                 if (int.TryParse(dictCollectingOfficer.GetValueOrDefault("id"), out int collectingOfficerId))
                     return (null, collectingOfficerId, true);
             }
@@ -83,7 +84,7 @@ namespace LFS.Views.Transactions.Payments
                 dgCheques.Tag.ToString()
             };
 
-            return AccFactory.CreateErrors(errors).GenerateErrorMessage();
+            return Factory.CreateErrors(errors).GenerateErrorMessage();
         }
 
         internal void OnLoad(int loggedUserId, string accountableFormNo, decimal totalAmount = 0)
@@ -109,7 +110,7 @@ namespace LFS.Views.Transactions.Payments
 
             var dataTable = new DataTable();
             dataTable.Columns.AddRange(dataColumns);
-            var dtAccountableForm = string.IsNullOrWhiteSpace(accountableFormNo) ? AccFactory.AccountableFormsRepository().GetRecords() : AccFactory.AccountableFormsRepository().GetRecordsByAccFormNo(accountableFormNo);
+            var dtAccountableForm = string.IsNullOrWhiteSpace(accountableFormNo) ? TreasuryFactory.AccountableFormsRepository().GetRecords() : TreasuryFactory.AccountableFormsRepository().GetRecordsByAccFormNo(accountableFormNo);
 
             foreach (DataRow row in dtAccountableForm.Rows)
             {
@@ -131,7 +132,7 @@ namespace LFS.Views.Transactions.Payments
 
             int accountableFormId = Convert.ToInt32(cmbxAccountableForm.SelectedValue);
 
-            var dtIssuedReceipts = AccFactory.ReceiptsIssuedRepository().GetViewRecordsByCollectorId_AccFormId(GetCollectorInfo().CollectingOfficerId, accountableFormId);
+            var dtIssuedReceipts = TreasuryFactory.ReceiptsIssuedRepository().GetViewRecordsByCollectorId_AccFormId(GetCollectorInfo().CollectingOfficerId, accountableFormId);
 
             var receiptNos = new List<int>();
 
@@ -146,7 +147,7 @@ namespace LFS.Views.Transactions.Payments
 
             receiptNos.Sort((a, b) => a.CompareTo(b));
 
-            var paymentCollectionReceiptsList = AccFactory.PaymentCollectionsRepository().GetRecordsReceiptsByAccFormId(accountableFormId);
+            var paymentCollectionReceiptsList = TreasuryFactory.PaymentCollectionsRepository().GetRecordsReceiptsByAccFormId(accountableFormId);
             list = receiptNos.Except(paymentCollectionReceiptsList).ToList();
 
             return list;
@@ -219,13 +220,13 @@ namespace LFS.Views.Transactions.Payments
 
         private bool CollectorValidated(ErrorProvider errorProvider, TextBox textBox)
         {
-            bool isUserJobOrder = AccFactory.JobOrderRepository().IsUserJobOrder(userId);
-            bool isUserCollectingOfficer = AccFactory.CollectingOfficerRepository().IsUserCollectingOfficer(userId);
+            bool isUserJobOrder = TreasuryFactory.JobOrderRepository().IsUserJobOrder(userId);
+            bool isUserCollectingOfficer = TreasuryFactory.CollectingOfficerRepository().IsUserCollectingOfficer(userId);
 
             if (isUserJobOrder)
             {
-                var dictJobOrder = AccFactory.JobOrderRepository().GetRecordByUserID(userId);
-                bool isJobOrderCollector = AccFactory.CollectingOfficerHasJobOrdersRepository().IsJobOrderCollector(Convert.ToInt32(dictJobOrder["id"]));
+                var dictJobOrder = TreasuryFactory.JobOrderRepository().GetRecordByUserID(userId);
+                bool isJobOrderCollector = TreasuryFactory.CollectingOfficerHasJobOrdersRepository().IsJobOrderCollector(Convert.ToInt32(dictJobOrder["id"]));
 
                 if (isJobOrderCollector)
                 {
@@ -235,7 +236,7 @@ namespace LFS.Views.Transactions.Payments
             }
             else if (isUserCollectingOfficer)
             {
-                var dictCO = AccFactory.CollectingOfficerRepository().GetRecordByUserID(userId);
+                var dictCO = TreasuryFactory.CollectingOfficerRepository().GetRecordByUserID(userId);
                 textBox.Text = Helper.GenerateFullName(dictCO["prefix"], dictCO["first_name"], dictCO["mid_initial"], dictCO["last_name"], dictCO["suffix"]);
                 return true;
             }
@@ -263,7 +264,7 @@ namespace LFS.Views.Transactions.Payments
             {
                 int accountableFormId = Convert.ToInt32(cmbxAccountableForm.SelectedValue);
                 int receiptNo = Convert.ToInt32(txtReceipts.Text.Trim());
-                bool receiptExist = AccFactory.PaymentCollectionsRepository().ReceiptExist(receiptNo, accountableFormId);
+                bool receiptExist = TreasuryFactory.PaymentCollectionsRepository().ReceiptExist(receiptNo, accountableFormId);
 
                 if (!GetReceiptsList().Contains(receiptNo))
                 {
