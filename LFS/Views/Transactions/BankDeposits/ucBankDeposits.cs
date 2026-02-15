@@ -1,10 +1,11 @@
-﻿using ACC.Data;
-using ACC.Domain.Models;
-using LFS.Helpers;
+﻿using LFS.Helpers;
+using OmniGov.Core.Repositories;
 using System;
 using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
+using Treasury.Data;
+using Treasury.Domain.Entities;
 
 namespace LFS.Views.Transactions.BankDeposits
 {
@@ -28,12 +29,12 @@ namespace LFS.Views.Transactions.BankDeposits
                 errorProvider1.GetError(nudAmount)
             };
 
-            return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
+            return Factory.CreateErrors(errorArray).GenerateErrorMessage();
         }
 
         private void LoadSelectedRecords()
         {
-            var dictBankDeposits = AccFactory.BankDepositsRepository().GetViewRecordById(bankDepositId.Value);
+            var dictBankDeposits = TreasuryFactory.BankDepositsRepository().GetViewRecordById(bankDepositId.Value);
             txtAccountableOfficer.Text = Helper.GetUserDataById(Convert.ToInt32(dictBankDeposits["created_by"]))["user_full_name"];
             cmbFund.SelectedValue = dictBankDeposits["funds_id"];
             cmbBank.SelectedValue = dictBankDeposits["banks_id"];
@@ -93,13 +94,13 @@ namespace LFS.Views.Transactions.BankDeposits
                 var model = BankDepositsModel();
                 model.Id = bankDepositId.Value;
                 model.UpdatedBy = UserHelper.loggedUser.Id;
-                return AccFactory.BankDepositsRepository().Update(model);
+                return TreasuryFactory.BankDepositsRepository().Update(model);
             }
             else
             {
                 var model = BankDepositsModel();
                 model.CreatedBy = UserHelper.loggedUser.Id;
-                return AccFactory.BankDepositsRepository().Insert(model);
+                return TreasuryFactory.BankDepositsRepository().Insert(model);
             }
         }
 
@@ -116,13 +117,13 @@ namespace LFS.Views.Transactions.BankDeposits
 
         private void LoadBanks()
         {
-            var dataTable = AccFactory.BanksRepository().GetRecords();
+            var dataTable = TreasuryFactory.BanksRepository().GetRecords();
             HelperLoadRecords.BankComboBox(dataTable, cmbBank, "id", "bank_name");
         }
 
         private void LoadFunds()
         {
-            var dataTable = AccFactory.FundsRepository().GetRecords();
+            var dataTable = Factory.FundsRepository().GetRecords();
             HelperLoadRecords.FundsComboBox(dataTable, cmbFund, "id", "fund_name");
         }
 
@@ -178,7 +179,7 @@ namespace LFS.Views.Transactions.BankDeposits
         private void LoadBankAccounts()
         {
             int bankID = Convert.ToInt32(cmbBank.SelectedValue);
-            DataTable dtBankAccounts = AccFactory.BankAccountsRepository().GetBankAccountsByBankID(bankID);
+            DataTable dtBankAccounts = TreasuryFactory.BankAccountsRepository().GetBankAccountsByBankID(bankID);
             HelperLoadRecords.BankAccountsComboBox(dtBankAccounts, cmbBankAccounts, "id", "account_no");
         }
     }
