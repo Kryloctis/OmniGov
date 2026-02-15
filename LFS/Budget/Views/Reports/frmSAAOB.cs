@@ -1,6 +1,7 @@
-﻿using ACC.Data;
+﻿using Budget.Data;
 using LFS.Helpers;
 using Microsoft.Reporting.WinForms;
+using OmniGov.Core.Repositories;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -31,7 +32,7 @@ namespace LFS.Budget.Views.Reports
 
         private void LoadFunds()
         {
-            var dtFunds = AccFactory.FundsRepository().GetRecords();
+            var dtFunds = Factory.FundsRepository().GetRecords();
             HelperLoadRecords.FundsComboBox(dtFunds, cmbxFund, "id", "fund_name");
         }
 
@@ -71,7 +72,7 @@ namespace LFS.Budget.Views.Reports
                 var args = ((int fundId, DateTime dtAsOf, int fppIsSpecial))e.Argument;
 
                 DataTable dtSAAOBB = new dsLFS().dtSAAOBB;
-                var dtBudgetAppropriations = AccFactory.BudgetAppropriationsRepository().GetViewRecords(args.fundId, args.dtAsOf, (byte)args.fppIsSpecial);
+                var dtBudgetAppropriations = BudgetFactory.BudgetAppropriationsRepository().GetViewRecords(args.fundId, args.dtAsOf, (byte)args.fppIsSpecial);
 
                 int totalProgress = dtBudgetAppropriations.AsEnumerable().Count(row => Convert.ToBoolean(row["continuing"]) || Convert.ToInt16(row["year"]) == args.dtAsOf.Year); ;
 
@@ -132,7 +133,7 @@ namespace LFS.Budget.Views.Reports
 
                     // ================= SUPPLEMENTAL APPROPRIATIONS =================
                     // Fetch additional budget via supplemental appropriations
-                    var dtSupplemtedAmount = AccFactory.SupplementalAppropriationsRepository()
+                    var dtSupplemtedAmount = BudgetFactory.SupplementalAppropriationsRepository()
                         .GetRecordsByBudgetAppropriationIdDateEntry(rowBudgetAppropriationId, args.dtAsOf);
                     decimal supplementedAmount = Convert.ToDecimal(
                         dtSupplemtedAmount.Rows.Count == 0 ? 0 : dtSupplemtedAmount.Compute("SUM(amount)", string.Empty)
@@ -146,7 +147,7 @@ namespace LFS.Budget.Views.Reports
 
                     // ================= ALLOTMENT RELEASE =================
                     // Fetch released allotment amounts (actual release)
-                    var dtAllotmentRelease = AccFactory.AllotmentReleaseRepository()
+                    var dtAllotmentRelease = BudgetFactory.AllotmentReleaseRepository()
                         .GetViewRecordsByBudgetAppropriationIdDateIssued(rowBudgetAppropriationId, args.dtAsOf);
                     decimal allotmentReleaseAmount = Convert.ToDecimal(
                         dtAllotmentRelease.Rows.Count == 0 ? 0 : dtAllotmentRelease.Compute("SUM(amount)", string.Empty)
@@ -154,7 +155,7 @@ namespace LFS.Budget.Views.Reports
 
                     // ================= OBLIGATIONS =================
                     // Fetch actual obligated amount (used budget)
-                    var dtObligation = AccFactory.ObligationRequestRepository()
+                    var dtObligation = BudgetFactory.ObligationRequestRepository()
                         .GetViewRecords(rowBudgetAppropriationId, args.dtAsOf);
                     decimal obligationRequestAmount = Convert.ToDecimal(
                         dtObligation.Rows.Count == 0 ? 0 : dtObligation.Compute("SUM(amount)", string.Empty)
@@ -198,7 +199,7 @@ namespace LFS.Budget.Views.Reports
                 string certifiedCorrectSignatoryTitle = string.Empty;
                 ParseSignatory(dictSignatory, ref certifiedCorrectSignatory, ref certifiedCorrectSignatoryTitle);
 
-                var fundRepo = AccFactory.FundsRepository().GetRecordByID(args.fundId);
+                var fundRepo = Factory.FundsRepository().GetRecordByID(args.fundId);
                 var parameters = new[]
                 {
                     new ReportParameter("paramMunicipality", ServerHelper.selectedServer.MunicipalityName),

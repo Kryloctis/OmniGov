@@ -1,10 +1,10 @@
-using LFS.Helpers;
+using Budget.Data;
 using LFS.Budget.Helpers;
+using LFS.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using ACC.Data;
 
 namespace LFS.Budget.Services
 {
@@ -13,7 +13,7 @@ namespace LFS.Budget.Services
         public DataTable GetObligationRequests(string searchKey, string status, DateTime dateFrom, DateTime dateTo, int rowLimit, Action<int, int> progressCallback = null)
         {
             // 1. Fetch raw data from the repository
-            var dtRaw = AccFactory.ObligationRequestRepository().GetRecords(
+            var dtRaw = BudgetFactory.ObligationRequestRepository().GetRecords(
                 searchKey,
                 status.ToLower(),
                 dateFrom,

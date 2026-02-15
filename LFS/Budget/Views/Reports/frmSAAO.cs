@@ -1,6 +1,7 @@
-﻿using ACC.Data;
+﻿using Budget.Data;
 using LFS.Helpers;
 using Microsoft.Reporting.WinForms;
+using OmniGov.Core.Repositories;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -24,7 +25,7 @@ public partial class frmSAAO : Form
     {
         try
         {
-            var dtFunds = AccFactory.FundsRepository().GetRecords();
+            var dtFunds = Factory.FundsRepository().GetRecords();
 
             HelperLoadRecords.FundsComboBox(dtFunds, cmbxFund, "id", "fund_name");
         }
@@ -69,7 +70,7 @@ public partial class frmSAAO : Form
             var parameters = ((int fundId, DateTime dateAsOf, short year, byte fppSpecial))e.Argument;
 
             var dtSaob = new dsLFS().dtSAAOB;
-            var dtBudgetAppropriations = AccFactory.BudgetAppropriationsRepository().GetViewRecords(parameters.fundId, parameters.dateAsOf, parameters.year, 0, parameters.fppSpecial);
+            var dtBudgetAppropriations = BudgetFactory.BudgetAppropriationsRepository().GetViewRecords(parameters.fundId, parameters.dateAsOf, parameters.year, 0, parameters.fppSpecial);
 
             int totalProgressCount = dtBudgetAppropriations.Rows.Count;
             int progressCount = 0;
@@ -88,7 +89,7 @@ public partial class frmSAAO : Form
                 int rowFPPId = Convert.ToInt32(row["fpp_id"]);
                 string rowFPPCode = row["fpp_code"].ToString();
                 string rowFPPName = row["fpp_name"].ToString();
-                var dictFPP = AccFactory.FunctionProgramProjectRepository().GetRecordByID(rowFPPId);
+                var dictFPP = Factory.FunctionProgramProjectRepository().GetRecordByID(rowFPPId);
                 byte rowFPPIsSpecial = Convert.ToByte(dictFPP["is_special"]);
                 byte rowIsContinuing = Convert.ToByte(row["continuing"]);
                 string rowSubFPPId = row["others_fpp_id"].ToString();
@@ -104,17 +105,17 @@ public partial class frmSAAO : Form
                 decimal rowAppropriation = Convert.ToDecimal(row["amount"]);
 
                 //SUPPLEMENTED AMOUNT
-                var dtSupplemtedAmount = AccFactory.SupplementalAppropriationsRepository().GetRecordsByBudgetAppropriationIdDateEntry(rowBudgetAppropriationId, parameters.dateAsOf);
+                var dtSupplemtedAmount = BudgetFactory.SupplementalAppropriationsRepository().GetRecordsByBudgetAppropriationIdDateEntry(rowBudgetAppropriationId, parameters.dateAsOf);
                 decimal supplementedAmount = Convert.ToDecimal(dtSupplemtedAmount.Rows.Count == 0 ? 0 : dtSupplemtedAmount.Compute("SUM(amount)", string.Empty));
 
                 decimal TotalBudgetAppropraition = rowAppropriation + supplementedAmount;
 
                 //ALLOTMENT RELEASE
-                var dtAllotmentRelease = AccFactory.AllotmentReleaseRepository().GetViewRecordsByBudgetAppropriationIdDateIssued(rowBudgetAppropriationId, parameters.dateAsOf);
+                var dtAllotmentRelease = BudgetFactory.AllotmentReleaseRepository().GetViewRecordsByBudgetAppropriationIdDateIssued(rowBudgetAppropriationId, parameters.dateAsOf);
                 decimal allotmentReleaseAmount = Convert.ToDecimal(dtAllotmentRelease.Rows.Count == 0 ? 0 : dtAllotmentRelease.Compute("SUM(amount)", string.Empty));
 
                 //OBLIGATIONS
-                var dtObligation = AccFactory.ObligationRequestRepository().GetViewRecords(rowBudgetAppropriationId, parameters.dateAsOf);
+                var dtObligation = BudgetFactory.ObligationRequestRepository().GetViewRecords(rowBudgetAppropriationId, parameters.dateAsOf);
                 decimal obligationRequestAmount = Convert.ToDecimal(dtObligation.Rows.Count == 0 ? 0 : dtObligation.Compute("SUM(amount)", string.Empty));
 
                 //UNOBLIGATED BALANCE
@@ -159,8 +160,8 @@ public partial class frmSAAO : Form
                 DateTime AsOf = dtAsOf.Value;
 
                 var parameters = new[] {
-                    new ReportParameter("paramFundName", AccFactory.FundsRepository().GetRecordByID(fundId)["fund_name"]),
-                    new ReportParameter("paramFundCode", AccFactory.FundsRepository().GetRecordByID(fundId)["fund_code"]),
+                    new ReportParameter("paramFundName", Factory.FundsRepository().GetRecordByID(fundId)["fund_name"]),
+                    new ReportParameter("paramFundCode", Factory.FundsRepository().GetRecordByID(fundId)["fund_code"]),
                     new ReportParameter("paramDate", AsOf.ToString("MMMM dd, yyyy")),
                     new ReportParameter("paramCertifiedCorrectSignatory", certifiedCorrectSignatory),
                     new ReportParameter("paramCertifiedCorrectSignatoryTitle", certifiedCorrectSignatoryTitle),
