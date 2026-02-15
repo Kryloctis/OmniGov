@@ -1,11 +1,11 @@
-﻿using ACC.Data;
-using ACC.Domain.Models;
+﻿using Accounting.Data;
+using Accounting.Domain.Entities;
 using LFS.Helpers;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
+using Treasury.Data;
 
 namespace LFS.Views.Transactions.JEV.JournalForms
 {
@@ -55,7 +55,7 @@ namespace LFS.Views.Transactions.JEV.JournalForms
 
         private void LoadCshDsbrsmntData(int jevId)
         {
-            var cashDisbursementsDict = AccFactory.CashDisbursementsJournalRepository().GetViewRecordByJevID(jevId);
+            var cashDisbursementsDict = AccountingFactory.CashDisbursementsJournalRepository().GetViewRecordByJevID(jevId);
 
             if (cashDisbursementsDict is not null && cashDisbursementsDict.Count > 0)
             {
@@ -79,7 +79,7 @@ namespace LFS.Views.Transactions.JEV.JournalForms
 
             var dataTable = new DataTable();
             dataTable.Columns.AddRange(dtColumns);
-            DataTable dtDisbursingOfficers = AccFactory.DisbursingOfficerRepository().GetRecords();
+            DataTable dtDisbursingOfficers = TreasuryFactory.DisbursingOfficerRepository().GetRecords();
 
             foreach (DataRow row in dtDisbursingOfficers.Rows)
             {

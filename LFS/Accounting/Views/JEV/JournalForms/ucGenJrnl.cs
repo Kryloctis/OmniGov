@@ -1,6 +1,5 @@
-﻿using ACC.Data;
-using ACC.Domain.Models;
-using System.Collections.Generic;
+﻿using Accounting.Data;
+using Accounting.Domain.Entities;
 using System.Windows.Forms;
 
 namespace LFS.Views.Transactions.JEV
@@ -28,7 +27,7 @@ namespace LFS.Views.Transactions.JEV
 
         private void LoadGenJrnlData(int jevId)
         {
-            var generalJournalDict = AccFactory.GeneralJournalRepository().GetViewRecordByJevID(jevId);
+            var generalJournalDict = AccountingFactory.GeneralJournalRepository().GetViewRecordByJevID(jevId);
 
             if (generalJournalDict is not null && generalJournalDict.Count > 0)
             {

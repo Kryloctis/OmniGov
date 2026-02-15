@@ -1,5 +1,5 @@
-﻿using ACC.Data;
-using ACC.Domain.Models;
+﻿using Accounting.Data;
+using Accounting.Domain.Entities;
 using System.Windows.Forms;
 
 namespace LFS.Views.Transactions.JEV.JournalForms
@@ -27,9 +27,9 @@ namespace LFS.Views.Transactions.JEV.JournalForms
 
         private void LoadADADisbursementDataIfExist(int jevId)
         {
-            if (AccFactory.ADADisbursementsJournalRepository().JevIdExist(jevId))
+            if (AccountingFactory.ADADisbursementsJournalRepository().JevIdExist(jevId))
             {
-                var adaDisbursementsDict = AccFactory.ADADisbursementsJournalRepository().GetViewRecordByJevID(jevId);
+                var adaDisbursementsDict = AccountingFactory.ADADisbursementsJournalRepository().GetViewRecordByJevID(jevId);
 
                 if (adaDisbursementsDict is not null && adaDisbursementsDict.Count > 0)
                 {

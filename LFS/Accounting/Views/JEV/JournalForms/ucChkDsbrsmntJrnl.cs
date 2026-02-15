@@ -1,5 +1,5 @@
-﻿using ACC.Data;
-using ACC.Domain.Models;
+﻿using Accounting.Data;
+using Accounting.Domain.Entities;
 using LFS.Helpers;
 using System;
 using System.Windows.Forms;
@@ -31,7 +31,7 @@ namespace LFS.Views.Transactions.JEV.JournalForms
 
         private void LoadChkDsbrsmntsDataIfExist(int jevId)
         {
-            var chkDsbrsmntsDict = AccFactory.CheckDisbursementsJournalRepository().GetRecordByJevID(jevId);
+            var chkDsbrsmntsDict = AccountingFactory.CheckDisbursementsJournalRepository().GetRecordByJevID(jevId);
 
             if (chkDsbrsmntsDict is not null && chkDsbrsmntsDict.Count > 0)
             {

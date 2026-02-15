@@ -1,11 +1,12 @@
-﻿using ACC.Data;
-using ACC.Domain.Models;
+﻿using Accounting.Data;
+using Accounting.Domain.Entities;
 using LFS.Helpers;
 using System;
 using System.ComponentModel;
 using System.Data;
 using System.Linq;
 using System.Windows.Forms;
+using Treasury.Data;
 
 namespace LFS.Views.Transactions.JEV.JournalForms
 {
@@ -35,7 +36,7 @@ namespace LFS.Views.Transactions.JEV.JournalForms
 
         private void LoadCshRcptsData(int jevId)
         {
-            var checkDisbursementsDict = AccFactory.CashReceiptsJournalRepository().GetViewRecordByJevID(jevId);
+            var checkDisbursementsDict = AccountingFactory.CashReceiptsJournalRepository().GetViewRecordByJevID(jevId);
 
             if (checkDisbursementsDict is not null && checkDisbursementsDict.Count > 0)
             {
@@ -77,7 +78,7 @@ namespace LFS.Views.Transactions.JEV.JournalForms
 
             var dataTable = new DataTable();
             dataTable.Columns.AddRange(dtColumns);
-            var dtCollectingOfficer = AccFactory.CollectingOfficerRepository().GetRecords();
+            var dtCollectingOfficer = TreasuryFactory.CollectingOfficerRepository().GetRecords();
 
             var officerData = dtCollectingOfficer
                 .AsEnumerable()
