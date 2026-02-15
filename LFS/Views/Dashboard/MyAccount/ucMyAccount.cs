@@ -1,8 +1,8 @@
-﻿using ACC.Data;
-using ACC.Domain.Models;
-using LFS.Helpers;
+﻿using LFS.Helpers;
 using LFS.Properties;
 using LFS.Views.SignIn;
+using OmniGov.Core.Entities;
+using OmniGov.Core.Repositories;
 using System;
 using System.ComponentModel;
 using System.Data;
@@ -36,7 +36,7 @@ namespace LFS.Views.Dashboard.MyAccount
                 errorProvider1.GetError(txtConfirmPassword),
             };
 
-            return AccFactory.CreateErrors(errors).GenerateErrorMessage();
+            return Factory.CreateErrors(errors).GenerateErrorMessage();
         }
 
         private void ResetForm(object sender)
@@ -76,7 +76,7 @@ namespace LFS.Views.Dashboard.MyAccount
 
         private void LoadListOfPermissions()
         {
-            var permissions = AccFactory.RolesPermissionsRepository()
+            var permissions = Factory.RolesPermissionsRepository()
                                         .GetViewRecordsByRoleId(rolesId)
                                         .AsEnumerable()
                                         .Select(dtRowPermissions => $"  -{dtRowPermissions["permission_name"]}")
@@ -174,7 +174,7 @@ namespace LFS.Views.Dashboard.MyAccount
                     UserName = txtUserName.Text.Trim(),
                     RoleId = rolesId
                 };
-                return AccFactory.UsersRepository().Update(userModel);
+                return Factory.UsersRepository().Update(userModel);
             }
 
             return false;
@@ -220,7 +220,7 @@ namespace LFS.Views.Dashboard.MyAccount
                     RoleId = rolesId
                 };
 
-                return AccFactory.UsersRepository().UpdateWithPassword(userModel);
+                return Factory.UsersRepository().UpdateWithPassword(userModel);
             }
 
             return false;
@@ -261,7 +261,7 @@ namespace LFS.Views.Dashboard.MyAccount
             string currentPassword = txtBoxCurrentPassowrd.Text.Trim();
             string userName = txtUserName.Text.Trim();
 
-            bool userCredIsValid = AccFactory.UsersRepository().AccIsValidated(userName, currentPassword);
+            bool userCredIsValid = Factory.UsersRepository().AccIsValidated(userName, currentPassword);
 
             isValid = !Helper.ShowErrorTextBoxEmpty(errorProvider1, txtBoxCurrentPassowrd, "Current Password.")
                       && !userCredIsValid;
