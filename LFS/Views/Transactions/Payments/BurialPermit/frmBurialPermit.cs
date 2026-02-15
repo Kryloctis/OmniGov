@@ -1,9 +1,10 @@
-﻿using ACC.Data;
-using ACC.Domain.Models;
-using LFS.Helpers;
+﻿using LFS.Helpers;
+using OmniGov.Core.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using Treasury.Data;
+using Treasury.Domain.Entities;
 
 namespace LFS.Views.Transactions.Payments.BurialPermit
 {
@@ -153,7 +154,7 @@ namespace LFS.Views.Transactions.Payments.BurialPermit
             var remainDetails = ucRemainsInfo.GetRemainsInfo();
             string isInfectious = burialDetails.isInfectious ? "Infectious" : "Non-Infectious";
             string isEmbalmed = burialDetails.isEmbalmed ? "Embalmed" : "None";
-            var dictRegistry = AccFactory.RegistryRepository().GetRecordByID(remainDetails.remainRegistryId);
+            var dictRegistry = Factory.RegistryRepository().GetRecordByID(remainDetails.remainRegistryId);
             var remainName = Helper.GenerateFullName(string.Empty, dictRegistry["first_name"], dictRegistry["middle_name"], dictRegistry["last_name"], string.Empty);
 
             var dictReportParameters = new Dictionary<string, string>()
@@ -228,7 +229,7 @@ namespace LFS.Views.Transactions.Payments.BurialPermit
 
         private bool ConfirmPayment()
         {
-            return AccFactory.PaymentCollectionsRepository().InsertWithBurialPermitPayment(ucPayment.PaymentCollectionsModel(), null, BurialPermitModel(), ucPaymentFeesCharges.PaymentFeesChargesModels());
+            return TreasuryFactory.PaymentCollectionsRepository().InsertWithBurialPermitPayment(ucPayment.PaymentCollectionsModel(), null, BurialPermitModel(), ucPaymentFeesCharges.PaymentFeesChargesModels());
         }
 
         private void btnNextMain_Click(object sender, EventArgs e)
