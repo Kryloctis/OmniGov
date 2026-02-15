@@ -495,7 +495,7 @@ namespace Treasury.Data.Repositories
                 _ = Insert(paymentCollectionsModel);
                 int lastPaymentCollectionId = GetLastInsertedID(createdBy);
 
-                var taxpayerRepo = Factory.TaxpayersRepository();
+                var taxpayerRepo = TreasuryFactory.TaxpayersRepository();
                 taxpayersModel.CreatedBy = createdBy;
                 taxpayerRepo.Insert(taxpayersModel);
                 int lastInsertedTaxpayerId = taxpayerRepo.GetLastInsertedId(createdBy);

@@ -1,5 +1,7 @@
-﻿using ACC.Data;
+﻿using Accounting.Data;
+using Budget.Data;
 using LFS.Helpers;
+using OmniGov.Core.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -454,7 +456,7 @@ namespace LFS
                 ushort subsidiaryLedgerId = Convert.ToUInt16(item["id"]);
                 string debitCreditType = string.Empty;
 
-                var beginningBalanceRepository = AccFactory.BeginningBalancesRepository();
+                var beginningBalanceRepository = AccountingFactory.BeginningBalancesRepository();
                 decimal generalLedgerBalance = beginningBalanceRepository.GetSumBalanceBy_FundId_GenLedgId_Year_SubLedgId(fundsId, generalLedgerId, year, subsidiaryLedgerId);
                 var beginningBalanceDict = beginningBalanceRepository.GetRecordBy_FundId_GenLedgId_Year_SubLedgId(fundsId, generalLedgerId, year, subsidiaryLedgerId);
 
@@ -494,7 +496,7 @@ namespace LFS
             datagrid.Columns.Clear();
             datagrid.Rows.Clear();
 
-            var dtJournals = AccFactory.JournalsRepository().GetRecords();
+            var dtJournals = Factory.JournalsRepository().GetRecords();
 
             //Image Column
             Image continuingIcon = Properties.Resources.ok14px;
@@ -1519,7 +1521,7 @@ namespace LFS
                 int? sub_fpp;
                 sub_fpp = null;
 
-                var dtGetViewRecordsByFFPIDByAllotmentClass = AccFactory.BudgetAppropriationsRepository().GetViewRecordsByFPPIdAndFundIdAndAllotmentClassIdAndDateEntry(fppID, sub_fpp, fundId, allotmentClassID, dateAsOf);
+                var dtGetViewRecordsByFFPIDByAllotmentClass = BudgetFactory.BudgetAppropriationsRepository().GetViewRecordsByFPPIdAndFundIdAndAllotmentClassIdAndDateEntry(fppID, sub_fpp, fundId, allotmentClassID, dateAsOf);
 
                 //Load by loop All Budget Appropriations Records without Others FPP
                 foreach (DataRow drGetViewRecordsByIds in dtGetViewRecordsByFFPIDByAllotmentClass.Rows)
@@ -1528,7 +1530,7 @@ namespace LFS
                 }
 
                 //Initialize Repository Method for others fpp records
-                DataTable dtGetRecordsOthersFPP = AccFactory.BudgetAppropriationsRepository().GetHeaderOthersFPP(fppID, allotmentClassID, fundId, Convert.ToInt16(dateAsOf.Year));
+                DataTable dtGetRecordsOthersFPP = BudgetFactory.BudgetAppropriationsRepository().GetHeaderOthersFPP(fppID, allotmentClassID, fundId, Convert.ToInt16(dateAsOf.Year));
 
                 //Load by loop All Budget Appropriations Records with Others FPP
                 foreach (DataRow drGetRecordsOthersFPP in dtGetRecordsOthersFPP.Rows)
@@ -1540,7 +1542,7 @@ namespace LFS
                     dgvBudgetAppropriations.Rows.Add(new object[] { null, null, null, null, null, null, othersFPPName });
 
                     sub_fpp = othersFPPID;
-                    DataTable dtGetViewRecordsByIds = AccFactory.BudgetAppropriationsRepository().GetViewRecordsByFPPIdAndFundIdAndAllotmentClassIdAndDateEntry(fppID, sub_fpp, fundId, allotmentClassID, dateAsOf);
+                    DataTable dtGetViewRecordsByIds = BudgetFactory.BudgetAppropriationsRepository().GetViewRecordsByFPPIdAndFundIdAndAllotmentClassIdAndDateEntry(fppID, sub_fpp, fundId, allotmentClassID, dateAsOf);
 
                     foreach (DataRow drGetViewRecordsByIds in dtGetViewRecordsByIds.Rows)
                     {
@@ -1565,12 +1567,12 @@ namespace LFS
                     string remarks = drGetViewRecordsByIds["remarks"].ToString();
 
                     //GET TOTAL SUPPLEMENTAL APPROPRIATIONS
-                    decimal supplementalAppropriation = AccFactory.SupplementalAppropriationsRepository().GetSumSupplementalAppropriationsBy_BudgetAppropriationsId_DateEntry(rowId, dateAsOf);
+                    decimal supplementalAppropriation = BudgetFactory.SupplementalAppropriationsRepository().GetSumSupplementalAppropriationsBy_BudgetAppropriationsId_DateEntry(rowId, dateAsOf);
 
                     //GET TOTAL ALLOTMENT RELEASE
-                    decimal allotments = AccFactory.AllotmentReleaseRepository().GetSumAllotments(rowId, dateAsOf);
+                    decimal allotments = BudgetFactory.AllotmentReleaseRepository().GetSumAllotments(rowId, dateAsOf);
 
-                    decimal obligations = AccFactory.ObligationRequestRepository().GetSumObligationsByAppropriationId(rowId, dateAsOf);
+                    decimal obligations = BudgetFactory.ObligationRequestRepository().GetSumObligationsByAppropriationId(rowId, dateAsOf);
 
                     //GET TOTAL APPROPRIATION
                     decimal totalAppropriationAmount = supplementalAppropriation + rowAppropriationAmount;

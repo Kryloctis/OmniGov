@@ -291,8 +291,13 @@
 		<PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
 	</ItemGroup>
 	<ItemGroup>
-		<ProjectReference Include="..\ACC.Data\ACC.Data.csproj" />
+		<ProjectReference Include="..\Accounting.Data\Accounting.Data.csproj" />
+		<ProjectReference Include="..\Accounting.Domain\Accounting.Domain.csproj" />
+		<ProjectReference Include="..\Budget.Data\Budget.Data.csproj" />
+		<ProjectReference Include="..\Budget.Domain\Budget.Domain.csproj" />
+		<ProjectReference Include="..\OmniGov.Core\OmniGov.Core.csproj" />
 		<ProjectReference Include="..\RPT.Data\RPT.Data.csproj" />
+		<ProjectReference Include="..\Treasury.Data\Treasury.Data.csproj" />
 	</ItemGroup>
 	<ItemGroup>
 		<Content Include="Reports\authority-to-debit-account-disbursements.rdlc">

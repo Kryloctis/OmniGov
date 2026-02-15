@@ -22,7 +22,15 @@ namespace Treasury.Data.Repositories
         private ITaxpayersRepository taxpayersRepository;
         private IRptPreviousAssessment rptPreviousAssessment;
 
-        public RealPropertiesRepository(GenericCommands mySqlGenericCommandsLFS, IProvinces provinces, IMunicipalities municipalities, IBarangayRepository barangayRepository, IActualUseCodes actualUseCodes, IClassificationCodes classificationCodes, ITaxpayerTypeRepository taxpayerTypeRepository, ITaxpayersRepository taxpayersRepository, IRptPreviousAssessment rptPreviousAssessment)
+        public RealPropertiesRepository(GenericCommands mySqlGenericCommandsLFS,
+                                        IProvinces provinces,
+                                        IMunicipalities municipalities,
+                                        IBarangayRepository barangayRepository,
+                                        IActualUseCodes actualUseCodes,
+                                        IClassificationCodes classificationCodes,
+                                        ITaxpayerTypeRepository taxpayerTypeRepository,
+                                        ITaxpayersRepository taxpayersRepository,
+                                        IRptPreviousAssessment rptPreviousAssessment)
         {
             this.mySqlGenericCommandsLFS = mySqlGenericCommandsLFS;
             this.provinces = provinces;
@@ -324,7 +332,7 @@ namespace Treasury.Data.Repositories
                 if (taxpayersRepository.TaxpayerNameExist(taxpayerName))
                 {
                     taxpayerId = taxpayersRepository.GetIdByName(taxpayerName);
-                    var dictTaxpayers = Factory.TaxpayersRepository().GetRecordByID(taxpayerId);
+                    var dictTaxpayers = TreasuryFactory.TaxpayersRepository().GetRecordByID(taxpayerId);
                     taxpayersModel.Id = taxpayerId;
                     taxpayersModel.TaxpayerTypeId = taxpayerTypeId;
                     taxpayersModel.IsActive = Convert.ToBoolean(Convert.ToByte(dictTaxpayers["is_active"]));
