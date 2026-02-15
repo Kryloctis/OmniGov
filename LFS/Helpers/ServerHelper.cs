@@ -1,16 +1,11 @@
-﻿using ACC.Data;
-using MySql.Data.MySqlClient;
+﻿using MySql.Data.MySqlClient;
+using OmniGov.Core.Repositories;
 using RPT.Data.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
-using System.Diagnostics.Contracts;
 using System.Drawing;
-using System.Linq;
-using System.Net;
 using System.Net.NetworkInformation;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LFS.Helpers
 {
@@ -102,7 +97,7 @@ namespace LFS.Helpers
 
                 if (!HostReachable(lfsInstance)) continue;
 
-                bool isLfsdbConnected = AccFactory.ServerRepository().TestConnection(lfsInstance);
+                bool isLfsdbConnected = Factory.ServerRepository().TestConnection(lfsInstance);
                 bool isRpmsdbConnected = RptFactory.ServerRepository().TestConnection(rpmInstance);
 
                 if (!isRpmsdbConnected && !isLfsdbConnected)

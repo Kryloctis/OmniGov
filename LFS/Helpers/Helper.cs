@@ -1,9 +1,8 @@
-using ACC.Data;
+using OmniGov.Core.Repositories;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
-using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Reflection;
@@ -21,7 +20,7 @@ namespace LFS.Helpers
         {
             var dictSigRefDoc = new Dictionary<string, string>();
 
-            dictSigRefDoc = AccFactory.SignatoriesHasReferencesRepository().GetSigntryByRefDoc(reference, documentName);
+            dictSigRefDoc = Factory.SignatoriesHasReferencesRepository().GetSigntryByRefDoc(reference, documentName);
 
             if (dictSigRefDoc.Count < 1)
                 return dictSigRefDoc;
@@ -533,7 +532,7 @@ namespace LFS.Helpers
             var dictUser = new Dictionary<string, dynamic>();
             try
             {
-                dictUser = AccFactory.UsersRepository().GetViewRecordById(userId);
+                dictUser = Factory.UsersRepository().GetViewRecordById(userId);
 
                 string prefix = dictUser["prefix"];
                 string suffix = dictUser["suffix"];
