@@ -1,12 +1,12 @@
-﻿using ACC.Data;
-using ACC.Domain.Models;
-using LFS.Helpers;
+﻿using LFS.Helpers;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
+using Treasury.Data;
+using Treasury.Domain.Entities;
 
 namespace LFS.Views.Transactions.CashTicketIssuance
 {
@@ -78,7 +78,7 @@ namespace LFS.Views.Transactions.CashTicketIssuance
 
                 var dataTable = new DataTable();
                 dataTable.Columns.AddRange(dataColumns);
-                DataTable dtCashTicketDb = AccFactory.CashTicketsIssuedRepository().GetViewRecordsBySearch(parameters.dateIssued, parameters.searchKey, parameters.rowLimit);
+                DataTable dtCashTicketDb = TreasuryFactory.CashTicketsIssuedRepository().GetViewRecordsBySearch(parameters.dateIssued, parameters.searchKey, parameters.rowLimit);
 
                 int totalProgressCount = dtCashTicketDb.Rows.Count;
                 int progressCount = 0;
@@ -190,7 +190,7 @@ namespace LFS.Views.Transactions.CashTicketIssuance
                     cashTicketIssuedModelList.Add(new CashTicketsIssuedModel() { Id = cashTicketIssuedId });
                 }
 
-                return AccFactory.CashTicketsIssuedRepository().Delete(cashTicketIssuedModelList);
+                return TreasuryFactory.CashTicketsIssuedRepository().Delete(cashTicketIssuedModelList);
             }
             return false;
         }

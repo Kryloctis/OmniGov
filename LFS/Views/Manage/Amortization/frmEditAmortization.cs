@@ -1,4 +1,4 @@
-﻿using ACC.Data;
+﻿using Accounting.Data;
 using LFS.Helpers;
 using System;
 using System.Windows.Forms;
@@ -23,7 +23,7 @@ namespace LFS.Views.Manage.Amortization
         {
             try
             {
-                var dicAmortizationRecord = AccFactory.AmortizationRepository().GetRecordByID(amortizationId);
+                var dicAmortizationRecord = AccountingFactory.AmortizationRepository().GetRecordByID(amortizationId);
 
                 string bankName = dicAmortizationRecord["bank_name"];
                 string amortizationTerm = dicAmortizationRecord["amortization_term"];

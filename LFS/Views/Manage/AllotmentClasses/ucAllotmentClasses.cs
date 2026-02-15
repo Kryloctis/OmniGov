@@ -1,6 +1,6 @@
-﻿using ACC.Data;
-using ACC.Domain.Models;
-using LFS.Helpers;
+﻿using LFS.Helpers;
+using OmniGov.Core.Entities;
+using OmniGov.Core.Repositories;
 using System;
 using System.ComponentModel;
 using System.Windows.Forms;
@@ -14,7 +14,7 @@ namespace LFS.Views.Manage.AllotmentClasses
 
         private void LoadSelectedRecord()
         {
-            var allotmentData = AccFactory.AllotmentClassesRepository().GetRecordByID(allotmentClassId);
+            var allotmentData = Factory.AllotmentClassesRepository().GetRecordByID(allotmentClassId);
             txtName.Text = allotmentData["allotment_name"];
             txtCode.Text = allotmentData["allotment_code"];
         }
@@ -52,7 +52,7 @@ namespace LFS.Views.Manage.AllotmentClasses
                 errorProvider1.GetError(txtCode)
             };
 
-            return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
+            return Factory.CreateErrors(errorArray).GenerateErrorMessage();
         }
 
         internal void ResetForm()
@@ -67,7 +67,7 @@ namespace LFS.Views.Manage.AllotmentClasses
                 return false;
 
             string allotmentName = txtName.Text.Trim();
-            bool allotmentNameExist = isEdit ? AccFactory.AllotmentClassesRepository().NameExist(allotmentName, allotmentClassId) : AccFactory.AllotmentClassesRepository().NameExist(allotmentName);
+            bool allotmentNameExist = isEdit ? Factory.AllotmentClassesRepository().NameExist(allotmentName, allotmentClassId) : Factory.AllotmentClassesRepository().NameExist(allotmentName);
 
             if (allotmentNameExist)
             {
@@ -98,7 +98,7 @@ namespace LFS.Views.Manage.AllotmentClasses
                 return false;
 
             string allotmentCode = txtCode.Text.Trim();
-            bool allotmentCodeExist = isEdit ? AccFactory.AllotmentClassesRepository().CodeExist(allotmentCode, allotmentClassId) : AccFactory.AllotmentClassesRepository().CodeExist(allotmentCode);
+            bool allotmentCodeExist = isEdit ? Factory.AllotmentClassesRepository().CodeExist(allotmentCode, allotmentClassId) : Factory.AllotmentClassesRepository().CodeExist(allotmentCode);
 
             if (allotmentCodeExist)
             {

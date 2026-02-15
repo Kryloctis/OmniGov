@@ -1,12 +1,11 @@
-﻿using ACC.Data;
-using ACC.Domain.Models;
-using LFS.Helpers;
+﻿using LFS.Helpers;
 using LFS.Views.Manage.BeginningBalances;
 using LFS.Views.Manage.ChartOfAccounts.AccountGroup;
 using LFS.Views.Manage.ChartOfAccounts.BeginningBalances;
 using LFS.Views.Manage.ChartOfAccounts.MajorAccountGroup;
 using LFS.Views.Manage.ChartOfAccounts.Subsidiary;
 using MySql.Data.MySqlClient;
+using OmniGov.Core.Entities;
 using System;
 using System.Collections.Generic;
 using System.Data;

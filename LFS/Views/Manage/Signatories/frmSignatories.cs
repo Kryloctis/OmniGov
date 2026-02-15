@@ -1,6 +1,6 @@
-﻿using ACC.Data;
-using ACC.Domain.Models;
-using LFS.Helpers;
+﻿using LFS.Helpers;
+using OmniGov.Core.Entities;
+using OmniGov.Core.Repositories;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -44,7 +44,7 @@ namespace LFS.Views.Manage.Signatories
         {
             int rowIndex = dataGridView.CurrentCell.RowIndex;
             int signatoriesId = Convert.ToInt32(dataGridView.Rows[rowIndex].Cells["id"].Value);
-            var dtReferencedDocuments = AccFactory.SignatoriesHasReferencesRepository().GetDocumentRecordsBySignatoryId(signatoriesId);
+            var dtReferencedDocuments = Factory.SignatoriesHasReferencesRepository().GetDocumentRecordsBySignatoryId(signatoriesId);
             var sbDocuments = new StringBuilder();
             dtReferencedDocuments.Rows.Cast<DataRow>().ToList().ForEach(x => { sbDocuments.AppendLine($" {x["documents_name"]}"); });
             richTextBox.Text = sbDocuments.ToString();
@@ -101,7 +101,7 @@ namespace LFS.Views.Manage.Signatories
                     signatoriesModelList.Add(signatoriesModel);
                 }
 
-                return AccFactory.SignatoriesRepository().Delete(signatoriesModelList);
+                return Factory.SignatoriesRepository().Delete(signatoriesModelList);
             }
 
             return false;
@@ -135,7 +135,7 @@ namespace LFS.Views.Manage.Signatories
                 };
 
                 dataTable.Columns.AddRange(dataColumns);
-                var dtSignatories = AccFactory.SignatoriesRepository().GetRecords();
+                var dtSignatories = Factory.SignatoriesRepository().GetRecords();
                 int totalProgressCount = dtSignatories.Rows.Count;
                 int progressCount = 0;
 

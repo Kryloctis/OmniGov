@@ -1,5 +1,5 @@
-﻿using ACC.Data;
-using LFS.Helpers;
+﻿using LFS.Helpers;
+using OmniGov.Core.Repositories;
 using System;
 using System.ComponentModel;
 using System.Windows.Forms;
@@ -23,7 +23,7 @@ namespace LFS.Views.Manage.FunctionProgramProject.FunctionalClassification
                 epName.GetError(txtName)
             };
 
-            return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
+            return Factory.CreateErrors(errorArray).GenerateErrorMessage();
         }
 
         internal void ResetForm()
@@ -47,9 +47,9 @@ namespace LFS.Views.Manage.FunctionProgramProject.FunctionalClassification
                 bool codeExist;
 
                 if (functionalClassificationId == 0)
-                    codeExist = AccFactory.FunctionalClassificationRepository().CodeExist(functionalClassificationCode);
+                    codeExist = Factory.FunctionalClassificationRepository().CodeExist(functionalClassificationCode);
                 else
-                    codeExist = AccFactory.FunctionalClassificationRepository().CodeExist(functionalClassificationCode, functionalClassificationId);
+                    codeExist = Factory.FunctionalClassificationRepository().CodeExist(functionalClassificationCode, functionalClassificationId);
 
                 if (codeExist)
                 {
@@ -75,9 +75,9 @@ namespace LFS.Views.Manage.FunctionProgramProject.FunctionalClassification
                 bool nameExist;
 
                 if (functionalClassificationId == 0)
-                    nameExist = AccFactory.FunctionalClassificationRepository().NameExist(functionalClassificationName);
+                    nameExist = Factory.FunctionalClassificationRepository().NameExist(functionalClassificationName);
                 else
-                    nameExist = AccFactory.FunctionalClassificationRepository().NameExist(functionalClassificationName, functionalClassificationId);
+                    nameExist = Factory.FunctionalClassificationRepository().NameExist(functionalClassificationName, functionalClassificationId);
 
                 if (nameExist)
                 {

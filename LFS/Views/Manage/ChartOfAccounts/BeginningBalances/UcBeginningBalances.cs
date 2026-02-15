@@ -1,5 +1,6 @@
-﻿using ACC.Data;
+﻿using Accounting.Data;
 using LFS.Helpers;
+using OmniGov.Core.Repositories;
 using System;
 using System.ComponentModel;
 using System.Windows.Forms;
@@ -27,12 +28,12 @@ namespace LFS.Views.Manage.BeginningBalances
                 epAmount.GetError(nudAmount)
             };
 
-            return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
+            return Factory.CreateErrors(errorArray).GenerateErrorMessage();
         }
 
         internal void LoadSelectedGeneralLedger()
         {
-            var generalLedgerAccount = AccFactory.GeneralLedgerAccountsRepository().GetViewRecordByID(generalLedgerId);
+            var generalLedgerAccount = AccountingFactory.GeneralLedgerAccountsRepository().GetViewRecordByID(generalLedgerId);
 
             txtAccountCode.Text = generalLedgerAccount["account_code"];
             txtAccountName.Text = generalLedgerAccount["ledger_name"];
@@ -42,7 +43,7 @@ namespace LFS.Views.Manage.BeginningBalances
         {
             if (subsidiaryLedgerId != 0)
             {
-                var subsidiaryDict = AccFactory.SubsidiaryLedgerAccountsRepository().GetRecordByID(subsidiaryLedgerId);
+                var subsidiaryDict = AccountingFactory.SubsidiaryLedgerAccountsRepository().GetRecordByID(subsidiaryLedgerId);
                 txtSubsidiaryCode.Text = subsidiaryDict["sub_code"];
                 txtSubsidiaryName.Text = subsidiaryDict["sub_name"];
             }
@@ -71,7 +72,7 @@ namespace LFS.Views.Manage.BeginningBalances
         {
             if (!DesignMode)
             {
-                var dtFund = AccFactory.FundsRepository().GetRecordByID(fundId);
+                var dtFund = Factory.FundsRepository().GetRecordByID(fundId);
                 txtFunName.Text = dtFund["fund_name"];
                 txtYear.Text = year.ToString();
                 dtpDateEntry.MaxDate = new DateTime(year, 12, DateTime.DaysInMonth(year, 12));

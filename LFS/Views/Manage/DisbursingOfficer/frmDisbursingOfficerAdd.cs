@@ -1,8 +1,8 @@
-﻿using ACC.Data;
-using ACC.Domain.Models;
-using LFS.Helpers;
+﻿using LFS.Helpers;
 using System;
 using System.Windows.Forms;
+using Treasury.Data;
+using Treasury.Domain.Entities;
 
 namespace LFS.Views.Manage.DisbursingOfficer
 {
@@ -38,7 +38,7 @@ namespace LFS.Views.Manage.DisbursingOfficer
                 UserId = uc.UserId
             };
 
-            return AccFactory.DisbursingOfficerRepository().Insert(disbursingOfficerModel);
+            return TreasuryFactory.DisbursingOfficerRepository().Insert(disbursingOfficerModel);
         }
 
         private void btnSave_Click(object sender, EventArgs e)

@@ -1,8 +1,7 @@
-﻿using ACC.Data;
-using ACC.Domain.Models;
-using LFS.Helpers;
+﻿using LFS.Helpers;
 using LFS.Views.Manage.Journals.DefaultAccounts;
 using MySql.Data.MySqlClient;
+using OmniGov.Core.Entities;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;

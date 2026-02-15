@@ -1,6 +1,6 @@
-﻿using ACC.Data;
-using ACC.Domain.Models;
-using LFS.Helpers;
+﻿using LFS.Helpers;
+using OmniGov.Core.Entities;
+using OmniGov.Core.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
@@ -44,7 +44,7 @@ namespace LFS.Views.Manage.Signatories
 
         private void LoadSelectedRecord()
         {
-            var dictSignatories = AccFactory.SignatoriesRepository().GetRecordByID(uc.signatoriesId);
+            var dictSignatories = Factory.SignatoriesRepository().GetRecordByID(uc.signatoriesId);
 
             uc.txtPrefix.Text = dictSignatories["prefix"];
             uc.txtFirstName.Text = dictSignatories["first_name"];
@@ -95,7 +95,7 @@ namespace LFS.Views.Manage.Signatories
                 }
             }
 
-            return AccFactory.SignatoriesRepository().Update(signatoriesModel, signatoriesHasDocumentReferences);
+            return Factory.SignatoriesRepository().Update(signatoriesModel, signatoriesHasDocumentReferences);
         }
     }
 }

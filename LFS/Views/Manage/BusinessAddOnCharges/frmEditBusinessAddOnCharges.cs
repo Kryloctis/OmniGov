@@ -1,8 +1,8 @@
-﻿using ACC.Data;
-using ACC.Domain.Models;
-using LFS.Helpers;
+﻿using LFS.Helpers;
 using System;
 using System.Windows.Forms;
+using Treasury.Data;
+using Treasury.Domain.Entities;
 
 namespace LFS.Views.Manage.BusinessAdOnCharges
 {
@@ -29,7 +29,7 @@ namespace LFS.Views.Manage.BusinessAdOnCharges
 
         private void LoadSelectedRecord()
         {
-            var dictBusinessAddOnCharges = AccFactory.BusinessAddOnChargesRepository().GetRecordByID(_businessAddOnChargesID);
+            var dictBusinessAddOnCharges = TreasuryFactory.BusinessAddOnChargesRepository().GetRecordByID(_businessAddOnChargesID);
 
             var appliedEachBusiness = Convert.ToInt16(dictBusinessAddOnCharges["is_applied_each_business"]);
             _ucBusinessAddOnCharges.txtCode.Text = dictBusinessAddOnCharges["code"];
@@ -72,7 +72,7 @@ namespace LFS.Views.Manage.BusinessAdOnCharges
                 CreatedBy = UserHelper.loggedUser.Id
             };
 
-            return AccFactory.BusinessAddOnChargesRepository().Update(businessAdOnChargesModel);
+            return TreasuryFactory.BusinessAddOnChargesRepository().Update(businessAdOnChargesModel);
         }
     }
 }

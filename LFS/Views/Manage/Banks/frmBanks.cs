@@ -1,12 +1,12 @@
-﻿using ACC.Data;
-using ACC.Domain.Models;
-using LFS.Helpers;
+﻿using LFS.Helpers;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
+using Treasury.Data;
+using Treasury.Domain.Entities;
 
 namespace LFS.Views.Manage.Banks
 {
@@ -61,7 +61,7 @@ namespace LFS.Views.Manage.Banks
                     banksModelList.Add(new BanksModel() { Id = bankId });
                 }
 
-                return AccFactory.BanksRepository().Delete(banksModelList);
+                return TreasuryFactory.BanksRepository().Delete(banksModelList);
             }
 
             return false;
@@ -121,7 +121,7 @@ namespace LFS.Views.Manage.Banks
         {
             var parameters = ((int rowLimit, string searchKey))e.Argument;
 
-            var dtBank = AccFactory.BanksRepository().GetRecords(parameters.rowLimit, parameters.searchKey);
+            var dtBank = TreasuryFactory.BanksRepository().GetRecords(parameters.rowLimit, parameters.searchKey);
 
             var dataTable = new DataTable();
             var dataColumns = new DataColumn[]

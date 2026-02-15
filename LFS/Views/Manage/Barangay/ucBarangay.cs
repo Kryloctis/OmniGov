@@ -1,6 +1,6 @@
-﻿using ACC.Data;
-using ACC.Domain.Models;
-using LFS.Helpers;
+﻿using LFS.Helpers;
+using OmniGov.Core.Entities;
+using OmniGov.Core.Repositories;
 using System;
 using System.ComponentModel;
 using System.Windows.Forms;
@@ -19,7 +19,7 @@ namespace LFS.Views.Manage.Barangay
 
         private void LoadSelectedBarangay(int barangayId)
         {
-            var dictBarangay = AccFactory.BarangayRepository().GetRecordByID(barangayId);
+            var dictBarangay = Factory.BarangayRepository().GetRecordByID(barangayId);
             txtCode.Text = dictBarangay["code"];
             txtName.Text = dictBarangay["name"];
         }
@@ -53,7 +53,7 @@ namespace LFS.Views.Manage.Barangay
                 errorProvider1.GetError(txtName)
             };
 
-            return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
+            return Factory.CreateErrors(errorArray).GenerateErrorMessage();
         }
 
         internal void ResetForm()
@@ -68,7 +68,7 @@ namespace LFS.Views.Manage.Barangay
                 return false;
 
             string barangayCode = textBox.Text.Trim();
-            bool codeExist = isEdit ? AccFactory.BarangayRepository().CodeExist(barangayCode, barangayId) : AccFactory.BarangayRepository().CodeExist(barangayCode);
+            bool codeExist = isEdit ? Factory.BarangayRepository().CodeExist(barangayCode, barangayId) : Factory.BarangayRepository().CodeExist(barangayCode);
 
             if (codeExist)
             {
@@ -85,7 +85,7 @@ namespace LFS.Views.Manage.Barangay
                 return false;
 
             string barangayName = textBox.Text.Trim();
-            bool nameExist = isEdit ? AccFactory.BarangayRepository().NameExist(barangayName, barangayId) : AccFactory.BarangayRepository().NameExist(barangayName);
+            bool nameExist = isEdit ? Factory.BarangayRepository().NameExist(barangayName, barangayId) : Factory.BarangayRepository().NameExist(barangayName);
 
             if (nameExist)
             {

@@ -1,6 +1,6 @@
-﻿using ACC.Data;
-using ACC.Domain.Models;
-using LFS.Helpers;
+﻿using LFS.Helpers;
+using OmniGov.Core.Entities;
+using OmniGov.Core.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
@@ -24,7 +24,7 @@ namespace LFS.Views.Manage.FunctionProgramProject.FunctonalClassificationService
 
         private void LoadSelectedRecord()
         {
-            Dictionary<string, string> data = AccFactory.FunctionalClassificationServiceRepository().GetRecordByID(uc.serviceID);
+            Dictionary<string, string> data = Factory.FunctionalClassificationServiceRepository().GetRecordByID(uc.serviceID);
 
             uc.cmbSectorName.SelectedValue = data["functional_classifications_id"];
             uc.txtName.Text = data["service_name"];
@@ -49,7 +49,7 @@ namespace LFS.Views.Manage.FunctionProgramProject.FunctonalClassificationService
                 ServiceName = serviceName,
             };
 
-            return AccFactory.FunctionalClassificationServiceRepository().Update(functionalClassificationServiceModel);
+            return Factory.FunctionalClassificationServiceRepository().Update(functionalClassificationServiceModel);
         }
 
         private void frmFunctonalClassificationServiceEdit_Load(object sender, EventArgs e)

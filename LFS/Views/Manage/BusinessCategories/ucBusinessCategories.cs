@@ -1,8 +1,9 @@
-﻿using ACC.Data;
-using LFS.Helpers;
+﻿using LFS.Helpers;
+using OmniGov.Core.Repositories;
 using System;
 using System.ComponentModel;
 using System.Windows.Forms;
+using Treasury.Data;
 
 namespace LFS.Views.Manage.BusinessCategories
 {
@@ -23,7 +24,7 @@ namespace LFS.Views.Manage.BusinessCategories
                 errorProvider1.GetError(txtDescription)
         };
 
-            return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
+            return Factory.CreateErrors(errorArray).GenerateErrorMessage();
         }
 
         internal void ResetForm()
@@ -42,7 +43,7 @@ namespace LFS.Views.Manage.BusinessCategories
         private bool DescriptionValidated(ErrorProvider errorProvider, TextBox textBox)
         {
             bool descriptionExist;
-            descriptionExist = isEdit ? AccFactory.BusinessCategoriesRepository().DescriptionExist(businessCategoryID, textBox.Text.Trim()) : AccFactory.BusinessCategoriesRepository().DescriptionExist(textBox.Text.Trim());
+            descriptionExist = isEdit ? TreasuryFactory.BusinessCategoriesRepository().DescriptionExist(businessCategoryID, textBox.Text.Trim()) : TreasuryFactory.BusinessCategoriesRepository().DescriptionExist(textBox.Text.Trim());
 
             if (Helper.ShowErrorTextBoxEmpty(errorProvider, textBox, "Description"))
                 return false;

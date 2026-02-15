@@ -1,8 +1,9 @@
-﻿using ACC.Data;
-using LFS.Helpers;
+﻿using LFS.Helpers;
+using OmniGov.Core.Repositories;
 using System;
 using System.ComponentModel;
 using System.Windows.Forms;
+using Treasury.Data;
 
 namespace LFS.Views.Manage.AccountableForm
 {
@@ -24,7 +25,7 @@ namespace LFS.Views.Manage.AccountableForm
                 errorProvider1.GetError(txtFormDescription)
             };
 
-            return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
+            return Factory.CreateErrors(errorArray).GenerateErrorMessage();
         }
 
         internal void ResetForm()
@@ -43,9 +44,9 @@ namespace LFS.Views.Manage.AccountableForm
                 return false;
 
             if (!isEdit)
-                formNumberExist = AccFactory.AccountableFormsRepository().CodeExist(formNumber);
+                formNumberExist = TreasuryFactory.AccountableFormsRepository().CodeExist(formNumber);
             else
-                formNumberExist = AccFactory.AccountableFormsRepository().CodeExist(formNumber, accountableFormId);
+                formNumberExist = TreasuryFactory.AccountableFormsRepository().CodeExist(formNumber, accountableFormId);
 
             if (formNumberExist)
             {

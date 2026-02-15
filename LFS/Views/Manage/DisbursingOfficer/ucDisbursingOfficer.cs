@@ -1,6 +1,6 @@
-﻿using ACC.Data;
-using LFS.Helpers;
+﻿using LFS.Helpers;
 using LFS.Views.Manage.LinkUser;
+using OmniGov.Core.Repositories;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -28,7 +28,7 @@ namespace LFS.Views.Manage.DisbursingOfficer
                 errorProvider1.GetError(txtJobTitle)
             };
 
-            return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
+            return Factory.CreateErrors(errorArray).GenerateErrorMessage();
         }
 
         internal void ResetForm()
@@ -110,7 +110,7 @@ namespace LFS.Views.Manage.DisbursingOfficer
 
         internal void LoadLink(int id)
         {
-            var data = AccFactory.UsersRepository().GetViewRecordById(id);
+            var data = Factory.UsersRepository().GetViewRecordById(id);
             if (data.Count > 0)
             {
                 UserId = id;
@@ -163,7 +163,7 @@ namespace LFS.Views.Manage.DisbursingOfficer
         private void LoadUsers(bool isSearch = false)
         {
             string searchKey = cmbxLinkedAcc.Text.Trim();
-            var dtUsers = AccFactory.UsersRepository().GetViewRecords();
+            var dtUsers = Factory.UsersRepository().GetViewRecords();
             HelperLoadRecords.UsersComboBox(dtUsers, cmbxLinkedAcc, "id", "first_name");
 
             var searchSources = new List<string>
@@ -201,7 +201,7 @@ namespace LFS.Views.Manage.DisbursingOfficer
         private void LoadUserDetails()
         {
             int userId = Convert.ToInt32(cmbxLinkedAcc.SelectedValue);
-            var dtUser = AccFactory.UsersRepository().GetViewRecordById(userId);
+            var dtUser = Factory.UsersRepository().GetViewRecordById(userId);
 
             txtPrefix.Text = dtUser["prefix"];
             txtFirstName.Text = dtUser["first_name"];

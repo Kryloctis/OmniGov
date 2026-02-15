@@ -1,6 +1,6 @@
-﻿using ACC.Data;
-using ACC.Domain.Models;
-using LFS.Helpers;
+﻿using LFS.Helpers;
+using OmniGov.Core.Entities;
+using OmniGov.Core.Repositories;
 using System;
 using System.ComponentModel;
 using System.Windows.Forms;
@@ -33,7 +33,7 @@ namespace LFS.Views.Manage.Journals
                  epName.GetError(txtName)
             };
 
-            return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
+            return Factory.CreateErrors(errorArray).GenerateErrorMessage();
         }
 
         internal void ResetForm()
@@ -61,9 +61,9 @@ namespace LFS.Views.Manage.Journals
                 return false;
 
             if (isEdit)
-                journalNameExist = AccFactory.JournalsRepository().NameExist(journalName, journalId.Value);
+                journalNameExist = Factory.JournalsRepository().NameExist(journalName, journalId.Value);
             else
-                journalNameExist = AccFactory.JournalsRepository().NameExist(journalName);
+                journalNameExist = Factory.JournalsRepository().NameExist(journalName);
 
             if (journalNameExist)
             {

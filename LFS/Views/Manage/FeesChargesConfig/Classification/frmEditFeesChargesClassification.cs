@@ -1,8 +1,8 @@
-﻿using ACC.Data;
-using ACC.Domain.Models;
-using LFS.Helpers;
+﻿using LFS.Helpers;
 using System;
 using System.Windows.Forms;
+using Treasury.Data;
+using Treasury.Domain.Entities;
 
 namespace LFS.Views.Manage.FeesChargesConfig.Classification
 {
@@ -39,7 +39,7 @@ namespace LFS.Views.Manage.FeesChargesConfig.Classification
                 FundID = uc.cmbxFund.SelectedValue
             };
 
-            return AccFactory.TaxTypesRepository().Update(feesChargesClassificationModel);
+            return TreasuryFactory.TaxTypesRepository().Update(feesChargesClassificationModel);
         }
 
         private void frmEditFeesChargesClassification_Load(object sender, EventArgs e)

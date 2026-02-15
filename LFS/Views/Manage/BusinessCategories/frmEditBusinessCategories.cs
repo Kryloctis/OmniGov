@@ -1,8 +1,8 @@
-﻿using ACC.Data;
-using ACC.Domain.Models;
-using LFS.Helpers;
+﻿using LFS.Helpers;
 using System;
 using System.Windows.Forms;
+using Treasury.Data;
+using Treasury.Domain.Entities;
 
 namespace LFS.Views.Manage.BusinessCategories
 {
@@ -38,7 +38,7 @@ namespace LFS.Views.Manage.BusinessCategories
 
         private void LoadSelectedRecord()
         {
-            var dictBusinessCategories = AccFactory.BusinessCategoriesRepository().GetRecordByID(_businessCategoriesID);
+            var dictBusinessCategories = TreasuryFactory.BusinessCategoriesRepository().GetRecordByID(_businessCategoriesID);
 
             var isLineOfBusiness = Convert.ToInt16(dictBusinessCategories["is_line_of_business"]);
 
@@ -70,7 +70,7 @@ namespace LFS.Views.Manage.BusinessCategories
                 LineOfBusiness = lineInBusiness
             };
 
-            return AccFactory.BusinessCategoriesRepository().Update(businessCategoriesModel);
+            return TreasuryFactory.BusinessCategoriesRepository().Update(businessCategoriesModel);
         }
 
         private void btnSave_Click(object sender, EventArgs e)

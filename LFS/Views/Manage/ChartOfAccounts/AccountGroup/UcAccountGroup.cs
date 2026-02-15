@@ -1,6 +1,5 @@
-﻿using ACC.Data;
-using ACC.Domain.Interfaces;
-using LFS.Helpers;
+﻿using LFS.Helpers;
+using OmniGov.Core.Repositories;
 using System;
 using System.ComponentModel;
 using System.Windows.Forms;
@@ -10,7 +9,6 @@ namespace LFS.Views.Manage.ChartOfAccounts.AccountGroup
     public partial class UcAccountGroup : UserControl
     {
         internal byte accountGroupId = 0;
-        private IAccountGroupRepository _accountGroupRepository;
 
         public UcAccountGroup()
         {
@@ -25,7 +23,7 @@ namespace LFS.Views.Manage.ChartOfAccounts.AccountGroup
                 epName.GetError(txtName)
             };
 
-            return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
+            return Factory.CreateErrors(errorArray).GenerateErrorMessage();
         }
 
         internal void ResetForm()
@@ -36,9 +34,9 @@ namespace LFS.Views.Manage.ChartOfAccounts.AccountGroup
 
         private bool CodeValidated(ErrorProvider errorProvider, TextBox textBox)
         {
-            _accountGroupRepository = AccFactory.AccountGroupRepository();
+            var accGrpRepo = Factory.AccountGroupRepository();
             string accountGroupCode = txtCode.Text.Trim();
-            bool codeExist = accountGroupId == 0 ? _accountGroupRepository.CodeExist(accountGroupCode) : _accountGroupRepository.CodeExist(accountGroupCode, accountGroupId);
+            bool codeExist = accountGroupId == 0 ? accGrpRepo.CodeExist(accountGroupCode) : accGrpRepo.CodeExist(accountGroupCode, accountGroupId);
 
             if (Helper.ShowErrorTextBoxEmpty(errorProvider, textBox, "code"))
                 return false;
@@ -52,9 +50,9 @@ namespace LFS.Views.Manage.ChartOfAccounts.AccountGroup
 
         private bool NameValidated(ErrorProvider errorProvider, TextBox textBox)
         {
-            _accountGroupRepository = AccFactory.AccountGroupRepository();
+            var accGrpRepo = Factory.AccountGroupRepository();
             string accountGroupName = textBox.Text.Trim();
-            bool nameExist = accountGroupId == 0 ? _accountGroupRepository.NameExist(accountGroupName) : _accountGroupRepository.NameExist(accountGroupName, accountGroupId);
+            bool nameExist = accountGroupId == 0 ? accGrpRepo.NameExist(accountGroupName) : accGrpRepo.NameExist(accountGroupName, accountGroupId);
 
             if (Helper.ShowErrorTextBoxEmpty(errorProvider, textBox, "name"))
                 return false;

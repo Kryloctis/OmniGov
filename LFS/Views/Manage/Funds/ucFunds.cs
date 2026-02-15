@@ -1,6 +1,6 @@
-﻿using ACC.Data;
-using ACC.Domain.Models;
-using LFS.Helpers;
+﻿using LFS.Helpers;
+using OmniGov.Core.Entities;
+using OmniGov.Core.Repositories;
 using System;
 using System.ComponentModel;
 using System.Windows.Forms;
@@ -19,7 +19,7 @@ namespace LFS.Views.Manage.Funds
 
         private void LoadSelectedRecord()
         {
-            var fundData = AccFactory.FundsRepository().GetRecordByID(1);
+            var fundData = Factory.FundsRepository().GetRecordByID(1);
             txtCode.Text = fundData["fund_code"];
             txtName.Text = fundData["fund_name"];
         }
@@ -52,7 +52,7 @@ namespace LFS.Views.Manage.Funds
                 errorProvider1.GetError(txtName)
             };
 
-            return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
+            return Factory.CreateErrors(errorArray).GenerateErrorMessage();
         }
 
         internal void ResetForm()
@@ -68,7 +68,7 @@ namespace LFS.Views.Manage.Funds
             if (Helper.ShowErrorTextBoxEmpty(errorProvider, textBox, "fund name"))
                 return false;
 
-            bool fundNameExist = isEdit ? AccFactory.FundsRepository().NameExist(fundName, fundId) : AccFactory.FundsRepository().NameExist(fundName);
+            bool fundNameExist = isEdit ? Factory.FundsRepository().NameExist(fundName, fundId) : Factory.FundsRepository().NameExist(fundName);
             if (fundNameExist)
             {
                 errorProvider.SetError(textBox, "Fund name already exist.");
@@ -98,7 +98,7 @@ namespace LFS.Views.Manage.Funds
             if (Helper.ShowErrorTextBoxEmpty(errorProvider, textBox, "fund code"))
                 return false;
 
-            bool fundCodeExist = isEdit ? AccFactory.FundsRepository().CodeExist(fundCode, fundId) : AccFactory.FundsRepository().CodeExist(fundCode);
+            bool fundCodeExist = isEdit ? Factory.FundsRepository().CodeExist(fundCode, fundId) : Factory.FundsRepository().CodeExist(fundCode);
 
             if (fundCodeExist)
             {

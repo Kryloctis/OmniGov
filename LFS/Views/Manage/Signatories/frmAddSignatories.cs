@@ -1,6 +1,6 @@
-﻿using ACC.Data;
-using ACC.Domain.Models;
-using LFS.Helpers;
+﻿using LFS.Helpers;
+using OmniGov.Core.Entities;
+using OmniGov.Core.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
@@ -81,7 +81,7 @@ namespace LFS.Views.Manage.Signatories
                 }
             }
 
-            return AccFactory.SignatoriesRepository().Insert(signatoriesModel, signatoriesHasDocumentReferences);
+            return Factory.SignatoriesRepository().Insert(signatoriesModel, signatoriesHasDocumentReferences);
         }
     }
 }

@@ -1,6 +1,6 @@
-﻿using ACC.Data;
-using ACC.Domain.Models;
-using LFS.Helpers;
+﻿using LFS.Helpers;
+using OmniGov.Core.Entities;
+using OmniGov.Core.Repositories;
 using System;
 using System.Windows.Forms;
 
@@ -34,7 +34,7 @@ namespace LFS.Views.Manage.FunctionProgramProject.OthersFunctionProgramProject
                 othersFPPName = uc.txtName.Text.Trim()
             };
 
-            return AccFactory.SubFPPRepository().Insert(othersFPPModel);
+            return Factory.SubFPPRepository().Insert(othersFPPModel);
         }
 
         private void btnSave_Click(object sender, EventArgs e)

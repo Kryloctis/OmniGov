@@ -1,6 +1,6 @@
-﻿using ACC.Data;
-using ACC.Domain.Models;
-using LFS.Helpers;
+﻿using LFS.Helpers;
+using OmniGov.Core.Entities;
+using OmniGov.Core.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
@@ -22,7 +22,7 @@ namespace LFS.Views.Manage.ChartOfAccounts.AccountGroup
 
         private void LoadSelectedRecord()
         {
-            Dictionary<string, string> accountGroupData = AccFactory.AccountGroupRepository().GetRecordByID(uc.accountGroupId);
+            Dictionary<string, string> accountGroupData = Factory.AccountGroupRepository().GetRecordByID(uc.accountGroupId);
 
             uc.txtCode.Text = accountGroupData["account_group_code"];
             uc.txtName.Text = accountGroupData["account_group_name"];
@@ -45,7 +45,7 @@ namespace LFS.Views.Manage.ChartOfAccounts.AccountGroup
                 AccountGroupName = uc.txtName.Text.Trim()
             };
 
-            return AccFactory.AccountGroupRepository().Update(accountGroupModel);
+            return Factory.AccountGroupRepository().Update(accountGroupModel);
         }
 
         private void OnLoad()

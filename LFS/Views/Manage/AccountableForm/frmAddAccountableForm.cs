@@ -1,8 +1,8 @@
-﻿using ACC.Data;
-using ACC.Domain.Models;
-using LFS.Helpers;
+﻿using LFS.Helpers;
 using System;
 using System.Windows.Forms;
+using Treasury.Data;
+using Treasury.Domain.Entities;
 
 namespace LFS.Views.Manage.AccountableForm
 {
@@ -34,7 +34,7 @@ namespace LFS.Views.Manage.AccountableForm
                 IsCashTicket = uc.cbIsCashTickets.Checked
             };
 
-            return AccFactory.AccountableFormsRepository().Insert(accModel);
+            return TreasuryFactory.AccountableFormsRepository().Insert(accModel);
         }
 
         private void btnSave_Click(object sender, EventArgs e)

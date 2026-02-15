@@ -1,11 +1,12 @@
-﻿using ACC.Data;
-using ACC.Domain.Models;
-using LFS.Helpers;
+﻿using LFS.Helpers;
+using OmniGov.Core.Entities;
 using RPT.Data.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Windows.Forms;
+using Treasury.Data;
+using Treasury.Domain.Entities;
 
 namespace LFS.Views.Manage.DatabaseSynchronization
 {
@@ -210,7 +211,7 @@ namespace LFS.Views.Manage.DatabaseSynchronization
                         RptPreviousAssessmentModels = rptPreviousAssessmentModel
                     };
 
-                    AccFactory.RealPropertiesRepository().Synchronize(realPropertiesModel);
+                    TreasuryFactory.RealPropertiesRepository().Synchronize(realPropertiesModel);
 
                     progressCount++;
                     remainingItems--;

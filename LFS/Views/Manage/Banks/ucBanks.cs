@@ -1,9 +1,10 @@
-﻿using ACC.Data;
-using ACC.Domain.Models;
-using LFS.Helpers;
+﻿using LFS.Helpers;
+using OmniGov.Core.Repositories;
 using System;
 using System.ComponentModel;
 using System.Windows.Forms;
+using Treasury.Data;
+using Treasury.Domain.Entities;
 
 namespace LFS.Views.Manage.Banks
 {
@@ -19,7 +20,7 @@ namespace LFS.Views.Manage.Banks
 
         private void LoadSelectedRecord(int bankId)
         {
-            var dictBank = AccFactory.BanksRepository().GetRecordByID(bankId);
+            var dictBank = TreasuryFactory.BanksRepository().GetRecordByID(bankId);
             txtBankCode.Text = dictBank["bank_code"];
             txtBankName.Text = dictBank["bank_name"];
             txtBankBranch.Text = dictBank["bank_branch"];
@@ -60,7 +61,7 @@ namespace LFS.Views.Manage.Banks
             {
                 errorProvider1.GetError(txtBankName)
             };
-            return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
+            return Factory.CreateErrors(errorArray).GenerateErrorMessage();
         }
 
         private void txtbankname_Validating(object sender, CancelEventArgs e)

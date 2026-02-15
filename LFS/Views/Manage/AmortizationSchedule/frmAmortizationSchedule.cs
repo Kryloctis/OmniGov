@@ -1,5 +1,4 @@
-﻿using ACC.Data;
-using ACC.Domain.Models;
+﻿using Accounting.Domain.Entities;
 using LFS.Helpers;
 using LFS.Views.Manage.AmortizationSchedule;
 using System;

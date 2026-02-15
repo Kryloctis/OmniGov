@@ -1,8 +1,9 @@
-﻿using ACC.Data;
-using LFS.Helpers;
+﻿using LFS.Helpers;
+using OmniGov.Core.Repositories;
 using System;
 using System.ComponentModel;
 using System.Windows.Forms;
+using Treasury.Data;
 
 namespace LFS.Views.Manage.FeesChargesConfig.FeesCharges
 {
@@ -13,8 +14,6 @@ namespace LFS.Views.Manage.FeesChargesConfig.FeesCharges
             InitializeComponent();
         }
 
-        #region Private Methods
-
         internal string GetFormErrors()
         {
             var errors = new string[]
@@ -22,7 +21,7 @@ namespace LFS.Views.Manage.FeesChargesConfig.FeesCharges
                 errorProvider1.GetError(txtDescription)
             };
 
-            return AccFactory.CreateErrors(errors).GenerateErrorMessage();
+            return Factory.CreateErrors(errors).GenerateErrorMessage();
         }
 
         internal void OnLoad(bool isEdit, int? feesChargesId = null)
@@ -33,19 +32,13 @@ namespace LFS.Views.Manage.FeesChargesConfig.FeesCharges
 
         private void LoadSelectedRecord(int feesChargesId)
         {
-            var dictFeesCharges = AccFactory.OtherPaymentRatesRepository().GetRecordByID(feesChargesId);
+            var dictFeesCharges = TreasuryFactory.OtherPaymentRatesRepository().GetRecordByID(feesChargesId);
 
             chckEditableRate.Checked = Convert.ToBoolean(Convert.ToByte(dictFeesCharges["is_rate_editable"]));
             txtDescription.Text = dictFeesCharges["description"];
             nudAmount.Value = Convert.ToDecimal(dictFeesCharges["amount"]);
             nudStartingYear.Value = Convert.ToDecimal(dictFeesCharges["starting_year"]);
         }
-
-        #endregion Private Methods
-
-        #region Event Methods
-
-        #region Validations
 
         private void txtDescription_Validating(object sender, CancelEventArgs e)
         {
@@ -56,9 +49,5 @@ namespace LFS.Views.Manage.FeesChargesConfig.FeesCharges
         {
             Helper.ClearErrorTextBox(errorProvider1, txtDescription);
         }
-
-        #endregion Validations
-
-        #endregion Event Methods
     }
 }

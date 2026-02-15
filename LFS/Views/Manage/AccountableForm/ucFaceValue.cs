@@ -1,5 +1,5 @@
-﻿using ACC.Data;
-using LFS.Helpers;
+﻿using LFS.Helpers;
+using OmniGov.Core.Repositories;
 using System;
 using System.Windows.Forms;
 
@@ -14,7 +14,7 @@ namespace LFS.Views.Manage.AccountableForm
 
         internal void LoadSelectedData(int faceValueId)
         {
-            var dictFaceValue = AccFactory.FaceValueRepository().GetRecordByID(faceValueId);
+            var dictFaceValue = Factory.FaceValueRepository().GetRecordByID(faceValueId);
 
             dtDateEffective.Value = Convert.ToDateTime(dictFaceValue["date_effective"]);
             nudAmount.Value = Convert.ToDecimal(dictFaceValue["amount"]);
@@ -28,7 +28,7 @@ namespace LFS.Views.Manage.AccountableForm
                 errorProvider1.GetError(nudAmount)
             };
 
-            return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
+            return Factory.CreateErrors(errorArray).GenerateErrorMessage();
         }
 
         internal void ResetForm()

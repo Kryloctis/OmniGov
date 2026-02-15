@@ -1,10 +1,11 @@
-﻿using ACC.Data;
-using ACC.Domain.Models;
-using LFS.Helpers;
+﻿using LFS.Helpers;
+using OmniGov.Core.Repositories;
 using System;
 using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
+using Treasury.Data;
+using Treasury.Domain.Entities;
 
 namespace LFS.Views.Manage.BankAccounts
 {
@@ -20,7 +21,7 @@ namespace LFS.Views.Manage.BankAccounts
 
         private void LoadSelectedRecord(int bankAccId)
         {
-            var dictBankAccounts = AccFactory.BankAccountsRepository().GetRecordByID(bankAccId);
+            var dictBankAccounts = TreasuryFactory.BankAccountsRepository().GetRecordByID(bankAccId);
             cmbxBank.SelectedValue = dictBankAccounts["banks_id"];
             txtAccountNo.Text = dictBankAccounts["account_no"];
         }
@@ -60,12 +61,12 @@ namespace LFS.Views.Manage.BankAccounts
                 errorProvider1.GetError(txtAccountNo)
             };
 
-            return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
+            return Factory.CreateErrors(errorArray).GenerateErrorMessage();
         }
 
         private void LoadBanks()
         {
-            DataTable dataTable = AccFactory.BanksRepository().GetRecords();
+            DataTable dataTable = TreasuryFactory.BanksRepository().GetRecords();
             HelperLoadRecords.BankComboBox(dataTable, cmbxBank, "id", "bank_name");
         }
 

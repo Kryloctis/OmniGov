@@ -1,5 +1,5 @@
-﻿using ACC.Data;
-using LFS.Helpers;
+﻿using LFS.Helpers;
+using OmniGov.Core.Repositories;
 using System;
 using System.Data;
 using System.Windows.Forms;
@@ -17,7 +17,7 @@ namespace LFS.Views.Manage.FunctionProgramProject.FunctonalClassificationService
 
         public void LoadSectorNameComboBox()
         {
-            DataTable dtSectorName = AccFactory.FunctionalClassificationRepository().GetRecords();
+            DataTable dtSectorName = Factory.FunctionalClassificationRepository().GetRecords();
             HelperLoadRecords.SectorNameComboBox(dtSectorName, cmbSectorName, "sector_name", "id");
             byte id = Convert.ToByte(cmbSectorName.SelectedValue);
         }
@@ -29,7 +29,7 @@ namespace LFS.Views.Manage.FunctionProgramProject.FunctonalClassificationService
                 epSectorName.GetError(cmbSectorName),
                 epName.GetError(txtName)
             };
-            return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
+            return Factory.CreateErrors(errorArray).GenerateErrorMessage();
         }
 
         internal void ResetForm()
@@ -73,8 +73,8 @@ namespace LFS.Views.Manage.FunctionProgramProject.FunctonalClassificationService
                 return false;
             }
 
-            bool nameExist = serviceID == 0 ? AccFactory.FunctionalClassificationServiceRepository().NameExist(textBox.Text.Trim()) :
-                                              AccFactory.FunctionalClassificationServiceRepository().NameExist(textBox.Text.Trim(), serviceID);
+            bool nameExist = serviceID == 0 ? Factory.FunctionalClassificationServiceRepository().NameExist(textBox.Text.Trim()) :
+                                              Factory.FunctionalClassificationServiceRepository().NameExist(textBox.Text.Trim(), serviceID);
             if (nameExist)
             {
                 errorProvider.SetError(textBox, "Service Name already exist.");

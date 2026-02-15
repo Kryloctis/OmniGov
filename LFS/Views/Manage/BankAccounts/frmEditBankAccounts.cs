@@ -1,7 +1,7 @@
-﻿using ACC.Data;
-using LFS.Helpers;
+﻿using LFS.Helpers;
 using System;
 using System.Windows.Forms;
+using Treasury.Data;
 
 namespace LFS.Views.Manage.BankAccounts
 {
@@ -40,7 +40,7 @@ namespace LFS.Views.Manage.BankAccounts
             var bankAccModel = uc.BankAccountsModel();
             bankAccModel.Id = bankAccId;
 
-            return AccFactory.BankAccountsRepository().Update(bankAccModel);
+            return TreasuryFactory.BankAccountsRepository().Update(bankAccModel);
         }
 
         private void btnSave_Click(object sender, EventArgs e)

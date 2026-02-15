@@ -1,5 +1,5 @@
-﻿using ACC.Data;
-using LFS.Helpers;
+﻿using LFS.Helpers;
+using OmniGov.Core.Repositories;
 using System;
 using System.Data;
 using System.Windows.Forms;
@@ -24,12 +24,12 @@ namespace LFS.Views.Manage.ChartOfAccounts.MajorAccountGroup
                 epName.GetError(txtName)
             };
 
-            return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
+            return Factory.CreateErrors(errorArray).GenerateErrorMessage();
         }
 
         internal void LoadAccountGroup()
         {
-            DataTable dtAccountGroup = AccFactory.AccountGroupRepository().GetRecords();
+            DataTable dtAccountGroup = Factory.AccountGroupRepository().GetRecords();
             HelperLoadRecords.AccountGroupComboBox(dtAccountGroup, cmbAccountGroup, "account_group_name", "id");
         }
 
@@ -43,7 +43,7 @@ namespace LFS.Views.Manage.ChartOfAccounts.MajorAccountGroup
         private bool AccountGroupValidated(ErrorProvider errorProvider, ComboBox comboBox)
         {
             int accountGroupId = Convert.ToByte(comboBox.SelectedValue);
-            bool idExist = AccFactory.AccountGroupRepository().IdExist(accountGroupId);
+            bool idExist = Factory.AccountGroupRepository().IdExist(accountGroupId);
 
             if (Helper.ShowErrorComboBoxEmpty(errorProvider, comboBox, "account group"))
                 return false;

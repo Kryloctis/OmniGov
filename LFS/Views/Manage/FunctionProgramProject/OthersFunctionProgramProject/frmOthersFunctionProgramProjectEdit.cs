@@ -1,6 +1,6 @@
-﻿using ACC.Data;
-using ACC.Domain.Models;
-using LFS.Helpers;
+﻿using LFS.Helpers;
+using OmniGov.Core.Entities;
+using OmniGov.Core.Repositories;
 using System;
 using System.Windows.Forms;
 
@@ -20,7 +20,7 @@ namespace LFS.Views.Manage.FunctionProgramProject.OthersFunctionProgramProject
 
         private void LoadSelected()
         {
-            var dicOthersFPPRecord = AccFactory.SubFPPRepository().GetRecordByID(uc.othersFPPID);
+            var dicOthersFPPRecord = Factory.SubFPPRepository().GetRecordByID(uc.othersFPPID);
             uc.txtCode.Text = dicOthersFPPRecord["others_fpp_code"];
             uc.txtName.Text = dicOthersFPPRecord["name"];
         }
@@ -40,7 +40,7 @@ namespace LFS.Views.Manage.FunctionProgramProject.OthersFunctionProgramProject
                 othersFPPName = uc.txtName.Text.Trim()
             };
 
-            return AccFactory.SubFPPRepository().Update(othersFPPModel);
+            return Factory.SubFPPRepository().Update(othersFPPModel);
         }
 
         private void btnSave_Click(object sender, EventArgs e)

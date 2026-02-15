@@ -1,6 +1,6 @@
-﻿using ACC.Data;
-using ACC.Domain.Models;
-using LFS.Helpers;
+﻿using LFS.Helpers;
+using OmniGov.Core.Entities;
+using OmniGov.Core.Repositories;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -80,7 +80,7 @@ namespace LFS.Views.Manage.AllotmentClasses
                     allotmentClassesModelList.Add(new AllotmentClassesModel() { Id = allotmentId });
                 }
 
-                return AccFactory.AllotmentClassesRepository().Delete(allotmentClassesModelList);
+                return Factory.AllotmentClassesRepository().Delete(allotmentClassesModelList);
             }
             return false;
         }
@@ -117,7 +117,7 @@ namespace LFS.Views.Manage.AllotmentClasses
             {
                 var parameters = ((int rowLimit, string searchKey))e.Argument;
 
-                var dtAllotmentClasses = AccFactory.AllotmentClassesRepository().GetRecordsBySearch(parameters.rowLimit, parameters.searchKey.Trim());
+                var dtAllotmentClasses = Factory.AllotmentClassesRepository().GetRecordsBySearch(parameters.rowLimit, parameters.searchKey.Trim());
                 int totalProgressCount = dtAllotmentClasses.Rows.Count;
                 int progressCount = 0;
 

@@ -1,11 +1,12 @@
-﻿using ACC.Data;
-using ACC.Domain.Models;
-using LFS.Helpers;
+﻿using LFS.Helpers;
+using OmniGov.Core.Repositories;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
+using Treasury.Data;
+using Treasury.Domain.Entities;
 
 namespace LFS.Views.Transactions.CashTicketIssuance
 {
@@ -30,7 +31,7 @@ namespace LFS.Views.Transactions.CashTicketIssuance
                 errorProvider1.GetError(nudQuantity),
             };
 
-            return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
+            return Factory.CreateErrors(errorArray).GenerateErrorMessage();
         }
 
         private void LoadCollectors()
@@ -41,7 +42,7 @@ namespace LFS.Views.Transactions.CashTicketIssuance
 
         private void LoadCashTickets()
         {
-            DataTable cashTicketsDT = AccFactory.CashTicketsRepository().GetRecords();
+            DataTable cashTicketsDT = TreasuryFactory.CashTicketsRepository().GetRecords();
 
             foreach (DataRow row in cashTicketsDT.Rows)
             {
@@ -89,7 +90,7 @@ namespace LFS.Views.Transactions.CashTicketIssuance
 
             int GetCoId(int joId)
             {
-                var coId = AccFactory.CollectingOfficerHasJobOrdersRepository().GetCollectingOfficerIDByJobOrderId(joId);
+                var coId = TreasuryFactory.CollectingOfficerHasJobOrdersRepository().GetCollectingOfficerIDByJobOrderId(joId);
                 return coId;
             }
 
@@ -133,7 +134,7 @@ namespace LFS.Views.Transactions.CashTicketIssuance
         {
             DataTable dataTable = new DataTable();
             dataTable.Columns.AddRange(DataColumnsCollectingOfficers());
-            DataTable dtCollectingOfficers = AccFactory.CollectingOfficerRepository().GetRecords();
+            DataTable dtCollectingOfficers = TreasuryFactory.CollectingOfficerRepository().GetRecords();
 
             foreach (DataRow row in dtCollectingOfficers.Rows)
             {
@@ -157,7 +158,7 @@ namespace LFS.Views.Transactions.CashTicketIssuance
         {
             DataTable dataTable = new DataTable();
             dataTable.Columns.AddRange(DataColumnsCollectingOfficers());
-            DataTable dtCollectingOfficerHasJobOrder = AccFactory.CollectingOfficerHasJobOrdersRepository().GetViewRecords();
+            DataTable dtCollectingOfficerHasJobOrder = TreasuryFactory.CollectingOfficerHasJobOrdersRepository().GetViewRecords();
 
             foreach (DataRow row in dtCollectingOfficerHasJobOrder.Rows)
             {
@@ -219,7 +220,7 @@ namespace LFS.Views.Transactions.CashTicketIssuance
             int.TryParse(dtrCashTckt["quantity"].ToString(), out int origCashTcktQnty);
             int.TryParse(dtrCashTckt["id"].ToString(), out int cashTcktId);
 
-            var issdCashTcktQnty = AccFactory.CashTicketsIssuedRepository().GetIssuedCountByCashTcktId(cashTcktId);
+            var issdCashTcktQnty = TreasuryFactory.CashTicketsIssuedRepository().GetIssuedCountByCashTcktId(cashTcktId);
 
             usedCashTcktCount = issdCashTcktQnty;
             unusedCashTcktCount = origCashTcktQnty - issdCashTcktQnty;

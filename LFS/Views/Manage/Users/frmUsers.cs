@@ -1,7 +1,7 @@
-﻿using ACC.Data;
-using ACC.Domain.Models;
-using LFS.Helpers;
+﻿using LFS.Helpers;
 using MySql.Data.MySqlClient;
+using OmniGov.Core.Entities;
+using OmniGov.Core.Repositories;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -106,7 +106,7 @@ namespace LFS.Views.Manage.Users
                         int userId = Convert.ToInt16(row.Cells["id"].Value.ToString());
                         usersModelList.Add(new UsersModel() { Id = userId });
                     }
-                    return AccFactory.UsersRepository().Delete(usersModelList);
+                    return Factory.UsersRepository().Delete(usersModelList);
                 }
             }
             return false;
@@ -159,7 +159,7 @@ namespace LFS.Views.Manage.Users
             try
             {
                 var parameters = ((int rowLimit, string searchKey))e.Argument;
-                var dbDataTable = AccFactory.UsersRepository().GetViewRecordsBySearch(parameters.rowLimit, parameters.searchKey);
+                var dbDataTable = Factory.UsersRepository().GetViewRecordsBySearch(parameters.rowLimit, parameters.searchKey);
                 var dataTable = new DataTable();
                 var dataColumns = new DataColumn[]
                 {
@@ -268,8 +268,8 @@ namespace LFS.Views.Manage.Users
             }
 
             bool isSaved = isEdit ?
-                AccFactory.UsersRepository().Update(uc.UsersModel()) :
-                AccFactory.UsersRepository().Insert(uc.UsersModel());
+                Factory.UsersRepository().Update(uc.UsersModel()) :
+                Factory.UsersRepository().Insert(uc.UsersModel());
 
             if (isSaved)
             {

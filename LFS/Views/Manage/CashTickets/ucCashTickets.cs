@@ -1,8 +1,9 @@
-﻿using ACC.Data;
-using ACC.Domain.Models;
+﻿using OmniGov.Core.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using Treasury.Data;
+using Treasury.Domain.Entities;
 
 namespace LFS.Views.Manage.CashTickets
 {
@@ -25,7 +26,7 @@ namespace LFS.Views.Manage.CashTickets
                 errorProvider1.GetError(dtpReceivedDate)
             };
 
-            return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
+            return Factory.CreateErrors(errorArray).GenerateErrorMessage();
         }
 
         internal void ResetForm()
@@ -38,7 +39,7 @@ namespace LFS.Views.Manage.CashTickets
 
         internal void LoadSelectedValue()
         {
-            Dictionary<string, string> dictReceipts = AccFactory.CashTicketsRepository().GetRecordByID(cashTicketId.Value);
+            Dictionary<string, string> dictReceipts = TreasuryFactory.CashTicketsRepository().GetRecordByID(cashTicketId.Value);
 
             var description = dictReceipts["description"].ToString();
             var dateReceived = Convert.ToDateTime(dictReceipts["received_date"]);

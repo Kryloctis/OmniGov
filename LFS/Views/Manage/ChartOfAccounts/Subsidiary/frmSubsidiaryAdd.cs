@@ -1,5 +1,5 @@
-﻿using ACC.Data;
-using ACC.Domain.Models;
+﻿using Accounting.Data;
+using Accounting.Domain.Entities;
 using LFS.Helpers;
 using System;
 using System.Windows.Forms;
@@ -41,7 +41,7 @@ namespace LFS.Views.Manage.ChartOfAccounts.Subsidiary
                 Contact = uc.txtContact.Text.Trim()
             };
 
-            return AccFactory.SubsidiaryLedgerAccountsRepository().Insert(subsidiaryLedgerAccountsModel);
+            return AccountingFactory.SubsidiaryLedgerAccountsRepository().Insert(subsidiaryLedgerAccountsModel);
         }
 
         private void frmSubsidiaryAdd_Load(object sender, EventArgs e)

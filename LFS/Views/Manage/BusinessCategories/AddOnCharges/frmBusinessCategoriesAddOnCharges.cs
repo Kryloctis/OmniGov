@@ -1,10 +1,9 @@
-﻿using ACC.Data;
-using ACC.Domain.Models;
-using LFS.Helpers;
+﻿using LFS.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Windows.Forms;
+using Treasury.Domain.Entities;
 
 namespace LFS.Views.Manage.BusinessCategories.AddOnCharges
 {

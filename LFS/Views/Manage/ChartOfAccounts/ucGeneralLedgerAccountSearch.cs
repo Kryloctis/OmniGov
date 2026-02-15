@@ -1,4 +1,4 @@
-﻿using ACC.Data;
+﻿using Accounting.Data;
 using LFS.Helpers;
 using System;
 using System.Collections.Generic;
@@ -18,7 +18,7 @@ namespace LFS.Views.Manage.ChartOfAccounts
         {
             try
             {
-                DataTable dtAccounts = AccFactory.GeneralLedgerAccountsRepository().GetViewRecordsBySearch(cmbGeneralLedgerAccount.Text);
+                DataTable dtAccounts = AccountingFactory.GeneralLedgerAccountsRepository().GetViewRecordsBySearch(cmbGeneralLedgerAccount.Text);
 
                 if (dtAccounts.Rows.Count == 0 || string.IsNullOrWhiteSpace(cmbGeneralLedgerAccount.Text)) return;
 
@@ -44,7 +44,7 @@ namespace LFS.Views.Manage.ChartOfAccounts
         private bool GeneralLedgerAccountValidated(ErrorProvider errorProvider, ComboBox comboBox)
         {
             int generalLedgerId = Convert.ToInt32(comboBox.SelectedValue);
-            var idExist = AccFactory.GeneralLedgerAccountsRepository().IdExist(generalLedgerId);
+            var idExist = AccountingFactory.GeneralLedgerAccountsRepository().IdExist(generalLedgerId);
 
             if (Helper.ShowErrorComboBoxEmpty(errorProvider, comboBox, "account"))
                 return false;

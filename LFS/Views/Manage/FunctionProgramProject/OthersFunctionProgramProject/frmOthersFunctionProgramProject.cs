@@ -1,6 +1,6 @@
-﻿using ACC.Data;
-using ACC.Domain.Models;
-using LFS.Helpers;
+﻿using LFS.Helpers;
+using OmniGov.Core.Entities;
+using OmniGov.Core.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -23,9 +23,9 @@ namespace LFS.Views.Manage.FunctionProgramProject.OthersFunctionProgramProject
             string searchTxt = toolStripTxtSearch.Text.Trim();
 
             if (toolStripTxtSearch.Text.Length > 3 && !string.IsNullOrEmpty(toolStripTxtSearch.Text))
-                dtOthersFPP = AccFactory.SubFPPRepository().GetRecorsByIDSearchCode(functionProgramProjectID, searchTxt);
+                dtOthersFPP = Factory.SubFPPRepository().GetRecorsByIDSearchCode(functionProgramProjectID, searchTxt);
             else
-                dtOthersFPP = AccFactory.SubFPPRepository().GetRecordsByFppId(functionProgramProjectID);
+                dtOthersFPP = Factory.SubFPPRepository().GetRecordsByFppId(functionProgramProjectID);
 
             HelperLoadRecords.OthersFPPDatagridView(dtOthersFPP, dgOthersFPP);
             lblRecordCount.Text = dgOthersFPP.Rows.Count.ToString();
@@ -97,7 +97,7 @@ namespace LFS.Views.Manage.FunctionProgramProject.OthersFunctionProgramProject
                     otherFPPModelList.Add(otherFPPModel);
                 }
 
-                return AccFactory.SubFPPRepository().Delete(otherFPPModelList);
+                return Factory.SubFPPRepository().Delete(otherFPPModelList);
             }
             return false;
         }

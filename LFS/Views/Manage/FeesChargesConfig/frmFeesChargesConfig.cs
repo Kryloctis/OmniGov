@@ -1,6 +1,4 @@
-﻿using ACC.Data;
-using ACC.Domain.Models;
-using LFS.Helpers;
+﻿using LFS.Helpers;
 using LFS.Views.Manage.FeesChargesConfig.Classification;
 using LFS.Views.Manage.FeesChargesConfig.FeesCharges;
 using System;
@@ -9,6 +7,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Linq;
 using System.Windows.Forms;
+using Treasury.Domain.Entities;
 
 namespace LFS.Views.Manage.FeesChargesConfig
 {

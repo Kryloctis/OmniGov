@@ -1,8 +1,9 @@
-﻿using ACC.Data;
-using LFS.Helpers;
+﻿using LFS.Helpers;
+using OmniGov.Core.Repositories;
 using System;
 using System.ComponentModel;
 using System.Windows.Forms;
+using Treasury.Data;
 
 namespace LFS.Views.Manage.FeesChargesConfig
 {
@@ -16,8 +17,6 @@ namespace LFS.Views.Manage.FeesChargesConfig
             InitializeComponent();
         }
 
-        #region Private Methods
-
         internal string GetFormErrors()
         {
             var errorArray = new string[]
@@ -26,7 +25,7 @@ namespace LFS.Views.Manage.FeesChargesConfig
                 errorProvider1.GetError(txtCode)
             };
 
-            return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
+            return Factory.CreateErrors(errorArray).GenerateErrorMessage();
         }
 
         internal void OnLoad(bool isEdit, int? feesChargesClassificationId = null)
@@ -42,7 +41,7 @@ namespace LFS.Views.Manage.FeesChargesConfig
 
         internal void LoadFunds()
         {
-            var dtFunds = AccFactory.FundsRepository().GetRecords();
+            var dtFunds = Factory.FundsRepository().GetRecords();
             HelperLoadRecords.FundsComboBox(dtFunds, cmbxFund, "id", "fund_name");
         }
 
@@ -67,7 +66,7 @@ namespace LFS.Views.Manage.FeesChargesConfig
 
         internal void LoadSelectedRecord(int feesChargesClassificationId)
         {
-            var dictFeesChargesClassification = AccFactory.TaxTypesRepository().GetRecordByID(feesChargesClassificationId);
+            var dictFeesChargesClassification = TreasuryFactory.TaxTypesRepository().GetRecordByID(feesChargesClassificationId);
             txtCode.Text = dictFeesChargesClassification["code"];
             txtDesciption.Text = dictFeesChargesClassification["description"];
 
@@ -84,12 +83,6 @@ namespace LFS.Views.Manage.FeesChargesConfig
             txtCOAAccountCode.Text = dictFeesChargesClassification["coa_account_code"];
             txtBLFGAccountCode.Text = dictFeesChargesClassification["blgf_account_code"];
         }
-
-        #endregion Private Methods
-
-        #region Event Methods
-
-        #region Validations
 
         private void txtDesciption_Validating(object sender, CancelEventArgs e)
         {
@@ -119,8 +112,6 @@ namespace LFS.Views.Manage.FeesChargesConfig
             Helper.ClearErrorTextBox(errorProvider1, txtCode);
         }
 
-        #endregion Validations
-
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
             try
@@ -129,7 +120,5 @@ namespace LFS.Views.Manage.FeesChargesConfig
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
-
-        #endregion Event Methods
     }
 }

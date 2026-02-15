@@ -1,8 +1,8 @@
-﻿using ACC.Data;
-using ACC.Domain.Models;
-using LFS.Helpers;
+﻿using LFS.Helpers;
 using System;
 using System.Windows.Forms;
+using Treasury.Data;
+using Treasury.Domain.Entities;
 
 namespace LFS.Views.Manage.RptTaxRates
 {
@@ -22,7 +22,7 @@ namespace LFS.Views.Manage.RptTaxRates
 
         private void LoadRecord()
         {
-            var dictTaxRates = AccFactory.RptTaxRatesRepository().GetRecordByID(uc.rptTaxRatesId);
+            var dictTaxRates = TreasuryFactory.RptTaxRatesRepository().GetRecordByID(uc.rptTaxRatesId);
             decimal taxRate = Convert.ToDecimal(dictTaxRates["rate"]);
 
             uc.txtCode.Text = dictTaxRates["code"];
@@ -46,7 +46,7 @@ namespace LFS.Views.Manage.RptTaxRates
                 Rate = uc.nudRate.Value
             };
 
-            return AccFactory.RptTaxRatesRepository().Update(model);
+            return TreasuryFactory.RptTaxRatesRepository().Update(model);
         }
 
         private void btnUpdate_Click(object sender, EventArgs e)

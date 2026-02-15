@@ -1,9 +1,10 @@
-﻿using ACC.Data;
-using LFS.Helpers;
+﻿using LFS.Helpers;
+using OmniGov.Core.Repositories;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Forms;
+using Treasury.Data;
 
 namespace LFS.Views.Manage.CollectingOfficer
 {
@@ -27,13 +28,13 @@ namespace LFS.Views.Manage.CollectingOfficer
                 errorProvider1.GetError(chckLinkAcc)
             };
 
-            return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
+            return Factory.CreateErrors(errorArray).GenerateErrorMessage();
         }
 
         private void LoadUsers(bool isSearch = false)
         {
             string searchKey = cmbxLinkedAcc.Text.Trim();
-            var dtUsers = AccFactory.UsersRepository().GetViewRecords();
+            var dtUsers = Factory.UsersRepository().GetViewRecords();
             HelperLoadRecords.UsersComboBox(dtUsers, cmbxLinkedAcc, "id", "first_name");
 
             var searchSources = new List<string>
@@ -78,7 +79,7 @@ namespace LFS.Views.Manage.CollectingOfficer
             if (Helper.ShowErrorTextBoxEmpty(errorProvider, textBox, message))
                 return false;
 
-            bool fullNameExist = AccFactory.CollectingOfficerRepository().FullNameExist(firstName, midInitial, lastName, Id);
+            bool fullNameExist = TreasuryFactory.CollectingOfficerRepository().FullNameExist(firstName, midInitial, lastName, Id);
             if (fullNameExist)
             {
                 errorProvider.SetError(textBox, "Name already exist.");
@@ -162,7 +163,7 @@ namespace LFS.Views.Manage.CollectingOfficer
 
         internal void LoadSelectedRecord()
         {
-            var dictCollectingOfficer = AccFactory.CollectingOfficerRepository().GetRecordByID(Id);
+            var dictCollectingOfficer = TreasuryFactory.CollectingOfficerRepository().GetRecordByID(Id);
 
             txtPrefix.Text = dictCollectingOfficer["prefix"];
             txtFirstName.Text = dictCollectingOfficer["first_name"];
@@ -190,7 +191,7 @@ namespace LFS.Views.Manage.CollectingOfficer
                 errorProvider.SetError(source, message);
                 return false;
             }
-            else if (!AccFactory.UsersRepository().IdExist(Convert.ToInt32(linkedUserId)))
+            else if (!Factory.UsersRepository().IdExist(Convert.ToInt32(linkedUserId)))
             {
                 errorProvider.SetError(source, message);
                 return false;
@@ -222,7 +223,7 @@ namespace LFS.Views.Manage.CollectingOfficer
         private void LoadUserDetails()
         {
             int userId = Convert.ToInt32(cmbxLinkedAcc.SelectedValue);
-            var dtUser = AccFactory.UsersRepository().GetViewRecordById(userId);
+            var dtUser = Factory.UsersRepository().GetViewRecordById(userId);
 
             txtPrefix.Text = dtUser["prefix"];
             txtFirstName.Text = dtUser["first_name"];
