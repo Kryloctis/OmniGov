@@ -1,9 +1,10 @@
-﻿using ACC.Data;
-using ACC.Domain.Models;
-using LFS.Helpers;
+﻿using LFS.Helpers;
+using OmniGov.Core.Repositories;
 using System;
 using System.ComponentModel;
 using System.Windows.Forms;
+using Treasury.Data;
+using Treasury.Domain.Entities;
 
 namespace LFS.Views.Transactions.Auction
 {
@@ -25,7 +26,7 @@ namespace LFS.Views.Transactions.Auction
                 errorProvider1.GetError(txtLocation),
             };
 
-            return AccFactory.CreateErrors(errors).GenerateErrorMessage();
+            return Factory.CreateErrors(errors).GenerateErrorMessage();
         }
 
         internal void OnLoad(bool isEdit, int? auctionId)
@@ -38,7 +39,7 @@ namespace LFS.Views.Transactions.Auction
 
         private void LoadSelectedRecord(int auctionId)
         {
-            var dictAuction = AccFactory.AuctionRepository().GetRecordById(auctionId);
+            var dictAuction = TreasuryFactory.AuctionRepository().GetRecordById(auctionId);
 
             dtpStartDate.Value = Convert.ToDateTime(dictAuction["start_date"]);
             dtpEndDate.Value = Convert.ToDateTime(dictAuction["end_date"]);
@@ -62,7 +63,7 @@ namespace LFS.Views.Transactions.Auction
                 return false;
             }
 
-            return isEdit ? AccFactory.AuctionRepository().Update(AuctionModel()) : AccFactory.AuctionRepository().Insert(AuctionModel());
+            return isEdit ? TreasuryFactory.AuctionRepository().Update(AuctionModel()) : TreasuryFactory.AuctionRepository().Insert(AuctionModel());
         }
 
         private AuctionModel AuctionModel()
