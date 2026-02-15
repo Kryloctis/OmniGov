@@ -1,5 +1,6 @@
-﻿using ACC.Data;
+﻿using Budget.Data;
 using LFS.Helpers;
+using OmniGov.Core.Repositories;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -23,7 +24,7 @@ namespace LFS.Budget.Views.AllotmentRelease
 
         internal void AutoGenerateSeriesNo()
         {
-            mskSeriesNo.Text = AccFactory.AllotmentReleaseRepository().GetLeastAllotmentReleaseNumber();
+            mskSeriesNo.Text = BudgetFactory.AllotmentReleaseRepository().GetLeastAllotmentReleaseNumber();
         }
 
         internal void CheckedAllotmentClass(int radAllotmentClassId)
@@ -101,9 +102,9 @@ namespace LFS.Budget.Views.AllotmentRelease
             DataTable dtFPP;
 
             if (string.IsNullOrWhiteSpace(cmbxFPP.Text))
-                dtFPP = AccFactory.FunctionProgramProjectRepository().GetViewRecords();
+                dtFPP = Factory.FunctionProgramProjectRepository().GetViewRecords();
             else
-                dtFPP = AccFactory.FunctionProgramProjectRepository().GetRecordsByCodeName(cmbxFPP.Text.Trim());
+                dtFPP = Factory.FunctionProgramProjectRepository().GetRecordsByCodeName(cmbxFPP.Text.Trim());
 
             return dtFPP;
         }
@@ -173,9 +174,9 @@ namespace LFS.Budget.Views.AllotmentRelease
             var fppId = Convert.ToInt32(cmbxFPP.SelectedValue);
 
             if (string.IsNullOrWhiteSpace(cmbxSubFPP.Text))
-                dtSubFPP = AccFactory.SubFPPRepository().GetRecordsByFppId(fppId);
+                dtSubFPP = Factory.SubFPPRepository().GetRecordsByFppId(fppId);
             else
-                dtSubFPP = AccFactory.SubFPPRepository().GetRecordsByFPPIdCodeName(fppId, cmbxSubFPP.Text);
+                dtSubFPP = Factory.SubFPPRepository().GetRecordsByFPPIdCodeName(fppId, cmbxSubFPP.Text);
 
             return dtSubFPP;
         }
@@ -213,12 +214,12 @@ namespace LFS.Budget.Views.AllotmentRelease
                 dgAllotmentRelease.Tag.ToString()
             };
 
-            return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
+            return Factory.CreateErrors(errorArray).GenerateErrorMessage();
         }
 
         internal void LoadAllotmentClasses()
         {
-            var allotmentClasses = AccFactory.AllotmentClassesRepository().GetRecords();
+            var allotmentClasses = Factory.AllotmentClassesRepository().GetRecords();
 
             flowLayoutPanelAllotmentClass.Controls.Clear();
 
@@ -250,7 +251,7 @@ namespace LFS.Budget.Views.AllotmentRelease
 
         internal void LoadFunds()
         {
-            var funds = AccFactory.FundsRepository().GetRecords();
+            var funds = Factory.FundsRepository().GetRecords();
 
             flowLayoutPanelFunds.Controls.Clear();
 
@@ -332,9 +333,9 @@ namespace LFS.Budget.Views.AllotmentRelease
             bool allotmentReleaseNoExist;
 
             if (!isEdit)
-                allotmentReleaseNoExist = AccFactory.AllotmentReleaseRepository().AllotmentReleaseNoExist(allotmentReleaseNo, dateIssued);
+                allotmentReleaseNoExist = BudgetFactory.AllotmentReleaseRepository().AllotmentReleaseNoExist(allotmentReleaseNo, dateIssued);
             else
-                allotmentReleaseNoExist = AccFactory.AllotmentReleaseRepository().AllotmentReleaseNoExist(allotmentReleaseId, allotmentReleaseNo, dateIssued);
+                allotmentReleaseNoExist = BudgetFactory.AllotmentReleaseRepository().AllotmentReleaseNoExist(allotmentReleaseId, allotmentReleaseNo, dateIssued);
 
             if (allotmentReleaseNoExist)
             {
@@ -507,7 +508,7 @@ namespace LFS.Budget.Views.AllotmentRelease
                 errorProvider1.GetError(cmbxSubFPP)
             };
 
-            return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
+            return Factory.CreateErrors(errorArray).GenerateErrorMessage();
         }
 
         private void LoadDatagridFormat()

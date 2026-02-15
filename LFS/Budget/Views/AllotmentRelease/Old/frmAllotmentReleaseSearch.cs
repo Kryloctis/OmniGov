@@ -1,5 +1,6 @@
-﻿using ACC.Data;
+﻿using Budget.Data;
 using LFS.Helpers;
+using OmniGov.Core.Repositories;
 using System;
 using System.Data;
 using System.Drawing;
@@ -23,7 +24,7 @@ namespace LFS.Budget.Views.AllotmentRelease
         {
             try
             {
-                var dtFunds = AccFactory.FundsRepository().GetRecords();
+                var dtFunds = Factory.FundsRepository().GetRecords();
                 HelperLoadRecords.FundsComboBox(dtFunds, cmbxFunds, "id", "fund_name");
             }
             catch (Exception ex)
@@ -36,7 +37,7 @@ namespace LFS.Budget.Views.AllotmentRelease
         {
             try
             {
-                var dtFunds = AccFactory.AllotmentClassesRepository().GetRecords();
+                var dtFunds = Factory.AllotmentClassesRepository().GetRecords();
                 HelperLoadRecords.AllotmentClasssesCombobox(dtFunds, cmbxAllotmentClasses, "allotment_code", "id");
             }
             catch (Exception ex)
@@ -67,7 +68,7 @@ namespace LFS.Budget.Views.AllotmentRelease
                 int allotmentClassId = Convert.ToInt32(cmbxAllotmentClasses.SelectedValue);
                 var dateIssued = dtDateIssued.Value;
 
-                var dtAllotmentReleaseSearch = AccFactory.AllotmentReleaseRepository().GetViewRecordsBySearch(fundId, allotmentClassId, dateIssued, searchTxt);
+                var dtAllotmentReleaseSearch = BudgetFactory.AllotmentReleaseRepository().GetViewRecordsBySearch(fundId, allotmentClassId, dateIssued, searchTxt);
 
                 foreach (DataRow row in dtAllotmentReleaseSearch.Rows)
                 {
@@ -76,7 +77,7 @@ namespace LFS.Budget.Views.AllotmentRelease
                     DateTime rowDateIssued = Convert.ToDateTime(row["date_issued"]);
                     string rowPurpose = row["purpose"].ToString();
                     bool rowIsContinuing = Convert.ToBoolean(row["continuing"]);
-                    string rowTotalAllotmentRelease = AccFactory.AllotmentReleaseRepository().GetTotalAllotmentReleaseById(rowAllotmentReleaseId).ToString("N2");
+                    string rowTotalAllotmentRelease = BudgetFactory.AllotmentReleaseRepository().GetTotalAllotmentReleaseById(rowAllotmentReleaseId).ToString("N2");
 
                     var item = new dynamic[] { rowAllotmentReleaseId, rowFullAroNo, rowDateIssued.ToString("MMM dd, yyyy"), rowPurpose, rowTotalAllotmentRelease, rowIsContinuing ? Properties.Resources.ok14px : null };
 

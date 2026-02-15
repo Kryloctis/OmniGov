@@ -1,5 +1,7 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
+using Budget.Data;
+using Budget.Domain.Models;
 using LFS.Helpers;
 using MySql.Data.MySqlClient;
 using System;
@@ -25,7 +27,7 @@ namespace LFS.Budget.Views.AllotmentRelease
         {
             try
             {
-                var dtAllotmentRelease = AccFactory.AllotmentReleaseRepository().GetViewRecordsById(uc.allotmentReleaseId);
+                var dtAllotmentRelease = BudgetFactory.AllotmentReleaseRepository().GetViewRecordsById(uc.allotmentReleaseId);
                 int fppId = Convert.ToInt32(dtAllotmentRelease.Rows[0]["function_program_project_id"]);
                 string subFPPId = dtAllotmentRelease.Rows[0]["others_fpp_id"].ToString();
                 int fundId = Convert.ToInt32(dtAllotmentRelease.Rows[0]["funds_id"]);
@@ -114,7 +116,7 @@ namespace LFS.Budget.Views.AllotmentRelease
                     DateIssued = uc.dtDateIssued.Value
                 };
 
-                return AccFactory.AllotmentReleaseRepository().Insert(allotmemtReleaseModel, AllotmentAccountModelList());
+                return BudgetFactory.AllotmentReleaseRepository().Insert(allotmemtReleaseModel, AllotmentAccountModelList());
             }
             catch (Exception ex)
             {
@@ -138,7 +140,7 @@ namespace LFS.Budget.Views.AllotmentRelease
                     DateIssued = uc.dtDateIssued.Value
                 };
 
-                return AccFactory.AllotmentReleaseRepository().Update(allotmemtReleaseModel, AllotmentAccountModelList());
+                return BudgetFactory.AllotmentReleaseRepository().Update(allotmemtReleaseModel, AllotmentAccountModelList());
             }
             catch (Exception ex)
             {
@@ -211,7 +213,7 @@ namespace LFS.Budget.Views.AllotmentRelease
             {
                 if (Helper.MessageBoxConfirmDelete(1))
                 {
-                    return AccFactory.AllotmentReleaseRepository().Delete(uc.allotmentReleaseId);
+                    return BudgetFactory.AllotmentReleaseRepository().Delete(uc.allotmentReleaseId);
                 }
             }
             catch (MySqlException ex)

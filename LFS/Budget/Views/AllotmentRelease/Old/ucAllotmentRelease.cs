@@ -1,6 +1,7 @@
-﻿using ACC.Data;
-using ACC.Domain.Models;
+﻿using Budget.Data;
+using Budget.Domain.Models;
 using LFS.Helpers;
+using OmniGov.Core.Repositories;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -56,9 +57,9 @@ namespace LFS.Budget.Views.AllotmentRelease
             string searchTxt = cmbxBudgetAppropriations.Text.Trim();
 
             if (string.IsNullOrEmpty(cmbxBudgetAppropriations.Text))
-                dtBudgetAppropriation = AccFactory.BudgetAppropriationsRepository().GetViewRecords(fppId, othersFPPId, allotmentClassId, fundId);
+                dtBudgetAppropriation = BudgetFactory.BudgetAppropriationsRepository().GetViewRecords(fppId, othersFPPId, allotmentClassId, fundId);
             else
-                dtBudgetAppropriation = AccFactory.BudgetAppropriationsRepository().GetViewRecordsByIdsSearch(budgetAppropriationsModel, searchTxt);
+                dtBudgetAppropriation = BudgetFactory.BudgetAppropriationsRepository().GetViewRecordsByIdsSearch(budgetAppropriationsModel, searchTxt);
 
             return dtBudgetAppropriation;
         }
@@ -147,7 +148,7 @@ namespace LFS.Budget.Views.AllotmentRelease
                 errorProvider1.GetError(nudAmount)
             };
 
-            return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
+            return Factory.CreateErrors(errorArray).GenerateErrorMessage();
         }
 
         private void OnLoad()
@@ -190,12 +191,12 @@ namespace LFS.Budget.Views.AllotmentRelease
                 if (cmbxBudgetAppropriations.SelectedIndex > -1)
                 {
                     int budgetAppropriationId = Convert.ToInt32(cmbxBudgetAppropriations.SelectedValue);
-                    var budgetAppropriationDict = AccFactory.BudgetAppropriationsRepository().GetViewRecordByIdDateEntry(budgetAppropriationId, dateIssued);
-                    var dtAllotmentRelease = AccFactory.AllotmentReleaseRepository().GetViewRecordsByBudgetAppropriationId(budgetAppropriationId);
+                    var budgetAppropriationDict = BudgetFactory.BudgetAppropriationsRepository().GetViewRecordByIdDateEntry(budgetAppropriationId, dateIssued);
+                    var dtAllotmentRelease = BudgetFactory.AllotmentReleaseRepository().GetViewRecordsByBudgetAppropriationId(budgetAppropriationId);
 
                     decimal budgetAppropriation = budgetAppropriationDict.Values.Count == 0 ? 0 : Convert.ToDecimal(budgetAppropriationDict["amount"]);
                     decimal totalAllotmentRelease = Convert.ToDecimal(dtAllotmentRelease.Rows.Count == 0 ? 0 : dtAllotmentRelease.Compute("Sum(amount)", string.Empty));
-                    decimal totalSupplementalAppropriation = AccFactory.SupplementalAppropriationsRepository().GetSumSupplementalAppropriationsBy_BudgetAppropriationsId_DateEntry(budgetAppropriationId, dateIssued);
+                    decimal totalSupplementalAppropriation = BudgetFactory.SupplementalAppropriationsRepository().GetSumSupplementalAppropriationsBy_BudgetAppropriationsId_DateEntry(budgetAppropriationId, dateIssued);
 
                     appropriationBalance = ((budgetAppropriation + totalSupplementalAppropriation) - totalAllotmentRelease) + (budgetAppropriationId == _budgetAppropriationId ? _amount : 0);
                 }
@@ -279,9 +280,9 @@ namespace LFS.Budget.Views.AllotmentRelease
                 var dateIssued = _ucAllotmentMain.dtDateIssued.Value;
 
                 if (allotmentReleaseId == 0)
-                    allotmentReleaseExist = AccFactory.AllotmentReleaseRepository().AllotmentReleaseExist(budgetAppropriationId, dateIssued);
+                    allotmentReleaseExist = BudgetFactory.AllotmentReleaseRepository().AllotmentReleaseExist(budgetAppropriationId, dateIssued);
                 else
-                    allotmentReleaseExist = AccFactory.AllotmentReleaseRepository().AllotmentReleaseExist(allotmentReleaseId, budgetAppropriationId, dateIssued);
+                    allotmentReleaseExist = BudgetFactory.AllotmentReleaseRepository().AllotmentReleaseExist(allotmentReleaseId, budgetAppropriationId, dateIssued);
 
                 if (allotmentReleaseExist && budgetAppropriationId != _budgetAppropriationId)
                 {

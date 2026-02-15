@@ -1,15 +1,9 @@
-﻿using ACC.Data;
+﻿using Budget.Data;
 using LFS.Helpers;
+using OmniGov.Core.Repositories;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using ZstdSharp.Unsafe;
 
 namespace LFS.Budget.Views.AllotmentRelease
 {
@@ -22,13 +16,13 @@ namespace LFS.Budget.Views.AllotmentRelease
 
         private void LoadFunds()
         {
-            var dtFunds = AccFactory.FundsRepository().GetRecords();
+            var dtFunds = Factory.FundsRepository().GetRecords();
             HelperLoadRecords.FundsComboBox(dtFunds, cmbxFund, "id", "fund_name");
         }
 
         private void LoadAllotmentClasses()
         {
-            var dtFunds = AccFactory.AllotmentClassesRepository().GetRecords();
+            var dtFunds = Factory.AllotmentClassesRepository().GetRecords();
             HelperLoadRecords.AllotmentClasssesCombobox(dtFunds, cmbxAlltmntClass, "allotment_code", "id");
         }
 
@@ -77,7 +71,7 @@ namespace LFS.Budget.Views.AllotmentRelease
             {
                 var parameters = ((string searchTxt, int fundId, int allotmentClass, DateTime dateFrom, DateTime dateTo))e.Argument;
 
-                var dbDtSrc = AccFactory.AllotmentReleaseRepository().
+                var dbDtSrc = BudgetFactory.AllotmentReleaseRepository().
                                         GetViewRecordsBySearch(
                                             parameters.fundId,
                                             parameters.allotmentClass,
