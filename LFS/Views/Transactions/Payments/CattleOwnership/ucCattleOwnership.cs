@@ -1,9 +1,10 @@
-﻿using ACC.Data;
-using ACC.Domain.Models;
-using LFS.Helpers;
+﻿using LFS.Helpers;
+using OmniGov.Core.Repositories;
 using System;
 using System.ComponentModel;
 using System.Windows.Forms;
+using Treasury.Data;
+using Treasury.Domain.Entities;
 
 namespace LFS.Views.Transactions.Payments.CattleOwnership
 {
@@ -54,18 +55,18 @@ namespace LFS.Views.Transactions.Payments.CattleOwnership
                 errorProvider1.GetError(cmbxOwner),
             };
 
-            return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
+            return Factory.CreateErrors(errorArray).GenerateErrorMessage();
         }
 
         private void LoadOwners()
         {
-            var dtRegistry = AccFactory.TaxpayersRepository().GetRecords();
+            var dtRegistry = TreasuryFactory.TaxpayersRepository().GetRecords();
             HelperLoadRecords.SearchableCombobox2(dtRegistry, cmbxOwner, "id", "name");
         }
 
         private void LoadCattle()
         {
-            var dataTable = AccFactory.CattleOwnershipRepository().GetRecords();
+            var dataTable = TreasuryFactory.CattleOwnershipRepository().GetRecords();
             HelperLoadRecords.SearchableCombobox2(dataTable, cmbxType, "id", "cattle_name");
         }
 
