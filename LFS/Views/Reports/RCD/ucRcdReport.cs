@@ -1,12 +1,13 @@
-﻿using ACC.Data;
-using ACC.Domain.Models;
-using LFS.DataSets;
+﻿using LFS.DataSets;
 using LFS.Helpers;
 using Microsoft.Reporting.WinForms;
+using OmniGov.Core.Entities;
 using System;
 using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
+using Treasury.Data;
+using Treasury.Domain.Entities;
 
 namespace LFS.Views.Reports.Rcd
 {
@@ -45,11 +46,11 @@ namespace LFS.Views.Reports.Rcd
                 var rcdDepositsModel = new RcdDepositsModel() { RcdModel = rcdModel };
 
                 //Collections
-                var dbRcdCollections = AccFactory.PaymentCollectionsRepository().GetViewConsolidatedRcdRecords(rcdCollectionsModel);
+                var dbRcdCollections = TreasuryFactory.PaymentCollectionsRepository().GetViewConsolidatedRcdRecords(rcdCollectionsModel);
                 var dtRcdCollections = new dsTreasury.dtRcdCollectionsDataTable();
 
                 //Deposits
-                var dbRcdDeposits = AccFactory.BankDepositsRepository().GetViewRcdRecord(rcdDepositsModel);
+                var dbRcdDeposits = TreasuryFactory.BankDepositsRepository().GetViewRcdRecord(rcdDepositsModel);
                 var dtRcdDeposits = new dsTreasury.dtRcdDepositsDataTable();
 
                 var dtRcdAccForms = new dsTreasury.dtRcdAccFormsDataTable();
@@ -95,7 +96,7 @@ namespace LFS.Views.Reports.Rcd
                 {
                     var accFormsModel = new AccountableFormsModel() { Id = Convert.ToInt32(dataRow["acc_form_id"]) };
                     var usersModel = new UsersModel() { Id = Convert.ToInt32(dataRow["created_by"]) };
-                    var dictRcdAccForms = AccFactory.ReceiptsIssuedRepository().GetViewRcdRecord(accFormsModel, usersModel);
+                    var dictRcdAccForms = TreasuryFactory.ReceiptsIssuedRepository().GetViewRcdRecord(accFormsModel, usersModel);
                     string accForm = $"{dataRow["acc_form_no"]} - {dataRow["acc_form_desc"]}";
                     decimal collectedReceiptFrom = Convert.ToInt32(dataRow["receipt_from"]);
                     decimal collectedReceiptTo = Convert.ToInt32(dataRow["receipt_to"]);
@@ -142,7 +143,7 @@ namespace LFS.Views.Reports.Rcd
                 report.ReportPath = $"{Application.StartupPath}Reports\\rcd.rdlc";
                 report.DataSources.Clear();
 
-                var dictRcd = AccFactory.RcdRepository().GetViewRecord(rcdId);
+                var dictRcd = TreasuryFactory.RcdRepository().GetViewRecord(rcdId);
 
                 var reportParameters = new ReportParameter[]
                 {
