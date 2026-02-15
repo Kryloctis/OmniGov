@@ -1,10 +1,10 @@
-﻿using ACC.Data;
-using ACC.Domain.Models;
-using LFS.Helpers;
+﻿using LFS.Helpers;
 using LFS.Views.Transactions.Payments.BurialPermit;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using Treasury.Data;
+using Treasury.Domain.Entities;
 
 namespace LFS.Views.Transactions.Payments.CommunityTaxCertificate
 {
@@ -158,7 +158,7 @@ namespace LFS.Views.Transactions.Payments.CommunityTaxCertificate
 
         private bool ConfirmPayment()
         {
-            return AccFactory.PaymentCollectionsRepository().InsertWithCommunityTaxCertificate(ucPayment.PaymentCollectionsModel(), CommunityTaxCertificateModel());
+            return TreasuryFactory.PaymentCollectionsRepository().InsertWithCommunityTaxCertificate(ucPayment.PaymentCollectionsModel(), CommunityTaxCertificateModel());
         }
 
         private CommunityTaxCertificateModel CommunityTaxCertificateModel()
