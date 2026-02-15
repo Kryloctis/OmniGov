@@ -320,7 +320,6 @@ namespace LFS.Views.Dashboard
             label1.Size = new System.Drawing.Size(177, 17);
             label1.TabIndex = 33;
             label1.Text = "JOURNAL ENTRY VOUCHER";
-            label1.Click += label1_Click;
             // 
             // toolStrip1
             // 

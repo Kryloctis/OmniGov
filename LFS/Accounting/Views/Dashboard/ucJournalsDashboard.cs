@@ -1,5 +1,6 @@
-﻿using ACC.Data;
+﻿using Accounting.Data;
 using LFS.Helpers;
+using OmniGov.Core.Repositories;
 using System;
 using System.Windows.Forms;
 
@@ -26,7 +27,7 @@ namespace LFS.Views.Dashboard.AccountingDashboard
 
         private void LoadFunds()
         {
-            var dtFunds = AccFactory.FundsRepository().GetRecords();
+            var dtFunds = Factory.FundsRepository().GetRecords();
             var newRow = dtFunds.NewRow();
             newRow["id"] = 0;
             newRow["fund_name"] = "All";
@@ -40,22 +41,22 @@ namespace LFS.Views.Dashboard.AccountingDashboard
         {
             string fundName = cmbxFunds.Text.Trim();
             int year = (int)numdYear.Value;
-            int generalJournalCount = AccFactory.JEVRepository()
+            int generalJournalCount = AccountingFactory.JEVRepository()
                                     .JevCounterByJournal(fundName, year, "General Journal");
 
-            int cashReceiptsJournalCount = AccFactory.JEVRepository()
+            int cashReceiptsJournalCount = AccountingFactory.JEVRepository()
                                     .JevCounterByJournal(fundName, year, "Cash Receipts Journal");
 
-            int procurementReceivedJournalCount = AccFactory.JEVRepository()
+            int procurementReceivedJournalCount = AccountingFactory.JEVRepository()
                                     .JevCounterByJournal(fundName, year, "Procurement Received Journal");
 
-            int cashDisbursementJournalCount = AccFactory.JEVRepository()
+            int cashDisbursementJournalCount = AccountingFactory.JEVRepository()
                                     .JevCounterByJournal(fundName, year, "Cash Disbursements Journal");
 
-            int checkDisbursementJournalCount = AccFactory.JEVRepository()
+            int checkDisbursementJournalCount = AccountingFactory.JEVRepository()
                                     .JevCounterByJournal(fundName, year, "Check Disbursements Journal");
 
-            int adaDisbursementJournalCount = AccFactory.JEVRepository()
+            int adaDisbursementJournalCount = AccountingFactory.JEVRepository()
                                     .JevCounterByJournal(fundName, year, "Authority to Debit Account Disbursement Journal");
 
             lblGeneralJournalCount.Text = generalJournalCount.ToString();
