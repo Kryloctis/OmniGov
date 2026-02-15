@@ -1,6 +1,7 @@
-﻿using ACC.Data;
+﻿using Accounting.Data;
 using LFS.Helpers;
 using Microsoft.Reporting.WinForms;
+using OmniGov.Core.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -31,7 +32,7 @@ namespace LFS.Views.Reports.Ledgers
 
         private DataTable DatatableAccounts()
         {
-            DataTable dtAccounts = AccFactory.GeneralLedgerAccountsRepository().GetViewRecords();
+            DataTable dtAccounts = AccountingFactory.GeneralLedgerAccountsRepository().GetViewRecords();
             var dataTable = new DataTable();
             dataTable.Columns.AddRange(DataColumnsAccounts());
 
@@ -70,7 +71,7 @@ namespace LFS.Views.Reports.Ledgers
 
         private void LoadFunds()
         {
-            DataTable dtFunds = AccFactory.FundsRepository().GetRecords();
+            DataTable dtFunds = Factory.FundsRepository().GetRecords();
             HelperLoadRecords.FundsComboBox(dtFunds, cmbFunds, "id", "fund_name");
         }
 
@@ -135,14 +136,14 @@ namespace LFS.Views.Reports.Ledgers
 
         private DataRow BeginningBalanceRow(int fundId, int year, int generalLedgerId, DataTable dataTable)
         {
-            decimal DebitBeginningBalance = AccFactory.BeginningBalancesRepository().GetSumBalancesBy_FundId_GenLedgId_IsDebit_SubLedgId((byte)fundId, (ushort)generalLedgerId, (short)year, true);
-            decimal CreditBeginningBalance = AccFactory.BeginningBalancesRepository().GetSumBalancesBy_FundId_GenLedgId_IsDebit_SubLedgId((byte)fundId, (ushort)generalLedgerId, (short)year, false);
+            decimal DebitBeginningBalance = AccountingFactory.BeginningBalancesRepository().GetSumBalancesBy_FundId_GenLedgId_IsDebit_SubLedgId((byte)fundId, (ushort)generalLedgerId, (short)year, true);
+            decimal CreditBeginningBalance = AccountingFactory.BeginningBalancesRepository().GetSumBalancesBy_FundId_GenLedgId_IsDebit_SubLedgId((byte)fundId, (ushort)generalLedgerId, (short)year, false);
 
             decimal beginningBalance = DebitBeginningBalance - CreditBeginningBalance;
             decimal debit = DebitBeginningBalance > CreditBeginningBalance ? Math.Abs(beginningBalance) : 0;
             decimal credit = DebitBeginningBalance < CreditBeginningBalance ? Math.Abs(beginningBalance) : 0;
 
-            Dictionary<string, string> dateDict = AccFactory.BeginningBalancesRepository().GetRecordBy_FundId_GenLedgId_Year_SubLedgId((byte)fundId, (ushort)generalLedgerId, (short)year);
+            Dictionary<string, string> dateDict = AccountingFactory.BeginningBalancesRepository().GetRecordBy_FundId_GenLedgId_Year_SubLedgId((byte)fundId, (ushort)generalLedgerId, (short)year);
 
             object beginningBalanceDate = string.IsNullOrEmpty(dateDict["date_entry"]) ? DBNull.Value : Convert.ToDateTime(dateDict["date_entry"]).ToShortDateString();
 
@@ -162,7 +163,7 @@ namespace LFS.Views.Reports.Ledgers
             int year = Convert.ToInt16(nudYear.Value);
 
             dsLFS.dtGeneralLedgerDataTable dtGeneralLedger = new dsLFS.dtGeneralLedgerDataTable();
-            DataTable dtGeneralLedgerFromDB = AccFactory.JEVAccountsRepository().GetViewRecords(fundId, generalLedgerId, (short)year);
+            DataTable dtGeneralLedgerFromDB = AccountingFactory.JEVAccountsRepository().GetViewRecords(fundId, generalLedgerId, (short)year);
             DataRow dataRowBeginningBalance = BeginningBalanceRow(fundId, year, generalLedgerId, dtGeneralLedger);
 
             int totalRecordCount = dtGeneralLedgerFromDB.Rows.Count;
@@ -199,7 +200,7 @@ namespace LFS.Views.Reports.Ledgers
             short year = Convert.ToInt16(nudYear.Value);
             ushort generalLedgerId = Convert.ToUInt16(cmbxAccount.SelectedValue);
 
-            var generalLedgerDict = AccFactory.GeneralLedgerAccountsRepository().GetViewRecordByID(generalLedgerId);
+            var generalLedgerDict = AccountingFactory.GeneralLedgerAccountsRepository().GetViewRecordByID(generalLedgerId);
             var fundName = cmbFunds.Text;
             report.ReportPath = $"{Application.StartupPath}\\Reports\\Ledgers\\general-ledger.rdlc";
             report.DataSources.Clear();
@@ -296,7 +297,7 @@ namespace LFS.Views.Reports.Ledgers
                 cmbFunds.Tag.ToString()
             };
 
-            return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
+            return Factory.CreateErrors(errorArray).GenerateErrorMessage();
         }
 
         private bool AccountValidated()

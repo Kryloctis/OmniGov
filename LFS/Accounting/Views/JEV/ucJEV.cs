@@ -1,7 +1,8 @@
-﻿using ACC.Data;
-using ACC.Domain.Models;
+﻿using Accounting.Data;
+using Accounting.Domain.Entities;
 using LFS.Helpers;
 using LFS.Views.Transactions.JEV.JournalForms;
+using OmniGov.Core.Repositories;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,7 +10,6 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Threading;
 using System.Windows.Forms;
 
 namespace LFS.Views.Transactions.JEV
@@ -79,12 +79,12 @@ namespace LFS.Views.Transactions.JEV
                 AccEntriesValidated().errMssg,
             };
 
-            return AccFactory.CreateErrors(errs).GenerateErrorMessage();
+            return Factory.CreateErrors(errs).GenerateErrorMessage();
         }
 
         private void LoadJournals()
         {
-            var dtJournals = AccFactory.JournalsRepository().GetRecords();
+            var dtJournals = Factory.JournalsRepository().GetRecords();
             HelperLoadRecords.ComboboxJournals(dtJournals, cmbxJournal, "id", "journal_name");
             cmbxJournal.SelectedIndex = 0;
         }
@@ -172,22 +172,22 @@ namespace LFS.Views.Transactions.JEV
             switch (jrnlTyp)
             {
                 case "General Journal":
-                    return AccFactory.JEVRepository().InsertJevGenJrnl(JevModel(), JevAcountsModelList(), ucGenJrnl.GeneralJournalModel());
+                    return AccountingFactory.JEVRepository().InsertJevGenJrnl(JevModel(), JevAcountsModelList(), ucGenJrnl.GeneralJournalModel());
 
                 case "Procurement Received Journal":
-                    return AccFactory.JEVRepository().InsertJevProcRcvJrnl(JevModel(), JevAcountsModelList());
+                    return AccountingFactory.JEVRepository().InsertJevProcRcvJrnl(JevModel(), JevAcountsModelList());
 
                 case "Cash Receipts Journal":
-                    return AccFactory.JEVRepository().InsertJevCashRcptsJrnl(JevModel(), JevAcountsModelList(), ucCshRcptsJrnl.CashReceiptsJournalModel());
+                    return AccountingFactory.JEVRepository().InsertJevCashRcptsJrnl(JevModel(), JevAcountsModelList(), ucCshRcptsJrnl.CashReceiptsJournalModel());
 
                 case "Cash Disbursements Journal":
-                    return AccFactory.JEVRepository().InsertJevCashDsbrsmntsJrnl(JevModel(), JevAcountsModelList(), ucCshDsbrsmntJrnl.CashDisbursementsJournalModel());
+                    return AccountingFactory.JEVRepository().InsertJevCashDsbrsmntsJrnl(JevModel(), JevAcountsModelList(), ucCshDsbrsmntJrnl.CashDisbursementsJournalModel());
 
                 case "Check Disbursements Journal":
-                    return AccFactory.JEVRepository().InsertJevChkDsbrsmntJrnl(JevModel(), JevAcountsModelList(), ucChkDsbrsmntJrnl.CheckDisbursementsJournalModel());
+                    return AccountingFactory.JEVRepository().InsertJevChkDsbrsmntJrnl(JevModel(), JevAcountsModelList(), ucChkDsbrsmntJrnl.CheckDisbursementsJournalModel());
 
                 case "Authority to Debit Account Disbursement Journal":
-                    return AccFactory.JEVRepository().InsertJevAdaDsbrsmntsJrnl(JevModel(), JevAcountsModelList(), ucAuthDbtAccDsbrsmntJrnl.ADADisbursementsJournalModel());
+                    return AccountingFactory.JEVRepository().InsertJevAdaDsbrsmntsJrnl(JevModel(), JevAcountsModelList(), ucAuthDbtAccDsbrsmntJrnl.ADADisbursementsJournalModel());
 
                 default:
                     return false;
@@ -199,22 +199,22 @@ namespace LFS.Views.Transactions.JEV
             switch (currentJrnlTyp)
             {
                 case "General Journal":
-                    return AccFactory.JEVRepository().UpdateJevGenJrnl(JevModel(), prevJournal, JevAcountsModelList(), ucGenJrnl.GeneralJournalModel());
+                    return AccountingFactory.JEVRepository().UpdateJevGenJrnl(JevModel(), prevJournal, JevAcountsModelList(), ucGenJrnl.GeneralJournalModel());
 
                 case "Procurement Received Journal":
-                    return AccFactory.JEVRepository().UpdateJevProcRcvJrnl(JevModel(), prevJournal, JevAcountsModelList());
+                    return AccountingFactory.JEVRepository().UpdateJevProcRcvJrnl(JevModel(), prevJournal, JevAcountsModelList());
 
                 case "Cash Receipts Journal":
-                    return AccFactory.JEVRepository().UpdateJevCshRcptsJrnl(JevModel(), prevJournal, JevAcountsModelList(), ucCshRcptsJrnl.CashReceiptsJournalModel());
+                    return AccountingFactory.JEVRepository().UpdateJevCshRcptsJrnl(JevModel(), prevJournal, JevAcountsModelList(), ucCshRcptsJrnl.CashReceiptsJournalModel());
 
                 case "Cash Disbursements Journal":
-                    return AccFactory.JEVRepository().UpdateJevCshDsbrsmntsJrnl(JevModel(), prevJournal, JevAcountsModelList(), ucCshDsbrsmntJrnl.CashDisbursementsJournalModel());
+                    return AccountingFactory.JEVRepository().UpdateJevCshDsbrsmntsJrnl(JevModel(), prevJournal, JevAcountsModelList(), ucCshDsbrsmntJrnl.CashDisbursementsJournalModel());
 
                 case "Check Disbursements Journal":
-                    return AccFactory.JEVRepository().UpdateJevChkDsbrsmntJrnl(JevModel(), prevJournal, JevAcountsModelList(), ucChkDsbrsmntJrnl.CheckDisbursementsJournalModel());
+                    return AccountingFactory.JEVRepository().UpdateJevChkDsbrsmntJrnl(JevModel(), prevJournal, JevAcountsModelList(), ucChkDsbrsmntJrnl.CheckDisbursementsJournalModel());
 
                 case "Authority to Debit Account Disbursement Journal":
-                    return AccFactory.JEVRepository().UpdateJevAdaDsbrsmntsJrnl(JevModel(), prevJournal, JevAcountsModelList(), ucAuthDbtAccDsbrsmntJrnl.ADADisbursementsJournalModel());
+                    return AccountingFactory.JEVRepository().UpdateJevAdaDsbrsmntsJrnl(JevModel(), prevJournal, JevAcountsModelList(), ucAuthDbtAccDsbrsmntJrnl.ADADisbursementsJournalModel());
 
                 default:
                     return false;
@@ -293,7 +293,7 @@ namespace LFS.Views.Transactions.JEV
 
         private void LoadFunds()
         {
-            var dtFunds = AccFactory.FundsRepository().GetRecords();
+            var dtFunds = Factory.FundsRepository().GetRecords();
             HelperLoadRecords.FundsComboBox(dtFunds, cmbxFunds, "id", "fund_name");
         }
 
@@ -424,7 +424,7 @@ namespace LFS.Views.Transactions.JEV
 
                 if (!validateRow.isValidated)
                 {
-                    var errMssg = AccFactory.CreateErrors(validateRow.errors).GenerateErrorMessage();
+                    var errMssg = Factory.CreateErrors(validateRow.errors).GenerateErrorMessage();
                     Helper.MessageBoxError(errMssg);
                     return;
                 }
@@ -461,7 +461,7 @@ namespace LFS.Views.Transactions.JEV
         private string GenTransctnNo()
         {
             DateTime dateEntry = dtpDateEntry.Value;
-            string seriesNo = AccFactory.JEVRepository().GetLastTrnsctionNo(dateEntry.Year);
+            string seriesNo = AccountingFactory.JEVRepository().GetLastTrnsctionNo(dateEntry.Year);
             string trnsctnNo = $"{dateEntry:yy}-{seriesNo}";
             return trnsctnNo;
         }
@@ -469,7 +469,7 @@ namespace LFS.Views.Transactions.JEV
         private string GenerateJevNoTemplate(string seriesNo = "_ _ _")
         {
             bool fundValid = int.TryParse(cmbxFunds.SelectedValue.ToString(), out int fundId);
-            var fund = AccFactory.FundsRepository().GetRecordByID(fundId);
+            var fund = Factory.FundsRepository().GetRecordByID(fundId);
 
             if (fundValid)
             {
@@ -515,7 +515,7 @@ namespace LFS.Views.Transactions.JEV
 
         private void LoadSelectedJev(int jevId)
         {
-            var dictJev = AccFactory.JEVRepository().GetViewRecordByJEVId(jevId);
+            var dictJev = AccountingFactory.JEVRepository().GetViewRecordByJEVId(jevId);
             if (dictJev.Count < 1) { throw new ArgumentException("Settings dictionary cannot be null or empty.", nameof(dictJev)); }
 
             byte journalId = Convert.ToByte(dictJev["journals_id"]);
@@ -561,7 +561,7 @@ namespace LFS.Views.Transactions.JEV
                 throw new Exception();
 
             bool createdByValid = int.TryParse($"{dictJev["created_by"]}", out int createdById);
-            var dictCrtdBy = AccFactory.UsersRepository().GetRecordByID(createdById);
+            var dictCrtdBy = Factory.UsersRepository().GetRecordByID(createdById);
             string crtdByName = !createdByValid ? string.Empty :
                 Helper.GenerateFullName(dictCrtdBy["prefix"],
                                         dictCrtdBy["first_name"],
@@ -576,7 +576,7 @@ namespace LFS.Views.Transactions.JEV
 
         private void LoadJevAccEntries(int jevId, DataGridView dgv)
         {
-            DataTable dtJEV = AccFactory.JEVAccountsRepository().GetViewRecordsByJevId(jevId);
+            DataTable dtJEV = AccountingFactory.JEVAccountsRepository().GetViewRecordsByJevId(jevId);
 
             foreach (DataRow row in dtJEV.Rows)
             {
@@ -669,7 +669,7 @@ namespace LFS.Views.Transactions.JEV
 
         private DataTable DtFpp()
         {
-            var dtFpp = AccFactory.FunctionProgramProjectRepository().GetViewRecords();
+            var dtFpp = Factory.FunctionProgramProjectRepository().GetViewRecords();
             var dt = new DataTable();
             var dtColmns = new DataColumn[]
             {
@@ -688,7 +688,7 @@ namespace LFS.Views.Transactions.JEV
 
         private DataTable DtGenLdgrAccs()
         {
-            var dtGenLdgrAcc = AccFactory.GeneralLedgerAccountsRepository().GetViewRecords();
+            var dtGenLdgrAcc = AccountingFactory.GeneralLedgerAccountsRepository().GetViewRecords();
             var dt = new DataTable();
             var dtColmns = new DataColumn[]
             {
@@ -780,7 +780,7 @@ namespace LFS.Views.Transactions.JEV
 
         private DataTable DtSubLdrAccs(int genLdgrId, int fundId)
         {
-            var dtDbSub = AccFactory.SubsidiaryLedgerAccountsRepository().GetRecordsByFundAndGeneralLedger(fundId, genLdgrId);
+            var dtDbSub = AccountingFactory.SubsidiaryLedgerAccountsRepository().GetRecordsByFundAndGeneralLedger(fundId, genLdgrId);
 
             var dtDbRows = dtDbSub.AsEnumerable()
                               .Select(r => new object[]
@@ -1041,7 +1041,7 @@ namespace LFS.Views.Transactions.JEV
                     Id = jevId.Value,
                     Remarks = txtRemarks.Text.Trim(),
                 };
-                return AccFactory.JEVRepository().CancelJev(model);
+                return AccountingFactory.JEVRepository().CancelJev(model);
             }
             return false;
         }
@@ -1060,7 +1060,7 @@ namespace LFS.Views.Transactions.JEV
                     Id = jevId.Value,
                     Remarks = txtRemarks.Text.Trim(),
                 };
-                return AccFactory.JEVRepository().DisapproveJev(model);
+                return AccountingFactory.JEVRepository().DisapproveJev(model);
             }
             return false;
         }
@@ -1072,7 +1072,7 @@ namespace LFS.Views.Transactions.JEV
             if (Helper.MessageBoxConfirmCancel($"Confirm approval of JEV (Transaction No.{trnsctnNo})"))
             {
                 bool fundValid = int.TryParse(cmbxFunds.SelectedValue.ToString(), out int fundId);
-                string jevSeriesNo = AccFactory.JEVRepository().GetLastJevNoSeries(fundId);
+                string jevSeriesNo = AccountingFactory.JEVRepository().GetLastJevNoSeries(fundId);
                 string genJevNo = GenerateJevNoTemplate(jevSeriesNo);
 
                 if (fundValid)
@@ -1085,7 +1085,7 @@ namespace LFS.Views.Transactions.JEV
                     };
 
                     jevNo = genJevNo;
-                    return AccFactory.JEVRepository().ApproveJev(model);
+                    return AccountingFactory.JEVRepository().ApproveJev(model);
                 }
                 else
                     throw new Exception("Fund is invalid.");

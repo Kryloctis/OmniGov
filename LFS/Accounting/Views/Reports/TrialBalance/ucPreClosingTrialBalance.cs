@@ -1,6 +1,7 @@
-﻿using ACC.Data;
+﻿using Accounting.Data;
 using LFS.Helpers;
 using Microsoft.Reporting.WinForms;
+using OmniGov.Core.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -23,7 +24,7 @@ namespace LFS.Views.Reports.TrialBalance
 
         internal void OnLoad()
         {
-            var dtFunds = AccFactory.FundsRepository().GetRecords();
+            var dtFunds = Factory.FundsRepository().GetRecords();
             HelperLoadRecords.FundsComboBox(dtFunds, cmbFund, "id", "fund_name");
         }
 
@@ -39,8 +40,8 @@ namespace LFS.Views.Reports.TrialBalance
         private void GetDebitCredit(byte fundId, DateTime dateEntry, ushort generalLedgerId, out decimal balanceDebit, out decimal balanceCredit)
         {
             beginningBalance = 0;
-            var dictBeginningBalance = AccFactory.BeginningBalancesRepository().GetSumBalancesBy_FundId_GenLedgId_Date_SubLedgId(fundId, generalLedgerId, dateEntry);
-            var dictTransaction = AccFactory.JEVAccountsRepository().GetSumTransactionsByGenLedgerId(fundId, generalLedgerId, dateEntry);
+            var dictBeginningBalance = AccountingFactory.BeginningBalancesRepository().GetSumBalancesBy_FundId_GenLedgId_Date_SubLedgId(fundId, generalLedgerId, dateEntry);
+            var dictTransaction = AccountingFactory.JEVAccountsRepository().GetSumTransactionsByGenLedgerId(fundId, generalLedgerId, dateEntry);
 
             decimal totalBeginningAndTransDebit = dictBeginningBalance["beginning_balance_debit"] + dictTransaction["debit"];
             decimal totalBeginningAndTransCredit = dictBeginningBalance["beginning_balance_credit"] + dictTransaction["credit"];
@@ -56,7 +57,7 @@ namespace LFS.Views.Reports.TrialBalance
             var dateAsOF = dtAsOf.Value;
             var dtPreTrialBalance = new dsLFS().dtTrialBalance;
 
-            var dtGeneralLedgerAccounts = AccFactory.GeneralLedgerAccountsRepository().GetViewRecords();
+            var dtGeneralLedgerAccounts = AccountingFactory.GeneralLedgerAccountsRepository().GetViewRecords();
 
             foreach (DataRow row in dtGeneralLedgerAccounts.Rows)
             {

@@ -1,4 +1,4 @@
-﻿using ACC.Data;
+﻿using Accounting.Data;
 using LFS.Helpers;
 using Microsoft.Reporting.WinForms;
 using System;
@@ -50,7 +50,7 @@ namespace LFS.Views.Reports.JEV
             {
                 case 1:
 
-                    journalDict = AccFactory.GeneralJournalRepository().GetViewRecordByJevID(jevId);
+                    journalDict = AccountingFactory.GeneralJournalRepository().GetViewRecordByJevID(jevId);
 
                     paramCheckDate = "";
                     paramOfficer = "";
@@ -64,7 +64,7 @@ namespace LFS.Views.Reports.JEV
 
                 case 2:
 
-                    journalDict = AccFactory.CashReceiptsJournalRepository().GetViewRecordByJevID(jevId);
+                    journalDict = AccountingFactory.CashReceiptsJournalRepository().GetViewRecordByJevID(jevId);
 
                     paramCheckDate = Convert.ToDateTime(journalDict["or_date"]).ToString("MM/dd/yy");
 
@@ -82,7 +82,7 @@ namespace LFS.Views.Reports.JEV
 
                 case 4:
 
-                    journalDict = AccFactory.CashDisbursementsJournalRepository().GetViewRecordByJevID(jevId);
+                    journalDict = AccountingFactory.CashDisbursementsJournalRepository().GetViewRecordByJevID(jevId);
 
                     paramCheckDate = Convert.ToDateTime(journalDict["date_paid"]).ToString("MM/dd/yy");
                     paramCheckNo = "";
@@ -96,7 +96,7 @@ namespace LFS.Views.Reports.JEV
 
                 case 5:
 
-                    journalDict = AccFactory.CheckDisbursementsJournalRepository().GetRecordByJevID(jevId);
+                    journalDict = AccountingFactory.CheckDisbursementsJournalRepository().GetRecordByJevID(jevId);
 
                     paramCheckDate = Convert.ToDateTime(journalDict["check_date"]).ToString("MM/dd/yy");
                     paramCheckNo = journalDict["check_no"];
@@ -108,7 +108,7 @@ namespace LFS.Views.Reports.JEV
 
                 case 6:
 
-                    journalDict = AccFactory.ADADisbursementsJournalRepository().GetViewRecordByJevID(jevId);
+                    journalDict = AccountingFactory.ADADisbursementsJournalRepository().GetViewRecordByJevID(jevId);
 
                     SetJournalData("", "", "ADA No. :", "DV No. :", "");
                     return;
@@ -143,12 +143,12 @@ namespace LFS.Views.Reports.JEV
 
                 int jevId = (int)e.Argument;
                 var dtJevAccEntries = new dsLFS.dtJournalVoucherDataTable();
-                var dtJevAccEntriesDb = AccFactory.JEVAccountsRepository().GetViewRecordsByJevId(jevId);
+                var dtJevAccEntriesDb = AccountingFactory.JEVAccountsRepository().GetViewRecordsByJevId(jevId);
                 totalCount = dtJevAccEntriesDb.Rows.Count;
 
                 ParseSignatory(out string CertSignatory, out string CertSignatoryTitle);
 
-                var dictJev = AccFactory.JEVRepository().GetViewRecordByJEVId(jevId);
+                var dictJev = AccountingFactory.JEVRepository().GetViewRecordByJEVId(jevId);
                 int jrnlId = Convert.ToInt32(dictJev["journals_id"]);
                 SetJournalCustomFields(jevId, jrnlId);
 
@@ -252,7 +252,7 @@ namespace LFS.Views.Reports.JEV
 
         private void LoadJevCombobox()
         {
-            var dtJev = AccFactory.JEVRepository().GetViewRecords();
+            var dtJev = AccountingFactory.JEVRepository().GetViewRecords();
             cmbxJev.DataSource = dtJev;
             cmbxJev.DisplayMember = "full_jev_no";
             cmbxJev.ValueMember = "id";

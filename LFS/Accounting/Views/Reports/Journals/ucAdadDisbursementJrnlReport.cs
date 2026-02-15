@@ -1,6 +1,7 @@
-﻿using ACC.Data;
+﻿using Accounting.Data;
 using LFS.Helpers;
 using Microsoft.Reporting.WinForms;
+using OmniGov.Core.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -24,7 +25,7 @@ namespace LFS.Views.Reports.Journals
 
         private void LoadFunds()
         {
-            var dtFunds = AccFactory.FundsRepository().GetRecords();
+            var dtFunds = Factory.FundsRepository().GetRecords();
             HelperLoadRecords.FundsComboBox(dtFunds, cmbxFunds, "id", "fund_name");
         }
 
@@ -44,9 +45,9 @@ namespace LFS.Views.Reports.Journals
             dictionary.Add("defaultAccCodeCredit2", string.Empty);
             dictionary.Add("defaultAccCodeCredit3", string.Empty);
 
-            DataTable dtCreditDefaultAccounts = AccFactory.JournalsDefaultAccountsRepository().GetViewRecordsByJournalId(journalId, fundId, false);
+            DataTable dtCreditDefaultAccounts = Factory.JournalsDefaultAccountsRepository().GetViewRecordsByJournalId(journalId, fundId, false);
 
-            DataTable dtDebitDefaultAccounts = AccFactory.JournalsDefaultAccountsRepository().GetViewRecordsByJournalId(journalId, fundId, true);
+            DataTable dtDebitDefaultAccounts = Factory.JournalsDefaultAccountsRepository().GetViewRecordsByJournalId(journalId, fundId, true);
 
             //Debit default Accounts
 
@@ -123,13 +124,13 @@ namespace LFS.Views.Reports.Journals
             int journalId = 6;
 
             var dtADADisbursementsJournal = new dsLFS.AuthorityToDebitAccountDisbursementsJournalDataTable();
-            var dictFund = AccFactory.FundsRepository().GetRecordByID(fundId);
-            var dtADADisbursementsFromDB = AccFactory.JEVAccountsRepository().GetViewRecordsByFundJournalDate(dictFund["fund_name"], journalName, date);
+            var dictFund = Factory.FundsRepository().GetRecordByID(fundId);
+            var dtADADisbursementsFromDB = AccountingFactory.JEVAccountsRepository().GetViewRecordsByFundJournalDate(dictFund["fund_name"], journalName, date);
 
             int jevId;
             string jevNo;
 
-            var aDADisbursementsJournalRepository = AccFactory.ADADisbursementsJournalRepository();
+            var aDADisbursementsJournalRepository = AccountingFactory.ADADisbursementsJournalRepository();
             foreach (DataRow item in dtADADisbursementsFromDB.Rows)
             {
                 jevId = Convert.ToInt32(item["jev_id"]);

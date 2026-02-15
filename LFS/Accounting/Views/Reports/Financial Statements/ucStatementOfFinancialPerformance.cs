@@ -1,6 +1,6 @@
-﻿using ACC.Data;
-using LFS.Helpers;
+﻿using LFS.Helpers;
 using Microsoft.Reporting.WinForms;
+using OmniGov.Core.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -107,7 +107,7 @@ namespace LFS.Views.Reports.Financial_Statements
             {
                 new ReportParameter("paramCertifiedCorrectSignatory", certifiedCorrectSignatory),
                 new ReportParameter("paramCertifiedCorrectSignatoryTitle", certifiedCorrectSignatoryTitle),
-                new ReportParameter("paramFund",  AccFactory.FundsRepository().GetRecordByID(fundId)["fund_name"]),
+                new ReportParameter("paramFund",  Factory.FundsRepository().GetRecordByID(fundId)["fund_name"]),
                 new ReportParameter("paramDateEnded", dateEnded.ToString("MMMM dd, yyyy")),
             };
 
@@ -121,7 +121,7 @@ namespace LFS.Views.Reports.Financial_Statements
 
         private void LoadFunds()
         {
-            var dtFunds = AccFactory.FundsRepository().GetRecords();
+            var dtFunds = Factory.FundsRepository().GetRecords();
             HelperLoadRecords.FundsComboBox(dtFunds, cmbxFunds, "id", "fund_name");
         }
 
