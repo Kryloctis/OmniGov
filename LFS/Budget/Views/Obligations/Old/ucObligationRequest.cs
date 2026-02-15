@@ -1,7 +1,10 @@
 ﻿using ACC.Data;
 using ACC.Domain.Interfaces;
 using ACC.Domain.Models;
+using Budget.Data;
+using Budget.Domain.Models;
 using LFS.Helpers;
+using OmniGov.Core.Repositories;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -48,10 +51,10 @@ namespace LFS.Budget.Views.Obligations
                 if (cmbxObjectOfExpenditure.SelectedIndex > -1)
                 {
                     int budgetAppropriationId = Convert.ToInt32(cmbxObjectOfExpenditure.SelectedValue);
-                    var dtAllotmentRelease = AccFactory.AllotmentReleaseRepository().GetViewRecordsByBudgetAppropriationIdDateIssued(budgetAppropriationId, dateRequested);
+                    var dtAllotmentRelease = BudgetFactory.AllotmentReleaseRepository().GetViewRecordsByBudgetAppropriationIdDateIssued(budgetAppropriationId, dateRequested);
 
                     decimal totalAllotmentRelease = Convert.ToDecimal(dtAllotmentRelease.Rows.Count == 0 ? 0 : dtAllotmentRelease.Compute("Sum(amount)", string.Empty));
-                    decimal totalObligations = AccFactory.ObligationRequestRepository().GetSumObligationsByBudgetAppropriationAndStatus(budgetAppropriationId);
+                    decimal totalObligations = BudgetFactory.ObligationRequestRepository().GetSumObligationsByBudgetAppropriationAndStatus(budgetAppropriationId);
 
                     allotmentReleaseBalance = (totalAllotmentRelease - totalObligations) + (budgetAppropriationId == _budgetAppropriationsId ? _amount : 0);
                 }
@@ -71,12 +74,13 @@ namespace LFS.Budget.Views.Obligations
 
         internal string GetFormErrors()
         {
-            var errorArray = new string[2];
-            errorArray[0] = epObjectOfExpenditure.GetError(cmbxObjectOfExpenditure);
-            errorArray[1] = epAmount.GetError(nudAmount);
+            var errorArray = new string[2]
+            {
+                epObjectOfExpenditure.GetError(cmbxObjectOfExpenditure),
+                epAmount.GetError(nudAmount),
+            };
 
-            IError _errors = AccFactory.CreateErrors(errorArray);
-            return _errors.GenerateErrorMessage();
+            return Factory.CreateErrors(errorArray).GenerateErrorMessage();
         }
 
         internal void ResetForm()
@@ -122,9 +126,9 @@ namespace LFS.Budget.Views.Obligations
             DataTable dtSubFPP;
 
             if (string.IsNullOrWhiteSpace(cmbxSubFPP.Text))
-                dtSubFPP = AccFactory.SubFPPRepository().GetRecordsByFppId(fppId);
+                dtSubFPP = Factory.SubFPPRepository().GetRecordsByFppId(fppId);
             else
-                dtSubFPP = AccFactory.SubFPPRepository().GetRecordsByFPPIdCodeName(fppId, cmbxSubFPP.Text);
+                dtSubFPP = Factory.SubFPPRepository().GetRecordsByFPPIdCodeName(fppId, cmbxSubFPP.Text);
 
             return dtSubFPP;
         }
@@ -215,9 +219,9 @@ namespace LFS.Budget.Views.Obligations
             string searchTxt = cmbxObjectOfExpenditure.Text.Trim();
 
             if (string.IsNullOrEmpty(cmbxObjectOfExpenditure.Text))
-                dtBudgetAppropriation = AccFactory.BudgetAppropriationsRepository().GetViewRecords(budgetAppropriationsModel.FunctionProgramProjectId, budgetAppropriationsModel.OthersFPPId, budgetAppropriationsModel.AllotmentClassesId, budgetAppropriationsModel.FundsId);
+                dtBudgetAppropriation = BudgetFactory.BudgetAppropriationsRepository().GetViewRecords(budgetAppropriationsModel.FunctionProgramProjectId, budgetAppropriationsModel.OthersFPPId, budgetAppropriationsModel.AllotmentClassesId, budgetAppropriationsModel.FundsId);
             else
-                dtBudgetAppropriation = AccFactory.BudgetAppropriationsRepository().GetViewRecordsByIdsSearch(budgetAppropriationsModel, searchTxt);
+                dtBudgetAppropriation = BudgetFactory.BudgetAppropriationsRepository().GetViewRecordsByIdsSearch(budgetAppropriationsModel, searchTxt);
 
             return dtBudgetAppropriation;
         }
@@ -317,10 +321,7 @@ namespace LFS.Budget.Views.Obligations
                     return true;
                 }
             }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
             return false;
         }
 
@@ -351,10 +352,7 @@ namespace LFS.Budget.Views.Obligations
                     }
                 }
             }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
             return false;
         }
 

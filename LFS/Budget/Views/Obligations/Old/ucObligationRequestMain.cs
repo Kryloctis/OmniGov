@@ -1,5 +1,6 @@
-﻿using ACC.Data;
+﻿using Budget.Data;
 using LFS.Helpers;
+using OmniGov.Core.Repositories;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -44,7 +45,7 @@ namespace LFS.Budget.Views.Obligations
         {
             try
             {
-                mskTxtObligationNoSeries.Text = AccFactory.ObligationRequestRepository().GetLeastOblgtnNo();
+                mskTxtObligationNoSeries.Text = BudgetFactory.ObligationRequestRepository().GetLeastOblgtnNo();
             }
             catch (Exception ex)
             {
@@ -64,7 +65,7 @@ namespace LFS.Budget.Views.Obligations
                 dgObligationRequests.Tag == null ? string.Empty : dgObligationRequests.Tag.ToString(),
             };
 
-            return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
+            return Factory.CreateErrors(errorArray).GenerateErrorMessage();
         }
 
         internal void ResetForm()
@@ -185,9 +186,9 @@ namespace LFS.Budget.Views.Obligations
             DataTable dtFPP;
 
             if (string.IsNullOrWhiteSpace(cmbxFPP.Text))
-                dtFPP = AccFactory.FunctionProgramProjectRepository().GetViewRecords();
+                dtFPP = Factory.FunctionProgramProjectRepository().GetViewRecords();
             else
-                dtFPP = AccFactory.FunctionProgramProjectRepository().GetRecordsByCodeName(cmbxFPP.Text.Trim());
+                dtFPP = Factory.FunctionProgramProjectRepository().GetRecordsByCodeName(cmbxFPP.Text.Trim());
 
             return dtFPP;
         }
@@ -262,7 +263,7 @@ namespace LFS.Budget.Views.Obligations
 
         internal void LoadFunds()
         {
-            var funds = AccFactory.FundsRepository().GetRecords();
+            var funds = Factory.FundsRepository().GetRecords();
 
             foreach (DataRow fund in funds.Rows)
             {
@@ -304,7 +305,7 @@ namespace LFS.Budget.Views.Obligations
 
         internal void LoadAllotmentClasses()
         {
-            var dtAllotmentClass = AccFactory.AllotmentClassesRepository().GetRecords();
+            var dtAllotmentClass = Factory.AllotmentClassesRepository().GetRecords();
 
             foreach (DataRow allotmentClass in dtAllotmentClass.Rows)
             {
@@ -345,7 +346,7 @@ namespace LFS.Budget.Views.Obligations
 
         internal string GenerateObligationRequestNoTemplate()
         {
-            string fundCode = AccFactory.FundsRepository().GetRecordByID(fundId)["fund_code"];
+            string fundCode = Factory.FundsRepository().GetRecordByID(fundId)["fund_code"];
 
             string obligationNoTemplate = $"{dtDateRequest.Value.ToString("MM")}-{dtDateRequest.Value.ToString("yy")}-{fundCode}";
 
@@ -375,7 +376,7 @@ namespace LFS.Budget.Views.Obligations
                 errorProvider1.GetError(cmbxFPP)
             };
 
-            return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
+            return Factory.CreateErrors(errorArray).GenerateErrorMessage();
         }
 
         private bool Validation()
@@ -426,7 +427,7 @@ namespace LFS.Budget.Views.Obligations
                 int rowIndex = dgObligationRequests.CurrentCell.RowIndex;
 
                 int budgetAppropriationId = Convert.ToInt32(dgObligationRequests.Rows[rowIndex].Cells["budget_appropriation_id"].Value);
-                var budgetAppropriationsDict = AccFactory.BudgetAppropriationsRepository().GetRecordByID(budgetAppropriationId);
+                var budgetAppropriationsDict = BudgetFactory.BudgetAppropriationsRepository().GetRecordByID(budgetAppropriationId);
 
                 var subFPP = budgetAppropriationsDict["others_fpp_id"];
                 decimal amount = Convert.ToDecimal(dgObligationRequests.Rows[rowIndex].Cells["obligation_amount"].Value);
@@ -527,9 +528,9 @@ namespace LFS.Budget.Views.Obligations
             bool obligationRequestNoExist;
 
             if (obligationRequestId == 0)
-                obligationRequestNoExist = AccFactory.ObligationRequestRepository().ObligationRequestNoExist(obligationNo);
+                obligationRequestNoExist = BudgetFactory.ObligationRequestRepository().ObligationRequestNoExist(obligationNo);
             else
-                obligationRequestNoExist = AccFactory.ObligationRequestRepository().ObligationRequestNoExist(obligationRequestId, obligationNo);
+                obligationRequestNoExist = BudgetFactory.ObligationRequestRepository().ObligationRequestNoExist(obligationRequestId, obligationNo);
 
             if (obligationRequestNoExist)
             {

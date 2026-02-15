@@ -1,7 +1,8 @@
-﻿using ACC.Data;
+﻿using Budget.Data;
+using Budget.Domain.Models;
 using LFS.Budget.Helpers;
 using LFS.Helpers;
-using LFS.Views.Transactions.JEV;
+using OmniGov.Core.Repositories;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -79,7 +80,7 @@ namespace LFS.Budget.Views.Obligations
         {
             var oblgtnRqst = new ObligationRequestModel()
             {
-                TransactionNo = AccFactory.ObligationRequestRepository().GetTransactionNo(dtDateRequest.Value.Year),
+                TransactionNo = BudgetFactory.ObligationRequestRepository().GetTransactionNo(dtDateRequest.Value.Year),
                 FppId = Convert.ToInt32(cmbxFPP.SelectedValue),
                 AllotmentClassId = Convert.ToInt32(cmbxAlltmntClss.SelectedValue),
                 FundId = Convert.ToInt32(cmbxFund.SelectedValue),
@@ -110,7 +111,7 @@ namespace LFS.Budget.Views.Obligations
 
         private void LoadSelectedRecord(int oblgtnRqstId)
         {
-            var dictOblgtnRqst = AccFactory.ObligationRequestRepository().GetViewRecordById(oblgtnRqstId);
+            var dictOblgtnRqst = BudgetFactory.ObligationRequestRepository().GetViewRecordById(oblgtnRqstId);
             int fppId = Convert.ToInt32(dictOblgtnRqst["fpp_id"]);
 
             mskTxtTransNo.Text = BudgetHelper.GenTransactionNo(dictOblgtnRqst["transaction_no"]);
@@ -127,7 +128,7 @@ namespace LFS.Budget.Views.Obligations
 
         private void LoadOblgtnEntries(int oblgtnRqstId, DataGridView dgv)
         {
-            var dtOblgtnAccs = AccFactory.ObligationRequestRepository().GetViewRecordsById(oblgtnRqstId);
+            var dtOblgtnAccs = BudgetFactory.ObligationRequestRepository().GetViewRecordsById(oblgtnRqstId);
 
             foreach (DataRow row in dtOblgtnAccs.Rows)
             {
@@ -183,7 +184,7 @@ namespace LFS.Budget.Views.Obligations
                 errorProvider1.GetError(txtPayee),
             };
 
-            return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
+            return Factory.CreateErrors(errorArray).GenerateErrorMessage();
         }
 
         private void SetControlsReadOnly(bool isReadOnly, Control parent, List<Control> exemptCtrls = null)
@@ -213,7 +214,7 @@ namespace LFS.Budget.Views.Obligations
 
         private string GenerateObligationRequestNoTemplate()
         {
-            string fundCode = AccFactory.FundsRepository().GetRecordByID(fundId)["fund_code"];
+            string fundCode = Factory.FundsRepository().GetRecordByID(fundId)["fund_code"];
 
             string obligationNoTemplate = $"{dtDateRequest.Value.ToString("MM")}-{dtDateRequest.Value.ToString("yy")}-{fundCode}";
 
@@ -222,7 +223,7 @@ namespace LFS.Budget.Views.Obligations
 
         private void LoadFPP()
         {
-            var dtFpp = AccFactory.FunctionProgramProjectRepository().GetViewRecords();
+            var dtFpp = Factory.FunctionProgramProjectRepository().GetViewRecords();
             var dataTable = new DataTable();
             dataTable.Columns.Add("id", typeof(uint));
             dataTable.Columns.Add("fpp_code_name", typeof(string));
@@ -241,7 +242,7 @@ namespace LFS.Budget.Views.Obligations
 
         private void LoadFunds()
         {
-            var dtFunds = AccFactory.FundsRepository().GetRecords();
+            var dtFunds = Factory.FundsRepository().GetRecords();
             var dataTable = new DataTable();
             dataTable.Columns.Add("id", typeof(byte));
             dataTable.Columns.Add("fund", typeof(string));
@@ -261,7 +262,7 @@ namespace LFS.Budget.Views.Obligations
 
         private void LoadAlltmntClss()
         {
-            var dtAlltmntClss = AccFactory.AllotmentClassesRepository().GetRecords();
+            var dtAlltmntClss = Factory.AllotmentClassesRepository().GetRecords();
 
             var dataTable = new DataTable();
             dataTable.Columns.Add("id", typeof(byte));
@@ -446,7 +447,7 @@ namespace LFS.Budget.Views.Obligations
         private DataTable DtSubFpp()
         {
             bool fppValid = int.TryParse(cmbxFPP.SelectedValue.ToString(), out int fppId);
-            var dtSubFpp = AccFactory.SubFPPRepository().GetRecordsByFppId(fppId);
+            var dtSubFpp = Factory.SubFPPRepository().GetRecordsByFppId(fppId);
             var dt = new DataTable();
             var dtColmns = new DataColumn[]
             {
@@ -468,7 +469,7 @@ namespace LFS.Budget.Views.Obligations
             bool fppValid = int.TryParse(cmbxFPP.SelectedValue.ToString(), out int fppId);
             bool alltmntClssValid = int.TryParse(cmbxAlltmntClss.SelectedValue.ToString(), out int alltmntClssId);
             bool fundValid = int.TryParse(cmbxFund.SelectedValue.ToString(), out int fundId);
-            var dbDtAllotmentRelease = AccFactory.AllotmentReleaseRepository().GetViewRecords(fppId, othersFppId == 0 ? null : othersFppId, alltmntClssId, searchKey);
+            var dbDtAllotmentRelease = BudgetFactory.AllotmentReleaseRepository().GetViewRecords(fppId, othersFppId == 0 ? null : othersFppId, alltmntClssId, searchKey);
 
             var dtAllotmntRelease = dbDtAllotmentRelease.AsEnumerable().GroupBy(x => x.Field<UInt32>("allotment_release_id")).ToList();
 
@@ -490,7 +491,7 @@ namespace LFS.Budget.Views.Obligations
 
         private DataTable DtAllotmentAccounts(string searchKey, int alltmntRlsId)
         {
-            var dtAccs = AccFactory.AllotmentReleaseRepository().GetViewRecords(alltmntRlsId);
+            var dtAccs = BudgetFactory.AllotmentReleaseRepository().GetViewRecords(alltmntRlsId);
 
             var dataTable = new DataTable();
             var dataColumns = new DataColumn[]
@@ -684,9 +685,5 @@ namespace LFS.Budget.Views.Obligations
         }
 
         #endregion Validation Events
-
-        private void ucObligations_Load(object sender, EventArgs e)
-        {
-        }
     }
 }

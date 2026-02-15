@@ -1,6 +1,6 @@
-﻿using ACC.Data;
-using ACC.Domain.Interfaces;
+﻿using Budget.Data;
 using LFS.Helpers;
+using OmniGov.Core.Repositories;
 using System;
 using System.ComponentModel;
 using System.Windows.Forms;
@@ -24,15 +24,14 @@ namespace LFS.Budget.Views.Obligations
                 txtDissaprovalMessage.Tag.ToString()
             };
 
-            IError error = AccFactory.CreateErrors(errorArray);
-            return error.GenerateErrorMessage();
+            return Factory.CreateErrors(errorArray).GenerateErrorMessage();
         }
 
         private bool SetObligationStatus(string status, string disapprovalMessage)
         {
             try
             {
-                return AccFactory.ObligationRequestRepository().SetObligationRequestStatus(_frmObligationRequestMain.ucObligationRequestMain1.obligationRequestId, status, disapprovalMessage);
+                return BudgetFactory.ObligationRequestRepository().SetObligationRequestStatus(_frmObligationRequestMain.ucObligationRequestMain1.obligationRequestId, status, disapprovalMessage);
             }
             catch (Exception ex)
             {
@@ -64,7 +63,7 @@ namespace LFS.Budget.Views.Obligations
         private string GetDissaprovalMessage()
         {
             int obligationrequestId = _frmObligationRequestMain.ucObligationRequestMain1.obligationRequestId;
-            string disapprovalMessage = AccFactory.ObligationRequestRepository().GetRecordByID(obligationrequestId)["disapproval_message"];
+            string disapprovalMessage = BudgetFactory.ObligationRequestRepository().GetRecordByID(obligationrequestId)["disapproval_message"];
 
             return disapprovalMessage;
         }
@@ -84,7 +83,7 @@ namespace LFS.Budget.Views.Obligations
 
         private void frmObligationRequestDisapproval_Load(object sender, EventArgs e)
         {
-            if (AccFactory.ObligationRequestRepository().GetObligationRequestStatus(_frmObligationRequestMain.ucObligationRequestMain1.obligationRequestId).ToLower() == "disapproved")
+            if (BudgetFactory.ObligationRequestRepository().GetObligationRequestStatus(_frmObligationRequestMain.ucObligationRequestMain1.obligationRequestId).ToLower() == "disapproved")
             {
                 if (_frmObligationRequestMain.ucObligationRequestMain1.Enabled)
                     btnAccept.Visible = false;
@@ -113,7 +112,7 @@ namespace LFS.Budget.Views.Obligations
                 txtDissaprovalMessage.ReadOnly = true;
             }
 
-            var dictObligationRequest = AccFactory.ObligationRequestRepository().GetViewRecordById(_frmObligationRequestMain.ucObligationRequestMain1.obligationRequestId);
+            var dictObligationRequest = BudgetFactory.ObligationRequestRepository().GetViewRecordById(_frmObligationRequestMain.ucObligationRequestMain1.obligationRequestId);
 
             int obligationRequestCreatedById = Convert.ToInt32(dictObligationRequest["created_by_id"]);
 

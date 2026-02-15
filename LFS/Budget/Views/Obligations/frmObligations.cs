@@ -1,5 +1,5 @@
-﻿using ACC.Data;
-using LFS.Budget.Helpers;
+﻿using Budget.Data;
+using Budget.Domain.Models;
 using LFS.Helpers;
 using System;
 using System.Collections.Generic;
@@ -145,7 +145,7 @@ namespace LFS.Budget.Views.Obligations
                 models.Add(model);
             }
 
-            return AccFactory.ObligationRequestRepository().Delete(models);
+            return BudgetFactory.ObligationRequestRepository().Delete(models);
         }
 
         private string GetUserFullName(string userId)
@@ -184,9 +184,9 @@ namespace LFS.Budget.Views.Obligations
         private bool SaveOblgtnRqst((ObligationRequestModel oblgtnRqstModel, List<ObligationAccountModel> oblgtnAccModels) models)
         {
             if (models.oblgtnRqstModel.Id == 0)
-                return AccFactory.ObligationRequestRepository().Insert(models.oblgtnRqstModel, models.oblgtnAccModels);
+                return BudgetFactory.ObligationRequestRepository().Insert(models.oblgtnRqstModel, models.oblgtnAccModels);
             else
-                return AccFactory.ObligationRequestRepository().Update(models.oblgtnRqstModel, models.oblgtnAccModels);
+                return BudgetFactory.ObligationRequestRepository().Update(models.oblgtnRqstModel, models.oblgtnAccModels);
         }
 
         private void tlStrpBtnCreate_Click(object sender, EventArgs e)

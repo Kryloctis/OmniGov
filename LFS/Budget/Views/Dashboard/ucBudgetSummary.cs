@@ -1,5 +1,6 @@
-﻿using ACC.Data;
+﻿using Budget.Data;
 using LFS.Helpers;
+using OmniGov.Core.Repositories;
 using System;
 using System.Data;
 using System.Windows.Forms;
@@ -18,7 +19,7 @@ namespace LFS.Budget.Dashboard
             var errorArray = new string[1];
 
             errorArray[0] = cmbxFpp.Tag.ToString();
-            return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
+            return Factory.CreateErrors(errorArray).GenerateErrorMessage();
         }
 
         internal void LoadBudgetDashboardContents()
@@ -35,13 +36,13 @@ namespace LFS.Budget.Dashboard
 
         internal void LoadFunds()
         {
-            var dtFunds = AccFactory.FundsRepository().GetRecords();
+            var dtFunds = Factory.FundsRepository().GetRecords();
             HelperLoadRecords.FundsComboBox(dtFunds, cmbxFunds, "id", "fund_name");
         }
 
         internal void LoadFPP()
         {
-            var dtFpp = AccFactory.FunctionProgramProjectRepository().GetViewRecords();
+            var dtFpp = Factory.FunctionProgramProjectRepository().GetViewRecords();
             var dataTable = new DataTable();
             var dataColumns = new DataColumn[]
             {
@@ -87,7 +88,7 @@ namespace LFS.Budget.Dashboard
 
             if (int.TryParse(fppId, out int result))
             {
-                var dtSubFpp = AccFactory.SubFPPRepository().GetRecordsByFppId(Convert.ToInt32(result));
+                var dtSubFpp = Factory.SubFPPRepository().GetRecordsByFppId(Convert.ToInt32(result));
                 foreach (DataRow dataRow in dtSubFpp.Rows)
                 {
                     var newRow = dataTable.NewRow();
@@ -120,9 +121,9 @@ namespace LFS.Budget.Dashboard
 
         private decimal GetAppropriations(string fppId, string subFppId, int fundId, DateTime dateAsOf, int allotmentClassId, byte isContinuing)
         {
-            decimal appropriations = AccFactory.BudgetAppropriationsRepository().GetSumBudgetAppropriations(fppId, subFppId, fundId, dateAsOf.Date, allotmentClassId, isContinuing);
+            decimal appropriations = BudgetFactory.BudgetAppropriationsRepository().GetSumBudgetAppropriations(fppId, subFppId, fundId, dateAsOf.Date, allotmentClassId, isContinuing);
 
-            decimal supplementalAppropriations = AccFactory.SupplementalAppropriationsRepository().GetSumSupplementalAppropriationsBy_FppId_SubFPPId_DateEntry_AllotmentClassId_IsContinuing(fppId, subFppId, fundId, dateAsOf.Date, allotmentClassId, isContinuing);
+            decimal supplementalAppropriations = BudgetFactory.SupplementalAppropriationsRepository().GetSumSupplementalAppropriationsBy_FppId_SubFPPId_DateEntry_AllotmentClassId_IsContinuing(fppId, subFppId, fundId, dateAsOf.Date, allotmentClassId, isContinuing);
 
             decimal totalAppropriations = appropriations + supplementalAppropriations;
 
@@ -147,7 +148,7 @@ namespace LFS.Budget.Dashboard
 
         private decimal GetAllotments(string fppId, string subFppId, int fundId, DateTime dateAsOf, int allotmentClassId, byte isContinuing)
         {
-            decimal allotments = AccFactory.AllotmentReleaseRepository().GetSumAllotments(fppId, subFppId, fundId, dateAsOf.Date, allotmentClassId, isContinuing);
+            decimal allotments = BudgetFactory.AllotmentReleaseRepository().GetSumAllotments(fppId, subFppId, fundId, dateAsOf.Date, allotmentClassId, isContinuing);
 
             return allotments;
         }
@@ -170,7 +171,7 @@ namespace LFS.Budget.Dashboard
 
         private decimal GetSumObligations(string fppId, string subFppId, int fundId, DateTime dateAsOf, int allotmentClassId, byte isContinuing)
         {
-            decimal obligations = AccFactory.ObligationRequestRepository().GetSumObligations(fppId, subFppId, fundId, dateAsOf.Date, allotmentClassId, isContinuing);
+            decimal obligations = BudgetFactory.ObligationRequestRepository().GetSumObligations(fppId, subFppId, fundId, dateAsOf.Date, allotmentClassId, isContinuing);
 
             return obligations;
         }
