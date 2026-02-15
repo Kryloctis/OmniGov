@@ -2,11 +2,14 @@
 using ACC.Domain.Models;
 using LFS.Helpers;
 using LFS.Views.Shared;
+using OmniGov.Core.Repositories;
 using System;
 using System.ComponentModel;
 using System.Data;
 using System.Linq;
 using System.Windows.Forms;
+using Treasury.Data;
+using Treasury.Domain.Entities;
 
 namespace LFS.Views.Transactions.Assessment
 {
@@ -36,7 +39,7 @@ namespace LFS.Views.Transactions.Assessment
         {
             dtPckrDate.ValueChanged -= new EventHandler(dtPckrDate_ValueChanged);
 
-            var dictDelinquencyNoticeId = AccFactory.DelinquentNoticeRepository().GetViewRecordById(delinquencyNoticeId);
+            var dictDelinquencyNoticeId = TreasuryFactory.DelinquentNoticeRepository().GetViewRecordById(delinquencyNoticeId);
             dtPckrDate.Value = Convert.ToDateTime(dictDelinquencyNoticeId["notice_date"]);
             string propertyKind = dictDelinquencyNoticeId["property_kind"];
             string noticeType = dictDelinquencyNoticeId["notice_type"];
@@ -111,7 +114,7 @@ namespace LFS.Views.Transactions.Assessment
             }
 
             var model = InsertDelinquentNoticeModel();
-            return AccFactory.DelinquentNoticeRepository().Insert(model);
+            return TreasuryFactory.DelinquentNoticeRepository().Insert(model);
         }
 
         internal bool UpdateData()
@@ -123,7 +126,7 @@ namespace LFS.Views.Transactions.Assessment
             }
 
             var model = UpdateDelinquentNoticeModel();
-            return AccFactory.DelinquentNoticeRepository().Update(model);
+            return TreasuryFactory.DelinquentNoticeRepository().Update(model);
         }
 
         internal void OnLoad(bool isEdit, int? delinquencyNoticeId = null)
@@ -145,7 +148,7 @@ namespace LFS.Views.Transactions.Assessment
                 errorProvider1.GetError(txtRpt)
             };
 
-            return AccFactory.CreateErrors(errors).GenerateErrorMessage();
+            return Factory.CreateErrors(errors).GenerateErrorMessage();
         }
 
         internal void ResetForm()
@@ -162,11 +165,11 @@ namespace LFS.Views.Transactions.Assessment
             var dtRealProperties = new DataTable();
 
             if (radLand.Checked)
-                dtRealProperties = AccFactory.RealPropertiesRepository().GetViewRecordsByKind('L');
+                dtRealProperties = TreasuryFactory.RealPropertiesRepository().GetViewRecordsByKind('L');
             else if (radBuilding.Checked)
-                dtRealProperties = AccFactory.RealPropertiesRepository().GetViewRecordsByKind('B');
+                dtRealProperties = TreasuryFactory.RealPropertiesRepository().GetViewRecordsByKind('B');
             else if (radMachinery.Checked)
-                dtRealProperties = AccFactory.RealPropertiesRepository().GetViewRecordsByKind('M');
+                dtRealProperties = TreasuryFactory.RealPropertiesRepository().GetViewRecordsByKind('M');
 
             var autoCompleteSrc = dtRealProperties.AsEnumerable().Select(row => row.Field<string>("complete_arp_no")).ToList();
             var autoCom = new AutoCompleteStringCollection();
@@ -243,7 +246,7 @@ namespace LFS.Views.Transactions.Assessment
 
         private (decimal basicPenalty, decimal sefPenalty) GetPenalties(DateTime transactionDate, (int assessmentYear, string compelteArpNo, int effectivityQuarter, int effectivityYear) currentAssmntParameters, decimal penaltyRate, decimal basicTaxDue, decimal sefTaxDue)
         {
-            var dictPrevAssmnt = AccFactory.RptAssessmentPostsRepository().GetViewRecentAssessmentRecord(currentAssmntParameters.compelteArpNo, currentAssmntParameters.assessmentYear);
+            var dictPrevAssmnt = TreasuryFactory.RptAssessmentPostsRepository().GetViewRecentAssessmentRecord(currentAssmntParameters.compelteArpNo, currentAssmntParameters.assessmentYear);
 
             int? prevAssmntYear = null;
 
@@ -274,7 +277,7 @@ namespace LFS.Views.Transactions.Assessment
             {
                 var parameters = ((string completeArpNo, DateTime date))e.Argument;
                 var dataTable = new DataTable();
-                var dtAssessmentPostingDb = AccFactory.RptAssessmentPostsRepository().GetViewDelinquentRecords(parameters.completeArpNo, parameters.date);
+                var dtAssessmentPostingDb = TreasuryFactory.RptAssessmentPostsRepository().GetViewDelinquentRecords(parameters.completeArpNo, parameters.date);
                 var dataColumns = new DataColumn[]
                 {
                     new DataColumn("tax_year", typeof(int)),
