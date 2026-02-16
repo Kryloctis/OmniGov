@@ -1,6 +1,6 @@
-﻿using ACC.Data;
-using ACC.Domain.Models;
-using LFS.Helpers;
+﻿using LFS.Helpers;
+using OmniGov.Core.Entities;
+using OmniGov.Core.Repositories;
 using System;
 using System.Windows.Forms;
 
@@ -39,7 +39,7 @@ namespace LFS.Views.Manage.AccountableForm
                 isDefault = uc.chckDefault.Checked
             };
 
-            return AccFactory.FaceValueRepository().Update(model);
+            return Factory.FaceValueRepository().Update(model);
         }
 
         private void btnUpdate_Click(object sender, EventArgs e)

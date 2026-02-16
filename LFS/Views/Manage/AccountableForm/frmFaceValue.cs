@@ -1,5 +1,6 @@
 ﻿using LFS.Helpers;
 using OmniGov.Core.Entities;
+using OmniGov.Core.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
@@ -29,7 +30,7 @@ namespace LFS.Views.Manage.AccountableForm
             {
                 if (accountableFormId != 0)
                 {
-                    var facevaluerepo = AccFactory.FaceValueRepository();
+                    var facevaluerepo = Factory.FaceValueRepository();
                     var dtFaceValue = facevaluerepo.GetRecordsByAccountableFormId(accountableFormId);
 
                     HelperLoadRecords.FaceValueDatagridView(dtFaceValue, dgfacevalue);
@@ -62,7 +63,7 @@ namespace LFS.Views.Manage.AccountableForm
                 int Id = int.Parse(dgfacevalue.SelectedCells[0].Value.ToString());
                 try
                 {
-                    var facevaluerepo = AccFactory.FaceValueRepository();
+                    var facevaluerepo = Factory.FaceValueRepository();
                     var faceval = facevaluerepo.GetRecordByID(Id);
                     faceValueId = int.Parse(faceval["id"]);
                     dtdate.Value = Convert.ToDateTime(faceval["date"]);
@@ -79,7 +80,7 @@ namespace LFS.Views.Manage.AccountableForm
                 if (Helper.MessageBoxConfirmDelete(dgfacevalue.SelectedRows.Count))
                 {
                     var facemodel = new List<FaceValueModel>();
-                    var facevaluerepo = AccFactory.FaceValueRepository();
+                    var facevaluerepo = Factory.FaceValueRepository();
                     foreach (DataGridViewRow row in dgfacevalue.SelectedRows)
                     {
                         int fid = int.Parse(row.Cells[0].Value.ToString());
@@ -117,7 +118,7 @@ namespace LFS.Views.Manage.AccountableForm
                     facedate = dtdate.Value,
                     facevalue = txtamount.Value
                 };
-                var facevaluerepo = AccFactory.FaceValueRepository();
+                var facevaluerepo = Factory.FaceValueRepository();
                 if (facevaluerepo.Insert(facemodel))
                     faceValueId = 0;
                 dtdate.Value = DateTime.Now;
@@ -149,7 +150,7 @@ namespace LFS.Views.Manage.AccountableForm
                     facevalue = txtamount.Value,
                 };
 
-                var facevaluerepo = AccFactory.FaceValueRepository();
+                var facevaluerepo = Factory.FaceValueRepository();
                 if (facevaluerepo.Update(facemodel))
                     faceValueId = 0;
                 dtdate.Value = DateTime.Now;

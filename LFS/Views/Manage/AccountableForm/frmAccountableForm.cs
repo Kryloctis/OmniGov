@@ -1,11 +1,13 @@
 ﻿using LFS.Helpers;
 using MySql.Data.MySqlClient;
 using OmniGov.Core.Entities;
+using OmniGov.Core.Repositories;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
+using Treasury.Data;
 using Treasury.Domain.Entities;
 
 namespace LFS.Views.Manage.AccountableForm
@@ -67,7 +69,7 @@ namespace LFS.Views.Manage.AccountableForm
                     accModelList.Add(new AccountableFormsModel() { Id = rowId });
                 }
 
-                return AccFactory.AccountableFormsRepository().Delete(accModelList);
+                return TreasuryFactory.AccountableFormsRepository().Delete(accModelList);
             }
             return false;
         }
@@ -153,7 +155,7 @@ namespace LFS.Views.Manage.AccountableForm
                 var dataTable = new DataTable();
                 dataTable.Columns.AddRange(AccountableFormColumns());
 
-                DataTable dtAccountableFormsFromDb = AccFactory.AccountableFormsRepository().GetRecordsBySearch(searchText); ;
+                DataTable dtAccountableFormsFromDb = TreasuryFactory.AccountableFormsRepository().GetRecordsBySearch(searchText); ;
 
                 if (dtAccountableFormsFromDb.Rows.Count < 1)
                 {
@@ -226,7 +228,7 @@ namespace LFS.Views.Manage.AccountableForm
             var dataTable = new DataTable();
             dataTable.Columns.AddRange(FaceValueDataColumns());
 
-            var dtFaceValue = AccFactory.FaceValueRepository().GetRecordsByAccountableFormId(accountableFormId);
+            var dtFaceValue = Factory.FaceValueRepository().GetRecordsByAccountableFormId(accountableFormId);
 
             foreach (DataRow row in dtFaceValue.Rows)
             {
@@ -288,7 +290,7 @@ namespace LFS.Views.Manage.AccountableForm
                     modelList.Add(new FaceValueModel() { id = rowId });
                 }
 
-                return AccFactory.FaceValueRepository().Delete(modelList);
+                return Factory.FaceValueRepository().Delete(modelList);
             }
 
             return false;
