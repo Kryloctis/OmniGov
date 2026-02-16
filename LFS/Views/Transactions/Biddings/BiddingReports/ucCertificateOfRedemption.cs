@@ -1,11 +1,11 @@
-﻿using ACC.Data;
-using LFS.Helpers;
+﻿using LFS.Helpers;
 using Microsoft.Reporting.WinForms;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows.Forms;
+using Treasury.Data;
 
 namespace LFS.Views.Transactions.Biddings.BiddingReports
 {
@@ -58,13 +58,13 @@ namespace LFS.Views.Transactions.Biddings.BiddingReports
                 progressCount += tasks["Fetch LGU Details"];
                 Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
 
-                var dictBiddingResult = AccFactory.BidRepository().GetHighestBidderByAuctionIdAndRptId(parameters.rptAuctionId, parameters.rptId);
+                var dictBiddingResult = TreasuryFactory.BidRepository().GetHighestBidderByAuctionIdAndRptId(parameters.rptAuctionId, parameters.rptId);
                 string nameOfBidder = dictBiddingResult["name"];
                 decimal bidAmount = Convert.ToDecimal(dictBiddingResult["bid_amount"].ToString());
                 var dateOfAuction = $"{Convert.ToDateTime(dictBiddingResult["start_date"]).ToString("MMMM dd yyyy")} - {Convert.ToDateTime(dictBiddingResult["end_date"]).ToString("MMMM dd yyyy")}";
                 string receiptNumber = dictBiddingResult["receipt_no"];
 
-                var dictRpt = AccFactory.RealPropertiesRepository().GetViewRecordById(parameters.rptId);
+                var dictRpt = TreasuryFactory.RealPropertiesRepository().GetViewRecordById(parameters.rptId);
 
                 string declaredOwner = dictRpt["taxpayer_name"];
                 string completeArp = dictRpt["complete_arp_no"];

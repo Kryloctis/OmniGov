@@ -1,9 +1,9 @@
-﻿using ACC.Data;
-using LFS.Helpers;
+﻿using LFS.Helpers;
 using LFS.Views.Transactions.Payments.BurialPermit;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using Treasury.Data;
 
 namespace LFS.Views.Transactions.Payments.CattleOwnership
 {
@@ -104,7 +104,7 @@ namespace LFS.Views.Transactions.Payments.CattleOwnership
         private void InitializeReceipt()
         {
             var taxpayerId = ucCattleOwnership.CattleOwnershipModel().TaxpayerId;
-            var dictTaxpayer = AccFactory.TaxpayersRepository().GetViewRecordById(taxpayerId);
+            var dictTaxpayer = TreasuryFactory.TaxpayersRepository().GetViewRecordById(taxpayerId);
 
             var dictParameters = new Dictionary<string, string>()
             {
@@ -170,7 +170,7 @@ namespace LFS.Views.Transactions.Payments.CattleOwnership
 
         private bool ConfirmPayment()
         {
-            return AccFactory.PaymentCollectionsRepository().InsertWithCattleOwnershipPayment(ucPayment.PaymentCollectionsModel(), null, ucCattleOwnership.CattleOwnershipModel(), ucPaymentFeesCharges.PaymentFeesChargesModels());
+            return TreasuryFactory.PaymentCollectionsRepository().InsertWithCattleOwnershipPayment(ucPayment.PaymentCollectionsModel(), null, ucCattleOwnership.CattleOwnershipModel(), ucPaymentFeesCharges.PaymentFeesChargesModels());
         }
 
         private void btnNextMain_Click(object sender, EventArgs e)

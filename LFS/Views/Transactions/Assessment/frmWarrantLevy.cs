@@ -1,12 +1,12 @@
-﻿using ACC.Data;
-using ACC.Domain.Models;
-using LFS.Helpers;
+﻿using LFS.Helpers;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
+using Treasury.Data;
+using Treasury.Domain.Entities;
 
 namespace LFS.Views.Transactions.Assessment
 {
@@ -68,7 +68,7 @@ namespace LFS.Views.Transactions.Assessment
                 foreach (DataGridViewRow row in selectedRows)
                     models.Add(new RptLevyModel() { Id = Convert.ToInt32(row.Cells["rpt_levy_id"].Value) });
 
-                return AccFactory.RptLevyRepository().Delete(models);
+                return TreasuryFactory.RptLevyRepository().Delete(models);
             }
             return false;
         }
@@ -141,7 +141,7 @@ namespace LFS.Views.Transactions.Assessment
             try
             {
                 var parameters = ((int rowLimit, string searchKey))e.Argument;
-                var dtWarrantLevy = AccFactory.RptLevyRepository().GetViewRecordsBySearch(parameters.rowLimit, parameters.searchKey);
+                var dtWarrantLevy = TreasuryFactory.RptLevyRepository().GetViewRecordsBySearch(parameters.rowLimit, parameters.searchKey);
                 var dataTable = new DataTable();
                 var dtColumns = new DataColumn[]
                 {

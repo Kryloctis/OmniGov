@@ -1,11 +1,11 @@
-﻿using ACC.Data;
-using LFS.Helpers;
+﻿using LFS.Helpers;
 using Microsoft.Reporting.WinForms;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows.Forms;
+using Treasury.Data;
 
 namespace LFS.Views.Transactions.Biddings.BiddingReports
 {
@@ -55,7 +55,7 @@ namespace LFS.Views.Transactions.Biddings.BiddingReports
             progressCount += tasks["Fetch LGU Details"];
             Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
 
-            var dictBid = AccFactory.BidRepository().GetRecordByAuctionIdAndBidderId(rptAuctionId, bidderId);
+            var dictBid = TreasuryFactory.BidRepository().GetRecordByAuctionIdAndBidderId(rptAuctionId, bidderId);
             string nameOfBidder = dictBid["name"].ToString();
             string bidderCompleteAddress = dictBid["address"].ToString();
             string dateOfPublicAuction = $"{Convert.ToDateTime(dictBid["start_date"]).ToString("MMMM dd yyyy")} - {Convert.ToDateTime(dictBid["end_date"]).ToString("MMMM dd yyyy")}";

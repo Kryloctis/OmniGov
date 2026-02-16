@@ -1,4 +1,4 @@
-﻿using ACC.Data;
+﻿using OmniGov.Core.Repositories;
 using System;
 using System.Windows.Forms;
 
@@ -19,7 +19,7 @@ namespace LFS.Views.Transactions.Payments.CommunityTaxCertificate
                 errorProvider1.GetError(nudBasicTax)
             };
 
-            return AccFactory.CreateErrors(errors).GenerateErrorMessage();
+            return Factory.CreateErrors(errors).GenerateErrorMessage();
         }
 
         internal void ResetForm()

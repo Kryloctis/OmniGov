@@ -1,5 +1,5 @@
-﻿using ACC.Data;
-using LFS.Helpers;
+﻿using LFS.Helpers;
+using OmniGov.Core.Repositories;
 using System;
 using System.ComponentModel;
 using System.Windows.Forms;
@@ -35,7 +35,7 @@ namespace LFS.Views.Transactions.Payments.MarriageLicense
                 errorProvider1.GetError(txtRegistrationNumber)
             };
 
-            return AccFactory.CreateErrors(errors).GenerateErrorMessage();
+            return Factory.CreateErrors(errors).GenerateErrorMessage();
         }
 
         internal (string licenseNo, string registryNo, DateTime publishedOn, DateTime issuedOn) GetMarriageDetails()

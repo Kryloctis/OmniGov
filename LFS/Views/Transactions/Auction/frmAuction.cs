@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Windows.Forms;
+using Treasury.Data;
 using Treasury.Domain.Entities;
 
 namespace LFS.Views.Transactions.Auction
@@ -28,7 +29,7 @@ namespace LFS.Views.Transactions.Auction
             try
             {
                 var parameters = ((string searchKey, int rowFilter, DateTime date))e.Argument;
-                var dtDb = AccFactory.AuctionRepository().GetRecords();
+                var dtDb = TreasuryFactory.AuctionRepository().GetRecords();
                 int totalProgressCount = dtDb.Rows.Count;
                 int progressCount = 0;
                 var dataTable = new DataTable();
@@ -156,7 +157,7 @@ namespace LFS.Views.Transactions.Auction
                     models.Add(model);
                 }
 
-                return AccFactory.AuctionRepository().Delete(models);
+                return TreasuryFactory.AuctionRepository().Delete(models);
             }
 
             return false;
@@ -175,7 +176,7 @@ namespace LFS.Views.Transactions.Auction
                     models.Add(model);
                 }
 
-                return AccFactory.RptAuctionRepository().Delete(models);
+                return TreasuryFactory.RptAuctionRepository().Delete(models);
             }
 
             return false;
@@ -329,8 +330,6 @@ namespace LFS.Views.Transactions.Auction
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        #region Rpt Auction Schedule
-
         private void btnSaveRptAuctionSchedule_Click(object sender, EventArgs e)
         {
             SaveRptAuctionSchedule();
@@ -361,7 +360,7 @@ namespace LFS.Views.Transactions.Auction
             try
             {
                 var parameters = ((string searchKey, DateTime date, int rowFilter))e.Argument;
-                var dtDb = AccFactory.RptAuctionRepository().GetViewRecords(parameters.searchKey, parameters.date, parameters.rowFilter);
+                var dtDb = TreasuryFactory.RptAuctionRepository().GetViewRecords(parameters.searchKey, parameters.date, parameters.rowFilter);
                 int totalProgressCount = dtDb.Rows.Count;
                 int progressCount = 0;
                 var dataTable = new DataTable();
@@ -467,7 +466,5 @@ namespace LFS.Views.Transactions.Auction
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
-
-        #endregion Rpt Auction Schedule
     }
 }

@@ -1,9 +1,10 @@
-﻿using ACC.Data;
-using LFS.Helpers;
+﻿using LFS.Helpers;
+using OmniGov.Core.Repositories;
 using System;
 using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
+using Treasury.Data;
 
 namespace LFS.Views.Transactions.ReceiptsIssued
 {
@@ -37,7 +38,7 @@ namespace LFS.Views.Transactions.ReceiptsIssued
                 errorProvider1.GetError(txtReceiptQuantity)
             };
 
-            return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
+            return Factory.CreateErrors(errorArray).GenerateErrorMessage();
         }
 
         internal void ResetForm()
@@ -56,8 +57,6 @@ namespace LFS.Views.Transactions.ReceiptsIssued
             ControlsConfiguration();
         }
 
-        #region Collectors
-
         private DataColumn[] DataColumnsCollectingOfficers()
         {
             return new DataColumn[]
@@ -71,7 +70,7 @@ namespace LFS.Views.Transactions.ReceiptsIssued
         {
             DataTable dataTable = new DataTable();
             dataTable.Columns.AddRange(DataColumnsCollectingOfficers());
-            DataTable dtCollectingOfficers = AccFactory.CollectingOfficerRepository().GetRecords();
+            DataTable dtCollectingOfficers = TreasuryFactory.CollectingOfficerRepository().GetRecords();
 
             foreach (DataRow row in dtCollectingOfficers.Rows)
             {
@@ -95,7 +94,7 @@ namespace LFS.Views.Transactions.ReceiptsIssued
         {
             DataTable dataTable = new DataTable();
             dataTable.Columns.AddRange(DataColumnsCollectingOfficers());
-            DataTable dtCollectingOfficerHasJobOrder = AccFactory.CollectingOfficerHasJobOrdersRepository().GetViewRecords();
+            DataTable dtCollectingOfficerHasJobOrder = TreasuryFactory.CollectingOfficerHasJobOrdersRepository().GetViewRecords();
 
             foreach (DataRow row in dtCollectingOfficerHasJobOrder.Rows)
             {
@@ -122,11 +121,9 @@ namespace LFS.Views.Transactions.ReceiptsIssued
             HelperLoadRecords.CollectingOfficerComboBox(dataTable, cmbCollector, "full_name", "id");
         }
 
-        #endregion Collectors
-
         internal void LoadReceipts()
         {
-            DataTable receiptsDt = AccFactory.ReceiptsRepository().GetViewRecords();
+            DataTable receiptsDt = TreasuryFactory.ReceiptsRepository().GetViewRecords();
 
             foreach (DataRow row in receiptsDt.Rows)
             {
@@ -136,7 +133,7 @@ namespace LFS.Views.Transactions.ReceiptsIssued
                 int quantity = Convert.ToInt32(row["quantity"]);
                 int receiptNumberFrom = Convert.ToInt32(row["receipt_number_from"]);
                 int receiptNumberTo = Convert.ToInt32(row["receipt_number_to"]);
-                int receiptTotalIssued = AccFactory.ReceiptsIssuedRepository().GetTotalIssuedReceiptByReceiptId(receiptsId);
+                int receiptTotalIssued = TreasuryFactory.ReceiptsIssuedRepository().GetTotalIssuedReceiptByReceiptId(receiptsId);
                 int remainingReceipts = quantity - receiptTotalIssued;
 
                 if (accountableForm.ToString().Contains("Tickets", StringComparison.InvariantCultureIgnoreCase))
@@ -189,8 +186,6 @@ namespace LFS.Views.Transactions.ReceiptsIssued
                 txtReceiptQuantity.Text = quantity.ToString();
         }
 
-        #region Validations
-
         private void cmbcollector_Validating(object sender, CancelEventArgs e)
         {
             if (string.IsNullOrEmpty(cmbCollector.Text))
@@ -238,12 +233,12 @@ namespace LFS.Views.Transactions.ReceiptsIssued
                 bool isReceiptNumberExist;
                 bool isReceiptNumberInRange;
 
-                isReceiptNumberExist = AccFactory.ReceiptsRepository().ReceiptNumberExist(receiptId, receiptNumber);
+                isReceiptNumberExist = TreasuryFactory.ReceiptsRepository().ReceiptNumberExist(receiptId, receiptNumber);
 
                 if (isEdit)
-                    isReceiptNumberInRange = AccFactory.ReceiptsIssuedRepository().ReceiptNumberInRange(receiptId, receiptNumber, receiptIssuedId);
+                    isReceiptNumberInRange = TreasuryFactory.ReceiptsIssuedRepository().ReceiptNumberInRange(receiptId, receiptNumber, receiptIssuedId);
                 else
-                    isReceiptNumberInRange = AccFactory.ReceiptsIssuedRepository().ReceiptNumberInRange(receiptId, receiptNumber);
+                    isReceiptNumberInRange = TreasuryFactory.ReceiptsIssuedRepository().ReceiptNumberInRange(receiptId, receiptNumber);
 
                 if (isReceiptNumberExist && isReceiptNumberInRange)
                     return true;
@@ -258,9 +253,9 @@ namespace LFS.Views.Transactions.ReceiptsIssued
             int receiptID = Convert.ToInt32(cmbReceipt.SelectedValue);
 
             if (receiptID == 0)
-                return AccFactory.ReceiptsRepository().ReceiptNumberExist(receiptID, receiptNumber);
+                return TreasuryFactory.ReceiptsRepository().ReceiptNumberExist(receiptID, receiptNumber);
             else
-                return AccFactory.ReceiptsRepository().ReceiptNumberExist(receiptID, receiptNumber, receiptID);
+                return TreasuryFactory.ReceiptsRepository().ReceiptNumberExist(receiptID, receiptNumber, receiptID);
         }
 
         private void txtReceiptNumberFrom_Validating(object sender, CancelEventArgs e)
@@ -309,8 +304,6 @@ namespace LFS.Views.Transactions.ReceiptsIssued
             Helper.ClearErrorTextBox(errorProvider1, txtReceiptIssuedTo);
         }
 
-        #endregion Validations
-
         internal void SetFieldsForCashTickets()
         {
             isCashTickets = true;
@@ -335,7 +328,7 @@ namespace LFS.Views.Transactions.ReceiptsIssued
             if (item == null) return;
 
             selectedReceiptID = Convert.ToInt32(item["id"]);
-            int totalIssuedReceipt = AccFactory.ReceiptsIssuedRepository().GetTotalIssuedReceiptByReceiptId(selectedReceiptID);
+            int totalIssuedReceipt = TreasuryFactory.ReceiptsIssuedRepository().GetTotalIssuedReceiptByReceiptId(selectedReceiptID);
             receiptAvailableQuantity = Convert.ToInt32(item["quantity"]) - totalIssuedReceipt;
             receiptNumberFrom = Convert.ToInt32(item["receipt_number_from"]);
 

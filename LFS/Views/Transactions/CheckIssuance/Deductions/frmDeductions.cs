@@ -1,6 +1,6 @@
-﻿using ACC.Data;
-using LFS.Helpers;
+﻿using LFS.Helpers;
 using LFS.Views.Transactions.RCI;
+using OmniGov.Core.Repositories;
 using System;
 using System.ComponentModel;
 using System.Windows.Forms;
@@ -82,8 +82,6 @@ namespace LFS.Views.Transactions.CheckIssuance.Deductions
             HelperLoadRecords.RCIDeductionsDatagridview(_uc.dtDeductions, dgDeductions);
         }
 
-        #region Validations
-
         internal string GetFormErrors()
         {
             var errorArray = new string[]
@@ -92,7 +90,7 @@ namespace LFS.Views.Transactions.CheckIssuance.Deductions
                 epAmount.GetError(nudAmount)
             };
 
-            return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
+            return Factory.CreateErrors(errorArray).GenerateErrorMessage();
         }
 
         private void txtDescription_Validating(object sender, CancelEventArgs e)
@@ -114,8 +112,6 @@ namespace LFS.Views.Transactions.CheckIssuance.Deductions
         {
             Helper.ClearErrorNumericUpDown(epAmount, nudAmount);
         }
-
-        #endregion Validations
 
         private void btnConfirmDeductions_Click(object sender, EventArgs e)
         {

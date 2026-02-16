@@ -6,6 +6,7 @@ using System;
 using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
+using Treasury.Data;
 using Treasury.Domain.Entities;
 
 namespace LFS.Views.Transactions.Auction
@@ -41,7 +42,7 @@ namespace LFS.Views.Transactions.Auction
                                                                decimal basicTaxDue,
                                                                decimal sefTaxDue)
         {
-            var dictPrevAssmnt = AccFactory.RptAssessmentPostsRepository().GetViewRecentAssessmentRecord(currentAssmntParameters.compelteArpNo, currentAssmntParameters.assessmentYear);
+            var dictPrevAssmnt = TreasuryFactory.RptAssessmentPostsRepository().GetViewRecentAssessmentRecord(currentAssmntParameters.compelteArpNo, currentAssmntParameters.assessmentYear);
 
             int? prevAssmntYear = null;
 
@@ -64,7 +65,7 @@ namespace LFS.Views.Transactions.Auction
                 var auctionModel = new AuctionModel() { Id = auctionId };
                 var rptAuctionModel = new RptAuctionModel() { AuctionId = auctionId };
 
-                var dbRptAuctionProperties = AccFactory.RptAuctionRepository().GetAuctionProperties(rptAuctionModel);
+                var dbRptAuctionProperties = TreasuryFactory.RptAuctionRepository().GetAuctionProperties(rptAuctionModel);
                 var dtRptAuctionProperties = new dsTreasury.dtLtom23DataTable();
 
                 int totalProgressCount = dbRptAuctionProperties.Rows.Count;
@@ -90,14 +91,14 @@ namespace LFS.Views.Transactions.Auction
 
                     #region Computation
 
-                    var dtDelinquentRpt = AccFactory.RptAssessmentPostsRepository().Get_View_List_Of_Real_Property_Tax_Delinquences_By_TaxpayerID(taxpayerID);
+                    var dtDelinquentRpt = TreasuryFactory.RptAssessmentPostsRepository().Get_View_List_Of_Real_Property_Tax_Delinquences_By_TaxpayerID(taxpayerID);
 
                     foreach (DataRow dataRowDeliquency in dtDelinquentRpt.Rows)
                     {
                         int assessmentYear = Convert.ToInt32(dataRowDeliquency["year"]);
                         int effectivityQuarter = Convert.ToInt32(dataRowDeliquency["effectivity_quarterly"]);
                         int effectivityYear = Convert.ToInt32(dataRowDeliquency["effectivity_year"]);
-                        var dictPrevAssmnt = AccFactory.RptAssessmentPostsRepository().GetViewRecentAssessmentRecord(completeArpNo, assessmentYear);
+                        var dictPrevAssmnt = TreasuryFactory.RptAssessmentPostsRepository().GetViewRecentAssessmentRecord(completeArpNo, assessmentYear);
 
                         int? prevAssmntYear = null;
 
@@ -162,7 +163,7 @@ namespace LFS.Views.Transactions.Auction
                 report.ReportPath = $"{Application.StartupPath}Reports\\LTOM\\Ltom23NoticeAuctionSaleDelinqRpt.rdlc";
                 report.DataSources.Clear();
 
-                var dtAuction = AccFactory.AuctionRepository().GetRecordById(auctionId);
+                var dtAuction = TreasuryFactory.AuctionRepository().GetRecordById(auctionId);
 
                 string location = dtAuction["location"];
                 string date = $"{Convert.ToDateTime(dtAuction["start_date"]):MMMM dd, yyyy} - {Convert.ToDateTime(dtAuction["end_date"]):MMMM dd, yyyy}";

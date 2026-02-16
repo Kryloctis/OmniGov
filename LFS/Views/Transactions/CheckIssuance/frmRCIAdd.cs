@@ -1,10 +1,10 @@
-﻿using ACC.Data;
-using ACC.Domain.Models;
-using LFS.Helpers;
+﻿using LFS.Helpers;
 using System;
 using System.Data;
 using System.Transactions;
 using System.Windows.Forms;
+using Treasury.Data;
+using Treasury.Domain.Entities;
 
 namespace LFS.Views.Transactions.RCI
 {
@@ -41,12 +41,12 @@ namespace LFS.Views.Transactions.RCI
                 Amount = amount
             };
 
-            return AccFactory.ChequesRepository().Insert(chequeModel);
+            return TreasuryFactory.ChequesRepository().Insert(chequeModel);
         }
 
         private bool SaveRCI()
         {
-            var chequeID = AccFactory.ChequesRepository().GetLastInsertId();
+            var chequeID = TreasuryFactory.ChequesRepository().GetLastInsertId();
             int fundID = Convert.ToInt32(uc.cmbFund.SelectedValue);
             int fpp = Convert.ToInt32(uc.cmbFPP.SelectedValue);
             string dVNo = uc.txtDVNo.Text.Trim();
@@ -63,12 +63,12 @@ namespace LFS.Views.Transactions.RCI
                 NaturePayment = natureOfPayment
             };
 
-            return AccFactory.RciRepository().Insert(RCIModel);
+            return TreasuryFactory.RciRepository().Insert(RCIModel);
         }
 
         internal void SaveDVObligationsNumber()
         {
-            int lastInsertedId = AccFactory.RciRepository().GetLastInsertId();
+            int lastInsertedId = TreasuryFactory.RciRepository().GetLastInsertId();
             string obligationNo;
             DateTime dateEntry;
 
@@ -76,13 +76,13 @@ namespace LFS.Views.Transactions.RCI
             {
                 obligationNo = row["obligation_no"].ToString();
                 dateEntry = Convert.ToDateTime(row["date_entry"]);
-                AccFactory.RciRepository().SaveRciDvObligations(lastInsertedId, obligationNo, dateEntry);
+                TreasuryFactory.RciRepository().SaveRciDvObligations(lastInsertedId, obligationNo, dateEntry);
             }
         }
 
         internal void SaveDeductions()
         {
-            int lastRecentRCIId = AccFactory.RciRepository().GetLastInsertId();
+            int lastRecentRCIId = TreasuryFactory.RciRepository().GetLastInsertId();
             string deductionDescription;
             decimal deductionAmount;
 
@@ -92,7 +92,7 @@ namespace LFS.Views.Transactions.RCI
                 deductionAmount = Convert.ToDecimal(row["amount"]);
                 uc.totalDeduction += deductionAmount;
 
-                AccFactory.RciRepository().SaveRciDeductions(lastRecentRCIId, deductionDescription, deductionAmount);
+                TreasuryFactory.RciRepository().SaveRciDeductions(lastRecentRCIId, deductionDescription, deductionAmount);
             }
         }
 

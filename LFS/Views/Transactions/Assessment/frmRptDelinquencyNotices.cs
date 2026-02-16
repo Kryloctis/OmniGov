@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
+using Treasury.Data;
 using Treasury.Domain.Entities;
 
 namespace LFS.Views.Transactions.Assessment
@@ -86,7 +87,7 @@ namespace LFS.Views.Transactions.Assessment
                 foreach (DataGridViewRow row in selectedRows)
                     registryModels.Add(new DelinquentNoticeModel() { Id = Convert.ToInt32(row.Cells["delinquent_notice_id"].Value) });
 
-                return AccFactory.DelinquentNoticeRepository().Delete(registryModels);
+                return TreasuryFactory.DelinquentNoticeRepository().Delete(registryModels);
             }
             return false;
         }
@@ -165,7 +166,7 @@ namespace LFS.Views.Transactions.Assessment
             try
             {
                 var parameters = ((int rowLimit, string searchKey))e.Argument;
-                var dtDelinquencyNotice = AccFactory.DelinquentNoticeRepository().GetViewRecordsBySearch(parameters.rowLimit, parameters.searchKey);
+                var dtDelinquencyNotice = TreasuryFactory.DelinquentNoticeRepository().GetViewRecordsBySearch(parameters.rowLimit, parameters.searchKey);
                 var dataTable = new DataTable();
                 int totalProgressCount = dtDelinquencyNotice.Rows.Count;
                 int progressCount = 0;

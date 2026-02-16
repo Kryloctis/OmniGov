@@ -1,10 +1,10 @@
-﻿using ACC.Data;
-using ACC.Domain.Models;
-using LFS.Helpers;
+﻿using LFS.Helpers;
 using System;
 using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
+using Treasury.Data;
+using Treasury.Domain.Entities;
 
 namespace LFS.Views.Transactions.Payments.PaymentHistory
 {
@@ -27,8 +27,8 @@ namespace LFS.Views.Transactions.Payments.PaymentHistory
 
             var dataTable = new DataTable();
             dataTable.Columns.AddRange(dataColumns);
-            var dtCoCollectors = AccFactory.CollectingOfficerRepository().GetRecords();
-            var dtJoCollectors = AccFactory.CollectingOfficerHasJobOrdersRepository().GetViewRecords();
+            var dtCoCollectors = TreasuryFactory.CollectingOfficerRepository().GetRecords();
+            var dtJoCollectors = TreasuryFactory.CollectingOfficerHasJobOrdersRepository().GetViewRecords();
 
             foreach (DataRow coRow in dtCoCollectors.Rows)
             {
@@ -69,7 +69,7 @@ namespace LFS.Views.Transactions.Payments.PaymentHistory
 
         private void LoadAccountableForms()
         {
-            var dtAccForms = AccFactory.AccountableFormsRepository().GetRecords();
+            var dtAccForms = TreasuryFactory.AccountableFormsRepository().GetRecords();
             HelperLoadRecords.AccountableFormsCombobox(cmbxAccForm.ComboBox, dtAccForms, "id", "acc_form_desc");
         }
 
@@ -112,9 +112,9 @@ namespace LFS.Views.Transactions.Payments.PaymentHistory
                 DataTable dtSourceDb;
 
                 if (collectorName.Contains("(Job Order)"))
-                    dtSourceDb = AccFactory.PaymentCollectionsRepository().GerViewRecordsByJoIdAccFormId(Convert.ToInt32(collectorId), Convert.ToInt32(accFormId), searchKey, rowFilter);
+                    dtSourceDb = TreasuryFactory.PaymentCollectionsRepository().GerViewRecordsByJoIdAccFormId(Convert.ToInt32(collectorId), Convert.ToInt32(accFormId), searchKey, rowFilter);
                 else
-                    dtSourceDb = AccFactory.PaymentCollectionsRepository().GerViewRecordsByCoIdAccFormId(Convert.ToInt32(collectorId), Convert.ToInt32(accFormId), searchKey, rowFilter);
+                    dtSourceDb = TreasuryFactory.PaymentCollectionsRepository().GerViewRecordsByCoIdAccFormId(Convert.ToInt32(collectorId), Convert.ToInt32(accFormId), searchKey, rowFilter);
 
                 backgroundWorker1.RunWorkerAsync(dtSourceDb);
             }
@@ -238,7 +238,7 @@ namespace LFS.Views.Transactions.Payments.PaymentHistory
                     IsCancelled = true
                 };
 
-                return AccFactory.PaymentCollectionsRepository().VoidPayment(paymentCollectionModel);
+                return TreasuryFactory.PaymentCollectionsRepository().VoidPayment(paymentCollectionModel);
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
 

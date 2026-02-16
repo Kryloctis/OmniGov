@@ -1,11 +1,11 @@
-﻿using ACC.Data;
-using LFS.DataSets;
+﻿using LFS.DataSets;
 using LFS.Helpers;
 using LFS.Views.Transactions.Payments.BurialPermit;
 using Microsoft.Reporting.WinForms;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using Treasury.Data;
 
 namespace LFS.Views.Transactions.Payments.AF51_57;
 
@@ -57,7 +57,7 @@ public partial class frmAF51_57 : Form
         foreach (var model in ucPaymentFeesCharges.PaymentFeesChargesModels())
         {
             var newRow = dataTable.NewRow();
-            var dictOtherPaymentRate = AccFactory.OtherPaymentRatesRepository().GetRecordByID(model.OtherPaymentRatesId);
+            var dictOtherPaymentRate = TreasuryFactory.OtherPaymentRatesRepository().GetRecordByID(model.OtherPaymentRatesId);
             newRow["nature_of_collection"] = $"{dictOtherPaymentRate["description"]} x{model.Unit}";
             newRow["amount"] = model.SubTotal;
             dataTable.Rows.Add(newRow);
@@ -95,7 +95,7 @@ public partial class frmAF51_57 : Form
 
     private bool ConfirmPayment()
     {
-        return AccFactory.PaymentCollectionsRepository().InsertWithFeesCharges(ucPayment.PaymentCollectionsModel(), null, ucPaymentFeesCharges.PaymentFeesChargesModels());
+        return TreasuryFactory.PaymentCollectionsRepository().InsertWithFeesCharges(ucPayment.PaymentCollectionsModel(), null, ucPaymentFeesCharges.PaymentFeesChargesModels());
     }
 
     private bool TabValidated()

@@ -1,10 +1,10 @@
-﻿using ACC.Data;
-using LFS.Helpers;
+﻿using LFS.Helpers;
 using LFS.Views.Transactions.Payments.BurialPermit;
 using LFS.Views.Transactions.Payments.OtherPayments.CattleTransferOfOwnership;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using Treasury.Data;
 
 namespace LFS.Views.Transactions.Payments.CattleTransferOfOwnership
 {
@@ -178,7 +178,7 @@ namespace LFS.Views.Transactions.Payments.CattleTransferOfOwnership
 
         private bool ConfirmPayment()
         {
-            return AccFactory.PaymentCollectionsRepository().InsertWithPrevCattleOwnership(ucPayment.PaymentCollectionsModel(), null, ucCattleTransfer.GetCattleOwnershipModel(), ucCattleTransfer.GetPrevCattleOwnershipModel(), ucPaymentFeesCharges.PaymentFeesChargesModels());
+            return TreasuryFactory.PaymentCollectionsRepository().InsertWithPrevCattleOwnership(ucPayment.PaymentCollectionsModel(), null, ucCattleTransfer.GetCattleOwnershipModel(), ucCattleTransfer.GetPrevCattleOwnershipModel(), ucPaymentFeesCharges.PaymentFeesChargesModels());
         }
 
         private void btnNextMain_Click(object sender, EventArgs e)

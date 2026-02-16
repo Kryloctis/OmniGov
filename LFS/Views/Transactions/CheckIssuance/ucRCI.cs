@@ -1,12 +1,13 @@
-﻿using ACC.Data;
-using LFS.Helpers;
+﻿using LFS.Helpers;
 using LFS.Views.Transactions.CheckIssuance.Deductions;
 using LFS.Views.Transactions.CheckIssuance.Obligations;
+using OmniGov.Core.Repositories;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
+using Treasury.Data;
 
 namespace LFS.Views.Transactions.RCI
 {
@@ -59,7 +60,7 @@ namespace LFS.Views.Transactions.RCI
         private void LoadBankAccounts()
         {
             int bankID = Convert.ToInt32(cmbBank.SelectedValue);
-            DataTable dtBankAccounts = AccFactory.BankAccountsRepository().GetBankAccountsByBankID(bankID);
+            DataTable dtBankAccounts = TreasuryFactory.BankAccountsRepository().GetBankAccountsByBankID(bankID);
 
             cmbBankAccounts.DataSource = dtBankAccounts;
             cmbBankAccounts.ValueMember = "id";
@@ -92,9 +93,9 @@ namespace LFS.Views.Transactions.RCI
             DataTable dtFPP;
 
             if (string.IsNullOrEmpty(cmbFPP.Text))
-                dtFPP = AccFactory.FunctionProgramProjectRepository().GetViewRecords();
+                dtFPP = Factory.FunctionProgramProjectRepository().GetViewRecords();
             else
-                dtFPP = AccFactory.FunctionProgramProjectRepository().GetRecordsByCodeName(cmbFPP.Text);
+                dtFPP = Factory.FunctionProgramProjectRepository().GetRecordsByCodeName(cmbFPP.Text);
 
             return dtFPP;
         }
@@ -122,14 +123,14 @@ namespace LFS.Views.Transactions.RCI
 
         internal void LoadFunds()
         {
-            var fundRepository = AccFactory.FundsRepository();
+            var fundRepository = Factory.FundsRepository();
             var dtFunds = fundRepository.GetRecords();
             HelperLoadRecords.FundsComboBox(dtFunds, cmbFund, "id", "fund_name");
         }
 
         internal void LoadBanks()
         {
-            var banksRepository = AccFactory.BanksRepository();
+            var banksRepository = TreasuryFactory.BanksRepository();
             var dtBank = banksRepository.GetRecords();
             HelperLoadRecords.BankComboBox(dtBank, cmbBank, "id", "bank_name");
         }
@@ -140,7 +141,7 @@ namespace LFS.Views.Transactions.RCI
             {
                 if (table.Equals("functions"))
                 {
-                    var functionData = AccFactory.FunctionProgramProjectRepository().GetRecordByID(Id);
+                    var functionData = Factory.FunctionProgramProjectRepository().GetRecordByID(Id);
                     fppId = Convert.ToInt16(functionData["id"]);
                     cmbFPP.Text = String.Format("{0} - {1}", functionData["fpp_code"], functionData["fpp_name"]);
                 }
@@ -183,8 +184,6 @@ namespace LFS.Views.Transactions.RCI
             totalDeduction = 0;
         }
 
-        #region Validations
-
         internal string GetFormErrors()
         {
             var errorArray = new string[]
@@ -200,7 +199,7 @@ namespace LFS.Views.Transactions.RCI
                 errorProvider1.GetError(nudNetAmount)
             };
 
-            return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
+            return Factory.CreateErrors(errorArray).GenerateErrorMessage();
         }
 
         private void txtdvno_Validating(object sender, CancelEventArgs e)
@@ -305,7 +304,5 @@ namespace LFS.Views.Transactions.RCI
         {
             Helper.ClearErrorNumericUpDown(errorProvider1, nudNetAmount);
         }
-
-        #endregion Validations
     }
 }

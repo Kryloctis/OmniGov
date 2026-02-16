@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
+using Treasury.Data;
 using Treasury.Domain.Entities;
 
 namespace LFS.Views.Transactions.BankDeposits
@@ -42,7 +43,7 @@ namespace LFS.Views.Transactions.BankDeposits
                     modelList.Add(new BankDepositsModel() { Id = id });
                 }
 
-                return AccFactory.BankDepositsRepository().Delete(modelList);
+                return TreasuryFactory.BankDepositsRepository().Delete(modelList);
             }
             return false;
         }
@@ -113,7 +114,7 @@ namespace LFS.Views.Transactions.BankDeposits
             try
             {
                 var parameters = ((DateTime date, int filterRow, string searchKey))e.Argument;
-                var dbDataTable = AccFactory.BankDepositsRepository().GetViewRecordBySearch(parameters.searchKey, parameters.date, parameters.filterRow);
+                var dbDataTable = TreasuryFactory.BankDepositsRepository().GetViewRecordBySearch(parameters.searchKey, parameters.date, parameters.filterRow);
                 var dataTable = new DataTable();
                 var dataColumns = new List<DataColumn>()
                 {

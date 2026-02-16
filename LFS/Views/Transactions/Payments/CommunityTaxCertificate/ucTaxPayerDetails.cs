@@ -1,4 +1,4 @@
-﻿using ACC.Data;
+﻿using OmniGov.Core.Repositories;
 using System;
 using System.Windows.Forms;
 
@@ -20,7 +20,7 @@ namespace LFS.Views.Transactions.Payments.CommunityTaxCertificate
                 errorProvider1.GetError(txtLastName)
             };
 
-            return AccFactory.CreateErrors(errors).GenerateErrorMessage();
+            return Factory.CreateErrors(errors).GenerateErrorMessage();
         }
 
         private void ucTaxPayerDetails_Load(object sender, EventArgs e)

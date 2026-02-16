@@ -1,10 +1,12 @@
 ﻿using LFS.Helpers;
+using OmniGov.Core.Repositories;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Linq;
 using System.Windows.Forms;
+using Treasury.Data;
 using Treasury.Domain.Entities;
 
 namespace LFS.Views.Transactions.Assessment
@@ -40,7 +42,7 @@ namespace LFS.Views.Transactions.Assessment
         {
             try
             {
-                var dataTable = AccFactory.BarangayRepository().GetRecords();
+                var dataTable = Factory.BarangayRepository().GetRecords();
                 HelperLoadRecords.BarangaysCombobox(dataTable, cmbxBarangays, "name", "id");
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
@@ -48,7 +50,7 @@ namespace LFS.Views.Transactions.Assessment
 
         private string GetPenaltyRate(string description, string parameters)
         {
-            var dictPenaltyRecord = AccFactory.RptPenaltiesRepository().GetRecordByDescription(description);
+            var dictPenaltyRecord = TreasuryFactory.RptPenaltiesRepository().GetRecordByDescription(description);
 
             if (dictPenaltyRecord.Values.Count < 1)
                 return string.Empty;
@@ -146,7 +148,7 @@ namespace LFS.Views.Transactions.Assessment
                 var dataTable = new DataTable();
                 dataTable.Columns.AddRange(AssessmentPostsDataColumns());
 
-                var dtViewRealProperties = AccFactory.RealPropertiesRepository().GetRecordsBy_EffectivivtyYear_Barangay_Search(parameters.year, parameters.barangayName, parameters.searchKey, parameters.rowFilter);
+                var dtViewRealProperties = TreasuryFactory.RealPropertiesRepository().GetRecordsBy_EffectivivtyYear_Barangay_Search(parameters.year, parameters.barangayName, parameters.searchKey, parameters.rowFilter);
                 int totalProgressCount = dtViewRealProperties.Rows.Count;
                 int progressCount = 0;
 
@@ -157,11 +159,11 @@ namespace LFS.Views.Transactions.Assessment
                     var newRow = dataTable.NewRow();
 
                     string rowCompleteArpNo = row["complete_arp_no"].ToString();
-                    int leastAssessedYear = AccFactory.RptAssessmentPostsRepository().GetMinAssessmentPostYear(rowCompleteArpNo);
+                    int leastAssessedYear = TreasuryFactory.RptAssessmentPostsRepository().GetMinAssessmentPostYear(rowCompleteArpNo);
                     if (leastAssessedYear > parameters.year && leastAssessedYear != 0)
                         continue;
 
-                    var dictAssessmentPosts = AccFactory.RptAssessmentPostsRepository().GetRecordBy_ArpNo_Year(rowCompleteArpNo, parameters.year);
+                    var dictAssessmentPosts = TreasuryFactory.RptAssessmentPostsRepository().GetRecordBy_ArpNo_Year(rowCompleteArpNo, parameters.year);
                     string rowPostingStatus = dictAssessmentPosts.Keys.Count != 0 ? "Posted" : (Convert.ToBoolean(row["is_taxable"]) != true ? "Tax Exempted" : string.Empty);
 
                     newRow["is_checked"] = false;
@@ -250,12 +252,12 @@ namespace LFS.Views.Transactions.Assessment
             foreach (DataRow row in filteredDb)
             {
                 //Get Penalty and Tax Rates
-                var dictRptPenalties = AccFactory.RptPenaltiesRepository().GetRecordByID(9);
+                var dictRptPenalties = TreasuryFactory.RptPenaltiesRepository().GetRecordByID(9);
 
                 decimal penaltyRate = string.IsNullOrEmpty(GetPenaltyRate("RPT monthly penalty", "rate")) ? 0 : Convert.ToDecimal(GetPenaltyRate("RPT monthly penalty", "rate"));
                 string penaltyFrequency = GetPenaltyRate("RPT monthly penalty", "frequency");
 
-                var dictRpt = AccFactory.RealPropertiesRepository().GetViewRecordById(Convert.ToInt32(row["real_property_id"]));
+                var dictRpt = TreasuryFactory.RealPropertiesRepository().GetViewRecordById(Convert.ToInt32(row["real_property_id"]));
 
                 var assessmentPostingModel = new RptAssessmentPostsModel()
                 {
@@ -286,8 +288,8 @@ namespace LFS.Views.Transactions.Assessment
                     IsCancelled = dictRpt["is_cancelled"] == "1" ? true : false,
                     PenaltyRate = penaltyRate,
                     PenaltyFrequency = penaltyFrequency,
-                    BasicRate = AccFactory.RptTaxRatesRepository().GetTaxRateByDescription("Basic"),
-                    SefRate = AccFactory.RptTaxRatesRepository().GetTaxRateByDescription("Special Educational Fund"),
+                    BasicRate = TreasuryFactory.RptTaxRatesRepository().GetTaxRateByDescription("Basic"),
+                    SefRate = TreasuryFactory.RptTaxRatesRepository().GetTaxRateByDescription("Special Educational Fund"),
                     PostedBy = UserHelper.loggedUser.Id,
                     DueYear = Convert.ToInt32(txtYear.Text)
                 };
@@ -312,7 +314,7 @@ namespace LFS.Views.Transactions.Assessment
             if (e.Result is not List<RptAssessmentPostsModel> rptAssessmentPostsModels)
                 return;
 
-            bool bulkInsert = AccFactory.RptAssessmentPostsRepository().BulkInsert(rptAssessmentPostsModels);
+            bool bulkInsert = TreasuryFactory.RptAssessmentPostsRepository().BulkInsert(rptAssessmentPostsModels);
             if (bulkInsert)
             {
                 Helper.MessageBoxSuccess("Assessments has been posted.");

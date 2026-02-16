@@ -1,6 +1,4 @@
-﻿using ACC.Data;
-using ACC.Domain.Models;
-using LFS.DataSets;
+﻿using LFS.DataSets;
 using LFS.Helpers;
 using LFS.Views.Shared;
 using Microsoft.Reporting.WinForms;
@@ -8,6 +6,8 @@ using System;
 using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
+using Treasury.Data;
+using Treasury.Domain.Entities;
 
 namespace LFS.Views.Transactions.Auction
 {
@@ -44,7 +44,7 @@ namespace LFS.Views.Transactions.Auction
                                                         decimal basicTaxDue,
                                                         decimal sefTaxDue)
         {
-            var dictPrevAssmnt = AccFactory.RptAssessmentPostsRepository().GetViewRecentAssessmentRecord(currentAssmntParameters.compelteArpNo, currentAssmntParameters.assessmentYear);
+            var dictPrevAssmnt = TreasuryFactory.RptAssessmentPostsRepository().GetViewRecentAssessmentRecord(currentAssmntParameters.compelteArpNo, currentAssmntParameters.assessmentYear);
 
             int? prevAssmntYear = null;
 
@@ -66,10 +66,10 @@ namespace LFS.Views.Transactions.Auction
                 var rptAuctionModel = new RptAuctionModel() { AuctionId = parameters.auctionId };
 
                 int progressCount = 0;
-                var dictRpt = AccFactory.RealPropertiesRepository().GetRecordByID(parameters.rptId);
+                var dictRpt = TreasuryFactory.RealPropertiesRepository().GetRecordByID(parameters.rptId);
                 string completeArp = dictRpt["complete_arp_no"].ToString();
 
-                var dtDelinquentProperty = AccFactory.RptAssessmentPostsRepository().GetViewDeliquentRecords();
+                var dtDelinquentProperty = TreasuryFactory.RptAssessmentPostsRepository().GetViewDeliquentRecords();
                 var dtRptAuctionProperties = new dsTreasury.dtLtom29DataTable();
                 int totalProgressCount = dtDelinquentProperty.Rows.Count;
 
@@ -137,10 +137,10 @@ namespace LFS.Views.Transactions.Auction
                 report.ReportPath = $"{Application.StartupPath}Reports\\LTOM\\Ltom29CertificateOfSale.rdlc";
                 report.DataSources.Clear();
 
-                var dictAuctionProperty = AccFactory.RptAuctionRepository().GetAuctionPropertiesByAuctionIdAndRptId(auctionId, rptId);
+                var dictAuctionProperty = TreasuryFactory.RptAuctionRepository().GetAuctionPropertiesByAuctionIdAndRptId(auctionId, rptId);
                 string date = $"{Convert.ToDateTime(dictAuctionProperty["start_date"]):MMMM dd, yyyy} - {Convert.ToDateTime(dictAuctionProperty["end_date"]):MMMM dd, yyyy}";
 
-                var dictBid = AccFactory.BidRepository().GetHighestBidderByAuctionIdAndRptId(auctionId, rptId);
+                var dictBid = TreasuryFactory.BidRepository().GetHighestBidderByAuctionIdAndRptId(auctionId, rptId);
 
                 var reportParameters = new ReportParameter[]
                 {

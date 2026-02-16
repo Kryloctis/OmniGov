@@ -1,8 +1,8 @@
-﻿using ACC.Data;
-using ACC.Domain.Models;
-using LFS.Helpers;
+﻿using LFS.Helpers;
 using System;
 using System.Windows.Forms;
+using Treasury.Data;
+using Treasury.Domain.Entities;
 
 namespace LFS.Views.Transactions.ReceiptsIssued
 {
@@ -53,9 +53,9 @@ namespace LFS.Views.Transactions.ReceiptsIssued
             if (uc.isCollectorJO)
             {
                 receiptIssuedModel.JobOrderId = collectorId;
-                receiptIssuedModel.CollectorId = AccFactory.CollectingOfficerHasJobOrdersRepository().GetCollectingOfficerIDByJobOrderId(collectorId);
+                receiptIssuedModel.CollectorId = TreasuryFactory.CollectingOfficerHasJobOrdersRepository().GetCollectingOfficerIDByJobOrderId(collectorId);
             }
-            return AccFactory.ReceiptsIssuedRepository().Insert(receiptIssuedModel);
+            return TreasuryFactory.ReceiptsIssuedRepository().Insert(receiptIssuedModel);
         }
 
         private void btnSave_Click(object sender, EventArgs e)

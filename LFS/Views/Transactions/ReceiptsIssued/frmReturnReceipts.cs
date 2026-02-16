@@ -1,8 +1,8 @@
-﻿using ACC.Data;
-using ACC.Domain.Models;
-using LFS.Helpers;
+﻿using LFS.Helpers;
 using System;
 using System.Windows.Forms;
+using Treasury.Data;
+using Treasury.Domain.Entities;
 
 namespace LFS.Views.Transactions.ReceiptsIssued
 {
@@ -23,7 +23,7 @@ namespace LFS.Views.Transactions.ReceiptsIssued
 
         private bool SaveData()
         {
-            var receiptIssuedRepository = AccFactory.ReceiptsIssuedRepository();
+            var receiptIssuedRepository = TreasuryFactory.ReceiptsIssuedRepository();
             var riModel = new ReceiptsIssuedModel()
             {
                 Id = issuanceId,

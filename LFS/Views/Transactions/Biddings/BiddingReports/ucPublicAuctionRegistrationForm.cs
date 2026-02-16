@@ -1,11 +1,11 @@
-﻿using ACC.Data;
-using LFS.Helpers;
+﻿using LFS.Helpers;
 using Microsoft.Reporting.WinForms;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows.Forms;
+using Treasury.Data;
 
 namespace LFS.Views.Transactions.Biddings.BiddingReports
 {
@@ -49,7 +49,7 @@ namespace LFS.Views.Transactions.Biddings.BiddingReports
             int totalProgressCount = tasks.Sum(t => t.Value);
             int progressCount = 0;
 
-            var dictBidder = AccFactory.BiddersRepository().GetViewRecordByAuctionIdAndBidderId(parameters.auctionId, parameters.bidderId);
+            var dictBidder = TreasuryFactory.BiddersRepository().GetViewRecordByAuctionIdAndBidderId(parameters.auctionId, parameters.bidderId);
 
             List<ReportParameter> reportParameters = new List<ReportParameter>();
             progressCount += tasks["Initialize Parameters"];

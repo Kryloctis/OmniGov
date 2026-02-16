@@ -1,10 +1,11 @@
-﻿using ACC.Data;
-using LFS.Helpers;
+﻿using LFS.Helpers;
 using LFS.Views.Manage.TaxPayers;
+using OmniGov.Core.Repositories;
 using System;
 using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
+using Treasury.Data;
 
 namespace LFS.Views.Transactions.Payments
 {
@@ -27,7 +28,7 @@ namespace LFS.Views.Transactions.Payments
                 error
             };
 
-            return AccFactory.CreateErrors(errors).GenerateErrorMessage();
+            return Factory.CreateErrors(errors).GenerateErrorMessage();
         }
 
         internal bool FormValidated(string fieldName)
@@ -64,7 +65,7 @@ namespace LFS.Views.Transactions.Payments
             if (!backgroundWorker1.IsBusy)
             {
                 string searchKey = txtSearch.Text.Trim();
-                var dtRegistry = AccFactory.TaxpayersRepository().GetViewRecordsBySearch(searchKey);
+                var dtRegistry = TreasuryFactory.TaxpayersRepository().GetViewRecordsBySearch(searchKey);
                 progressBar1.Value = 0;
                 backgroundWorker1.RunWorkerAsync(dtRegistry);
             }

@@ -1,11 +1,11 @@
-﻿using ACC.Data;
-using ACC.Domain.Models;
-using LFS.Helpers;
+﻿using LFS.Helpers;
 using Microsoft.Reporting.WinForms;
 using System;
 using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
+using Treasury.Data;
+using Treasury.Domain.Entities;
 
 namespace LFS.Views.Transactions.Auction
 {
@@ -77,7 +77,7 @@ namespace LFS.Views.Transactions.Auction
                 report.ReportPath = $"{Application.StartupPath}Reports\\LTOM\\Ltom31ReportOfSale.rdlc";
                 report.DataSources.Clear();
 
-                var dtAuction = AccFactory.AuctionRepository().GetRecordById(auctionId);
+                var dtAuction = TreasuryFactory.AuctionRepository().GetRecordById(auctionId);
 
                 string location = dtAuction["location"];
                 string date = dtAuction["start_date"];

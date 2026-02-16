@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Windows.Forms;
+using Treasury.Data;
 using Treasury.Domain.Entities;
 
 namespace LFS.Views.Transactions.Biddings
@@ -35,7 +36,7 @@ namespace LFS.Views.Transactions.Biddings
             txtName.AutoCompleteSource = AutoCompleteSource.CustomSource;
 
             AutoCompleteStringCollection collection = new();
-            dtTaxpayers = AccFactory.TaxpayersRepository().GetViewRecordsBySearch(txtName.Text);
+            dtTaxpayers = TreasuryFactory.TaxpayersRepository().GetViewRecordsBySearch(txtName.Text);
             foreach (DataRow d in dtTaxpayers.Rows)
                 collection.Add(d["taxpayers_name"].ToString());
 
@@ -85,7 +86,7 @@ namespace LFS.Views.Transactions.Biddings
                     models.Add(model);
                 }
 
-                return AccFactory.BidRepository().Delete(models);
+                return TreasuryFactory.BidRepository().Delete(models);
             }
 
             return false;
@@ -107,7 +108,7 @@ namespace LFS.Views.Transactions.Biddings
         {
             ucTaxPayers.Enabled = false;
 
-            var dictTaxpayer = AccFactory.TaxpayersRepository().GetRecordByID(taxpayerId);
+            var dictTaxpayer = TreasuryFactory.TaxpayersRepository().GetRecordByID(taxpayerId);
 
             ucTaxPayers.txtTIN.Text = dictTaxpayer["tin"];
             ucTaxPayers.txtName.Text = dictTaxpayer["name"];
@@ -172,7 +173,7 @@ namespace LFS.Views.Transactions.Biddings
                 CreatedBy = UserHelper.loggedUser.Id
             };
 
-            return AccFactory.BidRepository().UpdateBidDetails(biddersModel, bidModel);
+            return TreasuryFactory.BidRepository().UpdateBidDetails(biddersModel, bidModel);
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -281,7 +282,7 @@ namespace LFS.Views.Transactions.Biddings
                 CreatedBy = UserHelper.loggedUser.Id
             };
 
-            return AccFactory.PaymentCollectionsRepository().InsertWithBiddingPayment(ucPayment.PaymentCollectionsModel(), null, ucTaxPayers.TaxpayersModel(), bidModel, biddersModel);
+            return TreasuryFactory.PaymentCollectionsRepository().InsertWithBiddingPayment(ucPayment.PaymentCollectionsModel(), null, ucTaxPayers.TaxpayersModel(), bidModel, biddersModel);
         }
 
         private void backgroundWorker1_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
@@ -320,7 +321,7 @@ namespace LFS.Views.Transactions.Biddings
             try
             {
                 var parameters = ((string searchKey, int rowFilter, DateTime date))e.Argument;
-                var dtDb = AccFactory.BidRepository().GetViewRecords();
+                var dtDb = TreasuryFactory.BidRepository().GetViewRecords();
                 int totalProgressCount = dtDb.Rows.Count;
                 int progressCount = 0;
                 var dataTable = new DataTable();

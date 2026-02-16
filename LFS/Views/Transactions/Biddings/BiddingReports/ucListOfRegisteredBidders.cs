@@ -1,12 +1,12 @@
-﻿using ACC.Data;
-using ACC.Domain.Models;
-using LFS.DataSets;
+﻿using LFS.DataSets;
 using LFS.Helpers;
 using Microsoft.Reporting.WinForms;
 using System;
 using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
+using Treasury.Data;
+using Treasury.Domain.Entities;
 
 namespace LFS.Views.Transactions.Biddings.BiddingReports
 {
@@ -44,7 +44,7 @@ namespace LFS.Views.Transactions.Biddings.BiddingReports
                 var auctionModel = new AuctionModel() { Id = auctionId };
                 var rptAuctionModel = new RptAuctionModel() { AuctionId = auctionId };
 
-                var dbRegisteredBidders = AccFactory.BiddersRepository().GetViewRecords();
+                var dbRegisteredBidders = TreasuryFactory.BiddersRepository().GetViewRecords();
                 var dtRegisteredBidders = new dsTreasury.dtLtom26_27_28DataTable();
 
                 int totalProgressCount = dbRegisteredBidders.Rows.Count;

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using Treasury.Data;
 using Treasury.Domain.Entities;
 
 namespace LFS.Views.Transactions.ReceiptsIssued
@@ -23,7 +24,7 @@ namespace LFS.Views.Transactions.ReceiptsIssued
 
         internal void LoadSelectedValue()
         {
-            Dictionary<string, string> receiptIssuedDict = AccFactory.ReceiptsIssuedRepository().GetRecordByID(receiptIssuedID);
+            Dictionary<string, string> receiptIssuedDict = TreasuryFactory.ReceiptsIssuedRepository().GetRecordByID(receiptIssuedID);
 
             string jobOrderID = receiptIssuedDict["job_orders_id"];
             var collectingOfficerID = Convert.ToInt32(receiptIssuedDict["collecting_officer_id"]);
@@ -48,7 +49,7 @@ namespace LFS.Views.Transactions.ReceiptsIssued
 
         internal void CheckReceiptsIssuedStatus()
         {
-            var receiptDict = AccFactory.ReceiptsRepository().GetRecordByID(uc.selectedReceiptID);
+            var receiptDict = TreasuryFactory.ReceiptsRepository().GetRecordByID(uc.selectedReceiptID);
             bool isUsed = false;
 
             int accountableFormID = Convert.ToInt32(receiptDict["accountable_forms_id"]);
@@ -57,7 +58,7 @@ namespace LFS.Views.Transactions.ReceiptsIssued
 
             while (receiptNumberFrom <= receiptNumberTo)
             {
-                isUsed = AccFactory.PaymentCollectionsRepository().ReceiptAlreadyUsed(accountableFormID, receiptNumberFrom);
+                isUsed = TreasuryFactory.PaymentCollectionsRepository().ReceiptAlreadyUsed(accountableFormID, receiptNumberFrom);
                 receiptNumberFrom++;
 
                 if (isUsed)
@@ -91,7 +92,7 @@ namespace LFS.Views.Transactions.ReceiptsIssued
                 return false;
             }
 
-            var receiptIssuedRepository = AccFactory.ReceiptsIssuedRepository();
+            var receiptIssuedRepository = TreasuryFactory.ReceiptsIssuedRepository();
 
             int collectorID = Convert.ToInt32(uc.cmbCollector.SelectedValue);
             int receiptID = Convert.ToInt32(uc.cmbReceipt.SelectedValue);

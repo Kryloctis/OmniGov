@@ -1,11 +1,11 @@
-﻿using ACC.Data;
-using LFS.Helpers;
+﻿using LFS.Helpers;
 using Microsoft.Reporting.WinForms;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows.Forms;
+using Treasury.Data;
 
 namespace LFS.Views.Transactions.Biddings.BiddingReports
 {
@@ -57,7 +57,7 @@ namespace LFS.Views.Transactions.Biddings.BiddingReports
                 progressCount += tasks["Fetch LGU Details"];
                 Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
 
-                var dictWarrantLevy = AccFactory.RptLevyRepository().GetViewCancelledLevy(Convert.ToInt32(warrantLevyId));
+                var dictWarrantLevy = TreasuryFactory.RptLevyRepository().GetViewCancelledLevy(Convert.ToInt32(warrantLevyId));
 
                 progressCount += tasks["Fetch Warrant of Levy"];
                 Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);

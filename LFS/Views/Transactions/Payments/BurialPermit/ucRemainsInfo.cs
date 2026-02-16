@@ -1,5 +1,5 @@
-﻿using ACC.Data;
-using LFS.Helpers;
+﻿using LFS.Helpers;
+using OmniGov.Core.Repositories;
 using System;
 using System.ComponentModel;
 using System.Data;
@@ -23,7 +23,7 @@ namespace LFS.Views.Transactions.Payments.BurialPermit
                 errorProvider1.GetError(cmbxRegistry)
             };
 
-            return AccFactory.CreateErrors(errors).GenerateErrorMessage();
+            return Factory.CreateErrors(errors).GenerateErrorMessage();
         }
 
         internal void OnLoad()
@@ -42,7 +42,7 @@ namespace LFS.Views.Transactions.Payments.BurialPermit
             var dataTable = new DataTable();
             dataTable.Columns.AddRange(registryColumn);
 
-            var dtRegistry = AccFactory.RegistryRepository().GetRecords();
+            var dtRegistry = Factory.RegistryRepository().GetRecords();
 
             foreach (DataRow row in dtRegistry.Rows)
             {
@@ -99,7 +99,7 @@ namespace LFS.Views.Transactions.Payments.BurialPermit
         private void LoadSelectedRegistryInfo()
         {
             int registryId = Convert.ToInt32(cmbxRegistry.SelectedValue);
-            var dictRegistry = AccFactory.RegistryRepository().GetRecordByID(registryId);
+            var dictRegistry = Factory.RegistryRepository().GetRecordByID(registryId);
 
             txtFirstName.Text = dictRegistry["first_name"];
             txtMiddleName.Text = dictRegistry["middle_name"];

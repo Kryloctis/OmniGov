@@ -1,9 +1,10 @@
-﻿using ACC.Data;
-using LFS.Helpers;
+﻿using LFS.Helpers;
+using OmniGov.Core.Repositories;
 using System;
 using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
+using Treasury.Data;
 
 namespace LFS.Views.Transactions.Payments.RealProperty
 {
@@ -31,7 +32,7 @@ namespace LFS.Views.Transactions.Payments.RealProperty
         internal string GetFormErrors()
         {
             var errors = new string[] { this.Tag == null ? string.Empty : this.Tag.ToString() };
-            return AccFactory.CreateErrors(errors).GenerateErrorMessage();
+            return Factory.CreateErrors(errors).GenerateErrorMessage();
         }
 
         internal bool IsValidated()
@@ -85,7 +86,7 @@ namespace LFS.Views.Transactions.Payments.RealProperty
             var parameters = ((string searchKey, int rowFilter))e.Argument;
             var dataTable = new DataTable();
             dataTable.Columns.AddRange(TaxpayersColumns());
-            var dtTaxpayers = AccFactory.TaxpayersRepository().GetViewRecordsByParameters(parameters.searchKey, true, parameters.rowFilter);
+            var dtTaxpayers = TreasuryFactory.TaxpayersRepository().GetViewRecordsByParameters(parameters.searchKey, true, parameters.rowFilter);
 
             int totalProgressCount = dtTaxpayers.Rows.Count;
             int progressCount = 0;

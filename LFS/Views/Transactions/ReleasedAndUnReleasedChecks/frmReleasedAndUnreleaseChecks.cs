@@ -1,7 +1,9 @@
 ﻿using LFS.Helpers;
+using OmniGov.Core.Repositories;
 using System;
 using System.Data;
 using System.Windows.Forms;
+using Treasury.Data;
 using Treasury.Domain.Entities;
 
 namespace LFS.Views.Transactions.ReleasedAndUnReleasedChecks
@@ -36,7 +38,7 @@ namespace LFS.Views.Transactions.ReleasedAndUnReleasedChecks
         {
             try
             {
-                var bankRepository = AccFactory.BanksRepository();
+                var bankRepository = TreasuryFactory.BanksRepository();
                 var dtBank = bankRepository.GetRecords();
                 cmbxBank.DataSource = dtBank;
                 cmbxBank.ValueMember = "id";
@@ -52,7 +54,7 @@ namespace LFS.Views.Transactions.ReleasedAndUnReleasedChecks
         private void LoadBankAccounts()
         {
             int bankID = Convert.ToInt32(cmbxBank.SelectedValue);
-            DataTable dtBankAccounts = AccFactory.BankAccountsRepository().GetBankAccountsByBankID(bankID);
+            DataTable dtBankAccounts = TreasuryFactory.BankAccountsRepository().GetBankAccountsByBankID(bankID);
 
             cmbxBankAccountNo.DataSource = dtBankAccounts;
             cmbxBankAccountNo.ValueMember = "id";
@@ -61,7 +63,7 @@ namespace LFS.Views.Transactions.ReleasedAndUnReleasedChecks
 
         private void LoadFunds()
         {
-            var dtFunds = AccFactory.FundsRepository().GetRecords();
+            var dtFunds = Factory.FundsRepository().GetRecords();
             HelperLoadRecords.FundsComboBox(dtFunds, cmbxFund, "id", "fund_name");
         }
 
@@ -76,7 +78,7 @@ namespace LFS.Views.Transactions.ReleasedAndUnReleasedChecks
             int bankAccountID = Convert.ToInt32(cmbxBankAccountNo.SelectedValue);
             int fundsID = Convert.ToInt32(cmbxFund.SelectedValue);
 
-            var releasedChequesRepo = AccFactory.ReleasedChequesRepository();
+            var releasedChequesRepo = TreasuryFactory.ReleasedChequesRepository();
             var dtViewReleasedCheques = releasedChequesRepo.GetViewRecords(bankAccountID, fundsID, txtSeach, cbxShowReleasedChecks.Checked);
 
             releasedAndUnreleasedDT = new DataTable();
@@ -178,7 +180,7 @@ namespace LFS.Views.Transactions.ReleasedAndUnReleasedChecks
                     DateReleased = DateTime.Now,
                 };
 
-                var releasedChequesRepository = AccFactory.ReleasedChequesRepository();
+                var releasedChequesRepository = TreasuryFactory.ReleasedChequesRepository();
                 return releasedChequesRepository.Insert(releasedChequesModel);
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }

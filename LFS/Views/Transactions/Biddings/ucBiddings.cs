@@ -1,6 +1,8 @@
 ﻿using LFS.Helpers;
+using OmniGov.Core.Repositories;
 using System;
 using System.Windows.Forms;
+using Treasury.Data;
 using Treasury.Domain.Entities;
 
 namespace LFS.Views.Transactions.Biddings
@@ -26,7 +28,7 @@ namespace LFS.Views.Transactions.Biddings
                 errorProvider1.GetError(nudBidAmount),
             };
 
-            return AccFactory.CreateErrors(errors).GenerateErrorMessage();
+            return Factory.CreateErrors(errors).GenerateErrorMessage();
         }
 
         internal bool ValidateInput()
@@ -78,7 +80,7 @@ namespace LFS.Views.Transactions.Biddings
 
         private void LoadSelectedRecord(int biddingId)
         {
-            var dictBid = AccFactory.BidRepository().GetViewRecordById(biddingId);
+            var dictBid = TreasuryFactory.BidRepository().GetViewRecordById(biddingId);
 
             cmbxAuctionSchedule.SelectedValue = Convert.ToInt32(dictBid["auction_id"]);
             cmbxProperty.SelectedValue = Convert.ToInt32(dictBid["rpt_auction_id"]);
@@ -92,7 +94,7 @@ namespace LFS.Views.Transactions.Biddings
         {
             int auctionId = Convert.ToInt32(cmbxAuctionSchedule.SelectedValue);
             var rptAuctionModel = new RptAuctionModel() { AuctionId = auctionId };
-            var auctionProperties = AccFactory.RptAuctionRepository().GetAuctionProperties(rptAuctionModel);
+            var auctionProperties = TreasuryFactory.RptAuctionRepository().GetAuctionProperties(rptAuctionModel);
 
             cmbxProperty.ValueMember = "rpt_auction_id";
             cmbxProperty.DisplayMember = "complete_arp_no";
@@ -101,7 +103,7 @@ namespace LFS.Views.Transactions.Biddings
 
         private void LoadAuctionSchedule()
         {
-            var dtAuctionSchedules = AccFactory.AuctionRepository().GetAuctionSchedule();
+            var dtAuctionSchedules = TreasuryFactory.AuctionRepository().GetAuctionSchedule();
             HelperLoadRecords.AuctionScheduleCombobox(dtAuctionSchedules, cmbxAuctionSchedule, "date", "id");
         }
 
@@ -150,7 +152,7 @@ namespace LFS.Views.Transactions.Biddings
             int rptAuction = Convert.ToInt32(cmbxProperty.SelectedValue);
             string bidderNo = txtAssignedBidderNo.Text.Trim();
 
-            bool bidderNoExist = AccFactory.BiddersRepository().BidderNoExist(rptAuction, bidderNo);
+            bool bidderNoExist = TreasuryFactory.BiddersRepository().BidderNoExist(rptAuction, bidderNo);
 
             isValidated = !Helper.ShowErrorTextBoxEmpty(errorProvider, textBox, "Assigned Bidder No.") && !bidderNoExist;
             errorProvider.SetError(textBox, bidderNoExist ? "Assigned Bidder No. Exist." : errorProvider.GetError(textBox));

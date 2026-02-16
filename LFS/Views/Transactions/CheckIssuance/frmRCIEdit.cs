@@ -1,11 +1,11 @@
-﻿using ACC.Data;
-using ACC.Domain.Models;
-using LFS.Helpers;
+﻿using LFS.Helpers;
 using LFS.Views.Transactions.CheckIssuance.Deductions;
 using LFS.Views.Transactions.CheckIssuance.Obligations;
 using System;
 using System.Data;
 using System.Windows.Forms;
+using Treasury.Data;
+using Treasury.Domain.Entities;
 
 namespace LFS.Views.Transactions.RCI
 {
@@ -28,7 +28,7 @@ namespace LFS.Views.Transactions.RCI
         {
             frmChckIssOblgtns frmObligations = new(uc);
 
-            var rciObligationsRepo = AccFactory.RCIObligationsRepository();
+            var rciObligationsRepo = TreasuryFactory.RCIObligationsRepository();
             var dtRCIObligations = rciObligationsRepo.GetRecordsByRCIId(_rciID);
 
             foreach (DataRow row in dtRCIObligations.Rows)
@@ -46,7 +46,7 @@ namespace LFS.Views.Transactions.RCI
         {
             frmDeductions frmDeductions = new(uc);
 
-            var rciDeductionRepo = AccFactory.RCIDeductionsRepository();
+            var rciDeductionRepo = TreasuryFactory.RCIDeductionsRepository();
             var dtRCIDeductions = rciDeductionRepo.GetDeductionsByRCIId(_rciID);
 
             foreach (DataRow row in dtRCIDeductions.Rows)
@@ -57,7 +57,7 @@ namespace LFS.Views.Transactions.RCI
 
         private void LoadSelectedValue()
         {
-            var dictRCI = AccFactory.RciRepository().GetViewRecordById(_rciID);
+            var dictRCI = TreasuryFactory.RciRepository().GetViewRecordById(_rciID);
 
             if (dictRCI.Count == 0) return;
 
@@ -96,7 +96,7 @@ namespace LFS.Views.Transactions.RCI
 
         private void UpdateRCIObligation()
         {
-            var deleteResult = AccFactory.RCIObligationsRepository().DeleteRecordsByRCIId(_rciID);
+            var deleteResult = TreasuryFactory.RCIObligationsRepository().DeleteRecordsByRCIId(_rciID);
 
             if (deleteResult)
             {
@@ -108,14 +108,14 @@ namespace LFS.Views.Transactions.RCI
                 {
                     obligationNo = row["obligation_no"].ToString();
                     dateEntry = Convert.ToDateTime(row["date_entry"]);
-                    AccFactory.RciRepository().SaveRciDvObligations(rciId, obligationNo, dateEntry);
+                    TreasuryFactory.RciRepository().SaveRciDvObligations(rciId, obligationNo, dateEntry);
                 }
             }
         }
 
         private void UpdateRCIDeductions()
         {
-            var deleteResult = AccFactory.RCIDeductionsRepository().DeleteRecordsByRCIId(_rciID);
+            var deleteResult = TreasuryFactory.RCIDeductionsRepository().DeleteRecordsByRCIId(_rciID);
 
             if (deleteResult)
             {
@@ -124,7 +124,7 @@ namespace LFS.Views.Transactions.RCI
                 {
                     string description = row["description"].ToString();
                     decimal amount = Convert.ToDecimal(row["amount"]);
-                    AccFactory.RciRepository().SaveRciDeductions(rcid, description, amount);
+                    TreasuryFactory.RciRepository().SaveRciDeductions(rcid, description, amount);
                 }
             }
         }
@@ -140,7 +140,7 @@ namespace LFS.Views.Transactions.RCI
                 Amount = uc.nudNetAmount.Value,
             };
 
-            var chequesRepository = AccFactory.ChequesRepository();
+            var chequesRepository = TreasuryFactory.ChequesRepository();
             _ = chequesRepository.Update(chequesModel);
         }
 
@@ -168,7 +168,7 @@ namespace LFS.Views.Transactions.RCI
                 NaturePayment = natureOfPayment
             };
 
-            return AccFactory.RciRepository().Update(rciModel);
+            return TreasuryFactory.RciRepository().Update(rciModel);
         }
 
         private void btnSave_Click(object sender, EventArgs e)

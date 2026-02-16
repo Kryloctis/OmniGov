@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
+using Treasury.Data;
 using Treasury.Domain.Entities;
 
 namespace LFS.Views.Transactions.ReceiptsIssued
@@ -41,7 +42,7 @@ namespace LFS.Views.Transactions.ReceiptsIssued
                     receiptModelList.Add(new ReceiptsIssuedModel() { Id = receiptIssuedId });
                 }
 
-                return AccFactory.ReceiptsIssuedRepository().Delete(receiptModelList);
+                return TreasuryFactory.ReceiptsIssuedRepository().Delete(receiptModelList);
             }
             return false;
         }
@@ -154,7 +155,7 @@ namespace LFS.Views.Transactions.ReceiptsIssued
             var dataTable = new DataTable();
             dataTable.Columns.AddRange(dataColumns);
 
-            DataTable dtReceiptsIssuedDb = AccFactory.ReceiptsIssuedRepository().GetRecordsBySearch(parameters.dateIssued, parameters.searchKey, parameters.rowLimit);
+            DataTable dtReceiptsIssuedDb = TreasuryFactory.ReceiptsIssuedRepository().GetRecordsBySearch(parameters.dateIssued, parameters.searchKey, parameters.rowLimit);
             int totalProgressCount = dtReceiptsIssuedDb.Rows.Count;
             int progressCount = 0;
 

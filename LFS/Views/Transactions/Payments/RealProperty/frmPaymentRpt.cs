@@ -1,6 +1,4 @@
-﻿using ACC.Data;
-using ACC.Domain.Models;
-using LFS.DataSets;
+﻿using LFS.DataSets;
 using LFS.Helpers;
 using LFS.Views.Transactions.Payments.BurialPermit;
 using LFS.Views.Transactions.Payments.RealProperty;
@@ -9,6 +7,8 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Windows.Forms;
+using Treasury.Data;
+using Treasury.Domain.Entities;
 
 namespace LFS.Views.Transactions.Payments
 {
@@ -105,7 +105,7 @@ namespace LFS.Views.Transactions.Payments
             var taxpayerId = ucPaymentTaxpayers.GetSelectedTaxpayerId();
             var dataSource = (DataTable)ucPaymentRptTaxDues.dgTaxDues.DataSource;
             var filteredRows = dataSource.AsEnumerable().Where(row => row.Field<bool>("is_selected")).CopyToDataTable();
-            var dictTaxpayer = AccFactory.TaxpayersRepository().GetRecordByID(taxpayerId);
+            var dictTaxpayer = TreasuryFactory.TaxpayersRepository().GetRecordByID(taxpayerId);
 
             foreach (DataRow row in filteredRows.Rows)
             {
@@ -222,7 +222,7 @@ namespace LFS.Views.Transactions.Payments
         {
             var rptPaymentsModel = new RptPaymentsModel() { PostedBy = UserHelper.loggedUser.Id, };
 
-            return AccFactory.PaymentCollectionsRepository().InsertWithRptPayment(ucPayment.PaymentCollectionsModel(), null, rptPaymentsModel, ucPaymentRptTaxDues.RptTaxDuesModelList());
+            return TreasuryFactory.PaymentCollectionsRepository().InsertWithRptPayment(ucPayment.PaymentCollectionsModel(), null, rptPaymentsModel, ucPaymentRptTaxDues.RptTaxDuesModelList());
         }
 
         private void btnBack_Click(object sender, EventArgs e)

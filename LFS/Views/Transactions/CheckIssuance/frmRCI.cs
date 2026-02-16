@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
+using Treasury.Data;
 using Treasury.Domain.Entities;
 
 namespace LFS.Views.Transactions.RCI
@@ -63,7 +64,7 @@ namespace LFS.Views.Transactions.RCI
         private DataTable InitializeRciDataTable(string searchText)
         {
             var dtRci = new DataTable();
-            var dtRciFromDb = AccFactory.RciRepository().GetViewRecordsBySearch(searchText);
+            var dtRciFromDb = TreasuryFactory.RciRepository().GetViewRecordsBySearch(searchText);
 
             int progressCount = 0;
             int totalProgressCount = dtRciFromDb.Rows.Count;
@@ -148,7 +149,7 @@ namespace LFS.Views.Transactions.RCI
                     rciModels.Add(new RciModel() { Id = rciId });
                 }
 
-                return AccFactory.RciRepository().Delete(rciModels);
+                return TreasuryFactory.RciRepository().Delete(rciModels);
             }
             return false;
         }
