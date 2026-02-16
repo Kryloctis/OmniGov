@@ -1,5 +1,5 @@
-﻿using ACC.Data;
-using LFS.Helpers;
+﻿using LFS.Helpers;
+using OmniGov.Core.Repositories;
 using System;
 using System.Windows.Forms;
 
@@ -40,7 +40,7 @@ namespace LFS.Views.Manage.AllotmentClasses
             var allotmentModel = uc.AllotmentClassesModel();
             allotmentModel.Id = allotmentClassId;
 
-            return AccFactory.AllotmentClassesRepository().Update(allotmentModel);
+            return Factory.AllotmentClassesRepository().Update(allotmentModel);
         }
 
         private void btnSave_Click(object sender, EventArgs e)

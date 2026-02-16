@@ -1,5 +1,5 @@
-﻿using ACC.Data;
-using LFS.Helpers;
+﻿using LFS.Helpers;
+using OmniGov.Core.Repositories;
 using System;
 using System.Windows.Forms;
 
@@ -26,7 +26,7 @@ namespace LFS.Views.Manage.AllotmentClasses
                 return false;
             }
 
-            return AccFactory.AllotmentClassesRepository().Insert(uc.AllotmentClassesModel());
+            return Factory.AllotmentClassesRepository().Insert(uc.AllotmentClassesModel());
         }
 
         private void frmAllotmentClassesAdd_Load(object sender, EventArgs e)
