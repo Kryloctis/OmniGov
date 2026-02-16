@@ -1,5 +1,5 @@
-﻿using ACC.Data;
-using LFS.Helpers;
+﻿using LFS.Helpers;
+using OmniGov.Core.Repositories;
 using System;
 using System.ComponentModel;
 using System.Windows.Forms;
@@ -40,10 +40,8 @@ namespace LFS.Views.Manage.RptPenalties
                 errorProvider1.GetError(nudRate)
             };
 
-            return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
+            return Factory.CreateErrors(errorArray).GenerateErrorMessage();
         }
-
-        #region Validations
 
         private bool DescriptionValidated()
         {
@@ -84,8 +82,6 @@ namespace LFS.Views.Manage.RptPenalties
         {
             Helper.ClearErrorNumericUpDown(errorProvider1, nudRate);
         }
-
-        #endregion Validations
 
         private void OnLoad()
         {

@@ -1,7 +1,7 @@
-﻿using ACC.Data;
-using LFS.Helpers;
+﻿using LFS.Helpers;
 using System;
 using System.Windows.Forms;
+using Treasury.Data;
 
 namespace LFS.Views.Manage.CashTickets
 {
@@ -50,7 +50,7 @@ namespace LFS.Views.Manage.CashTickets
                 return false;
             }
 
-            return AccFactory.CashTicketsRepository().Update(uc.CashTicketsModel());
+            return TreasuryFactory.CashTicketsRepository().Update(uc.CashTicketsModel());
         }
     }
 }

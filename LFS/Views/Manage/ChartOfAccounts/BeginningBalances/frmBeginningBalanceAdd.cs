@@ -1,5 +1,5 @@
-﻿using ACC.Data;
-using ACC.Domain.Models;
+﻿using Accounting.Data;
+using Accounting.Domain.Entities;
 using LFS.Helpers;
 using LFS.Views.Manage.ChartOfAccounts;
 using LFS.Views.Manage.ChartOfAccounts.Subsidiary;
@@ -45,7 +45,7 @@ namespace LFS.Views.Manage.BeginningBalances
                 Amount = uc.nudAmount.Value
             };
 
-            return AccFactory.BeginningBalancesRepository().Insert(beginningBalanceModel);
+            return AccountingFactory.BeginningBalancesRepository().Insert(beginningBalanceModel);
         }
 
         private void OnLoad()

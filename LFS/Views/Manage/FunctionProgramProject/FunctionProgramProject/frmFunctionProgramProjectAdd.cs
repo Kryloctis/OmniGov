@@ -1,5 +1,6 @@
 ﻿using LFS.Helpers;
 using OmniGov.Core.Entities;
+using OmniGov.Core.Repositories;
 using System;
 using System.Windows.Forms;
 
@@ -49,7 +50,7 @@ namespace LFS.Views.Manage.FunctionProgramProject.FunctionProgramProject
                 IsSpecial = uc.chckboxSpecial.Checked ? true : false
             };
 
-            return AccFactory.FunctionProgramProjectRepository().Insert(functionProgramProjectModel);
+            return Factory.FunctionProgramProjectRepository().Insert(functionProgramProjectModel);
         }
 
         private void btnSave_Click(object sender, EventArgs e)

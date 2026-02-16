@@ -1,12 +1,13 @@
 ﻿using LFS.Helpers;
 using LFS.Views.Manage.TaxPayers;
-using RPT.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Text;
 using System.Windows.Forms;
+using Treasury.Data;
+using Treasury.Domain.Entities;
 
 namespace LFS.Views.Manage.RealProperties
 {
@@ -29,14 +30,14 @@ namespace LFS.Views.Manage.RealProperties
         {
             if (Helper.MessageBoxConfirmDelete(dgRealProperties.SelectedRows.Count))
             {
-                var realPropertiesRepository = AccFactory.RealPropertiesRepository();
+                var realPropertiesRepository = TreasuryFactory.RealPropertiesRepository();
                 var realPropertiesModels = new List<RealPropertiesModel>();
 
                 foreach (DataGridViewRow row in dgRealProperties.SelectedRows)
                 {
                     int realPropertiesID = int.Parse(row.Cells[0].Value.ToString());
 
-                    var receiptIsUsed = AccFactory.ReceiptsIssuedRepository().ReceiptHasIssuance(realPropertiesID);
+                    var receiptIsUsed = TreasuryFactory.ReceiptsIssuedRepository().ReceiptHasIssuance(realPropertiesID);
 
                     if (!receiptIsUsed)
                         realPropertiesModels.Add(new RealPropertiesModel() { Id = realPropertiesID });
@@ -102,7 +103,7 @@ namespace LFS.Views.Manage.RealProperties
                 var dataTable = new DataTable();
                 dataTable.Columns.AddRange(RealPropertiesColumns());
 
-                var dtRealPropertiesFromDB = AccFactory.RealPropertiesRepository().GetRecordsBySearch(parameters.searchKey, parameters.rowFilter, parameters.showCancelled);
+                var dtRealPropertiesFromDB = TreasuryFactory.RealPropertiesRepository().GetRecordsBySearch(parameters.searchKey, parameters.rowFilter, parameters.showCancelled);
                 int totalProgressCount = dtRealPropertiesFromDB.Rows.Count;
                 int progressCount = 0;
 
@@ -112,7 +113,7 @@ namespace LFS.Views.Manage.RealProperties
                     string location = $"{row["street"]} {row["barangay_name"]} {row["municipality_name"]} {row["province_name"]}";
                     string effectivityQuarterAndYear = $"{Helper.AddOrdinalSuffix((int)row["effectivity_quarter"])} Quarter - {row["effectivity_year"]}";
                     int rptId = Convert.ToInt32(row["real_property_id"]);
-                    var dtPrevRpt = AccFactory.RptPreviousAssessmentRepository().GetRecordsByRptId(rptId);
+                    var dtPrevRpt = TreasuryFactory.RptPreviousAssessmentRepository().GetRecordsByRptId(rptId);
 
                     newRow["real_property_id"] = rptId;
                     newRow["complete_arp_no"] = row["complete_arp_no"];

@@ -1,6 +1,6 @@
-﻿using ACC.Data;
-using ACC.Domain.Models;
-using LFS.Helpers;
+﻿using LFS.Helpers;
+using OmniGov.Core.Entities;
+using OmniGov.Core.Repositories;
 using System;
 using System.Windows.Forms;
 
@@ -36,7 +36,7 @@ namespace LFS.Views.Manage.FunctionProgramProject.FunctionalClassification
                 SectorName = uc.txtName.Text.Trim()
             };
 
-            return AccFactory.FunctionalClassificationRepository().Insert(functionalClassificationModel);
+            return Factory.FunctionalClassificationRepository().Insert(functionalClassificationModel);
         }
 
         private void btnSave_Click(object sender, EventArgs e)

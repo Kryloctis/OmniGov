@@ -1,5 +1,6 @@
 ﻿using LFS.Helpers;
 using OmniGov.Core.Entities;
+using OmniGov.Core.Repositories;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -58,7 +59,7 @@ namespace LFS.Views.Manage.Registry
                 foreach (DataGridViewRow row in selectedRows)
                     registryModels.Add(new RegistryModel() { Id = Convert.ToInt32(row.Cells["id"].Value) });
 
-                return AccFactory.RegistryRepository().Delete(registryModels);
+                return Factory.RegistryRepository().Delete(registryModels);
             }
             return false;
         }
@@ -109,7 +110,7 @@ namespace LFS.Views.Manage.Registry
 
                 var dataTable = new DataTable();
                 dataTable.Columns.AddRange(dataColumns);
-                var dtRegistry = AccFactory.RegistryRepository().GetRecordsBySearh_Limit(parameters.searchKey, parameters.limitCount);
+                var dtRegistry = Factory.RegistryRepository().GetRecordsBySearh_Limit(parameters.searchKey, parameters.limitCount);
 
                 int progressCount = 0;
                 int totalProgressCount = dtRegistry.Rows.Count;

@@ -1,5 +1,5 @@
-﻿using ACC.Data;
-using LFS.Helpers;
+﻿using LFS.Helpers;
+using OmniGov.Core.Repositories;
 using System;
 using System.Data;
 using System.Windows.Forms;
@@ -46,15 +46,15 @@ namespace LFS.Views.Manage.LinkUser
             switch (userType)
             {
                 case "collector":
-                    dataTableUsers = AccFactory.UsersRepository().GetLinksCollectingOfficers(textSearch);
+                    dataTableUsers = Factory.UsersRepository().GetLinksCollectingOfficers(textSearch);
                     break;
 
                 case "disburser":
-                    dataTableUsers = AccFactory.UsersRepository().GetLinksDisbursingOfficers();
+                    dataTableUsers = Factory.UsersRepository().GetLinksDisbursingOfficers();
                     break;
 
                 case "JO":
-                    dataTableUsers = AccFactory.UsersRepository().GetLinksJOCollectingOfficers();
+                    dataTableUsers = Factory.UsersRepository().GetLinksJOCollectingOfficers();
                     break;
             }
 

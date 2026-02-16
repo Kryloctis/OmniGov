@@ -1,5 +1,5 @@
-﻿using ACC.Data;
-using LFS.Helpers;
+﻿using LFS.Helpers;
+using OmniGov.Core.Repositories;
 using System;
 using System.Windows.Forms;
 
@@ -23,7 +23,7 @@ namespace LFS.Views.Manage.Journals
 
         private void LoadSelectedRecord()
         {
-            var journalData = AccFactory.JournalsRepository().GetRecordByID(journalId);
+            var journalData = Factory.JournalsRepository().GetRecordByID(journalId);
 
             uc.txtName.Text = journalData["journal_name"];
             uc.chkSpecialJournal.Checked = journalData["is_special"] == "0" ? false : true;
@@ -39,7 +39,7 @@ namespace LFS.Views.Manage.Journals
 
             var model = uc.JournalsModel();
             model.Id = journalId;
-            return AccFactory.JournalsRepository().Update(model);
+            return Factory.JournalsRepository().Update(model);
         }
 
         private void frmJournalsEdit_Load(object sender, EventArgs e)

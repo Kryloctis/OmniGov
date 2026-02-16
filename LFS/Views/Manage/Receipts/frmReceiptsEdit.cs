@@ -1,9 +1,9 @@
-﻿using ACC.Data;
-using ACC.Domain.Models;
-using LFS.Helpers;
+﻿using LFS.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using Treasury.Data;
+using Treasury.Domain.Entities;
 
 namespace LFS.Views.Manage.Receipts
 {
@@ -43,7 +43,7 @@ namespace LFS.Views.Manage.Receipts
         private void SetUpdateRestrictions()
         {
             //restrict updating series number and set the max date of received date receipts if receipts has been issued.
-            bool receiptHasIssuance = AccFactory.ReceiptsIssuedRepository().ReceiptHasIssuance(_receiptID);
+            bool receiptHasIssuance = TreasuryFactory.ReceiptsIssuedRepository().ReceiptHasIssuance(_receiptID);
 
             if (receiptHasIssuance)
             {
@@ -52,7 +52,7 @@ namespace LFS.Views.Manage.Receipts
                 uc.txtReceiptNumberTo.Enabled = false;
 
                 //set max date of date received.
-                Dictionary<string, string> dict = AccFactory.ReceiptsIssuedRepository().GetViewRecordReceiptId(_receiptID);
+                Dictionary<string, string> dict = TreasuryFactory.ReceiptsIssuedRepository().GetViewRecordReceiptId(_receiptID);
                 if (dict.Count != 0)
                     uc.dtpReceivedDate.MaxDate = Convert.ToDateTime(dict["date_issued"]);
             }
@@ -60,7 +60,7 @@ namespace LFS.Views.Manage.Receipts
 
         private void LoadSelectedValue()
         {
-            Dictionary<string, string> dictReceipts = AccFactory.ReceiptsRepository().GetRecordByID(_receiptID);
+            Dictionary<string, string> dictReceipts = TreasuryFactory.ReceiptsRepository().GetRecordByID(_receiptID);
 
             int accountableFormID = Convert.ToInt32(dictReceipts["accountable_forms_id"]);
             int receiptNumberFrom = Convert.ToInt32(dictReceipts["receipt_number_from"]);
@@ -104,7 +104,7 @@ namespace LFS.Views.Manage.Receipts
                 UserId = userId
             };
 
-            return AccFactory.ReceiptsRepository().Update(receiptModel);
+            return TreasuryFactory.ReceiptsRepository().Update(receiptModel);
         }
 
         private void btnSave_Click(object sender, EventArgs e)

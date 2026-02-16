@@ -1,7 +1,7 @@
-﻿using ACC.Data;
-using LFS.Helpers;
+﻿using LFS.Helpers;
 using System;
 using System.Windows.Forms;
+using Treasury.Data;
 
 namespace LFS.Views.Transactions.CashTicketIssuance
 {
@@ -23,7 +23,7 @@ namespace LFS.Views.Transactions.CashTicketIssuance
         {
             try
             {
-                var cashTicketIssuedDict = AccFactory.CashTicketsIssuedRepository().GetRecordByID(cashTckIssId);
+                var cashTicketIssuedDict = TreasuryFactory.CashTicketsIssuedRepository().GetRecordByID(cashTckIssId);
                 uc.OnLoad(true);
                 uc.LoadSelectedValue(cashTicketIssuedDict);
             }
@@ -55,7 +55,7 @@ namespace LFS.Views.Transactions.CashTicketIssuance
             var model = uc.CashTicketsIssuedModel();
             model.Id = cashTckIssId;
 
-            return AccFactory.CashTicketsIssuedRepository().Update(model);
+            return TreasuryFactory.CashTicketsIssuedRepository().Update(model);
         }
     }
 }

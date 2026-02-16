@@ -1,6 +1,6 @@
-﻿using ACC.Data;
-using ACC.Domain.Models;
-using LFS.Helpers;
+﻿using LFS.Helpers;
+using OmniGov.Core.Entities;
+using OmniGov.Core.Repositories;
 using System;
 using System.Windows.Forms;
 
@@ -39,7 +39,7 @@ namespace LFS.Views.Manage.FunctionProgramProject.FunctonalClassificationService
                 ServiceName = serviceName
             };
 
-            return AccFactory.FunctionalClassificationServiceRepository().Insert(functionalClassificationServiceModel);
+            return Factory.FunctionalClassificationServiceRepository().Insert(functionalClassificationServiceModel);
         }
 
         private void btnSave_Click(object sender, EventArgs e)

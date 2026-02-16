@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
 using System.Windows.Forms;
+using Treasury.Data;
 using Treasury.Domain.Entities;
 
 namespace LFS.Views.Manage.BusinessCategories
@@ -71,7 +72,7 @@ namespace LFS.Views.Manage.BusinessCategories
         internal void LoadBusinessCategories()
         {
             var searchText = toolStripTextBoxSearch.Text.Trim();
-            var dtBusinessCategories = AccFactory.BusinessCategoriesRepository().GetRecordsBySearch(searchText);
+            var dtBusinessCategories = TreasuryFactory.BusinessCategoriesRepository().GetRecordsBySearch(searchText);
             var dataTable = dtBusinessCategories.Clone();
             dataTable.Columns["is_line_of_business"].DataType = typeof(bool);
             foreach (DataRow row in dtBusinessCategories.Rows) { dataTable.Rows.Add(row.ItemArray); }
@@ -90,7 +91,7 @@ namespace LFS.Views.Manage.BusinessCategories
         private void LoadBusinessCategoriesAddons(int businessCategoriesId)
         {
             listBox1.Items.Clear();
-            var dtBusinessAddons = AccFactory.BusinessCategoriesHasAddOnCharges().GetViewRecordsByBusinessCategoriesId(businessCategoriesId);
+            var dtBusinessAddons = TreasuryFactory.BusinessCategoriesHasAddOnCharges().GetViewRecordsByBusinessCategoriesId(businessCategoriesId);
             foreach (DataRow item in dtBusinessAddons.Rows) { listBox1.Items.Add($"{item["business_add_on_charges_code"]}-{item["business_add_on_charges_description"]}"); }
         }
 
@@ -129,7 +130,7 @@ namespace LFS.Views.Manage.BusinessCategories
                 }
 
                 deletedCount = rowCount;
-                return AccFactory.BusinessCategoriesRepository().Delete(businessCategoriesModelList);
+                return TreasuryFactory.BusinessCategoriesRepository().Delete(businessCategoriesModelList);
             }
             return false;
         }

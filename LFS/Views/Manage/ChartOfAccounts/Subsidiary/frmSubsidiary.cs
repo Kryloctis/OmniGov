@@ -1,9 +1,10 @@
-﻿using ACC.Data;
-using ACC.Domain.Models;
+﻿using Accounting.Data;
+using Accounting.Domain.Entities;
 using LFS.Helpers;
 using LFS.Views.Manage.BeginningBalances;
 using LFS.Views.Manage.ChartOfAccounts.BeginningBalances;
 using MySql.Data.MySqlClient;
+using OmniGov.Core.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
@@ -29,14 +30,14 @@ namespace LFS.Views.Manage.ChartOfAccounts.Subsidiary
 
         private void LoadSelectedGeneralLedger()
         {
-            var dictGeneralLedger = AccFactory.GeneralLedgerAccountsRepository().GetViewRecordByID(generalLedgerId);
+            var dictGeneralLedger = AccountingFactory.GeneralLedgerAccountsRepository().GetViewRecordByID(generalLedgerId);
             txtCode.Text = dictGeneralLedger["ledger_code"];
             txtAccount.Text = dictGeneralLedger["ledger_name"];
         }
 
         internal void LoadSubsidiaryRecordsByFundAndGeneralLedger()
         {
-            var dtSubsidiary = AccFactory.SubsidiaryLedgerAccountsRepository().GetRecordsByFundAndGeneralLedger(fundId, generalLedgerId);
+            var dtSubsidiary = AccountingFactory.SubsidiaryLedgerAccountsRepository().GetRecordsByFundAndGeneralLedger(fundId, generalLedgerId);
             HelperLoadRecords.SubsidiaryLedgerAccountsDatagridView(dtSubsidiary, dgSubsidiary, fundId, year);
         }
 
@@ -46,7 +47,7 @@ namespace LFS.Views.Manage.ChartOfAccounts.Subsidiary
             Helper.DatagridFullRowSelectStyle(dgSubsidiary, true);
             LoadSelectedGeneralLedger();
             LoadSubsidiaryRecordsByFundAndGeneralLedger();
-            var dtFunds = AccFactory.FundsRepository().GetRecordByID(fundId);
+            var dtFunds = Factory.FundsRepository().GetRecordByID(fundId);
             txtFund.Text = dtFunds["fund_name"].ToString();
             txtYear.Text = year.ToString();
 
@@ -121,7 +122,7 @@ namespace LFS.Views.Manage.ChartOfAccounts.Subsidiary
                         subsidiaryModelList.Add(new SubsidiaryLedgerAccountsModel() { Id = subsidiaryLedgerId });
                     }
 
-                    return AccFactory.SubsidiaryLedgerAccountsRepository().Delete(subsidiaryModelList);
+                    return AccountingFactory.SubsidiaryLedgerAccountsRepository().Delete(subsidiaryModelList);
                 }
             }
             return false;
@@ -158,7 +159,7 @@ namespace LFS.Views.Manage.ChartOfAccounts.Subsidiary
                 {
                     ushort subsidiaryLedgerId = Convert.ToUInt16(dgSubsidiary.SelectedCells[0].Value);
 
-                    var subsidiaryLedgerBalanceExist = AccFactory.BeginningBalancesRepository().SubsidiaryLedgerBalanceExist(fundId, generalLedgerId, year, subsidiaryLedgerId);
+                    var subsidiaryLedgerBalanceExist = AccountingFactory.BeginningBalancesRepository().SubsidiaryLedgerBalanceExist(fundId, generalLedgerId, year, subsidiaryLedgerId);
 
                     if (subsidiaryLedgerBalanceExist)
                     {

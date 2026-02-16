@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
+using Treasury.Data;
 using Treasury.Domain.Entities;
 
 namespace LFS.Views.Manage.RptPenalties
@@ -53,7 +54,7 @@ namespace LFS.Views.Manage.RptPenalties
                 }
 
                 deletedCount = rowCount;
-                return AccFactory.RptPenaltiesRepository().Delete(rptPenalitiesModelList);
+                return TreasuryFactory.RptPenaltiesRepository().Delete(rptPenalitiesModelList);
             }
 
             deletedCount = 0;
@@ -125,7 +126,7 @@ namespace LFS.Views.Manage.RptPenalties
             try
             {
                 var searchText = e.Argument as string;
-                DataTable dtRptPenalties = AccFactory.RptPenaltiesRepository().GetRecordsBySearch(searchText);
+                DataTable dtRptPenalties = TreasuryFactory.RptPenaltiesRepository().GetRecordsBySearch(searchText);
                 var dataTable = new DataTable();
                 dataTable.Columns.AddRange(DataColumnsPenalties());
 

@@ -1,6 +1,6 @@
-﻿using ACC.Data;
-using ACC.Domain.Models;
-using LFS.Helpers;
+﻿using LFS.Helpers;
+using OmniGov.Core.Entities;
+using OmniGov.Core.Repositories;
 using System;
 using System.Windows.Forms;
 
@@ -35,7 +35,7 @@ namespace LFS.Views.Manage.ChartOfAccounts.MajorAccountGroup
                 MajorAccountGroupName = uc.txtName.Text.Trim()
             };
 
-            return AccFactory.MajorAccountGroupRepository().Insert(majorAccountGroupModel);
+            return Factory.MajorAccountGroupRepository().Insert(majorAccountGroupModel);
         }
 
         private void frmMajorAccountGroupAdd_Load(object sender, EventArgs e)

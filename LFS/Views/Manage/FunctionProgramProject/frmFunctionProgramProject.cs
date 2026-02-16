@@ -5,6 +5,7 @@ using LFS.Views.Manage.FunctionProgramProject.FunctonalClassificationService;
 using LFS.Views.Manage.FunctionProgramProject.OthersFunctionProgramProject;
 using MySql.Data.MySqlClient;
 using OmniGov.Core.Entities;
+using OmniGov.Core.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -31,7 +32,7 @@ namespace LFS.Views.Manage.FunctionProgramProject
         internal void LoadFunctionalClassifications()
         {
             string searchkey = Convert.ToString(txtSearch.Text);
-            var dtfunctionalClassificationRepository = AccFactory.FunctionalClassificationRepository().GetRecordsBySearch(searchkey);
+            var dtfunctionalClassificationRepository = Factory.FunctionalClassificationRepository().GetRecordsBySearch(searchkey);
             HelperLoadRecords.FunctionalClassificationDatagridView(dtfunctionalClassificationRepository, dgFunctionalClassification);
 
             dgFunctionalClassification.CurrentCell = dgFunctionalClassification.FirstDisplayedCell;
@@ -55,7 +56,7 @@ namespace LFS.Views.Manage.FunctionProgramProject
 
         public void LoadSectorComboBox()
         {
-            DataTable dtSectorName = AccFactory.FunctionalClassificationRepository().GetRecords();
+            DataTable dtSectorName = Factory.FunctionalClassificationRepository().GetRecords();
 
             var dataTable = new DataTable();
 
@@ -104,9 +105,9 @@ namespace LFS.Views.Manage.FunctionProgramProject
             DataTable functionClassificationServicesDataTable;
 
             if (sectorId == 0)
-                functionClassificationServicesDataTable = AccFactory.FunctionalClassificationServiceRepository().GetViewRecordsBySearch(searchText);
+                functionClassificationServicesDataTable = Factory.FunctionalClassificationServiceRepository().GetViewRecordsBySearch(searchText);
             else
-                functionClassificationServicesDataTable = AccFactory.FunctionalClassificationServiceRepository().GetViewRecordsBySearch_And_Sector(searchText, sectorId);
+                functionClassificationServicesDataTable = Factory.FunctionalClassificationServiceRepository().GetViewRecordsBySearch_And_Sector(searchText, sectorId);
 
             return functionClassificationServicesDataTable;
         }
@@ -136,7 +137,7 @@ namespace LFS.Views.Manage.FunctionProgramProject
 
             dtServiceName.Rows.Add(0, "All");
 
-            foreach (DataRow item in AccFactory.FunctionalClassificationServiceRepository().GetViewRecords().Rows)
+            foreach (DataRow item in Factory.FunctionalClassificationServiceRepository().GetViewRecords().Rows)
             {
                 string serviceName = $"{item["functional_classifications_sector_code"]} - {item["service_name"]}";
 
@@ -159,9 +160,9 @@ namespace LFS.Views.Manage.FunctionProgramProject
             DataTable fppDataTable;
 
             if (serviceId == 0)
-                fppDataTable = AccFactory.FunctionProgramProjectRepository().GetViewRecordsBySearch_And_IsSpecial(searchText, isSpecial);
+                fppDataTable = Factory.FunctionProgramProjectRepository().GetViewRecordsBySearch_And_IsSpecial(searchText, isSpecial);
             else
-                fppDataTable = AccFactory.FunctionProgramProjectRepository().GetViewRecordsByService_And_Search_And_IsSpecial(serviceId, searchText, isSpecial);
+                fppDataTable = Factory.FunctionProgramProjectRepository().GetViewRecordsByService_And_Search_And_IsSpecial(serviceId, searchText, isSpecial);
 
             var dataTable = new DataTable();
             dataTable.Columns.Add("id");
@@ -375,7 +376,7 @@ namespace LFS.Views.Manage.FunctionProgramProject
                     functionalClassificationModelList.Add(new FunctionalClassificationModel() { Id = functionalClassificationId });
                 }
 
-                return AccFactory.FunctionalClassificationRepository().Delete(functionalClassificationModelList);
+                return Factory.FunctionalClassificationRepository().Delete(functionalClassificationModelList);
             }
             return false;
         }
@@ -393,7 +394,7 @@ namespace LFS.Views.Manage.FunctionProgramProject
                     functionalClassificationServiceModelList.Add(new FunctionalClassificationServiceModel() { Id = serviceId });
                 }
 
-                return AccFactory.FunctionalClassificationServiceRepository().Delete(functionalClassificationServiceModelList);
+                return Factory.FunctionalClassificationServiceRepository().Delete(functionalClassificationServiceModelList);
             }
             return false;
         }
@@ -411,7 +412,7 @@ namespace LFS.Views.Manage.FunctionProgramProject
                     functionProgramProjectModelList.Add(new FunctionProgramProjectModel() { Id = fppID });
                 }
 
-                return AccFactory.FunctionProgramProjectRepository().Delete(functionProgramProjectModelList);
+                return Factory.FunctionProgramProjectRepository().Delete(functionProgramProjectModelList);
             }
             return false;
         }

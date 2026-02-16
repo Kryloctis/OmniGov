@@ -1,11 +1,11 @@
-﻿using ACC.Data;
-using ACC.Domain.Models;
-using LFS.Helpers;
+﻿using LFS.Helpers;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
+using Treasury.Data;
+using Treasury.Domain.Entities;
 
 namespace LFS.Views.Manage.TaxPayers
 {
@@ -40,7 +40,7 @@ namespace LFS.Views.Manage.TaxPayers
                 }
             }
 
-            return AccFactory.TaxpayersRepository().Delete(taxpayerModelList);
+            return TreasuryFactory.TaxpayersRepository().Delete(taxpayerModelList);
         }
 
         private void ShowEditForm()
@@ -92,7 +92,7 @@ namespace LFS.Views.Manage.TaxPayers
                 var parameters = ((string searchKey, bool showInactive, int rowFilter))e.Argument;
 
                 var dataTable = new DataTable();
-                var dtTaxpayers = AccFactory.TaxpayersRepository().GetViewRecordsByParameters(parameters.searchKey, parameters.showInactive, parameters.rowFilter);
+                var dtTaxpayers = TreasuryFactory.TaxpayersRepository().GetViewRecordsByParameters(parameters.searchKey, parameters.showInactive, parameters.rowFilter);
                 dataTable.Columns.AddRange(TaxpayersColumns());
 
                 int progressCount = 0;

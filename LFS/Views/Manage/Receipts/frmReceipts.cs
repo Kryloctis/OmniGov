@@ -1,12 +1,12 @@
-﻿using ACC.Data;
-using ACC.Domain.Models;
-using LFS.Helpers;
+﻿using LFS.Helpers;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
+using Treasury.Data;
+using Treasury.Domain.Entities;
 
 namespace LFS.Views.Manage.Receipts
 {
@@ -51,7 +51,7 @@ namespace LFS.Views.Manage.Receipts
                     int receiptId = Convert.ToInt32(row.Cells["id"].Value);
                     receiptModelList.Add(new ReceiptsModel() { Id = receiptId });
                 }
-                return AccFactory.ReceiptsRepository().Delete(receiptModelList);
+                return TreasuryFactory.ReceiptsRepository().Delete(receiptModelList);
             }
 
             return false;
@@ -106,7 +106,7 @@ namespace LFS.Views.Manage.Receipts
 
                 var dataTable = new DataTable();
                 dataTable.Columns.AddRange(dataColumns);
-                DataTable dtReceiptsDb = AccFactory.ReceiptsRepository().GetRecordsByDateAndText(parameters.dateRecieved, parameters.searchKey, parameters.rowLimit);
+                DataTable dtReceiptsDb = TreasuryFactory.ReceiptsRepository().GetRecordsByDateAndText(parameters.dateRecieved, parameters.searchKey, parameters.rowLimit);
 
                 int totalProgressCount = dtReceiptsDb.Rows.Count;
                 int progressCount = 0;
@@ -180,7 +180,7 @@ namespace LFS.Views.Manage.Receipts
             if (dgReceipts.SelectedRows.Count != 0)
             {
                 int receiptId = Convert.ToInt32(dgReceipts.SelectedRows[0].Cells["id"].Value);
-                int totalIssued = AccFactory.ReceiptsIssuedRepository().GetTotalIssuedReceiptByReceiptId(receiptId);
+                int totalIssued = TreasuryFactory.ReceiptsIssuedRepository().GetTotalIssuedReceiptByReceiptId(receiptId);
                 btnDelete.Enabled = totalIssued == 0;
             }
         }

@@ -1,9 +1,10 @@
-﻿using ACC.Data;
-using LFS.Helpers;
+﻿using LFS.Helpers;
+using OmniGov.Core.Repositories;
 using System;
 using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
+using Treasury.Data;
 
 namespace LFS.Views.Manage.Receipts
 {
@@ -81,7 +82,7 @@ namespace LFS.Views.Manage.Receipts
             var dataTable = new DataTable();
             dataTable.Columns.AddRange(dataColumns);
 
-            var dtAccoutnableForm = AccFactory.AccountableFormsRepository().GetRecords();
+            var dtAccoutnableForm = TreasuryFactory.AccountableFormsRepository().GetRecords();
             foreach (DataRow row in dtAccoutnableForm.Rows)
             {
                 var newRow = dataTable.NewRow();
@@ -98,8 +99,6 @@ namespace LFS.Views.Manage.Receipts
             LoadAccountableForms();
         }
 
-        #region Validations
-
         internal string GetFormErrors()
         {
             var errorArray = new[]
@@ -111,7 +110,7 @@ namespace LFS.Views.Manage.Receipts
                 errorProvider.GetError(txtQuantity)
             };
 
-            return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
+            return Factory.CreateErrors(errorArray).GenerateErrorMessage();
         }
 
         private void cmbAccountableForms_Validating(object sender, CancelEventArgs e)
@@ -129,9 +128,9 @@ namespace LFS.Views.Manage.Receipts
             int accountableFormID = Convert.ToInt32(cmbAccountableForms.SelectedValue);
 
             if (receiptID == 0)
-                return AccFactory.ReceiptsRepository().ReceiptNumberExist(accountableFormID, receiptNumber);
+                return TreasuryFactory.ReceiptsRepository().ReceiptNumberExist(accountableFormID, receiptNumber);
             else
-                return AccFactory.ReceiptsRepository().ReceiptNumberExist(accountableFormID, receiptNumber, receiptID);
+                return TreasuryFactory.ReceiptsRepository().ReceiptNumberExist(accountableFormID, receiptNumber, receiptID);
         }
 
         private void txtReceiptNumberFrom_Validating(object sender, CancelEventArgs e)
@@ -186,10 +185,6 @@ namespace LFS.Views.Manage.Receipts
         {
             Helper.ClearErrorTextBox(errorProvider, txtQuantity);
         }
-
-        #endregion Validations
-
-        #region Form Events Methods
 
         private void ComputeReceipQuantity()
         {
@@ -250,7 +245,5 @@ namespace LFS.Views.Manage.Receipts
         {
             ComputeReceipQuantity();
         }
-
-        #endregion Form Events Methods
     }
 }

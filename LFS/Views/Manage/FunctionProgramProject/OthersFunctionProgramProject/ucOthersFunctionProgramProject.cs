@@ -1,5 +1,5 @@
-﻿using ACC.Data;
-using LFS.Helpers;
+﻿using LFS.Helpers;
+using OmniGov.Core.Repositories;
 using System;
 using System.ComponentModel;
 using System.Windows.Forms;
@@ -24,7 +24,7 @@ namespace LFS.Views.Manage.FunctionProgramProject.OthersFunctionProgramProject
                 errorProvider1.GetError(txtName)
             };
 
-            return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
+            return Factory.CreateErrors(errorArray).GenerateErrorMessage();
         }
 
         internal void ResetForm()
@@ -36,7 +36,7 @@ namespace LFS.Views.Manage.FunctionProgramProject.OthersFunctionProgramProject
         private bool OthersFPPCodeValidated(ErrorProvider errorProvider, TextBox textBox)
         {
             string othersFPPCode = textBox.Text;
-            bool codeExist = othersFPPID == 0 ? AccFactory.SubFPPRepository().CodeExist(othersFPPCode) : AccFactory.SubFPPRepository().CodeExist(othersFPPID, othersFPPCode);
+            bool codeExist = othersFPPID == 0 ? Factory.SubFPPRepository().CodeExist(othersFPPCode) : Factory.SubFPPRepository().CodeExist(othersFPPID, othersFPPCode);
 
             if (Helper.ShowErrorTextBoxEmpty(errorProvider, textBox, "Others FPP Code"))
                 return false;
@@ -61,7 +61,7 @@ namespace LFS.Views.Manage.FunctionProgramProject.OthersFunctionProgramProject
         private bool OthersFPPNameValidated(ErrorProvider errorProvider, TextBox textBox)
         {
             string name = textBox.Text.Trim();
-            bool nameExist = othersFPPID == 0 ? AccFactory.SubFPPRepository().NameExist(name) : AccFactory.SubFPPRepository().NameExist(othersFPPID, name);
+            bool nameExist = othersFPPID == 0 ? Factory.SubFPPRepository().NameExist(name) : Factory.SubFPPRepository().NameExist(othersFPPID, name);
 
             if (Helper.ShowErrorTextBoxEmpty(errorProvider, textBox, "Name"))
                 return false;

@@ -1,4 +1,5 @@
-﻿using Accounting.Domain.Entities;
+﻿using Accounting.Data;
+using Accounting.Domain.Entities;
 using LFS.Helpers;
 using LFS.Views.Manage.BeginningBalances;
 using LFS.Views.Manage.ChartOfAccounts.Subsidiary;
@@ -34,9 +35,9 @@ namespace LFS.Views.Manage.ChartOfAccounts.BeginningBalances
         {
             Dictionary<string, string> beginningBalanceDict = new();
             if (uc.subsidiaryLedgerId == 0)
-                beginningBalanceDict = AccFactory.BeginningBalancesRepository().GetRecordBy_FundId_GenLedgId_Year_SubLedgId(fundId, uc.generalLedgerId, year);
+                beginningBalanceDict = AccountingFactory.BeginningBalancesRepository().GetRecordBy_FundId_GenLedgId_Year_SubLedgId(fundId, uc.generalLedgerId, year);
             else
-                beginningBalanceDict = AccFactory.BeginningBalancesRepository().GetRecordBy_FundId_GenLedgId_Year_SubLedgId(fundId, uc.generalLedgerId, year, uc.subsidiaryLedgerId);
+                beginningBalanceDict = AccountingFactory.BeginningBalancesRepository().GetRecordBy_FundId_GenLedgId_Year_SubLedgId(fundId, uc.generalLedgerId, year, uc.subsidiaryLedgerId);
 
             uc.beginningBalanceId = int.Parse(beginningBalanceDict["id"]);
             CheckedDebitCredit(beginningBalanceDict["is_debit"]);
@@ -75,7 +76,7 @@ namespace LFS.Views.Manage.ChartOfAccounts.BeginningBalances
                 Amount = uc.nudAmount.Value
             };
 
-            return AccFactory.BeginningBalancesRepository().Update(beginningBalanceModel);
+            return AccountingFactory.BeginningBalancesRepository().Update(beginningBalanceModel);
         }
 
         private void OnLoad()
@@ -116,7 +117,7 @@ namespace LFS.Views.Manage.ChartOfAccounts.BeginningBalances
         {
             string message = "Are you sure you want to delete the balance?";
             if (MessageBox.Show(message, "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
-                return AccFactory.BeginningBalancesRepository().DeleteById(uc.beginningBalanceId);
+                return AccountingFactory.BeginningBalancesRepository().DeleteById(uc.beginningBalanceId);
 
             return false;
         }

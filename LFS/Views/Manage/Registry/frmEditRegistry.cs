@@ -1,5 +1,5 @@
-﻿using ACC.Data;
-using LFS.Helpers;
+﻿using LFS.Helpers;
+using OmniGov.Core.Repositories;
 using System;
 using System.Windows.Forms;
 
@@ -32,7 +32,7 @@ namespace LFS.Views.Manage.Registry
             registryModel.Id = registryId;
             registryModel.UpdatedBy = UserHelper.loggedUser.Id;
 
-            return AccFactory.RegistryRepository().Update(registryModel);
+            return Factory.RegistryRepository().Update(registryModel);
         }
 
         private void frmEditRegistry_Load(object sender, EventArgs e)

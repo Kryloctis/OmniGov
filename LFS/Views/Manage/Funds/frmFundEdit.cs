@@ -1,5 +1,5 @@
-﻿using ACC.Data;
-using LFS.Helpers;
+﻿using LFS.Helpers;
+using OmniGov.Core.Repositories;
 using System;
 using System.Windows.Forms;
 
@@ -32,7 +32,7 @@ namespace LFS.Views.Manage.Funds
             var fundModel = uc.FundsModel();
             fundModel.Id = fundId;
 
-            return AccFactory.FundsRepository().Update(fundModel);
+            return Factory.FundsRepository().Update(fundModel);
         }
 
         private void btnSave_Click(object sender, EventArgs e)

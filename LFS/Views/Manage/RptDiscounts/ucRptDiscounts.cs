@@ -1,5 +1,5 @@
-﻿using ACC.Data;
-using LFS.Helpers;
+﻿using LFS.Helpers;
+using OmniGov.Core.Repositories;
 using System;
 using System.ComponentModel;
 using System.Data;
@@ -64,7 +64,7 @@ namespace LFS.Views.Manage.RptDiscount
                 errorProvider1.GetError(nudRate)
             };
 
-            return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
+            return Factory.CreateErrors(errorArray).GenerateErrorMessage();
         }
 
         private void ucRptDiscounts_Load(object sender, EventArgs e)
@@ -83,8 +83,6 @@ namespace LFS.Views.Manage.RptDiscount
                 LoadMonths();
             }
         }
-
-        #region Validations
 
         private void txtDescription_Validating(object sender, CancelEventArgs e)
         {
@@ -120,7 +118,5 @@ namespace LFS.Views.Manage.RptDiscount
         {
             Helper.ClearErrorNumericUpDown(errorProvider1, nudRate);
         }
-
-        #endregion Validations
     }
 }

@@ -1,5 +1,5 @@
-﻿using ACC.Data;
-using LFS.Helpers;
+﻿using LFS.Helpers;
+using OmniGov.Core.Repositories;
 using System;
 using System.Windows.Forms;
 
@@ -26,7 +26,7 @@ namespace LFS.Views.Manage.Journals
                 return false;
             }
 
-            return AccFactory.JournalsRepository().Insert(uc.JournalsModel());
+            return Factory.JournalsRepository().Insert(uc.JournalsModel());
         }
 
         private void frmJournalsAdd_Load(object sender, EventArgs e)

@@ -2,6 +2,7 @@
 using System;
 using System.Transactions;
 using System.Windows.Forms;
+using Treasury.Data;
 using Treasury.Domain.Entities;
 
 namespace LFS.Views.Manage.JobOrders
@@ -61,13 +62,13 @@ namespace LFS.Views.Manage.JobOrders
                 UserId = _uc.users_id
             };
 
-            return AccFactory.JobOrderRepository().Insert(jobOrderModel);
+            return TreasuryFactory.JobOrderRepository().Insert(jobOrderModel);
         }
 
         private bool AssignJOTORegularCollector()
         {
             var regularCollectingOfficerId = _frmJobOrder.collectingOfficerId;
-            var JOCollectingOfficerId = AccFactory.JobOrderRepository().GetJobOrderIdByUserId(_uc.users_id);
+            var JOCollectingOfficerId = TreasuryFactory.JobOrderRepository().GetJobOrderIdByUserId(_uc.users_id);
 
             var collectingOfficerHasJOModel = new CollectingOfficerHasJobOrdersModel()
             {
@@ -75,7 +76,7 @@ namespace LFS.Views.Manage.JobOrders
                 JobOrdersId = JOCollectingOfficerId
             };
 
-            return AccFactory.CollectingOfficerHasJobOrdersRepository().Insert(collectingOfficerHasJOModel);
+            return TreasuryFactory.CollectingOfficerHasJobOrdersRepository().Insert(collectingOfficerHasJOModel);
         }
     }
 }

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Windows.Forms;
+using Treasury.Data;
 using Treasury.Domain.Entities;
 
 namespace LFS.Views.Manage.BusinessCategories.AddOnCharges
@@ -34,7 +35,7 @@ namespace LFS.Views.Manage.BusinessCategories.AddOnCharges
 
         private DataTable DataTableAddOnCharges()
         {
-            var dtAddOnCharges = AccFactory.BusinessAddOnChargesRepository().GetRecords();
+            var dtAddOnCharges = TreasuryFactory.BusinessAddOnChargesRepository().GetRecords();
             DataTable dt = new DataTable();
             dt.Columns.AddRange(DataColumnsAddOnCharges());
 
@@ -42,7 +43,7 @@ namespace LFS.Views.Manage.BusinessCategories.AddOnCharges
             {
                 var newRow = dt.NewRow();
                 int businessAddOnChargesId = Convert.ToInt32(item["id"]);
-                newRow["is_selected"] = AccFactory.BusinessCategoriesHasAddOnCharges().BusinessCategoriesHasAddOnCharges(_businessCategoriesId, businessAddOnChargesId);
+                newRow["is_selected"] = TreasuryFactory.BusinessCategoriesHasAddOnCharges().BusinessCategoriesHasAddOnCharges(_businessCategoriesId, businessAddOnChargesId);
                 newRow["id"] = businessAddOnChargesId;
                 newRow["code"] = item["code"];
                 newRow["description"] = item["description"];
@@ -94,7 +95,7 @@ namespace LFS.Views.Manage.BusinessCategories.AddOnCharges
 
                 modeList.Add(model);
             }
-            return AccFactory.BusinessCategoriesHasAddOnCharges().Insert(_businessCategoriesId, modeList);
+            return TreasuryFactory.BusinessCategoriesHasAddOnCharges().Insert(_businessCategoriesId, modeList);
         }
 
         private void btnSave_Click(object sender, EventArgs e)

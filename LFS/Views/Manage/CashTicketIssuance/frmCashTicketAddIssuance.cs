@@ -1,7 +1,7 @@
-﻿using ACC.Data;
-using LFS.Helpers;
+﻿using LFS.Helpers;
 using System;
 using System.Windows.Forms;
+using Treasury.Data;
 
 namespace LFS.Views.Transactions.CashTicketIssuance
 {
@@ -49,7 +49,7 @@ namespace LFS.Views.Transactions.CashTicketIssuance
             }
 
             var model = uc.CashTicketsIssuedModel();
-            return AccFactory.CashTicketsIssuedRepository().Insert(model);
+            return TreasuryFactory.CashTicketsIssuedRepository().Insert(model);
         }
     }
 }

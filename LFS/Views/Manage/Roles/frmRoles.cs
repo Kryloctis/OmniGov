@@ -1,7 +1,7 @@
-﻿using ACC.Data;
-using ACC.Domain.Models;
-using LFS.Helpers;
+﻿using LFS.Helpers;
 using MySql.Data.MySqlClient;
+using OmniGov.Core.Entities;
+using OmniGov.Core.Repositories;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -90,7 +90,7 @@ namespace LFS.Views.Manage.Users.Roles
                     rolesModelList.Add(new RolesModel() { Id = roleId });
                 }
 
-                return AccFactory.RolesRepository().Delete(rolesModelList);
+                return Factory.RolesRepository().Delete(rolesModelList);
             }
             return false;
         }
@@ -143,7 +143,7 @@ namespace LFS.Views.Manage.Users.Roles
             try
             {
                 var parameters = ((int rowLimit, string searchKey))e.Argument;
-                var dbDataTable = AccFactory.RolesRepository().GetRecords(parameters.rowLimit, parameters.searchKey);
+                var dbDataTable = Factory.RolesRepository().GetRecords(parameters.rowLimit, parameters.searchKey);
                 int totalProgressCount = dbDataTable.Rows.Count;
                 int progressCount = 0;
 
@@ -228,7 +228,7 @@ namespace LFS.Views.Manage.Users.Roles
         private string LoadPrivileges(int? roleId)
         {
             if (roleId is null) return string.Empty;
-            var dtRolePermissions = AccFactory.RolesPermissionsRepository().GetViewRecordsByRoleId(roleId.Value);
+            var dtRolePermissions = Factory.RolesPermissionsRepository().GetViewRecordsByRoleId(roleId.Value);
             var sb = new StringBuilder();
 
             foreach (DataRow dataRow in dtRolePermissions.Rows)
@@ -282,8 +282,8 @@ namespace LFS.Views.Manage.Users.Roles
             }
 
             bool isSaved = isEdit ?
-                AccFactory.RolesRepository().Update(uc.RolesModel()) :
-                AccFactory.RolesRepository().Insert(uc.RolesModel());
+                Factory.RolesRepository().Update(uc.RolesModel()) :
+                Factory.RolesRepository().Insert(uc.RolesModel());
 
             if (isSaved)
             {

@@ -1,5 +1,6 @@
 ﻿using LFS.Helpers;
 using OmniGov.Core.Entities;
+using OmniGov.Core.Repositories;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -63,7 +64,7 @@ namespace LFS.Views.Manage.Funds
                         fundsModelList.Add(new FundsModel() { Id = fundId });
                     }
 
-                    return AccFactory.FundsRepository().Delete(fundsModelList);
+                    return Factory.FundsRepository().Delete(fundsModelList);
                 }
             }
             return false;
@@ -128,7 +129,7 @@ namespace LFS.Views.Manage.Funds
             try
             {
                 var parameters = ((string searchKey, int rowLimit))e.Argument;
-                DataTable dtFunds = AccFactory.FundsRepository().GetRecords(parameters.searchKey, parameters.rowLimit);
+                DataTable dtFunds = Factory.FundsRepository().GetRecords(parameters.searchKey, parameters.rowLimit);
                 int totalProgressCount = dtFunds.Rows.Count;
                 int progressCount = 0;
 

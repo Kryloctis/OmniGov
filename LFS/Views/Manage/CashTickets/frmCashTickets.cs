@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
+using Treasury.Data;
 using Treasury.Domain.Entities;
 
 namespace LFS.Views.Manage.CashTickets
@@ -77,7 +78,7 @@ namespace LFS.Views.Manage.CashTickets
 
                 var dataTable = new DataTable();
                 dataTable.Columns.AddRange(dataColumns);
-                DataTable dtReceiptsDb = AccFactory.CashTicketsRepository().GetRecordsBySearch(parameters.dateReceived, parameters.searchKey, parameters.rowLimit);
+                DataTable dtReceiptsDb = TreasuryFactory.CashTicketsRepository().GetRecordsBySearch(parameters.dateReceived, parameters.searchKey, parameters.rowLimit);
 
                 int totalProgressCount = dtReceiptsDb.Rows.Count;
                 int progressCount = 0;
@@ -168,7 +169,7 @@ namespace LFS.Views.Manage.CashTickets
                     int cashTicketId = Convert.ToInt32(row.Cells["id"].Value);
                     cashTicketsModelList.Add(new CashTicketsModel() { Id = cashTicketId });
                 }
-                return AccFactory.CashTicketsRepository().Delete(cashTicketsModelList);
+                return TreasuryFactory.CashTicketsRepository().Delete(cashTicketsModelList);
             }
 
             return false;

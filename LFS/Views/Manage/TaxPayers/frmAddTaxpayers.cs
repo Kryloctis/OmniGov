@@ -1,7 +1,7 @@
-﻿using ACC.Data;
-using LFS.Helpers;
+﻿using LFS.Helpers;
 using System;
 using System.Windows.Forms;
+using Treasury.Data;
 
 namespace LFS.Views.Manage.TaxPayers
 {
@@ -29,7 +29,7 @@ namespace LFS.Views.Manage.TaxPayers
             var taxpayersModel = uc.TaxpayersModel();
             taxpayersModel.CreatedBy = UserHelper.loggedUser.Id;
 
-            return AccFactory.TaxpayersRepository().Insert(taxpayersModel);
+            return TreasuryFactory.TaxpayersRepository().Insert(taxpayersModel);
         }
 
         private void btnSave_Click(object sender, EventArgs e)

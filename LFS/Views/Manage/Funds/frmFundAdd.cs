@@ -1,5 +1,5 @@
-﻿using ACC.Data;
-using LFS.Helpers;
+﻿using LFS.Helpers;
+using OmniGov.Core.Repositories;
 using System;
 using System.Windows.Forms;
 
@@ -26,7 +26,7 @@ namespace LFS.Views.Manage.Funds
                 return false;
             }
 
-            return AccFactory.FundsRepository().Insert(uc.FundsModel());
+            return Factory.FundsRepository().Insert(uc.FundsModel());
         }
 
         private void frmFundAdd_Load(object sender, EventArgs e)

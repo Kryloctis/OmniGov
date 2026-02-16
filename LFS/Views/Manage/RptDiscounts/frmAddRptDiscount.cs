@@ -1,8 +1,8 @@
-﻿using ACC.Data;
-using ACC.Domain.Models;
-using LFS.Helpers;
+﻿using LFS.Helpers;
 using System;
 using System.Windows.Forms;
+using Treasury.Data;
+using Treasury.Domain.Entities;
 
 namespace LFS.Views.Manage.RptDiscount
 {
@@ -40,7 +40,7 @@ namespace LFS.Views.Manage.RptDiscount
                 IsAdvance = uc.chckBxAdvance.Checked
             };
 
-            return AccFactory.RptDiscountRepository().Insert(model);
+            return TreasuryFactory.RptDiscountRepository().Insert(model);
         }
 
         private void btnSave_Click(object sender, EventArgs e)

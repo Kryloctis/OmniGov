@@ -1,5 +1,6 @@
 ﻿using LFS.Helpers;
 using OmniGov.Core.Entities;
+using OmniGov.Core.Repositories;
 using System;
 using System.Windows.Forms;
 
@@ -33,7 +34,7 @@ namespace LFS.Views.Manage.ChartOfAccounts.AccountGroup
                 AccountGroupName = uc.txtName.Text.Trim()
             };
 
-            return AccFactory.AccountGroupRepository().Insert(accountGroupModel);
+            return Factory.AccountGroupRepository().Insert(accountGroupModel);
         }
 
         private void frmAccountGroupAdd_Load(object sender, EventArgs e)

@@ -1,8 +1,8 @@
-﻿using ACC.Data;
-using ACC.Domain.Models;
-using LFS.Helpers;
+﻿using LFS.Helpers;
 using System;
 using System.Windows.Forms;
+using Treasury.Data;
+using Treasury.Domain.Entities;
 
 namespace LFS.Views.Manage.RptPenalties
 {
@@ -33,7 +33,7 @@ namespace LFS.Views.Manage.RptPenalties
                 Frequency = uc.cmbxFrequency.Text.Trim()
             };
 
-            return AccFactory.RptPenaltiesRepository().Insert(model);
+            return TreasuryFactory.RptPenaltiesRepository().Insert(model);
         }
 
         private void btnSave_Click(object sender, EventArgs e)

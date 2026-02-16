@@ -7,6 +7,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Linq;
 using System.Windows.Forms;
+using Treasury.Data;
 using Treasury.Domain.Entities;
 
 namespace LFS.Views.Manage.FeesChargesConfig
@@ -54,7 +55,7 @@ namespace LFS.Views.Manage.FeesChargesConfig
         private void LoadFeesChargesNodes(int feesChargesClassificationId, bool isDeleted, TreeNode nodeFeesChargesClassification)
         {
             var textSearch = txtSearch.Text;
-            var dtFeesCharges = AccFactory.OtherPaymentRatesRepository().GetRecordsByTaxTypeIDAndDescription(feesChargesClassificationId, textSearch);
+            var dtFeesCharges = TreasuryFactory.OtherPaymentRatesRepository().GetRecordsByTaxTypeIDAndDescription(feesChargesClassificationId, textSearch);
             List<TreeNode> nodes = new List<TreeNode>();
 
             foreach (DataRow row in dtFeesCharges.Rows)
@@ -89,7 +90,7 @@ namespace LFS.Views.Manage.FeesChargesConfig
 
                 mainTreeView.ExpandAll();
 
-                var dataTable = AccFactory.TaxTypesRepository().GetRecords();
+                var dataTable = TreasuryFactory.TaxTypesRepository().GetRecords();
 
                 EnumerableRowCollection<DataRow> parentNodes = dataTable.AsEnumerable().Where(row => row.Field<dynamic>("parent") == null);
 
@@ -282,7 +283,7 @@ namespace LFS.Views.Manage.FeesChargesConfig
                     if (Helper.MessageBoxConfirmCancel("Deleting this classification disable all linked fees & charges. Confirm deletion?"))
                     {
                         deleteMessage = "Classification";
-                        return AccFactory.TaxTypesRepository().DeleteTaxType(nodeParameter.paramId);
+                        return TreasuryFactory.TaxTypesRepository().DeleteTaxType(nodeParameter.paramId);
                     }
 
                     deleteMessage = string.Empty;
@@ -293,7 +294,7 @@ namespace LFS.Views.Manage.FeesChargesConfig
                     {
                         var feesChargesModels = new List<OtherPaymentRatesModel>() { new OtherPaymentRatesModel() { Id = nodeParameter.paramId } };
                         deleteMessage = "Fees & Charges";
-                        return AccFactory.OtherPaymentRatesRepository().Delete(feesChargesModels);
+                        return TreasuryFactory.OtherPaymentRatesRepository().Delete(feesChargesModels);
                     }
                     deleteMessage = string.Empty;
                     return false;
@@ -334,7 +335,7 @@ namespace LFS.Views.Manage.FeesChargesConfig
                 return false;
             }
 
-            return AccFactory.TaxTypesRepository().UnDeleteTaxType(nodeParameters.paramId);
+            return TreasuryFactory.TaxTypesRepository().UnDeleteTaxType(nodeParameters.paramId);
         }
 
         private void btnUndelete_Click(object sender, EventArgs e)

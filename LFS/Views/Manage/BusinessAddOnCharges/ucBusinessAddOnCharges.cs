@@ -1,8 +1,9 @@
-﻿using ACC.Data;
-using LFS.Helpers;
+﻿using LFS.Helpers;
+using OmniGov.Core.Repositories;
 using System;
 using System.ComponentModel;
 using System.Windows.Forms;
+using Treasury.Data;
 
 namespace LFS.Views.Manage.BusinessAdOnCharges
 {
@@ -27,7 +28,7 @@ namespace LFS.Views.Manage.BusinessAdOnCharges
                 errorProvider1.GetError(txtDescription)
             };
 
-            return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
+            return Factory.CreateErrors(errorArray).GenerateErrorMessage();
         }
 
         internal void ResetForm()
@@ -39,7 +40,7 @@ namespace LFS.Views.Manage.BusinessAdOnCharges
 
         private bool IsDescriptionValidated(ErrorProvider errorProvider, TextBox textBox)
         {
-            bool descriptionExist = isEdit ? AccFactory.BusinessAddOnChargesRepository().DescriptionExist(id, textBox.Text.Trim()) : AccFactory.BusinessAddOnChargesRepository().DescriptionExist(textBox.Text.Trim());
+            bool descriptionExist = isEdit ? TreasuryFactory.BusinessAddOnChargesRepository().DescriptionExist(id, textBox.Text.Trim()) : TreasuryFactory.BusinessAddOnChargesRepository().DescriptionExist(textBox.Text.Trim());
 
             if (Helper.ShowErrorTextBoxEmpty(errorProvider, textBox, "Description"))
                 return false;

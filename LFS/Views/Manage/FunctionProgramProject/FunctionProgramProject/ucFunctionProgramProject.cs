@@ -1,5 +1,5 @@
-﻿using ACC.Data;
-using LFS.Helpers;
+﻿using LFS.Helpers;
+using OmniGov.Core.Repositories;
 using System;
 using System.ComponentModel;
 using System.Data;
@@ -23,7 +23,7 @@ namespace LFS.Views.Manage.FunctionProgramProject.FunctionProgramProject
             dtServiceName.Columns.Add("id");
             dtServiceName.Columns.Add("service_name");
 
-            foreach (DataRow item in AccFactory.FunctionalClassificationServiceRepository().GetViewRecords().Rows)
+            foreach (DataRow item in Factory.FunctionalClassificationServiceRepository().GetViewRecords().Rows)
             {
                 string serviceName = $"{item["functional_classifications_sector_code"]} - {item["service_name"]}";
 
@@ -49,7 +49,7 @@ namespace LFS.Views.Manage.FunctionProgramProject.FunctionProgramProject
                 epServiceName.GetError(cmbFunctionalClassificationService)
             };
 
-            return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
+            return Factory.CreateErrors(errorArray).GenerateErrorMessage();
         }
 
         internal void ResetForm()
@@ -80,7 +80,7 @@ namespace LFS.Views.Manage.FunctionProgramProject.FunctionProgramProject
 
         private bool CodeValidated(ErrorProvider errorProvider, TextBox textBox)
         {
-            bool codeExist = fppId == 0 ? AccFactory.FunctionProgramProjectRepository().CodeExist(textBox.Text.Trim()) : AccFactory.FunctionProgramProjectRepository().CodeExist(textBox.Text.Trim(), fppId);
+            bool codeExist = fppId == 0 ? Factory.FunctionProgramProjectRepository().CodeExist(textBox.Text.Trim()) : Factory.FunctionProgramProjectRepository().CodeExist(textBox.Text.Trim(), fppId);
 
             if (Helper.ShowErrorTextBoxEmpty(errorProvider, textBox, "Code"))
                 return false;
@@ -110,7 +110,7 @@ namespace LFS.Views.Manage.FunctionProgramProject.FunctionProgramProject
         {
             int serviceId = Convert.ToInt32(cmbFunctionalClassificationService.SelectedValue);
             string fppName = txtName.Text.Trim();
-            bool nameExist = fppId == 0 ? AccFactory.FunctionProgramProjectRepository().NameExist(fppName, serviceId) : AccFactory.FunctionProgramProjectRepository().NameExist(fppName, serviceId, fppId);
+            bool nameExist = fppId == 0 ? Factory.FunctionProgramProjectRepository().NameExist(fppName, serviceId) : Factory.FunctionProgramProjectRepository().NameExist(fppName, serviceId, fppId);
 
             if (Helper.ShowErrorTextBoxEmpty(errorProvider, textBox, "Name"))
                 return false;

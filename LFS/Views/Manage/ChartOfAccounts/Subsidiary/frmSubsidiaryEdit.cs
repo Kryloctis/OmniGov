@@ -1,5 +1,5 @@
-﻿using ACC.Data;
-using ACC.Domain.Models;
+﻿using Accounting.Data;
+using Accounting.Domain.Entities;
 using LFS.Helpers;
 using System;
 using System.Collections.Generic;
@@ -26,7 +26,7 @@ namespace LFS.Views.Manage.ChartOfAccounts.Subsidiary
 
         private void LoadSelectedRecord()
         {
-            Dictionary<string, string> data = AccFactory.SubsidiaryLedgerAccountsRepository().GetRecordByID(subsidiaryLedgerId);
+            Dictionary<string, string> data = AccountingFactory.SubsidiaryLedgerAccountsRepository().GetRecordByID(subsidiaryLedgerId);
 
             uc.txtCode.Text = data["sub_code"];
             uc.txtName.Text = data["sub_name"];
@@ -72,7 +72,7 @@ namespace LFS.Views.Manage.ChartOfAccounts.Subsidiary
                 Contact = uc.txtContact.Text.Trim()
             };
 
-            return AccFactory.SubsidiaryLedgerAccountsRepository().Update(subsidiaryLedgerAccountsModel);
+            return AccountingFactory.SubsidiaryLedgerAccountsRepository().Update(subsidiaryLedgerAccountsModel);
         }
 
         private void btnSave_Click(object sender, EventArgs e)

@@ -1,5 +1,7 @@
-﻿using LFS.Helpers;
+﻿using Accounting.Data;
+using LFS.Helpers;
 using OmniGov.Core.Entities;
+using OmniGov.Core.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -28,7 +30,7 @@ namespace LFS.Views.Manage.Journals.DefaultAccounts
                 cmbxFunds.Tag.ToString()
             };
 
-            return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
+            return Factory.CreateErrors(errorArray).GenerateErrorMessage();
         }
 
         private int GetMaxNumberOfDefaultAccounts()
@@ -78,7 +80,7 @@ namespace LFS.Views.Manage.Journals.DefaultAccounts
 
         private void LoadFunds()
         {
-            var dtFunds = AccFactory.FundsRepository().GetRecords();
+            var dtFunds = Factory.FundsRepository().GetRecords();
             HelperLoadRecords.FundsComboBox(dtFunds, cmbxFunds, "id", "fund_name");
         }
 
@@ -87,7 +89,7 @@ namespace LFS.Views.Manage.Journals.DefaultAccounts
             string searchKey = txtAccounts.Text.Trim();
             CreateDatagridViewColumns(dgAccounts);
 
-            var dtGeneralLedgerAccounts = AccFactory.GeneralLedgerAccountsRepository().GetViewRecordsBySearch(searchKey);
+            var dtGeneralLedgerAccounts = AccountingFactory.GeneralLedgerAccountsRepository().GetViewRecordsBySearch(searchKey);
 
             foreach (DataRow row in dtGeneralLedgerAccounts.Rows)
             {
@@ -97,7 +99,7 @@ namespace LFS.Views.Manage.Journals.DefaultAccounts
                 int fundId = Convert.ToInt32(cmbxFunds.SelectedValue);
                 bool isDebit = radDebit.Checked;
 
-                if (AccFactory.JournalsDefaultAccountsRepository().GeneralLedgerAccountExist(journalId, generalLedgerAccountId, fundId, isDebit)) continue;
+                if (Factory.JournalsDefaultAccountsRepository().GeneralLedgerAccountExist(journalId, generalLedgerAccountId, fundId, isDebit)) continue;
 
                 dgAccounts.Rows.Add(new object[]
                 {
@@ -115,7 +117,7 @@ namespace LFS.Views.Manage.Journals.DefaultAccounts
             int fundId = Convert.ToInt32(cmbxFunds.SelectedValue);
             bool isDebit = radDebit.Checked;
 
-            var dtDefaultAccounts = AccFactory.JournalsDefaultAccountsRepository().GetViewRecordsByJournalId(journalId, fundId, isDebit);
+            var dtDefaultAccounts = Factory.JournalsDefaultAccountsRepository().GetViewRecordsByJournalId(journalId, fundId, isDebit);
 
             foreach (DataRow row in dtDefaultAccounts.Rows)
             {
@@ -143,7 +145,7 @@ namespace LFS.Views.Manage.Journals.DefaultAccounts
 
         private void OnLoad()
         {
-            var dtJournals = AccFactory.JournalsRepository().GetRecordByID(journalId);
+            var dtJournals = Factory.JournalsRepository().GetRecordByID(journalId);
             lblJournalName.Text = dtJournals["journal_name"].ToString();
             LoadFunds();
             LoadDefaultAccounts();
@@ -265,7 +267,7 @@ namespace LFS.Views.Manage.Journals.DefaultAccounts
                 journalsDefaulAccountsModelList.Add(journalsDefaulAccountsModel);
             }
 
-            return AccFactory.JournalsDefaultAccountsRepository().Insert(journalId, fundId, isDebit, journalsDefaulAccountsModelList);
+            return Factory.JournalsDefaultAccountsRepository().Insert(journalId, fundId, isDebit, journalsDefaulAccountsModelList);
         }
 
         private void btnSave_Click(object sender, EventArgs e)

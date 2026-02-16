@@ -1,5 +1,5 @@
-﻿using ACC.Data;
-using LFS.Helpers;
+﻿using LFS.Helpers;
+using OmniGov.Core.Repositories;
 using System;
 using System.Windows.Forms;
 
@@ -29,7 +29,7 @@ namespace LFS.Views.Manage.Registry
             var registryModel = uc.RegistryModel();
             registryModel.CreatedBy = UserHelper.loggedUser.Id;
 
-            return AccFactory.RegistryRepository().Insert(registryModel);
+            return Factory.RegistryRepository().Insert(registryModel);
         }
 
         private void frmAddRegistry_Load(object sender, EventArgs e)

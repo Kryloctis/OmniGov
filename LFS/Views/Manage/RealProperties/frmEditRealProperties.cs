@@ -1,8 +1,8 @@
-﻿using ACC.Data;
-using LFS.Helpers;
+﻿using LFS.Helpers;
 using LFS.Views.Manage.RealProperties;
 using System;
 using System.Windows.Forms;
+using Treasury.Data;
 
 namespace LFS.Views.Manage.TaxPayers
 {
@@ -33,7 +33,7 @@ namespace LFS.Views.Manage.TaxPayers
             rptModel.Id = rptId;
             rptModel.UpdatedBy = UserHelper.loggedUser.Id;
 
-            return AccFactory.RealPropertiesRepository().UpdateWithPreviousAssessements(rptModel);
+            return TreasuryFactory.RealPropertiesRepository().UpdateWithPreviousAssessements(rptModel);
         }
 
         private void frmEditRealProperties_Load(object sender, EventArgs e)

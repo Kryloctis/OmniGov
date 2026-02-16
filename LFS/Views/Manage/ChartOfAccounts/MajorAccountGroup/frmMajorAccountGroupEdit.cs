@@ -1,6 +1,6 @@
-﻿using ACC.Data;
-using ACC.Domain.Models;
-using LFS.Helpers;
+﻿using LFS.Helpers;
+using OmniGov.Core.Entities;
+using OmniGov.Core.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
@@ -22,7 +22,7 @@ namespace LFS.Views.Manage.ChartOfAccounts.MajorAccountGroup
 
         private void LoadSelectedRecord()
         {
-            Dictionary<string, string> data = AccFactory.MajorAccountGroupRepository().GetRecordByID(uc.majorAccountGroupId);
+            Dictionary<string, string> data = Factory.MajorAccountGroupRepository().GetRecordByID(uc.majorAccountGroupId);
 
             uc.cmbAccountGroup.SelectedValue = data["account_group_id"];
             uc.txtCode.Text = data["maj_acc_group_code"];
@@ -47,7 +47,7 @@ namespace LFS.Views.Manage.ChartOfAccounts.MajorAccountGroup
                 MajorAccountGroupName = uc.txtName.Text.Trim()
             };
 
-            return AccFactory.MajorAccountGroupRepository().Update(majorAccountGroupModel);
+            return Factory.MajorAccountGroupRepository().Update(majorAccountGroupModel);
         }
 
         private void frmMajorAccountGroupEdit_Load(object sender, EventArgs e)

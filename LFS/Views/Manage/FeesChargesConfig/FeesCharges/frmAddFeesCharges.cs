@@ -1,6 +1,7 @@
 ﻿using LFS.Helpers;
 using System;
 using System.Windows.Forms;
+using Treasury.Data;
 using Treasury.Domain.Entities;
 
 namespace LFS.Views.Manage.FeesChargesConfig.FeesCharges
@@ -38,7 +39,7 @@ namespace LFS.Views.Manage.FeesChargesConfig.FeesCharges
                 CreatedBy = UserHelper.loggedUser.Id
             };
 
-            return AccFactory.OtherPaymentRatesRepository().Insert(feesChargesModel);
+            return TreasuryFactory.OtherPaymentRatesRepository().Insert(feesChargesModel);
         }
 
         private void btnSave_Click(object sender, EventArgs e)

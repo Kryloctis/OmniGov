@@ -1,6 +1,7 @@
 ﻿using LFS.Helpers;
 using System;
 using System.Windows.Forms;
+using Treasury.Data;
 using Treasury.Domain.Entities;
 
 namespace LFS.Views.Manage.Receipts
@@ -47,7 +48,7 @@ namespace LFS.Views.Manage.Receipts
                 UserId = userId
             };
 
-            return AccFactory.ReceiptsRepository().Insert(receiptModel);
+            return TreasuryFactory.ReceiptsRepository().Insert(receiptModel);
         }
 
         private void btnSave_Click(object sender, EventArgs e)

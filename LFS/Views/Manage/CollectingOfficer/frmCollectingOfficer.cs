@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
+using Treasury.Data;
 using Treasury.Domain.Entities;
 
 namespace LFS.Views.Manage.CollectingOfficer
@@ -64,10 +65,10 @@ namespace LFS.Views.Manage.CollectingOfficer
                     foreach (DataGridViewRow row in dgCollectingOfficer.SelectedRows)
                     {
                         int collectingOfficerID = Convert.ToInt16(row.Cells["id"].Value.ToString());
-                        if (!AccFactory.ReceiptsIssuedRepository().CollectingOfficerHasReceiptAssigned(collectingOfficerID))
+                        if (!TreasuryFactory.ReceiptsIssuedRepository().CollectingOfficerHasReceiptAssigned(collectingOfficerID))
                             modelList.Add(new CollectingOfficerModel() { Id = collectingOfficerID });
                     }
-                    return AccFactory.CollectingOfficerRepository().Delete(modelList);
+                    return TreasuryFactory.CollectingOfficerRepository().Delete(modelList);
                 }
             }
             return false;
@@ -94,12 +95,12 @@ namespace LFS.Views.Manage.CollectingOfficer
                 int id = int.Parse(dgCollectingOfficer.CurrentRow.Cells["id"].Value.ToString());
                 byte[] columnIndexTimestamp = { 4, 5 };
 
-                lblJOCount.Text = AccFactory.CollectingOfficerRepository().CollectingOfficerJOCount(id).ToString();
+                lblJOCount.Text = TreasuryFactory.CollectingOfficerRepository().CollectingOfficerJOCount(id).ToString();
 
                 Helper.ShowRecordTimestamp(dgCollectingOfficer, columnIndexTimestamp, lblCreatedAt, lblUpdatedAt);
                 Helper.EnableDisableToolStripButtons(dgCollectingOfficer, btnEdit, btnDelete);
 
-                btnDelete.Enabled = AccFactory.ReceiptsIssuedRepository().CollectingOfficerHasReceiptAssigned(id) ? false : true;
+                btnDelete.Enabled = TreasuryFactory.ReceiptsIssuedRepository().CollectingOfficerHasReceiptAssigned(id) ? false : true;
                 btnJobOrder.Enabled = selectedRowCount == 1;
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
@@ -157,7 +158,7 @@ namespace LFS.Views.Manage.CollectingOfficer
 
                 var dataTable = new DataTable();
                 dataTable.Columns.AddRange(DataColumnsCollectingOfficers());
-                DataTable dtCollectingOfficers = AccFactory.CollectingOfficerRepository().GetRecordsBySearch(searchKey);
+                DataTable dtCollectingOfficers = TreasuryFactory.CollectingOfficerRepository().GetRecordsBySearch(searchKey);
 
                 int totalProgressCount = dtCollectingOfficers.Rows.Count;
                 int progressCount = 0;

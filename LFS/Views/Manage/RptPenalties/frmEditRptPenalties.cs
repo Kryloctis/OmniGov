@@ -1,8 +1,8 @@
-﻿using ACC.Data;
-using ACC.Domain.Models;
-using LFS.Helpers;
+﻿using LFS.Helpers;
 using System;
 using System.Windows.Forms;
+using Treasury.Data;
+using Treasury.Domain.Entities;
 
 namespace LFS.Views.Manage.RptPenalties
 {
@@ -36,12 +36,12 @@ namespace LFS.Views.Manage.RptPenalties
                 Frequency = uc.cmbxFrequency.Text.Trim()
             };
 
-            return AccFactory.RptPenaltiesRepository().Update(model);
+            return TreasuryFactory.RptPenaltiesRepository().Update(model);
         }
 
         private void LoadRecord()
         {
-            var dictRptDiscounts = AccFactory.RptPenaltiesRepository().GetRecordByID(uc.rptPenaltiesId);
+            var dictRptDiscounts = TreasuryFactory.RptPenaltiesRepository().GetRecordByID(uc.rptPenaltiesId);
             decimal rate = Convert.ToDecimal(dictRptDiscounts["rate"]);
 
             uc.txtDescription.Text = dictRptDiscounts["description"];

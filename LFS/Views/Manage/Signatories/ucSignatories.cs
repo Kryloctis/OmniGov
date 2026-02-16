@@ -1,5 +1,5 @@
-﻿using ACC.Data;
-using LFS.Helpers;
+﻿using LFS.Helpers;
+using OmniGov.Core.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -43,7 +43,7 @@ namespace LFS.Views.Manage.Signatories
                 dgReferences.Tag.ToString()
             };
 
-            return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
+            return Factory.CreateErrors(errorArray).GenerateErrorMessage();
         }
 
         internal void ValidateReferenced()
@@ -51,8 +51,8 @@ namespace LFS.Views.Manage.Signatories
             foreach (DataGridViewRow row in dgReferences.Rows)
             {
                 int referenceId = Convert.ToInt32(row.Cells["id"].Value);
-                bool isReferenced = AccFactory.SignatoriesHasReferencesRepository().ReferenceIdExist(referenceId);
-                bool isReferencedBySignatoryId = AccFactory.SignatoriesHasReferencesRepository().ReferenceIdExist(referenceId, signatoriesId);
+                bool isReferenced = Factory.SignatoriesHasReferencesRepository().ReferenceIdExist(referenceId);
+                bool isReferencedBySignatoryId = Factory.SignatoriesHasReferencesRepository().ReferenceIdExist(referenceId, signatoriesId);
 
                 if (!isEdit ? isReferenced : isReferencedBySignatoryId)
                 {
@@ -65,19 +65,17 @@ namespace LFS.Views.Manage.Signatories
             }
         }
 
-        #region References
-
         internal void LoadReferences()
         {
             HelperLoadRecords.ReferencesDatagridView(null, dgReferences);
             dgReferences.RowHeadersVisible = false;
             string office = cmbxOfficeFilter.Text.Trim();
-            var dtViewDocumentReferences = AccFactory.DocumentReferencesRepository().GetViewRecordsByOffice(office);
+            var dtViewDocumentReferences = Factory.DocumentReferencesRepository().GetViewRecordsByOffice(office);
 
             foreach (DataRow row in dtViewDocumentReferences.Rows)
             {
                 int documentReferencesId = Convert.ToInt32(row["document_references_id"]);
-                bool isReferenced = AccFactory.SignatoriesHasReferencesRepository().IsReferencedBySignatory(documentReferencesId, signatoriesId);
+                bool isReferenced = Factory.SignatoriesHasReferencesRepository().IsReferencedBySignatory(documentReferencesId, signatoriesId);
 
                 var data = new object[]
                 {
@@ -92,8 +90,6 @@ namespace LFS.Views.Manage.Signatories
 
             ValidateReferenced();
         }
-
-        #endregion References
 
         private void ucSignatories_Load(object sender, System.EventArgs e)
         {
@@ -125,8 +121,6 @@ namespace LFS.Views.Manage.Signatories
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
-
-        #region Validations
 
         private List<int> SelectedReferences()
         {
@@ -205,7 +199,5 @@ namespace LFS.Views.Manage.Signatories
         {
             Helper.ClearErrorTextBox(errorProvider1, txtTitle);
         }
-
-        #endregion Validations
     }
 }

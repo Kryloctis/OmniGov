@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
+using Treasury.Data;
 using Treasury.Domain.Entities;
 
 namespace LFS.Views.Manage.RptDiscount
@@ -122,7 +123,7 @@ namespace LFS.Views.Manage.RptDiscount
                 }
 
                 deletedCount = rowCount;
-                return AccFactory.RptDiscountRepository().Delete(rptDiscountsModelList);
+                return TreasuryFactory.RptDiscountRepository().Delete(rptDiscountsModelList);
             }
 
             deletedCount = 0;
@@ -172,7 +173,7 @@ namespace LFS.Views.Manage.RptDiscount
             {
                 string searchText = e.Argument as string;
 
-                DataTable dtRptDiscounts = AccFactory.RptDiscountRepository().GetRecordsBySearch(searchText);
+                DataTable dtRptDiscounts = TreasuryFactory.RptDiscountRepository().GetRecordsBySearch(searchText);
                 var dataTable = new DataTable();
                 dataTable.Columns.AddRange(DiscountsDataColumns());
 

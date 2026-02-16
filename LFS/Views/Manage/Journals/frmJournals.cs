@@ -2,6 +2,7 @@
 using LFS.Views.Manage.Journals.DefaultAccounts;
 using MySql.Data.MySqlClient;
 using OmniGov.Core.Entities;
+using OmniGov.Core.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
@@ -84,7 +85,7 @@ namespace LFS.Views.Manage.Journals
                         journalsModelList.Add(new JournalsModel() { Id = journalId });
                     }
 
-                    return AccFactory.JournalsRepository().Delete(journalsModelList);
+                    return Factory.JournalsRepository().Delete(journalsModelList);
                 }
             }
             return false;

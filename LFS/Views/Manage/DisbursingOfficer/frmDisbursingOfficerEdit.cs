@@ -1,8 +1,8 @@
-﻿using ACC.Data;
-using ACC.Domain.Models;
-using LFS.Helpers;
+﻿using LFS.Helpers;
 using System;
 using System.Windows.Forms;
+using Treasury.Data;
+using Treasury.Domain.Entities;
 
 namespace LFS.Views.Manage.DisbursingOfficer
 {
@@ -23,7 +23,7 @@ namespace LFS.Views.Manage.DisbursingOfficer
 
         private void LoadSelectedRecord()
         {
-            var disbursingOfficerDict = AccFactory.DisbursingOfficerRepository().GetRecordByID(uc.disbursingOfficerId);
+            var disbursingOfficerDict = TreasuryFactory.DisbursingOfficerRepository().GetRecordByID(uc.disbursingOfficerId);
 
             uc.txtPrefix.Text = disbursingOfficerDict["prefix"];
             uc.txtFirstName.Text = disbursingOfficerDict["first_name"];
@@ -55,7 +55,7 @@ namespace LFS.Views.Manage.DisbursingOfficer
                 UserId = uc.UserId,
             };
 
-            return AccFactory.DisbursingOfficerRepository().Update(disbursingOfficerModel);
+            return TreasuryFactory.DisbursingOfficerRepository().Update(disbursingOfficerModel);
         }
 
         private void btnUpdate_Click(object sender, EventArgs e)

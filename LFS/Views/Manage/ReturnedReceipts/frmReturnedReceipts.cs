@@ -1,7 +1,7 @@
-﻿using ACC.Data;
-using LFS.Helpers;
+﻿using LFS.Helpers;
 using System;
 using System.Windows.Forms;
+using Treasury.Data;
 
 namespace LFS.Views.Manage.ReturnedReceipts
 {
@@ -30,7 +30,7 @@ namespace LFS.Views.Manage.ReturnedReceipts
 
         private void LoadRecords()
         {
-            var returnedReceiptDt = AccFactory.ReceiptsIssuedRepository().GetReturnedReceipts();
+            var returnedReceiptDt = TreasuryFactory.ReceiptsIssuedRepository().GetReturnedReceipts();
 
             HelperLoadRecords.ReturnedReceiptsDatagridView(returnedReceiptDt, dgReturnedReceipts);
             lblRecordCounts.Text = dgReturnedReceipts.Rows.Count.ToString();
@@ -42,7 +42,7 @@ namespace LFS.Views.Manage.ReturnedReceipts
             {
                 var searchKey = txtSearch.Text.Trim();
 
-                var receiptIssuedRepo = AccFactory.ReceiptsIssuedRepository();
+                var receiptIssuedRepo = TreasuryFactory.ReceiptsIssuedRepository();
                 var returnedReceiptDt = receiptIssuedRepo.GetReturnedReceiptsBySearch(searchKey);
 
                 HelperLoadRecords.ReturnedReceiptsDatagridView(returnedReceiptDt, dgReturnedReceipts);

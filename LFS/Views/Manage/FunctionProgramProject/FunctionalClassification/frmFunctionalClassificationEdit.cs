@@ -1,5 +1,6 @@
 ﻿using LFS.Helpers;
 using OmniGov.Core.Entities;
+using OmniGov.Core.Repositories;
 using System;
 using System.Windows.Forms;
 
@@ -21,7 +22,7 @@ namespace LFS.Views.Manage.FunctionProgramProject.FunctionalClassification
 
         private void LoadSelectedRecord()
         {
-            var functionalClassificationData = AccFactory.FunctionalClassificationRepository().GetRecordByID(uc.functionalClassificationId);
+            var functionalClassificationData = Factory.FunctionalClassificationRepository().GetRecordByID(uc.functionalClassificationId);
 
             uc.txtCode.Text = functionalClassificationData["sector_code"];
             uc.txtName.Text = functionalClassificationData["sector_name"];
@@ -42,7 +43,7 @@ namespace LFS.Views.Manage.FunctionProgramProject.FunctionalClassification
                 SectorName = uc.txtName.Text.Trim()
             };
 
-            return AccFactory.FunctionalClassificationRepository().Update(functionalClassificationModel);
+            return Factory.FunctionalClassificationRepository().Update(functionalClassificationModel);
         }
 
         private void frmFunctionalClassificationEdit_Load(object sender, EventArgs e)

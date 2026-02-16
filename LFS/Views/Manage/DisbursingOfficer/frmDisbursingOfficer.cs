@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Windows.Forms;
+using Treasury.Data;
 using Treasury.Domain.Entities;
 
 namespace LFS.Views.Manage.DisbursingOfficer
@@ -34,9 +35,9 @@ namespace LFS.Views.Manage.DisbursingOfficer
             DataTable dtDisbursingOfficers;
 
             if (searchText.Length < 2)
-                dtDisbursingOfficers = AccFactory.DisbursingOfficerRepository().GetRecords();
+                dtDisbursingOfficers = TreasuryFactory.DisbursingOfficerRepository().GetRecords();
             else
-                dtDisbursingOfficers = AccFactory.DisbursingOfficerRepository().GetRecordsBySearch(searchText);
+                dtDisbursingOfficers = TreasuryFactory.DisbursingOfficerRepository().GetRecordsBySearch(searchText);
 
             foreach (DataRow row in dtDisbursingOfficers.Rows)
             {
@@ -114,7 +115,7 @@ namespace LFS.Views.Manage.DisbursingOfficer
                     modelList.Add(new DisbursingOfficerModel() { Id = disbursingOfficerId });
                 }
 
-                return AccFactory.DisbursingOfficerRepository().Delete(modelList);
+                return TreasuryFactory.DisbursingOfficerRepository().Delete(modelList);
             }
             return false;
         }

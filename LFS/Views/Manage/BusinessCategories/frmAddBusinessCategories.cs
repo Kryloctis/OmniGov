@@ -1,6 +1,7 @@
 ﻿using LFS.Helpers;
 using System;
 using System.Windows.Forms;
+using Treasury.Data;
 using Treasury.Domain.Entities;
 
 namespace LFS.Views.Manage.BusinessCategories
@@ -39,7 +40,7 @@ namespace LFS.Views.Manage.BusinessCategories
                 LineOfBusiness = lineInBusiness
             };
 
-            return AccFactory.BusinessCategoriesRepository().Insert(businessCategoriesModel);
+            return TreasuryFactory.BusinessCategoriesRepository().Insert(businessCategoriesModel);
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -50,7 +51,7 @@ namespace LFS.Views.Manage.BusinessCategories
                 {
                     Helper.MessageBoxSuccess("Business category has been saved.");
                     _frmBusinessCategories.LoadBusinessCategories();
-                    int lastInsertedId = AccFactory.BusinessCategoriesRepository().GetLastInsertedId();
+                    int lastInsertedId = TreasuryFactory.BusinessCategoriesRepository().GetLastInsertedId();
                     Helper.DatagridViewRecordFinder(_frmBusinessCategories.dgBusinessCategories, "id", lastInsertedId.ToString());
                     _ucBusinessCategories.ResetForm();
                 }

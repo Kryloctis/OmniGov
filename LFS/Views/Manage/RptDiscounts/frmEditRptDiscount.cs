@@ -1,6 +1,7 @@
 ﻿using LFS.Helpers;
 using System;
 using System.Windows.Forms;
+using Treasury.Data;
 using Treasury.Domain.Entities;
 
 namespace LFS.Views.Manage.RptDiscount
@@ -36,12 +37,12 @@ namespace LFS.Views.Manage.RptDiscount
                 IsAdvance = uc.chckBxAdvance.Checked
             };
 
-            return AccFactory.RptDiscountRepository().Update(model);
+            return TreasuryFactory.RptDiscountRepository().Update(model);
         }
 
         private void LoadRecord()
         {
-            var dictRptDiscounts = AccFactory.RptDiscountRepository().GetRecordByID(uc.rptDiscountId);
+            var dictRptDiscounts = TreasuryFactory.RptDiscountRepository().GetRecordByID(uc.rptDiscountId);
             decimal rate = Convert.ToDecimal(dictRptDiscounts["rate"]);
 
             uc.cmbxMonth.SelectedValue = dictRptDiscounts["month"];

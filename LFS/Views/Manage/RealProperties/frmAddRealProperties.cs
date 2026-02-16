@@ -1,8 +1,8 @@
-﻿using ACC.Data;
-using LFS.Helpers;
+﻿using LFS.Helpers;
 using LFS.Views.Manage.TaxPayers;
 using System;
 using System.Windows.Forms;
+using Treasury.Data;
 
 namespace LFS.Views.Manage.RealProperties
 {
@@ -29,7 +29,7 @@ namespace LFS.Views.Manage.RealProperties
             var rptModel = uc.RealPropertiesModel();
             rptModel.CreatedBy = UserHelper.loggedUser.Id;
 
-            return AccFactory.RealPropertiesRepository().InsertWithPreviousAssessments(rptModel);
+            return TreasuryFactory.RealPropertiesRepository().InsertWithPreviousAssessments(rptModel);
         }
 
         private void btnSave_Click(object sender, EventArgs e)

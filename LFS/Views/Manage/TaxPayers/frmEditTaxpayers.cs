@@ -1,7 +1,7 @@
-﻿using ACC.Data;
-using LFS.Helpers;
+﻿using LFS.Helpers;
 using System;
 using System.Windows.Forms;
+using Treasury.Data;
 
 namespace LFS.Views.Manage.TaxPayers
 {
@@ -32,7 +32,7 @@ namespace LFS.Views.Manage.TaxPayers
             taxpayersModel.Id = taxpayerId;
             taxpayersModel.UpdatedBy = UserHelper.loggedUser.Id;
 
-            return AccFactory.TaxpayersRepository().Update(taxpayersModel);
+            return TreasuryFactory.TaxpayersRepository().Update(taxpayersModel);
         }
 
         private void btnUpdate_Click(object sender, EventArgs e)

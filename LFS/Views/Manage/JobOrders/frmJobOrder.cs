@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using Treasury.Data;
 using Treasury.Domain.Entities;
 
 namespace LFS.Views.Manage.JobOrders
@@ -42,7 +43,7 @@ namespace LFS.Views.Manage.JobOrders
 
         internal void LoadRecords()
         {
-            var collectingOfficerHasJODT = AccFactory.CollectingOfficerHasJobOrdersRepository().GetJobOrdersByCollectingOfficerId(collectingOfficerId);
+            var collectingOfficerHasJODT = TreasuryFactory.CollectingOfficerHasJobOrdersRepository().GetJobOrdersByCollectingOfficerId(collectingOfficerId);
             HelperLoadRecords.JobOrdersDatagridView(collectingOfficerHasJODT, dgJobOrders);
             lblRecordCount.Text = dgJobOrders.Rows.Count.ToString();
         }
@@ -54,7 +55,7 @@ namespace LFS.Views.Manage.JobOrders
                 Helper.EnableDisableToolStripButtons(dgJobOrders, btnEdit, btnDelete);
 
                 int id = int.Parse(dgJobOrders.CurrentRow.Cells[0].Value.ToString());
-                btnDelete.Enabled = AccFactory.ReceiptsIssuedRepository().CollectingOfficerHasReceiptAssigned(id) ? false : true;
+                btnDelete.Enabled = TreasuryFactory.ReceiptsIssuedRepository().CollectingOfficerHasReceiptAssigned(id) ? false : true;
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -64,7 +65,7 @@ namespace LFS.Views.Manage.JobOrders
             try
             {
                 string searchText = txtSearch.Text.Trim();
-                var collectingOfficerHasJODt = AccFactory.CollectingOfficerHasJobOrdersRepository().GetRecordsBySearch(collectingOfficerId, searchText);
+                var collectingOfficerHasJODt = TreasuryFactory.CollectingOfficerHasJobOrdersRepository().GetRecordsBySearch(collectingOfficerId, searchText);
 
                 HelperLoadRecords.JobOrdersDatagridView(collectingOfficerHasJODt, dgJobOrders);
                 lblRecordCount.Text = dgJobOrders.Rows.Count.ToString();
@@ -96,7 +97,7 @@ namespace LFS.Views.Manage.JobOrders
                         jobOrderModel.Add(new JobOrderModel() { Id = jobOrderId });
                     }
 
-                    if (AccFactory.CollectingOfficerHasJobOrdersRepository().Delete(collectingOfficerHasJOModel) == true && AccFactory.JobOrderRepository().Delete(jobOrderModel) == true)
+                    if (TreasuryFactory.CollectingOfficerHasJobOrdersRepository().Delete(collectingOfficerHasJOModel) == true && TreasuryFactory.JobOrderRepository().Delete(jobOrderModel) == true)
                         LoadRecords();
                 }
             }

@@ -1,6 +1,6 @@
-﻿using ACC.Data;
-using ACC.Domain.Models;
-using LFS.Helpers;
+﻿using LFS.Helpers;
+using OmniGov.Core.Entities;
+using OmniGov.Core.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
@@ -23,7 +23,7 @@ namespace LFS.Views.Manage.FunctionProgramProject.FunctionProgramProject
 
         private void LoadSelectedRecord()
         {
-            Dictionary<string, string> dicfunctionProgramProject = AccFactory.FunctionProgramProjectRepository().GetRecordByID(uc.fppId);
+            Dictionary<string, string> dicfunctionProgramProject = Factory.FunctionProgramProjectRepository().GetRecordByID(uc.fppId);
             uc.cmbFunctionalClassificationService.SelectedValue = dicfunctionProgramProject["functional_classification_services_id"];
             uc.txtCode.Text = dicfunctionProgramProject["fpp_code"];
             uc.txtName.Text = dicfunctionProgramProject["fpp_name"];
@@ -49,7 +49,7 @@ namespace LFS.Views.Manage.FunctionProgramProject.FunctionProgramProject
                 IsSpecial = uc.chckboxSpecial.Checked ? true : false
             };
 
-            return AccFactory.FunctionProgramProjectRepository().Update(functionProgramProjectModel);
+            return Factory.FunctionProgramProjectRepository().Update(functionProgramProjectModel);
         }
 
         private void frmFunctionProgramProjectEdit_Load(object sender, EventArgs e)

@@ -1,11 +1,11 @@
-﻿using ACC.Data;
-using ACC.Domain.Models;
-using LFS.Helpers;
+﻿using LFS.Helpers;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
+using Treasury.Data;
+using Treasury.Domain.Entities;
 
 namespace LFS.Views.Manage.RptTaxRates
 {
@@ -59,7 +59,7 @@ namespace LFS.Views.Manage.RptTaxRates
                 }
 
                 deletedCount = rowCount;
-                return AccFactory.RptTaxRatesRepository().Delete(rptTaxRatesModelList);
+                return TreasuryFactory.RptTaxRatesRepository().Delete(rptTaxRatesModelList);
             }
 
             deletedCount = 0;
@@ -142,7 +142,7 @@ namespace LFS.Views.Manage.RptTaxRates
                 var searchText = e.Argument as string;
 
                 DataTable dataTable = new DataTable();
-                DataTable dtTaxRatesFromDb = AccFactory.RptTaxRatesRepository().GetRecordsBySearch(searchText);
+                DataTable dtTaxRatesFromDb = TreasuryFactory.RptTaxRatesRepository().GetRecordsBySearch(searchText);
 
                 dataTable.Columns.AddRange(TaxRatesDataColumns());
 

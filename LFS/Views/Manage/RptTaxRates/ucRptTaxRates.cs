@@ -1,5 +1,5 @@
-﻿using ACC.Data;
-using LFS.Helpers;
+﻿using LFS.Helpers;
+using OmniGov.Core.Repositories;
 using System;
 using System.ComponentModel;
 using System.Windows.Forms;
@@ -35,10 +35,8 @@ namespace LFS.Views.Manage.RptTaxRates
                 errorProvider1.GetError(nudRate)
             };
 
-            return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
+            return Factory.CreateErrors(errorArray).GenerateErrorMessage();
         }
-
-        #region Validations
 
         private bool CodeExist()
         {
@@ -98,7 +96,5 @@ namespace LFS.Views.Manage.RptTaxRates
         {
             Helper.ClearErrorNumericUpDown(errorProvider1, nudRate);
         }
-
-        #endregion Validations
     }
 }

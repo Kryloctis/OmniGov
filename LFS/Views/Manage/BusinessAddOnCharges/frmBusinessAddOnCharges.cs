@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using Treasury.Data;
 using Treasury.Domain.Entities;
 
 namespace LFS.Views.Manage.BusinessAdOnCharges
@@ -18,7 +19,7 @@ namespace LFS.Views.Manage.BusinessAdOnCharges
         internal void LoadBusinessAddOnCharges()
         {
             var searchText = toolStripTextBoxSearch.Text.Trim();
-            var dt = AccFactory.BusinessAddOnChargesRepository().GetRecordsBySearch(searchText);
+            var dt = TreasuryFactory.BusinessAddOnChargesRepository().GetRecordsBySearch(searchText);
             HelperLoadRecords.BusinessAddOnChargesDataGridView(dgBusinessAddOnCharges, dt);
             dgBusinessAddOnCharges.CurrentCell = dgBusinessAddOnCharges.FirstDisplayedCell;
             toolStripStatusLabelRecordCount.Text = dgBusinessAddOnCharges.Rows.Count.ToString();
@@ -112,7 +113,7 @@ namespace LFS.Views.Manage.BusinessAdOnCharges
                     }
 
                     deletedCount = rowCount;
-                    return AccFactory.BusinessAddOnChargesRepository().Delete(businessAdOnChargesModelList);
+                    return TreasuryFactory.BusinessAddOnChargesRepository().Delete(businessAdOnChargesModelList);
                 }
             }
             catch (Exception ex)
