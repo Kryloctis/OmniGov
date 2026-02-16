@@ -1,5 +1,5 @@
-﻿using ACC.Data;
-using LFS.Helpers;
+﻿using LFS.Helpers;
+using OmniGov.Core.Repositories;
 using System;
 using System.Windows.Forms;
 
@@ -30,7 +30,7 @@ namespace LFS.Budget.Views.SupplementalAppropriations
                 errorProvider1.GetError(nudAmount)
             };
 
-            return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
+            return Factory.CreateErrors(errorArray).GenerateErrorMessage();
         }
 
         internal void ResetForm()
@@ -72,8 +72,6 @@ namespace LFS.Budget.Views.SupplementalAppropriations
             }
         }
 
-        #region Validations
-
         private bool AmountValidated(NumericUpDown numericUpDown, ErrorProvider errorProvider, string message)
         {
             if (numericUpDown.Value == 0)
@@ -94,7 +92,5 @@ namespace LFS.Budget.Views.SupplementalAppropriations
         {
             Helper.ClearErrorNumericUpDown(errorProvider1, nudAmount);
         }
-
-        #endregion Validations
     }
 }

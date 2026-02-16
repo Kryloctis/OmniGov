@@ -1,9 +1,11 @@
-﻿using Budget.Domain.Models;
+﻿using Budget.Data;
+using Budget.Domain.Models;
 using LFS.Budget.Views.Augmentation;
 using LFS.Budget.Views.Realignment;
 using LFS.Budget.Views.SupplementalAppropriations;
 using LFS.Helpers;
 using MySql.Data.MySqlClient;
+using OmniGov.Core.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -46,7 +48,7 @@ namespace LFS.Budget.Views.BudgetAppropriations
                 nudYear.Tag
             };
 
-            return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
+            return Factory.CreateErrors(errorArray).GenerateErrorMessage();
         }
 
         private void ShowRecordTimeStamp(DataGridView dataGridView)
@@ -148,7 +150,7 @@ namespace LFS.Budget.Views.BudgetAppropriations
 
             budgetAppropriationsModel.OthersFPPId = null;
 
-            var dtGetViewRecordsByFFPIDByAllotmentClass = AccFactory.BudgetAppropriationsRepository().GetViewRecordsByIdsYear(budgetAppropriationsModel);
+            var dtGetViewRecordsByFFPIDByAllotmentClass = BudgetFactory.BudgetAppropriationsRepository().GetViewRecordsByIdsYear(budgetAppropriationsModel);
 
             //Load by loop All Budget Appropriations Records without Others FPP
             foreach (DataRow drGetViewRecordsByIds in dtGetViewRecordsByFFPIDByAllotmentClass.Rows)
@@ -161,7 +163,7 @@ namespace LFS.Budget.Views.BudgetAppropriations
             #region Others FPP
 
             //Initialize Repository Method for others fpp records
-            var dtGetRecordsOthersFPP = AccFactory.BudgetAppropriationsRepository().GetHeaderOthersFPP(fppId, allotmentClassId, fundId, year);
+            var dtGetRecordsOthersFPP = BudgetFactory.BudgetAppropriationsRepository().GetHeaderOthersFPP(fppId, allotmentClassId, fundId, year);
 
             //Load by loop All Budget Appropriations Records with Others FPP
             foreach (DataRow drGetRecordsOthersFPP in dtGetRecordsOthersFPP.Rows)
@@ -175,7 +177,7 @@ namespace LFS.Budget.Views.BudgetAppropriations
                 dataTable.Rows.Add(otherFppRowHeader);
 
                 budgetAppropriationsModel.OthersFPPId = othersFPPID;
-                DataTable dtGetViewRecordsByIds = AccFactory.BudgetAppropriationsRepository().GetViewRecordsByIdsYear(budgetAppropriationsModel);
+                DataTable dtGetViewRecordsByIds = BudgetFactory.BudgetAppropriationsRepository().GetViewRecordsByIdsYear(budgetAppropriationsModel);
 
                 foreach (DataRow drGetViewRecordsByIds in dtGetViewRecordsByIds.Rows)
                 {
@@ -204,22 +206,22 @@ namespace LFS.Budget.Views.BudgetAppropriations
                 string remarks = dataRow["remarks"].ToString();
 
                 //Get total supplemental appropriations
-                decimal totalSupplementalAppropriation = AccFactory.SupplementalAppropriationsRepository().GetSumSupplementalAppropriationsBy_BudgetAppropriationsId(rowId);
+                decimal totalSupplementalAppropriation = BudgetFactory.SupplementalAppropriationsRepository().GetSumSupplementalAppropriationsBy_BudgetAppropriationsId(rowId);
 
                 //GET total allotment release
-                var dtAllotmentRelease = AccFactory.AllotmentReleaseRepository().GetViewRecordsByBudgetAppropriationId(rowId);
+                var dtAllotmentRelease = BudgetFactory.AllotmentReleaseRepository().GetViewRecordsByBudgetAppropriationId(rowId);
                 decimal totalAllotmentRelease = Convert.ToDecimal(dtAllotmentRelease.Rows.Count == 0 ? 0 : dtAllotmentRelease.Compute("SUM(amount)", string.Empty));
 
                 //Get total realignment
-                //var totalRealignmentTo = AccFactory.BudgetRealignmentRepository().GetAmountOfBudgetRealignedToByBudgetId(rowId);
+                //var totalRealignmentTo = BudgetFactory.BudgetRealignmentRepository().GetAmountOfBudgetRealignedToByBudgetId(rowId);
 
-                //var totalRealignmentFrom = AccFactory.BudgetRealignmentRepository().GetAmountOfBudgetRealignedFromByBudgetId(rowId);
+                //var totalRealignmentFrom = BudgetFactory.BudgetRealignmentRepository().GetAmountOfBudgetRealignedFromByBudgetId(rowId);
 
                 //Get total Appropriations
                 decimal totalAppropriationAmount = (totalSupplementalAppropriation + rowAppropriationAmount + 0) - 0;
 
                 //Get total Obligations
-                var totalObligations = AccFactory.ObligationRequestRepository().GetSumObligationsByBudgetAppropriationAndStatus(rowId);
+                var totalObligations = BudgetFactory.ObligationRequestRepository().GetSumObligationsByBudgetAppropriationAndStatus(rowId);
                 var unobligatedBalance = totalAppropriationAmount - totalObligations;
 
                 string objectOfExpenditures = $"   {rowAccountCode} - {rowAccountName}{(string.IsNullOrEmpty(remarks) ? string.Empty : $" → {remarks}")}";
@@ -299,10 +301,10 @@ namespace LFS.Budget.Views.BudgetAppropriations
         {
             try
             {
-                var dtAllotmentClasses = AccFactory.AllotmentClassesRepository().GetRecords();
+                var dtAllotmentClasses = Factory.AllotmentClassesRepository().GetRecords();
                 HelperLoadRecords.BudgetAppropriationsAllotmentClassCombobox(dtAllotmentClasses, cmbxAllotmentClass, "allotment_code", "id");
 
-                var dtFunds = AccFactory.FundsRepository().GetRecords();
+                var dtFunds = Factory.FundsRepository().GetRecords();
                 HelperLoadRecords.BudgetAppropriationsTypeOfFundsCombobox(dtFunds, cmbxFunds, "fund_name", "id");
 
                 LoadFPP();
@@ -456,7 +458,7 @@ namespace LFS.Budget.Views.BudgetAppropriations
                             }
                         }
 
-                        _ = AccFactory.BudgetAppropriationsRepository().Delete(budgetAppropriationsModelList);
+                        _ = BudgetFactory.BudgetAppropriationsRepository().Delete(budgetAppropriationsModelList);
                         LoadBudgetAppropriationRecords();
                     }
                 }
@@ -503,9 +505,9 @@ namespace LFS.Budget.Views.BudgetAppropriations
             DataTable dtFPP;
 
             if (string.IsNullOrEmpty(cmbxFPP.Text))
-                dtFPP = AccFactory.FunctionProgramProjectRepository().GetViewRecords();
+                dtFPP = Factory.FunctionProgramProjectRepository().GetViewRecords();
             else
-                dtFPP = AccFactory.FunctionProgramProjectRepository().GetRecordsByCodeName(cmbxFPP.Text);
+                dtFPP = Factory.FunctionProgramProjectRepository().GetRecordsByCodeName(cmbxFPP.Text);
 
             foreach (DataRow item in dtFPP.Rows)
             {

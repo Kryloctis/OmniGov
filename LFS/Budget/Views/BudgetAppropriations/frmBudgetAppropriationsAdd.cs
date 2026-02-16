@@ -1,5 +1,5 @@
-﻿using ACC.Data;
-using ACC.Domain.Models;
+﻿using Budget.Data;
+using Budget.Domain.Models;
 using LFS.Helpers;
 using System;
 using System.Windows.Forms;
@@ -44,7 +44,7 @@ namespace LFS.Budget.Views.BudgetAppropriations
                     Remarks = uc.txtRemarks.Text.Trim()
                 };
 
-                return AccFactory.BudgetAppropriationsRepository().Insert(budgetAppropriationsModel);
+                return BudgetFactory.BudgetAppropriationsRepository().Insert(budgetAppropriationsModel);
             }
             catch (Exception ex)
             {

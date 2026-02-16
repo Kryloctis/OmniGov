@@ -1,4 +1,5 @@
-﻿using Budget.Domain.Models;
+﻿using Budget.Data;
+using Budget.Domain.Models;
 using LFS.Helpers;
 using System;
 using System.Windows.Forms;
@@ -24,7 +25,7 @@ namespace LFS.Budget.Views.BudgetAppropriations
             {
                 int ucBudgetAppropriationId = uc.budgetAppropriationId;
 
-                var selectedBudgetAppropriation = AccFactory.BudgetAppropriationsRepository().GetRecordByID(ucBudgetAppropriationId);
+                var selectedBudgetAppropriation = BudgetFactory.BudgetAppropriationsRepository().GetRecordByID(ucBudgetAppropriationId);
 
                 int fundId = Convert.ToInt32(selectedBudgetAppropriation["funds_id"]);
                 int fppId = Convert.ToInt32(selectedBudgetAppropriation["function_program_project_id"]);
@@ -93,7 +94,7 @@ namespace LFS.Budget.Views.BudgetAppropriations
                     Remarks = uc.txtRemarks.Text.Trim()
                 };
 
-                return AccFactory.BudgetAppropriationsRepository().Update(budgetAppModel);
+                return BudgetFactory.BudgetAppropriationsRepository().Update(budgetAppModel);
             }
             catch (Exception ex)
             {

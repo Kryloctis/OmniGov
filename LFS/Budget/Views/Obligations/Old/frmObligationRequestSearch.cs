@@ -1,5 +1,6 @@
-﻿using ACC.Data;
+﻿using Budget.Data;
 using LFS.Helpers;
+using OmniGov.Core.Repositories;
 using System;
 using System.Data;
 using System.Windows.Forms;
@@ -59,7 +60,7 @@ namespace LFS.Budget.Views.Obligations
             int allotmentClassId = Convert.ToInt32(cmbxAllotmentClasses.SelectedValue);
             DateTime dateRequestedCoverage = dtDateRequested.Value;
             string filterStatus = cmbxStatus.Text.Trim().ToLower();
-            var dtObligationRequests = AccFactory.ObligationRequestRepository().GetViewRecordsBySearchAndStatus(searchTxt, filterStatus, fundId, allotmentClassId, dateRequestedCoverage);
+            var dtObligationRequests = BudgetFactory.ObligationRequestRepository().GetViewRecordsBySearchAndStatus(searchTxt, filterStatus, fundId, allotmentClassId, dateRequestedCoverage);
 
             foreach (DataRow row in dtObligationRequests.Rows)
             {
@@ -79,7 +80,7 @@ namespace LFS.Budget.Views.Obligations
                 var updatedAt = row["updated_at"].ToString();
                 var updatedById = row["updated_by_id"].ToString();
                 var updatedByFullName = row["updated_by_full_name"].ToString();
-                string totalObligations = AccFactory.ObligationRequestRepository().GetSumObligationsById(Convert.ToInt32(id)).ToString("N2");
+                string totalObligations = BudgetFactory.ObligationRequestRepository().GetSumObligationsById(Convert.ToInt32(id)).ToString("N2");
 
                 var item = new object[] { id, obligationNo, dateRequested, payee, explanation, referenceNo, createdAt, createdById, createdByFullName, updatedAt, updatedById, updatedByFullName, totalObligations, status };
 
@@ -93,7 +94,7 @@ namespace LFS.Budget.Views.Obligations
         {
             try
             {
-                var dtFunds = AccFactory.FundsRepository().GetRecords();
+                var dtFunds = Factory.FundsRepository().GetRecords();
                 HelperLoadRecords.FundsComboBox(dtFunds, cmbxFunds, "id", "fund_name");
             }
             catch (Exception ex)
@@ -106,7 +107,7 @@ namespace LFS.Budget.Views.Obligations
         {
             try
             {
-                var dtFunds = AccFactory.AllotmentClassesRepository().GetRecords();
+                var dtFunds = Factory.AllotmentClassesRepository().GetRecords();
                 HelperLoadRecords.AllotmentClasssesCombobox(dtFunds, cmbxAllotmentClasses, "allotment_code", "id");
             }
             catch (Exception ex)

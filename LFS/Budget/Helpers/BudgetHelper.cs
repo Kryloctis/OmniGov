@@ -1,4 +1,4 @@
-﻿using ACC.Data;
+﻿using Accounting.Data;
 using System.Data;
 using System.Text.RegularExpressions;
 
@@ -36,7 +36,7 @@ namespace LFS.Budget.Helpers
             searchKey ??= string.Empty;
 
             // Get a single instance of the repository for better performance and readability
-            var repo = AccFactory.GeneralLedgerAccountsRepository();
+            var repo = AccountingFactory.GeneralLedgerAccountsRepository();
 
             // LGU Rule Enforcement:
             // Capital Outlay → use Account Group Name = "Assets"

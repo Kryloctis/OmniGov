@@ -1,4 +1,4 @@
-﻿using ACC.Data;
+﻿using Budget.Data;
 using LFS.Helpers;
 using System;
 using System.Windows.Forms;
@@ -34,7 +34,7 @@ namespace LFS.Budget.Views.AllotmentRelease
                 }
 
                 int budgetAppropriationId = Convert.ToInt32(uc.cmbxBudgetAppropriations.SelectedValue);
-                var budgetAppropriationsDict = AccFactory.BudgetAppropriationsRepository().GetViewRecordByID(budgetAppropriationId);
+                var budgetAppropriationsDict = BudgetFactory.BudgetAppropriationsRepository().GetViewRecordByID(budgetAppropriationId);
 
                 string remarks = string.IsNullOrEmpty(budgetAppropriationsDict["remarks"].ToString()) ? string.Empty : $"({budgetAppropriationsDict["remarks"]})";
                 string accountName = $"{budgetAppropriationsDict["general_ledger_accounts_name"]} {remarks}";
