@@ -1,5 +1,6 @@
 ﻿using LFS.Helpers;
 using OmniGov.Core.Entities;
+using OmniGov.Core.Repositories;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -72,7 +73,7 @@ namespace LFS.Views.Manage.Barangay
                     barangayModelList.Add(model);
                 }
 
-                return AccFactory.BarangayRepository().Delete(barangayModelList);
+                return Factory.BarangayRepository().Delete(barangayModelList);
             }
 
             return false;
@@ -103,7 +104,7 @@ namespace LFS.Views.Manage.Barangay
                 };
                 dataTable.Columns.AddRange(dataColumns);
 
-                var dtBarangayFromDb = AccFactory.BarangayRepository().GetRecordsBySearch(parameters.rowLimit, parameters.searchKey, ServerHelper.selectedServer.LguId);
+                var dtBarangayFromDb = Factory.BarangayRepository().GetRecordsBySearch(parameters.rowLimit, parameters.searchKey, ServerHelper.selectedServer.LguId);
                 int totalProgressCount = dtBarangayFromDb.Rows.Count;
                 int progressCount = 0;
 

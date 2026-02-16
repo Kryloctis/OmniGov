@@ -1,5 +1,5 @@
-﻿using ACC.Data;
-using LFS.Helpers;
+﻿using LFS.Helpers;
+using OmniGov.Core.Repositories;
 using System;
 using System.Windows.Forms;
 
@@ -35,7 +35,7 @@ namespace LFS.Views.Manage.Barangay
                 return false;
             }
 
-            return AccFactory.BarangayRepository().Insert(uc.BarangayModel());
+            return Factory.BarangayRepository().Insert(uc.BarangayModel());
         }
 
         private void btnSave_Click(object sender, EventArgs e)

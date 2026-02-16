@@ -1,5 +1,5 @@
-﻿using ACC.Data;
-using LFS.Helpers;
+﻿using LFS.Helpers;
+using OmniGov.Core.Repositories;
 using System;
 using System.Windows.Forms;
 
@@ -32,7 +32,7 @@ namespace LFS.Views.Manage.Barangay
             var barangayModel = uc.BarangayModel();
             barangayModel.Id = barangayId;
 
-            return AccFactory.BarangayRepository().Update(barangayModel);
+            return Factory.BarangayRepository().Update(barangayModel);
         }
 
         private void btnSave_Click(object sender, EventArgs e)
