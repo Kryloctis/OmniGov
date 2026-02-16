@@ -1,5 +1,4 @@
-﻿using ACC.Data;
-using Microsoft.CodeAnalysis.VisualBasic;
+﻿using OmniGov.Core.Repositories;
 using System;
 using System.Collections.Generic;
 
@@ -48,7 +47,7 @@ namespace LFS.Helpers
 
         private string GetUserFullName(int userId)
         {
-            var dictUser = AccFactory.UsersRepository().GetRecordByID(userId);
+            var dictUser = Factory.UsersRepository().GetRecordByID(userId);
             return Helper.GenerateFullName(null, dictUser["first_name"], dictUser["mid_initial"], dictUser["last_name"], "");
         }
     }

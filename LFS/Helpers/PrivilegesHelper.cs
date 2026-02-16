@@ -1,21 +1,13 @@
-﻿using ACC.Data;
-using System;
+﻿using OmniGov.Core.Repositories;
 using System.Collections.Generic;
 using System.Data;
-using System.Diagnostics;
 using System.Linq;
 
 namespace LFS.Helpers
 {
     public enum Privileges
     {
-        DashAccounting, DashBudget, DashTreasury,
-
-        MngAccForms, MngAllotClasses, MngAllotReleases, MngAmortization, MngBankAccounts, MngBanks, MngBarangays, MngBudgetApprops, MngBizAddOnCharges, MngBizCategories, MngChartAccounts, MngCollOfficer, MngDbSync, MngDisbOfficer, MngFeesChargesCfg, MngFuncProgProj, MngFunds, MngJournals, MngPreferences, MngRealProps, MngReceipts, MngReturnedReceipts, MngRoles, MngSignatories, MngSubsidiaryAcct, MngTaxpayers, MngUsers,
-
-        RptAbsGenColl, RptAuthDebitAcctDJ, RptBankCashbook, RptCashDisbJournal, RptCashRecvJournal, RptChkDisbJournal, RptCollRCD, RptConsPropTaxDues, RptConsReceipts, RptDailyCashPos, RptGenJournal, RptGenLedger, RptJEVs, RptDelinqAccts, RptPostTrialBal, RptPreTrialBal, RptProcRecvJournal, RptRPTAR, RptChkIssued, RptCollDeposits, RptSAAOB, RptSAAOBB, RptSchedReleasedChk, RptSchedUnreleasedChk, RptCashFlows, RptChangesNetAssets, RptBudgetVsActual, RptFinPerformance, RptFinPosition, RptSubsidiaryLedger, RptSummarySubLedger, RptTaxDueBill, RptTransLog,
-
-        TransAssessPosting, TransBankDeposits, TransEditApprJEV, TransGenRCD, TransIssueChk, TransIssueReceipt, TransJEV, TransJEVApproval, TransJEVApproved, TransObligationReq, TransObligationAppr, TransObligationApproved, TransPayments, TransRCDApproval, TransReleaseChk,
+        DashAccounting, DashBudget, DashTreasury, MngAccForms, MngAllotClasses, MngAllotReleases, MngAmortization, MngBankAccounts, MngBanks, MngBarangays, MngBudgetApprops, MngBizAddOnCharges, MngBizCategories, MngChartAccounts, MngCollOfficer, MngDbSync, MngDisbOfficer, MngFeesChargesCfg, MngFuncProgProj, MngFunds, MngJournals, MngPreferences, MngRealProps, MngReceipts, MngReturnedReceipts, MngRoles, MngSignatories, MngSubsidiaryAcct, MngTaxpayers, MngUsers, RptAbsGenColl, RptAuthDebitAcctDJ, RptBankCashbook, RptCashDisbJournal, RptCashRecvJournal, RptChkDisbJournal, RptCollRCD, RptConsPropTaxDues, RptConsReceipts, RptDailyCashPos, RptGenJournal, RptGenLedger, RptJEVs, RptDelinqAccts, RptPostTrialBal, RptPreTrialBal, RptProcRecvJournal, RptRPTAR, RptChkIssued, RptCollDeposits, RptSAAOB, RptSAAOBB, RptSchedReleasedChk, RptSchedUnreleasedChk, RptCashFlows, RptChangesNetAssets, RptBudgetVsActual, RptFinPerformance, RptFinPosition, RptSubsidiaryLedger, RptSummarySubLedger, RptTaxDueBill, RptTransLog, TransAssessPosting, TransBankDeposits, TransEditApprJEV, TransGenRCD, TransIssueChk, TransIssueReceipt, TransJEV, TransJEVApproval, TransJEVApproved, TransObligationReq, TransObligationAppr, TransObligationApproved, TransPayments, TransRCDApproval, TransReleaseChk,
     }
 
     public static class PrivilegesHelper
@@ -121,7 +113,7 @@ namespace LFS.Helpers
 
         internal static string[] UserPrivileges(int rolesId)
         {
-            var dtUserPriviledges = AccFactory.RolesPermissionsRepository().GetViewRecordsByRoleId(rolesId);
+            var dtUserPriviledges = Factory.RolesPermissionsRepository().GetViewRecordsByRoleId(rolesId);
             return dtUserPriviledges.AsEnumerable()
                                     .Select(row => row.Field<string>("permission_name"))
                                     .ToArray();
