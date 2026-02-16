@@ -1,4 +1,5 @@
-﻿using Accounting.Domain.Entities;
+﻿using Accounting.Data;
+using Accounting.Domain.Entities;
 using LFS.Helpers;
 using System;
 using System.Collections.Generic;
@@ -19,7 +20,7 @@ namespace LFS.Views.Manage.Amortization
         {
             try
             {
-                var dtAmortizationRecords = AccFactory.AmortizationRepository().GetRecords();
+                var dtAmortizationRecords = AccountingFactory.AmortizationRepository().GetRecords();
                 HelperLoadRecords.AmortizationDataGridView(dtAmortizationRecords, dgAmortization);
             }
             catch (Exception ex)
@@ -100,7 +101,7 @@ namespace LFS.Views.Manage.Amortization
                     amortizationModelList.Add(amortizationModel);
                 }
 
-                return AccFactory.AmortizationRepository().Delete(amortizationModelList);
+                return AccountingFactory.AmortizationRepository().Delete(amortizationModelList);
             }
             catch (Exception ex)
             {

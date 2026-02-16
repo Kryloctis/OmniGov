@@ -1,5 +1,7 @@
-﻿using LFS.Helpers;
-using OmniGov.Core.Interfaces;
+﻿using Accounting.Data;
+using Accounting.Domain.Entities;
+using LFS.Helpers;
+using OmniGov.Core.Repositories;
 using System;
 using System.ComponentModel;
 using System.Windows.Forms;
@@ -50,15 +52,12 @@ namespace LFS.Views.Manage.Amortization
                 if (isEdit)
                 {
                     amortizationModel.Id = amortizationId;
-                    return AccFactory.AmortizationRepository().Update(amortizationModel);
+                    return AccountingFactory.AmortizationRepository().Update(amortizationModel);
                 }
                 else
-                    return AccFactory.AmortizationRepository().Insert(amortizationModel);
+                    return AccountingFactory.AmortizationRepository().Insert(amortizationModel);
             }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
             return false;
         }
 
@@ -66,7 +65,7 @@ namespace LFS.Views.Manage.Amortization
         {
             try
             {
-                var dicAmortizationRecord = AccFactory.AmortizationRepository().GetRecordByID(amortizationId);
+                var dicAmortizationRecord = AccountingFactory.AmortizationRepository().GetRecordByID(amortizationId);
 
                 string bankName = dicAmortizationRecord["bank_name"];
                 string amortizationTerm = dicAmortizationRecord["amortization_term"];
@@ -78,20 +77,18 @@ namespace LFS.Views.Manage.Amortization
                 nudInterest.Value = interest;
                 nudAmountRelease.Value = amountReleased;
             }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         internal string GetFormErrors()
         {
-            var errorArray = new string[2];
-            errorArray[0] = epBankName.GetError(txtBankName);
-            errorArray[1] = epAmountRelease.GetError(nudAmountRelease);
+            var errorArray = new string[2]
+            {
+                epAmountRelease.GetError(nudAmountRelease),
+                epBankName.GetError(txtBankName)
+            };
 
-            IError _errors = AccFactory.CreateErrors(errorArray);
-            return _errors.GenerateErrorMessage();
+            return Factory.CreateErrors(errorArray).GenerateErrorMessage();
         }
 
         private void txtBankName_Validating(object sender, CancelEventArgs e)
