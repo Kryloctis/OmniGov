@@ -1,6 +1,7 @@
-﻿using ACC.Data;
+﻿using Accounting.Data;
 using LFS.Helpers;
 using Microsoft.Reporting.WinForms;
+using OmniGov.Core.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -24,7 +25,7 @@ namespace LFS.Views.Reports.Journals
 
         private void LoadFunds()
         {
-            var dtFunds = AccFactory.FundsRepository().GetRecords();
+            var dtFunds = Factory.FundsRepository().GetRecords();
             HelperLoadRecords.FundsComboBox(dtFunds, cmbxFunds, "id", "fund_name");
         }
 
@@ -46,7 +47,7 @@ namespace LFS.Views.Reports.Journals
 
         private static void AddExplanationRow(dsLFS.dtGeneralJournalDataTable dtGeneralJournal, string jevNo, ref string particulars, int jevId, ref byte i, DataRow item)
         {
-            var countJevAccounts = AccFactory.JEVAccountsRepository().CountByJevId(jevId);
+            var countJevAccounts = AccountingFactory.JEVAccountsRepository().CountByJevId(jevId);
             if (i == countJevAccounts)
             {
                 particulars = $"          {item["explanation"]}";
@@ -80,8 +81,8 @@ namespace LFS.Views.Reports.Journals
             var date = dateTimePicker1.Value;
 
             var dtGeneralJournal = new dsLFS.dtGeneralJournalDataTable();
-            var dictFund = AccFactory.FundsRepository().GetRecordByID(fundId);
-            var dtGeneralJournalFromDB = AccFactory.JEVAccountsRepository().GetViewRecordsByFundJournalDate(dictFund["fund_name"], journalName, date);
+            var dictFund = Factory.FundsRepository().GetRecordByID(fundId);
+            var dtGeneralJournalFromDB = AccountingFactory.JEVAccountsRepository().GetViewRecordsByFundJournalDate(dictFund["fund_name"], journalName, date);
 
             string jevNo;
             string particulars;

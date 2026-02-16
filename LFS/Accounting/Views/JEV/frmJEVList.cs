@@ -1,6 +1,8 @@
-﻿using Accounting.Domain.Entities;
+﻿using Accounting.Data;
+using Accounting.Domain.Entities;
 using LFS.Helpers;
 using LFS.Views.Dashboard;
+using OmniGov.Core.Repositories;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -55,7 +57,7 @@ namespace LFS.Views.Transactions.JEV
             dataTable.Columns.Add("id");
             dataTable.Columns.Add("journal_name");
 
-            var dtJournals = AccFactory.JournalsRepository().GetRecords();
+            var dtJournals = Factory.JournalsRepository().GetRecords();
             dataTable = new DataView(dtJournals).ToTable(false, "id", "journal_name");
 
             return dataTable;
@@ -63,7 +65,7 @@ namespace LFS.Views.Transactions.JEV
 
         internal void LoadFunds()
         {
-            var dtFunds = AccFactory.FundsRepository().GetRecords();
+            var dtFunds = Factory.FundsRepository().GetRecords();
             HelperLoadRecords.FundsComboBox(dtFunds, cmbxFunds, "id", "fund_name");
         }
 
@@ -252,7 +254,7 @@ namespace LFS.Views.Transactions.JEV
             short year = Convert.ToInt16(dict["year"]);
 
             // Retrieve data
-            var dtJevDb = AccFactory.JEVRepository()
+            var dtJevDb = AccountingFactory.JEVRepository()
                 .GetViewRecords(jevStatus, searchKey, journal, fund, year, rowLimit);
 
             int totalCount = dtJevDb.Rows.Count;
@@ -403,7 +405,7 @@ namespace LFS.Views.Transactions.JEV
                 models.Add(model);
             }
 
-            return AccFactory.JEVRepository().Delete(models);
+            return AccountingFactory.JEVRepository().Delete(models);
         }
 
         private void tlStrpBtnDelete_Click(object sender, EventArgs e)
