@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Linq;
 using System.Windows.Forms;
+using Treasury.Data;
 using Treasury.Domain.Entities;
 
 namespace LFS.Views.Manage.BankAccounts
@@ -54,7 +55,7 @@ namespace LFS.Views.Manage.BankAccounts
                     bankAccountsModelList.Add(new BankAccountsModel() { Id = bankAccountID });
                 }
 
-                return AccFactory.BankAccountsRepository().Delete(bankAccountsModelList);
+                return TreasuryFactory.BankAccountsRepository().Delete(bankAccountsModelList);
             }
             return false;
         }
@@ -113,7 +114,7 @@ namespace LFS.Views.Manage.BankAccounts
         {
             var parameters = ((int rowLimit, string searchKey))e.Argument;
 
-            var dtBankAccount = AccFactory.BankAccountsRepository().GetViewRecordsBySearch(parameters.rowLimit, parameters.searchKey.Trim());
+            var dtBankAccount = TreasuryFactory.BankAccountsRepository().GetViewRecordsBySearch(parameters.rowLimit, parameters.searchKey.Trim());
             int totalProgressCount = dtBankAccount.Rows.Count;
             int progressCount = 0;
 

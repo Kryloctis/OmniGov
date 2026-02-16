@@ -1,7 +1,7 @@
-﻿using ACC.Data;
-using LFS.Helpers;
+﻿using LFS.Helpers;
 using System;
 using System.Windows.Forms;
+using Treasury.Data;
 
 namespace LFS.Views.Manage.BankAccounts
 {
@@ -49,7 +49,7 @@ namespace LFS.Views.Manage.BankAccounts
                 return false;
             }
 
-            return AccFactory.BankAccountsRepository().Insert(uc.BankAccountsModel());
+            return TreasuryFactory.BankAccountsRepository().Insert(uc.BankAccountsModel());
         }
 
         private void frmAddBankAccounts_KeyDown(object sender, KeyEventArgs e)
