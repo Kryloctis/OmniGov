@@ -1,5 +1,5 @@
-﻿using ACC.Data;
-using ACC.Domain.Models;
+﻿using Accounting.Data;
+using Accounting.Domain.Entities;
 using LFS.Helpers;
 using System;
 using System.Windows.Forms;
@@ -74,10 +74,10 @@ namespace LFS.Views.Manage.Amortization
                 if (isEdit)
                 {
                     amortizationScheduleModel.Id = amortizationScheduleId;
-                    return AccFactory.AmortizationScheduleRepository().Update(amortizationScheduleModel);
+                    return AccountingFactory.AmortizationScheduleRepository().Update(amortizationScheduleModel);
                 }
                 else
-                    return AccFactory.AmortizationScheduleRepository().Insert(amortizationScheduleModel);
+                    return AccountingFactory.AmortizationScheduleRepository().Insert(amortizationScheduleModel);
             }
             catch (Exception ex)
             {

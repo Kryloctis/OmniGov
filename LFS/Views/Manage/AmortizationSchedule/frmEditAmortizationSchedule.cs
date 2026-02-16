@@ -1,4 +1,4 @@
-﻿using ACC.Data;
+﻿using Accounting.Data;
 using LFS.Helpers;
 using LFS.Views.Manage.Amortization;
 using System;
@@ -24,7 +24,7 @@ namespace LFS.Views.Manage.AmortizationSchedule
 
         private void LoadSelectedAmortizationSchedule()
         {
-            var dicAmortizationScheduleRecord = AccFactory.AmortizationScheduleRepository().GetRecordByID(amortizationScheduleId);
+            var dicAmortizationScheduleRecord = AccountingFactory.AmortizationScheduleRepository().GetRecordByID(amortizationScheduleId);
 
             uc.dtDate.Value = Convert.ToDateTime(dicAmortizationScheduleRecord["date"]);
             uc.nudPrincipal.Value = Convert.ToDecimal(dicAmortizationScheduleRecord["principal_amount"]);

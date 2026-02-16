@@ -1,4 +1,5 @@
-﻿using Accounting.Domain.Entities;
+﻿using Accounting.Data;
+using Accounting.Domain.Entities;
 using LFS.Helpers;
 using LFS.Views.Manage.AmortizationSchedule;
 using System;
@@ -21,7 +22,7 @@ namespace LFS.Views.Manage.Amortization
 
         internal void LoadRecords()
         {
-            var dtAmortizationSheduleRecords = AccFactory.AmortizationScheduleRepository().GetRecordsByAmortizationId(amortizationId);
+            var dtAmortizationSheduleRecords = AccountingFactory.AmortizationScheduleRepository().GetRecordsByAmortizationId(amortizationId);
 
             HelperLoadRecords.DatagridViewAmortizationSchedule(dtAmortizationSheduleRecords, amortizationTerm, dgAmortizationSched);
         }
@@ -80,7 +81,7 @@ namespace LFS.Views.Manage.Amortization
                     amortizationScheduleModelList.Add(amortizationScheduleModel);
                 }
 
-                return AccFactory.AmortizationScheduleRepository().Delete(amortizationScheduleModelList);
+                return AccountingFactory.AmortizationScheduleRepository().Delete(amortizationScheduleModelList);
             }
             catch (Exception ex)
             {
