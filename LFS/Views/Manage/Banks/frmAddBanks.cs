@@ -1,7 +1,7 @@
-﻿using ACC.Data;
-using LFS.Helpers;
+﻿using LFS.Helpers;
 using System;
 using System.Windows.Forms;
+using Treasury.Data;
 
 namespace LFS.Views.Manage.Banks
 {
@@ -26,7 +26,7 @@ namespace LFS.Views.Manage.Banks
                 return false;
             }
 
-            return AccFactory.BanksRepository().Insert(uc.BanksModel());
+            return TreasuryFactory.BanksRepository().Insert(uc.BanksModel());
         }
 
         private void btnSave_Click(object sender, EventArgs e)
