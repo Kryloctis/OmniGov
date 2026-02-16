@@ -1,5 +1,5 @@
-﻿using ACC.Data;
-using System;
+﻿using System;
+using Treasury.Data;
 
 namespace LFS.Views.Shared
 {
@@ -44,8 +44,8 @@ namespace LFS.Views.Shared
 
         public static decimal GetDiscountRate(DateTime transactionDate, (DateTime postedDate, int assmntYear) currentAssmntParameters)
         {
-            var annualDiscountRate = AccFactory.RptDiscountRepository().GetRecordByMonth(10, true);
-            var monthlyDiscountRate = AccFactory.RptDiscountRepository().GetRecordByMonth(transactionDate.Month, false);
+            var annualDiscountRate = TreasuryFactory.RptDiscountRepository().GetRecordByMonth(10, true);
+            var monthlyDiscountRate = TreasuryFactory.RptDiscountRepository().GetRecordByMonth(transactionDate.Month, false);
 
             if (currentAssmntParameters.assmntYear > transactionDate.Year)
             {

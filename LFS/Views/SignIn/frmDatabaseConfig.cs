@@ -1,5 +1,5 @@
-﻿using ACC.Data;
-using LFS.Helpers;
+﻿using LFS.Helpers;
+using OmniGov.Core.Repositories;
 using RPT.Data.Repositories;
 using System;
 using System.ComponentModel;
@@ -123,7 +123,7 @@ namespace LFS.Views.SignIn
                 if (SetSelectedServer())
                 {
                     _frmSignIn.lblServer.Text = $"(F12) Server: {ServerHelper.selectedServer.MunicipalityName}, {ServerHelper.selectedServer.ProvinceName}";
-                    AccFactory.ServerRepository().ApplyConnection(ServerHelper.selectedServer.LfsInstance);
+                    Factory.ServerRepository().ApplyConnection(ServerHelper.selectedServer.LfsInstance);
                     RptFactory.ServerRepository().ApplyConnection(ServerHelper.selectedServer.RpmsInstance);
                     this.Close();
                 }

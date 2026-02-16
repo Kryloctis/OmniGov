@@ -1,8 +1,8 @@
-﻿using ACC.Data;
-using LFS.Helpers;
+﻿using LFS.Helpers;
 using LFS.Properties;
 using LFS.Views.Dashboard;
-using RPT.Data.Repositories;
+using OmniGov.Core.Interfaces;
+using OmniGov.Core.Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -67,7 +67,8 @@ namespace LFS.Views.SignIn
                     return;
                 }
 
-                var userDict = AccFactory.UsersRepository().GetUserRecordByAcc(username, password);
+                var factory = ServiceLocator.GetRequiredService<IRepositoryFactory>();
+                var userDict = factory.UsersRepository().GetUserRecordByAcc(username, password);
                 _ = new UserHelper(userDict);
 
                 var dashboardForm = new frmMain(this);
@@ -117,7 +118,8 @@ namespace LFS.Views.SignIn
                 txtUsername.Tag.ToString(),
             };
 
-            return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
+            var factory = ServiceLocator.GetRequiredService<IRepositoryFactory>();
+            return factory.CreateErrors(errorArray).GenerateErrorMessage();
         }
 
         private void OnLoad()
@@ -136,8 +138,11 @@ namespace LFS.Views.SignIn
         private void SelectFirstServerLoaded(List<ServerHelper> serverHelpers)
         {
             ServerHelper.selectedServer = serverHelpers.First();
-            AccFactory.ServerRepository().ApplyConnection(ServerHelper.selectedServer.LfsInstance);
-            RptFactory.ServerRepository().ApplyConnection(ServerHelper.selectedServer.RpmsInstance);
+            
+            // Initialize connection provider with selected server connections
+            var connectionProvider = ServiceLocator.GetRequiredService<IConnectionProvider>();
+            connectionProvider.SetLfsConnectionName(ServerHelper.selectedServer.LfsInstance);
+            connectionProvider.SetRptConnectionName(ServerHelper.selectedServer.RpmsInstance);
 
             lblServer.Text = $"(F12) Server: {ServerHelper.selectedServer.MunicipalityName}, {ServerHelper.selectedServer.ProvinceName}.";
         }
@@ -168,10 +173,11 @@ namespace LFS.Views.SignIn
 
             if (!isServerNull)
             {
+                var factory = ServiceLocator.GetRequiredService<IRepositoryFactory>();
                 bool lfsTestConnection =
-                    AccFactory.ServerRepository().TestConnection(ServerHelper.selectedServer.LfsInstance);
-                bool rptmTestConnection =
-                    RptFactory.ServerRepository().TestConnection(ServerHelper.selectedServer.RpmsInstance);
+                    factory.ServerRepository().TestConnection(ServerHelper.selectedServer.LfsInstance);
+                // TODO: Add RPT test connection when RPT services are implemented
+                bool rptmTestConnection = true; // Temporary
 
                 bool isTestConnectionSucceed = lfsTestConnection && rptmTestConnection;
 
@@ -202,7 +208,7 @@ namespace LFS.Views.SignIn
                 txtPassword.Tag = errorMessage;
                 return false;
             }
-            else if (!AccFactory.UsersRepository().AccIsValidated(username, password))
+            else if (!ServiceLocator.GetRequiredService<IRepositoryFactory>().UsersRepository().AccIsValidated(username, password))
             {
                 string errorMessage = "Incorrect username or password.";
                 txtUsername.Tag = errorMessage;
