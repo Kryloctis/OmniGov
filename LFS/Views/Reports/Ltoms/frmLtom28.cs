@@ -1,6 +1,4 @@
-﻿using ACC.Data;
-using ACC.Domain.Models;
-using LFS.Helpers;
+﻿using LFS.Helpers;
 using Microsoft.Reporting.WinForms;
 using System;
 using System.Collections.Generic;
@@ -8,6 +6,8 @@ using System.ComponentModel;
 using System.Data;
 using System.Linq;
 using System.Windows.Forms;
+using Treasury.Data;
+using Treasury.Domain.Entities;
 
 namespace LFS.Views.Reports.Ltoms
 {
@@ -51,7 +51,7 @@ namespace LFS.Views.Reports.Ltoms
         private void LoadProperties()
         {
             int auctionId = Convert.ToInt32(cmbxAuctionSchedule.SelectedValue);
-            dtAuctionRpt = AccFactory.RptAuctionRepository().GetAuctionProperties(new RptAuctionModel() { AuctionId = auctionId });
+            dtAuctionRpt = TreasuryFactory.RptAuctionRepository().GetAuctionProperties(new RptAuctionModel() { AuctionId = auctionId });
 
             var autoCompleteSrc = dtAuctionRpt.AsEnumerable().Select(row => row.Field<string>("complete_arp_no")).ToList();
             var autoCom = new AutoCompleteStringCollection();
@@ -62,7 +62,7 @@ namespace LFS.Views.Reports.Ltoms
 
         private void LoadAuctionSchedule()
         {
-            DataTable dtAuctionSchedule = AccFactory.AuctionRepository().GetAuctionSchedule();
+            DataTable dtAuctionSchedule = TreasuryFactory.AuctionRepository().GetAuctionSchedule();
             HelperLoadRecords.AuctionScheduleCombobox(dtAuctionSchedule, cmbxAuctionSchedule, "date", "id");
         }
 
@@ -76,7 +76,7 @@ namespace LFS.Views.Reports.Ltoms
             if (rptAuctionId is not 0)
             {
                 int auctionId = Convert.ToInt32(cmbxAuctionSchedule.SelectedValue);
-                var dtBidders = AccFactory.BiddersRepository().GetBiddersByAuctionIdAndRptId(auctionId, rptAuctionId);
+                var dtBidders = TreasuryFactory.BiddersRepository().GetBiddersByAuctionIdAndRptId(auctionId, rptAuctionId);
 
                 cmbxBidders.DisplayMember = "name";
                 cmbxBidders.ValueMember = "id";

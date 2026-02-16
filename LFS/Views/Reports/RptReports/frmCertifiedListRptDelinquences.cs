@@ -1,5 +1,4 @@
-﻿using ACC.Data;
-using LFS.DataSets;
+﻿using LFS.DataSets;
 using LFS.Helpers;
 using LFS.Views.Shared;
 using Microsoft.Reporting.WinForms;
@@ -7,6 +6,7 @@ using System;
 using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
+using Treasury.Data;
 
 namespace LFS.Views.Reports.RptReports
 {
@@ -25,7 +25,7 @@ namespace LFS.Views.Reports.RptReports
 
         private void LoadBarangays()
         {
-            var dtBarangays = AccFactory.RptAssessmentPostsRepository().GetBarangayRecords();
+            var dtBarangays = TreasuryFactory.RptAssessmentPostsRepository().GetBarangayRecords();
             HelperLoadRecords.BarangaysCombobox(dtBarangays, cmbxBarangays, "barangay_name", "id");
         }
 
@@ -55,7 +55,7 @@ namespace LFS.Views.Reports.RptReports
                                                                          decimal basicTaxDue,
                                                                          decimal sefTaxDue)
         {
-            var dictPrevAssmnt = AccFactory.RptAssessmentPostsRepository().GetViewRecentAssessmentRecord(currentAssmntParameters.compelteArpNo, currentAssmntParameters.assessmentYear);
+            var dictPrevAssmnt = TreasuryFactory.RptAssessmentPostsRepository().GetViewRecentAssessmentRecord(currentAssmntParameters.compelteArpNo, currentAssmntParameters.assessmentYear);
 
             int? prevAssmntYear = null;
 
@@ -89,7 +89,7 @@ namespace LFS.Views.Reports.RptReports
                 var parameters = ((string barangayName, DateTime periodFrom, DateTime periodTo))e.Argument;
 
                 var dataTable = new dsTreasury.dtCertfiedRptDelinquenciesDataTable();
-                var dbDataTable = AccFactory.RptAssessmentPostsRepository().GetViewDelinquentRecordsByBarangayNamePeriod(parameters.barangayName, parameters.periodFrom, parameters.periodTo);
+                var dbDataTable = TreasuryFactory.RptAssessmentPostsRepository().GetViewDelinquentRecordsByBarangayNamePeriod(parameters.barangayName, parameters.periodFrom, parameters.periodTo);
 
                 int totalProgressCount = dbDataTable.Rows.Count;
                 int progressCount = 0;

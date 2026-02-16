@@ -1,6 +1,6 @@
-﻿using ACC.Data;
-using LFS.Helpers;
+﻿using LFS.Helpers;
 using Microsoft.Reporting.WinForms;
+using OmniGov.Core.Repositories;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -55,7 +55,7 @@ namespace LFS.Views.Reports.DailyCashPositionReport
                 var dtSpecialCash = new dsLFS.dtCashreportDataTable().Clone();
                 var dtTrustCash = new dsLFS.dtCashreportDataTable().Clone();
 
-                var dtdata = AccFactory.FundsRepository().GetRecordsPrintCashposition(date);
+                var dtdata = Factory.FundsRepository().GetRecordsPrintCashposition(date);
 
                 var fundType = new string[] { "General Fund", "Special Education Fund", "Trust Fund" };
                 decimal beginning = 0;
@@ -176,17 +176,17 @@ namespace LFS.Views.Reports.DailyCashPositionReport
                     }
                 }
 
-                var dictCertifiedCorrectSignatory = AccFactory.SignatoriesHasReferencesRepository().GetSigntryByRefDoc("Certified Correct", "Daily Cash Position Report");
+                var dictCertifiedCorrectSignatory = Factory.SignatoriesHasReferencesRepository().GetSigntryByRefDoc("Certified Correct", "Daily Cash Position Report");
                 string certifiedCorrectSignatory = string.Empty;
                 string certifiedCorrectSignatoryTitle = string.Empty;
                 ParseSignatory(dictCertifiedCorrectSignatory, ref certifiedCorrectSignatory, ref certifiedCorrectSignatoryTitle);
 
-                var dictNotedSignatory = AccFactory.SignatoriesHasReferencesRepository().GetSigntryByRefDoc("Noted", "Daily Cash Position Report");
+                var dictNotedSignatory = Factory.SignatoriesHasReferencesRepository().GetSigntryByRefDoc("Noted", "Daily Cash Position Report");
                 string notedSignatory = string.Empty;
                 string notedSignatoryTitle = string.Empty;
                 ParseSignatory(dictNotedSignatory, ref notedSignatory, ref notedSignatoryTitle);
 
-                var dictPreparedBySignatory = AccFactory.SignatoriesHasReferencesRepository().GetSigntryByRefDoc("Prepared By", "Daily Cash Position Report");
+                var dictPreparedBySignatory = Factory.SignatoriesHasReferencesRepository().GetSigntryByRefDoc("Prepared By", "Daily Cash Position Report");
 
                 string preparedBySignatory = string.Empty;
                 string preparedBySignatoryTitle = string.Empty;

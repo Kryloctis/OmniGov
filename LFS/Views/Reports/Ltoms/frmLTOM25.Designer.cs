@@ -134,7 +134,6 @@
             cmbxBidders.Name = "cmbxBidders";
             cmbxBidders.Size = new System.Drawing.Size(200, 23);
             cmbxBidders.TabIndex = 21;
-            cmbxBidders.SelectedIndexChanged += cmbxBidders_SelectedIndexChanged;
             // 
             // label3
             // 

@@ -1,6 +1,6 @@
-﻿using ACC.Data;
-using LFS.Helpers;
+﻿using LFS.Helpers;
 using Microsoft.Reporting.WinForms;
+using OmniGov.Core.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
@@ -29,7 +29,7 @@ namespace LFS.Views.Reports.GeneralCollection
             var certifiedCorrectSignatory = string.Empty;
             var certifiedCorrectSignatoryTitle = string.Empty;
 
-            var dictCertifiedCorrect = AccFactory.SignatoriesHasReferencesRepository().GetSigntryByRefDoc("Certified Correct", "Report of General Collections ");
+            var dictCertifiedCorrect = Factory.SignatoriesHasReferencesRepository().GetSigntryByRefDoc("Certified Correct", "Report of General Collections ");
             static void ParseSignatory(Dictionary<string, string> dictSignatory, ref string signatory, ref string signatoryTitle)
             {
                 if (dictSignatory.Count > 0)

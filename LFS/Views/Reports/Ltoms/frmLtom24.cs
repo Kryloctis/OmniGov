@@ -1,6 +1,4 @@
-﻿using ACC.Data;
-using ACC.Domain.Models;
-using LFS.DataSets;
+﻿using LFS.DataSets;
 using LFS.Helpers;
 using LFS.Views.Shared;
 using Microsoft.Reporting.WinForms;
@@ -8,6 +6,8 @@ using System;
 using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
+using Treasury.Data;
+using Treasury.Domain.Entities;
 
 namespace LFS.Views.Reports.Ltoms
 {
@@ -42,7 +42,7 @@ namespace LFS.Views.Reports.Ltoms
 
         private void LoadAuctionSchedule()
         {
-            DataTable dtAuctionSchedule = AccFactory.AuctionRepository().GetAuctionSchedule();
+            DataTable dtAuctionSchedule = TreasuryFactory.AuctionRepository().GetAuctionSchedule();
             HelperLoadRecords.AuctionScheduleCombobox(dtAuctionSchedule, cmbxAuctionSchedule, "date", "id");
         }
 
@@ -50,7 +50,7 @@ namespace LFS.Views.Reports.Ltoms
         {
             int auctionId = Convert.ToInt32(cmbxAuctionSchedule.SelectedValue);
             var rptAuctionModel = new RptAuctionModel() { AuctionId = auctionId };
-            var auctionProperties = AccFactory.RptAuctionRepository().GetAuctionProperties(rptAuctionModel);
+            var auctionProperties = TreasuryFactory.RptAuctionRepository().GetAuctionProperties(rptAuctionModel);
 
             cmbxProperty.DataSource = auctionProperties;
             cmbxProperty.ValueMember = "real_properties_id";
@@ -88,7 +88,7 @@ namespace LFS.Views.Reports.Ltoms
                                                      decimal basicTaxDue,
                                                      decimal sefTaxDue)
         {
-            var dictPrevAssmnt = AccFactory.RptAssessmentPostsRepository().GetViewRecentAssessmentRecord(currentAssmntParameters.compelteArpNo, currentAssmntParameters.assessmentYear);
+            var dictPrevAssmnt = TreasuryFactory.RptAssessmentPostsRepository().GetViewRecentAssessmentRecord(currentAssmntParameters.compelteArpNo, currentAssmntParameters.assessmentYear);
 
             int? prevAssmntYear = null;
 
@@ -120,11 +120,11 @@ namespace LFS.Views.Reports.Ltoms
             {
                 var parameters = ((int auctionId, int rptId))e.Argument;
 
-                var dictAuctionProperties = AccFactory.RptAuctionRepository().GetAuctionPropertiesByAuctionIdAndRptId(parameters.auctionId, parameters.rptId);
+                var dictAuctionProperties = TreasuryFactory.RptAuctionRepository().GetAuctionPropertiesByAuctionIdAndRptId(parameters.auctionId, parameters.rptId);
                 string completeArpNo = dictAuctionProperties["complete_arp_no"].ToString();
                 int taxPayersId = Convert.ToInt32(dictAuctionProperties["taxpayers_id"]);
 
-                var dtAssessmentPosting = AccFactory.RptAssessmentPostsRepository().GetViewRecordsByTaxpayerIdArpNoShowPaid(taxPayersId, Helper.GetCurrentDate().Year, completeArpNo, true);
+                var dtAssessmentPosting = TreasuryFactory.RptAssessmentPostsRepository().GetViewRecordsByTaxpayerIdArpNoShowPaid(taxPayersId, Helper.GetCurrentDate().Year, completeArpNo, true);
                 var dtRptAuctionProperties = new dsTreasury.dtLtom24DataTable();
                 int totalProgressCount = dtAssessmentPosting.Rows.Count;
                 int progressCount = 0;
@@ -198,14 +198,14 @@ namespace LFS.Views.Reports.Ltoms
                 if (dataTable.Rows.Count < 1)
                     progressBar1.Value = 100;
 
-                var dtAuction = AccFactory.AuctionRepository().GetRecordById(auctionId);
+                var dtAuction = TreasuryFactory.AuctionRepository().GetRecordById(auctionId);
 
                 string location = dtAuction["location"];
                 string date = $"{Convert.ToDateTime(dtAuction["start_date"]):MMMM dd, yyyy} - {Convert.ToDateTime(dtAuction["end_date"]):MMMM dd, yyyy}";
 
-                var dictAuctionProperty = AccFactory.RptAuctionRepository().GetAuctionPropertiesByAuctionIdAndRptId(auctionId, rptId);
+                var dictAuctionProperty = TreasuryFactory.RptAuctionRepository().GetAuctionPropertiesByAuctionIdAndRptId(auctionId, rptId);
 
-                var dictRpt = AccFactory.RealPropertiesRepository().GetViewRecordById(rptId);
+                var dictRpt = TreasuryFactory.RealPropertiesRepository().GetViewRecordById(rptId);
                 var propertyLocation = Helper.GenerateFullAddress(string.Empty, dictRpt["barangay_name"], dictRpt["municipality_name"], dictRpt["province_name"]);
                 var assessedValue = Convert.ToDecimal(dictRpt["assessed_value"]);
 

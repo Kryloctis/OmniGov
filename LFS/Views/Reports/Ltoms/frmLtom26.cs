@@ -1,12 +1,12 @@
-﻿using ACC.Data;
-using ACC.Domain.Models;
-using LFS.DataSets;
+﻿using LFS.DataSets;
 using LFS.Helpers;
 using Microsoft.Reporting.WinForms;
 using System;
 using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
+using Treasury.Data;
+using Treasury.Domain.Entities;
 
 namespace LFS.Views.Reports.Ltoms
 {
@@ -61,7 +61,7 @@ namespace LFS.Views.Reports.Ltoms
 
         private void LoadAuctionSchedule()
         {
-            DataTable dtAuctionSchedule = AccFactory.AuctionRepository().GetAuctionSchedule();
+            DataTable dtAuctionSchedule = TreasuryFactory.AuctionRepository().GetAuctionSchedule();
             HelperLoadRecords.AuctionScheduleCombobox(dtAuctionSchedule, cmbxAuctionSchedule, "date", "id");
         }
 
@@ -123,7 +123,7 @@ namespace LFS.Views.Reports.Ltoms
                 var auctionModel = new AuctionModel() { Id = auctionId };
                 var rptAuctionModel = new RptAuctionModel() { AuctionId = auctionId };
 
-                var dbRegisteredBidders = AccFactory.BiddersRepository().GetViewRecords();
+                var dbRegisteredBidders = TreasuryFactory.BiddersRepository().GetViewRecords();
                 var dtRegisteredBidders = new dsTreasury.dtLtom26_27_28DataTable();
 
                 int totalProgressCount = dbRegisteredBidders.Rows.Count;

@@ -1,5 +1,4 @@
-﻿using ACC.Data;
-using LFS.DataSets;
+﻿using LFS.DataSets;
 using LFS.Helpers;
 using LFS.Views.Shared;
 using Microsoft.Reporting.WinForms;
@@ -9,6 +8,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Linq;
 using System.Windows.Forms;
+using Treasury.Data;
 
 namespace LFS.Views.Reports.Ltoms
 {
@@ -27,7 +27,7 @@ namespace LFS.Views.Reports.Ltoms
 
         private void LoadRealProperties()
         {
-            dtRpt = AccFactory.RealPropertiesRepository().GetViewRecords();
+            dtRpt = TreasuryFactory.RealPropertiesRepository().GetViewRecords();
             var autoCompleteSrc = dtRpt.AsEnumerable().Select(row => row.Field<string>("complete_arp_no")).ToList();
             var autoCom = new AutoCompleteStringCollection();
             autoCom.Clear();
@@ -44,7 +44,7 @@ namespace LFS.Views.Reports.Ltoms
 
             if (rptId is not null)
             {
-                var dtNoticeDelinquencies = AccFactory.RptLevyRepository().GetViewRecords(Convert.ToInt32(rptId));
+                var dtNoticeDelinquencies = TreasuryFactory.RptLevyRepository().GetViewRecords(Convert.ToInt32(rptId));
                 cmbxWarrantLevy.DataSource = dtNoticeDelinquencies;
                 cmbxWarrantLevy.ValueMember = "rpt_levy_id";
                 cmbxWarrantLevy.DisplayMember = "date_issued";
@@ -79,7 +79,7 @@ namespace LFS.Views.Reports.Ltoms
 
         private (decimal basicPenalty, decimal sefPenalty) GetPenalties(DateTime transactionDate, (int assessmentYear, string compelteArpNo, int effectivityQuarter, int effectivityYear) currentAssmntParameters, decimal penaltyRate, decimal basicTaxDue, decimal sefTaxDue)
         {
-            var dictPrevAssmnt = AccFactory.RptAssessmentPostsRepository().GetViewRecentAssessmentRecord(currentAssmntParameters.compelteArpNo, currentAssmntParameters.assessmentYear);
+            var dictPrevAssmnt = TreasuryFactory.RptAssessmentPostsRepository().GetViewRecentAssessmentRecord(currentAssmntParameters.compelteArpNo, currentAssmntParameters.assessmentYear);
 
             int? prevAssmntYear = null;
 
@@ -106,12 +106,12 @@ namespace LFS.Views.Reports.Ltoms
                     return;
                 }
 
-                var dictWarrantLevy = AccFactory.RptLevyRepository().GetViewRecordById(Convert.ToInt32(warrantLevyId));
+                var dictWarrantLevy = TreasuryFactory.RptLevyRepository().GetViewRecordById(Convert.ToInt32(warrantLevyId));
                 var noticeDate = Convert.ToDateTime(dictWarrantLevy["date_issued"]);
                 var completeArpNo = dictWarrantLevy["complete_arp_no"];
 
                 var dtLtom17to19 = new dsTreasury.dtLtom17_19DataTable().Clone();
-                var dtAssessmentPostingDb = AccFactory.RptAssessmentPostsRepository().GetViewDelinquentRecords(completeArpNo, noticeDate);
+                var dtAssessmentPostingDb = TreasuryFactory.RptAssessmentPostsRepository().GetViewDelinquentRecords(completeArpNo, noticeDate);
 
                 int totalProgressCount = dtAssessmentPostingDb.Rows.Count;
                 int progressCount = 0;

@@ -1,11 +1,12 @@
-﻿using ACC.Data;
-using LFS.Helpers;
+﻿using LFS.Helpers;
 using Microsoft.Reporting.WinForms;
+using OmniGov.Core.Repositories;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
+using Treasury.Data;
 
 namespace LFS.Views.Reports.ConsolidatedReceipts
 {
@@ -53,7 +54,7 @@ namespace LFS.Views.Reports.ConsolidatedReceipts
             {
                 var endDate = (DateTime)e.Argument;
                 var dtConsolidatedReceipts = new dsLFS.dtConsolidatedReceiptsDataTable().Clone();
-                DataTable dtConsolidatedReceiptsFromDB = AccFactory.ReceiptsIssuedRepository().GetAccountabilityForAccountableForms(endDate);
+                DataTable dtConsolidatedReceiptsFromDB = TreasuryFactory.ReceiptsIssuedRepository().GetAccountabilityForAccountableForms(endDate);
 
                 int totalProgressCount = dtConsolidatedReceiptsFromDB.Rows.Count;
                 int progressCount = 0;
@@ -70,7 +71,7 @@ namespace LFS.Views.Reports.ConsolidatedReceipts
                     int collectingOfficerID = Convert.ToInt32(item["collecting_officer_id"]);
                     int accountableFormID = Convert.ToInt32(item["accountable_form_id"]);
 
-                    int totalUsedByCollectingOfficer = AccFactory.PaymentCollectionsRepository().GetTotalUsedAccountableFormByCollectingOfficerID(collectingOfficerID, accountableFormID);
+                    int totalUsedByCollectingOfficer = TreasuryFactory.PaymentCollectionsRepository().GetTotalUsedAccountableFormByCollectingOfficerID(collectingOfficerID, accountableFormID);
                     var collectingOfficer = $"{item["collecting_officers_first_name"]} {item["collecting_officers_mid_initial"]}. {item["collecting_officers_last_name"]}";
 
                     row["form"] = accountableForm;
@@ -127,8 +128,8 @@ namespace LFS.Views.Reports.ConsolidatedReceipts
                 string treasurer = string.Empty;
                 string treasurerTitle = string.Empty;
 
-                var dictCertifiedCorrect = AccFactory.SignatoriesHasReferencesRepository().GetSigntryByRefDoc("Certified Correct", "Consolidated Report of Accountability for Accountable Forms");
-                var dictTreasurer = AccFactory.SignatoriesHasReferencesRepository().GetSigntryByRefDoc("Treasurer", "Consolidated Report of Accountability for Accountable Forms");
+                var dictCertifiedCorrect = Factory.SignatoriesHasReferencesRepository().GetSigntryByRefDoc("Certified Correct", "Consolidated Report of Accountability for Accountable Forms");
+                var dictTreasurer = Factory.SignatoriesHasReferencesRepository().GetSigntryByRefDoc("Treasurer", "Consolidated Report of Accountability for Accountable Forms");
 
                 static void ParseSignatory(Dictionary<string, string> dictSignatory, ref string signatory, ref string signatoryTitle)
                 {
@@ -147,7 +148,7 @@ namespace LFS.Views.Reports.ConsolidatedReceipts
                     }
                 }
 
-                var dictPreparedBySignatory = AccFactory.SignatoriesHasReferencesRepository().GetSigntryByRefDoc("Prepared By", "Consolidated Report of Accountability for Accountable Forms");
+                var dictPreparedBySignatory = Factory.SignatoriesHasReferencesRepository().GetSigntryByRefDoc("Prepared By", "Consolidated Report of Accountability for Accountable Forms");
 
                 string preparedBySignatory = string.Empty;
                 string preparedBySignatoryTitle = string.Empty;

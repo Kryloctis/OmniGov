@@ -1,10 +1,12 @@
 ﻿using LFS.Helpers;
 using Microsoft.Reporting.WinForms;
+using OmniGov.Core.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Windows.Forms;
+using Treasury.Data;
 using Treasury.Domain.Entities;
 
 namespace LFS.Views.Reports.Ltoms
@@ -40,7 +42,7 @@ namespace LFS.Views.Reports.Ltoms
 
         private void LoadAuctionSchedule()
         {
-            DataTable dtAuctionSchedule = AccFactory.AuctionRepository().GetAuctionSchedule();
+            DataTable dtAuctionSchedule = TreasuryFactory.AuctionRepository().GetAuctionSchedule();
             HelperLoadRecords.AuctionScheduleCombobox(dtAuctionSchedule, cmbxAuctionSchedule, "date", "id");
         }
 
@@ -52,7 +54,7 @@ namespace LFS.Views.Reports.Ltoms
         private void LoadProperties()
         {
             int auctionId = Convert.ToInt32(cmbxAuctionSchedule.SelectedValue);
-            dtAuctionRpt = AccFactory.RptAuctionRepository().GetAuctionProperties(new RptAuctionModel() { AuctionId = auctionId });
+            dtAuctionRpt = TreasuryFactory.RptAuctionRepository().GetAuctionProperties(new RptAuctionModel() { AuctionId = auctionId });
 
             var autoCompleteSrc = dtAuctionRpt.AsEnumerable().Select(row => row.Field<string>("complete_arp_no")).ToList();
             var autoCom = new AutoCompleteStringCollection();
@@ -103,7 +105,7 @@ namespace LFS.Views.Reports.Ltoms
             int totalProgressCount = tasks.Sum(t => t.Value);
             int progressCount = 0;
 
-            var dictBidder = AccFactory.BiddersRepository().GetViewRecordByAuctionIdAndBidderId(parameters.auctionId, parameters.bidderId);
+            var dictBidder = TreasuryFactory.BiddersRepository().GetViewRecordByAuctionIdAndBidderId(parameters.auctionId, parameters.bidderId);
             progressCount += tasks["Fetch Bidder"];
             Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
 
@@ -124,7 +126,7 @@ namespace LFS.Views.Reports.Ltoms
 
             if (isRepresentative)
             {
-                var dictRegistry = AccFactory.RegistryRepository().GetRecordByID(Convert.ToInt32(dictBidder["representative_registry_id"]));
+                var dictRegistry = Factory.RegistryRepository().GetRecordByID(Convert.ToInt32(dictBidder["representative_registry_id"]));
                 reportParameters.Add(new ReportParameter("paramCitizenship", dictRegistry["nationality"]));
                 reportParameters.Add(new ReportParameter("paramSex", dictRegistry["sex"]));
             }
@@ -183,16 +185,12 @@ namespace LFS.Views.Reports.Ltoms
             if (rptAuctionId is not 0)
             {
                 int auctionId = Convert.ToInt32(cmbxAuctionSchedule.SelectedValue);
-                var dtBidders = AccFactory.BiddersRepository().GetBiddersByAuctionIdAndRptId(auctionId, rptAuctionId);
+                var dtBidders = TreasuryFactory.BiddersRepository().GetBiddersByAuctionIdAndRptId(auctionId, rptAuctionId);
 
                 cmbxBidders.DisplayMember = "name";
                 cmbxBidders.ValueMember = "id";
                 cmbxBidders.DataSource = dtBidders;
             }
-        }
-
-        private void cmbxBidders_SelectedIndexChanged(object sender, EventArgs e)
-        {
         }
     }
 }

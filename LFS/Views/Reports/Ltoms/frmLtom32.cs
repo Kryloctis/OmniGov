@@ -1,6 +1,4 @@
-﻿using ACC.Data;
-using ACC.Domain.Models;
-using LFS.Helpers;
+﻿using LFS.Helpers;
 using Microsoft.Reporting.WinForms;
 using System;
 using System.Collections.Generic;
@@ -8,6 +6,8 @@ using System.ComponentModel;
 using System.Data;
 using System.Linq;
 using System.Windows.Forms;
+using Treasury.Data;
+using Treasury.Domain.Entities;
 
 namespace LFS.Views.Reports.Ltoms
 {
@@ -48,7 +48,7 @@ namespace LFS.Views.Reports.Ltoms
 
         private void LoadAuctionSchedule()
         {
-            DataTable dtAuctionSchedule = AccFactory.AuctionRepository().GetAuctionSchedule();
+            DataTable dtAuctionSchedule = TreasuryFactory.AuctionRepository().GetAuctionSchedule();
             HelperLoadRecords.AuctionScheduleCombobox(dtAuctionSchedule, cmbxAuctionSchedule, "date", "id");
         }
 
@@ -56,7 +56,7 @@ namespace LFS.Views.Reports.Ltoms
         {
             int auctionId = Convert.ToInt32(cmbxAuctionSchedule.SelectedValue);
             var rptAuctionModel = new RptAuctionModel() { AuctionId = auctionId };
-            var auctionProperties = AccFactory.RptAuctionRepository().GetAuctionProperties(rptAuctionModel);
+            var auctionProperties = TreasuryFactory.RptAuctionRepository().GetAuctionProperties(rptAuctionModel);
 
             cmbxProperty.ValueMember = "real_properties_id";
             cmbxProperty.DisplayMember = "complete_arp_no";
@@ -120,13 +120,13 @@ namespace LFS.Views.Reports.Ltoms
                 progressCount += tasks["Fetch LGU Details"];
                 Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
 
-                var dictBiddingResult = AccFactory.BidRepository().GetHighestBidderByAuctionIdAndRptId(parameters.rptAuctionId, parameters.rptId);
+                var dictBiddingResult = TreasuryFactory.BidRepository().GetHighestBidderByAuctionIdAndRptId(parameters.rptAuctionId, parameters.rptId);
                 string nameOfBidder = dictBiddingResult["name"];
                 decimal bidAmount = Convert.ToDecimal(dictBiddingResult["bid_amount"].ToString());
                 var dateOfAuction = $"{Convert.ToDateTime(dictBiddingResult["start_date"]).ToString("MMMM dd yyyy")} - {Convert.ToDateTime(dictBiddingResult["end_date"]).ToString("MMMM dd yyyy")}";
                 string receiptNumber = dictBiddingResult["receipt_no"];
 
-                var dictRpt = AccFactory.RealPropertiesRepository().GetViewRecordById(parameters.rptId);
+                var dictRpt = TreasuryFactory.RealPropertiesRepository().GetViewRecordById(parameters.rptId);
 
                 string declaredOwner = dictRpt["taxpayer_name"];
                 string completeArp = dictRpt["complete_arp_no"];

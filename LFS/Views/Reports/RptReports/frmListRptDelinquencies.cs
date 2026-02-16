@@ -1,12 +1,13 @@
-﻿using ACC.Data;
-using LFS.DataSets;
+﻿using LFS.DataSets;
 using LFS.Helpers;
 using LFS.Views.Shared;
 using Microsoft.Reporting.WinForms;
+using OmniGov.Core.Repositories;
 using System;
 using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
+using Treasury.Data;
 
 namespace LFS.Views.Reports.RptReports
 {
@@ -30,13 +31,13 @@ namespace LFS.Views.Reports.RptReports
 
         private void LoadBarangays()
         {
-            var dtBarangays = AccFactory.BarangayRepository().GetRecords();
+            var dtBarangays = Factory.BarangayRepository().GetRecords();
             HelperLoadRecords.BarangaysCombobox(dtBarangays, cmbxLoadBy, "name", "id");
         }
 
         private void LoadTaxpayers()
         {
-            var dtTaxpayers = AccFactory.TaxpayersRepository().GetRecords();
+            var dtTaxpayers = TreasuryFactory.TaxpayersRepository().GetRecords();
             cmbxLoadBy.DataSource = dtTaxpayers;
             cmbxLoadBy.ValueMember = "id";
             cmbxLoadBy.DisplayMember = "name";
@@ -58,7 +59,7 @@ namespace LFS.Views.Reports.RptReports
                                                                        decimal basicTaxDue,
                                                                        decimal sefTaxDue)
         {
-            var dictPrevAssmnt = AccFactory.RptAssessmentPostsRepository().GetViewRecentAssessmentRecord(currentAssmntParameters.compelteArpNo, currentAssmntParameters.assessmentYear);
+            var dictPrevAssmnt = TreasuryFactory.RptAssessmentPostsRepository().GetViewRecentAssessmentRecord(currentAssmntParameters.compelteArpNo, currentAssmntParameters.assessmentYear);
 
             int? prevAssmntYear = null;
 
@@ -85,9 +86,9 @@ namespace LFS.Views.Reports.RptReports
                     DataTable dtSourceDb;
 
                     if (radBarangay.Checked)
-                        dtSourceDb = AccFactory.RptAssessmentPostsRepository().GetViewDelinquentRecordsByBarangayNamePeriod(loadBy, periodFrom, periodTo);
+                        dtSourceDb = TreasuryFactory.RptAssessmentPostsRepository().GetViewDelinquentRecordsByBarangayNamePeriod(loadBy, periodFrom, periodTo);
                     else
-                        dtSourceDb = AccFactory.RptAssessmentPostsRepository().GetViewDelinquentRecordsByOwnerNamePeriod(loadBy, periodFrom, periodTo);
+                        dtSourceDb = TreasuryFactory.RptAssessmentPostsRepository().GetViewDelinquentRecordsByOwnerNamePeriod(loadBy, periodFrom, periodTo);
 
                     backgroundWorker1.RunWorkerAsync(dtSourceDb);
                 }

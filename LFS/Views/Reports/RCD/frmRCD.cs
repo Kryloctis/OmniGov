@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
+using Treasury.Data;
 using Treasury.Domain.Entities;
 
 namespace LFS.Views.Reports.Rcd
@@ -137,7 +138,7 @@ namespace LFS.Views.Reports.Rcd
             try
             {
                 var parameters = ((string searchKey, int rowFilter, DateTime date))e.Argument;
-                var dtDb = AccFactory.RcdRepository().GetViewRecords(parameters.searchKey, parameters.date, parameters.rowFilter);
+                var dtDb = TreasuryFactory.RcdRepository().GetViewRecords(parameters.searchKey, parameters.date, parameters.rowFilter);
                 int totalProgressCount = dtDb.Rows.Count;
                 int progressCount = 0;
                 var dataTable = new DataTable();
@@ -237,7 +238,7 @@ namespace LFS.Views.Reports.Rcd
                     models.Add(model);
                 }
 
-                return AccFactory.RcdRepository().Delete(models);
+                return TreasuryFactory.RcdRepository().Delete(models);
             }
             return false;
         }

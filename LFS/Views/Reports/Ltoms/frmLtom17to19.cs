@@ -1,5 +1,4 @@
-﻿using ACC.Data;
-using LFS.DataSets;
+﻿using LFS.DataSets;
 using LFS.Helpers;
 using LFS.Views.Shared;
 using Microsoft.Reporting.WinForms;
@@ -9,6 +8,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Linq;
 using System.Windows.Forms;
+using Treasury.Data;
 
 namespace LFS.Views.Reports.Ltoms
 {
@@ -36,7 +36,7 @@ namespace LFS.Views.Reports.Ltoms
 
         private void LoadRealProperties()
         {
-            dtDelinquentNotice = AccFactory.RealPropertiesRepository().GetViewRecords();
+            dtDelinquentNotice = TreasuryFactory.RealPropertiesRepository().GetViewRecords();
 
             var autoCompleteSrc = dtDelinquentNotice.AsEnumerable().Select(row => row.Field<string>("complete_arp_no")).ToList();
             var autoCom = new AutoCompleteStringCollection();
@@ -78,7 +78,7 @@ namespace LFS.Views.Reports.Ltoms
 
             if (rptId is not null)
             {
-                var dtNoticeDelinquencies = AccFactory.DelinquentNoticeRepository().GetViewRecordsByRptId(Convert.ToInt32(rptId), noticeType);
+                var dtNoticeDelinquencies = TreasuryFactory.DelinquentNoticeRepository().GetViewRecordsByRptId(Convert.ToInt32(rptId), noticeType);
                 cmbxDelinquentNoticeRecord.DataSource = dtNoticeDelinquencies;
                 cmbxDelinquentNoticeRecord.ValueMember = "delinquent_notice_id";
                 cmbxDelinquentNoticeRecord.DisplayMember = "notice_date";
@@ -105,7 +105,7 @@ namespace LFS.Views.Reports.Ltoms
 
         private (decimal basicPenalty, decimal sefPenalty) GetPenalties(DateTime transactionDate, (int assessmentYear, string compelteArpNo, int effectivityQuarter, int effectivityYear) currentAssmntParameters, decimal penaltyRate, decimal basicTaxDue, decimal sefTaxDue)
         {
-            var dictPrevAssmnt = AccFactory.RptAssessmentPostsRepository().GetViewRecentAssessmentRecord(currentAssmntParameters.compelteArpNo, currentAssmntParameters.assessmentYear);
+            var dictPrevAssmnt = TreasuryFactory.RptAssessmentPostsRepository().GetViewRecentAssessmentRecord(currentAssmntParameters.compelteArpNo, currentAssmntParameters.assessmentYear);
 
             int? prevAssmntYear = null;
 
@@ -132,12 +132,12 @@ namespace LFS.Views.Reports.Ltoms
                     return;
                 }
 
-                var dictDelinquentNotice = AccFactory.DelinquentNoticeRepository().GetViewRecordById(Convert.ToInt32(rptDelinquencyNoticeId));
+                var dictDelinquentNotice = TreasuryFactory.DelinquentNoticeRepository().GetViewRecordById(Convert.ToInt32(rptDelinquencyNoticeId));
                 var noticeDate = Convert.ToDateTime(dictDelinquentNotice["notice_date"]);
                 var completeArpNo = dictDelinquentNotice["complete_arp_no"];
 
                 var dtLtom17to19 = new dsTreasury.dtLtom17_19DataTable().Clone();
-                var dtAssessmentPostingDb = AccFactory.RptAssessmentPostsRepository().GetViewDelinquentRecords(completeArpNo, noticeDate);
+                var dtAssessmentPostingDb = TreasuryFactory.RptAssessmentPostsRepository().GetViewDelinquentRecords(completeArpNo, noticeDate);
 
                 int totalProgressCount = dtAssessmentPostingDb.Rows.Count;
                 int progressCount = 0;

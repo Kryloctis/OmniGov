@@ -1,5 +1,4 @@
-﻿using ACC.Data;
-using LFS.Helpers;
+﻿using LFS.Helpers;
 using LFS.Views.Transactions.Biddings.BiddingReports;
 using Microsoft.Reporting.WinForms;
 using System;
@@ -8,6 +7,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Linq;
 using System.Windows.Forms;
+using Treasury.Data;
 
 namespace LFS.Views.Reports.Ltoms
 {
@@ -58,7 +58,7 @@ namespace LFS.Views.Reports.Ltoms
 
             if (rptId is not null)
             {
-                var dtNoticeDelinquencies = AccFactory.RptLevyRepository().GetCancelledLevy(Convert.ToInt32(rptId));
+                var dtNoticeDelinquencies = TreasuryFactory.RptLevyRepository().GetCancelledLevy(Convert.ToInt32(rptId));
                 cmbxWarrantLevy.DataSource = dtNoticeDelinquencies;
                 cmbxWarrantLevy.ValueMember = "rpt_levy_id";
                 cmbxWarrantLevy.DisplayMember = "date_issued";
@@ -67,7 +67,7 @@ namespace LFS.Views.Reports.Ltoms
 
         private void LoadRealProperties()
         {
-            dtRpt = AccFactory.RealPropertiesRepository().GetViewRecords();
+            dtRpt = TreasuryFactory.RealPropertiesRepository().GetViewRecords();
 
             var autoCompleteSrc = dtRpt.AsEnumerable().Select(row => row.Field<string>("complete_arp_no")).ToList();
             var autoCom = new AutoCompleteStringCollection();
@@ -121,7 +121,7 @@ namespace LFS.Views.Reports.Ltoms
                 progressCount += tasks["Fetch LGU Details"];
                 Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
 
-                var dictWarrantLevy = AccFactory.RptLevyRepository().GetViewCancelledLevy(Convert.ToInt32(warrantLevyId));
+                var dictWarrantLevy = TreasuryFactory.RptLevyRepository().GetViewCancelledLevy(Convert.ToInt32(warrantLevyId));
 
                 progressCount += tasks["Fetch Warrant of Levy"];
                 Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);

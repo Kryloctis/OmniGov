@@ -1,5 +1,4 @@
-﻿using ACC.Data;
-using LFS.Helpers;
+﻿using LFS.Helpers;
 using Microsoft.Reporting.WinForms;
 using System;
 using System.Collections.Generic;
@@ -7,6 +6,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Linq;
 using System.Windows.Forms;
+using Treasury.Data;
 
 namespace LFS.Views.Reports.Ltoms
 {
@@ -25,7 +25,7 @@ namespace LFS.Views.Reports.Ltoms
 
         private void LoadRealProperties()
         {
-            dtRpt = AccFactory.RealPropertiesRepository().GetViewRecords();
+            dtRpt = TreasuryFactory.RealPropertiesRepository().GetViewRecords();
 
             var autoCompleteSrc = dtRpt.AsEnumerable().Select(row => row.Field<string>("complete_arp_no")).ToList();
             var autoCom = new AutoCompleteStringCollection();
@@ -85,7 +85,7 @@ namespace LFS.Views.Reports.Ltoms
                                    .Where(row => row.Field<string>("complete_arp_no") == txtRpt.Text)
                                    .Select(row => row.Field<int>("real_property_id"))
                                    .FirstOrDefault();
-            var dtRptLevy = AccFactory.RptLevyRepository().GetViewRecords(rptId, date);
+            var dtRptLevy = TreasuryFactory.RptLevyRepository().GetViewRecords(rptId, date);
             var listBxItems = new List<string>();
 
             foreach (DataRow row in dtRptLevy.Rows)
@@ -124,7 +124,7 @@ namespace LFS.Views.Reports.Ltoms
             {
                 var parameters = ((object rptId, DateTime date))e.Argument;
 
-                var dictRptAssessmentPost = AccFactory.RealPropertiesRepository().GetViewRecordById(Convert.ToInt32(parameters.rptId));
+                var dictRptAssessmentPost = TreasuryFactory.RealPropertiesRepository().GetViewRecordById(Convert.ToInt32(parameters.rptId));
 
                 // Define tasks and their progress weights
                 var tasks = new Dictionary<string, int>

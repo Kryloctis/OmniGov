@@ -1,5 +1,4 @@
-﻿using ACC.Data;
-using LFS.DataSets;
+﻿using LFS.DataSets;
 using LFS.Helpers;
 using LFS.Views.Shared;
 using Microsoft.Reporting.WinForms;
@@ -7,6 +6,7 @@ using System;
 using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
+using Treasury.Data;
 
 namespace LFS.Views.Reports.RptReports
 {
@@ -31,7 +31,7 @@ namespace LFS.Views.Reports.RptReports
             var dataTable = new DataTable();
             dataTable.Columns.AddRange(registryColumn);
 
-            var dtRegistry = AccFactory.TaxpayersRepository().GetRecords();
+            var dtRegistry = TreasuryFactory.TaxpayersRepository().GetRecords();
 
             foreach (DataRow row in dtRegistry.Rows)
             {
@@ -84,7 +84,7 @@ namespace LFS.Views.Reports.RptReports
                                                                        decimal basicTaxDue,
                                                                        decimal sefTaxDue)
         {
-            var dictPrevAssmnt = AccFactory.RptAssessmentPostsRepository().GetViewRecentAssessmentRecord(currentAssmntParameters.compelteArpNo, currentAssmntParameters.assessmentYear);
+            var dictPrevAssmnt = TreasuryFactory.RptAssessmentPostsRepository().GetViewRecentAssessmentRecord(currentAssmntParameters.compelteArpNo, currentAssmntParameters.assessmentYear);
 
             int? prevAssmntYear = null;
 
@@ -105,7 +105,7 @@ namespace LFS.Views.Reports.RptReports
                 var parameters = ((string ownerName, DateTime periodFrom, DateTime periodTo))e.Argument;
                 var dataTable = new dsTreasury.dtRptTaxDuesPaymentsDataTable();
 
-                var dtAssessmentPosting = AccFactory.RptAssessmentPostsRepository().GetViewRecordsByOwnerNamePeriod(parameters.ownerName, parameters.periodFrom, parameters.periodTo);
+                var dtAssessmentPosting = TreasuryFactory.RptAssessmentPostsRepository().GetViewRecordsByOwnerNamePeriod(parameters.ownerName, parameters.periodFrom, parameters.periodTo);
                 int totalProgressCount = dtAssessmentPosting.Rows.Count;
                 int progressCount = 0;
 
@@ -232,7 +232,7 @@ namespace LFS.Views.Reports.RptReports
 
             var localReport = reportViewer1.LocalReport;
             int taxpayerId = Convert.ToInt32(cmbxOwners.SelectedValue);
-            var dictTaxpayer = AccFactory.TaxpayersRepository().GetRecordByID(taxpayerId);
+            var dictTaxpayer = TreasuryFactory.TaxpayersRepository().GetRecordByID(taxpayerId);
 
             var parameter = new ReportParameter[]
             {

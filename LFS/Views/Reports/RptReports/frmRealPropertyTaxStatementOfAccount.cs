@@ -1,5 +1,4 @@
-﻿using ACC.Data;
-using LFS.DataSets;
+﻿using LFS.DataSets;
 using LFS.Helpers;
 using LFS.Views.Shared;
 using Microsoft.Reporting.WinForms;
@@ -7,6 +6,7 @@ using System;
 using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
+using Treasury.Data;
 
 namespace LFS.Views.Reports.RptReports
 {
@@ -31,7 +31,7 @@ namespace LFS.Views.Reports.RptReports
 
         private void LoadProperties(int ownerId)
         {
-            var dataTable = AccFactory.RptAssessmentPostsRepository().GetViewRecordsByOwnerId(ownerId);
+            var dataTable = TreasuryFactory.RptAssessmentPostsRepository().GetViewRecordsByOwnerId(ownerId);
             cmbxProperty.DataSource = dataTable;
             cmbxProperty.ValueMember = "rpt_assessment_posts_id";
             cmbxProperty.DisplayMember = "complete_arp_no";
@@ -41,7 +41,7 @@ namespace LFS.Views.Reports.RptReports
 
         private void LoadOwners()
         {
-            var dataTable = AccFactory.TaxpayersRepository().GetRecords();
+            var dataTable = TreasuryFactory.TaxpayersRepository().GetRecords();
             HelperLoadRecords.SearchableCombobox2(dataTable, cmbxOwner, "id", "name");
         }
 
@@ -51,7 +51,7 @@ namespace LFS.Views.Reports.RptReports
                                                                   decimal basicTaxDue,
                                                                   decimal sefTaxDue)
         {
-            var dictPrevAssmnt = AccFactory.RptAssessmentPostsRepository().GetViewRecentAssessmentRecord(currentAssmntParameters.compelteArpNo, currentAssmntParameters.assessmentYear);
+            var dictPrevAssmnt = TreasuryFactory.RptAssessmentPostsRepository().GetViewRecentAssessmentRecord(currentAssmntParameters.compelteArpNo, currentAssmntParameters.assessmentYear);
 
             int? prevAssmntYear = null;
 
@@ -70,7 +70,7 @@ namespace LFS.Views.Reports.RptReports
             var parameters = ((string completeArpNo, DateTime periodFrom, DateTime periodTo))e.Argument;
 
             DataTable dataTable = new dsTreasury.dtRptStamentOfAccountsDataTable();
-            var dtSourceDb = AccFactory.RptAssessmentPostsRepository().GetViewRecordsByArpNoPeriod(parameters.completeArpNo, parameters.periodFrom, parameters.periodTo);
+            var dtSourceDb = TreasuryFactory.RptAssessmentPostsRepository().GetViewRecordsByArpNoPeriod(parameters.completeArpNo, parameters.periodFrom, parameters.periodTo);
 
             int totalProgressCount = dtSourceDb.Rows.Count;
             int progressCount = 0;
@@ -117,7 +117,7 @@ namespace LFS.Views.Reports.RptReports
 
                 //Previous Year
                 int previousYear;
-                var dictPrevAssmnt = AccFactory.RptAssessmentPostsRepository().GetViewRecentAssessmentRecord(rowCompleteArpNo, rowAssessmntYear);
+                var dictPrevAssmnt = TreasuryFactory.RptAssessmentPostsRepository().GetViewRecentAssessmentRecord(rowCompleteArpNo, rowAssessmntYear);
                 if (dictPrevAssmnt.Count < 1)
                     previousYear = rowEffectivityYear;
                 else
@@ -169,7 +169,7 @@ namespace LFS.Views.Reports.RptReports
                 if (dataTable.Rows.Count < 1)
                     progressBar1.Value = 100;
 
-                var dictTaxpayer = AccFactory.TaxpayersRepository().GetRecordByID(Convert.ToInt32(cmbxOwner.SelectedValue));
+                var dictTaxpayer = TreasuryFactory.TaxpayersRepository().GetRecordByID(Convert.ToInt32(cmbxOwner.SelectedValue));
                 var taxpayerAddress = Helper.GenerateFullAddress(dictTaxpayer["address"], string.Empty, dictTaxpayer["municipality"], dictTaxpayer["province"]);
 
                 var reportParameters = new ReportParameter[]

@@ -1,5 +1,4 @@
-﻿using ACC.Data;
-using LFS.Helpers;
+﻿using LFS.Helpers;
 using Microsoft.Reporting.WinForms;
 using System;
 using System.Collections.Generic;
@@ -7,6 +6,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Linq;
 using System.Windows.Forms;
+using Treasury.Data;
 
 namespace LFS.Views.Reports.TaxClearance
 {
@@ -35,7 +35,7 @@ namespace LFS.Views.Reports.TaxClearance
 
         private void LoadRealProperties()
         {
-            dtRealProperties = AccFactory.RealPropertiesRepository().GetViewRecords();
+            dtRealProperties = TreasuryFactory.RealPropertiesRepository().GetViewRecords();
 
             var autoCompleteSrc = dtRealProperties.AsEnumerable().Select(row => row.Field<string>("taxpayer_name")).ToList();
             var autoCom = new AutoCompleteStringCollection();
@@ -184,7 +184,7 @@ namespace LFS.Views.Reports.TaxClearance
 
             if (taxPayerId is not null)
             {
-                DataTable dtProperty = AccFactory.RealPropertiesRepository().GetPropertiesByOwnerId(Convert.ToInt32(taxPayerId));
+                DataTable dtProperty = TreasuryFactory.RealPropertiesRepository().GetPropertiesByOwnerId(Convert.ToInt32(taxPayerId));
 
                 cmbxProperty.DataSource = dtProperty;
                 cmbxProperty.ValueMember = "real_property_id";
@@ -196,19 +196,19 @@ namespace LFS.Views.Reports.TaxClearance
         private void CheckProperty(string completeArpNo)
         {
             int year = DateTime.Now.Year;
-            var dictAssessmentPost = AccFactory.RptAssessmentPostsRepository().GetRecordBy_ArpNo_Year(completeArpNo, year);
+            var dictAssessmentPost = TreasuryFactory.RptAssessmentPostsRepository().GetRecordBy_ArpNo_Year(completeArpNo, year);
             int assessmentPostId = 0;
 
             if (dictAssessmentPost.Count != 0)
             {
                 assessmentPostId = Convert.ToInt32(dictAssessmentPost["id"]);
 
-                var rptPayment = AccFactory.RptPaymentepository().GetRecordByAssessmentPostId(assessmentPostId);
+                var rptPayment = TreasuryFactory.RptPaymentepository().GetRecordByAssessmentPostId(assessmentPostId);
 
                 if (rptPayment.Count != 0)
                 {
                     int paymentId = Convert.ToInt32(rptPayment["payment_collections_id"]);
-                    var paymentColllection = AccFactory.PaymentCollectionsRepository().GetRecordByID(paymentId);
+                    var paymentColllection = TreasuryFactory.PaymentCollectionsRepository().GetRecordByID(paymentId);
 
                     owner = dictAssessmentPost["taxpayer_name"];
                     ownerAddress = dictAssessmentPost["taxpayer_address"];

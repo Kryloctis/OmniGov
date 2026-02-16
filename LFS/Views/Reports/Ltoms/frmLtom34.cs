@@ -1,5 +1,4 @@
-﻿using ACC.Data;
-using LFS.Helpers;
+﻿using LFS.Helpers;
 using Microsoft.Reporting.WinForms;
 using System;
 using System.Collections.Generic;
@@ -7,6 +6,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Linq;
 using System.Windows.Forms;
+using Treasury.Data;
 
 namespace LFS.Views.Reports.Ltoms
 {
@@ -76,9 +76,9 @@ namespace LFS.Views.Reports.Ltoms
                 Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
 
                 //Fetch Record
-                var dictBid = AccFactory.BidRepository().GetBidderWinnerAndBidDetails(taxpayerId, rptId);
+                var dictBid = TreasuryFactory.BidRepository().GetBidderWinnerAndBidDetails(taxpayerId, rptId);
 
-                var dictPropertyDetails = AccFactory.RealPropertiesRepository().GetViewRecordById(rptId);
+                var dictPropertyDetails = TreasuryFactory.RealPropertiesRepository().GetViewRecordById(rptId);
 
                 progressCount += tasks["Fetch Record"];
                 Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
@@ -161,7 +161,7 @@ namespace LFS.Views.Reports.Ltoms
 
             if (rptId is not null)
             {
-                var dtHighestBidder = AccFactory.BidRepository().GetHighestBidderByRptId(Convert.ToInt32(rptId));
+                var dtHighestBidder = TreasuryFactory.BidRepository().GetHighestBidderByRptId(Convert.ToInt32(rptId));
                 cmbxBidders.DataSource = dtHighestBidder;
                 cmbxBidders.ValueMember = "taxpayers_id";
                 cmbxBidders.DisplayMember = "name";
@@ -182,17 +182,13 @@ namespace LFS.Views.Reports.Ltoms
 
         private void LoadRealProperties()
         {
-            dtRpt = AccFactory.RealPropertiesRepository().GetViewRecords();
+            dtRpt = TreasuryFactory.RealPropertiesRepository().GetViewRecords();
 
             var autoCompleteSrc = dtRpt.AsEnumerable().Select(row => row.Field<string>("complete_arp_no")).ToList();
             var autoCom = new AutoCompleteStringCollection();
             autoCom.Clear();
             autoCom.AddRange(autoCompleteSrc.ToArray());
             txtRpt.AutoCompleteCustomSource = autoCom;
-        }
-
-        private void txtBidder_TextChanged(object sender, EventArgs e)
-        {
         }
 
         private void txtRpt_TextChanged(object sender, EventArgs e)

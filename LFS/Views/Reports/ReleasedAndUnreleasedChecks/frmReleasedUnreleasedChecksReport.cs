@@ -1,11 +1,12 @@
-﻿using ACC.Data;
-using LFS.Helpers;
+﻿using LFS.Helpers;
 using Microsoft.Reporting.WinForms;
+using OmniGov.Core.Repositories;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
+using Treasury.Data;
 
 namespace LFS.Views.Reports.ReleasedAndUnreleasedCheques
 {
@@ -23,7 +24,7 @@ namespace LFS.Views.Reports.ReleasedAndUnreleasedCheques
 
         internal void LoadBanks()
         {
-            var dtBank = AccFactory.BanksRepository().GetRecords();
+            var dtBank = TreasuryFactory.BanksRepository().GetRecords();
             cmbBank.DataSource = dtBank;
             cmbBank.ValueMember = "id";
             cmbBank.DisplayMember = "bank_name";
@@ -32,7 +33,7 @@ namespace LFS.Views.Reports.ReleasedAndUnreleasedCheques
         private void LoadBankAccounts()
         {
             int bankID = Convert.ToInt32(cmbBank.SelectedValue);
-            DataTable dtBankAccounts = AccFactory.BankAccountsRepository().GetBankAccountsByBankID(bankID);
+            DataTable dtBankAccounts = TreasuryFactory.BankAccountsRepository().GetBankAccountsByBankID(bankID);
             cmbBankAccounts.DataSource = dtBankAccounts;
             cmbBankAccounts.ValueMember = "id";
             cmbBankAccounts.DisplayMember = "account_no";
@@ -93,8 +94,8 @@ namespace LFS.Views.Reports.ReleasedAndUnreleasedCheques
                 var dtReleasedCheques = new dsLFS.dtSchedulesOfReleasedChequeDataTable().Clone();
                 DataTable dtDb =
                     parameters.isReleased ?
-                    AccFactory.ReleasedChequesRepository().GetViewRecordsByBankAccountIDAndPeriodCoveredReleased(parameters.bankAccountId, parameters.periodCovered) :
-                    AccFactory.ReleasedChequesRepository().GetViewRecordsByBankAccountIDAndPeriodCoveredUnReleased(parameters.bankAccountId, parameters.periodCovered);
+                    TreasuryFactory.ReleasedChequesRepository().GetViewRecordsByBankAccountIDAndPeriodCoveredReleased(parameters.bankAccountId, parameters.periodCovered) :
+                    TreasuryFactory.ReleasedChequesRepository().GetViewRecordsByBankAccountIDAndPeriodCoveredUnReleased(parameters.bankAccountId, parameters.periodCovered);
 
                 foreach (DataRow item in dtDb.Rows)
                 {
@@ -145,7 +146,7 @@ namespace LFS.Views.Reports.ReleasedAndUnreleasedCheques
 
                 var localReport = reportViewer1.LocalReport;
                 int bankAccountId = Convert.ToInt32(cmbBankAccounts.SelectedValue);
-                var dictBankAccount = AccFactory.BankAccountsRepository().GetViewRecordById(bankAccountId);
+                var dictBankAccount = TreasuryFactory.BankAccountsRepository().GetViewRecordById(bankAccountId);
                 string bankDetails = string.Format("{0} - {1}", dictBankAccount["bank_name"], dictBankAccount["account_no"]);
 
                 (string reportPath, string dtName) localReportParam;
@@ -162,13 +163,13 @@ namespace LFS.Views.Reports.ReleasedAndUnreleasedCheques
 
                 var dictCertifiedCorrect =
                     radReleased.Checked ?
-                    AccFactory.SignatoriesHasReferencesRepository().GetSigntryByRefDoc("Certified Correct", "Schedule of Released Checks") :
-                    AccFactory.SignatoriesHasReferencesRepository().GetSigntryByRefDoc("Certified Correct", "Schedule of UnReleased Checks");
+                    Factory.SignatoriesHasReferencesRepository().GetSigntryByRefDoc("Certified Correct", "Schedule of Released Checks") :
+                    Factory.SignatoriesHasReferencesRepository().GetSigntryByRefDoc("Certified Correct", "Schedule of UnReleased Checks");
 
                 var dictReceivedBy =
                     radReleased.Checked ?
-                    AccFactory.SignatoriesHasReferencesRepository().GetSigntryByRefDoc("Received By", "Schedule of Released Checks") :
-                    AccFactory.SignatoriesHasReferencesRepository().GetSigntryByRefDoc("Received By", "Schedule of UnReleased Checks");
+                    Factory.SignatoriesHasReferencesRepository().GetSigntryByRefDoc("Received By", "Schedule of Released Checks") :
+                    Factory.SignatoriesHasReferencesRepository().GetSigntryByRefDoc("Received By", "Schedule of UnReleased Checks");
 
                 var certifiedCorrectSig = ParseSignatory(dictCertifiedCorrect);
                 var receivedBySig = ParseSignatory(dictReceivedBy);

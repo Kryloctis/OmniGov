@@ -1,11 +1,12 @@
-﻿using ACC.Data;
-using LFS.Helpers;
+﻿using LFS.Helpers;
 using Microsoft.Reporting.WinForms;
+using OmniGov.Core.Repositories;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
+using Treasury.Data;
 
 namespace LFS.Views.Reports.RCI
 {
@@ -46,19 +47,19 @@ namespace LFS.Views.Reports.RCI
                 errorProvider1.GetError(cmbxBankAccounts)
             };
 
-            return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
+            return Factory.CreateErrors(errorArray).GenerateErrorMessage();
         }
 
         internal void LoadBanks()
         {
-            var dtBank = AccFactory.BanksRepository().GetRecords();
+            var dtBank = TreasuryFactory.BanksRepository().GetRecords();
             HelperLoadRecords.BankComboBox(dtBank, cmbxBank, "id", "bank_name");
         }
 
         private void LoadBankAccounts()
         {
             int bankID = Convert.ToInt32(cmbxBank.SelectedValue);
-            DataTable dtBankAccounts = AccFactory.BankAccountsRepository().GetBankAccountsByBankID(bankID);
+            DataTable dtBankAccounts = TreasuryFactory.BankAccountsRepository().GetBankAccountsByBankID(bankID);
 
             cmbxBankAccounts.DataSource = dtBankAccounts;
             cmbxBankAccounts.ValueMember = "id";
@@ -120,7 +121,7 @@ namespace LFS.Views.Reports.RCI
             {
                 var parameters = ((int bankAccId, string dateYearMonth))e.Argument;
                 var dtRci = new dsLFS.dtRCINewDataTable().Clone();
-                var dtCheckIssuance = AccFactory.RciRepository().GetViewRecordsByBankAccountIdAndMonth(parameters.bankAccId, parameters.dateYearMonth);
+                var dtCheckIssuance = TreasuryFactory.RciRepository().GetViewRecordsByBankAccountIdAndMonth(parameters.bankAccId, parameters.dateYearMonth);
                 int totalProgressCount = dtCheckIssuance.Rows.Count;
                 int progressCount = 0;
 
@@ -171,7 +172,7 @@ namespace LFS.Views.Reports.RCI
                 }
 
                 //Report Parameters
-                var dictDepartmentHeadSignatory = AccFactory.SignatoriesHasReferencesRepository().GetSigntryByRefDoc("Department Head", "Report of Check Issued");
+                var dictDepartmentHeadSignatory = Factory.SignatoriesHasReferencesRepository().GetSigntryByRefDoc("Department Head", "Report of Check Issued");
                 static void ParseSignatory(Dictionary<string, string> dictSignatory, ref string signatory, ref string signatoryTitle)
                 {
                     if (dictSignatory.Count > 0)
@@ -193,12 +194,12 @@ namespace LFS.Views.Reports.RCI
                 string departmentHeadSignatoryTitle = string.Empty;
                 ParseSignatory(dictDepartmentHeadSignatory, ref departmentHeadSignatory, ref departmentHeadSignatoryTitle);
 
-                var dictAdministrativeOfficer = AccFactory.SignatoriesHasReferencesRepository().GetSigntryByRefDoc("Administrative Officer", "Report of Check Issued");
+                var dictAdministrativeOfficer = Factory.SignatoriesHasReferencesRepository().GetSigntryByRefDoc("Administrative Officer", "Report of Check Issued");
                 string administrativeOfficerSignatory = string.Empty;
                 string administrativeOfficerSignatoryTitle = string.Empty;
                 ParseSignatory(dictAdministrativeOfficer, ref administrativeOfficerSignatory, ref administrativeOfficerSignatoryTitle);
 
-                var dictBankAccount = AccFactory.BankAccountsRepository().GetViewRecordById(parameters.bankAccId);
+                var dictBankAccount = TreasuryFactory.BankAccountsRepository().GetViewRecordById(parameters.bankAccId);
                 var fund = fundName;
 
                 string bankDetails = string.Format("{0} - {1}", dictBankAccount["bank_name"], dictBankAccount["account_no"]);

@@ -1,5 +1,4 @@
-﻿using ACC.Data;
-using LFS.DataSets;
+﻿using LFS.DataSets;
 using LFS.Helpers;
 using LFS.Views.Shared;
 using Microsoft.Reporting.WinForms;
@@ -8,6 +7,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Linq;
 using System.Windows.Forms;
+using Treasury.Data;
 
 namespace LFS.Views.Reports.Ltoms
 {
@@ -48,7 +48,7 @@ namespace LFS.Views.Reports.Ltoms
             {
                 var parameter = (DateTime)e.Argument;
                 var dtLtom16 = new dsTreasury.dtLtom16DataTable().Clone();
-                var dtAssessmentPost = AccFactory.RptAssessmentPostsRepository().GetViewRecords(parameter);
+                var dtAssessmentPost = TreasuryFactory.RptAssessmentPostsRepository().GetViewRecords(parameter);
                 var groupedData = dtAssessmentPost.AsEnumerable()
                                                   .GroupBy(row => row.Field<string>("complete_arp_no"))
                                                   .SelectMany(grp => grp.Select(row =>

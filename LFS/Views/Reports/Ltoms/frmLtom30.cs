@@ -7,6 +7,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Linq;
 using System.Windows.Forms;
+using Treasury.Data;
 using Treasury.Domain.Entities;
 
 namespace LFS.Views.Reports.Ltoms
@@ -43,14 +44,14 @@ namespace LFS.Views.Reports.Ltoms
 
         private void LoadAuctionSchedule()
         {
-            DataTable dtAuctionSchedule = AccFactory.AuctionRepository().GetAuctionSchedule();
+            DataTable dtAuctionSchedule = TreasuryFactory.AuctionRepository().GetAuctionSchedule();
             HelperLoadRecords.AuctionScheduleCombobox(dtAuctionSchedule, cmbxAuctionSchedule, "date", "id");
         }
 
         private void LoadProperties()
         {
             int auctionId = Convert.ToInt32(cmbxAuctionSchedule.SelectedValue);
-            dtAuctionRpt = AccFactory.RptAuctionRepository().GetAuctionProperties(new RptAuctionModel() { AuctionId = auctionId });
+            dtAuctionRpt = TreasuryFactory.RptAuctionRepository().GetAuctionProperties(new RptAuctionModel() { AuctionId = auctionId });
 
             var autoCompleteSrc = dtAuctionRpt.AsEnumerable().Select(row => row.Field<string>("complete_arp_no")).ToList();
             var autoCom = new AutoCompleteStringCollection();
@@ -112,7 +113,7 @@ namespace LFS.Views.Reports.Ltoms
                                                    decimal basicTaxDue,
                                                    decimal sefTaxDue)
         {
-            var dictPrevAssmnt = AccFactory.RptAssessmentPostsRepository().GetViewRecentAssessmentRecord(currentAssmntParameters.compelteArpNo, currentAssmntParameters.assessmentYear);
+            var dictPrevAssmnt = TreasuryFactory.RptAssessmentPostsRepository().GetViewRecentAssessmentRecord(currentAssmntParameters.compelteArpNo, currentAssmntParameters.assessmentYear);
 
             int? prevAssmntYear = null;
 
@@ -134,10 +135,10 @@ namespace LFS.Views.Reports.Ltoms
                 var rptAuctionModel = new RptAuctionModel() { AuctionId = parameters.auctionId };
 
                 int progressCount = 0;
-                var dictRpt = AccFactory.RealPropertiesRepository().GetRecordByID(parameters.rptId);
+                var dictRpt = TreasuryFactory.RealPropertiesRepository().GetRecordByID(parameters.rptId);
                 string completeArp = dictRpt["complete_arp_no"].ToString();
 
-                var dtDelinquentProperty = AccFactory.RptAssessmentPostsRepository().GetViewDeliquentRecords();
+                var dtDelinquentProperty = TreasuryFactory.RptAssessmentPostsRepository().GetViewDeliquentRecords();
                 var dtRptAuctionProperties = new dsTreasury.dtLtom29DataTable();
                 int totalProgressCount = dtDelinquentProperty.Rows.Count;
 
@@ -205,7 +206,7 @@ namespace LFS.Views.Reports.Ltoms
                 report.ReportPath = $"{Application.StartupPath}Reports\\Ltoms\\Ltom30DeclarationOfForfeitureOfDelinquentRpt.rdlc";
                 report.DataSources.Clear();
 
-                var dictAuctionProperty = AccFactory.RptAuctionRepository().GetAuctionPropertiesByAuctionIdAndRptId(auctionId, rptId);
+                var dictAuctionProperty = TreasuryFactory.RptAuctionRepository().GetAuctionPropertiesByAuctionIdAndRptId(auctionId, rptId);
 
                 var reportParameters = new ReportParameter[]
                 {

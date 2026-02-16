@@ -1,10 +1,10 @@
-﻿using ACC.Data;
-using LFS.Helpers;
+﻿using LFS.Helpers;
 using Microsoft.Reporting.WinForms;
 using System;
 using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
+using Treasury.Data;
 
 namespace LFS.Views.Reports.Cashbook
 {
@@ -35,14 +35,14 @@ namespace LFS.Views.Reports.Cashbook
 
         internal void LoadBanks()
         {
-            var dtBanks = AccFactory.BanksRepository().GetRecords();
+            var dtBanks = TreasuryFactory.BanksRepository().GetRecords();
             HelperLoadRecords.BankComboBox(dtBanks, cmbxBank, "id", "bank_name");
         }
 
         internal void LoadBankAccounts()
         {
             int bankID = Convert.ToInt32(cmbxBank.SelectedValue);
-            DataTable dtBankAccounts = AccFactory.BankAccountsRepository().GetBankAccountsByBankID(bankID);
+            DataTable dtBankAccounts = TreasuryFactory.BankAccountsRepository().GetBankAccountsByBankID(bankID);
             HelperLoadRecords.BankAccountsComboBox(dtBankAccounts, cmbxBankAcc, "id", "account_no");
         }
 
@@ -93,8 +93,8 @@ namespace LFS.Views.Reports.Cashbook
             {
                 var parameters = ((int bankId, int bankAccountId))e.Argument;
                 var dtCashBook = new dsLFS.dtCashbookDataTable().Clone();
-                var dtCashBookFromDb = AccFactory.BankDepositsRepository().GetRecordsByBankAndAccountID(parameters.bankId, parameters.bankAccountId);
-                var dtRci = AccFactory.RciRepository().GetRecordsByBankAndAccountID(parameters.bankId, parameters.bankAccountId);
+                var dtCashBookFromDb = TreasuryFactory.BankDepositsRepository().GetRecordsByBankAndAccountID(parameters.bankId, parameters.bankAccountId);
+                var dtRci = TreasuryFactory.RciRepository().GetRecordsByBankAndAccountID(parameters.bankId, parameters.bankAccountId);
 
                 int totalProgressCount = dtCashBookFromDb.Rows.Count + dtRci.Rows.Count;
                 int progressCount = 0;

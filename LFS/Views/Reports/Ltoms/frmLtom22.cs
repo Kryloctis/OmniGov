@@ -1,5 +1,4 @@
-﻿using ACC.Data;
-using LFS.DataSets;
+﻿using LFS.DataSets;
 using LFS.Helpers;
 using Microsoft.Reporting.WinForms;
 using System;
@@ -8,6 +7,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Linq;
 using System.Windows.Forms;
+using Treasury.Data;
 
 namespace LFS.Views.Reports.Ltoms
 {
@@ -73,7 +73,7 @@ namespace LFS.Views.Reports.Ltoms
                 };
 
                 var dtLtom22 = new dsTreasury.dtLtom22DataTable().Clone();
-                var dtRptLevy = AccFactory.RptLevyRepository().GetViewRecords(date);
+                var dtRptLevy = TreasuryFactory.RptLevyRepository().GetViewRecords(date);
                 int totalProgressCount = tasks.Sum(t => t.Value) + dtRptLevy.Rows.Count;
                 int progressCount = 0;
 
