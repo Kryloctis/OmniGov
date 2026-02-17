@@ -1,5 +1,6 @@
-﻿using MySql.Data.MySqlClient;
+using MySql.Data.MySqlClient;
 using RPT.Domain.Interfaces;
+using System;
 using System.Configuration;
 using System.Data;
 using System.Data.Common;
@@ -130,13 +131,20 @@ namespace RPT.Data.Repositories
             try
             {
                 string testConnectionString = ConfigurationManager.ConnectionStrings[testConnectionName].ConnectionString;
-                using (MySqlConnection connection = new MySqlConnection(testConnectionString))
+                var builder = new MySqlConnectionStringBuilder(testConnectionString)
+                {
+                    ConnectionTimeout = 2
+                };
+
+                using (MySqlConnection connection = new MySqlConnection(builder.ConnectionString))
                 {
                     connection.Open();
                     return true;
                 }
             }
             catch (MySqlException) { return false; }
+            catch (Exception) { return false; }
         }
     }
 }
+

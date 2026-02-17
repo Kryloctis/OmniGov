@@ -1,4 +1,9 @@
-﻿using RPT.Domain.Interfaces;
+using OmniGov.Core.Interfaces.Repositories;
+using OmniGov.Core.Interfaces.Services;
+using OmniGov.Core.Interfaces.Factories;
+using OmniGov.Core.Services;
+using RPT.Domain.Interfaces;
+using RptInterfaces = RPT.Domain.Interfaces;
 
 namespace RPT.Data.Repositories
 {
@@ -16,6 +21,10 @@ namespace RPT.Data.Repositories
 
         public static IPreviousAssessment PreviousAssessmentRepository() => new PreviousAssessmentRepository(mySqlGenericCommandsRPT);
 
-        public static IServer ServerRepository() => new RptServerRepository(mySqlGenericCommandsRPT);
+        public static RptInterfaces.IServer ServerRepository() 
+        {
+            var provider = ServiceLocator.GetRequiredService<IConnectionProvider>();
+            return new RptServerRepository(mySqlGenericCommandsRPT, provider);
+        }
     }
 }

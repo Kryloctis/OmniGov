@@ -1,4 +1,4 @@
-﻿using System.Data;
+using System.Data;
 
 namespace RPT.Domain.Interfaces
 {
@@ -19,3 +19,4 @@ namespace RPT.Domain.Interfaces
         int ExecuteNonQueryId(string query, params object[][] parameters);
     }
 }
+

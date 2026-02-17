@@ -1,4 +1,4 @@
-﻿namespace RPT.Domain.Models
+namespace RPT.Domain.Models
 {
     public class RealPropertiesModel
     {

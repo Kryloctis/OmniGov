@@ -1,4 +1,4 @@
-﻿using RPT.Domain.Models;
+using RPT.Domain.Models;
 
 namespace RPT.Domain.Interfaces
 {

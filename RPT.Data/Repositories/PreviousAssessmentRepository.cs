@@ -1,4 +1,4 @@
-﻿using RPT.Domain.Interfaces;
+using RPT.Domain.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -82,3 +82,4 @@ namespace RPT.Data.Repositories
         }
     }
 }
+
