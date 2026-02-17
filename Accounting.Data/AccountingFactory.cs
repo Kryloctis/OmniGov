@@ -1,6 +1,7 @@
-﻿using Accounting.Data.Repositories;
+using Accounting.Data.Repositories;
 using Accounting.Domain.Interfaces;
 using OmniGov.Core.Repositories;
+using OmniGov.Core.Services;
 
 namespace Accounting.Data
 {
@@ -39,3 +40,4 @@ namespace Accounting.Data
         public static IGeneralLedgerAccountsRepository GeneralLedgerAccountsRepository() => new GeneralLedgerAccountsRepository(genericCommands);
     }
 }
+

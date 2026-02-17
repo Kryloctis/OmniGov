@@ -1,6 +1,7 @@
-﻿using Accounting.Domain.Entities;
+using Accounting.Domain.Entities;
 using Accounting.Domain.Interfaces;
 using OmniGov.Core.Repositories;
+using OmniGov.Core.Services;
 using System.Data;
 
 namespace Accounting.Data.Repositories
@@ -9,11 +10,11 @@ namespace Accounting.Data.Repositories
     {
         private const string tableName = "check_disbursements_journal";
         private const string viewTableName = "view_check_disbursement_journal";
-        private GenericCommands mySqlGenericCommandsLFS;
+        private GenericCommands mySqlGenericCommands;
 
-        public CheckDisbursementsJournalRepository(GenericCommands mySqlGenericCommandsLFS)
+        public CheckDisbursementsJournalRepository(GenericCommands mySqlGenericCommands)
         {
-            this.mySqlGenericCommandsLFS = mySqlGenericCommandsLFS;
+            this.mySqlGenericCommands = mySqlGenericCommands;
         }
 
         public bool Delete(List<CheckDisbursementsJournalModel> entityList)
@@ -53,7 +54,7 @@ namespace Accounting.Data.Repositories
             };
 
             string query = $"INSERT INTO {tableName} (jev_id, check_date, check_no, dv_no, rci_no) VALUES (@jev_id, @check_date, @check_no, @dv_no, @rci_no)";
-            return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
+            return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public bool Update(CheckDisbursementsJournalModel entity)
@@ -73,7 +74,7 @@ namespace Accounting.Data.Repositories
             };
 
             string query = $"UPDATE {tableName} SET check_date = @check_date, check_no = @check_no, dv_no = @dv_no, rci_no = @rci_no WHERE jev_id = @jev_id";
-            return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
+            return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public Dictionary<string, string> GetRecordByJevID(int jevId)
@@ -87,7 +88,7 @@ namespace Accounting.Data.Repositories
 
             string query = $"SELECT id, payee, check_date, check_no, dv_no, rci_no FROM {viewTableName} WHERE jev_id = @jev_id";
 
-            DataTable dataTable = mySqlGenericCommandsLFS.ExecuteReader(query, parameters);
+            DataTable dataTable = mySqlGenericCommands.ExecuteReader(query, parameters);
 
             if (dataTable.Rows.Count > 0)
             {
@@ -109,7 +110,8 @@ namespace Accounting.Data.Repositories
             };
 
             string query = $"DELETE FROM {tableName} WHERE jev_id = @id";
-            return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
+            return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
         }
     }
 }
+

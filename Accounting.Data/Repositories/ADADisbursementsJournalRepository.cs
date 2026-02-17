@@ -1,6 +1,7 @@
-﻿using Accounting.Domain.Entities;
+using Accounting.Domain.Entities;
 using Accounting.Domain.Interfaces;
 using OmniGov.Core.Repositories;
+using OmniGov.Core.Services;
 using System.Data;
 
 namespace Accounting.Data.Repositories
@@ -8,11 +9,11 @@ namespace Accounting.Data.Repositories
     public class ADADisbursementsJournalRepository : IADADisbursementsJournalRepository
     {
         private const string tableName = "ada_disbursement_journal";
-        private GenericCommands mySqlGenericCommandsLFS;
+        private GenericCommands mySqlGenericCommands;
 
-        public ADADisbursementsJournalRepository(GenericCommands mySqlGenericCommandsLFS)
+        public ADADisbursementsJournalRepository(GenericCommands mySqlGenericCommands)
         {
-            this.mySqlGenericCommandsLFS = mySqlGenericCommandsLFS;
+            this.mySqlGenericCommands = mySqlGenericCommands;
         }
 
         public bool Delete(List<ADADisbursementsJournalModel> entityList)
@@ -46,7 +47,7 @@ namespace Accounting.Data.Repositories
 
             string query = $"SELECT * FROM {tableName} WHERE jev_id = @jev_id";
 
-            DataTable dataTable = mySqlGenericCommandsLFS.ExecuteReader(query, parameters);
+            DataTable dataTable = mySqlGenericCommands.ExecuteReader(query, parameters);
 
             if (dataTable.Rows.Count > 0)
             {
@@ -75,7 +76,7 @@ namespace Accounting.Data.Repositories
             };
 
             string query = $"INSERT INTO {tableName} (jev_id, ada_no, dv_no) VALUES (@jev_id, @ada_no, @dv_no)";
-            return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
+            return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public bool Update(ADADisbursementsJournalModel entity)
@@ -93,7 +94,7 @@ namespace Accounting.Data.Repositories
             };
 
             string query = $"UPDATE {tableName} SET ada_no = @ada_no, dv_no = @dv_no WHERE jev_id = @jev_id";
-            return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
+            return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public Dictionary<string, string> GetViewRecordByJevID(int jevId)
@@ -107,7 +108,7 @@ namespace Accounting.Data.Repositories
 
             string query = $"SELECT * FROM {tableName} WHERE jev_id = @jev_id";
 
-            DataTable dataTable = mySqlGenericCommandsLFS.ExecuteReader(query, parameters);
+            DataTable dataTable = mySqlGenericCommands.ExecuteReader(query, parameters);
 
             if (dataTable.Rows.Count > 0)
             {
@@ -131,7 +132,7 @@ namespace Accounting.Data.Repositories
                 };
 
                 string query = $"SELECT id FROM {tableName} WHERE jev_id = @jev_id";
-                string queryResult = mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
+                string queryResult = mySqlGenericCommands.ExecuteScalar(query, parameters);
 
                 // if query is not null, means found some record, so true
                 if (!string.IsNullOrEmpty(queryResult)) return true;
@@ -153,7 +154,8 @@ namespace Accounting.Data.Repositories
             };
 
             string query = $"DELETE FROM {tableName} WHERE jev_id = @jev_id";
-            return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
+            return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
         }
     }
 }
+

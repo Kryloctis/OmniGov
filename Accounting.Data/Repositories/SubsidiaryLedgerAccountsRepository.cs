@@ -1,6 +1,7 @@
-﻿using Accounting.Domain.Entities;
+using Accounting.Domain.Entities;
 using Accounting.Domain.Interfaces;
 using OmniGov.Core.Repositories;
+using OmniGov.Core.Services;
 using System.Data;
 using System.Transactions;
 
@@ -10,11 +11,11 @@ namespace Accounting.Data.Repositories
     {
         private readonly string tableName = "subsidiary_ledger_accounts";
         private readonly string viewTableName = "view_subsidiary_ledger_accounts";
-        private GenericCommands mySqlGenericCommandsLFS;
+        private GenericCommands mySqlGenericCommands;
 
-        public SubsidiaryLedgerAccountsRepository(GenericCommands mySqlGenericCommandsLFS)
+        public SubsidiaryLedgerAccountsRepository(GenericCommands mySqlGenericCommands)
         {
-            this.mySqlGenericCommandsLFS = mySqlGenericCommandsLFS;
+            this.mySqlGenericCommands = mySqlGenericCommands;
         }
 
         public bool Delete(List<SubsidiaryLedgerAccountsModel> entityList)
@@ -29,7 +30,7 @@ namespace Accounting.Data.Repositories
                     };
 
                     string query = $"DELETE FROM {tableName} WHERE id = @id";
-                    _ = mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
+                    _ = mySqlGenericCommands.ExecuteNonQuery(query, parameters);
                 }
 
                 scope.Complete();
@@ -48,7 +49,7 @@ namespace Accounting.Data.Repositories
 
             string query = $"SELECT funds_id, general_ledger_accounts_id, sub_code, sub_name, address, contact_person, contact, created_at, updated_at FROM {tableName} WHERE id = @id";
 
-            using (DataTable reader = mySqlGenericCommandsLFS.ExecuteReader(query, parameters))
+            using (DataTable reader = mySqlGenericCommands.ExecuteReader(query, parameters))
             {
                 if (reader.Rows.Count < 1)
                     return record;
@@ -71,7 +72,7 @@ namespace Accounting.Data.Repositories
             string query = $"SELECT * FROM {tableName}";
 
             DataTable dataTable = new DataTable();
-            return mySqlGenericCommandsLFS.Fill(query, dataTable);
+            return mySqlGenericCommands.Fill(query, dataTable);
         }
 
         public DataTable GetRecordsByReference(int Id)
@@ -79,7 +80,7 @@ namespace Accounting.Data.Repositories
             string query = $"SELECT * FROM {tableName} WHERE general_ledger_accounts_id='{Id}'";
 
             DataTable dataTable = new DataTable();
-            return mySqlGenericCommandsLFS.Fill(query, dataTable);
+            return mySqlGenericCommands.Fill(query, dataTable);
         }
 
         public DataTable GetRecordsBySearch(string searchText)
@@ -92,7 +93,7 @@ namespace Accounting.Data.Repositories
             string query = $"SELECT * FROM {tableName} WHERE sub_code LIKE @search_text OR sub_code LIKE @search_text";
 
             DataTable dataTable = new DataTable();
-            return mySqlGenericCommandsLFS.FillBySearch(query, dataTable, parameters);
+            return mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
         }
 
         public DataTable GetRecordsBySearchByReference(string searchText, int Id)
@@ -105,7 +106,7 @@ namespace Accounting.Data.Repositories
             string query = $"SELECT * FROM {tableName} WHERE general_ledger_accounts_id='{Id}' AND sub_code LIKE @search_text OR sub_code LIKE @search_text";
 
             DataTable dataTable = new DataTable();
-            return mySqlGenericCommandsLFS.FillBySearch(query, dataTable, parameters);
+            return mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
         }
 
         public DataTable GetRecordsByFundAndGeneralLedger(int fundId, int generalLedgerId)
@@ -119,7 +120,7 @@ namespace Accounting.Data.Repositories
             string query = $"SELECT * FROM {tableName} WHERE funds_id = @funds_id AND general_ledger_accounts_id = @generalLedgerId";
 
             DataTable dataTable = new DataTable();
-            return mySqlGenericCommandsLFS.FillBySearch(query, dataTable, parameters);
+            return mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
         }
 
         public bool IdExist(int id)
@@ -141,7 +142,7 @@ namespace Accounting.Data.Repositories
             };
 
             string query = $"INSERT INTO {tableName} (funds_id, general_ledger_accounts_id, sub_code, sub_name, address, contact_person, contact) VALUES (@funds_id, @general_ledger_accounts_id, @sub_code, @sub_name, @address, @contact_person, @contact)";
-            return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
+            return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public bool Update(SubsidiaryLedgerAccountsModel entity)
@@ -160,7 +161,7 @@ namespace Accounting.Data.Repositories
 
             string query = $"UPDATE {tableName} SET funds_id = @funds_id, general_ledger_accounts_id = @general_ledger_accounts_id, sub_code = @sub_code, sub_name = @sub_name, address = @address, contact_person = @contact_person, contact = @contact WHERE id = @id";
 
-            return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
+            return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public bool HasSubsidiary(ushort generalLedgerId, byte fundId)
@@ -172,7 +173,7 @@ namespace Accounting.Data.Repositories
             };
 
             string query = $"SELECT id FROM {tableName} WHERE general_ledger_accounts_id = @general_ledger_accounts_id AND funds_id = @funds_id";
-            string queryResult = mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
+            string queryResult = mySqlGenericCommands.ExecuteScalar(query, parameters);
 
             // if query is not null, means found some record, so true
             if (!string.IsNullOrEmpty(queryResult)) return true;
@@ -189,7 +190,8 @@ namespace Accounting.Data.Repositories
 
             string query = $"SELECT * FROM {viewTableName} WHERE funds_id = @funds_id AND general_ledger_accounts_id = @general_ledger_accounts_id";
             DataTable dataTable = new DataTable();
-            return mySqlGenericCommandsLFS.FillBySearch(query, dataTable, parameters);
+            return mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
         }
     }
 }
+

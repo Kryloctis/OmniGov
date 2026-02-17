@@ -1,19 +1,20 @@
-﻿using Accounting.Domain.Entities;
+using Accounting.Domain.Entities;
 using Accounting.Domain.Interfaces;
 using OmniGov.Core.Repositories;
+using OmniGov.Core.Services;
 using System.Data;
 
 namespace Accounting.Data.Repositories
 {
     internal class CashDisbursementsJournalRepository : ICashDisbursementsJournalRepository
     {
-        private GenericCommands mySqlGenericCommandsLFS;
+        private GenericCommands mySqlGenericCommands;
         private const string tableName = "cash_disbursement_journal";
         private const string viewTableName = "view_cash_disbursement_journal";
 
-        public CashDisbursementsJournalRepository(GenericCommands mySqlGenericCommandsLFS)
+        public CashDisbursementsJournalRepository(GenericCommands mySqlGenericCommands)
         {
-            this.mySqlGenericCommandsLFS = mySqlGenericCommandsLFS;
+            this.mySqlGenericCommands = mySqlGenericCommands;
         }
 
         public bool Delete(List<CashDisbursementsJournalModel> entityList)
@@ -52,7 +53,7 @@ namespace Accounting.Data.Repositories
             };
 
             string query = $"INSERT INTO {tableName} (jev_id, disbursing_officers_id, dv_no, date_paid) VALUES (@jev_id, @disbursing_officers_id, @dv_no, @date_paid)";
-            return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
+            return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public bool Update(CashDisbursementsJournalModel entity)
@@ -71,7 +72,7 @@ namespace Accounting.Data.Repositories
             };
 
             string query = $"UPDATE {tableName} SET disbursing_officers_id = @disbursing_officers_id, dv_no = @dv_no, date_paid = @date_paid WHERE jev_id = @jev_id";
-            return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
+            return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public bool JevIdExist(int jevId)
@@ -84,7 +85,7 @@ namespace Accounting.Data.Repositories
             string query = $"SELECT id FROM {tableName} WHERE jev_id = @jev_id";
 
             // if query is not null, means found some record, so true
-            return !string.IsNullOrEmpty(mySqlGenericCommandsLFS.ExecuteScalar(query, parameters));
+            return !string.IsNullOrEmpty(mySqlGenericCommands.ExecuteScalar(query, parameters));
         }
 
         public Dictionary<string, string> GetViewRecordByJevID(int jevId)
@@ -98,7 +99,7 @@ namespace Accounting.Data.Repositories
 
             string query = $"SELECT id, disbursing_officers_id, dv_no, date_paid, first_name, mid_initial, last_name, full_name, job_title FROM {viewTableName} WHERE jev_id = @jev_id";
 
-            DataTable dataTable = mySqlGenericCommandsLFS.ExecuteReader(query, parameters);
+            DataTable dataTable = mySqlGenericCommands.ExecuteReader(query, parameters);
 
             if (dataTable.Rows.Count > 0)
             {
@@ -120,7 +121,8 @@ namespace Accounting.Data.Repositories
             };
 
             string query = $"DELETE FROM {tableName} WHERE jev_id = @id";
-            return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
+            return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
         }
     }
 }
+

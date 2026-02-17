@@ -1,6 +1,7 @@
-﻿using Accounting.Domain.Entities;
+using Accounting.Domain.Entities;
 using Accounting.Domain.Interfaces;
 using OmniGov.Core.Repositories;
+using OmniGov.Core.Services;
 using System.Data;
 
 namespace Accounting.Data.Repositories
@@ -9,11 +10,11 @@ namespace Accounting.Data.Repositories
     {
         private readonly string tableName = "beginning_balances";
         private readonly string viewTableName = "view_beginning_balances";
-        private GenericCommands mySqlGenericCommandsLFS;
+        private GenericCommands mySqlGenericCommands;
 
-        public BeginningBalancesRepository(GenericCommands mySqlGenericCommandsLFS)
+        public BeginningBalancesRepository(GenericCommands mySqlGenericCommands)
         {
-            this.mySqlGenericCommandsLFS = mySqlGenericCommandsLFS;
+            this.mySqlGenericCommands = mySqlGenericCommands;
         }
 
         public int CountRecords()
@@ -36,7 +37,7 @@ namespace Accounting.Data.Repositories
             string query = $"SELECT * FROM {tableName}";
 
             var dtJournals = new DataTable();
-            return mySqlGenericCommandsLFS.Fill(query, dtJournals);
+            return mySqlGenericCommands.Fill(query, dtJournals);
         }
 
         public DataTable GetRecordsBySearch(string searchText)
@@ -59,7 +60,7 @@ namespace Accounting.Data.Repositories
 
             string query = $"SELECT COALESCE(SUM(amount), 0) AS amount FROM {tableName} WHERE funds_id = @funds_id AND YEAR(date_entry) = @year AND general_ledger_accounts_id = @general_ledger_accounts_id {subsidiaryQuery} AND is_debit = @is_debit";
 
-            decimal amount = Convert.ToDecimal(mySqlGenericCommandsLFS.ExecuteScalar(query, parameters));
+            decimal amount = Convert.ToDecimal(mySqlGenericCommands.ExecuteScalar(query, parameters));
             return amount;
         }
 
@@ -78,7 +79,7 @@ namespace Accounting.Data.Repositories
 
             string query = $"SELECT id, funds_id, subsidiary_ledger_accounts_id, is_debit, MAX(date_entry) AS date_entry, amount, created_at, updated_at FROM {tableName} WHERE funds_id = @funds_id AND general_ledger_accounts_id = @general_ledger_accounts_id AND YEAR(date_entry) = @year {subsidiaryQuery}";
 
-            using (DataTable reader = mySqlGenericCommandsLFS.ExecuteReader(query, parameters))
+            using (DataTable reader = mySqlGenericCommands.ExecuteReader(query, parameters))
             {
                 if (reader.Rows.Count < 1)
                     return record;
@@ -124,7 +125,7 @@ namespace Accounting.Data.Repositories
                 $"AND account_group_id = @account_group_id " +
                 $"{subsidiaryQuery}";
 
-            using (var reader = mySqlGenericCommandsLFS.ExecuteReader(query, parameters))
+            using (var reader = mySqlGenericCommands.ExecuteReader(query, parameters))
             {
                 foreach (DataRow item in reader.Rows)
                 {
@@ -161,7 +162,7 @@ namespace Accounting.Data.Repositories
                 $"AND maj_acc_group_id = @maj_acc_group_id " +
                 $"{subsidiaryQuery}";
 
-            using (var reader = mySqlGenericCommandsLFS.ExecuteReader(query, parameters))
+            using (var reader = mySqlGenericCommands.ExecuteReader(query, parameters))
             {
                 foreach (DataRow item in reader.Rows)
                 {
@@ -198,7 +199,7 @@ namespace Accounting.Data.Repositories
                 $"AND sub_maj_acc_group_id = @sub_maj_acc_group_id " +
                 $"{subsidiaryQuery}";
 
-            using (var reader = mySqlGenericCommandsLFS.ExecuteReader(query, parameters))
+            using (var reader = mySqlGenericCommands.ExecuteReader(query, parameters))
             {
                 foreach (DataRow item in reader.Rows)
                 {
@@ -235,7 +236,7 @@ namespace Accounting.Data.Repositories
                 $"AND general_ledger_accounts_id = @general_ledger_accounts_id " +
                 $"{subsidiaryQuery}";
 
-            using (var reader = mySqlGenericCommandsLFS.ExecuteReader(query, parameters))
+            using (var reader = mySqlGenericCommands.ExecuteReader(query, parameters))
             {
                 foreach (DataRow item in reader.Rows)
                 {
@@ -266,7 +267,7 @@ namespace Accounting.Data.Repositories
                 $"AND subsidiary_ledger_accounts_id = @subsidiary_ledger_accounts_id " +
                 $"GROUP BY general_ledger_accounts_id";
 
-            string sumBalance = mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
+            string sumBalance = mySqlGenericCommands.ExecuteScalar(query, parameters);
             if (!string.IsNullOrWhiteSpace(sumBalance))
                 return Convert.ToDecimal(sumBalance);
 
@@ -291,7 +292,7 @@ namespace Accounting.Data.Repositories
             };
 
             string query = $"INSERT INTO {tableName} (funds_id, general_ledger_accounts_id, subsidiary_ledger_accounts_id, is_debit, date_entry, amount) VALUES (@funds_id, @general_ledger_accounts_id, @subsidiary_ledger_accounts_id, @is_debit, @date_entry, @amount)";
-            return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
+            return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public bool Update(BeginningBalancesModel entity)
@@ -308,7 +309,7 @@ namespace Accounting.Data.Repositories
             };
 
             string query = $"UPDATE {tableName} SET funds_id = @funds_id, general_ledger_accounts_id = @general_ledger_accounts_id, subsidiary_ledger_accounts_id = @subsidiary_ledger_accounts_id, is_debit = @is_debit, date_entry = @date_entry, amount = @amount WHERE id = @id";
-            return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
+            return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public bool GeneralLedgerBalanceExist(byte fundsId, ushort generalLedgerId, short year)
@@ -323,7 +324,7 @@ namespace Accounting.Data.Repositories
             string query = $"SELECT id FROM {tableName} WHERE funds_id = @funds_id AND subsidiary_ledger_accounts_id IS NULL AND general_ledger_accounts_id = @general_ledger_accounts_id AND YEAR(date_entry) = @year";
 
             // if query is not null, means found some record, so true
-            return !string.IsNullOrEmpty(mySqlGenericCommandsLFS.ExecuteScalar(query, parameters));
+            return !string.IsNullOrEmpty(mySqlGenericCommands.ExecuteScalar(query, parameters));
         }
 
         public bool SubsidiaryLedgerBalanceExist(byte fundsId, ushort generalLedgerId, short year, ushort subsidiaryLedgerId)
@@ -338,7 +339,7 @@ namespace Accounting.Data.Repositories
 
             string query = $"SELECT id FROM {tableName} WHERE funds_id = @funds_id AND general_ledger_accounts_id = @general_ledger_accounts_id AND subsidiary_ledger_accounts_id = @subsidiary_ledger_accounts_id AND YEAR(date_entry) = @year";
 
-            return !string.IsNullOrEmpty(mySqlGenericCommandsLFS.ExecuteScalar(query, parameters));
+            return !string.IsNullOrEmpty(mySqlGenericCommands.ExecuteScalar(query, parameters));
         }
 
         public bool DeleteById(int Id)
@@ -348,7 +349,7 @@ namespace Accounting.Data.Repositories
                 new object[] { "@id", DbType.Int32, Id}
             };
             string query = $"DELETE FROM {tableName} WHERE id = @id";
-            return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
+            return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public decimal GetSumBalancesBy_FundId_Year_Availablility(int fundsId, short year, bool isDebit)
@@ -362,7 +363,8 @@ namespace Accounting.Data.Repositories
 
             string query = $"SELECT COALESCE(SUM((amount)),0) AS amount FROM {tableName} WHERE funds_id = @funds_id AND YEAR(date_entry) = @year AND is_debit = @is_debit";
 
-            return Convert.ToDecimal(mySqlGenericCommandsLFS.ExecuteScalar(query, parameters));
+            return Convert.ToDecimal(mySqlGenericCommands.ExecuteScalar(query, parameters));
         }
     }
 }
+
