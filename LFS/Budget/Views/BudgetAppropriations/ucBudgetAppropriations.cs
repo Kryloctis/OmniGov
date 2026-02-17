@@ -1,4 +1,3 @@
-using Budget.Data;
 using LFS.Budget.Helpers;
 using LFS.Helpers;
 using OmniGov.Core.Repositories;
@@ -8,6 +7,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Linq;
 using System.Windows.Forms;
+using Budget.Data.Factories;
 
 namespace LFS.Budget.Views.BudgetAppropriations
 {

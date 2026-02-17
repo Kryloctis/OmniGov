@@ -1,4 +1,3 @@
-using Budget.Data;
 using Budget.Domain.Models;
 using LFS.Budget.Helpers;
 using LFS.Helpers;
@@ -10,6 +9,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Linq;
 using System.Windows.Forms;
+using Budget.Data.Factories;
 
 namespace LFS.Budget.Views.Obligations
 {

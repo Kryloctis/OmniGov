@@ -5,7 +5,7 @@ using Budget.Domain.Interfaces;
 using OmniGov.Core.Repositories;
 using OmniGov.Core.Services;
 
-namespace Budget.Data
+namespace Budget.Data.Factories
 {
     public class BudgetFactory
     {

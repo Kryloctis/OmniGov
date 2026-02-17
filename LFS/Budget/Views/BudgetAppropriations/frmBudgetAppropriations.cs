@@ -1,4 +1,3 @@
-using Budget.Data;
 using Budget.Domain.Models;
 using LFS.Budget.Views.Augmentation;
 using LFS.Budget.Views.Realignment;
@@ -12,6 +11,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
+using Budget.Data.Factories;
 
 namespace LFS.Budget.Views.BudgetAppropriations
 {

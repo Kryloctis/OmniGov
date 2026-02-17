@@ -1,7 +1,6 @@
 using ACC.Data;
 using ACC.Domain.Interfaces;
 using ACC.Domain.Models;
-using Budget.Data;
 using Budget.Domain.Models;
 using LFS.Helpers;
 using OmniGov.Core.Repositories;
@@ -11,6 +10,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
+using Budget.Data.Factories;
 
 namespace LFS.Budget.Views.Obligations
 {
