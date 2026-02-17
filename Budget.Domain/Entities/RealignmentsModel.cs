@@ -1,4 +1,4 @@
-﻿namespace Budget.Domain.Entities
+namespace Budget.Domain.Entities
 {
     public class RealignmentsModel
     {

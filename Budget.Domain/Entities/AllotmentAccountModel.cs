@@ -1,4 +1,4 @@
-﻿namespace Budget.Domain.Models
+namespace Budget.Domain.Models
 {
     public class AllotmentAccountModel
     {
