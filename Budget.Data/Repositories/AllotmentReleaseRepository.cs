@@ -1,7 +1,6 @@
 using Budget.Domain.Interfaces;
 using Budget.Domain.Models;
-using OmniGov.Core.Repositories;
-using OmniGov.Core.Services;
+using OmniGov.Core.Interfaces.Services;
 using System.Data;
 using System.Transactions;
 
@@ -12,11 +11,11 @@ namespace Budget.Data.Repositories
         private readonly string viewTableName = "view_allotment_release";
         private readonly string tableName = "allotment_release";
         private readonly IAllotmentAccountRepository allotmentAccountRepository;
-        private GenericCommands mySqlGenericCommands;
+        private IGenericCommands _genericCommands;
 
-        public AllotmentReleaseRepository(GenericCommands mySqlGenericCommandsLFS, IAllotmentAccountRepository allotmentAccountRepository)
+        public AllotmentReleaseRepository(IGenericCommands genericCommands, IAllotmentAccountRepository allotmentAccountRepository)
         {
-            mySqlGenericCommands = mySqlGenericCommandsLFS;
+            _genericCommands = genericCommands;
             this.allotmentAccountRepository = allotmentAccountRepository;
         }
 
@@ -38,7 +37,7 @@ namespace Budget.Data.Repositories
         public DataTable GetRecords()
         {
             string query = $"SELECT id, aro_no, purpose, date_issued, created_at, updated_at FROM {tableName}";
-            return mySqlGenericCommands.Fill(query, new DataTable());
+            return _genericCommands.Fill(query, new DataTable());
         }
 
         public DataTable GetRecordsBySearch(string searchText)
@@ -50,7 +49,7 @@ namespace Budget.Data.Repositories
 
             string query = $"SELECT id, aro_no, purpose, date_issued, created_at, updated_at FROM {tableName} WHERE aro_no LIKE @searchTxt OR purpose LIKE  @searchTxt";
 
-            return mySqlGenericCommands.FillBySearch(query, new DataTable(), parameters);
+            return _genericCommands.FillBySearch(query, new DataTable(), parameters);
         }
 
         public Dictionary<string, string> GetRecordByID(int Id)
@@ -64,7 +63,7 @@ namespace Budget.Data.Repositories
 
             string query = $"SELECT id, aro_no, purpose, date_issued, created_at, updated_at FROM {tableName} id = @id";
 
-            DataTable dataTable = mySqlGenericCommands.ExecuteReader(query, parameters);
+            DataTable dataTable = _genericCommands.ExecuteReader(query, parameters);
 
             if (dataTable.Rows.Count > 0)
             {
@@ -87,13 +86,13 @@ namespace Budget.Data.Repositories
 
             string query = $"SELECT allotment_release_id, allotment_account_id, aro_no, purpose, date_issued, allotment_release_created_at, allotment_release_updated_at, budget_appropriations_id, funds_id, fund_code, fund_name, function_program_project_id, fpp_code, fpp_name, is_special, others_fpp_id, others_fpp_code, others_fpp_name, allotment_classes_id, allotment_code, allotment_name, general_ledger_accounts_id, account_code, ledger_name, date_entry, year, continuing, remarks, amount FROM {viewTableName} WHERE allotment_release_id = @allotment_release_id";
 
-            return mySqlGenericCommands.FillBySearch(query, new DataTable(), parameters);
+            return _genericCommands.FillBySearch(query, new DataTable(), parameters);
         }
 
         private int GetLastInsertedID()
         {
             string query = $"SELECT MAX(id) FROM {tableName}";
-            return int.Parse(mySqlGenericCommands.ExecuteScalar(query));
+            return int.Parse(_genericCommands.ExecuteScalar(query));
         }
 
         public bool Insert(AllotmentReleaseModel entity, List<AllotmentAccountModel> listAllotmentAccount)
@@ -109,7 +108,7 @@ namespace Budget.Data.Repositories
 
                 string query = $"INSERT INTO {tableName} (aro_no, purpose, date_issued) VALUES (@aro_no, @purpose, @date_issued)";
 
-                _ = mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+                _ = _genericCommands.ExecuteNonQuery(query, parameters);
 
                 foreach (var allotmentAccount in listAllotmentAccount)
                 {
@@ -136,7 +135,7 @@ namespace Budget.Data.Repositories
 
                 string query = $"UPDATE {tableName} SET aro_no = @aro_no, purpose = @purpose, date_issued = @date_issued WHERE id = @id";
 
-                _ = mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+                _ = _genericCommands.ExecuteNonQuery(query, parameters);
                 _ = allotmentAccountRepository.DeleteByAllotmentReleaseId(entity.ID);
 
                 foreach (var allotmentAccount in listAllotmentAccount)
@@ -161,7 +160,7 @@ namespace Budget.Data.Repositories
 
                 string query = $"DELETE FROM {tableName} WHERE id = @id";
                 _ = allotmentAccountRepository.DeleteByAllotmentReleaseId(allotmentReleaseId);
-                _ = mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+                _ = _genericCommands.ExecuteNonQuery(query, parameters);
 
                 scope.Complete();
                 return true;
@@ -183,7 +182,7 @@ namespace Budget.Data.Repositories
 
             string query = $"SELECT id FROM {tableName} WHERE aro_no = @aro_no AND YEAR(date_issued) = @year";
 
-            return !string.IsNullOrEmpty(mySqlGenericCommands.ExecuteScalar(query, parameters));
+            return !string.IsNullOrEmpty(_genericCommands.ExecuteScalar(query, parameters));
         }
 
         public bool AllotmentReleaseNoExist(int Id, string allotmentReleaseNo, short year)
@@ -197,7 +196,7 @@ namespace Budget.Data.Repositories
 
             string query = $"SELECT id FROM {tableName} WHERE id <> @id AND aro_no = @aro_no AND YEAR(date_issued) = @year";
 
-            return !string.IsNullOrEmpty(mySqlGenericCommands.ExecuteScalar(query, parameters));
+            return !string.IsNullOrEmpty(_genericCommands.ExecuteScalar(query, parameters));
         }
 
         public bool AllotmentReleaseExist(int budgetAppropriationId, DateTime dateIssued)
@@ -210,7 +209,7 @@ namespace Budget.Data.Repositories
 
             string query = $"SELECT allotment_release_id FROM {viewTableName} WHERE budget_appropriations_id = @budget_appropriations_id AND date_issued = @date_issued";
 
-            string queryResult = mySqlGenericCommands.ExecuteScalar(query, parameters);
+            string queryResult = _genericCommands.ExecuteScalar(query, parameters);
             return !string.IsNullOrEmpty(queryResult);
         }
 
@@ -224,7 +223,7 @@ namespace Budget.Data.Repositories
             };
 
             string query = $"SELECT allotment_release_id FROM {viewTableName} WHERE allotment_release_id = @allotment_release_id AND budget_appropriations_id = @budget_appropriations_id AND date_issued = @date_issued";
-            string queryResult = mySqlGenericCommands.ExecuteScalar(query, parameters);
+            string queryResult = _genericCommands.ExecuteScalar(query, parameters);
 
             return !string.IsNullOrEmpty(queryResult);
         }
@@ -239,7 +238,7 @@ namespace Budget.Data.Repositories
 
             string query = $"SELECT allotment_release_id, allotment_account_id, aro_no, purpose, date_issued, allotment_release_created_at, allotment_release_updated_at, budget_appropriations_id, funds_id, fund_code, fund_name, function_program_project_id, fpp_code, fpp_name, is_special, others_fpp_id, others_fpp_code, others_fpp_name, allotment_classes_id, allotment_code, allotment_name, general_ledger_accounts_id, account_code, ledger_name, date_entry, year, continuing, remarks, amount FROM {viewTableName}  WHERE budget_appropriations_id = @budget_appropriations_id AND date_issued <= @date_issued";
 
-            return mySqlGenericCommands.FillBySearch(query, new DataTable(), parameters);
+            return _genericCommands.FillBySearch(query, new DataTable(), parameters);
         }
 
         public DataTable GetViewRecordsByBudgetAppropriationId(int budgetAppropriationId)
@@ -251,14 +250,14 @@ namespace Budget.Data.Repositories
 
             string query = $"SELECT allotment_release_id, allotment_account_id, aro_no, purpose, date_issued, allotment_release_created_at, allotment_release_updated_at, budget_appropriations_id, funds_id, fund_code, fund_name, function_program_project_id, fpp_code, fpp_name, is_special, others_fpp_id, others_fpp_code, others_fpp_name, allotment_classes_id, allotment_code, allotment_name, general_ledger_accounts_id, account_code, ledger_name, date_entry, year, continuing, remarks, amount FROM {viewTableName} WHERE budget_appropriations_id = @budget_appropriations_id";
 
-            return mySqlGenericCommands.FillBySearch(query, new DataTable(), parameters);
+            return _genericCommands.FillBySearch(query, new DataTable(), parameters);
         }
 
         public DataTable GetViewRecords()
         {
             string query = $"SELECT allotment_release_id, allotment_account_id, aro_no, purpose, date_issued, allotment_release_created_at, allotment_release_updated_at, budget_appropriations_id, funds_id, fund_code, fund_name, function_program_project_id, fpp_code, fpp_name, is_special, others_fpp_id, others_fpp_code, others_fpp_name, allotment_classes_id, allotment_code, allotment_name, general_ledger_accounts_id, account_code, ledger_name, date_entry, year, continuing, remarks, amount FROM {viewTableName} ";
 
-            return mySqlGenericCommands.Fill(query, new DataTable());
+            return _genericCommands.Fill(query, new DataTable());
         }
 
         public DataTable GetViewRecordsBySearch(int fundId, int allotmentClassId, DateTime dateIssued, string searchText)
@@ -274,7 +273,7 @@ namespace Budget.Data.Repositories
             string query = $"SELECT * FROM {viewTableName} WHERE funds_id = @funds_id AND allotment_classes_id = @allotment_classes_id AND date_issued <= @date_issued AND (aro_no LIKE @searchTxt OR purpose LIKE  @searchTxt) GROUP BY allotment_release_id";
 
             var dataTable = new DataTable();
-            return mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
+            return _genericCommands.FillBySearch(query, dataTable, parameters);
         }
 
         public decimal GetTotalAllotmentReleaseById(int allotmentReleaseId)
@@ -286,7 +285,7 @@ namespace Budget.Data.Repositories
 
             string query = $"SELECT COALESCE(SUM(amount), 0) AS total_allotment_release FROM {viewTableName} WHERE allotment_release_id = @allotment_release_id";
 
-            return Convert.ToDecimal(mySqlGenericCommands.ExecuteScalar(query, parameters));
+            return Convert.ToDecimal(_genericCommands.ExecuteScalar(query, parameters));
         }
 
         //SUMMARY
@@ -318,7 +317,7 @@ namespace Budget.Data.Repositories
 
             string query = $"SELECT COALESCE(SUM(amount), 0) AS amount FROM {viewTableName} WHERE {fppWhereQuery} {subFPPQuery} funds_id = @funds_id AND date_issued <= @date_issued AND allotment_classes_id = @allotment_classes_id AND continuing = @continuing AND {isContinuingQuery}";
 
-            return Convert.ToDecimal(mySqlGenericCommands.ExecuteScalar(query, parameters));
+            return Convert.ToDecimal(_genericCommands.ExecuteScalar(query, parameters));
         }
 
         //DETAILED
@@ -332,13 +331,13 @@ namespace Budget.Data.Repositories
 
             string query = $"SELECT COALESCE(SUM(amount), 0) AS amount FROM {viewTableName} WHERE budget_appropriations_id = @budget_appropriations_id AND date_issued <= @date_issued";
 
-            return Convert.ToDecimal(mySqlGenericCommands.ExecuteScalar(query, parameters));
+            return Convert.ToDecimal(_genericCommands.ExecuteScalar(query, parameters));
         }
 
         public string GetLeastAllotmentReleaseNumber()
         {
             string query = $"SELECT COALESCE(LPAD(MAX(aro_no)+1, 3, '0'),'001') AS aro_no FROM {viewTableName}";
-            return mySqlGenericCommands.ExecuteScalar(query);
+            return _genericCommands.ExecuteScalar(query);
         }
 
         public DataTable GetViewRecords(int fppId, int? othersFppId, int allotmentClssId, string searchKey)
@@ -361,7 +360,7 @@ namespace Budget.Data.Repositories
                                 ELSE 0
                                 END = 1";
 
-            return mySqlGenericCommands.FillBySearch(query, new DataTable(), parameters);
+            return _genericCommands.FillBySearch(query, new DataTable(), parameters);
         }
 
         public DataTable GetViewRecords(int id)
@@ -372,8 +371,7 @@ namespace Budget.Data.Repositories
             };
 
             string query = $"SELECT * FROM {viewTableName} WHERE allotment_release_id = @allotment_release_id";
-            return mySqlGenericCommands.FillBySearch(query, new DataTable(), parameters);
+            return _genericCommands.FillBySearch(query, new DataTable(), parameters);
         }
     }
 }
-

@@ -1,7 +1,6 @@
 using Budget.Domain.Interfaces;
 using Budget.Domain.Models;
-using OmniGov.Core.Repositories;
-using OmniGov.Core.Services;
+using OmniGov.Core.Interfaces.Services;
 using System.Data;
 using System.Transactions;
 
@@ -9,13 +8,13 @@ namespace Budget.Data.Repositories
 {
     public class SupplementalAppropriationsRepository : ISupplementalAppropriationsRepository
     {
-        private GenericCommands _mySqlGenericCommands;
+        private IGenericCommands _genericCommands;
         private readonly string tableName = "supplemental_appropriations";
         private readonly string viewTableName = "view_supplemental_appropriations";
 
-        public SupplementalAppropriationsRepository(GenericCommands mySqlGenericCommands)
+        public SupplementalAppropriationsRepository(IGenericCommands genericCommands)
         {
-            _mySqlGenericCommands = mySqlGenericCommands;
+            _genericCommands = genericCommands;
         }
 
         public int CountRecords()
@@ -42,28 +41,21 @@ namespace Budget.Data.Repositories
 
         public bool Delete(List<SupplementalAppropriationsModel> entityList)
         {
-            try
+            using (var scope = new TransactionScope())
             {
-                using (var scope = new TransactionScope())
+                foreach (var entity in entityList)
                 {
-                    foreach (var entity in entityList)
+                    var parameters = new object[][]
                     {
-                        var parameters = new object[][]
-                        {
-                            new object[] { "@id", DbType.Int32, entity.Id},
-                        };
+                        new object[] { "@id", DbType.Int32, entity.Id},
+                    };
 
-                        string query = $"DELETE FROM {tableName} WHERE id = @id";
-                        _ = _mySqlGenericCommands.ExecuteNonQuery(query, parameters);
-                    }
-
-                    scope.Complete();
-                    return true;
+                    string query = $"DELETE FROM {tableName} WHERE id = @id";
+                    _ = _genericCommands.ExecuteNonQuery(query, parameters);
                 }
-            }
-            catch (Exception)
-            {
-                throw;
+
+                scope.Complete();
+                return true;
             }
         }
 
@@ -77,7 +69,7 @@ namespace Budget.Data.Repositories
                 };
 
                 string query = $"DELETE FROM {tableName} WHERE budget_appropriations_id = @budget_appropriations_id";
-                _ = _mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+                _ = _genericCommands.ExecuteNonQuery(query, parameters);
 
                 scope.Complete();
                 return true;
@@ -88,45 +80,30 @@ namespace Budget.Data.Repositories
         {
             var record = new Dictionary<string, string>();
 
-            try
+            var parameters = new object[][]
             {
-                var parameters = new object[][]
+                new object[] { "@id", DbType.Int32, Id }
+            };
+
+            string query = $"SELECT id, budget_appropriations_id, date_entry, amount, remarks, created_at, updated_at FROM {tableName} WHERE id = @id";
+
+            using (var reader = _genericCommands.ExecuteReader(query, parameters))
+            {
+                if (reader.Rows.Count < 1)
+                    return record;
+
+                foreach (DataRow item in reader.Rows)
                 {
-                    new object[] { "@id", DbType.Int32, Id }
-                };
-
-                string query = $"SELECT " +
-                    $"id, " +
-                    $"budget_appropriations_id, " +
-                    $"date_entry, " +
-                    $"amount, " +
-                    $"remarks, " +
-                    $"created_at, " +
-                    $"updated_at " +
-                    $"FROM {tableName} " +
-                    $"WHERE id = @id";
-
-                using (var reader = _mySqlGenericCommands.ExecuteReader(query, parameters))
-                {
-                    if (reader.Rows.Count < 1)
-                        return record;
-
-                    foreach (DataRow item in reader.Rows)
-                    {
-                        record.Add("id", item[0].ToString());
-                        record.Add("budget_appropriations_id", item[1].ToString());
-                        record.Add("date_entry", item[2].ToString());
-                        record.Add("amount", item[3].ToString());
-                        record.Add("remarks", item[4].ToString());
-                        record.Add("created_at", item[5].ToString());
-                        record.Add("updated_at", item[6].ToString());
-                    }
+                    record.Add("id", item[0].ToString());
+                    record.Add("budget_appropriations_id", item[1].ToString());
+                    record.Add("date_entry", item[2].ToString());
+                    record.Add("amount", item[3].ToString());
+                    record.Add("remarks", item[4].ToString());
+                    record.Add("created_at", item[5].ToString());
+                    record.Add("updated_at", item[6].ToString());
                 }
             }
-            catch (Exception)
-            {
-                throw;
-            }
+
             return record;
         }
 
@@ -147,45 +124,30 @@ namespace Budget.Data.Repositories
 
         public bool Insert(SupplementalAppropriationsModel entity)
         {
-            try
+            var parameters = new object[][]
             {
-                var parameters = new object[][]
-                {
-                    new object[] { "@budget_appropriations_id", DbType.Int32, entity.BudgetAppropriationID},
-                    new object[] { "@date_entry", DbType.Date, entity.date_entry.Date},
-                    new object[] { "@amount", DbType.Decimal, entity.amount},
-                    new object[] { "@remarks", DbType.String, entity.remarks},
-                };
+                new object[] { "@budget_appropriations_id", DbType.Int32, entity.BudgetAppropriationID},
+                new object[] { "@date_entry", DbType.Date, entity.date_entry.Date},
+                new object[] { "@amount", DbType.Decimal, entity.amount},
+                new object[] { "@remarks", DbType.String, entity.remarks},
+            };
 
-                string query = $"INSERT INTO {tableName} (budget_appropriations_id, date_entry, amount, remarks) VALUES (@budget_appropriations_id, @date_entry, @amount, @remarks)";
-                return _mySqlGenericCommands.ExecuteNonQuery(query, parameters);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            string query = $"INSERT INTO {tableName} (budget_appropriations_id, date_entry, amount, remarks) VALUES (@budget_appropriations_id, @date_entry, @amount, @remarks)";
+            return _genericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public bool Update(SupplementalAppropriationsModel entity)
         {
-            try
+            var parameters = new object[][]
             {
-                var parameters = new object[][]
-                {
-                    new object[] { "@id", DbType.Int32, entity.Id },
-                    new object[] { "@date_entry", DbType.Date, entity.date_entry },
-                    new object[] { "@amount",DbType.Decimal, entity.amount },
-                    new object[] { "@remarks", DbType.String, entity.remarks }
-                };
+                new object[] { "@id", DbType.Int32, entity.Id },
+                new object[] { "@date_entry", DbType.Date, entity.date_entry },
+                new object[] { "@amount",DbType.Decimal, entity.amount },
+                new object[] { "@remarks", DbType.String, entity.remarks }
+            };
 
-                string query = $"UPDATE {tableName} SET date_entry = @date_entry, amount = @amount, remarks = @remarks WHERE id = @id";
-
-                return _mySqlGenericCommands.ExecuteNonQuery(query, parameters);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            string query = $"UPDATE {tableName} SET date_entry = @date_entry, amount = @amount, remarks = @remarks WHERE id = @id";
+            return _genericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public DataTable GetRecordsByBudgetAppropriationId(int budgetAppropriationsId)
@@ -199,7 +161,7 @@ namespace Budget.Data.Repositories
 
             var dtSupplementalApprorpriation = new DataTable();
 
-            return _mySqlGenericCommands.FillBySearch(query, dtSupplementalApprorpriation, parameters);
+            return _genericCommands.FillBySearch(query, dtSupplementalApprorpriation, parameters);
         }
 
         public DataTable GetRecordsByBudgetAppropriationIdDateEntry(int budgetAppropriationId, DateTime dateEntry)
@@ -210,20 +172,9 @@ namespace Budget.Data.Repositories
                 new object[] { "@date_entry", DbType.Date, dateEntry.Date}
             };
 
-            string query = $"SELECT " +
-                $"id, " +
-                $"budget_appropriations_id, " +
-                $"date_entry, " +
-                $"amount, " +
-                $"remarks " +
-                $"FROM {tableName} " +
-                $"WHERE " +
-                $"budget_appropriations_id = @budget_appropriations_id " +
-                $"AND date_entry <= @date_entry";
+            string query = $"SELECT id, budget_appropriations_id, date_entry, amount, remarks FROM {tableName} WHERE budget_appropriations_id = @budget_appropriations_id AND date_entry <= @date_entry";
 
-            var dtSupplementalApprorpriation = new DataTable();
-
-            return _mySqlGenericCommands.FillBySearch(query, dtSupplementalApprorpriation, parameters);
+            return _genericCommands.FillBySearch(query, new DataTable(), parameters);
         }
 
         public decimal GetSumSupplementalAppropriationsBy_FppId_SubFPPId_DateEntry_AllotmentClassId_IsContinuing(string fppId, string subFPPId, int fundId, DateTime dateEntry, int allotmentClassId, Byte isContinuing)
@@ -262,7 +213,7 @@ namespace Budget.Data.Repositories
                 $"AND continuing = @continuing " +
                 $"AND {isContinuingQuery}";
 
-            decimal supplementalAppropriations = Convert.ToDecimal(_mySqlGenericCommands.ExecuteScalar(query, parameters));
+            decimal supplementalAppropriations = Convert.ToDecimal(_genericCommands.ExecuteScalar(query, parameters));
 
             return supplementalAppropriations;
         }
@@ -271,11 +222,11 @@ namespace Budget.Data.Repositories
         {
             var parameters = new object[][]
             {
-                    new object[] { "@budget_appropriations_id", DbType.Int32, budgetAppropriationId },
-                    new object[] { "@date_entry",DbType.Date, dateEntry.Date}
+                new object[] { "@budget_appropriations_id", DbType.Int32, budgetAppropriationId },
+                new object[] { "@date_entry",DbType.Date, dateEntry.Date}
             };
             string query = $"SELECT COALESCE(SUM(amount),0) AS amount FROM {tableName} WHERE budget_appropriations_id = @budget_appropriations_id AND date_entry <= @date_entry";
-            decimal supplementalAmount = Convert.ToDecimal(_mySqlGenericCommands.ExecuteScalar(query, parameters));
+            decimal supplementalAmount = Convert.ToDecimal(_genericCommands.ExecuteScalar(query, parameters));
             return supplementalAmount;
         }
 
@@ -286,9 +237,8 @@ namespace Budget.Data.Repositories
                 new object[] { "@budget_appropriations_id", DbType.Int32, budgetAppropriationId }
             };
             string query = $"SELECT COALESCE(SUM(amount),0) AS amount FROM {tableName} WHERE budget_appropriations_id = @budget_appropriations_id";
-            decimal supplementalAmount = Convert.ToDecimal(_mySqlGenericCommands.ExecuteScalar(query, parameters));
+            decimal supplementalAmount = Convert.ToDecimal(_genericCommands.ExecuteScalar(query, parameters));
             return supplementalAmount;
         }
     }
 }
-

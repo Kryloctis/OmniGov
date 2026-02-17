@@ -1,7 +1,6 @@
 using Budget.Domain.Interfaces;
 using Budget.Domain.Models;
-using OmniGov.Core.Repositories;
-using OmniGov.Core.Services;
+using OmniGov.Core.Interfaces.Services;
 using System.Data;
 using System.Transactions;
 
@@ -10,16 +9,11 @@ namespace Budget.Data.Repositories
     public class BudgetAppropriationHasAugmentationsRepository : IBudgetAppropriationHasAugmentations
     {
         private readonly string tableName = "budget_appropriation_has_augmentations";
-        private GenericCommands mySqlGenericCommands;
+        private IGenericCommands _genericCommands;
 
-        public BudgetAppropriationHasAugmentationsRepository(GenericCommands mySqlGenericCommands)
+        public BudgetAppropriationHasAugmentationsRepository(IGenericCommands genericCommands)
         {
-            this.mySqlGenericCommands = mySqlGenericCommands;
-        }
-
-        public int CountRecords()
-        {
-            throw new NotImplementedException();
+            _genericCommands = genericCommands;
         }
 
         public bool Delete(List<BudgetAppropriationHasAugmentationsModel> entityList)
@@ -30,7 +24,7 @@ namespace Budget.Data.Repositories
                 {
                     var parameters = new object[][] { new object[] { "@id", DbType.Int32, item.Id } };
                     string query = $"DELETE FROM {tableName} WHERE id = @id";
-                    _ = mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+                    _ = _genericCommands.ExecuteNonQuery(query, parameters);
                 }
 
                 scope.Complete();
@@ -69,7 +63,7 @@ namespace Budget.Data.Repositories
             };
 
             string query = $"INSERT INTO {tableName} (augmentations_id, budget_appropriations_id, date_entry, remarks) VALUES (@augmentations_id, @budget_appropriations_id, @date_entry, @remarks)";
-            return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+            return _genericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public bool Update(BudgetAppropriationHasAugmentationsModel entity)
@@ -78,4 +72,3 @@ namespace Budget.Data.Repositories
         }
     }
 }
-

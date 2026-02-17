@@ -1,24 +1,18 @@
-using ACC.Domain.Interfaces;
-using ACC.Domain.Models;
-using OmniGov.Core.Repositories;
-using OmniGov.Core.Services;
+using Budget.Domain.Entities;
+using Budget.Domain.Interfaces;
+using OmniGov.Core.Interfaces.Services;
 using System.Data;
 
-namespace ACC.Data
+namespace Budget.Data.Repositories
 {
     public class AugmentationsRepository : IAugmentations
     {
         private readonly string tableName = "augmentations";
-        private GenericCommands mySqlGenericCommands;
+        private IGenericCommands _genericCommands;
 
-        public AugmentationsRepository(GenericCommands mySqlGenericCommands)
+        public AugmentationsRepository(IGenericCommands genericCommands)
         {
-            this.mySqlGenericCommands = mySqlGenericCommands;
-        }
-
-        public int CountRecords()
-        {
-            throw new NotImplementedException();
+            _genericCommands = genericCommands;
         }
 
         public bool Delete(List<AugmentationsModel> entityList)
@@ -57,4 +51,3 @@ namespace ACC.Data
         }
     }
 }
-

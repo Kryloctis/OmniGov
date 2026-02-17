@@ -10,19 +10,7 @@ namespace Accounting.Data.Services
     public static class AccountingServiceConfiguration
     {
         public static IServiceCollection AddAccountingServices(this IServiceCollection services)
-        {  // Register connection provider as singleton (shared across the app)
-            services.AddSingleton<IConnectionProvider, ConnectionProvider>();
-
-            // Register GenericCommands as scoped (new instance per scope/request)
-            services.AddScoped<IGenericCommands>(sp =>
-            {
-                var connectionProvider = sp.GetRequiredService<IConnectionProvider>();
-                return new GenericCommands(connectionProvider);
-            });
-
-            // Register the Repository Factory
-            //services.AddScoped<IRepositoryFactory, RepositoryFactory>();
-
+        {
             // Register the Accounting Repository Factory
             services.AddScoped<IAccountingFactory, AccountingFactoryRepository>();
 

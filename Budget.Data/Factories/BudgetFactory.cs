@@ -1,35 +1,30 @@
-using ACC.Data;
 using ACC.Domain.Interfaces;
-using Budget.Data.Repositories;
 using Budget.Domain.Interfaces;
-using OmniGov.Core.Repositories;
-using OmniGov.Core.Services;
 
 namespace Budget.Data.Factories
 {
     public class BudgetFactory
     {
-        internal static GenericCommands genericCommands;
+        private static T Resolve<T>() where T : notnull => OmniGov.Core.Services.ServiceLocator.GetRequiredService<T>();
 
-        public static IBudgetAppropriationsRepository BudgetAppropriationsRepository() => new BudgetAppropriationsRepository(genericCommands, SupplementalAppropriationsRepository());
+        public static IBudgetAppropriationsRepository BudgetAppropriationsRepository() => Resolve<IBudgetAppropriationsRepository>();
 
-        public static IRealignments RealignmentsRepository() => new RealignmentsRepository(genericCommands);
+        public static IRealignments RealignmentsRepository() => Resolve<IRealignments>();
 
-        public static IBudgetAppropriationsHasRealignments BudgetAppropriationsHasRealignments() => new BudgetAppropriationsHasRealignmentsRepository(genericCommands);
+        public static IBudgetAppropriationsHasRealignments BudgetAppropriationsHasRealignments() => Resolve<IBudgetAppropriationsHasRealignments>();
 
-        public static ISupplementalAppropriationsRepository SupplementalAppropriationsRepository() => new SupplementalAppropriationsRepository(genericCommands);
+        public static ISupplementalAppropriationsRepository SupplementalAppropriationsRepository() => Resolve<ISupplementalAppropriationsRepository>();
 
-        public static IAugmentations AugmentationsRepository() => new AugmentationsRepository(genericCommands);
+        public static IAugmentations AugmentationsRepository() => Resolve<IAugmentations>();
 
-        public static IBudgetAppropriationHasAugmentations BudgetAppropriationHasAugmentationsRepository() => new BudgetAppropriationHasAugmentationsRepository(genericCommands);
+        public static IBudgetAppropriationHasAugmentations BudgetAppropriationHasAugmentationsRepository() => Resolve<IBudgetAppropriationHasAugmentations>();
 
-        public static IAllotmentReleaseRepository AllotmentReleaseRepository() => new AllotmentReleaseRepository(genericCommands, AllotmentAccountRepository());
+        public static IAllotmentReleaseRepository AllotmentReleaseRepository() => Resolve<IAllotmentReleaseRepository>();
 
-        public static IAllotmentAccountRepository AllotmentAccountRepository() => new AllotmentAccountRepository(genericCommands);
+        public static IAllotmentAccountRepository AllotmentAccountRepository() => Resolve<IAllotmentAccountRepository>();
 
-        public static IObligationRequestRepository ObligationRequestRepository() => new ObligationRequestRepository(genericCommands, ObligationAccountRepository());
+        public static IObligationRequestRepository ObligationRequestRepository() => Resolve<IObligationRequestRepository>();
 
-        public static IObligationAccountRepository ObligationAccountRepository() => new ObligationAccountRepository(genericCommands);
+        public static IObligationAccountRepository ObligationAccountRepository() => Resolve<IObligationAccountRepository>();
     }
 }
-

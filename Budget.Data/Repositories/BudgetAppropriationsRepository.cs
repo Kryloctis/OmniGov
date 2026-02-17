@@ -1,7 +1,6 @@
 using Budget.Domain.Interfaces;
 using Budget.Domain.Models;
-using OmniGov.Core.Repositories;
-using OmniGov.Core.Services;
+using OmniGov.Core.Interfaces.Services;
 using System.Data;
 using System.Transactions;
 
@@ -10,13 +9,14 @@ namespace Budget.Data.Repositories
     public class BudgetAppropriationsRepository : IBudgetAppropriationsRepository
     {
         private ISupplementalAppropriationsRepository ISupplementalAppropriationsRepository;
-        private GenericCommands mySqlGenericCommands;
+        private IGenericCommands _genericCommands;
         private readonly string tableName = "budget_appropriations";
         private readonly string viewTableName = "view_budget_appropriations";
 
-        public BudgetAppropriationsRepository(GenericCommands mySqlGenericCommands, ISupplementalAppropriationsRepository supplementalAppropriationsRepository)
+        public BudgetAppropriationsRepository(IGenericCommands genericCommands,
+                                              ISupplementalAppropriationsRepository supplementalAppropriationsRepository)
         {
-            this.mySqlGenericCommands = mySqlGenericCommands;
+            _genericCommands = genericCommands;
             ISupplementalAppropriationsRepository = supplementalAppropriationsRepository;
         }
 
@@ -35,7 +35,7 @@ namespace Budget.Data.Repositories
             string query = $"SELECT id FROM {tableName} WHERE funds_id = @funds_id AND function_program_project_id = @function_program_project_id AND others_fpp_id <=> @others_fpp_id AND allotment_classes_id = @allotment_classes_id AND general_ledger_accounts_id = @general_ledger_accounts_id AND continuing = 1";
 
             // if query is not null, means found some record, so true
-            return !string.IsNullOrEmpty(mySqlGenericCommands.ExecuteScalar(query, parameters));
+            return !string.IsNullOrEmpty(_genericCommands.ExecuteScalar(query, parameters));
         }
 
         public bool BudgetAppropriationContinuing(int id, int fundId, int fppId, int? othersFPPId, int allotmentClassId, int generalLedgerAccountId)
@@ -53,7 +53,7 @@ namespace Budget.Data.Repositories
             string query = $"SELECT id FROM {tableName} WHERE id <> @id AND funds_id = @funds_id AND function_program_project_id = @function_program_project_id AND others_fpp_id <=> @others_fpp_id AND allotment_classes_id = @allotment_classes_id AND general_ledger_accounts_id = @general_ledger_accounts_id AND continuing = 1";
 
             // if query is not null, means found some record, so true
-            return !string.IsNullOrEmpty(mySqlGenericCommands.ExecuteScalar(query, parameters));
+            return !string.IsNullOrEmpty(_genericCommands.ExecuteScalar(query, parameters));
         }
 
         public bool BudgetAppropriationExist(int fundId, int fppId, int? othersFPPId, int allotmentClassId, int generalLedgerAccountId, short year, string remarks)
@@ -72,7 +72,7 @@ namespace Budget.Data.Repositories
             string query = $"SELECT id FROM {tableName} WHERE funds_id = @funds_id AND function_program_project_id = @function_program_project_id AND others_fpp_id <=> @others_fpp_id AND allotment_classes_id = @allotment_classes_id AND general_ledger_accounts_id = @general_ledger_accounts_id AND year = @year AND remarks = @remarks";
 
             // if query is not null, means found some record, so true
-            return !string.IsNullOrEmpty(mySqlGenericCommands.ExecuteScalar(query, parameters));
+            return !string.IsNullOrEmpty(_genericCommands.ExecuteScalar(query, parameters));
         }
 
         public bool BudgetAppropriationExist(int id, int fundId, int FPPId, int? othersFPPId, int allotmentClassId, int generalLedgerAccountId, short year, string remarks)
@@ -92,7 +92,7 @@ namespace Budget.Data.Repositories
             string query = $"SELECT id FROM {tableName} WHERE id <> @id AND funds_id = @funds_id AND function_program_project_id = @function_program_project_id AND others_fpp_id <=> @others_fpp_id AND allotment_classes_id = @allotment_classes_id AND general_ledger_accounts_id = @general_ledger_accounts_id AND year = @year AND remarks = @remarks";
 
             // if query is not null, means found some record, so true
-            return !string.IsNullOrEmpty(mySqlGenericCommands.ExecuteScalar(query, parameters));
+            return !string.IsNullOrEmpty(_genericCommands.ExecuteScalar(query, parameters));
         }
 
         public bool Delete(List<BudgetAppropriationsModel> entityList)
@@ -107,7 +107,7 @@ namespace Budget.Data.Repositories
                     };
 
                     string query = $"DELETE FROM {tableName} WHERE id = @id";
-                    _ = mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+                    _ = _genericCommands.ExecuteNonQuery(query, parameters);
                 }
 
                 scope.Complete();
@@ -159,7 +159,7 @@ namespace Budget.Data.Repositories
 
             string query = $"INSERT INTO {tableName} (funds_id, function_program_project_id , others_fpp_id, allotment_classes_id, general_ledger_accounts_id, date_entry, year, amount, continuing, remarks) VALUES (@funds_id, @function_program_project_id, @others_fpp_id, @allotment_classes_id, @general_ledger_accounts_id, @date_entry, @year, @amount, @continuing, @remarks)";
 
-            return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+            return _genericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public bool Update(BudgetAppropriationsModel entity)
@@ -181,7 +181,7 @@ namespace Budget.Data.Repositories
 
             string query = $"UPDATE {tableName} SET function_program_project_id = @function_program_project_id, funds_id = @funds_id, others_fpp_id = @others_fpp_id, allotment_classes_id = @allotment_classes_id, general_ledger_accounts_id = @general_ledger_accounts_id, date_entry = @date_entry, year = @year, amount = @amount, continuing = @continuing, remarks = @remarks WHERE id = @id";
 
-            return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+            return _genericCommands.ExecuteNonQuery(query, parameters);
         }
 
         // DataTable methods
@@ -213,7 +213,7 @@ namespace Budget.Data.Repositories
                                     account_code,
                                     general_ledger_accounts_name";
 
-            return mySqlGenericCommands.FillBySearch(query, new DataTable(), parameters);
+            return _genericCommands.FillBySearch(query, new DataTable(), parameters);
         }
 
         public DataTable GetHeaderOthersFPP(string fppId, int allotment_classes_id, int funds_id, short year)
@@ -228,7 +228,7 @@ namespace Budget.Data.Repositories
             string fppWhereQuery = fppId == "all" ? string.Empty : "a.fpp_id = @fpp_id AND";
 
             string query = $"SELECT distinct a.others_fpp_id, a.others_fpp_name FROM {viewTableName} a INNER JOIN others_fpp b ON a.others_fpp_id = b.id WHERE {fppWhereQuery} a.allotment_class_id = @allotment_class_id AND funds_id = @funds_id AND a.year = @year";
-            return mySqlGenericCommands.FillBySearch(query, new DataTable(), parameters);
+            return _genericCommands.FillBySearch(query, new DataTable(), parameters);
         }
 
         public DataTable GetHeaderOthersFPP(int fppID, int allotment_classes_id, int funds_id, short year)
@@ -243,13 +243,13 @@ namespace Budget.Data.Repositories
 
             string query = $"SELECT distinct a.others_fpp_id, a.others_fpp_name  FROM {viewTableName} a INNER JOIN others_fpp b ON a.others_fpp_id = b.id WHERE a.fpp_id = @fpp_id AND a.allotment_class_id = @allotment_class_id AND funds_id = @funds_id AND a.year = @year";
 
-            return mySqlGenericCommands.FillBySearch(query, new DataTable(), parameters);
+            return _genericCommands.FillBySearch(query, new DataTable(), parameters);
         }
 
         public DataTable GetRecords()
         {
             string query = $"SELECT * FROM {viewTableName}";
-            return mySqlGenericCommands.Fill(query, new DataTable());
+            return _genericCommands.Fill(query, new DataTable());
         }
 
         public DataTable GetRecordsBySearch(string searchText)
@@ -268,7 +268,7 @@ namespace Budget.Data.Repositories
 
             string query = $"SELECT * FROM {viewTableName} WHERE funds_id = @funds_id AND date_entry <= @date_entry AND fpp_is_special = @fpp_is_special";
 
-            return mySqlGenericCommands.FillBySearch(query, new DataTable(), parameters);
+            return _genericCommands.FillBySearch(query, new DataTable(), parameters);
         }
 
         public DataTable GetViewRecords(int fundId, DateTime dateEntry, short year, byte isContinuing, byte isSpecial)
@@ -283,7 +283,7 @@ namespace Budget.Data.Repositories
             };
 
             string query = $"SELECT * FROM {viewTableName} WHERE funds_id = @funds_id AND date_entry <= @date_entry AND year = @year AND continuing = @continuing AND fpp_is_special = @fpp_is_special";
-            return mySqlGenericCommands.FillBySearch(query, new DataTable(), parameters);
+            return _genericCommands.FillBySearch(query, new DataTable(), parameters);
         }
 
         public DataTable GetViewRecordsByFPPIdAndFundIdAndAllotmentClassIdAndDateEntry(string fppId, int? subFPPId, int funds_id, int allotment_class_id, DateTime date_entry)
@@ -302,7 +302,7 @@ namespace Budget.Data.Repositories
 
             string query = $"SELECT id, funds_id, fund_code, fund_name, fpp_id, fpp_code, fpp_name, fpp_is_special, functional_classification_service_id, functional_classification_service_name, functional_classification_id, functional_classification_sector_code, functional_classification_sector_name, others_fpp_id, others_fpp_code, others_fpp_name, allotment_class_id, allotment_class_code, allotment_class_name, general_ledger_accounts_id, general_ledger_accounts_code, general_ledger_accounts_name, account_code, date_entry, year, SUM(amount) AS amount, continuing, remarks, created_at, updated_at FROM {viewTableName} WHERE {fppWhereQuery} others_fpp_id <=> @others_fpp_id AND allotment_class_id = @allotment_class_id AND date_entry <= @date_entry AND year = @year AND funds_id = @funds_id GROUP BY id";
 
-            return mySqlGenericCommands.FillBySearch(query, new DataTable(), parameters);
+            return _genericCommands.FillBySearch(query, new DataTable(), parameters);
         }
 
         public DataTable GetViewRecordsByFPPIdAndFundIdAndAllotmentClassIdAndDateEntryAndBudgetAppropriationId(string fppId, int? subFPPId, int funds_id, int allotment_class_id, DateTime date_entry, int budget_id)
@@ -322,7 +322,7 @@ namespace Budget.Data.Repositories
 
             string query = $"SELECT id, funds_id, fund_code, fund_name, fpp_id, fpp_code, fpp_name, fpp_is_special, functional_classification_service_id, functional_classification_service_name, functional_classification_id, functional_classification_sector_code, functional_classification_sector_name, others_fpp_id, others_fpp_code, others_fpp_name, allotment_class_id, allotment_class_code, allotment_class_name, general_ledger_accounts_id, general_ledger_accounts_code, general_ledger_accounts_name, account_code, date_entry, year, SUM(amount) AS amount, continuing, remarks, created_at, updated_at FROM {viewTableName} WHERE {fppWhereQuery} others_fpp_id <=> @others_fpp_id AND allotment_class_id = @allotment_class_id AND date_entry <= @date_entry AND year = @year AND id <> @budget_id GROUP BY general_ledger_accounts_id";
 
-            return mySqlGenericCommands.FillBySearch(query, new DataTable(), parameters);
+            return _genericCommands.FillBySearch(query, new DataTable(), parameters);
         }
 
         public DataTable GetViewRecords(int fppId, int? subFppId, int alltmntClssId, int fundId)
@@ -337,7 +337,7 @@ namespace Budget.Data.Repositories
 
             string query = $"SELECT * FROM {viewTableName} WHERE fpp_id = @fpp_id AND allotment_class_id = @allotment_class_id AND others_fpp_id <=> @others_fpp_id AND funds_id = @funds_id ";
 
-            return mySqlGenericCommands.FillBySearch(query, new DataTable(), parameters);
+            return _genericCommands.FillBySearch(query, new DataTable(), parameters);
         }
 
         public DataTable GetViewRecordsByIdsSearch(BudgetAppropriationsModel entity, string searchTxt)
@@ -353,7 +353,7 @@ namespace Budget.Data.Repositories
 
             string query = $"SELECT * FROM {viewTableName} WHERE fpp_id = @fpp_id AND allotment_class_id = @allotment_class_id AND others_fpp_id <=> @others_fpp_id AND funds_id = @funds_id AND (account_code LIKE @searchTxt OR general_ledger_accounts_name LIKE @searchTxt)";
 
-            return mySqlGenericCommands.FillBySearch(query, new DataTable(), parameters);
+            return _genericCommands.FillBySearch(query, new DataTable(), parameters);
         }
 
         public DataTable GetViewRecordsByIdsYear(BudgetAppropriationsModel entity)
@@ -369,7 +369,7 @@ namespace Budget.Data.Repositories
 
             string query = $"SELECT * FROM {viewTableName} WHERE fpp_id = @fpp_id AND allotment_class_id = @allotment_class_id AND others_fpp_id <=> @others_fpp_id AND funds_id = @funds_id AND year = @year ORDER BY general_ledger_accounts_code";
 
-            return mySqlGenericCommands.FillBySearch(query, new DataTable(), parameters);
+            return _genericCommands.FillBySearch(query, new DataTable(), parameters);
         }
 
         // decimal methods
@@ -405,7 +405,7 @@ namespace Budget.Data.Repositories
 
             string query = $"SELECT COALESCE(SUM(amount), 0) AS amount FROM {viewTableName} WHERE {fppWhereQuery} {subFPPQuery} funds_id = @funds_id AND date_entry <= @date_entry AND allotment_class_id = @allotment_class_id AND continuing = @continuing AND {isContinuingQuery}";
 
-            return Convert.ToDecimal(mySqlGenericCommands.ExecuteScalar(query, parameters));
+            return Convert.ToDecimal(_genericCommands.ExecuteScalar(query, parameters));
         }
 
         // Dictionary methods
@@ -419,7 +419,7 @@ namespace Budget.Data.Repositories
             };
             string query = $"SELECT funds_id, function_program_project_id, others_fpp_id, allotment_classes_id, general_ledger_accounts_id, date_entry, year, amount, continuing, remarks, created_at, updated_at FROM {tableName} WHERE id = @id";
 
-            DataTable dataTable = mySqlGenericCommands.ExecuteReader(query, parameters);
+            DataTable dataTable = _genericCommands.ExecuteReader(query, parameters);
 
             if (dataTable.Rows.Count > 0)
             {
@@ -444,7 +444,7 @@ namespace Budget.Data.Repositories
             };
             string query = $"SELECT * FROM {viewTableName} WHERE id = @id AND date_entry <= @date_entry";
 
-            DataTable dataTable = mySqlGenericCommands.ExecuteReader(query, parameters);
+            DataTable dataTable = _genericCommands.ExecuteReader(query, parameters);
 
             if (dataTable.Rows.Count > 0)
             {
@@ -468,7 +468,7 @@ namespace Budget.Data.Repositories
             };
             string query = $"SELECT * FROM {viewTableName} WHERE id = @id ";
 
-            DataTable dataTable = mySqlGenericCommands.ExecuteReader(query, parameters);
+            DataTable dataTable = _genericCommands.ExecuteReader(query, parameters);
 
             if (dataTable.Rows.Count > 0)
             {
@@ -486,7 +486,7 @@ namespace Budget.Data.Repositories
         public int GetLastInsertedID()
         {
             string query = $"SELECT MAX(id) FROM {tableName}";
-            return int.Parse(mySqlGenericCommands.ExecuteScalar(query));
+            return int.Parse(_genericCommands.ExecuteScalar(query));
         }
 
         // string methods
@@ -498,8 +498,7 @@ namespace Budget.Data.Repositories
             };
 
             string query = $"SELECT id FROM {tableName} WHERE general_ledger_accounts_id = @general_ledger_id LIMIT 1";
-            return mySqlGenericCommands.ExecuteScalar(query, parameters);
+            return _genericCommands.ExecuteScalar(query, parameters);
         }
     }
 }
-

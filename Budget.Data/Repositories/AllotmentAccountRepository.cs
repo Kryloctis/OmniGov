@@ -1,19 +1,18 @@
 using Budget.Domain.Interfaces;
 using Budget.Domain.Models;
-using OmniGov.Core.Repositories;
-using OmniGov.Core.Services;
+using OmniGov.Core.Interfaces.Services;
 using System.Data;
 
 namespace Budget.Data.Repositories
 {
     public class AllotmentAccountRepository : IAllotmentAccountRepository
     {
-        private GenericCommands _mySqlGenericCommands;
+        private IGenericCommands _genericCommands;
         private readonly string tableName = "allotment_account";
 
-        public AllotmentAccountRepository(GenericCommands mySqlGenericCommands)
+        public AllotmentAccountRepository(IGenericCommands genericCommands)
         {
-            _mySqlGenericCommands = mySqlGenericCommands;
+            _genericCommands = genericCommands;
         }
 
         public int CountRecords()
@@ -48,30 +47,15 @@ namespace Budget.Data.Repositories
 
         public bool Insert(AllotmentAccountModel entity)
         {
-            try
+            var parameters = new object[][]
             {
-                var parameters = new object[][]
-                {
-                    new object[] { "@budget_appropriations_id", DbType.Int32, entity.BudgetAppropriationsID },
-                    new object[] { "@allotment_release_id", DbType.Int32, entity.AllotmentReleaseID },
-                    new object[] { "@amount", DbType.Decimal, entity.Amount}
-                };
+                new object[] { "@budget_appropriations_id", DbType.Int32, entity.BudgetAppropriationsID },
+                new object[] { "@allotment_release_id", DbType.Int32, entity.AllotmentReleaseID },
+                new object[] { "@amount", DbType.Decimal, entity.Amount}
+            };
 
-                string query = $"INSERT INTO {tableName} " +
-                    $"(budget_appropriations_id, " +
-                    $"allotment_release_id, " +
-                    $"amount) " +
-                    $"VALUES " +
-                    $"(@budget_appropriations_id, " +
-                    $"@allotment_release_id, " +
-                    $"@amount)";
-
-                return _mySqlGenericCommands.ExecuteNonQuery(query, parameters);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            string query = $"INSERT INTO {tableName} (budget_appropriations_id, allotment_release_id, amount) VALUES(@budget_appropriations_id, @allotment_release_id, @amount)";
+            return _genericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public bool Update(AllotmentAccountModel entity)
@@ -81,22 +65,13 @@ namespace Budget.Data.Repositories
 
         public bool DeleteByAllotmentReleaseId(int allotmentReleaseId)
         {
-            try
+            var parameters = new object[][]
             {
-                var parameters = new object[][]
-                {
-                    new object[] { "@allotment_release_id", DbType.Int32, allotmentReleaseId}
-                };
+                new object[] { "@allotment_release_id", DbType.Int32, allotmentReleaseId}
+            };
 
-                string query = $"DELETE FROM {tableName} WHERE allotment_release_id = @allotment_release_id ";
-
-                return _mySqlGenericCommands.ExecuteNonQuery(query, parameters);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            string query = $"DELETE FROM {tableName} WHERE allotment_release_id = @allotment_release_id ";
+            return _genericCommands.ExecuteNonQuery(query, parameters);
         }
     }
 }
-
