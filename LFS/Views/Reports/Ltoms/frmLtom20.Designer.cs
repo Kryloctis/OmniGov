@@ -1,4 +1,4 @@
-﻿namespace LFS.Views.Reports.Ltoms
+namespace LFS.Views.Reports.Ltoms
 {
     partial class frmLtom20
     {

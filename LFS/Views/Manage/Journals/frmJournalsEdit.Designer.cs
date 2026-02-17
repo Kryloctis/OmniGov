@@ -1,4 +1,4 @@
-﻿
+
 namespace LFS.Views.Manage.Journals
 {
     partial class frmJournalsEdit

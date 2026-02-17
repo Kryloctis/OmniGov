@@ -1,4 +1,4 @@
-﻿
+
 namespace LFS.Views.Manage.FunctionProgramProject.FunctionProgramProject
 {
     partial class ucFunctionProgramProject

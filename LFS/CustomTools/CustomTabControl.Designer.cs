@@ -1,4 +1,4 @@
-﻿namespace LFS.CustomTools
+namespace LFS.CustomTools
 {
     partial class CustomTabControl
     {

@@ -1,4 +1,4 @@
-﻿
+
 namespace LFS.Views.Manage.Signatories
 {
     partial class ucSignatories

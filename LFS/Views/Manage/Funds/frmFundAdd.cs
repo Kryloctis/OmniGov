@@ -1,5 +1,6 @@
-﻿using LFS.Helpers;
+using LFS.Helpers;
 using OmniGov.Core.Repositories;
+using OmniGov.Core.Factories;
 using System;
 using System.Windows.Forms;
 
@@ -67,3 +68,4 @@ namespace LFS.Views.Manage.Funds
         }
     }
 }
+

@@ -1,4 +1,4 @@
-﻿
+
 namespace LFS.Views.Manage.ChartOfAccounts.MajorAccountGroup
 {
     partial class frmMajorAccountGroupEdit

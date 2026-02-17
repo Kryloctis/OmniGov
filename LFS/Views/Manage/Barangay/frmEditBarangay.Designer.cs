@@ -1,4 +1,4 @@
-﻿namespace LFS.Views.Manage.Barangay
+namespace LFS.Views.Manage.Barangay
 {
     partial class frmEditBarangay
     {

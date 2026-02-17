@@ -1,4 +1,4 @@
-﻿using Accounting.Data;
+using Accounting.Data;
 using System;
 using System.Collections.Generic;
 

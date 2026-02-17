@@ -1,4 +1,4 @@
-﻿using LFS.Helpers;
+using LFS.Helpers;
 using LFS.Views.Transactions.Payments.BurialPermit;
 using LFS.Views.Transactions.Payments.OtherPayments.CattleTransferOfOwnership;
 using System;

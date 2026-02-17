@@ -1,4 +1,4 @@
-﻿using LFS.Helpers;
+using LFS.Helpers;
 using LFS.Views.Dashboard.Accounting;
 using LFS.Views.Dashboard.Manage;
 using LFS.Views.Dashboard.MyAccount;

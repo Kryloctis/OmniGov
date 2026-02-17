@@ -1,4 +1,4 @@
-﻿namespace LFS.Views.Manage.DisbursingOfficer
+namespace LFS.Views.Manage.DisbursingOfficer
 {
     partial class frmDisbursingOfficerAdd
     {

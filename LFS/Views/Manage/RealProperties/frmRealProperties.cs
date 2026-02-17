@@ -1,4 +1,4 @@
-﻿using LFS.Helpers;
+using LFS.Helpers;
 using LFS.Views.Manage.TaxPayers;
 using System;
 using System.Collections.Generic;

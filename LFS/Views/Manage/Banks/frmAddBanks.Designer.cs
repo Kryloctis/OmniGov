@@ -1,4 +1,4 @@
-﻿
+
 namespace LFS.Views.Manage.Banks
 {
     partial class frmAddBanks

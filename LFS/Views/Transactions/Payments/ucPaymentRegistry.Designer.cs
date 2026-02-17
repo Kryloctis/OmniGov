@@ -1,4 +1,4 @@
-﻿namespace LFS.Views.Transactions.Payments
+namespace LFS.Views.Transactions.Payments
 {
     partial class ucPaymentRegistry
     {

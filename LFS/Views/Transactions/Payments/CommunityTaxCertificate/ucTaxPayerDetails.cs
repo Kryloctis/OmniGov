@@ -1,4 +1,5 @@
-﻿using OmniGov.Core.Repositories;
+using OmniGov.Core.Repositories;
+using OmniGov.Core.Factories;
 using System;
 using System.Windows.Forms;
 
@@ -53,3 +54,4 @@ namespace LFS.Views.Transactions.Payments.CommunityTaxCertificate
         }
     }
 }
+

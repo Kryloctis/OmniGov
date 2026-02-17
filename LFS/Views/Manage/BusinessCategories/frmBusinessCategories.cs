@@ -1,4 +1,4 @@
-﻿using LFS.Helpers;
+using LFS.Helpers;
 using LFS.Views.Manage.BusinessCategories.AddOnCharges;
 using MySql.Data.MySqlClient;
 using System;

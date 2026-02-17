@@ -1,4 +1,4 @@
-﻿namespace LFS.Views.Dashboard.Reports
+namespace LFS.Views.Dashboard.Reports
 {
     partial class ucReports
     {

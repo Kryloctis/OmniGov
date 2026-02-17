@@ -1,4 +1,4 @@
-﻿
+
 namespace LFS.Views.Dashboard.AccountingDashboard
 {
     partial class ucJournalsDashboard

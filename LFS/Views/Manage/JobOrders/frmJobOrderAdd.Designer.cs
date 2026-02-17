@@ -1,4 +1,4 @@
-﻿
+
 namespace LFS.Views.Manage.JobOrders
 {
     partial class frmJobOrderAdd

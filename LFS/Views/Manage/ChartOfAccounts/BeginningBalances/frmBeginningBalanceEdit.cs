@@ -1,4 +1,4 @@
-﻿using Accounting.Data;
+using Accounting.Data;
 using Accounting.Domain.Entities;
 using LFS.Helpers;
 using LFS.Views.Manage.BeginningBalances;

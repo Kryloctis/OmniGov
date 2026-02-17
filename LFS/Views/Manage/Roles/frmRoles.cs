@@ -1,7 +1,8 @@
-﻿using LFS.Helpers;
+using LFS.Helpers;
 using MySql.Data.MySqlClient;
 using OmniGov.Core.Entities;
 using OmniGov.Core.Repositories;
+using OmniGov.Core.Factories;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -245,12 +246,12 @@ namespace LFS.Views.Manage.Users.Roles
             {
                 case true:
                     splitContainer1.Panel2Collapsed = false;
-                    btnShowSidePanel.Text = "✕";
+                    btnShowSidePanel.Text = "?";
                     break;
 
                 case false:
                     splitContainer1.Panel2Collapsed = true;
-                    btnShowSidePanel.Text = "☰";
+                    btnShowSidePanel.Text = "?";
                     break;
             }
         }
@@ -321,3 +322,4 @@ namespace LFS.Views.Manage.Users.Roles
         }
     }
 }
+

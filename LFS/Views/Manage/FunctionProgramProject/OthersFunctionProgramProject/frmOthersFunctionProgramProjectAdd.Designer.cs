@@ -1,4 +1,4 @@
-﻿
+
 namespace LFS.Views.Manage.FunctionProgramProject.OthersFunctionProgramProject
 {
     partial class frmOthersFunctionProgramProjectAdd

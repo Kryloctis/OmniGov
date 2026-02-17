@@ -1,4 +1,4 @@
-﻿namespace LFS.Views.Reports.TrialBalance
+namespace LFS.Views.Reports.TrialBalance
 {
     partial class frmTrialBalance
     {

@@ -1,4 +1,4 @@
-﻿
+
 namespace LFS.Views.SignIn
 {
     partial class frmSignIn
@@ -87,7 +87,7 @@ namespace LFS.Views.SignIn
             txtPassword.Location = new System.Drawing.Point(301, 102);
             txtPassword.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             txtPassword.Name = "txtPassword";
-            txtPassword.PasswordChar = '•';
+            txtPassword.PasswordChar = '�';
             txtPassword.Size = new System.Drawing.Size(230, 23);
             txtPassword.TabIndex = 2;
             txtPassword.Validating += Username_Password_Validating;

@@ -1,4 +1,4 @@
-﻿using Accounting.Data;
+using Accounting.Data;
 using LFS.Helpers;
 using LFS.Views.Manage.BeginningBalances;
 using LFS.Views.Manage.ChartOfAccounts.AccountGroup;
@@ -8,6 +8,7 @@ using LFS.Views.Manage.ChartOfAccounts.Subsidiary;
 using MySql.Data.MySqlClient;
 using OmniGov.Core.Entities;
 using OmniGov.Core.Repositories;
+using OmniGov.Core.Factories;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -521,3 +522,4 @@ namespace LFS.Views.Manage.ChartOfAccounts
         }
     }
 }
+

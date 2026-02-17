@@ -1,4 +1,4 @@
-﻿namespace LFS.Views.Transactions.JEV
+namespace LFS.Views.Transactions.JEV
 {
     partial class ucGenJrnl
     {

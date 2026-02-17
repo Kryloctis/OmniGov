@@ -1,4 +1,4 @@
-﻿
+
 namespace LFS.Views.Manage.Amortization
 {
     partial class frmAmortization

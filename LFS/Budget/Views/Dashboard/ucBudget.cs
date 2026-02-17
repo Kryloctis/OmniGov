@@ -1,4 +1,4 @@
-﻿using LFS.Helpers;
+using LFS.Helpers;
 using LFS.Views.Transactions.CheckIssuance.Obligations;
 using System;
 using System.Windows.Forms;

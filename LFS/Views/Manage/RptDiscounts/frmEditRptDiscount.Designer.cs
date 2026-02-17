@@ -1,4 +1,4 @@
-﻿
+
 namespace LFS.Views.Manage.RptDiscount
 {
     partial class frmEditRptDiscount

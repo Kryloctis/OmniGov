@@ -1,4 +1,4 @@
-﻿
+
 namespace LFS.Views.Reports.DailyCashPositionReport
 {
     partial class frmDailyCash

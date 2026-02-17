@@ -1,4 +1,4 @@
-﻿
+
 namespace LFS.Views.Manage.RptTaxRates
 {
     partial class ucRptTaxRates

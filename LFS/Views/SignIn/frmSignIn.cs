@@ -1,8 +1,11 @@
-ï»¿using LFS.Helpers;
+using LFS.Helpers;
 using LFS.Properties;
 using LFS.Views.Dashboard;
-using OmniGov.Core.Interfaces;
+using OmniGov.Core.Interfaces.Repositories;
+using OmniGov.Core.Interfaces.Services;
+using OmniGov.Core.Interfaces.Factories;
 using OmniGov.Core.Services;
+using OmniGov.Core.Factories;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -80,7 +83,7 @@ namespace LFS.Views.SignIn
                 Hide();
 
                 btnVisibility.Image = visibleImage;
-                txtPassword.PasswordChar = 'â€¢';
+                txtPassword.PasswordChar = '•';
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.StackTrace); }
         }
@@ -90,7 +93,7 @@ namespace LFS.Views.SignIn
             Image invisibleImage = Resources.invisible_16px;
             Image visibleImage = Resources.visible_16px;
 
-            if (textBox.PasswordChar == 'â€¢')
+            if (textBox.PasswordChar == '•')
             {
                 button.Image = invisibleImage;
                 textBox.PasswordChar = default(char);
@@ -98,7 +101,7 @@ namespace LFS.Views.SignIn
             else
             {
                 button.Image = visibleImage;
-                textBox.PasswordChar = 'â€¢';
+                textBox.PasswordChar = '•';
             }
         }
 
@@ -138,7 +141,7 @@ namespace LFS.Views.SignIn
         private void SelectFirstServerLoaded(List<ServerHelper> serverHelpers)
         {
             ServerHelper.selectedServer = serverHelpers.First();
-            
+
             // Initialize connection provider with selected server connections
             var connectionProvider = ServiceLocator.GetRequiredService<IConnectionProvider>();
             connectionProvider.SetLfsConnectionName(ServerHelper.selectedServer.LfsInstance);
@@ -174,8 +177,7 @@ namespace LFS.Views.SignIn
             if (!isServerNull)
             {
                 var factory = ServiceLocator.GetRequiredService<IRepositoryFactory>();
-                bool lfsTestConnection =
-                    factory.ServerRepository().TestConnection(ServerHelper.selectedServer.LfsInstance);
+                bool lfsTestConnection = factory.ServerRepository().TestConnection(ServerHelper.selectedServer.LfsInstance);
                 // TODO: Add RPT test connection when RPT services are implemented
                 bool rptmTestConnection = true; // Temporary
 
@@ -236,3 +238,4 @@ namespace LFS.Views.SignIn
         }
     }
 }
+

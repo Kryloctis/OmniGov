@@ -1,4 +1,4 @@
-﻿namespace LFS.Views.Manage.FeesChargesConfig.FeesCharges
+namespace LFS.Views.Manage.FeesChargesConfig.FeesCharges
 {
     partial class frmAddFeesCharges
     {

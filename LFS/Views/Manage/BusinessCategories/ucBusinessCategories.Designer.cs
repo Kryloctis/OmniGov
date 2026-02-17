@@ -1,4 +1,4 @@
-﻿namespace LFS.Views.Manage.BusinessCategories
+namespace LFS.Views.Manage.BusinessCategories
 {
     partial class ucBusinessCategories
     {

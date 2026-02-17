@@ -1,7 +1,9 @@
-﻿using LFS.Helpers;
+using LFS.Helpers;
 using OmniGov.Core.Repositories;
+using OmniGov.Core.Factories;
 using RPT.Data.Repositories;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Linq;
@@ -22,15 +24,15 @@ namespace LFS.Views.SignIn
             _frmSignIn = frmSignIn;
         }
 
-        private void LoadServers()
+        private void LoadServers(List<ServerHelper> availableServers)
         {
-            int totalServers = ServerHelper.AvailableServerList().Count;
+            int totalServers = availableServers.Count;
             int serverCount = 0;
 
             flowLayoutPanel1.Controls.Clear();
             progressBar1.Value = 0;
 
-            foreach (var model in ServerHelper.AvailableServerList())
+            foreach (var model in availableServers)
             {
                 int lguId = model.LguId;
                 string municipalityName = model.MunicipalityName;
@@ -47,7 +49,7 @@ namespace LFS.Views.SignIn
                 flowLayoutPanel1.Controls.Add(radioButton);
                 serverCount++;
                 int progressPercentage = (serverCount * 100) / totalServers;
-                backgroundWorker1.ReportProgress(progressPercentage);
+                progressBar1.Value = progressPercentage;
             }
 
             SelectCurrentServer();
@@ -136,9 +138,10 @@ namespace LFS.Views.SignIn
         {
             try
             {
+                var availableServers = ServerHelper.AvailableServerList();
                 Invoke((MethodInvoker)delegate
                     {
-                        LoadServers();
+                        LoadServers(availableServers);
                     });
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
@@ -156,3 +159,4 @@ namespace LFS.Views.SignIn
         }
     }
 }
+

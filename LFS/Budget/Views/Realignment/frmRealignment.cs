@@ -1,4 +1,4 @@
-﻿using LFS.Budget.Views.BudgetAppropriations;
+using LFS.Budget.Views.BudgetAppropriations;
 using LFS.Helpers;
 using System;
 using System.Windows.Forms;

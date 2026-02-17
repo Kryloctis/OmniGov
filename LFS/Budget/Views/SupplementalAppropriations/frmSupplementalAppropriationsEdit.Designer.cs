@@ -1,4 +1,4 @@
-﻿using LFS.Budget.Views.SupplementalAppropriations;
+using LFS.Budget.Views.SupplementalAppropriations;
 
 namespace LFS.Budget.Views.SupplementalAppropriations
 {

@@ -1,4 +1,4 @@
-﻿using LFS.Helpers;
+using LFS.Helpers;
 using LFS.Views.Reports.Cashbook;
 using LFS.Views.Reports.ConsolidatedReceipts;
 using LFS.Views.Reports.DailyCashPositionReport;

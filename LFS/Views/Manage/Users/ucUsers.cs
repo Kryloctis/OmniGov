@@ -1,8 +1,9 @@
-ï»¿using LFS.CustomTools;
+using LFS.CustomTools;
 using LFS.Helpers;
 using LFS.Properties;
 using OmniGov.Core.Entities;
 using OmniGov.Core.Repositories;
+using OmniGov.Core.Factories;
 using System;
 using System.ComponentModel;
 using System.Data;
@@ -259,7 +260,7 @@ namespace LFS.Views.Manage.Users
                 Image invisibleImage = Properties.Resources.invisible_16px;
                 Image visibleImage = Properties.Resources.visible_16px;
 
-                if (txtPassword.PasswordChar == 'â€¢')
+                if (txtPassword.PasswordChar == '•')
                 {
                     btnPasswordVisibility.Image = invisibleImage;
                     txtPassword.PasswordChar = default(char);
@@ -267,7 +268,7 @@ namespace LFS.Views.Manage.Users
                 else
                 {
                     btnPasswordVisibility.Image = visibleImage;
-                    txtPassword.PasswordChar = 'â€¢';
+                    txtPassword.PasswordChar = '•';
                 }
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
@@ -280,7 +281,7 @@ namespace LFS.Views.Manage.Users
                 Image invisibleImage = Properties.Resources.invisible_16px;
                 Image visibleImage = Properties.Resources.visible_16px;
 
-                if (txtConfirmPassword.PasswordChar == 'â€¢')
+                if (txtConfirmPassword.PasswordChar == '•')
                 {
                     btnConfirmPasswordVisibility.Image = invisibleImage;
                     txtConfirmPassword.PasswordChar = default(char);
@@ -288,7 +289,7 @@ namespace LFS.Views.Manage.Users
                 else
                 {
                     btnConfirmPasswordVisibility.Image = visibleImage;
-                    txtConfirmPassword.PasswordChar = 'â€¢';
+                    txtConfirmPassword.PasswordChar = '•';
                 }
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
@@ -365,3 +366,4 @@ namespace LFS.Views.Manage.Users
         }
     }
 }
+

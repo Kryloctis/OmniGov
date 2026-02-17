@@ -1,4 +1,4 @@
-﻿
+
 namespace LFS.Views.Transactions.Payments.AF51_57
 {
     partial class frmAF51_57

@@ -1,4 +1,4 @@
-﻿
+
 namespace LFS.Views.Reports.ConsolidatedReceipts
 {
     partial class frmConsolidatedReceipts

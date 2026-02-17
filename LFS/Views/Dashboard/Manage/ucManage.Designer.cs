@@ -1,4 +1,4 @@
-﻿namespace LFS.Views.Dashboard.Manage
+namespace LFS.Views.Dashboard.Manage
 {
     partial class ucManage
     {

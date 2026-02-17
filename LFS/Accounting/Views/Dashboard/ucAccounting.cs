@@ -1,4 +1,4 @@
-﻿using LFS.Helpers;
+using LFS.Helpers;
 using LFS.Views.Dashboard.AccountingDashboard;
 using LFS.Views.Transactions.JEV;
 using System;

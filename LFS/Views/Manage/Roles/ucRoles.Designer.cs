@@ -1,4 +1,4 @@
-﻿
+
 namespace LFS.Views.Manage.Users.Roles
 {
     partial class ucRoles

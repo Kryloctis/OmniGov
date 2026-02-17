@@ -1,9 +1,10 @@
-﻿using Accounting.Data;
+using Accounting.Data;
 using Budget.Data;
 using Budget.Domain.Models;
 using LFS.Budget.Views.BudgetAppropriations;
 using LFS.Helpers;
 using OmniGov.Core.Repositories;
+using OmniGov.Core.Factories;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -460,7 +461,7 @@ namespace LFS.Budget.Views.SupplementalAppropriations
                 {
                     string generalLedgerAccountName = cmbxAccount.Text;
                     string remarks = txtRemarks.Text;
-                    string objectOfExpenditures = $"   {generalLedgerAccountName}{(string.IsNullOrEmpty(remarks) ? string.Empty : $" → {remarks}")}";
+                    string objectOfExpenditures = $"   {generalLedgerAccountName}{(string.IsNullOrEmpty(remarks) ? string.Empty : $" ? {remarks}")}";
                     string subFPP = cmbxSubFPP.Text;
                     string message = budgetAppropriationId == 0 ? "Supplemental Appropriation has been saved." : "Changes has been saved.";
 
@@ -578,3 +579,4 @@ namespace LFS.Budget.Views.SupplementalAppropriations
         }
     }
 }
+

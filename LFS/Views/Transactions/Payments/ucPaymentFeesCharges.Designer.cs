@@ -1,4 +1,4 @@
-﻿namespace LFS.Views.Transactions.Payments
+namespace LFS.Views.Transactions.Payments
 {
     partial class ucPaymentFeesCharges
     {
@@ -214,7 +214,7 @@
             btnDelete.Name = "btnDelete";
             btnDelete.Size = new System.Drawing.Size(31, 23);
             btnDelete.TabIndex = 1;
-            btnDelete.Text = "▲";
+            btnDelete.Text = "?";
             btnDelete.UseVisualStyleBackColor = true;
             btnDelete.Click += btnDelete_Click;
             // 
@@ -226,7 +226,7 @@
             btnAdd.Name = "btnAdd";
             btnAdd.Size = new System.Drawing.Size(31, 23);
             btnAdd.TabIndex = 0;
-            btnAdd.Text = "▼";
+            btnAdd.Text = "?";
             btnAdd.UseVisualStyleBackColor = true;
             btnAdd.Click += btnAdd_Click;
             // 

@@ -1,8 +1,9 @@
-﻿using Accounting.Data;
+using Accounting.Data;
 using Accounting.Domain.Entities;
 using LFS.Helpers;
 using LFS.Views.Dashboard;
 using OmniGov.Core.Repositories;
+using OmniGov.Core.Factories;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -558,3 +559,4 @@ namespace LFS.Views.Transactions.JEV
         }
     }
 }
+

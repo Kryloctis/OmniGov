@@ -1,4 +1,4 @@
-﻿using LFS.DataSets;
+using LFS.DataSets;
 using LFS.Helpers;
 using Microsoft.Reporting.WinForms;
 using OmniGov.Core.Entities;

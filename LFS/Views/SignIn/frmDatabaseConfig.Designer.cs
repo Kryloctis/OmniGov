@@ -1,4 +1,4 @@
-﻿namespace LFS.Views.SignIn
+namespace LFS.Views.SignIn
 {
     partial class frmDatabaseConfig
     {

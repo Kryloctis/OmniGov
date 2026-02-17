@@ -1,5 +1,10 @@
-﻿using MySql.Data.MySqlClient;
+using MySql.Data.MySqlClient;
+using OmniGov.Core.Interfaces.Repositories;
+using OmniGov.Core.Interfaces.Services;
+using OmniGov.Core.Interfaces.Factories;
 using OmniGov.Core.Repositories;
+using OmniGov.Core.Factories;
+using OmniGov.Core.Services;
 using RPT.Data.Repositories;
 using System;
 using System.Collections.Generic;
@@ -97,10 +102,12 @@ namespace LFS.Helpers
 
                 if (!HostReachable(lfsInstance)) continue;
 
-                bool isLfsdbConnected = Factory.ServerRepository().TestConnection(lfsInstance);
+                // Use DI to test connections
+                var factory = ServiceLocator.GetRequiredService<IRepositoryFactory>();
+                bool isLfsdbConnected = factory.ServerRepository().TestConnection(lfsInstance);
                 bool isRpmsdbConnected = RptFactory.ServerRepository().TestConnection(rpmInstance);
 
-                if (!isRpmsdbConnected && !isLfsdbConnected)
+                if (!isRpmsdbConnected || !isLfsdbConnected)
                     continue;
 
                 availableServerList.Add(model);
@@ -110,3 +117,4 @@ namespace LFS.Helpers
         }
     }
 }
+

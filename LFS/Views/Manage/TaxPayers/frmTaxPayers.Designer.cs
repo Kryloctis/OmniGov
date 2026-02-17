@@ -1,4 +1,4 @@
-﻿
+
 namespace LFS.Views.Manage.TaxPayers
 {
     partial class frmTaxpayers

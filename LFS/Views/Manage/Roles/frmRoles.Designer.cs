@@ -1,4 +1,4 @@
-﻿
+
 namespace LFS.Views.Manage.Users.Roles
 {
     partial class frmRoles
@@ -295,7 +295,7 @@ namespace LFS.Views.Manage.Users.Roles
             btnShowSidePanel.Name = "btnShowSidePanel";
             btnShowSidePanel.Size = new System.Drawing.Size(30, 30);
             btnShowSidePanel.TabIndex = 1;
-            btnShowSidePanel.Text = "✕";
+            btnShowSidePanel.Text = "?";
             btnShowSidePanel.UseVisualStyleBackColor = true;
             btnShowSidePanel.Click += btnShowSidePanel_Click;
             // 

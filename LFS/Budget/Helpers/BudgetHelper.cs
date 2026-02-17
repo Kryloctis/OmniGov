@@ -1,4 +1,4 @@
-﻿using Accounting.Data;
+using Accounting.Data;
 using System.Data;
 using System.Text.RegularExpressions;
 
@@ -39,8 +39,8 @@ namespace LFS.Budget.Helpers
             var repo = AccountingFactory.GeneralLedgerAccountsRepository();
 
             // LGU Rule Enforcement:
-            // Capital Outlay → use Account Group Name = "Assets"
-            // Other classes → use Major Account Group Name = Allotment Class Name
+            // Capital Outlay ? use Account Group Name = "Assets"
+            // Other classes ? use Major Account Group Name = Allotment Class Name
             return allotmentClassName == "Capital Outlay"
                 ? repo.GetViewRecordsByAccountGroupNameSearch("Assets", searchKey)
                 : repo.GetViewRecordsByMajorAccGroupNameSearch(allotmentClassName, searchKey);

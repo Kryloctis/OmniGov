@@ -1,6 +1,7 @@
-﻿using Accounting.Data;
+using Accounting.Data;
 using LFS.Helpers;
 using OmniGov.Core.Repositories;
+using OmniGov.Core.Factories;
 using System;
 using System.Windows.Forms;
 
@@ -101,3 +102,4 @@ namespace LFS.Views.Dashboard.AccountingDashboard
         }
     }
 }
+

@@ -1,4 +1,4 @@
-﻿namespace LFS.Views.Manage.Registry
+namespace LFS.Views.Manage.Registry
 {
     partial class frmAddRegistry
     {

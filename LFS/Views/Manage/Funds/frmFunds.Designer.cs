@@ -1,4 +1,4 @@
-﻿
+
 namespace LFS.Views.Manage.Funds
 {
     partial class frmFunds

@@ -1,4 +1,4 @@
-﻿using LFS.DataSets;
+using LFS.DataSets;
 using LFS.Helpers;
 using LFS.Views.Shared;
 using Microsoft.Reporting.WinForms;

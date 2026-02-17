@@ -1,4 +1,4 @@
-﻿
+
 namespace LFS.Views.Manage.ChartOfAccounts.Subsidiary
 {
     partial class frmSubsidiary

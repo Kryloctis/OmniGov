@@ -1,4 +1,4 @@
-﻿using LFS.Budget.Views.Augmentation;
+using LFS.Budget.Views.Augmentation;
 
 namespace LFS.Budget.Views.Augmentation
 {

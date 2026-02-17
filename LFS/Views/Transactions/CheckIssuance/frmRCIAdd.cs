@@ -1,4 +1,4 @@
-﻿using LFS.Helpers;
+using LFS.Helpers;
 using System;
 using System.Data;
 using System.Transactions;

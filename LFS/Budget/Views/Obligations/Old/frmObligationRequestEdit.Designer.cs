@@ -1,4 +1,4 @@
-﻿using LFS.Budget.Views.Obligations;
+using LFS.Budget.Views.Obligations;
 
 namespace LFS.Budget.Views.Obligations
 {

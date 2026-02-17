@@ -1,4 +1,4 @@
-﻿using LFS.Helpers;
+using LFS.Helpers;
 using LFS.Views.Transactions.Biddings.BiddingReports;
 using Microsoft.Reporting.WinForms;
 using System;

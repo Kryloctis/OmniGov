@@ -1,4 +1,4 @@
-﻿using Budget.Data;
+using Budget.Data;
 using LFS.Helpers;
 using System;
 using System.Windows.Forms;

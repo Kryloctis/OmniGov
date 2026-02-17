@@ -1,4 +1,4 @@
-﻿namespace LFS.Views.Dashboard.Treasury
+namespace LFS.Views.Dashboard.Treasury
 {
     partial class ucTreasury
     {
@@ -87,7 +87,7 @@
             manageTstripDrpDwnBtn.Margin = new System.Windows.Forms.Padding(0, 1, 10, 2);
             manageTstripDrpDwnBtn.Name = "manageTstripDrpDwnBtn";
             manageTstripDrpDwnBtn.Size = new System.Drawing.Size(73, 19);
-            manageTstripDrpDwnBtn.Text = "● Manage";
+            manageTstripDrpDwnBtn.Text = "? Manage";
             // 
             // receiptsToolStripMenuItem
             // 
@@ -175,7 +175,7 @@
             transactionsTstripDrpDwnBtn.Margin = new System.Windows.Forms.Padding(0, 1, 10, 2);
             transactionsTstripDrpDwnBtn.Name = "transactionsTstripDrpDwnBtn";
             transactionsTstripDrpDwnBtn.Size = new System.Drawing.Size(95, 19);
-            transactionsTstripDrpDwnBtn.Text = "● Transactions";
+            transactionsTstripDrpDwnBtn.Text = "? Transactions";
             // 
             // paymentsToolStripMenuItem
             // 

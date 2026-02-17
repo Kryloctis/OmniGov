@@ -1,7 +1,8 @@
-﻿using LFS.Helpers;
+using LFS.Helpers;
 using LFS.Views.Transactions.CheckIssuance.Deductions;
 using LFS.Views.Transactions.CheckIssuance.Obligations;
 using OmniGov.Core.Repositories;
+using OmniGov.Core.Factories;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -306,3 +307,4 @@ namespace LFS.Views.Transactions.RCI
         }
     }
 }
+

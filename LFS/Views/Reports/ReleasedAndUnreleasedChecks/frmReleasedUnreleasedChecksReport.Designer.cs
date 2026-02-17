@@ -1,4 +1,4 @@
-﻿namespace LFS.Views.Reports.ReleasedAndUnreleasedCheques
+namespace LFS.Views.Reports.ReleasedAndUnreleasedCheques
 {
     partial class frmReleasedUnreleasedChecksReport
     {

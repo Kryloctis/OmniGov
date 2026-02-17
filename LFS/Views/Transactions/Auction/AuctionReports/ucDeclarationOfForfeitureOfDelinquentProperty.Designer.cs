@@ -1,4 +1,4 @@
-﻿namespace LFS.Views.Transactions.Auction
+namespace LFS.Views.Transactions.Auction
 {
     partial class ucDeclarationOfForfeitureOfDelinquentProperty
     {

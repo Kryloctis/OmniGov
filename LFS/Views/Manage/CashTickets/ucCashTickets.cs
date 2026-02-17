@@ -1,4 +1,5 @@
-﻿using OmniGov.Core.Repositories;
+using OmniGov.Core.Repositories;
+using OmniGov.Core.Factories;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
@@ -76,3 +77,4 @@ namespace LFS.Views.Manage.CashTickets
         }
     }
 }
+

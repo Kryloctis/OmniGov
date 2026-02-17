@@ -1,4 +1,4 @@
-﻿namespace LFS.Views.Transactions.Payments.MarriageLicense
+namespace LFS.Views.Transactions.Payments.MarriageLicense
 {
     partial class ucMarriageDetails
     {

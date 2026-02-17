@@ -1,4 +1,4 @@
-﻿
+
 namespace LFS.Views.Transactions.ReceiptsIssued
 {
     partial class frmReceiptsIssued

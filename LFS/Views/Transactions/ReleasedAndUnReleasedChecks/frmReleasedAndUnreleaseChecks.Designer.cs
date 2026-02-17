@@ -1,4 +1,4 @@
-﻿namespace LFS.Views.Transactions.ReleasedAndUnReleasedChecks
+namespace LFS.Views.Transactions.ReleasedAndUnReleasedChecks
 {
     partial class frmReleasedAndUnreleaseChecks
     {
@@ -91,7 +91,7 @@
             btnToggleFilter.ImageTransparentColor = System.Drawing.Color.Magenta;
             btnToggleFilter.Name = "btnToggleFilter";
             btnToggleFilter.Size = new System.Drawing.Size(23, 28);
-            btnToggleFilter.Text = "✕";
+            btnToggleFilter.Text = "?";
             btnToggleFilter.Click += btnToggleFilter_Click;
             // 
             // panel1

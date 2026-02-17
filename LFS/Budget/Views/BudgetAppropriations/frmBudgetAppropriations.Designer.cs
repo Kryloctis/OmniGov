@@ -1,4 +1,4 @@
-﻿
+
 namespace LFS.Budget.Views.BudgetAppropriations
 {
     partial class frmBudgetAppropriations

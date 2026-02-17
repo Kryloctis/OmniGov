@@ -1,4 +1,4 @@
-﻿using LFS.Helpers;
+using LFS.Helpers;
 using LFS.Views.Manage.FunctionProgramProject.FunctionalClassification;
 using LFS.Views.Manage.FunctionProgramProject.FunctionProgramProject;
 using LFS.Views.Manage.FunctionProgramProject.FunctonalClassificationService;
@@ -6,6 +6,7 @@ using LFS.Views.Manage.FunctionProgramProject.OthersFunctionProgramProject;
 using MySql.Data.MySqlClient;
 using OmniGov.Core.Entities;
 using OmniGov.Core.Repositories;
+using OmniGov.Core.Factories;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -488,3 +489,4 @@ namespace LFS.Views.Manage.FunctionProgramProject
         }
     }
 }
+

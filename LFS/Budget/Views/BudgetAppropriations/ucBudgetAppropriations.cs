@@ -1,7 +1,8 @@
-﻿using Budget.Data;
+using Budget.Data;
 using LFS.Budget.Helpers;
 using LFS.Helpers;
 using OmniGov.Core.Repositories;
+using OmniGov.Core.Factories;
 using System;
 using System.ComponentModel;
 using System.Data;
@@ -36,7 +37,7 @@ namespace LFS.Budget.Views.BudgetAppropriations
             toolTip1.ToolTipTitle = "Info.";
             toolTip1.ToolTipIcon = ToolTipIcon.Info;
             toolTip1.ShowAlways = true;
-            string message = $"This Object Expenditure have the following: \n ● Supplemental Appropriation: {totalSupplementalApprorpriationAmount.ToString("N2")}";
+            string message = $"This Object Expenditure have the following: \n ? Supplemental Appropriation: {totalSupplementalApprorpriationAmount.ToString("N2")}";
             toolTip1.SetToolTip(nudAmount, message);
         }
 
@@ -290,3 +291,4 @@ namespace LFS.Budget.Views.BudgetAppropriations
         }
     }
 }
+

@@ -1,4 +1,5 @@
-﻿using OmniGov.Core.Repositories;
+using OmniGov.Core.Repositories;
+using OmniGov.Core.Factories;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -120,3 +121,4 @@ namespace LFS.Helpers
         }
     }
 }
+

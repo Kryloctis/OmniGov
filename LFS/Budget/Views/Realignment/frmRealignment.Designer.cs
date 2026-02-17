@@ -1,4 +1,4 @@
-﻿
+
 namespace LFS.Budget.Views.Realignment
 {
     partial class frmRealignment

@@ -1,4 +1,4 @@
-﻿
+
 namespace LFS.Views.Manage.CollectingOfficer
 {
     partial class frmCollectingOfficerAdd

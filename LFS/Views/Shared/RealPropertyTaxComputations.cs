@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Treasury.Data;
 
 namespace LFS.Views.Shared

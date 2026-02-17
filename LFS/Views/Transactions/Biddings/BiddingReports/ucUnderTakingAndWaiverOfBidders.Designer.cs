@@ -1,4 +1,4 @@
-﻿namespace LFS.Views.Transactions.Biddings.BiddingReports
+namespace LFS.Views.Transactions.Biddings.BiddingReports
 {
     partial class ucUnderTakingAndWaiverOfBidders
     {

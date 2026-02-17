@@ -1,6 +1,7 @@
-﻿using LFS.Helpers;
+using LFS.Helpers;
 using LFS.Views.Shared;
 using OmniGov.Core.Repositories;
+using OmniGov.Core.Factories;
 using System;
 using System.ComponentModel;
 using System.Data;
@@ -369,3 +370,4 @@ namespace LFS.Views.Transactions.Assessment
         }
     }
 }
+

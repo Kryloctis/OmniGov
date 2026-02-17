@@ -1,4 +1,4 @@
-﻿namespace LFS.Views.Transactions.Payments.OtherPayments.CattleTransferOfOwnership
+namespace LFS.Views.Transactions.Payments.OtherPayments.CattleTransferOfOwnership
 {
     partial class ucCattleTransfer
     {

@@ -1,4 +1,4 @@
-﻿
+
 namespace LFS.Views.Manage.FunctionProgramProject.FunctionalClassification
 {
     partial class ucFunctionalClassification

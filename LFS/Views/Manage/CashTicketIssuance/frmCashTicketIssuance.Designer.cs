@@ -1,4 +1,4 @@
-﻿namespace LFS.Views.Transactions.CashTicketIssuance
+namespace LFS.Views.Transactions.CashTicketIssuance
 {
     partial class frmCashTicketIssuance
     {

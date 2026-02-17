@@ -1,5 +1,6 @@
-﻿using LFS.Helpers;
+using LFS.Helpers;
 using OmniGov.Core.Repositories;
+using OmniGov.Core.Factories;
 using System;
 using System.Data;
 using System.Windows.Forms;
@@ -214,12 +215,12 @@ namespace LFS.Views.Transactions.ReleasedAndUnReleasedChecks
             {
                 case true:
                     pnlFilter.Visible = false;
-                    btnToggleFilter.Text = "☰";
+                    btnToggleFilter.Text = "?";
                     break;
 
                 case false:
                     pnlFilter.Visible = true;
-                    btnToggleFilter.Text = "✕";
+                    btnToggleFilter.Text = "?";
                     break;
             }
         }
@@ -253,3 +254,4 @@ namespace LFS.Views.Transactions.ReleasedAndUnReleasedChecks
         }
     }
 }
+

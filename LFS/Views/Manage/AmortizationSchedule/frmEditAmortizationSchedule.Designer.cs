@@ -1,4 +1,4 @@
-﻿
+
 namespace LFS.Views.Manage.AmortizationSchedule
 {
     partial class frmEditAmortizationSchedule

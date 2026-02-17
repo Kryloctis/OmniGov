@@ -1,8 +1,9 @@
-﻿using LFS.Helpers;
+using LFS.Helpers;
 using LFS.Properties;
 using LFS.Views.SignIn;
 using OmniGov.Core.Entities;
 using OmniGov.Core.Repositories;
+using OmniGov.Core.Factories;
 using System;
 using System.ComponentModel;
 using System.Data;
@@ -361,3 +362,4 @@ namespace LFS.Views.Dashboard.MyAccount
         }
     }
 }
+

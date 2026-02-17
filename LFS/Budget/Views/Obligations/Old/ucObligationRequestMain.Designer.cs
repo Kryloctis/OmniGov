@@ -1,4 +1,4 @@
-﻿
+
 namespace LFS.Budget.Views.Obligations
 {
     partial class ucObligationRequestMain

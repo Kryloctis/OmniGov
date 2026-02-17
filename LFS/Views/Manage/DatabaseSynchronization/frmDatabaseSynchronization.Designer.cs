@@ -1,4 +1,4 @@
-﻿namespace LFS.Views.Manage.DatabaseSynchronization
+namespace LFS.Views.Manage.DatabaseSynchronization
 {
     partial class frmDatabaseSynchronization
     {

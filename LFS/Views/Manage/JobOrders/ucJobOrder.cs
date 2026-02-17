@@ -1,4 +1,4 @@
-﻿using LFS.Views.Manage.LinkUser;
+using LFS.Views.Manage.LinkUser;
 using System.Windows.Forms;
 
 namespace LFS.Views.Manage.JobOrders

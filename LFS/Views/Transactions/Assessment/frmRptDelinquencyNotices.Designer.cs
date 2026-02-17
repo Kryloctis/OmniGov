@@ -1,4 +1,4 @@
-﻿namespace LFS.Views.Transactions.Assessment
+namespace LFS.Views.Transactions.Assessment
 {
     partial class frmRptDelinquencyNotices
     {

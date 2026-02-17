@@ -1,4 +1,4 @@
-﻿
+
 namespace LFS.Views.Manage.Journals.DefaultAccounts
 {
     partial class frmDefaultAccounts

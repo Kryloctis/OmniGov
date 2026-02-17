@@ -1,4 +1,4 @@
-﻿using LFS.Helpers;
+using LFS.Helpers;
 using OmniGov.Core.Entities;
 using RPT.Data.Repositories;
 using System;

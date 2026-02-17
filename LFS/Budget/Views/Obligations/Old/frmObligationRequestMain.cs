@@ -1,4 +1,4 @@
-﻿using ACC.Data;
+using ACC.Data;
 using ACC.Domain.Models;
 using Budget.Data;
 using Budget.Domain.Models;

@@ -1,4 +1,4 @@
-﻿
+
 namespace LFS.Views.Transactions.RCI
 {
     partial class frmRCIEdit

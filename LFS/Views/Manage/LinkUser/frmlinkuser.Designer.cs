@@ -1,4 +1,4 @@
-﻿
+
 namespace LFS.Views.Manage.LinkUser
 {
     partial class frmLinkUser

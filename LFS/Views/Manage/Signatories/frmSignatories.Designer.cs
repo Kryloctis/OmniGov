@@ -1,4 +1,4 @@
-﻿
+
 namespace LFS.Views.Manage.Signatories
 {
     partial class frmSignatories
@@ -271,7 +271,7 @@ namespace LFS.Views.Manage.Signatories
             label1.Name = "label1";
             label1.Size = new System.Drawing.Size(220, 31);
             label1.TabIndex = 3;
-            label1.Text = "▾Documents";
+            label1.Text = "?Documents";
             // 
             // panel2
             // 
@@ -292,7 +292,7 @@ namespace LFS.Views.Manage.Signatories
             btnShowSidePanel.Name = "btnShowSidePanel";
             btnShowSidePanel.Size = new System.Drawing.Size(30, 30);
             btnShowSidePanel.TabIndex = 1;
-            btnShowSidePanel.Text = "✕";
+            btnShowSidePanel.Text = "?";
             btnShowSidePanel.UseVisualStyleBackColor = true;
             btnShowSidePanel.Click += btnShowSidePanel_Click;
             // 

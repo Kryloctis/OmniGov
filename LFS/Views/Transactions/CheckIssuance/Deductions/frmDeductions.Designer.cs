@@ -1,4 +1,4 @@
-﻿
+
 namespace LFS.Views.Transactions.CheckIssuance.Deductions
 {
     partial class frmDeductions

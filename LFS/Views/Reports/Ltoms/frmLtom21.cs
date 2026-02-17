@@ -1,4 +1,4 @@
-﻿using LFS.Helpers;
+using LFS.Helpers;
 using Microsoft.Reporting.WinForms;
 using System;
 using System.Collections.Generic;

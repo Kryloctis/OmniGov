@@ -1,4 +1,4 @@
-﻿
+
 namespace LFS.Budget.Views.Obligations
 {
     partial class ucObligations
@@ -146,7 +146,7 @@ namespace LFS.Budget.Views.Obligations
             lblStatIndctr.Name = "lblStatIndctr";
             lblStatIndctr.Size = new System.Drawing.Size(16, 17);
             lblStatIndctr.TabIndex = 68;
-            lblStatIndctr.Text = "●";
+            lblStatIndctr.Text = "?";
             lblStatIndctr.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lblCreatedBy

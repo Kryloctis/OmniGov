@@ -1,4 +1,4 @@
-﻿
+
 namespace LFS.Views.Manage.AccountableForm
 {
     partial class frmAddAccountableForm

@@ -1,4 +1,4 @@
-﻿
+
 namespace LFS.Views.Manage.RptPenalties
 {
     partial class frmRptPenalties

@@ -1,4 +1,4 @@
-﻿using Accounting.Data;
+using Accounting.Data;
 using LFS.Helpers;
 using System;
 using System.Windows.Forms;

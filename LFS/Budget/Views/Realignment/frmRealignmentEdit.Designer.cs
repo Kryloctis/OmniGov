@@ -1,4 +1,4 @@
-﻿using LFS.Budget.Views.Realignment;
+using LFS.Budget.Views.Realignment;
 
 namespace LFS.Budget.Views.Realignment
 {

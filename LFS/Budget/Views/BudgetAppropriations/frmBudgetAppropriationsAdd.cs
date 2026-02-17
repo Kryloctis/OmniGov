@@ -1,4 +1,4 @@
-﻿using Budget.Data;
+using Budget.Data;
 using Budget.Domain.Models;
 using LFS.Helpers;
 using System;
@@ -59,7 +59,7 @@ namespace LFS.Budget.Views.BudgetAppropriations
             {
                 string generalLedgerAccountName = uc.cmbxAccount.Text;
                 string remarks = uc.txtRemarks.Text;
-                string objectOfExpenditures = $"   {generalLedgerAccountName}{(string.IsNullOrEmpty(remarks) ? string.Empty : $" → {remarks}")}";
+                string objectOfExpenditures = $"   {generalLedgerAccountName}{(string.IsNullOrEmpty(remarks) ? string.Empty : $" ? {remarks}")}";
                 string subFPP = uc.cmbxOthersFPP.Text;
                 int allotmentClassID = uc.allotmentClassId;
                 int fundID = uc.fundId;

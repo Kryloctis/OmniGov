@@ -1,4 +1,4 @@
-﻿
+
 namespace LFS.Views.Transactions.BankDeposits
 {
     partial class frmBankDeposits

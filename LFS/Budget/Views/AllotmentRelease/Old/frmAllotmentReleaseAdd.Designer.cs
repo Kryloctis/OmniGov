@@ -1,4 +1,4 @@
-﻿using LFS.Budget.Views.AllotmentRelease;
+using LFS.Budget.Views.AllotmentRelease;
 
 namespace LFS.Budget.Views.AllotmentRelease
 {

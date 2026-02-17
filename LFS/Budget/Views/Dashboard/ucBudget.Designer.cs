@@ -1,4 +1,4 @@
-﻿using LFS.Budget.Dashboard;
+using LFS.Budget.Dashboard;
 namespace LFS.Budget.Dashboard
 {
     partial class ucBudget

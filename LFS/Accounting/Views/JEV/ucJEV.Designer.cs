@@ -1,4 +1,4 @@
-﻿
+
 namespace LFS.Views.Transactions.JEV
 {
     partial class ucJev
@@ -620,7 +620,7 @@ namespace LFS.Views.Transactions.JEV
             lblStatIndctr.Name = "lblStatIndctr";
             lblStatIndctr.Size = new System.Drawing.Size(16, 17);
             lblStatIndctr.TabIndex = 65;
-            lblStatIndctr.Text = "●";
+            lblStatIndctr.Text = "?";
             lblStatIndctr.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lblCreatedBy

@@ -1,4 +1,4 @@
-﻿
+
 namespace LFS.Budget.Views.Reports
 {
     partial class frmSAAO

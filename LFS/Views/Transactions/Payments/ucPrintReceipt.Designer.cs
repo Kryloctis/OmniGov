@@ -1,4 +1,4 @@
-﻿namespace LFS.Views.Transactions.Payments.BurialPermit
+namespace LFS.Views.Transactions.Payments.BurialPermit
 {
     partial class ucPrintReceipt
     {

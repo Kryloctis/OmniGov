@@ -1,4 +1,4 @@
-﻿namespace LFS.Views.Transactions.Payments.CattleTransferOfOwnership
+namespace LFS.Views.Transactions.Payments.CattleTransferOfOwnership
 {
     partial class frmCattleTransfer
     {

@@ -1,8 +1,9 @@
-﻿using LFS.DataSets;
+using LFS.DataSets;
 using LFS.Helpers;
 using LFS.Views.Shared;
 using Microsoft.Reporting.WinForms;
 using OmniGov.Core.Repositories;
+using OmniGov.Core.Factories;
 using System;
 using System.ComponentModel;
 using System.Data;
@@ -226,3 +227,4 @@ namespace LFS.Views.Reports.RptReports
         }
     }
 }
+

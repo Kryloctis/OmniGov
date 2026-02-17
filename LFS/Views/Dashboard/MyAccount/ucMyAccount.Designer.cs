@@ -1,4 +1,4 @@
-ï»¿namespace LFS.Views.Dashboard.MyAccount
+namespace LFS.Views.Dashboard.MyAccount
 {
     partial class ucMyAccount
     {
@@ -283,7 +283,7 @@
             txtNewPassword.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
             txtNewPassword.MaxLength = 60;
             txtNewPassword.Name = "txtNewPassword";
-            txtNewPassword.PasswordChar = 'â€¢';
+            txtNewPassword.PasswordChar = '•';
             txtNewPassword.Size = new System.Drawing.Size(272, 23);
             txtNewPassword.TabIndex = 79;
             txtNewPassword.Validating += txtNewPassword_Validating;
@@ -308,7 +308,7 @@
             txtCurrentPassword.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
             txtCurrentPassword.MaxLength = 60;
             txtCurrentPassword.Name = "txtCurrentPassword";
-            txtCurrentPassword.PasswordChar = 'â€¢';
+            txtCurrentPassword.PasswordChar = '•';
             txtCurrentPassword.Size = new System.Drawing.Size(272, 23);
             txtCurrentPassword.TabIndex = 78;
             txtCurrentPassword.Validating += txtOldPassword_Validating;
@@ -335,7 +335,7 @@
             txtConfirmPassword.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
             txtConfirmPassword.MaxLength = 60;
             txtConfirmPassword.Name = "txtConfirmPassword";
-            txtConfirmPassword.PasswordChar = 'â€¢';
+            txtConfirmPassword.PasswordChar = '•';
             txtConfirmPassword.Size = new System.Drawing.Size(272, 23);
             txtConfirmPassword.TabIndex = 80;
             txtConfirmPassword.Validating += txtConfirmPassword_Validating;
@@ -468,7 +468,7 @@
             txtProfileCurrentPassword.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
             txtProfileCurrentPassword.MaxLength = 60;
             txtProfileCurrentPassword.Name = "txtProfileCurrentPassword";
-            txtProfileCurrentPassword.PasswordChar = 'â€¢';
+            txtProfileCurrentPassword.PasswordChar = '•';
             txtProfileCurrentPassword.Size = new System.Drawing.Size(272, 23);
             txtProfileCurrentPassword.TabIndex = 78;
             txtProfileCurrentPassword.Validating += txtProfileCurrentPassword_Validating;

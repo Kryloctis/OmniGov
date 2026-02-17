@@ -1,4 +1,4 @@
-﻿using Budget.Data;
+using Budget.Data;
 using Budget.Domain.Models;
 using LFS.Budget.Views.Augmentation;
 using LFS.Budget.Views.Realignment;
@@ -6,6 +6,7 @@ using LFS.Budget.Views.SupplementalAppropriations;
 using LFS.Helpers;
 using MySql.Data.MySqlClient;
 using OmniGov.Core.Repositories;
+using OmniGov.Core.Factories;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -224,7 +225,7 @@ namespace LFS.Budget.Views.BudgetAppropriations
                 var totalObligations = BudgetFactory.ObligationRequestRepository().GetSumObligationsByBudgetAppropriationAndStatus(rowId);
                 var unobligatedBalance = totalAppropriationAmount - totalObligations;
 
-                string objectOfExpenditures = $"   {rowAccountCode} - {rowAccountName}{(string.IsNullOrEmpty(remarks) ? string.Empty : $" → {remarks}")}";
+                string objectOfExpenditures = $"   {rowAccountCode} - {rowAccountName}{(string.IsNullOrEmpty(remarks) ? string.Empty : $" ? {remarks}")}";
 
                 newRow["id"] = rowId;
                 newRow["funds_id"] = rowFundId;
@@ -688,3 +689,4 @@ namespace LFS.Budget.Views.BudgetAppropriations
         }
     }
 }
+
