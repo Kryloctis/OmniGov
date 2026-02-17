@@ -1,4 +1,4 @@
-﻿namespace Accounting.Domain.Entities
+namespace Accounting.Domain.Entities
 {
     public class JevModel
     {
