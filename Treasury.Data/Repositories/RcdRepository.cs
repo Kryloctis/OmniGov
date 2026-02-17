@@ -1,5 +1,6 @@
-﻿using OmniGov.Core.Entities;
+using OmniGov.Core.Entities;
 using OmniGov.Core.Repositories;
+using OmniGov.Core.Services;
 using System.Data;
 using System.Transactions;
 using Treasury.Domain.Entities;
@@ -11,14 +12,14 @@ namespace Treasury.Data.Repositories
     {
         private readonly string tableName = "rcd";
         private readonly string viewTableName = "view_rcd";
-        private GenericCommands mySqlGenericCommandsLFS;
+        private GenericCommands mySqlGenericCommands;
         private IRcdCollections rcdCollections;
         private IRcdDeposits rcdDeposits;
 
-        public RcdRepository(GenericCommands mySqlGenericCommandsLFS, IRcdCollections rcdCollections, IRcdDeposits rcdDeposits)
+        public RcdRepository(GenericCommands mySqlGenericCommands, IRcdCollections rcdCollections, IRcdDeposits rcdDeposits)
 
         {
-            this.mySqlGenericCommandsLFS = mySqlGenericCommandsLFS;
+            this.mySqlGenericCommands = mySqlGenericCommands;
             this.rcdCollections = rcdCollections;
             this.rcdDeposits = rcdDeposits;
         }
@@ -38,7 +39,7 @@ namespace Treasury.Data.Repositories
                     string query = $"DELETE FROM {tableName} WHERE id = @id";
                     _ = rcdCollections.DeleteByRcdId(entity);
                     _ = rcdDeposits.DeleteByRcdId(entity);
-                    _ = mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
+                    _ = mySqlGenericCommands.ExecuteNonQuery(query, parameters);
                 }
 
                 scope.Complete();
@@ -53,7 +54,7 @@ namespace Treasury.Data.Repositories
             var parameters = new object[][] { new object[] { "@id", DbType.Int32, Id } };
             string query = $"SELECT * FROM {tableName} WHERE id = @id";
 
-            DataTable dataTable = mySqlGenericCommandsLFS.ExecuteReader(query, parameters);
+            DataTable dataTable = mySqlGenericCommands.ExecuteReader(query, parameters);
 
             if (dataTable.Rows.Count > 0)
             {
@@ -70,14 +71,14 @@ namespace Treasury.Data.Repositories
         public DataTable GetRecords()
         {
             string query = $"SELECT * FROM {tableName}";
-            return mySqlGenericCommandsLFS.Fill(query, new DataTable());
+            return mySqlGenericCommands.Fill(query, new DataTable());
         }
 
         public DataTable GetRecordsBySearch(string searchText)
         {
             var parameters = new object[][] { new object[] { "@search_key", DbType.String, $"%{searchText}%" } };
             string query = $"SELECT * FROM {tableName} WHERE report_no LIKE @search_key";
-            return mySqlGenericCommandsLFS.FillBySearch(query, new DataTable(), parameters);
+            return mySqlGenericCommands.FillBySearch(query, new DataTable(), parameters);
         }
 
         public DataTable GetViewRecords(string searchKey, DateTime date, int rowFilter)
@@ -90,7 +91,7 @@ namespace Treasury.Data.Repositories
             };
 
             string query = $"SELECT * FROM {viewTableName} WHERE (report_no LIKE @search_key OR first_name LIKE @search_key OR last_name LIKE @search_key) AND (DATE(date) <= @date) LIMIT @row_filter";
-            return mySqlGenericCommandsLFS.FillBySearch(query, new DataTable(), parameters);
+            return mySqlGenericCommands.FillBySearch(query, new DataTable(), parameters);
         }
 
         public bool IdExist(int id)
@@ -109,14 +110,14 @@ namespace Treasury.Data.Repositories
             };
 
             string query = $"INSERT INTO {tableName} (funds_id, report_no, date, created_by) VALUES (@funds_id, @report_no, @date, @created_by)";
-            return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
+            return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public bool reportNoExist(string reportNo)
         {
             var parameters = new object[][] { new object[] { "@report_no", DbType.String, reportNo } };
             string query = $"SELECT id FROM {tableName} WHERE report_no = @report_no";
-            string result = mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
+            string result = mySqlGenericCommands.ExecuteScalar(query, parameters);
             return !string.IsNullOrWhiteSpace(result);
         }
 
@@ -129,7 +130,7 @@ namespace Treasury.Data.Repositories
             };
 
             string query = $"SELECT id FROM {tableName} WHERE report_no = @report_no AND id <> @id";
-            string result = mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
+            string result = mySqlGenericCommands.ExecuteScalar(query, parameters);
             return !string.IsNullOrWhiteSpace(result);
         }
 
@@ -144,7 +145,7 @@ namespace Treasury.Data.Repositories
             };
 
             string query = $"UPDATE {tableName} SET  report_no = @report_no, funds_id = @funds_id, date = @date WHERE id = @id;";
-            return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
+            return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public bool InsertWithCollectionsDeposits(RcdModel rcdModel, List<RcdCollectionsModel> rcdCollectionsModels, List<RcdDepositsModel> rcdDepositsModels)
@@ -201,7 +202,7 @@ namespace Treasury.Data.Repositories
             var recordDictionary = new Dictionary<string, string>();
             var parameters = new object[][] { new object[] { "@id", DbType.Int32, id } };
             string query = $"SELECT * FROM {viewTableName} WHERE id = @id";
-            DataTable dataTable = mySqlGenericCommandsLFS.ExecuteReader(query, parameters);
+            DataTable dataTable = mySqlGenericCommands.ExecuteReader(query, parameters);
 
             if (dataTable.Rows.Count > 0)
             {
@@ -219,7 +220,8 @@ namespace Treasury.Data.Repositories
         {
             var parameters = new object[][] { new object[] { "@created_by", DbType.Int32, usersModel.Id } };
             string query = $"SELECT MAX(id) FROM {tableName} WHERE created_by = @created_by";
-            return Convert.ToInt32(mySqlGenericCommandsLFS.ExecuteScalar(query, parameters));
+            return Convert.ToInt32(mySqlGenericCommands.ExecuteScalar(query, parameters));
         }
     }
 }
+

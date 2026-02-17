@@ -1,4 +1,5 @@
-﻿using OmniGov.Core.Repositories;
+using OmniGov.Core.Repositories;
+using OmniGov.Core.Services;
 using System.Data;
 using System.Transactions;
 using Treasury.Domain.Entities;
@@ -9,11 +10,11 @@ namespace Treasury.Data.Repositories
     internal class PaymentFeesChargesRepository : IPaymentFeesCharges
     {
         private readonly string tableName = "payment_fees_charges";
-        private GenericCommands mySqlGenericCommandsLFS;
+        private GenericCommands mySqlGenericCommands;
 
-        public PaymentFeesChargesRepository(GenericCommands mySqlGenericCommandsLFS)
+        public PaymentFeesChargesRepository(GenericCommands mySqlGenericCommands)
         {
-            this.mySqlGenericCommandsLFS = mySqlGenericCommandsLFS;
+            this.mySqlGenericCommands = mySqlGenericCommands;
         }
 
         public int CountRecords()
@@ -29,7 +30,7 @@ namespace Treasury.Data.Repositories
                 {
                     var parameters = new object[][] { new object[] { "@id", DbType.Int32, model.Id } };
                     string query = $"DELETE FROM {tableName} WHERE id = @id";
-                    _ = mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
+                    _ = mySqlGenericCommands.ExecuteNonQuery(query, parameters);
                 }
 
                 scope.Complete();
@@ -46,7 +47,7 @@ namespace Treasury.Data.Repositories
         {
             string query = $"SELECT * FROM {tableName}";
             var dataTable = new DataTable();
-            return mySqlGenericCommandsLFS.Fill(query, dataTable);
+            return mySqlGenericCommands.Fill(query, dataTable);
         }
 
         public DataTable GetRecordsBySearch(string searchText)
@@ -58,7 +59,7 @@ namespace Treasury.Data.Repositories
 
             string query = $"SELECT * FROM {tableName} WHERE unit LIKE @search_key OR sub_total LIKE @search_key";
             var dataTable = new DataTable();
-            return mySqlGenericCommandsLFS.FillBySearch(query, dataTable, parameters);
+            return mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
         }
 
         public bool IdExist(int id)
@@ -77,7 +78,7 @@ namespace Treasury.Data.Repositories
             };
 
             string query = $"INSERT INTO {tableName} (payment_collections_id, other_payment_rates_id, unit, sub_total ) VALUES (@payment_collections_id, @other_payment_rates_id, @unit, @sub_total)";
-            return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
+            return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public bool InsertBulk(List<PaymentFeesChargesModel> entityList)
@@ -104,7 +105,8 @@ namespace Treasury.Data.Repositories
             };
 
             string query = $"UPDATE {tableName} SET payment_collections_id = @payment_collections_id, other_payment_rates_id = @other_payment_rates_id, unit = @unit, sub_total = @sub_total WHERE id = @id";
-            return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
+            return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
         }
     }
 }
+

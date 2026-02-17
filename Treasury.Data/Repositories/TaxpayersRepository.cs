@@ -1,4 +1,5 @@
-﻿using OmniGov.Core.Repositories;
+using OmniGov.Core.Repositories;
+using OmniGov.Core.Services;
 using System.Data;
 using System.Transactions;
 using Treasury.Domain.Entities;
@@ -8,13 +9,13 @@ namespace Treasury.Data.Repositories
 {
     public class TaxpayerRepository : ITaxpayersRepository
     {
-        private GenericCommands mySqlGenericCommandsLFS;
+        private GenericCommands mySqlGenericCommands;
         private readonly string tableName = "taxpayers";
         private readonly string viewTableName = "view_taxpayers";
 
-        public TaxpayerRepository(GenericCommands mySqlGenericCommandsLFS)
+        public TaxpayerRepository(GenericCommands mySqlGenericCommands)
         {
-            this.mySqlGenericCommandsLFS = mySqlGenericCommandsLFS;
+            this.mySqlGenericCommands = mySqlGenericCommands;
         }
 
         public int CountRecords()
@@ -30,7 +31,7 @@ namespace Treasury.Data.Repositories
                 {
                     var parameters = new object[][] { new object[] { "@id", DbType.Int32, taxpayersModel.Id } };
                     string query = $"DELETE FROM {tableName} WHERE id = @id";
-                    _ = mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
+                    _ = mySqlGenericCommands.ExecuteNonQuery(query, parameters);
                 }
 
                 scope.Complete();
@@ -48,7 +49,7 @@ namespace Treasury.Data.Repositories
 
             string query = $"SELECT * FROM {tableName} WHERE id = @id";
 
-            DataTable dataTable = mySqlGenericCommandsLFS.ExecuteReader(query, parameters);
+            DataTable dataTable = mySqlGenericCommands.ExecuteReader(query, parameters);
 
             if (dataTable.Rows.Count > 0)
             {
@@ -66,7 +67,7 @@ namespace Treasury.Data.Repositories
         {
             string query = $"SELECT * FROM {tableName}";
             var dataTable = new DataTable();
-            return mySqlGenericCommandsLFS.Fill(query, dataTable);
+            return mySqlGenericCommands.Fill(query, dataTable);
         }
 
         public DataTable GetRecordsBySearch(string searchText)
@@ -78,7 +79,7 @@ namespace Treasury.Data.Repositories
 
             string query = $"SELECT * FROM {tableName} WHERE tin LIKE @search_text OR name LIKE @search_text";
             var dataTable = new DataTable();
-            return mySqlGenericCommandsLFS.FillBySearch(query, dataTable, parameters);
+            return mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
         }
 
         public bool IdExist(int id)
@@ -103,7 +104,7 @@ namespace Treasury.Data.Repositories
             };
 
             string query = $"INSERT INTO {tableName} (representative_registry_id, tin, name, taxpayer_type_id, contact_info, address, municipality, province, is_active, created_by) VALUES (@representative_registry_id, @tin, @name, @taxpayer_type_id, @contact_info, @address, @municipality, @province, @is_active, @created_by)";
-            return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
+            return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public bool Update(TaxpayersModel entity)
@@ -125,7 +126,7 @@ namespace Treasury.Data.Repositories
 
             string query = $"UPDATE {tableName} SET  taxpayer_type_id = @taxpayer_type_id, representative_registry_id = @representative_registry_id, tin = @tin, name = @name, address = @address, municipality = @municipality, province = @province, contact_info = @contact_info, is_active = @is_active, updated_by = @updated_by WHERE id = @id";
 
-            return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
+            return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public bool TaxpayerNameExist(string name)
@@ -136,7 +137,7 @@ namespace Treasury.Data.Repositories
             };
 
             string query = $"SELECT id FROM {tableName} WHERE name = @name";
-            string result = mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
+            string result = mySqlGenericCommands.ExecuteScalar(query, parameters);
 
             if (!string.IsNullOrWhiteSpace(result))
                 return true;
@@ -152,7 +153,7 @@ namespace Treasury.Data.Repositories
             };
 
             string query = $"SELECT id FROM {tableName} WHERE id <> @id AND name = @name";
-            string result = mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
+            string result = mySqlGenericCommands.ExecuteScalar(query, parameters);
 
             if (!string.IsNullOrWhiteSpace(result))
                 return true;
@@ -167,14 +168,14 @@ namespace Treasury.Data.Repositories
             };
 
             string query = $"SELECT MAX(id) FROM {tableName} WHERE created_by = @created_by";
-            return int.Parse(mySqlGenericCommandsLFS.ExecuteScalar(query, parameters));
+            return int.Parse(mySqlGenericCommands.ExecuteScalar(query, parameters));
         }
 
         public DataTable GetViewRecords()
         {
             var query = $"SELECT * FROM {viewTableName}";
             var dataTable = new DataTable();
-            return mySqlGenericCommandsLFS.Fill(query, dataTable);
+            return mySqlGenericCommands.Fill(query, dataTable);
         }
 
         public DataTable GetViewRecordsBySearch(string searchText)
@@ -182,14 +183,14 @@ namespace Treasury.Data.Repositories
             var parameters = new object[][] { new object[] { "@search_text", DbType.String, $"%{searchText}%" } };
             string query = $"SELECT * FROM {viewTableName} WHERE taxpayers_tin LIKE @search_text OR taxpayers_name LIKE @search_text";
             var dataTable = new DataTable();
-            return mySqlGenericCommandsLFS.FillBySearch(query, dataTable, parameters);
+            return mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
         }
 
         public int GetIdByName(string name)
         {
             var parameters = new object[][] { new object[] { "@name", DbType.String, name } };
             string query = $"SELECT id FROM {tableName} WHERE name = @name";
-            return Convert.ToInt32(mySqlGenericCommandsLFS.ExecuteScalar(query, parameters));
+            return Convert.ToInt32(mySqlGenericCommands.ExecuteScalar(query, parameters));
         }
 
         public Dictionary<string, string> GetViewRecordById(int id)
@@ -202,7 +203,7 @@ namespace Treasury.Data.Repositories
 
             string query = $"SELECT * FROM {viewTableName} WHERE taxpayers_id = @taxpayers_id";
 
-            DataTable dataTable = mySqlGenericCommandsLFS.ExecuteReader(query, parameters);
+            DataTable dataTable = mySqlGenericCommands.ExecuteReader(query, parameters);
 
             if (dataTable.Rows.Count > 0)
             {
@@ -228,7 +229,8 @@ namespace Treasury.Data.Repositories
 
             string query = $"SELECT * FROM {viewTableName} WHERE {subQuery} (taxpayers_tin LIKE @search_text OR taxpayers_name LIKE @search_text OR representative_name LIKE @search_text) ORDER BY taxpayers_name ASC LIMIT @row_filter";
             var dataTable = new DataTable();
-            return mySqlGenericCommandsLFS.FillBySearch(query, dataTable, parameters);
+            return mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
         }
     }
 }
+

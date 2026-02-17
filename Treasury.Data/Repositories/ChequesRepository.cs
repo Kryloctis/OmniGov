@@ -1,4 +1,5 @@
-﻿using OmniGov.Core.Repositories;
+using OmniGov.Core.Repositories;
+using OmniGov.Core.Services;
 using System.Data;
 using System.Transactions;
 using Treasury.Domain.Entities;
@@ -9,11 +10,11 @@ namespace Treasury.Data.Repositories
     public class ChequesRepository : IChequesRepository
     {
         private readonly string tableName = "cheques";
-        private GenericCommands _mySqlGenericCommandsLFS;
+        private GenericCommands _mySqlGenericCommands;
 
-        public ChequesRepository(GenericCommands mySqlGenericCommandsLFS)
+        public ChequesRepository(GenericCommands mySqlGenericCommands)
         {
-            _mySqlGenericCommandsLFS = mySqlGenericCommandsLFS;
+            _mySqlGenericCommands = mySqlGenericCommands;
         }
 
         public int CountRecords()
@@ -33,7 +34,7 @@ namespace Treasury.Data.Repositories
                     };
 
                     string query = $"DELETE FROM {tableName} WHERE id = @id";
-                    _ = _mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
+                    _ = _mySqlGenericCommands.ExecuteNonQuery(query, parameters);
                 }
 
                 scope.Complete();
@@ -44,7 +45,7 @@ namespace Treasury.Data.Repositories
         public int GetLastInsertId()
         {
             string query = $"SELECT MAX(id) FROM {tableName}";
-            return Convert.ToInt32(_mySqlGenericCommandsLFS.ExecuteScalar(query));
+            return Convert.ToInt32(_mySqlGenericCommands.ExecuteScalar(query));
         }
 
         public Dictionary<string, string> GetRecordByID(int Id)
@@ -58,7 +59,7 @@ namespace Treasury.Data.Repositories
 
             string query = $"SELECT id, bank_accounts_id, cheque_no, cheque_date, amount, created_at, updated_at FROM {tableName} WHERE id = @id";
 
-            using (var reader = _mySqlGenericCommandsLFS.ExecuteReader(query, parameters))
+            using (var reader = _mySqlGenericCommands.ExecuteReader(query, parameters))
             {
                 if (reader.Rows.Count < 1)
                     return dict;
@@ -80,7 +81,7 @@ namespace Treasury.Data.Repositories
         {
             string query = $"SELECT * FROM {tableName}";
             var dataTable = new DataTable();
-            return _mySqlGenericCommandsLFS.Fill(query, dataTable);
+            return _mySqlGenericCommands.Fill(query, dataTable);
         }
 
         public DataTable GetRecordsBySearch(string searchText)
@@ -92,7 +93,7 @@ namespace Treasury.Data.Repositories
 
             string query = $"SELECT * FROM {tableName} WHERE cheque_no LIKE @searchText";
             var dataTable = new DataTable();
-            return _mySqlGenericCommandsLFS.FillBySearch(query, dataTable, parameters);
+            return _mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
         }
 
         public bool IdExist(int id)
@@ -112,7 +113,7 @@ namespace Treasury.Data.Repositories
 
             string query = $"INSERT INTO {tableName} (bank_accounts_id, cheque_no, cheque_date, amount) VALUES (@bank_accounts_id, @cheque_no, @cheque_date, @amount)";
 
-            return _mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
+            return _mySqlGenericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public bool Update(ChequesModel entity)
@@ -128,7 +129,8 @@ namespace Treasury.Data.Repositories
 
             string query = $"UPDATE {tableName} SET bank_accounts_id = @bank_accounts_id, cheque_no = @cheque_no, cheque_date = @cheque_date, amount = @amount WHERE id = @id";
 
-            return _mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
+            return _mySqlGenericCommands.ExecuteNonQuery(query, parameters);
         }
     }
 }
+

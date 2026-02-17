@@ -1,4 +1,5 @@
-﻿using OmniGov.Core.Repositories;
+using OmniGov.Core.Repositories;
+using OmniGov.Core.Services;
 using System.Data;
 using System.Transactions;
 using Treasury.Domain.Entities;
@@ -8,13 +9,13 @@ namespace Treasury.Data.Repositories
 {
     public class RptLevyRepository : IRptLevy
     {
-        private GenericCommands mySqlGenericCommandsLFS;
+        private GenericCommands mySqlGenericCommands;
         private readonly string tableName = "rpt_levy";
         private readonly string viewTableName = "view_rpt_levy";
 
-        public RptLevyRepository(GenericCommands mySqlGenericCommandsLFS)
+        public RptLevyRepository(GenericCommands mySqlGenericCommands)
         {
-            this.mySqlGenericCommandsLFS = mySqlGenericCommandsLFS;
+            this.mySqlGenericCommands = mySqlGenericCommands;
         }
 
         public bool Delete(List<RptLevyModel> entityList)
@@ -26,7 +27,7 @@ namespace Treasury.Data.Repositories
                     var parameters = new object[][] { new object[] { "@id", DbType.Int16, entity.Id }, };
 
                     string query = $"DELETE FROM {tableName} WHERE id = @id";
-                    _ = mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
+                    _ = mySqlGenericCommands.ExecuteNonQuery(query, parameters);
                 }
 
                 scope.Complete();
@@ -42,7 +43,7 @@ namespace Treasury.Data.Repositories
         public DataTable GetRecords()
         {
             string query = $"SELECT * FROM {tableName}";
-            return mySqlGenericCommandsLFS.Fill(query, new DataTable());
+            return mySqlGenericCommands.Fill(query, new DataTable());
         }
 
         public DataTable GetRecordsBySearch(string searchText)
@@ -57,7 +58,7 @@ namespace Treasury.Data.Repositories
             var parameters = new object[][] { new object[] { "@rpt_levy_id", DbType.Int32, Id } };
             string query = $"SELECT * FROM {viewTableName} WHERE rpt_levy_id = @rpt_levy_id";
 
-            DataTable dataTable = mySqlGenericCommandsLFS.ExecuteReader(query, parameters);
+            DataTable dataTable = mySqlGenericCommands.ExecuteReader(query, parameters);
 
             if (dataTable.Rows.Count > 0)
             {
@@ -80,7 +81,7 @@ namespace Treasury.Data.Repositories
             };
 
             string query = $"SELECT * FROM {viewTableName} WHERE (complete_arp_no LIKE @search_key OR taxpayers_name LIKE @search_key) ORDER BY taxpayers_name ASC LIMIT @row_limit";
-            return mySqlGenericCommandsLFS.FillBySearch(query, new DataTable(), parameters);
+            return mySqlGenericCommands.FillBySearch(query, new DataTable(), parameters);
         }
 
         public bool IdExist(int id)
@@ -98,7 +99,7 @@ namespace Treasury.Data.Repositories
             };
 
             string query = $"INSERT INTO {tableName} (real_properties_id, date_issued, created_by) VALUES (@real_properties_id, @date_issued, @created_by)";
-            return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
+            return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public bool Update(RptLevyModel entity)
@@ -112,7 +113,7 @@ namespace Treasury.Data.Repositories
             };
 
             string query = $"UPDATE {tableName} SET real_properties_id = @real_properties_id, date_issued = @date_issued, updated_by = @updated_by WHERE id = @id";
-            return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
+            return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public DataTable GetViewRecords(int rptId)
@@ -123,7 +124,7 @@ namespace Treasury.Data.Repositories
             };
 
             string query = $"SELECT * FROM {viewTableName} WHERE real_properties_id = @real_properties_id";
-            return mySqlGenericCommandsLFS.FillBySearch(query, new DataTable(), parameters);
+            return mySqlGenericCommands.FillBySearch(query, new DataTable(), parameters);
         }
 
         public DataTable GetViewRecords(DateTime date)
@@ -134,7 +135,7 @@ namespace Treasury.Data.Repositories
             };
 
             string query = $"SELECT * FROM {viewTableName} WHERE DATE(date_issued) <= @date_issued";
-            return mySqlGenericCommandsLFS.FillBySearch(query, new DataTable(), parameters);
+            return mySqlGenericCommands.FillBySearch(query, new DataTable(), parameters);
         }
 
         public DataTable GetViewRecords(int rptId, DateTime date)
@@ -146,7 +147,7 @@ namespace Treasury.Data.Repositories
             };
 
             string query = $"SELECT * FROM {viewTableName} WHERE real_properties_id = @real_properties_id AND date_issued <= @date_issued";
-            return mySqlGenericCommandsLFS.FillBySearch(query, new DataTable(), parameters);
+            return mySqlGenericCommands.FillBySearch(query, new DataTable(), parameters);
         }
 
         public Dictionary<string, string> GetViewCancelledLevy(int Id)
@@ -156,7 +157,7 @@ namespace Treasury.Data.Repositories
             var parameters = new object[][] { new object[] { "@rpt_levy_id", DbType.Int32, Id } };
             string query = $"SELECT * FROM {viewTableName} WHERE rpt_levy_id = @rpt_levy_id AND is_cancelled = 1";
 
-            DataTable dataTable = mySqlGenericCommandsLFS.ExecuteReader(query, parameters);
+            DataTable dataTable = mySqlGenericCommands.ExecuteReader(query, parameters);
 
             if (dataTable.Rows.Count > 0)
             {
@@ -178,7 +179,8 @@ namespace Treasury.Data.Repositories
             };
 
             string query = $"SELECT * FROM {viewTableName} WHERE real_properties_id = @real_properties_id AND is_cancelled = 1";
-            return mySqlGenericCommandsLFS.FillBySearch(query, new DataTable(), parameters);
+            return mySqlGenericCommands.FillBySearch(query, new DataTable(), parameters);
         }
     }
 }
+

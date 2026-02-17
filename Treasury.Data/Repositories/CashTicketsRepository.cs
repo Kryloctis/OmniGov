@@ -1,4 +1,5 @@
-﻿using OmniGov.Core.Repositories;
+using OmniGov.Core.Repositories;
+using OmniGov.Core.Services;
 using System.Data;
 using System.Transactions;
 using Treasury.Domain.Entities;
@@ -9,11 +10,11 @@ namespace Treasury.Data.Repositories
     internal class CashTicketsRepository : ICashTicketsRepository
     {
         private readonly string tableName = "cash_tickets";
-        private GenericCommands mySqlGenericCommandsLFS;
+        private GenericCommands mySqlGenericCommands;
 
-        public CashTicketsRepository(GenericCommands mySqlGenericCommandsLFS)
+        public CashTicketsRepository(GenericCommands mySqlGenericCommands)
         {
-            this.mySqlGenericCommandsLFS = mySqlGenericCommandsLFS ?? throw new ArgumentNullException(nameof(mySqlGenericCommandsLFS));
+            this.mySqlGenericCommands = mySqlGenericCommands ?? throw new ArgumentNullException(nameof(mySqlGenericCommands));
         }
 
         public bool IdExist(int id)
@@ -24,7 +25,7 @@ namespace Treasury.Data.Repositories
         public DataTable GetRecords()
         {
             string query = $"SELECT * FROM {tableName}";
-            return mySqlGenericCommandsLFS.Fill(query, new DataTable());
+            return mySqlGenericCommands.Fill(query, new DataTable());
         }
 
         public DataTable GetRecordsBySearch(string searchText)
@@ -39,7 +40,7 @@ namespace Treasury.Data.Repositories
             var parameters = new object[][] { new object[] { "@id", DbType.Int32, Id } };
             string query = $"SELECT * FROM {tableName} WHERE id = @id";
 
-            DataTable dataTable = mySqlGenericCommandsLFS.ExecuteReader(query, parameters);
+            DataTable dataTable = mySqlGenericCommands.ExecuteReader(query, parameters);
 
             if (dataTable.Rows.Count > 0)
             {
@@ -65,7 +66,7 @@ namespace Treasury.Data.Repositories
 
             string query = $"INSERT INTO {tableName} (description, quantity,  received_date, remarks) VALUES(@description, @quantity,  @received_date, @remarks)";
 
-            return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
+            return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public bool Update(CashTicketsModel entity)
@@ -80,7 +81,7 @@ namespace Treasury.Data.Repositories
             };
 
             string query = $"UPDATE {tableName} SET  description = @description, quantity = @quantity, received_date = @received_date, remarks = @remarks WHERE id = @id;";
-            return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
+            return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public bool Delete(List<CashTicketsModel> entityList)
@@ -95,7 +96,7 @@ namespace Treasury.Data.Repositories
                     };
 
                     string query = $"DELETE FROM {tableName} WHERE id = @id";
-                    _ = mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
+                    _ = mySqlGenericCommands.ExecuteNonQuery(query, parameters);
                 }
 
                 scope.Complete();
@@ -114,7 +115,8 @@ namespace Treasury.Data.Repositories
 
             string query = $"SELECT * FROM {tableName} WHERE DATE(received_date) <= @received_date AND (description LIKE @searchTxt) LIMIT @row_limit";
 
-            return mySqlGenericCommandsLFS.FillBySearch(query, new DataTable(), parameter);
+            return mySqlGenericCommands.FillBySearch(query, new DataTable(), parameter);
         }
     }
 }
+

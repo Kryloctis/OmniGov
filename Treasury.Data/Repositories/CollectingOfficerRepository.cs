@@ -1,4 +1,5 @@
-﻿using OmniGov.Core.Repositories;
+using OmniGov.Core.Repositories;
+using OmniGov.Core.Services;
 using System.Data;
 using System.Transactions;
 using Treasury.Domain.Entities;
@@ -10,18 +11,18 @@ namespace Treasury.Data.Repositories
     {
         private readonly string tableName = "collecting_officers";
         private readonly string tableName3 = "receipts_issued";
-        private GenericCommands mySqlGenericCommandsLFS;
+        private GenericCommands mySqlGenericCommands;
 
-        public CollectingOfficerRepository(GenericCommands mySqlGenericCommandsLFS)
+        public CollectingOfficerRepository(GenericCommands mySqlGenericCommands)
         {
-            this.mySqlGenericCommandsLFS = mySqlGenericCommandsLFS;
+            this.mySqlGenericCommands = mySqlGenericCommands;
         }
 
         public int CountRecords()
         {
             string query = $"SELECT COUNT(id) FROM {tableName}";
 
-            return int.Parse(mySqlGenericCommandsLFS.ExecuteScalar(query));
+            return int.Parse(mySqlGenericCommands.ExecuteScalar(query));
         }
 
         public bool Delete(List<CollectingOfficerModel> entityList)
@@ -36,7 +37,7 @@ namespace Treasury.Data.Repositories
                     };
 
                     string query = $"DELETE FROM {tableName} WHERE id = @id";
-                    _ = mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
+                    _ = mySqlGenericCommands.ExecuteNonQuery(query, parameters);
                 }
 
                 scope.Complete();
@@ -55,7 +56,7 @@ namespace Treasury.Data.Repositories
 
             string query = $"SELECT * FROM {tableName} WHERE id = @id";
 
-            DataTable dataTable = mySqlGenericCommandsLFS.ExecuteReader(query, parameters);
+            DataTable dataTable = mySqlGenericCommands.ExecuteReader(query, parameters);
 
             if (dataTable.Rows.Count > 0)
             {
@@ -80,7 +81,7 @@ namespace Treasury.Data.Repositories
 
             string query = $"SELECT id, prefix, first_name, mid_initial, last_name, suffix, job_title, created_at, updated_at, users_id FROM {tableName} WHERE users_id = @users_id AND is_deleted = 0";
 
-            using (var reader = mySqlGenericCommandsLFS.ExecuteReader(query, parameters))
+            using (var reader = mySqlGenericCommands.ExecuteReader(query, parameters))
             {
                 if (reader.Rows.Count < 1)
                     return record;
@@ -108,7 +109,7 @@ namespace Treasury.Data.Repositories
             string query = $"SELECT id, prefix, first_name, mid_initial, last_name, suffix, job_title, is_deleted, created_at, updated_at, users_id FROM {tableName}";
 
             var dataTable = new DataTable();
-            return mySqlGenericCommandsLFS.Fill(query, dataTable);
+            return mySqlGenericCommands.Fill(query, dataTable);
         }
 
         public DataTable GetCollectorsWithReceiptsIssuedByReceiptId(int receiptsId)
@@ -123,7 +124,7 @@ namespace Treasury.Data.Repositories
                             $"WHERE receipts_id = @receipts_id AND is_returned='NO')";
 
             var collectingOfficerReceiptsDt = new DataTable();
-            return mySqlGenericCommandsLFS.FillBySearch(query, collectingOfficerReceiptsDt, parameters);
+            return mySqlGenericCommands.FillBySearch(query, collectingOfficerReceiptsDt, parameters);
         }
 
         public DataTable GetRecordsBySearch(string searchText)
@@ -136,7 +137,7 @@ namespace Treasury.Data.Repositories
             string query = $"SELECT id, prefix, first_name, mid_initial, last_name, suffix, job_title, is_deleted, created_at, updated_at, users_id FROM {tableName} WHERE prefix LIKE @search_text OR first_name LIKE @search_text OR last_name LIKE @search_text OR suffix LIKE @search_text OR job_title LIKE @search_text";
 
             var dtFunds = new DataTable();
-            return mySqlGenericCommandsLFS.FillBySearch(query, dtFunds, parameters);
+            return mySqlGenericCommands.FillBySearch(query, dtFunds, parameters);
         }
 
         public bool IdExist(int id)
@@ -147,7 +148,7 @@ namespace Treasury.Data.Repositories
             };
 
             string query = $"SELECT id FROM {tableName} WHERE id = @id";
-            string queryResult = mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
+            string queryResult = mySqlGenericCommands.ExecuteScalar(query, parameters);
 
             if (!string.IsNullOrEmpty(queryResult)) return true;
 
@@ -168,7 +169,7 @@ namespace Treasury.Data.Repositories
             };
 
             string query = $"INSERT INTO {tableName} (prefix, first_name, mid_initial, last_name, suffix, job_title, users_id) VALUES (@prefix, @first_name, @mid_initial, @last_name, @suffix, @job_title, @users_id)";
-            return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
+            return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public bool Update(CollectingOfficerModel entity)
@@ -186,7 +187,7 @@ namespace Treasury.Data.Repositories
             };
 
             string query = $"UPDATE {tableName} SET prefix = @prefix, first_name = @first_name, mid_initial = @mid_initial, last_name = @last_name, suffix = @suffix, job_title = @job_title, users_id = @users_id WHERE id = @id";
-            return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
+            return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public bool FullNameExist(string firstName, string middleInitial, string lastName, int id)
@@ -202,7 +203,7 @@ namespace Treasury.Data.Repositories
             string query = $"SELECT * FROM {tableName} " +
                            $"WHERE id <> @id AND first_name = @first_name AND mid_initial = @middle_initial AND last_name = @last_name";
 
-            string queryResult = mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
+            string queryResult = mySqlGenericCommands.ExecuteScalar(query, parameters);
 
             if (!string.IsNullOrEmpty(queryResult))
                 return true;
@@ -219,7 +220,7 @@ namespace Treasury.Data.Repositories
 
             string query = $"SELECT COUNT(collecting_officers_id) FROM collecting_officers_has_job_orders WHERE collecting_officers_id =    @collecting_officers_id";
 
-            return int.Parse(mySqlGenericCommandsLFS.ExecuteScalar(query, parameter));
+            return int.Parse(mySqlGenericCommands.ExecuteScalar(query, parameter));
         }
 
         public bool IsUserCollectingOfficer(int userId)
@@ -230,7 +231,8 @@ namespace Treasury.Data.Repositories
             };
 
             string query = $"SELECT COUNT(*) FROM {tableName} WHERE users_id = @users_id";
-            return Convert.ToInt32(mySqlGenericCommandsLFS.ExecuteScalar(query, parameters)) > 0;
+            return Convert.ToInt32(mySqlGenericCommands.ExecuteScalar(query, parameters)) > 0;
         }
     }
 }
+

@@ -1,4 +1,5 @@
-﻿using OmniGov.Core.Repositories;
+using OmniGov.Core.Repositories;
+using OmniGov.Core.Services;
 using System.Data;
 using System.Transactions;
 using Treasury.Domain.Entities;
@@ -8,13 +9,13 @@ namespace Treasury.Data.Repositories
 {
     public class CollectingOfficerHasJobOrdersRepository : ICollectingOfficerHasJobOrders
     {
-        private readonly GenericCommands mySqlGenericCommandsLFS;
+        private readonly GenericCommands mySqlGenericCommands;
         private readonly string tableName = "collecting_officers_has_job_orders";
         private readonly string viewTableName = "view_collecting_officers_has_job_orders";
 
         public CollectingOfficerHasJobOrdersRepository(GenericCommands mySqlGenericCommands)
         {
-            this.mySqlGenericCommandsLFS = mySqlGenericCommands;
+            this.mySqlGenericCommands = mySqlGenericCommands;
         }
 
         public int CountRecords()
@@ -35,7 +36,7 @@ namespace Treasury.Data.Repositories
                     };
 
                     string query = $"DELETE FROM {tableName} WHERE collecting_officers_id = @collecting_officers_id AND job_orders_id = @job_orders_id";
-                    _ = mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
+                    _ = mySqlGenericCommands.ExecuteNonQuery(query, parameters);
                 }
 
                 scope.Complete();
@@ -51,8 +52,8 @@ namespace Treasury.Data.Repositories
 
             string query = $"SELECT collecting_officers_id FROM {tableName} WHERE job_orders_id = @job_orders_id LIMIT 1";
 
-            if (!string.IsNullOrEmpty(mySqlGenericCommandsLFS.ExecuteScalar(query, parameter)))
-                return int.Parse(mySqlGenericCommandsLFS.ExecuteScalar(query, parameter));
+            if (!string.IsNullOrEmpty(mySqlGenericCommands.ExecuteScalar(query, parameter)))
+                return int.Parse(mySqlGenericCommands.ExecuteScalar(query, parameter));
 
             return 0;
         }
@@ -66,7 +67,7 @@ namespace Treasury.Data.Repositories
             string query = $"SELECT job_orders_id, CONCAT(job_orders_first_name, ' ', job_orders_mid_initial, ' ', job_orders_last_name) as fullname, job_orders_job_title FROM {viewTableName} WHERE collecting_officers_id = @collecting_officers_id AND job_orders_is_deleted = 0";
 
             var dataTable = new DataTable();
-            return mySqlGenericCommandsLFS.FillBySearch(query, dataTable, parameter);
+            return mySqlGenericCommands.FillBySearch(query, dataTable, parameter);
         }
 
         public Dictionary<string, string> GetRecordByID(int Id)
@@ -79,7 +80,7 @@ namespace Treasury.Data.Repositories
             string query = $"SELECT * FROM {tableName}";
 
             var dataTable = new DataTable();
-            return mySqlGenericCommandsLFS.Fill(query, dataTable);
+            return mySqlGenericCommands.Fill(query, dataTable);
         }
 
         public DataTable GetRecordsBySearch(string searchText)
@@ -97,7 +98,7 @@ namespace Treasury.Data.Repositories
             string query = $"SELECT job_orders_id, CONCAT(job_orders_first_name, ' ', job_orders_mid_initial, ' ', job_orders_last_name) as fullname, job_orders_job_title FROM {viewTableName} WHERE collecting_officers_id = @collecting_officers_id AND (job_orders_first_name LIKE @search_text OR  job_orders_last_name LIKE  @search_text)";
 
             var dataTable = new DataTable();
-            return mySqlGenericCommandsLFS.FillBySearch(query, dataTable, parameter);
+            return mySqlGenericCommands.FillBySearch(query, dataTable, parameter);
         }
 
         public Dictionary<string, string> GetViewRecordByJobOrderUserId(int jobOrderUserId)
@@ -111,7 +112,7 @@ namespace Treasury.Data.Repositories
 
             string query = $"SELECT collecting_officers_id, collecting_officers_prefix, collecting_officers_firstname, collecting_officers_mid_initial, collecting_officers_last_name, collecting_officers_suffix, collecting_officers_job_title, collecting_officers_is_deleted, job_orders_id, job_orders_user_id, job_orders_prefix, job_orders_first_name, job_orders_mid_initial, job_orders_last_name, job_orders_suffix, job_orders_job_title, job_orders_is_deleted FROM {viewTableName} WHERE job_orders_user_id = @job_orders_user_id AND job_orders_is_deleted = 0";
 
-            DataTable dataTable = mySqlGenericCommandsLFS.ExecuteReader(query, parameters);
+            DataTable dataTable = mySqlGenericCommands.ExecuteReader(query, parameters);
 
             if (dataTable.Rows.Count > 0)
             {
@@ -130,7 +131,7 @@ namespace Treasury.Data.Repositories
             string query = $"SELECT * FROM {viewTableName} WHERE job_orders_is_deleted = 0";
 
             DataTable dataTable = new DataTable();
-            return mySqlGenericCommandsLFS.Fill(query, dataTable);
+            return mySqlGenericCommands.Fill(query, dataTable);
         }
 
         public bool IdExist(int id)
@@ -147,7 +148,7 @@ namespace Treasury.Data.Repositories
             };
 
             string query = $"INSERT INTO {tableName} VALUES (@collecting_officers_id, @job_orders_id)";
-            return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
+            return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public bool IsJobOrderCollector(int jobOrderId)
@@ -158,7 +159,7 @@ namespace Treasury.Data.Repositories
             };
 
             string query = $"SELECT COUNT(*) FROM {tableName} WHERE job_orders_id = @job_orders_id";
-            return mySqlGenericCommandsLFS.ExecuteScalar(query, parameters) == "0";
+            return mySqlGenericCommands.ExecuteScalar(query, parameters) == "0";
         }
 
         public bool Update(CollectingOfficerHasJobOrdersModel entity)
@@ -167,3 +168,4 @@ namespace Treasury.Data.Repositories
         }
     }
 }
+

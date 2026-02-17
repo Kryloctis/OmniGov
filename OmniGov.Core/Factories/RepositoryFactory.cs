@@ -1,8 +1,6 @@
+using OmniGov.Core.Interfaces.Factories;
 using OmniGov.Core.Interfaces.Repositories;
 using OmniGov.Core.Interfaces.Services;
-using OmniGov.Core.Interfaces.Factories;
-using OmniGov.Core.Repositories;
-using OmniGov.Core.Services;
 
 namespace OmniGov.Core.Factories
 {
@@ -105,4 +103,3 @@ namespace OmniGov.Core.Factories
             => new Repositories.RegistryRepository(_genericCommands);
     }
 }
-

@@ -1,5 +1,6 @@
-﻿using OmniGov.Core.Entities;
+using OmniGov.Core.Entities;
 using OmniGov.Core.Repositories;
+using OmniGov.Core.Services;
 using System.Data;
 using System.Transactions;
 using Treasury.Domain.Entities;
@@ -11,7 +12,7 @@ namespace Treasury.Data.Repositories
     {
         private readonly string tableName = "payment_collections";
         private readonly string viewTableName = "view_payment_collections";
-        private GenericCommands mySqlGenericCommandsLFS;
+        private GenericCommands mySqlGenericCommands;
         private IRptPaymentRepository rptPaymentRepository;
         private IMarriageLicenseRepository marriageLicenseRepository;
         private ICattleOwnershipRepository cattleOwnershipRepository;
@@ -25,9 +26,9 @@ namespace Treasury.Data.Repositories
         private IBiddersRepository biddersRepository;
         private ICommunityTaxCertificateRepository communityTaxCertificateRepository;
 
-        public PaymentCollectionsRepository(GenericCommands mySqlGenericCommandsLFSLFS, IRptPaymentRepository rptPaymentRepository, IMarriageLicenseRepository marriageLicenseRepository, ICattleOwnershipRepository cattleOwnershipRepository, IPrevCattleOwnership prevCattleOwnership, IBurialPermitRepository burialPermitRepository, IPaymentCollectionHasChequesRepository paymentCollectionHasChequesRepository, IPaymentFeesCharges paymentFeesCharges, IRcdCollections rcdCollections, IRcdDeposits rcdDeposits, IBidRepository biddingsRepository, IBiddersRepository biddersRepository, ICommunityTaxCertificateRepository communityTaxCertificateRepository)
+        public PaymentCollectionsRepository(GenericCommands mySqlGenericCommandsLFS, IRptPaymentRepository rptPaymentRepository, IMarriageLicenseRepository marriageLicenseRepository, ICattleOwnershipRepository cattleOwnershipRepository, IPrevCattleOwnership prevCattleOwnership, IBurialPermitRepository burialPermitRepository, IPaymentCollectionHasChequesRepository paymentCollectionHasChequesRepository, IPaymentFeesCharges paymentFeesCharges, IRcdCollections rcdCollections, IRcdDeposits rcdDeposits, IBidRepository biddingsRepository, IBiddersRepository biddersRepository, ICommunityTaxCertificateRepository communityTaxCertificateRepository)
         {
-            this.mySqlGenericCommandsLFS = mySqlGenericCommandsLFSLFS;
+            this.mySqlGenericCommands = mySqlGenericCommandsLFS;
             this.rptPaymentRepository = rptPaymentRepository;
             this.marriageLicenseRepository = marriageLicenseRepository;
             this.cattleOwnershipRepository = cattleOwnershipRepository;
@@ -53,7 +54,7 @@ namespace Treasury.Data.Repositories
 
             string query = $"SELECT * FROM {tableName} WHERE id = @id";
 
-            DataTable dataTable = mySqlGenericCommandsLFS.ExecuteReader(query, parameters);
+            DataTable dataTable = mySqlGenericCommands.ExecuteReader(query, parameters);
 
             if (dataTable.Rows.Count > 0)
             {
@@ -72,7 +73,7 @@ namespace Treasury.Data.Repositories
             string query = $"SELECT * FROM {viewTableName}";
 
             var dataTable = new DataTable();
-            return mySqlGenericCommandsLFS.Fill(query, dataTable);
+            return mySqlGenericCommands.Fill(query, dataTable);
         }
 
         public bool Insert(PaymentCollectionsModel entity)
@@ -92,7 +93,7 @@ namespace Treasury.Data.Repositories
 
             string query = $"INSERT INTO {tableName} (collecting_officers_id, job_orders_id, accountable_forms_id, payee, receipt_no, payment_date, amount, is_cancelled, created_by) VALUES (@collecting_officers_id, @job_orders_id, @accountable_forms_id, @payee, @receipt_no, @payment_date, @amount, @is_cancelled, @created_by)";
 
-            return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
+            return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public bool Update(PaymentCollectionsModel entity)
@@ -113,7 +114,7 @@ namespace Treasury.Data.Repositories
 
             string query = $"UPDATE {tableName} SET collecting_officers_id = @collecting_officers_id, job_orders_id = @job_orders_id, accountable_forms_id = @accountable_forms_id, payee = @payee, receipt_no = @receipt_no, payment_date = @payment_date, amount = @amount, is_cancelled = @is_cancelled, updated_by = @updated_by WHERE id = @id;";
 
-            return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
+            return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public bool Delete(List<PaymentCollectionsModel> entityList)
@@ -128,7 +129,7 @@ namespace Treasury.Data.Repositories
                     };
 
                     string query = $"DELETE FROM {tableName} WHERE id = @id";
-                    _ = mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
+                    _ = mySqlGenericCommands.ExecuteNonQuery(query, parameters);
                 }
 
                 scope.Complete();
@@ -139,7 +140,7 @@ namespace Treasury.Data.Repositories
         public int CountRecords()
         {
             string query = $"SELECT COUNT(*) FROM {tableName}";
-            return int.Parse(mySqlGenericCommandsLFS.ExecuteScalar(query));
+            return int.Parse(mySqlGenericCommands.ExecuteScalar(query));
         }
 
         public bool IdExist(int id)
@@ -150,7 +151,7 @@ namespace Treasury.Data.Repositories
             };
 
             string query = $"SELECT id FROM {tableName} WHERE id = @id";
-            string queryResult = mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
+            string queryResult = mySqlGenericCommands.ExecuteScalar(query, parameters);
 
             if (!string.IsNullOrEmpty(queryResult))
                 return true;
@@ -167,7 +168,7 @@ namespace Treasury.Data.Repositories
             };
 
             string query = $"SELECT id FROM {tableName} WHERE receipt_no = @receipt_no AND accountable_forms_id = @accountable_forms_id";
-            string queryResult = mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
+            string queryResult = mySqlGenericCommands.ExecuteScalar(query, parameters);
 
             if (!string.IsNullOrEmpty(queryResult))
                 return true;
@@ -185,7 +186,7 @@ namespace Treasury.Data.Repositories
             string query = $"SELECT * FROM {viewTableName}  WHERE acc_form_desc LIKE @searchText || acc_form_no LIKE @searchText";
 
             var dataTable = new DataTable();
-            return mySqlGenericCommandsLFS.FillBySearch(query, dataTable, parameter);
+            return mySqlGenericCommands.FillBySearch(query, dataTable, parameter);
         }
 
         public DataTable GetRecordByLedger(object[] parameter)
@@ -203,7 +204,7 @@ namespace Treasury.Data.Repositories
             string query = $"SELECT * FROM {viewTableName} WHERE {columnFilter} = @co_id AND payment_date BETWEEN @collection_from AND @collection_to ";
 
             var dataTable = new DataTable();
-            return mySqlGenericCommandsLFS.FillBySearch(query, dataTable, parameters);
+            return mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
         }
 
         public DataTable GetCollectionsPerCollector()
@@ -211,7 +212,7 @@ namespace Treasury.Data.Repositories
             string query = $"SELECT co_id, co_first_name, co_mid_initial, co_last_name, jo_id, jo_first_name, jo_mid_initial, jo_last_name, SUM(amount) AS amount FROM {viewTableName} GROUP BY jo_id";
 
             var dataTable = new DataTable();
-            return mySqlGenericCommandsLFS.FillBySearch(query, dataTable);
+            return mySqlGenericCommands.FillBySearch(query, dataTable);
         }
 
         public int GetLastInsertedID(int createdById)
@@ -222,7 +223,7 @@ namespace Treasury.Data.Repositories
             };
 
             string query = $"SELECT COALESCE(MAX(id)) FROM {tableName} WHERE created_by = @created_by";
-            return Convert.ToInt32(mySqlGenericCommandsLFS.ExecuteScalar(query, parameters));
+            return Convert.ToInt32(mySqlGenericCommands.ExecuteScalar(query, parameters));
         }
 
         public List<int> GetRecordsReceiptsByAccFormId(int accountableFormId)
@@ -235,7 +236,7 @@ namespace Treasury.Data.Repositories
 
             string query = $"SELECT receipt_no FROM {tableName} WHERE accountable_forms_id = @accountable_forms_id";
 
-            foreach (DataRow row in mySqlGenericCommandsLFS.ExecuteReader(query, parameters).Rows)
+            foreach (DataRow row in mySqlGenericCommands.ExecuteReader(query, parameters).Rows)
                 receiptNos.Add(Convert.ToInt32(row["receipt_no"]));
 
             return receiptNos;
@@ -251,7 +252,7 @@ namespace Treasury.Data.Repositories
 
             string query = $"SELECT COALESCE(COUNT(id), 0) FROM {viewTableName} WHERE co_id = @co_id AND acc_form_id = @acc_form_id";
 
-            return Convert.ToInt32(mySqlGenericCommandsLFS.ExecuteScalar(query, parameter));
+            return Convert.ToInt32(mySqlGenericCommands.ExecuteScalar(query, parameter));
         }
 
         public bool ReceiptAlreadyUsed(int accountableFormID, int receiptNumberFrom)
@@ -264,7 +265,7 @@ namespace Treasury.Data.Repositories
 
             string query = $"SELECT id FROM {tableName} WHERE receipt_no = @receipt_no AND accountable_forms_id = @accountable_forms_id";
 
-            string queryResult = mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
+            string queryResult = mySqlGenericCommands.ExecuteScalar(query, parameters);
 
             if (!string.IsNullOrEmpty(queryResult))
                 return true;
@@ -371,7 +372,7 @@ namespace Treasury.Data.Repositories
 
             string query = $"SELECT * FROM {viewTableName} WHERE co_id = @co_id AND acc_form_id = @acc_form_id AND (payee LIKE @search_key OR receipt_no LIKE @search_key OR amount LIKE @search_key) LIMIT @row_filter";
             var dataTable = new DataTable();
-            return mySqlGenericCommandsLFS.FillBySearch(query, dataTable, parameters);
+            return mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
         }
 
         public DataTable GerViewRecordsByJoIdAccFormId(int joId, int accFormId, string searchKey, int rowFilter)
@@ -386,7 +387,7 @@ namespace Treasury.Data.Repositories
 
             string query = $"SELECT * FROM {viewTableName} WHERE jo_id = @jo_id AND acc_form_id = @acc_form_id AND (payee LIKE @search_key OR receipt_no LIKE @search_key OR amount LIKE @search_key) LIMIT @row_filter";
             var dataTable = new DataTable();
-            return mySqlGenericCommandsLFS.FillBySearch(query, dataTable, parameters);
+            return mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
         }
 
         public bool InsertWithPrevCattleOwnership(PaymentCollectionsModel paymentCollectionsModel, PaymentCollectionHasChequesModel paymentCollectionHasChequesModel, CattleOwnershipModel cattleOwnershipModel, PrevCattleOwnershipModel prevCattleOwnershipModel, List<PaymentFeesChargesModel> paymentFeesChargesModels)
@@ -418,7 +419,7 @@ namespace Treasury.Data.Repositories
             };
 
             string query = $"SELECT acc_form_id, acc_form_no, acc_form_desc, MIN(receipt_no) AS receipt_from, MAX(receipt_no) AS receipt_to, SUM(amount) AS total_amount FROM {viewTableName} WHERE created_by = @created_by AND DATE(payment_date) < DATE(@date) AND id NOT IN (SELECT payment_collections_id FROM {rcdCollectionsRepository.GetTableName()}) GROUP BY acc_form_id ORDER BY acc_form_no ASC";
-            return mySqlGenericCommandsLFS.FillBySearch(query, new DataTable(), parameters);
+            return mySqlGenericCommands.FillBySearch(query, new DataTable(), parameters);
         }
 
         public DataTable GetViewConsolidatedRcdRecords(RcdCollectionsModel rcdCollectionsModel)
@@ -429,7 +430,7 @@ namespace Treasury.Data.Repositories
             };
 
             string query = $"SELECT acc_form_id, acc_form_no, acc_form_desc, MIN(receipt_no) AS receipt_from, MAX(receipt_no) AS receipt_to, SUM(amount) AS total_amount, created_by FROM {viewTableName} WHERE id IN (SELECT payment_collections_id FROM {rcdCollectionsRepository.GetTableName()} WHERE rcd_id = @rcd_id) GROUP BY acc_form_id ORDER BY acc_form_no ASC";
-            return mySqlGenericCommandsLFS.FillBySearch(query, new DataTable(), parameters);
+            return mySqlGenericCommands.FillBySearch(query, new DataTable(), parameters);
         }
 
         public List<RcdCollectionsModel> GetRcdCollections(DateTime date, UsersModel createdBy)
@@ -444,7 +445,7 @@ namespace Treasury.Data.Repositories
 
             string query = $"SELECT * FROM {viewTableName} WHERE created_by = @created_by AND DATE(payment_date) < DATE(@date) AND id NOT IN (SELECT payment_collections_id FROM {rcdCollectionsRepository.GetTableName()}) ORDER BY acc_form_no ASC ";
 
-            using (DataTable dataTable = mySqlGenericCommandsLFS.ExecuteReader(query, parameters))
+            using (DataTable dataTable = mySqlGenericCommands.ExecuteReader(query, parameters))
             {
                 foreach (DataRow dataRow in dataTable.Rows)
                 {
@@ -471,7 +472,7 @@ namespace Treasury.Data.Repositories
 
             string query = $"SELECT * FROM {viewTableName} WHERE id IN (SELECT payment_collections_id FROM {rcdCollectionsRepository.GetTableName()} WHERE rcd_id = @rcd_id) ORDER BY acc_form_no ASC ";
 
-            using (DataTable dataTable = mySqlGenericCommandsLFS.ExecuteReader(query, parameters))
+            using (DataTable dataTable = mySqlGenericCommands.ExecuteReader(query, parameters))
             {
                 foreach (DataRow dataRow in dataTable.Rows)
                 {
@@ -523,7 +524,7 @@ namespace Treasury.Data.Repositories
 
             string query = $"UPDATE {tableName} SET  is_cancelled = @is_cancelled WHERE id = @id";
 
-            return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
+            return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public bool InsertWithCommunityTaxCertificate(PaymentCollectionsModel paymentCollectionsModel, CommunityTaxCertificateModel communityTaxCertificateModel)
@@ -543,3 +544,4 @@ namespace Treasury.Data.Repositories
         }
     }
 }
+

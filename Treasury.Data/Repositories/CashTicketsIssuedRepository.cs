@@ -1,4 +1,5 @@
-﻿using OmniGov.Core.Repositories;
+using OmniGov.Core.Repositories;
+using OmniGov.Core.Services;
 using System.Data;
 using System.Transactions;
 using Treasury.Domain.Entities;
@@ -10,11 +11,11 @@ namespace Treasury.Data.Repositories
     {
         private readonly string tableName = "cash_tickets_issued";
         private readonly string viewTableName = "view_cash_tickets_issued";
-        private GenericCommands mySqlGenericCommandsLFS;
+        private GenericCommands mySqlGenericCommands;
 
-        public CashTicketsIssuedRepository(GenericCommands mySqlGenericCommandsLFS)
+        public CashTicketsIssuedRepository(GenericCommands mySqlGenericCommands)
         {
-            this.mySqlGenericCommandsLFS = mySqlGenericCommandsLFS;
+            this.mySqlGenericCommands = mySqlGenericCommands;
         }
 
         public bool Delete(List<CashTicketsIssuedModel> entityList)
@@ -29,7 +30,7 @@ namespace Treasury.Data.Repositories
                     };
 
                     string query = $"DELETE FROM {tableName} WHERE id = @id";
-                    _ = mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
+                    _ = mySqlGenericCommands.ExecuteNonQuery(query, parameters);
                 }
 
                 scope.Complete();
@@ -44,7 +45,7 @@ namespace Treasury.Data.Repositories
             var parameters = new object[][] { new object[] { "@id", DbType.Int32, Id } };
             string query = $"SELECT * FROM {viewTableName} WHERE id = @id";
 
-            DataTable dataTable = mySqlGenericCommandsLFS.ExecuteReader(query, parameters);
+            DataTable dataTable = mySqlGenericCommands.ExecuteReader(query, parameters);
 
             if (dataTable.Rows.Count > 0)
             {
@@ -73,7 +74,7 @@ namespace Treasury.Data.Repositories
                 };
 
             string query = $"SELECT * FROM {viewTableName} WHERE DATE(date_issued) <= @date_issued AND (cash_tickets_desc LIKE @txt_search) LIMIT @row_limit";
-            return mySqlGenericCommandsLFS.FillBySearch(query, new DataTable(), parameter);
+            return mySqlGenericCommands.FillBySearch(query, new DataTable(), parameter);
         }
 
         public DataTable GetRecordsBySearch(string searchText)
@@ -89,7 +90,7 @@ namespace Treasury.Data.Repositories
             };
 
             string query = $"SELECT COALESCE(SUM(quantity), 0) AS total_issued FROM {tableName} WHERE cash_tickets_id = @cash_tickets_id";
-            return Convert.ToInt32(mySqlGenericCommandsLFS.ExecuteScalar(query, parameter));
+            return Convert.ToInt32(mySqlGenericCommands.ExecuteScalar(query, parameter));
         }
 
         public bool IdExist(int id)
@@ -111,7 +112,7 @@ namespace Treasury.Data.Repositories
 
             string query = $"INSERT INTO {tableName} (cash_tickets_id, collecting_officers_id, job_orders_id,  date_issued, quantity, issued_by) VALUES( @cash_tickets_id, @collecting_officers_id, @job_orders_id, @date_issued, @quantity, @issued_by)";
 
-            return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
+            return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public bool Update(CashTicketsIssuedModel entity)
@@ -126,7 +127,8 @@ namespace Treasury.Data.Repositories
             };
 
             string query = $"UPDATE {tableName} SET  cash_tickets_id = @cash_tickets_id, collecting_officers_id = @collecting_officers_id, date_issued = @date_issued, quantity = @quantity WHERE id = @id;";
-            return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
+            return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
         }
     }
 }
+

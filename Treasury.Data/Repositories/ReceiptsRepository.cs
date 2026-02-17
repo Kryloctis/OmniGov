@@ -1,4 +1,5 @@
-﻿using OmniGov.Core.Repositories;
+using OmniGov.Core.Repositories;
+using OmniGov.Core.Services;
 using System.Data;
 using System.Transactions;
 using Treasury.Domain.Entities;
@@ -10,11 +11,11 @@ namespace Treasury.Data.Repositories
     {
         private readonly string tableName = "receipts";
         private readonly string viewTableName = "view_receipts";
-        private GenericCommands mySqlGenericCommandsLFS;
+        private GenericCommands mySqlGenericCommands;
 
-        public ReceiptsRepository(GenericCommands mySqlGenericCommandsLFS)
+        public ReceiptsRepository(GenericCommands mySqlGenericCommands)
         {
-            this.mySqlGenericCommandsLFS = mySqlGenericCommandsLFS;
+            this.mySqlGenericCommands = mySqlGenericCommands;
         }
 
         public bool Delete(List<ReceiptsModel> entityList)
@@ -29,7 +30,7 @@ namespace Treasury.Data.Repositories
                     };
 
                     string query = $"DELETE FROM {tableName} WHERE id = @id";
-                    _ = mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
+                    _ = mySqlGenericCommands.ExecuteNonQuery(query, parameters);
                 }
 
                 scope.Complete();
@@ -48,7 +49,7 @@ namespace Treasury.Data.Repositories
 
             string query = $"SELECT * FROM {tableName} WHERE {tableName}.id = @id";
 
-            DataTable dataTable = mySqlGenericCommandsLFS.ExecuteReader(query, parameters);
+            DataTable dataTable = mySqlGenericCommands.ExecuteReader(query, parameters);
 
             if (dataTable.Rows.Count > 0)
             {
@@ -66,7 +67,7 @@ namespace Treasury.Data.Repositories
         {
             string query = $"SELECT id, accountable_forms_id, acc_form_no, acc_form_desc, receipt_number_from, receipt_number_to, received_date, quantity, user AS officer FROM {viewTableName} ORDER BY accountable_forms_id ";
 
-            return mySqlGenericCommandsLFS.Fill(query, new DataTable());
+            return mySqlGenericCommands.Fill(query, new DataTable());
         }
 
         public DataTable GetRecordsBySearch(string searchText)
@@ -78,7 +79,7 @@ namespace Treasury.Data.Repositories
 
             string query = $"SELECT id, CONCAT(acc_form_no, ' ', acc_form_desc) AS accountable_forms, receipt_number_from, receipt_number_to, received_date, quantity, user AS officer, FROM {viewTableName} WHERE acc_form_no like @searchText OR acc_form_desc LIKE @searchText OR user LIKE @searchText ORDER BY received_date DESC";
 
-            return mySqlGenericCommandsLFS.FillBySearch(query, new DataTable(), parameter);
+            return mySqlGenericCommands.FillBySearch(query, new DataTable(), parameter);
         }
 
         public bool IdExist(int id)
@@ -91,7 +92,7 @@ namespace Treasury.Data.Repositories
             string query = $"SELECT id FROM {tableName} WHERE id = @id";
 
             // if query is not null, means found some record, so true
-            return !string.IsNullOrEmpty(mySqlGenericCommandsLFS.ExecuteScalar(query, parameters));
+            return !string.IsNullOrEmpty(mySqlGenericCommands.ExecuteScalar(query, parameters));
         }
 
         public int GetMaxReceiptNumberByAccountableFormId(int accountableFormId)
@@ -102,7 +103,7 @@ namespace Treasury.Data.Repositories
                            $"FROM {tableName} " +
                            $"WHERE accountable_forms_id = {accountableFormId}";
 
-            DataTable dt = mySqlGenericCommandsLFS.Fill(query, new DataTable());
+            DataTable dt = mySqlGenericCommands.Fill(query, new DataTable());
             if (dt.Rows.Count > 0)
             {
                 for (int i = 0; i < dt.Rows.Count; i++)
@@ -119,7 +120,7 @@ namespace Treasury.Data.Repositories
             string query = $"SELECT IFNULL(MAX(receipt_number_from), 0) AS receiptno " +
                             $"FROM {tableName} " +
                             $"WHERE accountable_forms_id = {accountableFormId}";
-            DataTable dt = mySqlGenericCommandsLFS.Fill(query, new DataTable());
+            DataTable dt = mySqlGenericCommands.Fill(query, new DataTable());
             if (dt.Rows.Count > 0)
             {
                 for (int i = 0; i < dt.Rows.Count; i++)
@@ -143,7 +144,7 @@ namespace Treasury.Data.Repositories
             };
 
             string query = $"INSERT INTO {tableName} (accountable_forms_id, receipt_number_from, receipt_number_to, received_date, quantity, users_id, remarks) VALUES (@accountable_forms_id, @receipt_number_from, @receipt_number_to, @received_date, @quantity, @users_id, @remarks)";
-            return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
+            return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public bool Update(ReceiptsModel entity)
@@ -162,7 +163,7 @@ namespace Treasury.Data.Repositories
 
             string query = $"UPDATE {tableName} SET users_id = @users_id, accountable_forms_id = @accountable_forms_id, receipt_number_from = @receipt_number_from, receipt_number_to = @receipt_number_to, received_date = @received_date, quantity = @quantity, remarks = @remarks WHERE id = @id";
 
-            return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
+            return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public bool ReceiptNumberInRange(int receiptId, int receiptNumber)
@@ -174,7 +175,7 @@ namespace Treasury.Data.Repositories
             };
             string query = $"SELECT id FROM {tableName} WHERE @receipt_number BETWEEN receipt_number_from AND receipt_number_to AND id = @receipt_id";
 
-            string queryResult = mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
+            string queryResult = mySqlGenericCommands.ExecuteScalar(query, parameters);
 
             if (string.IsNullOrEmpty(queryResult))
                 return false;
@@ -192,7 +193,7 @@ namespace Treasury.Data.Repositories
             };
 
             string query = $"SELECT * FROM {viewTableName} WHERE DATE(received_date) <= @received_date AND (acc_form_desc LIKE @txt_search OR acc_form_no LIKE @txt_search) LIMIT @row_limit";
-            return mySqlGenericCommandsLFS.FillBySearch(query, new DataTable(), parameter);
+            return mySqlGenericCommands.FillBySearch(query, new DataTable(), parameter);
         }
 
         public bool ReceiptNumberExist(int accountableFormID, int receiptNumber)
@@ -205,7 +206,7 @@ namespace Treasury.Data.Repositories
 
             string query = $"SELECT id FROM {tableName} WHERE @receipt_number BETWEEN receipt_number_from AND receipt_number_to AND accountable_forms_id = @accountable_forms_id";
 
-            string queryResult = mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
+            string queryResult = mySqlGenericCommands.ExecuteScalar(query, parameters);
 
             if (string.IsNullOrEmpty(queryResult))
                 return false;
@@ -224,14 +225,15 @@ namespace Treasury.Data.Repositories
 
             string query = $"SELECT id FROM {tableName} WHERE @receipt_number BETWEEN receipt_number_from AND receipt_number_to AND accountable_forms_id = @accountable_forms_id AND id <> @id ";
 
-            return !string.IsNullOrEmpty(mySqlGenericCommandsLFS.ExecuteScalar(query, parameters));
+            return !string.IsNullOrEmpty(mySqlGenericCommands.ExecuteScalar(query, parameters));
         }
 
         public DataTable GetViewRecords()
         {
             string query = $"SELECT * FROM {viewTableName}";
 
-            return mySqlGenericCommandsLFS.Fill(query, new DataTable());
+            return mySqlGenericCommands.Fill(query, new DataTable());
         }
     }
 }
+

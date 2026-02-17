@@ -1,4 +1,5 @@
-﻿using OmniGov.Core.Repositories;
+using OmniGov.Core.Repositories;
+using OmniGov.Core.Services;
 using System.Data;
 using System.Transactions;
 using Treasury.Domain.Entities;
@@ -9,11 +10,11 @@ namespace Treasury.Data.Repositories
     public class MarriageLicenseRepository : IMarriageLicenseRepository
     {
         private readonly string tableName = "marriage_license";
-        private GenericCommands mySqlGenericCommandsLFS;
+        private GenericCommands mySqlGenericCommands;
 
-        public MarriageLicenseRepository(GenericCommands mySqlGenericCommandsLFS)
+        public MarriageLicenseRepository(GenericCommands mySqlGenericCommands)
         {
-            this.mySqlGenericCommandsLFS = mySqlGenericCommandsLFS;
+            this.mySqlGenericCommands = mySqlGenericCommands;
         }
 
         public int CountRecords()
@@ -29,7 +30,7 @@ namespace Treasury.Data.Repositories
                 {
                     var parameters = new object[][] { new object[] { "@id", DbType.Int32, marriageLicenseModel.Id } };
                     string query = $"DELETE FROM {tableName} WHERE id = @id";
-                    _ = mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
+                    _ = mySqlGenericCommands.ExecuteNonQuery(query, parameters);
                 }
 
                 scope.Complete();
@@ -81,7 +82,7 @@ namespace Treasury.Data.Repositories
 
             string query = $"INSERT INTO {tableName} (payment_collections_id, registry_no, marriage_license_no, date_issued, date_published, groom_registry_id, groom_age, groom_months, groom_religion, groom_residence, bride_registry_id, bride_age, bride_months, bride_religion, bride_residence, created_by) VALUES (@payment_collections_id, @registry_no, @marriage_license_no, @date_issued, @date_published, @groom_registry_id, @groom_age, @groom_months, @groom_religion, @groom_residence, @bride_registry_id, @bride_age, @bride_months, @bride_religion, @bride_residence, @created_by)";
 
-            return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
+            return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public bool Update(MarriageLicenseModel entity)
@@ -108,7 +109,8 @@ namespace Treasury.Data.Repositories
             };
 
             string query = $"UPDATE {tableName} SET payment_collections_id = @payment_collections_id, registry_no = @registry_no, marriage_license_no = @marriage_license_no, date_issued = @date_issued, date_published = @date_published, groom_registry_id = @groom_registry_id, groom_age = @groom_age, groom_months = @groom_months, groom_religion = @groom_religion, groom_residence = @groom_residence, bride_registry_id = @bride_registry_id, bride_age = @bride_age, bride_months = @bride_months, bride_religion = @bride_religion, bride_residence = @bride_residence, updated_by = @updated_by WHERE id = @id;";
-            return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
+            return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
         }
     }
 }
+

@@ -1,4 +1,5 @@
-﻿using OmniGov.Core.Repositories;
+using OmniGov.Core.Repositories;
+using OmniGov.Core.Services;
 using System.Data;
 using Treasury.Domain.Entities;
 using Treasury.Domain.Interfaces;
@@ -7,13 +8,13 @@ namespace Treasury.Data.Repositories
 {
     internal class BiddersRepository : IBiddersRepository
     {
-        private GenericCommands mySqlGenericCommandsLFS;
+        private GenericCommands mySqlGenericCommands;
         private string tableName = "bidders";
         private string viewTableName = "view_bidders";
 
-        public BiddersRepository(GenericCommands mySqlGenericCommandsLFS)
+        public BiddersRepository(GenericCommands mySqlGenericCommands)
         {
-            this.mySqlGenericCommandsLFS = mySqlGenericCommandsLFS;
+            this.mySqlGenericCommands = mySqlGenericCommands;
         }
 
         public bool Delete(List<BiddersModel> entityList)
@@ -30,7 +31,7 @@ namespace Treasury.Data.Repositories
 
             string query = $"SELECT * FROM {viewTableName} WHERE auction_id = @auction_id AND rpt_auction_id = @rpt_auction_id";
 
-            return mySqlGenericCommandsLFS.FillBySearch(query, new DataTable(), parameters);
+            return mySqlGenericCommands.FillBySearch(query, new DataTable(), parameters);
         }
 
         public bool BidderNoExist(int rptAuctionId, string bidderNo)
@@ -41,7 +42,7 @@ namespace Treasury.Data.Repositories
             };
 
             string query = $"SELECT id FROM {viewTableName} WHERE rpt_auction_id = @rpt_auction_id AND bidder_no = @bidder_no";
-            string result = mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
+            string result = mySqlGenericCommands.ExecuteScalar(query, parameters);
             return !string.IsNullOrWhiteSpace(result);
         }
 
@@ -53,7 +54,7 @@ namespace Treasury.Data.Repositories
             };
 
             string query = $"SELECT COALESCE(MAX(id)) FROM {tableName} WHERE created_by = @created_by";
-            return Convert.ToInt32(mySqlGenericCommandsLFS.ExecuteScalar(query, parameters));
+            return Convert.ToInt32(mySqlGenericCommands.ExecuteScalar(query, parameters));
         }
 
         public Dictionary<string, string> GetRecordByID(int Id)
@@ -78,7 +79,7 @@ namespace Treasury.Data.Repositories
             var parameters = new object[][] { new object[] { "@auction_id", DbType.Int32, auctionId }, new object[] { "@bidder_id", DbType.Int32, bidderId } };
             string query = $"SELECT * FROM {viewTableName} WHERE id = @bidder_id AND auction_id = @auction_id";
 
-            DataTable dataTable = mySqlGenericCommandsLFS.ExecuteReader(query, parameters);
+            DataTable dataTable = mySqlGenericCommands.ExecuteReader(query, parameters);
 
             if (dataTable.Rows.Count > 0)
             {
@@ -95,7 +96,7 @@ namespace Treasury.Data.Repositories
         public DataTable GetViewRecords()
         {
             string query = $"SELECT * FROM {viewTableName}";
-            return mySqlGenericCommandsLFS.Fill(query, new DataTable());
+            return mySqlGenericCommands.Fill(query, new DataTable());
         }
 
         public DataTable GetViewRecordsByAuctionIdAndBiddersId(int auctionId, int bidderId)
@@ -107,7 +108,7 @@ namespace Treasury.Data.Repositories
 
             string query = $"SELECT * FROM {viewTableName} WHERE id = @bidder_id AND rpt_auction_id = @auction_id";
 
-            return mySqlGenericCommandsLFS.FillBySearch(query, new DataTable(), parameters);
+            return mySqlGenericCommands.FillBySearch(query, new DataTable(), parameters);
         }
 
         public bool IdExist(int id)
@@ -128,7 +129,7 @@ namespace Treasury.Data.Repositories
 
             string query = $"INSERT INTO {tableName} (taxpayers_id, auction_id, payment_collections_id, bidder_no, created_by) VALUES (@taxpayers_id, @auction_id, @payment_collections_id, @bidder_no, @created_by)";
 
-            return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
+            return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public bool Update(BiddersModel entity)
@@ -137,3 +138,4 @@ namespace Treasury.Data.Repositories
         }
     }
 }
+

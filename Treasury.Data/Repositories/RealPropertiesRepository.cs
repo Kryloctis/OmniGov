@@ -1,6 +1,9 @@
-﻿using OmniGov.Core.Entities;
-using OmniGov.Core.Interfaces;
+using OmniGov.Core.Entities;
+using OmniGov.Core.Interfaces.Repositories;
+using OmniGov.Core.Interfaces.Services;
+using OmniGov.Core.Interfaces.Factories;
 using OmniGov.Core.Repositories;
+using OmniGov.Core.Services;
 using System.Data;
 using System.Transactions;
 using Treasury.Domain.Entities;
@@ -10,7 +13,7 @@ namespace Treasury.Data.Repositories
 {
     public class RealPropertiesRepository : IRealPropertiesRepository
     {
-        private GenericCommands mySqlGenericCommandsLFS;
+        private GenericCommands mySqlGenericCommands;
         private readonly string tableName = "real_properties";
         private readonly string viewTableName = "view_real_properties";
         private IProvinces provinces;
@@ -22,7 +25,7 @@ namespace Treasury.Data.Repositories
         private ITaxpayersRepository taxpayersRepository;
         private IRptPreviousAssessment rptPreviousAssessment;
 
-        public RealPropertiesRepository(GenericCommands mySqlGenericCommandsLFS,
+        public RealPropertiesRepository(GenericCommands mySqlGenericCommands,
                                         IProvinces provinces,
                                         IMunicipalities municipalities,
                                         IBarangayRepository barangayRepository,
@@ -32,7 +35,7 @@ namespace Treasury.Data.Repositories
                                         ITaxpayersRepository taxpayersRepository,
                                         IRptPreviousAssessment rptPreviousAssessment)
         {
-            this.mySqlGenericCommandsLFS = mySqlGenericCommandsLFS;
+            this.mySqlGenericCommands = mySqlGenericCommands;
             this.provinces = provinces;
             this.municipalities = municipalities;
             this.barangayRepository = barangayRepository;
@@ -55,7 +58,7 @@ namespace Treasury.Data.Repositories
                     };
 
                     string query = $"DELETE FROM {tableName} WHERE id = @id";
-                    _ = mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
+                    _ = mySqlGenericCommands.ExecuteNonQuery(query, parameters);
                 }
 
                 scope.Complete();
@@ -70,7 +73,7 @@ namespace Treasury.Data.Repositories
 
             string query = $"SELECT * FROM {tableName} WHERE id = @real_property_id";
 
-            DataTable dataTable = mySqlGenericCommandsLFS.ExecuteReader(query, parameters);
+            DataTable dataTable = mySqlGenericCommands.ExecuteReader(query, parameters);
 
             if (dataTable.Rows.Count > 0)
             {
@@ -88,7 +91,7 @@ namespace Treasury.Data.Repositories
         {
             string query = $"SELECT * FROM {tableName}";
             var dataTable = new DataTable();
-            return mySqlGenericCommandsLFS.Fill(query, dataTable);
+            return mySqlGenericCommands.Fill(query, dataTable);
         }
 
         public DataTable GetRecordsBySearch(string searchText)
@@ -96,7 +99,7 @@ namespace Treasury.Data.Repositories
             var parameters = new object[][] { new object[] { "@search_text", DbType.String, $"%{searchText}%" } };
             string query = $"SELECT * FROM {viewTableName} WHERE taxpayer_name LIKE @search_text OR complete_arp_no LIKE @search_text OR property_pin LIKE @search_text OR lot_no LIKE @search_text";
             var dataTable = new DataTable();
-            return mySqlGenericCommandsLFS.FillBySearch(query, dataTable, parameters);
+            return mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
         }
 
         public bool IdExist(int id)
@@ -130,7 +133,7 @@ namespace Treasury.Data.Repositories
 
             string query = $"INSERT INTO {tableName} (taxpayers_id, barangays_id, classification_codes_id, actual_use_codes_id, street, complete_arp_no, property_pin, property_kind, effectivity_quarter, effectivity_year, other_improvements, assessed_value, area, lot_no, gr_year, is_taxable, is_cancelled, created_by) VALUES (@taxpayers_id, @barangays_id, @classification_codes_id, @actual_use_codes_id, @street, @complete_arp_no, @property_pin, @property_kind, @effectivity_quarter, @effectivity_year, @other_improvements, @assessed_value, @area, @lot_no, @gr_year, @is_taxable, @is_cancelled, @created_by)";
 
-            return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
+            return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public bool Update(RealPropertiesModel entity)
@@ -160,7 +163,7 @@ namespace Treasury.Data.Repositories
 
             string query = $"UPDATE {tableName} SET taxpayers_id = @taxpayers_id, barangays_id = @barangays_id, classification_codes_id = @classification_codes_id, actual_use_codes_id = @actual_use_codes_id, street = @street, complete_arp_no = @complete_arp_no, property_pin = @property_pin, property_kind = @property_kind, effectivity_quarter = @effectivity_quarter, effectivity_year = @effectivity_year, other_improvements = @other_improvements, assessed_value = @assessed_value, area = @area, lot_no = @lot_no, gr_year = @gr_year, is_taxable = @is_taxable, is_cancelled = @is_cancelled, updated_by = @updated_by WHERE id = @id;";
 
-            return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
+            return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public bool CompleteArpNoExist(string completeArpNo)
@@ -171,7 +174,7 @@ namespace Treasury.Data.Repositories
             };
 
             string query = $"SELECT id FROM {tableName} WHERE complete_arp_no = @complete_arp_no";
-            string result = mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
+            string result = mySqlGenericCommands.ExecuteScalar(query, parameters);
 
             if (!string.IsNullOrWhiteSpace(result))
                 return true;
@@ -187,7 +190,7 @@ namespace Treasury.Data.Repositories
              };
 
             string query = $"SELECT id FROM {tableName} WHERE complete_arp_no = @complete_arp_no AND id <> @id";
-            string result = mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
+            string result = mySqlGenericCommands.ExecuteScalar(query, parameters);
 
             if (!string.IsNullOrWhiteSpace(result))
                 return true;
@@ -202,7 +205,7 @@ namespace Treasury.Data.Repositories
             };
 
             string query = $"SELECT MAX(id) FROM {tableName} WHERE created_by = @created_by";
-            return Convert.ToInt32(mySqlGenericCommandsLFS.ExecuteScalar(query, parameters));
+            return Convert.ToInt32(mySqlGenericCommands.ExecuteScalar(query, parameters));
         }
 
         public DataTable GetRecordsBy_EffectivivtyYear_Barangay_Search(int effectivityYear, string barangay, string searchText, int rowFilter)
@@ -218,7 +221,7 @@ namespace Treasury.Data.Repositories
             string query = $"SELECT * FROM {viewTableName} WHERE barangay_name = @barangay_name AND (taxpayer_name LIKE @search_text OR complete_arp_no LIKE @search_text) AND is_cancelled = 0 AND effectivity_year <= @effectivity_year ORDER BY taxpayer_name ASC LIMIT @row_filter";
 
             var dataTable = new DataTable();
-            return mySqlGenericCommandsLFS.FillBySearch(query, dataTable, parameters);
+            return mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
         }
 
         public Dictionary<string, string> GetViewRecordByCompleteArpNo(string completeArpNo)
@@ -227,7 +230,7 @@ namespace Treasury.Data.Repositories
             var parameters = new object[][] { new object[] { "@complete_arp_no", DbType.String, completeArpNo } };
             string query = $"SELECT * FROM {viewTableName} WHERE complete_arp_no = @complete_arp_no";
 
-            DataTable dataTable = mySqlGenericCommandsLFS.ExecuteReader(query, parameters);
+            DataTable dataTable = mySqlGenericCommands.ExecuteReader(query, parameters);
 
             if (dataTable.Rows.Count > 0)
             {
@@ -404,7 +407,7 @@ namespace Treasury.Data.Repositories
             string query = $"SELECT * FROM {viewTableName} WHERE (taxpayer_name LIKE @search_text OR representative_name LIKE @search_text OR complete_arp_no LIKE @search_text OR property_pin LIKE @search_text OR lot_no LIKE @search_text) {subQuery} ORDER BY complete_arp_no LIMIT @row_filter";
 
             var dataTable = new DataTable();
-            return mySqlGenericCommandsLFS.FillBySearch(query, dataTable, parameters);
+            return mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
         }
 
         public DataTable GetRecordNotExistedPreviousRpt(int rptId)
@@ -417,7 +420,7 @@ namespace Treasury.Data.Repositories
             string query = $"SELECT * FROM {viewTableName} WHERE  NOT EXISTS(SELECT {rptPreviousAssessment.tableName}.real_properties_id FROM {rptPreviousAssessment.tableName} WHERE {rptPreviousAssessment.tableName}.real_properties_id = {viewTableName}.real_property_id) AND real_property_id <> @real_property_id";
 
             var dataTable = new DataTable();
-            return mySqlGenericCommandsLFS.FillBySearch(query, dataTable, parameters);
+            return mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
         }
 
         public DataTable GetRecordNotExistedPreviousRpt()
@@ -425,7 +428,7 @@ namespace Treasury.Data.Repositories
             string query = $"SELECT * FROM {viewTableName} WHERE NOT EXISTS(SELECT {rptPreviousAssessment.tableName}.real_properties_id FROM {rptPreviousAssessment.tableName} WHERE {rptPreviousAssessment.tableName}.real_properties_id = {viewTableName}.real_property_id)";
 
             var dataTable = new DataTable();
-            return mySqlGenericCommandsLFS.FillBySearch(query, dataTable); ;
+            return mySqlGenericCommands.FillBySearch(query, dataTable); ;
         }
 
         public Dictionary<string, string> GetViewRecordById(int Id)
@@ -435,7 +438,7 @@ namespace Treasury.Data.Repositories
 
             string query = $"SELECT * FROM {viewTableName} WHERE real_property_id = @real_property_id";
 
-            DataTable dataTable = mySqlGenericCommandsLFS.ExecuteReader(query, parameters);
+            DataTable dataTable = mySqlGenericCommands.ExecuteReader(query, parameters);
 
             if (dataTable.Rows.Count > 0)
             {
@@ -489,7 +492,7 @@ namespace Treasury.Data.Repositories
         public DataTable GetViewRecords()
         {
             string query = $"SELECT * FROM {viewTableName}";
-            return mySqlGenericCommandsLFS.Fill(query, new DataTable());
+            return mySqlGenericCommands.Fill(query, new DataTable());
         }
 
         public DataTable GetViewRecordsByKind(char propertyKind)
@@ -500,7 +503,7 @@ namespace Treasury.Data.Repositories
             };
 
             string query = $"SELECT * FROM {viewTableName} WHERE property_kind = @property_kind";
-            return mySqlGenericCommandsLFS.FillBySearch(query, new DataTable(), parameters);
+            return mySqlGenericCommands.FillBySearch(query, new DataTable(), parameters);
         }
 
         public DataTable GetPropertiesByOwnerId(int taxPayerId)
@@ -512,7 +515,8 @@ namespace Treasury.Data.Repositories
 
             string query = $"SELECT * FROM {viewTableName} WHERE taxpayers_id = @taxpayers_id";
             var dataTable = new DataTable();
-            return mySqlGenericCommandsLFS.FillBySearch(query, dataTable, parameters);
+            return mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
         }
     }
 }
+

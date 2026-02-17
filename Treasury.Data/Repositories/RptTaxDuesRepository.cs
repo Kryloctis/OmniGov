@@ -1,4 +1,5 @@
-﻿using OmniGov.Core.Repositories;
+using OmniGov.Core.Repositories;
+using OmniGov.Core.Services;
 using System.Data;
 using System.Transactions;
 using Treasury.Domain.Entities;
@@ -8,13 +9,13 @@ namespace Treasury.Data.Repositories
 {
     public class RptTaxDuesRepository : IRptTaxDuesRepository
     {
-        private GenericCommands mySqlGenericCommandsLFS;
+        private GenericCommands mySqlGenericCommands;
         private readonly string tableName = "rpt_tax_dues";
         private readonly string viewTableName = "view_rpt_tax_dues";
 
-        public RptTaxDuesRepository(GenericCommands mySqlGenericCommandsLFS)
+        public RptTaxDuesRepository(GenericCommands mySqlGenericCommands)
         {
-            this.mySqlGenericCommandsLFS = mySqlGenericCommandsLFS;
+            this.mySqlGenericCommands = mySqlGenericCommands;
         }
 
         public int CountRecords()
@@ -58,7 +59,7 @@ namespace Treasury.Data.Repositories
             };
 
             string query = $"INSERT INTO  {tableName}  (rpt_assessment_posts_id ,  rpt_payments_id ,  discount_rate ,  is_advance ) VALUES (@rpt_assessment_posts_id, @rpt_payments_id, @discount_rate, @is_advance)";
-            return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
+            return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public bool Update(RptTaxDuesModel entity)
@@ -75,7 +76,7 @@ namespace Treasury.Data.Repositories
 
             string query = $"SELECT * FROM {viewTableName} WHERE rpt_payments_id = @rpt_payments_id";
             var dataTable = new DataTable();
-            return mySqlGenericCommandsLFS.FillBySearch(query, dataTable, parameters);
+            return mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
         }
 
         public bool BulkInsert(List<RptTaxDuesModel> entityList)
@@ -91,3 +92,4 @@ namespace Treasury.Data.Repositories
         }
     }
 }
+

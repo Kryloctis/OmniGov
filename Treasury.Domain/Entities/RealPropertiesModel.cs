@@ -1,4 +1,4 @@
-﻿using OmniGov.Core.Entities;
+using OmniGov.Core.Entities;
 
 namespace Treasury.Domain.Entities
 {
