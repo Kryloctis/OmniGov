@@ -1,6 +1,6 @@
 using Accounting.Domain.Entities;
 using Accounting.Domain.Interfaces;
-using OmniGov.Core.Repositories;
+using OmniGov.Core.Interfaces.Services;
 using OmniGov.Core.Services;
 using System.Data;
 using System.Transactions;
@@ -16,11 +16,11 @@ namespace Accounting.Data.Repositories
         private readonly ICashReceiptsJournalRepository iCashReceiptsJournalRepository;
         private readonly IADADisbursementsJournalRepository iADADisbursementsJournalRepository;
 
-        private GenericCommands mySqlGenericCommands;
+        private IGenericCommands genericCommands;
         private const string tableName = "jev";
         private const string viewTableName = "view_jev";
 
-        public JEVRepository(GenericCommands mySqlGenericCommands,
+        public JEVRepository(IGenericCommands genericCommands,
             IJEVAccountsRepository iJEVAccountsRepository,
             ICheckDisbursementsJournalRepository checkDisbursementsJournalRepository,
             ICashReceiptsJournalRepository cashReceiptsJournalRepository,
@@ -28,7 +28,7 @@ namespace Accounting.Data.Repositories
             ICashDisbursementsJournalRepository cashDisbursementsJournalRepository,
             IGeneralJournalRepository generalJournalRepository)
         {
-            this.mySqlGenericCommands = mySqlGenericCommands;
+            this.genericCommands = genericCommands;
             this.iJevAccountsRepository = iJEVAccountsRepository;
             this.iCheckDisbursementsJournalRepository = checkDisbursementsJournalRepository;
             this.iCashReceiptsJournalRepository = cashReceiptsJournalRepository;
@@ -65,7 +65,7 @@ namespace Accounting.Data.Repositories
             };
 
             string query = $"DELETE FROM {tableName} WHERE id = @id";
-            return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+            return genericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public Dictionary<string, string> GetRecordByID(int Id)
@@ -79,7 +79,7 @@ namespace Accounting.Data.Repositories
 
             string query = $"SELECT id, funds_id, fund_code, fund_name, journals_id, journal_name, is_special, jev_no, date_entry, ref_no, payee, explanation, is_approved, is_disapproved, is_cancelled, created_at, created_by, created_by_name, updated_at, updated_by, updated_by_name FROM {viewTableName} WHERE id = @id";
 
-            DataTable dataTable = mySqlGenericCommands.ExecuteReader(query, parameters);
+            DataTable dataTable = genericCommands.ExecuteReader(query, parameters);
 
             if (dataTable.Rows.Count > 0)
             {
@@ -96,7 +96,7 @@ namespace Accounting.Data.Repositories
         public DataTable GetRecords()
         {
             string query = $"SELECT * FROM {tableName}";
-            return mySqlGenericCommands.Fill(query, new DataTable());
+            return genericCommands.Fill(query, new DataTable());
         }
 
         public DataTable GetRecordsByJEVNoAndDate(string searchText, sbyte month, ushort year, byte journalId)
@@ -111,7 +111,7 @@ namespace Accounting.Data.Repositories
 
             string query = $"SELECT id, funds_id, journals_id, jev_no, ref_no, payee, explanation, fund_code, is_approved, is_disapproved, is_cancelled, created_at, created_by, updated_at, updated_by, CONCAT_WS('-', fund_code,YEAR(date_entry),MONTH(date_entry),jev_no) AS full_jev_no, date_entry FROM {viewTableName} WHERE MONTH(date_entry) = @month AND YEAR(date_entry) = @year AND journals_id = @journalId AND is_approved = 1 AND is_disapproved = 0 AND is_cancelled =  0 AND jev_no LIKE @jev_no";
 
-            return mySqlGenericCommands.FillBySearch(query, new DataTable(), parameters);
+            return genericCommands.FillBySearch(query, new DataTable(), parameters);
         }
 
         public DataTable GetRecordsBySearch(string searchText)
@@ -126,7 +126,7 @@ namespace Accounting.Data.Repositories
 
             string query = $"SELECT id, funds_id, journals_id, jev_no, full_jev_no, date_entry, ref_no, payee, explanation, fund_code, is_approved, is_disapproved, is_cancelled, created_at, created_by, updated_at, updated_by FROM {viewTableName} WHERE is_approved=1 AND (jev_no LIKE @jev_no OR ref_no LIKE @ref_no OR payee LIKE @payee OR explanation LIKE @explanation)";
 
-            return mySqlGenericCommands.FillBySearch(query, new DataTable(), parameters);
+            return genericCommands.FillBySearch(query, new DataTable(), parameters);
         }
 
         public bool IdExist(int id)
@@ -152,13 +152,13 @@ namespace Accounting.Data.Repositories
 
             string query = $"INSERT INTO {tableName} (funds_id, journals_id, trns_no, jev_no, date_entry, ref_no, payee, explanation, is_approved, created_by) VALUES (@funds_id, @journals_id, @trns_no, @jev_no, @date_entry, @ref_no, @payee, @explanation, @is_approved, @created_by);";
 
-            return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+            return genericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public int GetLastInsertedID()
         {
             string query = $"SELECT MAX(id) FROM {tableName}";
-            return int.Parse(mySqlGenericCommands.ExecuteScalar(query));
+            return int.Parse(genericCommands.ExecuteScalar(query));
         }
 
         public bool InsertJevGenJrnl(JevModel entity,
@@ -323,7 +323,7 @@ namespace Accounting.Data.Repositories
 
             string query = $"UPDATE {tableName} SET funds_id = @funds_id, journals_id = @journals_id, trns_no = @trns_no, jev_no = @jev_no, date_entry = @date_entry, ref_no = @ref_no, payee = @payee, explanation = @explanation, is_approved = @is_approved, is_disapproved = @is_disapproved, is_cancelled = @is_cancelled, updated_by = @updated_by, is_edited = @is_edited, remarks = @remarks WHERE id = @id";
 
-            return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+            return genericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public bool UpdateJevGenJrnl(JevModel currentJev,
@@ -493,7 +493,7 @@ namespace Accounting.Data.Repositories
 
             string query = $"SELECT * FROM {viewTableName} WHERE id = @id";
 
-            DataTable dataTable = mySqlGenericCommands.ExecuteReader(query, parameters);
+            DataTable dataTable = genericCommands.ExecuteReader(query, parameters);
 
             if (dataTable.Rows.Count > 0)
             {
@@ -518,7 +518,7 @@ namespace Accounting.Data.Repositories
 
             string query = $"SELECT COUNT(*) FROM {viewTableName} WHERE is_approved = 1 AND is_cancelled = 0 AND is_disapproved = 0 {(fundName == "All" ? string.Empty : "AND fund_name = @fund_name")} AND journal_name = @journal_name AND YEAR(date_entry) <= @year";
 
-            bool isResultValid = int.TryParse(mySqlGenericCommands.ExecuteScalar(query, parameters), out int result);
+            bool isResultValid = int.TryParse(genericCommands.ExecuteScalar(query, parameters), out int result);
             return isResultValid ? result : 0;
         }
 
@@ -532,7 +532,7 @@ namespace Accounting.Data.Repositories
             };
 
             string query = $"SELECT * FROM {tableName} WHERE jev_no = @jev_no AND funds_id = @funds_id AND YEAR(date_entry) = @year";
-            string queryResult = mySqlGenericCommands.ExecuteScalar(query, parameters);
+            string queryResult = genericCommands.ExecuteScalar(query, parameters);
 
             // if query is not null, means found some record, so true
             return !string.IsNullOrEmpty(queryResult);
@@ -549,7 +549,7 @@ namespace Accounting.Data.Repositories
             };
 
             string query = $"SELECT id FROM {tableName} WHERE id <> @id AND jev_no = @jev_no AND funds_id = @funds_id AND YEAR(date_entry) = @year";
-            string queryResult = mySqlGenericCommands.ExecuteScalar(query, parameters);
+            string queryResult = genericCommands.ExecuteScalar(query, parameters);
 
             // if query is not null, means found some record, so true
             return !string.IsNullOrEmpty(queryResult);
@@ -594,7 +594,7 @@ namespace Accounting.Data.Repositories
 
             string query = $"SELECT COUNT(*) FROM {viewTableName} WHERE {statusQuery} {journalQuery} {fundQuery} YEAR(date_entry) = @year";
 
-            bool isResultValid = int.TryParse(mySqlGenericCommands.ExecuteScalar(query, parameters), out int result);
+            bool isResultValid = int.TryParse(genericCommands.ExecuteScalar(query, parameters), out int result);
             return isResultValid ? result : 0;
         }
 
@@ -608,7 +608,7 @@ namespace Accounting.Data.Repositories
 
             string query = $"SELECT COUNT(*) FROM {tableName} WHERE is_approved=1 AND is_disapproved=0 AND is_cancelled=0 AND MONTH(date_entry)<=@month AND YEAR(date_entry)=@year";
 
-            bool isResultValid = int.TryParse(mySqlGenericCommands.ExecuteScalar(query, parameters), out int result);
+            bool isResultValid = int.TryParse(genericCommands.ExecuteScalar(query, parameters), out int result);
             return isResultValid ? result : 0;
         }
 
@@ -622,7 +622,7 @@ namespace Accounting.Data.Repositories
 
             string query = $"SELECT COUNT(*) FROM {tableName} WHERE  is_approved=0 AND is_disapproved=0 AND is_cancelled=0 AND MONTH(date_entry)<=@month AND YEAR(date_entry)=@year";
 
-            bool isResultValid = int.TryParse(mySqlGenericCommands.ExecuteScalar(query, parameters), out int result);
+            bool isResultValid = int.TryParse(genericCommands.ExecuteScalar(query, parameters), out int result);
             return isResultValid ? result : 0;
         }
 
@@ -636,7 +636,7 @@ namespace Accounting.Data.Repositories
 
             string query = $"SELECT COUNT(*) FROM {tableName} WHERE  is_approved=0 AND is_disapproved=1 AND is_cancelled=0 AND MONTH(date_entry)<=@month AND YEAR(date_entry)=@year";
 
-            bool isResultValid = int.TryParse(mySqlGenericCommands.ExecuteScalar(query, parameters), out int result);
+            bool isResultValid = int.TryParse(genericCommands.ExecuteScalar(query, parameters), out int result);
             return isResultValid ? result : 0;
         }
 
@@ -650,7 +650,7 @@ namespace Accounting.Data.Repositories
 
             string query = $"SELECT COUNT(*) FROM {tableName} WHERE is_approved=1 AND is_disapproved=0 AND is_cancelled=1 AND MONTH(date_entry)<=@month AND YEAR(date_entry)=@year";
 
-            bool isResultValid = int.TryParse(mySqlGenericCommands.ExecuteScalar(query, parameters), out int result);
+            bool isResultValid = int.TryParse(genericCommands.ExecuteScalar(query, parameters), out int result);
             return isResultValid ? result : 0;
         }
 
@@ -691,7 +691,7 @@ namespace Accounting.Data.Repositories
             }
 
             string query = $"SELECT * FROM {viewTableName} WHERE {jevStatusQuery} journal_name = @journal_name AND fund_name = @fund_name AND YEAR(date_entry) = @year AND (full_jev_no LIKE @searchTxt OR fund_name LIKE @searchTxt OR ref_no LIKE @searchTxt OR payee LIKE @searchTxt OR explanation LIKE @searchTxt) ORDER BY full_jev_no LIMIT @row_limit";
-            return mySqlGenericCommands.FillBySearch(query, new DataTable(), parameters);
+            return genericCommands.FillBySearch(query, new DataTable(), parameters);
         }
 
         //SFPs
@@ -708,7 +708,7 @@ namespace Accounting.Data.Repositories
 
             string query = $"SELECT COALESCE(SUM(b.amount), 0) AS amount FROM jev a JOIN jev_accounts b ON b.jev_id = a.id JOIN general_ledger_accounts c ON c.id = b.general_ledger_accounts_id JOIN sub_major_account_group d ON d.id = c.sub_major_account_group_id JOIN major_account_group e ON e.id = d.major_account_group_id JOIN account_group f ON f.id = e.account_group_id WHERE a.funds_id = @funds_id AND a.date_entry <= @date_entry AND YEAR(a.date_entry) = @year AND e.id  = @major_account_group_id AND b.is_debit = @is_debit";
 
-            bool isResultValid = int.TryParse(mySqlGenericCommands.ExecuteScalar(query, parameters), out int result);
+            bool isResultValid = int.TryParse(genericCommands.ExecuteScalar(query, parameters), out int result);
             return isResultValid ? result : 0;
         }
 
@@ -723,7 +723,7 @@ namespace Accounting.Data.Repositories
             };
             string query = $"SELECT COALESCE(SUM(b.amount), 0) AS amount FROM jev a JOIN jev_accounts b ON b.jev_id = a.id JOIN general_ledger_accounts c ON c.id = b.general_ledger_accounts_id JOIN sub_major_account_group d ON d.id = c.sub_major_account_group_id JOIN major_account_group e ON e.id = d.major_account_group_id JOIN account_group f ON f.id = e.account_group_id WHERE a.funds_id = @funds_id AND YEAR(a.date_entry) = @year AND e.id  = @major_account_group_id AND b.is_debit = @is_debit";
 
-            bool isResultValid = int.TryParse(mySqlGenericCommands.ExecuteScalar(query, parameters), out int result);
+            bool isResultValid = int.TryParse(genericCommands.ExecuteScalar(query, parameters), out int result);
             return isResultValid ? result : 0;
         }
 
@@ -735,7 +735,7 @@ namespace Accounting.Data.Repositories
             };
 
             string query = $"SELECT COALESCE(LPAD(MAX(jev_no)+1, 4, '0'), '0001') AS jev_no FROM {tableName} WHERE funds_id = @funds_id";
-            return mySqlGenericCommands.ExecuteScalar(query, parameters);
+            return genericCommands.ExecuteScalar(query, parameters);
         }
 
         public string GetLastTrnsctionNo(int year)
@@ -746,7 +746,7 @@ namespace Accounting.Data.Repositories
             };
 
             string query = $"SELECT COALESCE(LPAD(MAX(trns_no)+1, 4, '0'), '0001') AS trns_no FROM {tableName} WHERE YEAR(date_entry) = @date_entry_year";
-            return mySqlGenericCommands.ExecuteScalar(query, parameters);
+            return genericCommands.ExecuteScalar(query, parameters);
         }
 
         public string GetJevStatus(int jevId)
@@ -756,7 +756,7 @@ namespace Accounting.Data.Repositories
                 new object[] { "@jev_id", DbType.Int32, jevId}
             };
             string query = $"SELECT is_approved, is_disapproved, is_cancelled FROM {tableName} WHERE id = @jev_id";
-            using (var reader = mySqlGenericCommands.ExecuteReader(query, parameters))
+            using (var reader = genericCommands.ExecuteReader(query, parameters))
             {
                 if (reader.Rows.Count < 1)
                     return string.Empty;
@@ -786,7 +786,7 @@ namespace Accounting.Data.Repositories
                 new object[] { "@remarks", DbType.String, entity.Remarks }
             };
             string query = $"UPDATE {tableName} SET is_approved = 0, is_disapproved = 0, is_cancelled = 0, remarks = NULL WHERE id = @id";
-            return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+            return genericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public bool CancelJev(JevModel entity)
@@ -798,7 +798,7 @@ namespace Accounting.Data.Repositories
             };
 
             string query = $"UPDATE {tableName} SET is_cancelled = 1, remarks = @remarks WHERE id = @id";
-            return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+            return genericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public bool ApproveJev(JevModel entity)
@@ -811,7 +811,7 @@ namespace Accounting.Data.Repositories
             };
 
             string query = $"UPDATE {tableName} SET jev_no = @jev_no, is_approved = 1, remarks = @remarks  WHERE id = @id";
-            return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+            return genericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public bool DisapproveJev(JevModel entity)
@@ -823,7 +823,7 @@ namespace Accounting.Data.Repositories
             };
 
             string query = $"UPDATE {tableName} SET is_disapproved = 1, is_cancelled = 0, remarks = @remarks WHERE id = @id";
-            return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+            return genericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public bool TrnsctnNoExist(string trnsctnNo)
@@ -834,7 +834,7 @@ namespace Accounting.Data.Repositories
             };
 
             string query = $"SELECT * FROM {tableName} WHERE trns_no = @trns_no";
-            return !string.IsNullOrWhiteSpace(mySqlGenericCommands.ExecuteScalar(query, parameters));
+            return !string.IsNullOrWhiteSpace(genericCommands.ExecuteScalar(query, parameters));
         }
 
         public bool TrnsctnNoExist(int jevId, string trnsctnNo)
@@ -846,14 +846,13 @@ namespace Accounting.Data.Repositories
             };
 
             string query = $"SELECT * FROM {tableName} WHERE id <> @id AND trns_no = @trns_no";
-            return !string.IsNullOrWhiteSpace(mySqlGenericCommands.ExecuteScalar(query, parameters));
+            return !string.IsNullOrWhiteSpace(genericCommands.ExecuteScalar(query, parameters));
         }
 
         public DataTable GetViewRecords()
         {
             string query = $"SELECT * FROM {viewTableName} WHERE is_approved = 1";
-            return mySqlGenericCommands.Fill(query, new DataTable());
+            return genericCommands.Fill(query, new DataTable());
         }
     }
 }
-

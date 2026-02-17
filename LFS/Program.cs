@@ -1,3 +1,4 @@
+using Accounting.Data.Services;
 using LFS.Views.SignIn;
 using Microsoft.Extensions.DependencyInjection;
 using OmniGov.Core.Services;
@@ -37,7 +38,7 @@ namespace LFS
             // services.AddBudgetServices();
 
             // TODO: Add Accounting services
-            // services.AddAccountingServices();
+            services.AddAccountingServices();
 
             // TODO: Add Treasury services
             // services.AddTreasuryServices();

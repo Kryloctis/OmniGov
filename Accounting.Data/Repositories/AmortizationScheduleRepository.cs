@@ -1,7 +1,6 @@
 using Accounting.Domain.Entities;
 using Accounting.Domain.Interfaces;
-using OmniGov.Core.Repositories;
-using OmniGov.Core.Services;
+using OmniGov.Core.Interfaces.Services;
 using System.Data;
 using System.Transactions;
 
@@ -10,11 +9,11 @@ namespace Accounting.Data.Repositories
     public class AmortizationScheduleRepository : IAmortizationScheduleRepository
     {
         private readonly string tableName = "amortization_sched";
-        private GenericCommands _mySqlGenericCommands;
+        private IGenericCommands genericCommands;
 
-        public AmortizationScheduleRepository(GenericCommands mySqlGenericCommands)
+        public AmortizationScheduleRepository(IGenericCommands genericCommands)
         {
-            _mySqlGenericCommands = mySqlGenericCommands;
+            this.genericCommands = genericCommands;
         }
 
         public bool Delete(List<AmortizationScheduleModel> entityList)
@@ -29,7 +28,7 @@ namespace Accounting.Data.Repositories
                     };
 
                     string query = $"DELETE FROM {tableName} WHERE id = @id";
-                    _ = _mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+                    _ = genericCommands.ExecuteNonQuery(query, parameters);
                 }
 
                 scope.Complete();
@@ -43,12 +42,12 @@ namespace Accounting.Data.Repositories
 
             var parameters = new object[][]
             {
-                    new object[] { "@id", DbType.Int32, Id}
+                new object[] { "@id", DbType.Int32, Id}
             };
 
             string query = $"SELECT id, amortization_id, date, principal_amount, interest_amount, grt_amount FROM {tableName} WHERE id = @id";
 
-            using (var reader = _mySqlGenericCommands.ExecuteReader(query, parameters))
+            using (var reader = genericCommands.ExecuteReader(query, parameters))
             {
                 if (reader.Rows.Count < 1)
                     return record;
@@ -75,7 +74,7 @@ namespace Accounting.Data.Repositories
         public DataTable GetRecordsByAmortizationId(int amortizationId)
         {
             string query = $"SELECT id, amortization_id, date, principal_amount, interest_amount, grt_amount FROM {tableName} WHERE amortization_id = {amortizationId}";
-            return _mySqlGenericCommands.Fill(query, new DataTable());
+            return genericCommands.Fill(query, new DataTable());
         }
 
         public DataTable GetRecordsBySearch(string searchText)
@@ -101,7 +100,7 @@ namespace Accounting.Data.Repositories
 
             string query = $"INSERT INTO {tableName} (amortization_id, date, principal_amount, interest_amount, grt_amount) VALUES (@amortization_id, @date, @principal_amount, @interest_amount, @grt_amount)";
 
-            return _mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+            return genericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public bool Update(AmortizationScheduleModel entity)
@@ -118,8 +117,7 @@ namespace Accounting.Data.Repositories
 
             string query = $"UPDATE {tableName} SET amortization_id = @amortization_id, date = @date, principal_amount = @principal_amount, interest_amount = @interest_amount, grt_amount = @grt_amount WHERE id = @id ";
 
-            return _mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+            return genericCommands.ExecuteNonQuery(query, parameters);
         }
     }
 }
-

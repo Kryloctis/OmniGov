@@ -1,7 +1,6 @@
 using Accounting.Domain.Entities;
 using Accounting.Domain.Interfaces;
-using OmniGov.Core.Repositories;
-using OmniGov.Core.Services;
+using OmniGov.Core.Interfaces.Services;
 using System.Data;
 
 namespace Accounting.Data.Repositories
@@ -10,11 +9,11 @@ namespace Accounting.Data.Repositories
     {
         private readonly string tableName = "general_journal";
         private readonly string viewTableName = "view_general_journal";
-        private GenericCommands mySqlGenericCommands;
+        private IGenericCommands genericCommands;
 
-        public GeneralJournalRepository(GenericCommands mySqlGenericCommands)
+        public GeneralJournalRepository(IGenericCommands genericCommands)
         {
-            this.mySqlGenericCommands = mySqlGenericCommands;
+            this.genericCommands = genericCommands;
         }
 
         public bool Delete(List<GeneralJournalModel> entityList)
@@ -53,7 +52,7 @@ namespace Accounting.Data.Repositories
             };
 
             string query = $"INSERT INTO {tableName} (jev_id, dv_no, check_no, or_no) VALUES (@jev_id, @dv_no, @check_no, @or_no);";
-            return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+            return genericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public bool Update(GeneralJournalModel entity)
@@ -71,7 +70,7 @@ namespace Accounting.Data.Repositories
             string query = $"SELECT id FROM {tableName} WHERE jev_id = @jev_id";
 
             // if query is not null, means found some record, so true
-            return !string.IsNullOrEmpty(mySqlGenericCommands.ExecuteScalar(query, parameters));
+            return !string.IsNullOrEmpty(genericCommands.ExecuteScalar(query, parameters));
         }
 
         public bool UpdateByJevId(GeneralJournalModel entity)
@@ -85,7 +84,7 @@ namespace Accounting.Data.Repositories
             };
 
             string query = $"UPDATE {tableName} SET dv_no = @dv_no, check_no = @check_no, or_no = @or_no WHERE jev_id = @jev_id";
-            return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+            return genericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public Dictionary<string, string> GetViewRecordByJevID(int jevId)
@@ -99,7 +98,7 @@ namespace Accounting.Data.Repositories
 
             string query = $"SELECT funds_id, journals_id, jev_no, date_entry, ref_no, payee, explanation, is_approved, created_at, created_by, updated_at, updated_by, general_journal_id, dv_no, check_no, or_no FROM {viewTableName} WHERE jev_id = @jev_id";
 
-            DataTable dataTable = mySqlGenericCommands.ExecuteReader(query, parameters);
+            DataTable dataTable = genericCommands.ExecuteReader(query, parameters);
 
             if (dataTable.Rows.Count > 0)
             {
@@ -121,8 +120,7 @@ namespace Accounting.Data.Repositories
             };
 
             string query = $"DELETE FROM {tableName} WHERE jev_id = @id";
-            return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+            return genericCommands.ExecuteNonQuery(query, parameters);
         }
     }
 }
-

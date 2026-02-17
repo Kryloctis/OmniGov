@@ -1,23 +1,22 @@
 using Accounting.Domain.Entities;
 using Accounting.Domain.Interfaces;
-using OmniGov.Core.Repositories;
-using OmniGov.Core.Services;
+using OmniGov.Core.Interfaces.Services;
 using System.Data;
 
 namespace Accounting.Data.Repositories
 {
     public class GeneralLedgerAccountsRepository : IGeneralLedgerAccountsRepository
     {
-        private GenericCommands mySqlGenericCommands;
+        private IGenericCommands genericCommands;
         private readonly string tableName = "general_ledger_accounts";
         private readonly string tblAccGroup = "account_group";
         private readonly string tblMajAccGroup = "major_account_group";
         private readonly string tblSubMajAccGroup = "sub_major_account_group";
         private readonly string viewGenLedgrAccs = "view_general_ledger_accounts";
 
-        public GeneralLedgerAccountsRepository(GenericCommands mySqlGenericCommands)
+        public GeneralLedgerAccountsRepository(IGenericCommands genericCommands)
         {
-            this.mySqlGenericCommands = mySqlGenericCommands;
+            this.genericCommands = genericCommands;
         }
 
         public Dictionary<string, string> GetViewRecordByID(int generalLedgerId)
@@ -31,7 +30,7 @@ namespace Accounting.Data.Repositories
 
             string query = $"SELECT sub_major_account_group_id, account_code, ledger_code, ledger_name, is_contra_account, created_at, updated_at FROM {viewGenLedgrAccs} WHERE general_ledger_accounts_id = @general_ledger_accounts_id";
 
-            DataTable dataTable = mySqlGenericCommands.ExecuteReader(query, parameters);
+            DataTable dataTable = genericCommands.ExecuteReader(query, parameters);
 
             if (dataTable.Rows.Count > 0)
             {
@@ -56,7 +55,7 @@ namespace Accounting.Data.Repositories
 
             string query = $"SELECT sub_major_account_group_id, ledger_code, ledger_name, is_contra_account, created_at, updated_at FROM {tableName} WHERE id = @general_ledger_accounts_id";
 
-            DataTable dataTable = mySqlGenericCommands.ExecuteReader(query, parameters);
+            DataTable dataTable = genericCommands.ExecuteReader(query, parameters);
 
             if (dataTable.Rows.Count > 0)
             {
@@ -73,14 +72,14 @@ namespace Accounting.Data.Repositories
         public DataTable GetRecords()
         {
             string query = $"SELECT * FROM {tableName}";
-            return mySqlGenericCommands.Fill(query, new DataTable());
+            return genericCommands.Fill(query, new DataTable());
         }
 
         public DataTable GetViewRecords()
         {
             string query = $"SELECT * FROM {viewGenLedgrAccs}";
 
-            return mySqlGenericCommands.Fill(query, new DataTable());
+            return genericCommands.Fill(query, new DataTable());
         }
 
         public DataTable GetViewRecordsBySearch(string searchText)
@@ -92,7 +91,7 @@ namespace Accounting.Data.Repositories
 
             string query = $"SELECT general_ledger_accounts_id, account_code, ledger_name, sub_maj_acc_group_name, created_at, updated_at FROM {viewGenLedgrAccs} WHERE account_code LIKE @searchText OR REPLACE(account_code, '-', '') LIKE @searchText OR ledger_name LIKE @searchText";
 
-            return mySqlGenericCommands.FillBySearch(query, new DataTable(), parameters);
+            return genericCommands.FillBySearch(query, new DataTable(), parameters);
         }
 
         public bool Insert(GeneralLedgerAccountsModel entity)
@@ -120,7 +119,7 @@ namespace Accounting.Data.Repositories
             string query = $"SELECT id FROM {tableName} WHERE id = @id";
 
             // if query is not null, means found some record, so true
-            return !string.IsNullOrEmpty(mySqlGenericCommands.ExecuteScalar(query, parameters));
+            return !string.IsNullOrEmpty(genericCommands.ExecuteScalar(query, parameters));
         }
 
         public DataTable GetRecordsBySearch(string searchText)
@@ -131,7 +130,7 @@ namespace Accounting.Data.Repositories
             };
 
             string query = $"SELECT {tableName}.id,CONCAT({tblAccGroup}.account_group_code,'-',{tblMajAccGroup}.maj_acc_group_code,'-',{tblSubMajAccGroup}.sub_maj_acc_group_code,'-',{tableName}.ledger_code) AS account_code,{tableName}.ledger_name FROM {tableName} LEFT JOIN {tblSubMajAccGroup} ON {tableName}.sub_major_account_group_id={tblSubMajAccGroup}.id LEFT JOIN {tblMajAccGroup} ON {tblSubMajAccGroup}.major_account_group_id={tblMajAccGroup}.id LEFT JOIN {tblAccGroup} ON ({tblMajAccGroup}.account_group_id={tblAccGroup}.id AND {tblAccGroup}.id='4') WHERE CONCAT({tblAccGroup}.account_group_code,'-',{tblMajAccGroup}.maj_acc_group_code,'-',{tblSubMajAccGroup}.sub_maj_acc_group_code,'-',{tableName}.ledger_code) IS NOT NULL AND (CONCAT({tblAccGroup}.account_group_code,'-',{tblMajAccGroup}.maj_acc_group_code,'-',{tblSubMajAccGroup}.sub_maj_acc_group_code,'-',{tableName}.ledger_code) LIKE @search_txt OR ledger_name LIKE @search_txt)";
-            return mySqlGenericCommands.FillBySearch(query, new DataTable());
+            return genericCommands.FillBySearch(query, new DataTable());
         }
 
         public DataTable GetViewRecordsByMajorAccGroupName(string majAccGroupName)
@@ -143,7 +142,7 @@ namespace Accounting.Data.Repositories
 
             string query = $"SELECT * FROM {viewGenLedgrAccs} WHERE maj_acc_group_name = @maj_acc_group_name";
 
-            return mySqlGenericCommands.FillBySearch(query, new DataTable(), parameters);
+            return genericCommands.FillBySearch(query, new DataTable(), parameters);
         }
 
         public DataTable GetViewRecordsByMajorAccGroupNameSearch(string majAccGroupName, string searchText)
@@ -156,7 +155,7 @@ namespace Accounting.Data.Repositories
 
             string query = $"SELECT * FROM {viewGenLedgrAccs} WHERE maj_acc_group_name = @maj_acc_group_name AND (account_code LIKE @searchText OR REPLACE(account_code, '-', '') LIKE @searchText OR ledger_name LIKE @searchText)";
 
-            return mySqlGenericCommands.FillBySearch(query, new DataTable(), parameters);
+            return genericCommands.FillBySearch(query, new DataTable(), parameters);
         }
 
         public DataTable GetViewRecordsByAccountGroupName(string accountGroupName)
@@ -168,7 +167,7 @@ namespace Accounting.Data.Repositories
 
             string query = $"SELECT * FROM {viewGenLedgrAccs} WHERE account_group_name = @account_group_name ";
 
-            return mySqlGenericCommands.FillBySearch(query, new DataTable(), parameters);
+            return genericCommands.FillBySearch(query, new DataTable(), parameters);
         }
 
         public DataTable GetViewRecordsByAccountGroupNameSearch(string accountGroupName, string searchText)
@@ -181,7 +180,7 @@ namespace Accounting.Data.Repositories
 
             string query = $"SELECT * FROM {viewGenLedgrAccs} WHERE account_group_name = @account_group_name AND (account_code LIKE @searchText OR REPLACE(account_code, '-', '') LIKE @searchText OR ledger_name LIKE @searchText)";
 
-            return mySqlGenericCommands.FillBySearch(query, new DataTable(), parameters);
+            return genericCommands.FillBySearch(query, new DataTable(), parameters);
         }
 
         //CHART OF ACCOUNTS
@@ -194,7 +193,7 @@ namespace Accounting.Data.Repositories
 
             string query = $"SELECT general_ledger_accounts_id, account_code, ledger_name, created_at, updated_at FROM {viewGenLedgrAccs} WHERE account_group_id = @account_group_id";
 
-            return mySqlGenericCommands.FillBySearch(query, new DataTable(), parameters);
+            return genericCommands.FillBySearch(query, new DataTable(), parameters);
         }
 
         public DataTable GetViewRecordsBy_AccountGroupId_Search(int accountGroupId, string searchText)
@@ -207,7 +206,7 @@ namespace Accounting.Data.Repositories
 
             string query = $"SELECT general_ledger_accounts_id, account_code, ledger_name, created_at, updated_at FROM {viewGenLedgrAccs} WHERE account_group_id = @account_group_id AND (account_code LIKE @searchText OR REPLACE(account_code, '-', '') LIKE @searchText OR ledger_name LIKE @searchText)";
 
-            return mySqlGenericCommands.FillBySearch(query, new DataTable(), parameters);
+            return genericCommands.FillBySearch(query, new DataTable(), parameters);
         }
 
         public DataTable GetViewRecordsBy_AccountGroupId_Search_Limited(int accountGroupId, string searchText, int limit)
@@ -221,7 +220,7 @@ namespace Accounting.Data.Repositories
 
             string query = $"SELECT general_ledger_accounts_id, account_code, ledger_name, created_at, updated_at FROM {viewGenLedgrAccs} WHERE account_group_id = @account_group_id AND (account_code LIKE @searchText OR REPLACE(account_code, '-', '') LIKE @searchText OR ledger_name LIKE @searchText) LIMIT @limit";
 
-            return mySqlGenericCommands.FillBySearch(query, new DataTable(), parameters);
+            return genericCommands.FillBySearch(query, new DataTable(), parameters);
         }
 
         public DataTable GetGeneralLedgerAccountsIncomeRecords(string searchText)
@@ -233,14 +232,13 @@ namespace Accounting.Data.Repositories
 
             string query = $"SELECT * FROM {viewGenLedgrAccs} WHERE account_group_code LIKE @searchText OR ledger_name LIKE @searchText AND account_group_code=4";
 
-            return mySqlGenericCommands.FillBySearch(query, new DataTable(), parameters);
+            return genericCommands.FillBySearch(query, new DataTable(), parameters);
         }
 
         public DataTable GetGeneralLedgerAccountsIncomeRecords()
         {
             string query = $"SELECT * FROM {viewGenLedgrAccs} WHERE account_group_code=4";
-            return mySqlGenericCommands.Fill(query, new DataTable());
+            return genericCommands.Fill(query, new DataTable());
         }
     }
 }
-
