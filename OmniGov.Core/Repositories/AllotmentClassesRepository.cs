@@ -1,18 +1,21 @@
-﻿using OmniGov.Core.Entities;
-using OmniGov.Core.Interfaces;
+using OmniGov.Core.Entities;
+using OmniGov.Core.Interfaces.Repositories;
+using OmniGov.Core.Interfaces.Services;
 using System.Data;
 using System.Transactions;
+
+using OmniGov.Core.Services;
 
 namespace OmniGov.Core.Repositories
 {
     public class AllotmentClassesRepository : IAllotmentClassesRepository
     {
         private readonly string tableName = "allotment_classes";
-        private GenericCommands mySqlGenericCommandsLFS;
+        private IGenericCommands mySqlGenericCommands;
 
-        public AllotmentClassesRepository(GenericCommands mySqlGenericCommandsLFS)
+        public AllotmentClassesRepository(IGenericCommands mySqlGenericCommands)
         {
-            this.mySqlGenericCommandsLFS = mySqlGenericCommandsLFS;
+            this.mySqlGenericCommands = mySqlGenericCommands;
         }
 
         public Dictionary<string, string> GetRecordByID(int Id)
@@ -26,7 +29,7 @@ namespace OmniGov.Core.Repositories
 
             string query = $"SELECT * FROM {tableName} WHERE id = @id";
 
-            DataTable dataTable = mySqlGenericCommandsLFS.ExecuteReader(query, parameters);
+            DataTable dataTable = mySqlGenericCommands.ExecuteReader(query, parameters);
 
             if (dataTable.Rows.Count > 0)
             {
@@ -43,7 +46,7 @@ namespace OmniGov.Core.Repositories
         public DataTable GetRecords()
         {
             string query = $"SELECT id, allotment_code, allotment_name, created_at, updated_at FROM {tableName}";
-            return mySqlGenericCommandsLFS.Fill(query, new DataTable());
+            return mySqlGenericCommands.Fill(query, new DataTable());
         }
 
         public DataTable GetRecordsBySearch(string searchText)
@@ -55,7 +58,7 @@ namespace OmniGov.Core.Repositories
 
             string query = $"SELECT * FROM {tableName} WHERE allotment_code LIKE @search_text OR allotment_name LIKE @search_text";
 
-            return mySqlGenericCommandsLFS.FillBySearch(query, new DataTable(), parameters);
+            return mySqlGenericCommands.FillBySearch(query, new DataTable(), parameters);
         }
 
         public bool Insert(AllotmentClassesModel entity)
@@ -67,7 +70,7 @@ namespace OmniGov.Core.Repositories
             };
 
             string query = $"INSERT INTO {tableName} (allotment_code, allotment_name) VALUES (@allotment_code, @allotment_name)";
-            return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
+            return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public bool Update(AllotmentClassesModel entity)
@@ -80,7 +83,7 @@ namespace OmniGov.Core.Repositories
             };
 
             string query = $"UPDATE {tableName} SET allotment_name = @allotment_name, allotment_code = @allotment_code WHERE id = @id";
-            return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
+            return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public bool Delete(List<AllotmentClassesModel> entityList)
@@ -95,7 +98,7 @@ namespace OmniGov.Core.Repositories
                     };
 
                     string query = $"DELETE FROM {tableName} WHERE id = @id";
-                    _ = mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
+                    _ = mySqlGenericCommands.ExecuteNonQuery(query, parameters);
                 }
 
                 scope.Complete();
@@ -116,7 +119,7 @@ namespace OmniGov.Core.Repositories
             };
 
             string query = $"SELECT id FROM {tableName} WHERE id = @id";
-            string queryResult = mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
+            string queryResult = mySqlGenericCommands.ExecuteScalar(query, parameters);
 
             return !string.IsNullOrEmpty(queryResult);
         }
@@ -129,7 +132,7 @@ namespace OmniGov.Core.Repositories
             };
 
             string query = $"SELECT allotment_code FROM {tableName} WHERE allotment_code = @allotment_code";
-            string queryResult = mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
+            string queryResult = mySqlGenericCommands.ExecuteScalar(query, parameters);
 
             return !string.IsNullOrEmpty(queryResult);
         }
@@ -143,7 +146,7 @@ namespace OmniGov.Core.Repositories
             };
 
             string query = $"SELECT allotment_code FROM {tableName} WHERE id <> @id AND allotment_code = @allotment_code";
-            string queryResult = mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
+            string queryResult = mySqlGenericCommands.ExecuteScalar(query, parameters);
 
             return !string.IsNullOrEmpty(queryResult);
         }
@@ -156,7 +159,7 @@ namespace OmniGov.Core.Repositories
             };
 
             string query = $"SELECT allotment_name FROM {tableName} WHERE allotment_name = @allotment_name";
-            string queryResult = mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
+            string queryResult = mySqlGenericCommands.ExecuteScalar(query, parameters);
 
             return !string.IsNullOrEmpty(queryResult);
         }
@@ -170,7 +173,7 @@ namespace OmniGov.Core.Repositories
             };
 
             string query = $"SELECT allotment_name FROM {tableName} WHERE id <> @id AND allotment_name = @allotment_name";
-            string queryResult = mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
+            string queryResult = mySqlGenericCommands.ExecuteScalar(query, parameters);
 
             return !string.IsNullOrEmpty(queryResult);
         }
@@ -184,7 +187,7 @@ namespace OmniGov.Core.Repositories
             };
 
             string query = $"SELECT * FROM {tableName} WHERE (allotment_code LIKE @search_key OR allotment_name LIKE @search_key) LIMIT @row_limit";
-            return mySqlGenericCommandsLFS.FillBySearch(query, new DataTable(), parameters);
+            return mySqlGenericCommands.FillBySearch(query, new DataTable(), parameters);
         }
     }
 }

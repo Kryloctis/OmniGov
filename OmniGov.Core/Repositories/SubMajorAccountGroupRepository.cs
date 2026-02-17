@@ -1,16 +1,19 @@
-﻿using OmniGov.Core.Entities;
-using OmniGov.Core.Interfaces;
+using OmniGov.Core.Entities;
+using OmniGov.Core.Interfaces.Repositories;
+using OmniGov.Core.Interfaces.Services;
 using System.Data;
+
+using OmniGov.Core.Services;
 
 namespace OmniGov.Core.Repositories
 {
     public class SubMajorAccountGroupRepository : ISubMajorAccountGroupRepository
     {
-        private readonly GenericCommands _dbGenericCommands;
+        private readonly IGenericCommands _dbGenericCommands;
         private readonly string tableName = "sub_major_account_group";
         private readonly string viewTableName = "view_sub_major_account_group";
 
-        public SubMajorAccountGroupRepository(GenericCommands dbGenericCommands)
+        public SubMajorAccountGroupRepository(IGenericCommands dbGenericCommands)
         {
             _dbGenericCommands = dbGenericCommands;
         }

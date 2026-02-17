@@ -1,7 +1,10 @@
-﻿using OmniGov.Core.Entities;
-using OmniGov.Core.Interfaces;
+using OmniGov.Core.Entities;
+using OmniGov.Core.Interfaces.Repositories;
+using OmniGov.Core.Interfaces.Services;
 using System.Data;
 using System.Transactions;
+
+using OmniGov.Core.Services;
 
 namespace OmniGov.Core.Repositories
 {
@@ -9,11 +12,11 @@ namespace OmniGov.Core.Repositories
     {
         private readonly string tableName = "function_program_project";
         private readonly string viewTableName = "view_function_program_project";
-        private GenericCommands mySqlGenericCommandsLFS;
+        private IGenericCommands mySqlGenericCommands;
 
-        public FunctionProgramProjectRepository(GenericCommands mySqlGenericCommandsLFS)
+        public FunctionProgramProjectRepository(IGenericCommands mySqlGenericCommands)
         {
-            this.mySqlGenericCommandsLFS = mySqlGenericCommandsLFS;
+            this.mySqlGenericCommands = mySqlGenericCommands;
         }
 
         public Dictionary<string, string> GetRecordByID(int Id)
@@ -29,7 +32,7 @@ namespace OmniGov.Core.Repositories
 
                 string query = $"SELECT functional_classification_services_id, fpp_code, fpp_name, is_special, created_at, updated_at FROM {tableName} WHERE id = @id";
 
-                using (var reader = mySqlGenericCommandsLFS.ExecuteReader(query, parameters))
+                using (var reader = mySqlGenericCommands.ExecuteReader(query, parameters))
                 {
                     if (reader.Rows.Count < 1)
                         return record;
@@ -73,7 +76,7 @@ namespace OmniGov.Core.Repositories
 
                 var dtFPP = new DataTable();
 
-                return mySqlGenericCommandsLFS.FillBySearch(query, dtFPP, parameters);
+                return mySqlGenericCommands.FillBySearch(query, dtFPP, parameters);
             }
             catch (Exception)
             {
@@ -94,7 +97,7 @@ namespace OmniGov.Core.Repositories
                 };
 
                 string query = $"INSERT INTO {tableName} (functional_classification_services_id, fpp_code, fpp_name, is_special) VALUES (@functional_classification_services_id,@fpp_code, @fpp_name, @is_special)";
-                return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
+                return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
             }
             catch (Exception)
             {
@@ -116,7 +119,7 @@ namespace OmniGov.Core.Repositories
                 };
 
                 string query = $"UPDATE {tableName} SET functional_classification_services_id = @functional_classification_services_id, fpp_code = @fpp_code, fpp_name = @fpp_name, is_special = @is_special WHERE id = @id";
-                return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
+                return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
             }
             catch (Exception)
             {
@@ -138,7 +141,7 @@ namespace OmniGov.Core.Repositories
                         };
 
                         string query = $"DELETE FROM {tableName} WHERE id = @id";
-                        _ = mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
+                        _ = mySqlGenericCommands.ExecuteNonQuery(query, parameters);
                     }
 
                     scope.Complete();
@@ -157,7 +160,7 @@ namespace OmniGov.Core.Repositories
             {
                 string query = $"SELECT COUNT(*) FROM {tableName}";
 
-                return int.Parse(mySqlGenericCommandsLFS.ExecuteScalar(query));
+                return int.Parse(mySqlGenericCommands.ExecuteScalar(query));
             }
             catch (Exception)
             {
@@ -175,7 +178,7 @@ namespace OmniGov.Core.Repositories
                 };
 
                 string query = $"SELECT id FROM {tableName} WHERE id = @id";
-                string queryResult = mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
+                string queryResult = mySqlGenericCommands.ExecuteScalar(query, parameters);
 
                 // if query is not null, means found some record, so true
                 if (!string.IsNullOrEmpty(queryResult)) return true;
@@ -199,7 +202,7 @@ namespace OmniGov.Core.Repositories
                 };
 
                 string query = $"SELECT functional_classification_services_id FROM {tableName} WHERE fpp_code = @fpp_code";
-                string queryResult = mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
+                string queryResult = mySqlGenericCommands.ExecuteScalar(query, parameters);
 
                 // if query is not null, means found some record, so true
                 if (!string.IsNullOrEmpty(queryResult)) return true;
@@ -224,7 +227,7 @@ namespace OmniGov.Core.Repositories
                 };
 
                 string query = $"SELECT functional_classification_services_id FROM {tableName} WHERE id <> @id AND fpp_code = @fpp_code";
-                string queryResult = mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
+                string queryResult = mySqlGenericCommands.ExecuteScalar(query, parameters);
 
                 // if query is not null, means found some record, so true
                 if (!string.IsNullOrEmpty(queryResult)) return true;
@@ -249,7 +252,7 @@ namespace OmniGov.Core.Repositories
                 };
 
                 string query = $"SELECT fpp_name FROM {tableName} WHERE fpp_name = @fpp_name AND functional_classification_services_id = @functional_classification_services_id";
-                string queryResult = mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
+                string queryResult = mySqlGenericCommands.ExecuteScalar(query, parameters);
 
                 // if query is not null, means found some record, so true
                 if (!string.IsNullOrEmpty(queryResult)) return true;
@@ -275,7 +278,7 @@ namespace OmniGov.Core.Repositories
                 };
 
                 string query = $"SELECT fpp_name FROM {tableName} WHERE id <> @id AND fpp_name = @fpp_name AND functional_classification_services_id = @functional_classification_services_id";
-                string queryResult = mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
+                string queryResult = mySqlGenericCommands.ExecuteScalar(query, parameters);
 
                 // if query is not null, means found some record, so true
                 if (!string.IsNullOrEmpty(queryResult)) return true;
@@ -292,7 +295,7 @@ namespace OmniGov.Core.Repositories
         public DataTable GetViewRecords()
         {
             string query = $"SELECT * FROM {viewTableName} ORDER BY fpp_name";
-            return mySqlGenericCommandsLFS.Fill(query, new DataTable());
+            return mySqlGenericCommands.Fill(query, new DataTable());
         }
 
         public DataTable GetViewRecordsByService_And_Search_And_IsSpecial(int serviceId, string searchText, bool isSpecial)
@@ -306,7 +309,7 @@ namespace OmniGov.Core.Repositories
 
             string query = $"SELECT * FROM {viewTableName} WHERE functional_classification_services_id = @functional_classification_services_id AND (fpp_code LIKE @searchText OR fpp_name LIKE @searchText) AND is_special = @is_special ORDER BY fpp_name";
             var dataTable = new DataTable();
-            return mySqlGenericCommandsLFS.FillBySearch(query, dataTable, parameters);
+            return mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
         }
 
         public DataTable GetViewRecordsBySearch_And_IsSpecial(string searchText, bool isSpecial)
@@ -319,7 +322,7 @@ namespace OmniGov.Core.Repositories
 
             string query = $"SELECT * FROM {viewTableName} WHERE (fpp_code LIKE @searchText OR fpp_name LIKE @searchText) AND is_special = @is_special ORDER BY fpp_name";
             var dataTable = new DataTable();
-            return mySqlGenericCommandsLFS.FillBySearch(query, dataTable, parameters);
+            return mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
         }
     }
 }

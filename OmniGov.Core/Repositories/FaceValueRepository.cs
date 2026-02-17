@@ -1,18 +1,21 @@
-﻿using OmniGov.Core.Entities;
-using OmniGov.Core.Interfaces;
+using OmniGov.Core.Entities;
+using OmniGov.Core.Interfaces.Repositories;
+using OmniGov.Core.Interfaces.Services;
 using System.Data;
 using System.Transactions;
+
+using OmniGov.Core.Services;
 
 namespace OmniGov.Core.Repositories
 {
     public class FaceValueRepository : IFaceValueRepository
     {
         private readonly string tableName = "face_values";
-        private GenericCommands mySqlGenericCommandsLFS;
+        private IGenericCommands mySqlGenericCommands;
 
-        public FaceValueRepository(GenericCommands mySqlGenericCommandsLFS)
+        public FaceValueRepository(IGenericCommands mySqlGenericCommands)
         {
-            this.mySqlGenericCommandsLFS = mySqlGenericCommandsLFS;
+            this.mySqlGenericCommands = mySqlGenericCommands;
         }
 
         public int CountRecords()
@@ -21,7 +24,7 @@ namespace OmniGov.Core.Repositories
             {
                 string query = $"SELECT COUNT(*) FROM {tableName}";
 
-                return int.Parse(mySqlGenericCommandsLFS.ExecuteScalar(query));
+                return int.Parse(mySqlGenericCommands.ExecuteScalar(query));
             }
             catch (Exception)
             {
@@ -41,7 +44,7 @@ namespace OmniGov.Core.Repositories
                     };
 
                     string query = $"DELETE FROM {tableName} WHERE id = @id";
-                    _ = mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
+                    _ = mySqlGenericCommands.ExecuteNonQuery(query, parameters);
                 }
 
                 scope.Complete();
@@ -60,7 +63,7 @@ namespace OmniGov.Core.Repositories
 
             string query = $"SELECT * FROM {tableName} WHERE id = @id";
 
-            using (var reader = mySqlGenericCommandsLFS.ExecuteReader(query, parameters))
+            using (var reader = mySqlGenericCommands.ExecuteReader(query, parameters))
             {
                 if (reader.Rows.Count < 1)
                     return record;
@@ -80,7 +83,7 @@ namespace OmniGov.Core.Repositories
             string query = $"SELECT * FROM {tableName} ORDER BY id DESC";
 
             var dataTable = new DataTable();
-            return mySqlGenericCommandsLFS.Fill(query, dataTable);
+            return mySqlGenericCommands.Fill(query, dataTable);
         }
 
         public DataTable GetRecordsByAccountableFormId(int accountableFormId)
@@ -91,7 +94,7 @@ namespace OmniGov.Core.Repositories
             string query = $"SELECT * FROM {tableName} WHERE accountable_forms_id= @accountable_forms_id ORDER BY id DESC";
 
             var dtBanks = new DataTable();
-            return mySqlGenericCommandsLFS.FillBySearch(query, dtBanks, parameter);
+            return mySqlGenericCommands.FillBySearch(query, dtBanks, parameter);
         }
 
         public DataTable GetRecordsBySearch(string searchText)
@@ -101,7 +104,7 @@ namespace OmniGov.Core.Repositories
                 string query = $"SELECT * FROM {tableName} WHERE date_effective LIKE '%{searchText}%' OR amount LIKE '%{searchText}%' ORDER BY id DESC";
 
                 var dtBanks = new DataTable();
-                return mySqlGenericCommandsLFS.Fill(query, dtBanks);
+                return mySqlGenericCommands.Fill(query, dtBanks);
             }
             catch (Exception)
             {
@@ -125,7 +128,7 @@ namespace OmniGov.Core.Repositories
             };
 
             string query = $"INSERT INTO {tableName} (accountable_forms_id, date_effective, amount, is_default) VALUES (@accountable_forms_id, @date_effective, @amount, @is_default)";
-            return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
+            return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public bool Update(FaceValueModel entity)
@@ -140,7 +143,7 @@ namespace OmniGov.Core.Repositories
             };
 
             string query = $"UPDATE {tableName} SET accountable_forms_id = @accountable_forms_id, date_effective = @date_effective, amount = @amount, is_default = @is_default WHERE id = @id";
-            return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
+            return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public decimal GetFaceValueByAccountableFormId(int id)
@@ -151,7 +154,7 @@ namespace OmniGov.Core.Repositories
             };
 
             string query = $"SELECT COALESCE(amount, 0) AS amount FROM {tableName} WHERE accountable_forms_id = @accountableFormId";
-            var queryResult = mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
+            var queryResult = mySqlGenericCommands.ExecuteScalar(query, parameters);
 
             if (string.IsNullOrEmpty(queryResult))
                 return 0;

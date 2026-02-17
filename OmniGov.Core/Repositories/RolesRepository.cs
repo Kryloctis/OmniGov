@@ -1,7 +1,10 @@
-﻿using OmniGov.Core.Entities;
-using OmniGov.Core.Interfaces;
+using OmniGov.Core.Entities;
+using OmniGov.Core.Interfaces.Repositories;
+using OmniGov.Core.Interfaces.Services;
 using System.Data;
 using System.Transactions;
+
+using OmniGov.Core.Services;
 
 namespace OmniGov.Core.Repositories
 {
@@ -9,11 +12,11 @@ namespace OmniGov.Core.Repositories
     {
         private readonly IRolesPermissionsRepository roleHasPermissionsRepository;
         private readonly string tableName = "roles";
-        private GenericCommands mySqlGenericCommandsLFS;
+        private IGenericCommands mySqlGenericCommands;
 
-        public RolesRepository(GenericCommands mySqlGenericCommandsLFS, IRolesPermissionsRepository roleHasPermissionsRepository)
+        public RolesRepository(IGenericCommands mySqlGenericCommands, IRolesPermissionsRepository roleHasPermissionsRepository)
         {
-            this.mySqlGenericCommandsLFS = mySqlGenericCommandsLFS;
+            this.mySqlGenericCommands = mySqlGenericCommands;
             this.roleHasPermissionsRepository = roleHasPermissionsRepository;
         }
 
@@ -28,7 +31,7 @@ namespace OmniGov.Core.Repositories
 
             string query = $"SELECT role_name, created_at, updated_at FROM {tableName} WHERE id = @id";
 
-            DataTable dataTable = mySqlGenericCommandsLFS.ExecuteReader(query, parameters);
+            DataTable dataTable = mySqlGenericCommands.ExecuteReader(query, parameters);
 
             if (dataTable.Rows.Count > 0)
             {
@@ -45,7 +48,7 @@ namespace OmniGov.Core.Repositories
         public DataTable GetRecords()
         {
             string query = $"SELECT * FROM {tableName} WHERE role_name <> 'System Administrator'";
-            return mySqlGenericCommandsLFS.Fill(query, new DataTable());
+            return mySqlGenericCommands.Fill(query, new DataTable());
         }
 
         public DataTable GetRecordsBySearch(string searchText)
@@ -60,13 +63,13 @@ namespace OmniGov.Core.Repositories
             string query = $"SELECT * FROM {tableName} WHERE role_name <> 'System Administrator' AND role_name  LIKE @search_text";
 
             var dtUsers = new DataTable();
-            return mySqlGenericCommandsLFS.FillBySearch(query, dtUsers, parameters);
+            return mySqlGenericCommands.FillBySearch(query, dtUsers, parameters);
         }
 
         public byte GetLastInsertedID()
         {
             string query = $"SELECT MAX(id) FROM {tableName}";
-            return byte.Parse(mySqlGenericCommandsLFS.ExecuteScalar(query));
+            return byte.Parse(mySqlGenericCommands.ExecuteScalar(query));
         }
 
         public bool Insert(RolesModel entity)
@@ -79,7 +82,7 @@ namespace OmniGov.Core.Repositories
                 };
 
                 string query = $"INSERT INTO {tableName} (role_name) VALUES (@role_name)";
-                _ = mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
+                _ = mySqlGenericCommands.ExecuteNonQuery(query, parameters);
 
                 var roleHasPermissionModel = new RolesPermissionsModel();
                 foreach (var permissionsModel in entity.PermissionsModels)
@@ -105,7 +108,7 @@ namespace OmniGov.Core.Repositories
                 };
 
                 string query = $"UPDATE {tableName} SET role_name = @role_name WHERE id = @id";
-                _ = mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
+                _ = mySqlGenericCommands.ExecuteNonQuery(query, parameters);
                 roleHasPermissionsRepository.DeleteByRoleId(entity.Id);
                 var roleHasPermissionModel = new RolesPermissionsModel();
                 foreach (var permissionsModel in entity.PermissionsModels)
@@ -130,7 +133,7 @@ namespace OmniGov.Core.Repositories
 
                     string query = $"DELETE FROM {tableName} WHERE id = @id";
                     _ = roleHasPermissionsRepository.DeleteByRoleId(entity.Id);
-                    _ = mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
+                    _ = mySqlGenericCommands.ExecuteNonQuery(query, parameters);
                 }
 
                 scope.Complete();
@@ -146,7 +149,7 @@ namespace OmniGov.Core.Repositories
             };
 
             string query = $"SELECT id FROM {tableName} WHERE id = @id";
-            string result = mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
+            string result = mySqlGenericCommands.ExecuteScalar(query, parameters);
 
             return !string.IsNullOrEmpty(result);
         }
@@ -159,7 +162,7 @@ namespace OmniGov.Core.Repositories
             };
 
             string query = $"SELECT role_name FROM {tableName} WHERE role_name = @role_name";
-            string result = mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
+            string result = mySqlGenericCommands.ExecuteScalar(query, parameters);
 
             return !string.IsNullOrEmpty(result);
         }
@@ -173,7 +176,7 @@ namespace OmniGov.Core.Repositories
             };
 
             string query = $"SELECT role_name FROM {tableName} WHERE id <> @id AND role_name = @role_name";
-            string result = mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
+            string result = mySqlGenericCommands.ExecuteScalar(query, parameters);
 
             return !string.IsNullOrEmpty(result);
         }
@@ -187,7 +190,7 @@ namespace OmniGov.Core.Repositories
             };
 
             string query = $"SELECT * FROM {tableName} WHERE (role_name LIKE @search_key) LIMIT @row_limit";
-            return mySqlGenericCommandsLFS.FillBySearch(query, new DataTable(), parameters);
+            return mySqlGenericCommands.FillBySearch(query, new DataTable(), parameters);
         }
     }
 }

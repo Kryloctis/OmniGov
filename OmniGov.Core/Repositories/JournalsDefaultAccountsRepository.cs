@@ -1,7 +1,10 @@
-﻿using OmniGov.Core.Entities;
-using OmniGov.Core.Interfaces;
+using OmniGov.Core.Entities;
+using OmniGov.Core.Interfaces.Repositories;
+using OmniGov.Core.Interfaces.Services;
 using System.Data;
 using System.Transactions;
+
+using OmniGov.Core.Services;
 
 namespace OmniGov.Core.Repositories
 {
@@ -9,9 +12,9 @@ namespace OmniGov.Core.Repositories
     {
         private readonly string tableName = "journals_default_accounts";
         private readonly string viewTableName = "view_journals_default_accounts";
-        private GenericCommands mySqlGenericCommands;
+        private IGenericCommands mySqlGenericCommands;
 
-        public JournalsDefaultAccountsRepository(GenericCommands mySqlGenericCommands)
+        public JournalsDefaultAccountsRepository(IGenericCommands mySqlGenericCommands)
         {
             this.mySqlGenericCommands = mySqlGenericCommands;
         }

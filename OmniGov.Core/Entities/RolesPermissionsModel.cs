@@ -1,4 +1,4 @@
-﻿namespace OmniGov.Core.Entities
+namespace OmniGov.Core.Entities
 {
     public class RolesPermissionsModel
     {

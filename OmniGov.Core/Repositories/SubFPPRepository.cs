@@ -1,7 +1,10 @@
-﻿using OmniGov.Core.Entities;
-using OmniGov.Core.Interfaces;
+using OmniGov.Core.Entities;
+using OmniGov.Core.Interfaces.Repositories;
+using OmniGov.Core.Interfaces.Services;
 using System.Data;
 using System.Transactions;
+
+using OmniGov.Core.Services;
 
 namespace OmniGov.Core.Repositories
 {
@@ -9,11 +12,11 @@ namespace OmniGov.Core.Repositories
     {
         private readonly string tableName = "others_fpp";
 
-        private GenericCommands mySqlGenericCommandsLFS;
+        private IGenericCommands mySqlGenericCommands;
 
-        public SubFPPRepository(GenericCommands mySqlGenericCommandsLFS)
+        public SubFPPRepository(IGenericCommands mySqlGenericCommands)
         {
-            this.mySqlGenericCommandsLFS = mySqlGenericCommandsLFS;
+            this.mySqlGenericCommands = mySqlGenericCommands;
         }
 
         public bool Delete(List<SubFPPModel> entityList)
@@ -24,7 +27,7 @@ namespace OmniGov.Core.Repositories
                 {
                     var parameters = new object[][] { new object[] { "@id", DbType.Int32, entity.Id }, };
                     string query = $"DELETE FROM {tableName} WHERE id = @id";
-                    _ = mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
+                    _ = mySqlGenericCommands.ExecuteNonQuery(query, parameters);
                 }
 
                 scope.Complete();
@@ -42,7 +45,7 @@ namespace OmniGov.Core.Repositories
             };
             string query = $"SELECT others_fpp_code, name FROM {tableName} WHERE id = @id";
 
-            using (var reader = mySqlGenericCommandsLFS.ExecuteReader(query, parameters))
+            using (var reader = mySqlGenericCommands.ExecuteReader(query, parameters))
             {
                 if (reader.Rows.Count < 1)
                     return record;
@@ -60,7 +63,7 @@ namespace OmniGov.Core.Repositories
         public DataTable GetRecords()
         {
             string query = $"SELECT id, function_program_project_id, others_fpp_code, name, created_at, updated_at FROM {tableName}";
-            return mySqlGenericCommandsLFS.Fill(query, new DataTable());
+            return mySqlGenericCommands.Fill(query, new DataTable());
         }
 
         public DataTable GetRecordsBySearch(string searchText)
@@ -83,7 +86,7 @@ namespace OmniGov.Core.Repositories
             };
 
             string query = $"INSERT INTO {tableName} (function_program_project_id, others_fpp_code, name) VALUES (@function_program_project_id, @others_fpp_code, @name)";
-            return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
+            return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public bool Update(SubFPPModel entity)
@@ -96,7 +99,7 @@ namespace OmniGov.Core.Repositories
             };
 
             string query = $"UPDATE {tableName} SET others_fpp_code = @others_fpp_code, name = @name WHERE id = @id";
-            return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
+            return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public DataTable GetRecordsByFppId(int fppId)
@@ -107,7 +110,7 @@ namespace OmniGov.Core.Repositories
             };
 
             string query = $"SELECT * FROM {tableName} WHERE function_program_project_id = @function_program_project_id";
-            return mySqlGenericCommandsLFS.FillBySearch(query, new DataTable(), parameters);
+            return mySqlGenericCommands.FillBySearch(query, new DataTable(), parameters);
         }
 
         public DataTable GetRecorsByIDSearchCode(int id, string searchtxt)
@@ -120,7 +123,7 @@ namespace OmniGov.Core.Repositories
 
             string query = $"SELECT * FROM {tableName} WHERE function_program_project_id = @function_program_project_id AND (name LIKE @searchTxt OR others_fpp_code LIKE @searchTxt)";
 
-            return mySqlGenericCommandsLFS.FillBySearch(query, new DataTable(), parameters);
+            return mySqlGenericCommands.FillBySearch(query, new DataTable(), parameters);
         }
 
         public bool NameExist(string name)
@@ -131,7 +134,7 @@ namespace OmniGov.Core.Repositories
             };
 
             string query = $"SELECT id FROM {tableName} WHERE name = @name";
-            string result = mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
+            string result = mySqlGenericCommands.ExecuteScalar(query, parameters);
             return !string.IsNullOrEmpty(result);
         }
 
@@ -144,7 +147,7 @@ namespace OmniGov.Core.Repositories
             };
 
             string query = $"SELECT id FROM {tableName} WHERE id <> @id AND name = @name";
-            string result = mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
+            string result = mySqlGenericCommands.ExecuteScalar(query, parameters);
 
             return !string.IsNullOrEmpty(result);
         }
@@ -157,7 +160,7 @@ namespace OmniGov.Core.Repositories
             };
 
             string query = $"SELECT id FROM {tableName} WHERE others_fpp_code = @others_fpp_code";
-            string result = mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
+            string result = mySqlGenericCommands.ExecuteScalar(query, parameters);
             return !string.IsNullOrEmpty(result);
         }
 
@@ -170,7 +173,7 @@ namespace OmniGov.Core.Repositories
             };
 
             string query = $"SELECT id FROM {tableName} WHERE id <> @id AND others_fpp_code = @others_fpp_code";
-            string result = mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
+            string result = mySqlGenericCommands.ExecuteScalar(query, parameters);
             return !string.IsNullOrEmpty(result);
         }
 
@@ -184,7 +187,7 @@ namespace OmniGov.Core.Repositories
 
             string query = $"SELECT id, function_program_project_id, others_fpp_code, name, created_at, updated_at FROM {tableName} WHERE function_program_project_id = @function_program_project_id AND (others_fpp_code LIKE @searchTxt OR name LIKE @searchTxt)";
 
-            return mySqlGenericCommandsLFS.FillBySearch(query, new DataTable(), parameters);
+            return mySqlGenericCommands.FillBySearch(query, new DataTable(), parameters);
         }
     }
 }

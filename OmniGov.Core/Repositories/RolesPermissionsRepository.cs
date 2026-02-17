@@ -1,6 +1,9 @@
-﻿using OmniGov.Core.Entities;
-using OmniGov.Core.Interfaces;
+using OmniGov.Core.Entities;
+using OmniGov.Core.Interfaces.Repositories;
+using OmniGov.Core.Interfaces.Services;
 using System.Data;
+
+using OmniGov.Core.Services;
 
 namespace OmniGov.Core.Repositories
 {
@@ -8,11 +11,11 @@ namespace OmniGov.Core.Repositories
     {
         private readonly string tableName = "role_has_permissions";
         private readonly string viewTableName = "view_role_has_permissions";
-        private GenericCommands mySqlGenericCommandsLFS;
+        private IGenericCommands mySqlGenericCommands;
 
-        public RolesPermissionsRepository(GenericCommands mySqlGenericCommandsLFS)
+        public RolesPermissionsRepository(IGenericCommands mySqlGenericCommands)
         {
-            this.mySqlGenericCommandsLFS = mySqlGenericCommandsLFS;
+            this.mySqlGenericCommands = mySqlGenericCommands;
         }
 
         public bool Delete(List<RolesPermissionsModel> entityList)
@@ -28,7 +31,7 @@ namespace OmniGov.Core.Repositories
             };
 
             string query = $"SET FOREIGN_KEY_CHECKS=0; DELETE FROM {tableName} WHERE roles_id = @roles_id; SET FOREIGN_KEY_CHECKS=1;";
-            return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
+            return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public Dictionary<string, string> GetRecordByID(int Id)
@@ -49,7 +52,7 @@ namespace OmniGov.Core.Repositories
             };
 
             string query = $"SELECT * FROM {viewTableName} WHERE roles_id = @roles_id ORDER BY permission_name ASC";
-            return mySqlGenericCommandsLFS.FillBySearch(query, new DataTable(), parameters);
+            return mySqlGenericCommands.FillBySearch(query, new DataTable(), parameters);
         }
 
         public DataTable GetRecordsBySearch(string searchText)
@@ -71,7 +74,7 @@ namespace OmniGov.Core.Repositories
             };
 
             string query = $"INSERT INTO {tableName} (roles_id, permissions_id) VALUES (@role_id, @permission_id)";
-            return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
+            return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public bool Update(RolesPermissionsModel entity)

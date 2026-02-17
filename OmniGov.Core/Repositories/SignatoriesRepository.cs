@@ -1,17 +1,20 @@
-﻿using OmniGov.Core.Entities;
-using OmniGov.Core.Interfaces;
+using OmniGov.Core.Entities;
+using OmniGov.Core.Interfaces.Repositories;
+using OmniGov.Core.Interfaces.Services;
 using System.Data;
 using System.Transactions;
+
+using OmniGov.Core.Services;
 
 namespace OmniGov.Core.Repositories
 {
     public class SignatoriesRepository : ISignatories
     {
-        private GenericCommands mySqlGenericCommands;
+        private IGenericCommands mySqlGenericCommands;
         private readonly string tableName = "signatories";
         private readonly ISignatoriesHasReferences _signatoriesHasReferences;
 
-        public SignatoriesRepository(GenericCommands mySqlGenericCommands, ISignatoriesHasReferences signatoriesHasReferences)
+        public SignatoriesRepository(IGenericCommands mySqlGenericCommands, ISignatoriesHasReferences signatoriesHasReferences)
         {
             this.mySqlGenericCommands = mySqlGenericCommands;
             _signatoriesHasReferences = signatoriesHasReferences;

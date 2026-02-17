@@ -1,14 +1,17 @@
-﻿using OmniGov.Core.Entities;
-using OmniGov.Core.Interfaces;
+using OmniGov.Core.Entities;
+using OmniGov.Core.Interfaces.Repositories;
+using OmniGov.Core.Interfaces.Services;
 using System.Data;
+
+using OmniGov.Core.Services;
 
 namespace OmniGov.Core.Repositories
 {
     public class DocumentsRepository : IDocuments
     {
-        private GenericCommands mySqlGenericCommands;
+        private IGenericCommands mySqlGenericCommands;
 
-        public DocumentsRepository(GenericCommands mySqlGenericCommands)
+        public DocumentsRepository(IGenericCommands mySqlGenericCommands)
         {
             this.mySqlGenericCommands = mySqlGenericCommands;
         }

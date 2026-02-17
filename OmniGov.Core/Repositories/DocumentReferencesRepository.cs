@@ -1,16 +1,19 @@
-﻿using OmniGov.Core.Entities;
-using OmniGov.Core.Interfaces;
+using OmniGov.Core.Entities;
+using OmniGov.Core.Interfaces.Repositories;
+using OmniGov.Core.Interfaces.Services;
 using System.Data;
+
+using OmniGov.Core.Services;
 
 namespace OmniGov.Core.Repositories
 {
     public class DocumentReferencesRepository : IDocumentReferences
     {
-        private GenericCommands mySqlGenericCommands;
+        private IGenericCommands mySqlGenericCommands;
         private const string tableName = "document_references";
         private const string viewTableName = "view_document_references";
 
-        public DocumentReferencesRepository(GenericCommands mySqlGenericCommands)
+        public DocumentReferencesRepository(IGenericCommands mySqlGenericCommands)
         {
             this.mySqlGenericCommands = mySqlGenericCommands;
         }

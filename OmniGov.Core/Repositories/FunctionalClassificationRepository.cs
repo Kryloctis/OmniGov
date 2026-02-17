@@ -1,16 +1,19 @@
-﻿using OmniGov.Core.Entities;
-using OmniGov.Core.Interfaces;
+using OmniGov.Core.Entities;
+using OmniGov.Core.Interfaces.Repositories;
+using OmniGov.Core.Interfaces.Services;
 using System.Data;
 using System.Transactions;
+
+using OmniGov.Core.Services;
 
 namespace OmniGov.Core.Repositories
 {
     public class FunctionalClassificationRepository : IFunctionalClassificationRepository
     {
-        private readonly GenericCommands _dbGenericCommands;
+        private readonly IGenericCommands _dbGenericCommands;
         private readonly string tableName = "functional_classifications";
 
-        public FunctionalClassificationRepository(GenericCommands dbGenericCommands)
+        public FunctionalClassificationRepository(IGenericCommands dbGenericCommands)
         {
             _dbGenericCommands = dbGenericCommands;
         }
