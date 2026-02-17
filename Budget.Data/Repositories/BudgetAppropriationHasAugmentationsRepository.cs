@@ -1,6 +1,7 @@
-﻿using Budget.Domain.Interfaces;
+using Budget.Domain.Interfaces;
 using Budget.Domain.Models;
 using OmniGov.Core.Repositories;
+using OmniGov.Core.Services;
 using System.Data;
 using System.Transactions;
 
@@ -9,11 +10,11 @@ namespace Budget.Data.Repositories
     public class BudgetAppropriationHasAugmentationsRepository : IBudgetAppropriationHasAugmentations
     {
         private readonly string tableName = "budget_appropriation_has_augmentations";
-        private GenericCommands mySqlGenericCommandsLFS;
+        private GenericCommands mySqlGenericCommands;
 
-        public BudgetAppropriationHasAugmentationsRepository(GenericCommands mySqlGenericCommandsLFS)
+        public BudgetAppropriationHasAugmentationsRepository(GenericCommands mySqlGenericCommands)
         {
-            this.mySqlGenericCommandsLFS = mySqlGenericCommandsLFS;
+            this.mySqlGenericCommands = mySqlGenericCommands;
         }
 
         public int CountRecords()
@@ -29,7 +30,7 @@ namespace Budget.Data.Repositories
                 {
                     var parameters = new object[][] { new object[] { "@id", DbType.Int32, item.Id } };
                     string query = $"DELETE FROM {tableName} WHERE id = @id";
-                    _ = mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
+                    _ = mySqlGenericCommands.ExecuteNonQuery(query, parameters);
                 }
 
                 scope.Complete();
@@ -68,7 +69,7 @@ namespace Budget.Data.Repositories
             };
 
             string query = $"INSERT INTO {tableName} (augmentations_id, budget_appropriations_id, date_entry, remarks) VALUES (@augmentations_id, @budget_appropriations_id, @date_entry, @remarks)";
-            return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
+            return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public bool Update(BudgetAppropriationHasAugmentationsModel entity)
@@ -77,3 +78,4 @@ namespace Budget.Data.Repositories
         }
     }
 }
+

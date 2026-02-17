@@ -1,6 +1,7 @@
-﻿using ACC.Domain.Interfaces;
+using ACC.Domain.Interfaces;
 using Budget.Domain.Entities;
 using OmniGov.Core.Repositories;
+using OmniGov.Core.Services;
 using System.Data;
 using System.Transactions;
 
@@ -9,11 +10,11 @@ namespace Budget.Data.Repositories
     public class RealignmentsRepository : IRealignments
     {
         private readonly string tableName = "realignments";
-        private GenericCommands mySqlGenericCommandsLFS;
+        private GenericCommands mySqlGenericCommands;
 
-        public RealignmentsRepository(GenericCommands mySqlGenericCommandsLFS)
+        public RealignmentsRepository(GenericCommands mySqlGenericCommands)
         {
-            this.mySqlGenericCommandsLFS = mySqlGenericCommandsLFS;
+            this.mySqlGenericCommands = mySqlGenericCommands;
         }
 
         public int CountRecords()
@@ -33,7 +34,7 @@ namespace Budget.Data.Repositories
                     };
 
                     string query = $"DELETE FROM {tableName} WHERE id = @id";
-                    _ = mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
+                    _ = mySqlGenericCommands.ExecuteNonQuery(query, parameters);
                 }
 
                 scope.Complete();
@@ -70,7 +71,7 @@ namespace Budget.Data.Repositories
             };
 
             string query = $"INSERT INTO {tableName}(budget_appropriations_id, amount) VALUES  (@budget_appropriations_id, @amount)";
-            return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
+            return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public bool Update(RealignmentsModel entity)
@@ -79,3 +80,4 @@ namespace Budget.Data.Repositories
         }
     }
 }
+

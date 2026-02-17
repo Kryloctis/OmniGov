@@ -1,6 +1,7 @@
-﻿using Budget.Domain.Interfaces;
+using Budget.Domain.Interfaces;
 using Budget.Domain.Models;
 using OmniGov.Core.Repositories;
+using OmniGov.Core.Services;
 using System.Data;
 
 namespace Budget.Data.Repositories
@@ -8,11 +9,11 @@ namespace Budget.Data.Repositories
     public class ObligationAccountRepository : IObligationAccountRepository
     {
         private readonly string tableName = "obligation_account";
-        private GenericCommands mySqlGenericCommandsLFS;
+        private GenericCommands mySqlGenericCommands;
 
-        public ObligationAccountRepository(GenericCommands mySqlGenericCommandsLFS)
+        public ObligationAccountRepository(GenericCommands mySqlGenericCommands)
         {
-            this.mySqlGenericCommandsLFS = mySqlGenericCommandsLFS;
+            this.mySqlGenericCommands = mySqlGenericCommands;
         }
 
         public int CountRecords()
@@ -63,7 +64,7 @@ namespace Budget.Data.Repositories
                             (obligation_request_id, allotment_account_id, amount) VALUES
                             (@obligation_request_id, @allotment_account_id, @amount)";
 
-            return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
+            return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public bool DeleteByOblgtnId(int ObligationRequestId)
@@ -75,7 +76,8 @@ namespace Budget.Data.Repositories
 
             string query = $"DELETE FROM {tableName} WHERE obligation_request_id = @obligation_request_id";
 
-            return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
+            return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
         }
     }
 }
+

@@ -1,6 +1,7 @@
-﻿using ACC.Domain.Interfaces;
+using ACC.Domain.Interfaces;
 using ACC.Domain.Models;
 using OmniGov.Core.Repositories;
+using OmniGov.Core.Services;
 using System.Data;
 
 namespace ACC.Data
@@ -8,11 +9,11 @@ namespace ACC.Data
     public class AugmentationsRepository : IAugmentations
     {
         private readonly string tableName = "augmentations";
-        private GenericCommands mySqlGenericCommandsLFS;
+        private GenericCommands mySqlGenericCommands;
 
-        public AugmentationsRepository(GenericCommands mySqlGenericCommandsLFS)
+        public AugmentationsRepository(GenericCommands mySqlGenericCommands)
         {
-            this.mySqlGenericCommandsLFS = mySqlGenericCommandsLFS;
+            this.mySqlGenericCommands = mySqlGenericCommands;
         }
 
         public int CountRecords()
@@ -56,3 +57,4 @@ namespace ACC.Data
         }
     }
 }
+

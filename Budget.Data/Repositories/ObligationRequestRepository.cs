@@ -1,6 +1,7 @@
-﻿using Budget.Domain.Interfaces;
+using Budget.Domain.Interfaces;
 using Budget.Domain.Models;
 using OmniGov.Core.Repositories;
+using OmniGov.Core.Services;
 using System.Data;
 using System.Transactions;
 
@@ -13,11 +14,11 @@ namespace Budget.Data.Repositories
 
         private readonly IObligationAccountRepository obligationAccountRepository;
 
-        private GenericCommands mySqlGenericCommandsLFS;
+        private GenericCommands mySqlGenericCommands;
 
-        public ObligationRequestRepository(GenericCommands mySqlGenericCommandsLFS, IObligationAccountRepository obligationAccountRepository)
+        public ObligationRequestRepository(GenericCommands mySqlGenericCommands, IObligationAccountRepository obligationAccountRepository)
         {
-            this.mySqlGenericCommandsLFS = mySqlGenericCommandsLFS;
+            this.mySqlGenericCommands = mySqlGenericCommands;
             this.obligationAccountRepository = obligationAccountRepository;
         }
 
@@ -32,7 +33,7 @@ namespace Budget.Data.Repositories
 
             string query = $"SELECT * FROM {tableName} WHERE id = @id";
 
-            DataTable dataTable = mySqlGenericCommandsLFS.ExecuteReader(query, parameters);
+            DataTable dataTable = mySqlGenericCommands.ExecuteReader(query, parameters);
 
             if (dataTable.Rows.Count > 0)
             {
@@ -60,7 +61,7 @@ namespace Budget.Data.Repositories
 
             string query = $"SELECT id, obligation_no, payee, explanation, reference_no, date_requested, created_at, created_by, updated_at, updated_by FROM {tableName} WHERE obligation_no LIKE @searchTxt OR payee LIKE @searchTxt OR explanation LIKE @searchTxt OR reference_no LIKE @searchTxt OR YEAR(date_requested) LIKE @searchTxt";
 
-            return mySqlGenericCommandsLFS.FillBySearch(query, new DataTable(), parameters);
+            return mySqlGenericCommands.FillBySearch(query, new DataTable(), parameters);
         }
 
         public bool IdExist(int id)
@@ -104,7 +105,7 @@ namespace Budget.Data.Repositories
                             @date_requested,
                             @created_by)";
 
-            return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
+            return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public bool Delete(List<ObligationRequestModel> entityList)
@@ -134,7 +135,7 @@ namespace Budget.Data.Repositories
 
                 string query = $"DELETE FROM {tableName} WHERE id = @id";
 
-                _ = mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
+                _ = mySqlGenericCommands.ExecuteNonQuery(query, parameters);
 
                 scope.Complete();
                 return true;
@@ -166,7 +167,7 @@ namespace Budget.Data.Repositories
                             date_requested = @date_requested,
                             updated_by = @updated_by WHERE id = @id";
 
-            return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
+            return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public Dictionary<string, string> GetViewRecordById(int Id)
@@ -180,7 +181,7 @@ namespace Budget.Data.Repositories
 
             string query = $"SELECT * FROM {viewTableName} WHERE obligation_request_id = @obligation_request_id";
 
-            DataTable dataTable = mySqlGenericCommandsLFS.ExecuteReader(query, parameters);
+            DataTable dataTable = mySqlGenericCommands.ExecuteReader(query, parameters);
 
             if (dataTable.Rows.Count > 0)
             {
@@ -203,7 +204,7 @@ namespace Budget.Data.Repositories
 
             string query = $"SELECT * FROM {viewTableName} WHERE obligation_request_id = @obligation_request_id";
             var dataTable = new DataTable();
-            return mySqlGenericCommandsLFS.FillBySearch(query, dataTable, parameters);
+            return mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
         }
 
         public DataTable GetViewRecords(int budgetAppropriationId, DateTime dateRequested)
@@ -217,7 +218,7 @@ namespace Budget.Data.Repositories
             string query = $"SELECT * FROM {viewTableName} WHERE budget_appropriations_id = @budget_appropriations_id AND date_requested <= @date_requested";
 
             var dtObligationRequests = new DataTable();
-            return mySqlGenericCommandsLFS.FillBySearch(query, dtObligationRequests, parameters);
+            return mySqlGenericCommands.FillBySearch(query, dtObligationRequests, parameters);
         }
 
         public decimal GetSumObligationsByAppropriationId(int appropriationId, DateTime dateRequested)
@@ -230,7 +231,7 @@ namespace Budget.Data.Repositories
 
             string query = $"SELECT COALESCE(SUM(amount), 0) AS amount FROM {viewTableName} WHERE budget_appropriations_id = @budget_appropriations_id AND date_requested <= @date_requested AND is_cancelled = 0";
 
-            return Convert.ToDecimal(mySqlGenericCommandsLFS.ExecuteScalar(query, parameters));
+            return Convert.ToDecimal(mySqlGenericCommands.ExecuteScalar(query, parameters));
         }
 
         public decimal GetSumObligations(string fppId, string subFPPId, int fundId, DateTime dateIssued, int allotmentClassId, byte isContinuing)
@@ -270,7 +271,7 @@ namespace Budget.Data.Repositories
                             AND {isContinuingQuery}
                             AND is_cancelled = 0";
 
-            return Convert.ToDecimal(mySqlGenericCommandsLFS.ExecuteScalar(query, parameters));
+            return Convert.ToDecimal(mySqlGenericCommands.ExecuteScalar(query, parameters));
         }
 
         private int GetLastInsertedId(int createdById)
@@ -281,7 +282,7 @@ namespace Budget.Data.Repositories
             };
 
             string query = $"SELECT MAX(id) FROM {tableName} WHERE created_by = @created_by";
-            return int.Parse(mySqlGenericCommandsLFS.ExecuteScalar(query, parameters));
+            return int.Parse(mySqlGenericCommands.ExecuteScalar(query, parameters));
         }
 
         public bool Insert(ObligationRequestModel entity, List<ObligationAccountModel> obligationAccountModels)
@@ -329,7 +330,7 @@ namespace Budget.Data.Repositories
 
             string query = $"SELECT id FROM {tableName} WHERE obligation_no = @obligation_no";
 
-            return !string.IsNullOrEmpty(mySqlGenericCommandsLFS.ExecuteScalar(query, parameters));
+            return !string.IsNullOrEmpty(mySqlGenericCommands.ExecuteScalar(query, parameters));
         }
 
         public bool ObligationRequestNoExist(int Id, string obligationNo)
@@ -342,7 +343,7 @@ namespace Budget.Data.Repositories
 
             string query = $"SELECT id FROM {tableName} WHERE id <> @id AND obligation_no = @obligation_no";
 
-            return !string.IsNullOrEmpty(mySqlGenericCommandsLFS.ExecuteScalar(query, parameters));
+            return !string.IsNullOrEmpty(mySqlGenericCommands.ExecuteScalar(query, parameters));
         }
 
         public bool SetObligationRequestStatus(int obligationRequestId, string status, string disapprovalMessage = null)
@@ -376,7 +377,7 @@ namespace Budget.Data.Repositories
 
             string query = $"UPDATE {tableName} SET {Status()}  WHERE id = @id";
 
-            return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
+            return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public string GetObligationRequestStatus(int obligationRequestId)
@@ -388,7 +389,7 @@ namespace Budget.Data.Repositories
 
             string query = $"SELECT is_approved, is_disapproved, is_cancelled FROM {tableName} WHERE id = @id";
 
-            using (var reader = mySqlGenericCommandsLFS.ExecuteReader(query, parameters))
+            using (var reader = mySqlGenericCommands.ExecuteReader(query, parameters))
             {
                 if (reader.Rows.Count < 1)
                     return string.Empty;
@@ -453,7 +454,7 @@ namespace Budget.Data.Repositories
                             GROUP BY obligation_request_id
                             ORDER BY obligation_no";
 
-            return mySqlGenericCommandsLFS.FillBySearch(query, new DataTable(), parameters);
+            return mySqlGenericCommands.FillBySearch(query, new DataTable(), parameters);
         }
 
         public decimal GetSumObligationsById(int obligationRequestId)
@@ -465,7 +466,7 @@ namespace Budget.Data.Repositories
 
             string query = $"SELECT COALESCE(SUM(amount), 0) FROM {viewTableName} WHERE obligation_request_id = @obligation_request_id";
 
-            return Convert.ToDecimal(mySqlGenericCommandsLFS.ExecuteScalar(query, parameters));
+            return Convert.ToDecimal(mySqlGenericCommands.ExecuteScalar(query, parameters));
         }
 
         public decimal GetSumObligationsByBudgetAppropriationAndStatus(int budgetAppropriationId)
@@ -477,13 +478,13 @@ namespace Budget.Data.Repositories
 
             string query = $"SELECT COALESCE(SUM(amount), 0) FROM {viewTableName} WHERE budget_appropriations_id = @budget_appropriations_id AND is_cancelled = 0";
 
-            return Convert.ToDecimal(mySqlGenericCommandsLFS.ExecuteScalar(query, parameters));
+            return Convert.ToDecimal(mySqlGenericCommands.ExecuteScalar(query, parameters));
         }
 
         public string GetLeastOblgtnNo()
         {
             string query = $"SELECT COALESCE(LPAD(MAX(obligation_no)+1, 4, '0'),'0001') AS obligation_no FROM {viewTableName}";
-            return mySqlGenericCommandsLFS.ExecuteScalar(query);
+            return mySqlGenericCommands.ExecuteScalar(query);
         }
 
         public DataTable GetRecords(string srchKey, string status, DateTime dtFrom, DateTime dtTo, int rowLimit)
@@ -527,7 +528,7 @@ namespace Budget.Data.Repositories
                                 (obligation_no LIKE @search_key OR payee LIKE @search_key) AND
                                 (date_requested >= @dt_from AND date_requested <= @dt_to) LIMIT @row_limit";
 
-            return mySqlGenericCommandsLFS.FillBySearch(query, new DataTable(), parameters);
+            return mySqlGenericCommands.FillBySearch(query, new DataTable(), parameters);
         }
 
         public string GetTransactionNo(int year)
@@ -544,8 +545,9 @@ namespace Budget.Data.Repositories
                             WHERE
                                transaction_no REGEXP CONCAT('^', @year, '-')";
 
-            string seqNo = mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
+            string seqNo = mySqlGenericCommands.ExecuteScalar(query, parameters);
             return $"{year}-{seqNo}";
         }
     }
 }
+
