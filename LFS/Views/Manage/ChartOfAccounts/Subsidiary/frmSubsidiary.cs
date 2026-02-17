@@ -1,4 +1,3 @@
-using Accounting.Data;
 using Accounting.Domain.Entities;
 using LFS.Helpers;
 using LFS.Views.Manage.BeginningBalances;
@@ -9,6 +8,7 @@ using OmniGov.Core.Factories;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using Accounting.Data.Factories;
 
 namespace LFS.Views.Manage.ChartOfAccounts.Subsidiary
 {

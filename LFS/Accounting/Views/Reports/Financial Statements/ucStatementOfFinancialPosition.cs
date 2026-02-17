@@ -1,4 +1,3 @@
-using Accounting.Data;
 using LFS.Helpers;
 using Microsoft.Reporting.WinForms;
 using OmniGov.Core.Repositories;
@@ -6,6 +5,7 @@ using OmniGov.Core.Factories;
 using System;
 using System.Data;
 using System.Windows.Forms;
+using Accounting.Data.Factories;
 
 namespace LFS.Views.Reports.Financial_Statements
 {

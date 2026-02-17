@@ -1,4 +1,3 @@
-using Accounting.Data;
 using Budget.Data;
 using Budget.Domain.Models;
 using LFS.Budget.Views.BudgetAppropriations;
@@ -10,6 +9,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
+using Accounting.Data.Factories;
 
 namespace LFS.Budget.Views.SupplementalAppropriations
 {

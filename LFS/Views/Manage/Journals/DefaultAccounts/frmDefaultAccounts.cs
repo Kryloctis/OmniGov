@@ -1,4 +1,3 @@
-using Accounting.Data;
 using LFS.Helpers;
 using OmniGov.Core.Entities;
 using OmniGov.Core.Repositories;
@@ -7,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Windows.Forms;
+using Accounting.Data.Factories;
 
 namespace LFS.Views.Manage.Journals.DefaultAccounts
 {

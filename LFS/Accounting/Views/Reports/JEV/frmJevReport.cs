@@ -1,4 +1,4 @@
-using Accounting.Data;
+using Accounting.Data.Factories;
 using LFS.Helpers;
 using Microsoft.Reporting.WinForms;
 using System;

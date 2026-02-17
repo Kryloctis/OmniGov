@@ -1,4 +1,3 @@
-using Accounting.Data;
 using Accounting.Domain.Entities;
 using LFS.Helpers;
 using LFS.Views.Dashboard;
@@ -10,6 +9,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Linq;
 using System.Windows.Forms;
+using Accounting.Data.Factories;
 
 namespace LFS.Views.Transactions.JEV
 {
