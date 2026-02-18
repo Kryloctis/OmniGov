@@ -1,0 +1,10 @@
+
+<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <PackageReference Include="MySql.Data" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\OmniGov.PropertyAssessment.Domain\OmniGov.PropertyAssessment.Domain.csproj" />
+    <ProjectReference Include="..\..\..\Core\OmniGov.Core\OmniGov.Core.csproj" />
+  </ItemGroup>
+</Project>

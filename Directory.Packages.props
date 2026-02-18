@@ -1,0 +1,13 @@
+
+<Project>
+  <PropertyGroup>
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageVersion Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
+    <PackageVersion Include="MySql.Data" Version="9.3.0" />
+    <PackageVersion Include="ReportViewerCore.WinForms" Version="15.1.26" />
+    <PackageVersion Include="Microsoft.CSharp" Version="4.7.0" />
+    <PackageVersion Include="xunit" Version="2.9.0" />
+  </ItemGroup>
+</Project>
