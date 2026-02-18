@@ -10,10 +10,7 @@ namespace Treasury.Data.Services
     {
         public static IServiceCollection AddTreasuryServices(this IServiceCollection services)
         {
-            // Register the Treasury Repository Factory
             services.AddScoped<ITreasuryFactory, TreasuryFactoryRepository>();
-
-            // Register individual repositories
             RegisterTreasuryRepositories(services);
 
             return services;

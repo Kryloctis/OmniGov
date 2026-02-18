@@ -9,10 +9,7 @@ namespace Accounting.Data.Services
     {
         public static IServiceCollection AddAccountingServices(this IServiceCollection services)
         {
-            // Register the Accounting Repository Factory
             services.AddScoped<IAccountingFactory, AccountingFactoryRepository>();
-
-            // Register individual repositories (optional - can use factory instead)
             RegisterAccountingRepositories(services);
 
             return services;

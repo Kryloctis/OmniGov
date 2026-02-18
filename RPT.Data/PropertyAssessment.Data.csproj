@@ -9,7 +9,4 @@
     <ProjectReference Include="..\RPT.Domain\PropertyAssessment.Domain.csproj" />
     <ProjectReference Include="..\OmniGov.Core\OmniGov.Core.csproj" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Services\" />
-  </ItemGroup>
 </Project>

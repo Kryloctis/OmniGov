@@ -2,7 +2,7 @@ using PropertyAssessment.Domain.Interfaces;
 
 namespace PropertyAssessment.Data.Factories
 {
-    public static class PropertyAssessmentFactory
+    public class PropertyAssessmentFactory
     {
         private static T Resolve<T>() where T : notnull => OmniGov.Core.Services.ServiceLocator.GetRequiredService<T>();
 

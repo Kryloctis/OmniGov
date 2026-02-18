@@ -12,8 +12,6 @@ namespace Budget.Data.Services
         public static IServiceCollection AddBudgetServices(this IServiceCollection services)
         {
             services.AddScoped<IBudgetFactory, BudgetFactoryRepository>();
-
-            // Register individual repositories (optional - can use factory instead)
             RegisterBudgetRepositories(services);
 
             return services;
