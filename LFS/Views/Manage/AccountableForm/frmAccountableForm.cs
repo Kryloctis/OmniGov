@@ -8,8 +8,8 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
-using Treasury.Data;
 using Treasury.Domain.Entities;
+using Treasury.Data.Factories;
 
 namespace LFS.Views.Manage.AccountableForm
 {

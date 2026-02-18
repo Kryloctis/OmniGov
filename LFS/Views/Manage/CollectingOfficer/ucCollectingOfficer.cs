@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Forms;
-using Treasury.Data;
+using Treasury.Data.Factories;
 
 namespace LFS.Views.Manage.CollectingOfficer
 {

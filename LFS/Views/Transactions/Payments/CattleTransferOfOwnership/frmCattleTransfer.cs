@@ -4,7 +4,7 @@ using LFS.Views.Transactions.Payments.OtherPayments.CattleTransferOfOwnership;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using Treasury.Data;
+using Treasury.Data.Factories;
 
 namespace LFS.Views.Transactions.Payments.CattleTransferOfOwnership
 {

@@ -4,7 +4,7 @@ using System;
 using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
-using Treasury.Data;
+using Treasury.Data.Factories;
 
 namespace LFS.Views.Reports.Cashbook
 {

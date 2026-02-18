@@ -4,8 +4,8 @@ using OmniGov.Core.Factories;
 using System;
 using System.ComponentModel;
 using System.Windows.Forms;
-using Treasury.Data;
 using Treasury.Domain.Entities;
+using Treasury.Data.Factories;
 
 namespace LFS.Views.Transactions.Payments.OtherPayments.CattleTransferOfOwnership
 {

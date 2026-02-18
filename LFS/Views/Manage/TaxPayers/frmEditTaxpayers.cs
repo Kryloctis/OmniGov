@@ -1,7 +1,7 @@
 using LFS.Helpers;
 using System;
 using System.Windows.Forms;
-using Treasury.Data;
+using Treasury.Data.Factories;
 
 namespace LFS.Views.Manage.TaxPayers
 {

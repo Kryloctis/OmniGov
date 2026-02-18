@@ -10,8 +10,8 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using Treasury.Data;
 using Treasury.Domain.Entities;
+using Treasury.Data.Factories;
 
 namespace LFS.Views.Transactions.Payments.RealProperty
 {

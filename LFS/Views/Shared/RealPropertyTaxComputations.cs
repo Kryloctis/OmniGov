@@ -1,5 +1,5 @@
 using System;
-using Treasury.Data;
+using Treasury.Data.Factories;
 
 namespace LFS.Views.Shared
 {

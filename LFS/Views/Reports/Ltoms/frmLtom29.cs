@@ -7,7 +7,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Linq;
 using System.Windows.Forms;
-using Treasury.Data;
+using Treasury.Data.Factories;
 using Treasury.Domain.Entities;
 
 namespace LFS.Views.Reports.Ltoms

@@ -2,7 +2,7 @@ using LFS.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using Treasury.Data;
+using Treasury.Data.Factories;
 using Treasury.Domain.Entities;
 
 namespace LFS.Views.Manage.BusinessAdOnCharges

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
-using Treasury.Data;
+using Treasury.Data.Factories;
 using Treasury.Domain.Entities;
 
 namespace LFS.Views.Manage.RptPenalties

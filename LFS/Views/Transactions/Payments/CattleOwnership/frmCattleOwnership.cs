@@ -3,7 +3,7 @@ using LFS.Views.Transactions.Payments.BurialPermit;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using Treasury.Data;
+using Treasury.Data.Factories;
 
 namespace LFS.Views.Transactions.Payments.CattleOwnership
 {

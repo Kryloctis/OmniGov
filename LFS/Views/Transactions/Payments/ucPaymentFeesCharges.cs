@@ -7,8 +7,8 @@ using System.ComponentModel;
 using System.Data;
 using System.Linq;
 using System.Windows.Forms;
-using Treasury.Data;
 using Treasury.Domain.Entities;
+using Treasury.Data.Factories;
 
 namespace LFS.Views.Transactions.Payments
 {

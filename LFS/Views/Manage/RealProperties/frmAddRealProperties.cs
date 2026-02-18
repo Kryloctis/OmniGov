@@ -2,7 +2,7 @@ using LFS.Helpers;
 using LFS.Views.Manage.TaxPayers;
 using System;
 using System.Windows.Forms;
-using Treasury.Data;
+using Treasury.Data.Factories;
 
 namespace LFS.Views.Manage.RealProperties
 {

@@ -4,7 +4,7 @@ using OmniGov.Core.Services;
 using Treasury.Data.Repositories;
 using Treasury.Domain.Interfaces;
 
-namespace Treasury.Data
+namespace Treasury.Data.Factories
 {
     public class TreasuryFactory
     {
@@ -117,5 +117,3 @@ namespace Treasury.Data
         public static ICashTicketsIssuedRepository CashTicketsIssuedRepository() => new CashTicketsIssuedRepository(genericCommands);
     }
 }
-
-
