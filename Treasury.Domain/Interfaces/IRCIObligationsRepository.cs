@@ -1,12 +1,10 @@
 using OmniGov.Core.Interfaces.Repositories;
-using OmniGov.Core.Interfaces.Services;
-using OmniGov.Core.Interfaces.Factories;
 using System.Data;
 using Treasury.Domain.Entities;
 
 namespace Treasury.Domain.Interfaces
 {
-    public interface IRCIObligationsRepository : IRepository<RCIObligationsModel>
+    public interface IRciObligationsRepository : IRepository<RCIObligationsModel>
     {
         DataTable GetRecordsByRCIId(int rciId);
 

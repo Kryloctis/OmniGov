@@ -1,12 +1,10 @@
 using OmniGov.Core.Interfaces.Repositories;
-using OmniGov.Core.Interfaces.Services;
-using OmniGov.Core.Interfaces.Factories;
 using System.Data;
 using Treasury.Domain.Entities;
 
 namespace Treasury.Domain.Interfaces
 {
-    public interface IAccountableRepository : IRepository<AccountableFormsModel>
+    public interface IAccountableFormsRepository : IRepository<AccountableFormsModel>
     {
         bool CodeExist(string code);
 

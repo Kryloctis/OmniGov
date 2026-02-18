@@ -7,7 +7,7 @@ using Treasury.Domain.Interfaces;
 
 namespace Treasury.Data.Repositories
 {
-    public class AccountableFormsRepository : IAccountableRepository
+    public class AccountableFormsRepository : IAccountableFormsRepository
     {
         private readonly string tableName = "accountable_forms";
         private readonly string viewTableName = "view_accountable_forms";

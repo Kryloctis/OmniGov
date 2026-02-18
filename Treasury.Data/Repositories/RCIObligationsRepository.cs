@@ -7,7 +7,7 @@ using Treasury.Domain.Interfaces;
 
 namespace Treasury.Data.Repositories
 {
-    public class RCIObligationsRepository : IRCIObligationsRepository
+    public class RCIObligationsRepository : IRciObligationsRepository
     {
         private readonly GenericCommands _dbGenericCommands;
         private readonly string tableName = "rci_obligations";

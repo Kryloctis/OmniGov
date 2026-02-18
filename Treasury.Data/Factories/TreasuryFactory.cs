@@ -1,4 +1,3 @@
-using OmniGov.Core.Repositories;
 using OmniGov.Core.Factories;
 using OmniGov.Core.Services;
 using Treasury.Data.Repositories;
@@ -18,13 +17,13 @@ namespace Treasury.Data.Factories
 
         public static IBankAccountsRepository BankAccountsRepository() => new BankAccountsRepository(genericCommands);
 
-        public static IRCIObligationsRepository RCIObligationsRepository() => new RCIObligationsRepository(genericCommands);
+        public static IRciObligationsRepository RCIObligationsRepository() => new RCIObligationsRepository(genericCommands);
 
-        public static IRCIDeductionsRepository RCIDeductionsRepository() => new RCIDeductionsRepository(genericCommands);
+        public static IRciDeductionsRepository RCIDeductionsRepository() => new RCIDeductionsRepository(genericCommands);
 
         public static IRciRepository RciRepository() => new RciRepository(genericCommands);
 
-        public static IAccountableRepository AccountableFormsRepository() => new AccountableFormsRepository(genericCommands);
+        public static IAccountableFormsRepository AccountableFormsRepository() => new AccountableFormsRepository(genericCommands);
 
         public static IPaymentCollectionsRepository PaymentCollectionsRepository() => new PaymentCollectionsRepository(genericCommands, RptPaymentepository(), MarriageLicenseRepository(), CattleOwnershipRepository(), PrevCattleOwnershipRepository(), BurialPermitRepository(), PaymentCollectionHasChequesRepository(), PaymentFeesChargesRepository(), RcdCollectionsRepository(), RcdDepositsRepository(), BidRepository(), BiddersRepository(), CommunityTaxCertificateRepository());
 
@@ -92,7 +91,7 @@ namespace Treasury.Data.Factories
 
         public static IPrevCattleOwnership PrevCattleOwnershipRepository() => new PrevCattleOwnershipRepository(genericCommands);
 
-        public static IRcd RcdRepository() => new RcdRepository(genericCommands, RcdCollectionsRepository(), RcdDepositsRepository());
+        public static IRcdRepository RcdRepository() => new RcdRepository(genericCommands, RcdCollectionsRepository(), RcdDepositsRepository());
 
         public static IRcdCollections RcdCollectionsRepository() => new RcdCollectionRepository(genericCommands);
 

@@ -8,7 +8,7 @@ using Treasury.Domain.Interfaces;
 
 namespace Treasury.Data.Repositories
 {
-    public class RcdRepository : IRcd
+    public class RcdRepository : IRcdRepository
     {
         private readonly string tableName = "rcd";
         private readonly string viewTableName = "view_rcd";
