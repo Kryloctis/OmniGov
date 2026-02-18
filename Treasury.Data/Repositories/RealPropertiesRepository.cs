@@ -1,14 +1,11 @@
 using OmniGov.Core.Entities;
 using OmniGov.Core.Interfaces.Repositories;
 using OmniGov.Core.Interfaces.Services;
-using OmniGov.Core.Interfaces.Factories;
-using OmniGov.Core.Repositories;
-using OmniGov.Core.Services;
 using System.Data;
 using System.Transactions;
+using Treasury.Data.Factories;
 using Treasury.Domain.Entities;
 using Treasury.Domain.Interfaces;
-using Treasury.Data.Factories;
 
 namespace Treasury.Data.Repositories
 {

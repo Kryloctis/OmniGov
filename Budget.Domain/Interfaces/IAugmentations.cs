@@ -1,5 +1,5 @@
-using OmniGov.Core.Interfaces.Repositories;
 using Budget.Domain.Entities;
+using OmniGov.Core.Interfaces.Repositories;
 
 namespace Budget.Domain.Interfaces
 {

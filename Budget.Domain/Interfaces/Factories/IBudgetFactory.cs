@@ -1,5 +1,4 @@
 ﻿using ACC.Domain.Interfaces;
-using Budget.Domain.Interfaces;
 
 namespace Budget.Domain.Interfaces.Factories
 {

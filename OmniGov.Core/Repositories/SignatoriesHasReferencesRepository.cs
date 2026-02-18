@@ -3,8 +3,6 @@ using OmniGov.Core.Interfaces.Repositories;
 using OmniGov.Core.Interfaces.Services;
 using System.Data;
 
-using OmniGov.Core.Services;
-
 namespace OmniGov.Core.Repositories
 {
     public class SignatoriesHasReferencesRepository : ISignatoriesHasReferences

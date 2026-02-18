@@ -1,5 +1,3 @@
-using System;
-
 namespace Budget.Domain.Models
 {
     public class AllotmentReleaseModel

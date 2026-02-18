@@ -1,7 +1,6 @@
 using Accounting.Domain.Entities;
 using Accounting.Domain.Interfaces;
 using OmniGov.Core.Interfaces.Services;
-using OmniGov.Core.Services;
 using System.Data;
 using System.Transactions;
 
