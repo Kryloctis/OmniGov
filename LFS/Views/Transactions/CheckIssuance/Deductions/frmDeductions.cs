@@ -1,12 +1,10 @@
-using LFS.Helpers;
-using LFS.Views.Transactions.RCI;
-using OmniGov.Core.Repositories;
+using OmniGov.App.Helpers;
 using OmniGov.Core.Factories;
 using System;
 using System.ComponentModel;
 using System.Windows.Forms;
 
-namespace LFS.Views.Transactions.CheckIssuance.Deductions
+namespace OmniGov.App.Views.Transactions.CheckIssuance.Deductions
 {
     public partial class frmDeductions : Form
     {
@@ -137,4 +135,3 @@ namespace LFS.Views.Transactions.CheckIssuance.Deductions
         }
     }
 }
-

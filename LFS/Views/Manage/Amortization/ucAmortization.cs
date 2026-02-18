@@ -1,13 +1,12 @@
+using Accounting.Data.Factories;
 using Accounting.Domain.Entities;
-using LFS.Helpers;
-using OmniGov.Core.Repositories;
+using OmniGov.App.Helpers;
 using OmniGov.Core.Factories;
 using System;
 using System.ComponentModel;
 using System.Windows.Forms;
-using Accounting.Data.Factories;
 
-namespace LFS.Views.Manage.Amortization
+namespace OmniGov.App.Views.Manage.Amortization
 {
     public partial class ucAmortization : UserControl
     {
@@ -139,4 +138,3 @@ namespace LFS.Views.Manage.Amortization
         }
     }
 }
-

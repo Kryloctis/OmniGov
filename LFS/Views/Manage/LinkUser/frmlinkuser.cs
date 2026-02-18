@@ -1,11 +1,10 @@
-using LFS.Helpers;
-using OmniGov.Core.Repositories;
+using OmniGov.App.Helpers;
 using OmniGov.Core.Factories;
 using System;
 using System.Data;
 using System.Windows.Forms;
 
-namespace LFS.Views.Manage.LinkUser
+namespace OmniGov.App.Views.Manage.LinkUser
 {
     public partial class frmLinkUser : Form
     {

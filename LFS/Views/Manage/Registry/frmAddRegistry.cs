@@ -1,10 +1,9 @@
-using LFS.Helpers;
-using OmniGov.Core.Repositories;
+using OmniGov.App.Helpers;
 using OmniGov.Core.Factories;
 using System;
 using System.Windows.Forms;
 
-namespace LFS.Views.Manage.Registry
+namespace OmniGov.App.Views.Manage.Registry
 {
     public partial class frmAddRegistry : Form
     {

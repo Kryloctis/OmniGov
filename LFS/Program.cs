@@ -1,13 +1,13 @@
 using Accounting.Data.Services;
 using Budget.Data.Services;
-using LFS.Views.SignIn;
 using Microsoft.Extensions.DependencyInjection;
+using OmniGov.App.Views.SignIn;
 using OmniGov.Core.Services;
 using System;
 using System.Windows.Forms;
 using Treasury.Data.Services;
 
-namespace LFS
+namespace OmniGov.App
 {
     internal static class Program
     {

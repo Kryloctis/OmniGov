@@ -2,7 +2,7 @@ using Accounting.Data.Factories;
 using Accounting.Domain.Entities;
 using System.Windows.Forms;
 
-namespace LFS.Views.Transactions.JEV
+namespace OmniGov.App.Accounting.Views.JEV.JournalForms
 {
     public partial class ucGenJrnl : UserControl
     {

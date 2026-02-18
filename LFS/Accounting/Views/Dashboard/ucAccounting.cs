@@ -1,10 +1,7 @@
-using LFS.Helpers;
-using LFS.Views.Dashboard.AccountingDashboard;
-using LFS.Views.Transactions.JEV;
-using System;
+using OmniGov.App.Helpers;
 using System.Windows.Forms;
 
-namespace LFS.Views.Dashboard.Accounting
+namespace OmniGov.App.Accounting.Views.Dashboard
 {
     public partial class ucAccounting : UserControl
     {

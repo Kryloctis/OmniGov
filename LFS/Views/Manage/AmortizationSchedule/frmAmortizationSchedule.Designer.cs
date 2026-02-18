@@ -1,5 +1,5 @@
 
-namespace LFS.Views.Manage.Amortization
+namespace OmniGov.App.Views.Manage.AmortizationSchedule
 {
     partial class frmAmortizationSchedule
     {
@@ -69,7 +69,7 @@ namespace LFS.Views.Manage.Amortization
             // 
             // btnAdd
             // 
-            this.btnAdd.Image = global::LFS.Properties.Resources.add;
+            this.btnAdd.Image = global::OmniGov.App.Properties.Resources.add;
             this.btnAdd.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnAdd.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnAdd.Name = "btnAdd";
@@ -80,7 +80,7 @@ namespace LFS.Views.Manage.Amortization
             // 
             // btnEdit
             // 
-            this.btnEdit.Image = global::LFS.Properties.Resources.edit;
+            this.btnEdit.Image = global::OmniGov.App.Properties.Resources.edit;
             this.btnEdit.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnEdit.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnEdit.Name = "btnEdit";
@@ -91,7 +91,7 @@ namespace LFS.Views.Manage.Amortization
             // 
             // btnDelete
             // 
-            this.btnDelete.Image = global::LFS.Properties.Resources.delete;
+            this.btnDelete.Image = global::OmniGov.App.Properties.Resources.delete;
             this.btnDelete.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnDelete.Name = "btnDelete";

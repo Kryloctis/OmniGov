@@ -1,4 +1,4 @@
-namespace LFS.Views.Reports.Journals
+namespace OmniGov.App.Accounting.Views.Reports.Journals
 {
     partial class ucCashDisbursementJrnlReport
     {

@@ -1,4 +1,5 @@
-namespace LFS.Views.Reports.Journals
+using OmniGov.App.Accounting.Views.Reports.Journals;
+namespace OmniGov.App.Accounting.Views.Reports.Journals
 {
     partial class frmJournalReports
     {

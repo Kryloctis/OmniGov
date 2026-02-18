@@ -1,7 +1,6 @@
-using LFS.Helpers;
 using MySql.Data.MySqlClient;
+using OmniGov.App.Helpers;
 using OmniGov.Core.Entities;
-using OmniGov.Core.Repositories;
 using OmniGov.Core.Factories;
 using System;
 using System.Collections.Generic;
@@ -9,7 +8,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
 
-namespace LFS.Views.Manage.Users
+namespace OmniGov.App.Views.Manage.Users
 {
     public partial class frmUsers : Form
     {

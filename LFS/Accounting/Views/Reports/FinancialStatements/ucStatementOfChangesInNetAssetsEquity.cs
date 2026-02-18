@@ -1,13 +1,12 @@
-using LFS.Helpers;
 using Microsoft.Reporting.WinForms;
-using OmniGov.Core.Repositories;
+using OmniGov.App.Helpers;
 using OmniGov.Core.Factories;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Windows.Forms;
 
-namespace LFS.Views.Reports.Financial_Statements
+namespace OmniGov.App.Accounting.Views.Reports.FinancialStatements
 {
     public partial class ucStatementOfChangesInNetAssetsEquity : UserControl
     {
@@ -104,4 +103,3 @@ namespace LFS.Views.Reports.Financial_Statements
         }
     }
 }
-

@@ -1,4 +1,5 @@
-namespace LFS.Views.Manage.Barangay
+using OmniGov.App.Views.Manage.Barangay;
+namespace OmniGov.App.Views.Manage.Barangay
 {
     partial class frmEditBarangay
     {

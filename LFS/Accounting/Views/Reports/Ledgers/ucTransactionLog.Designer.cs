@@ -1,5 +1,5 @@
 
-namespace LFS.Views.Reports.Ledgers
+namespace OmniGov.App.Accounting.Views.Reports.Ledgers
 {
     partial class ucTransactionLog
     {

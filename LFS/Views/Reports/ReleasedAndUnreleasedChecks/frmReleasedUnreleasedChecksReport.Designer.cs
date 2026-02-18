@@ -1,4 +1,4 @@
-namespace LFS.Views.Reports.ReleasedAndUnreleasedCheques
+namespace OmniGov.App.Views.Reports.ReleasedAndUnreleasedChecks
 {
     partial class frmReleasedUnreleasedChecksReport
     {

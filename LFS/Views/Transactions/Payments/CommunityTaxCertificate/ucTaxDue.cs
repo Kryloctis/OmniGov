@@ -1,9 +1,8 @@
-using OmniGov.Core.Repositories;
 using OmniGov.Core.Factories;
 using System;
 using System.Windows.Forms;
 
-namespace LFS.Views.Transactions.Payments.CommunityTaxCertificate
+namespace OmniGov.App.Views.Transactions.Payments.CommunityTaxCertificate
 {
     public partial class ucTaxDue : UserControl
     {
@@ -49,4 +48,3 @@ namespace LFS.Views.Transactions.Payments.CommunityTaxCertificate
         }
     }
 }
-

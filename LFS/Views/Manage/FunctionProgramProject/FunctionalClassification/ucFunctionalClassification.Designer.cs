@@ -1,5 +1,5 @@
 
-namespace LFS.Views.Manage.FunctionProgramProject.FunctionalClassification
+namespace OmniGov.App.Views.Manage.FunctionProgramProject.FunctionalClassification
 {
     partial class ucFunctionalClassification
     {

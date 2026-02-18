@@ -1,4 +1,4 @@
-namespace LFS.Views.Dashboard
+namespace OmniGov.App.Views.Dashboard
 {
     partial class frmMain
     {
@@ -39,24 +39,24 @@ namespace LFS.Views.Dashboard
             tabControlMain = new System.Windows.Forms.TabControl();
             tabPageBudget = new System.Windows.Forms.TabPage();
             panel2 = new System.Windows.Forms.Panel();
-            ucBudget1 = new LFS.Budget.Dashboard.ucBudget();
+            ucBudget1 = new OmniGov.App.Budget.Views.Dashboard.ucBudget();
             label4 = new System.Windows.Forms.Label();
             tabPageAccounting = new System.Windows.Forms.TabPage();
             panel3 = new System.Windows.Forms.Panel();
-            ucAccounting1 = new LFS.Views.Dashboard.Accounting.ucAccounting();
+            ucAccounting1 = new OmniGov.App.Accounting.Views.Dashboard.ucAccounting();
             label2 = new System.Windows.Forms.Label();
             tabPageTreasury = new System.Windows.Forms.TabPage();
             panel4 = new System.Windows.Forms.Panel();
-            ucTreasury1 = new LFS.Views.Dashboard.Treasury.ucTreasury();
+            ucTreasury1 = new OmniGov.App.Views.Dashboard.Treasury.ucTreasury();
             label3 = new System.Windows.Forms.Label();
             tabPageManage = new System.Windows.Forms.TabPage();
-            ucManage1 = new LFS.Views.Dashboard.Manage.ucManage();
+            ucManage1 = new OmniGov.App.Views.Dashboard.Manage.ucManage();
             label5 = new System.Windows.Forms.Label();
             tabPageReports = new System.Windows.Forms.TabPage();
-            ucReports1 = new LFS.Views.Dashboard.Reports.ucReports();
+            ucReports1 = new OmniGov.App.Views.Dashboard.Reports.ucReports();
             label1 = new System.Windows.Forms.Label();
             tabPageMyAccount = new System.Windows.Forms.TabPage();
-            ucMyAccount1 = new LFS.Views.Dashboard.MyAccount.ucMyAccount();
+            ucMyAccount1 = new OmniGov.App.Views.Dashboard.MyAccount.ucMyAccount();
             taxRatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             discountRatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             statusStrip1 = new System.Windows.Forms.StatusStrip();
@@ -302,7 +302,7 @@ namespace LFS.Views.Dashboard
             tabPageAccounting.Location = new System.Drawing.Point(4, 24);
             tabPageAccounting.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             tabPageAccounting.Name = "tabPageAccounting";
-            tabPageAccounting.Size = new System.Drawing.Size(192, 72);
+            tabPageAccounting.Size = new System.Drawing.Size(1125, 652);
             tabPageAccounting.TabIndex = 2;
             tabPageAccounting.Text = "tabPageAccounting";
             tabPageAccounting.UseVisualStyleBackColor = true;
@@ -315,7 +315,7 @@ namespace LFS.Views.Dashboard
             panel3.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             panel3.Name = "panel3";
             panel3.Padding = new System.Windows.Forms.Padding(5, 4, 5, 4);
-            panel3.Size = new System.Drawing.Size(192, 0);
+            panel3.Size = new System.Drawing.Size(1125, 572);
             panel3.TabIndex = 5;
             // 
             // ucAccounting1
@@ -324,7 +324,7 @@ namespace LFS.Views.Dashboard
             ucAccounting1.Location = new System.Drawing.Point(5, 4);
             ucAccounting1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             ucAccounting1.Name = "ucAccounting1";
-            ucAccounting1.Size = new System.Drawing.Size(182, 0);
+            ucAccounting1.Size = new System.Drawing.Size(1115, 564);
             ucAccounting1.TabIndex = 0;
             // 
             // label2
@@ -335,7 +335,7 @@ namespace LFS.Views.Dashboard
             label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             label2.Name = "label2";
             label2.Padding = new System.Windows.Forms.Padding(5, 4, 5, 4);
-            label2.Size = new System.Drawing.Size(192, 80);
+            label2.Size = new System.Drawing.Size(1125, 80);
             label2.TabIndex = 3;
             label2.Text = "Accounting";
             // 
@@ -346,7 +346,7 @@ namespace LFS.Views.Dashboard
             tabPageTreasury.Location = new System.Drawing.Point(4, 24);
             tabPageTreasury.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             tabPageTreasury.Name = "tabPageTreasury";
-            tabPageTreasury.Size = new System.Drawing.Size(192, 72);
+            tabPageTreasury.Size = new System.Drawing.Size(1125, 652);
             tabPageTreasury.TabIndex = 3;
             tabPageTreasury.Text = "tabPageTreasury";
             tabPageTreasury.UseVisualStyleBackColor = true;
@@ -359,7 +359,7 @@ namespace LFS.Views.Dashboard
             panel4.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             panel4.Name = "panel4";
             panel4.Padding = new System.Windows.Forms.Padding(5, 4, 5, 4);
-            panel4.Size = new System.Drawing.Size(192, 0);
+            panel4.Size = new System.Drawing.Size(1125, 572);
             panel4.TabIndex = 5;
             // 
             // ucTreasury1
@@ -368,7 +368,7 @@ namespace LFS.Views.Dashboard
             ucTreasury1.Location = new System.Drawing.Point(5, 4);
             ucTreasury1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             ucTreasury1.Name = "ucTreasury1";
-            ucTreasury1.Size = new System.Drawing.Size(182, 0);
+            ucTreasury1.Size = new System.Drawing.Size(1115, 564);
             ucTreasury1.TabIndex = 0;
             // 
             // label3
@@ -379,7 +379,7 @@ namespace LFS.Views.Dashboard
             label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             label3.Name = "label3";
             label3.Padding = new System.Windows.Forms.Padding(5, 4, 5, 4);
-            label3.Size = new System.Drawing.Size(192, 80);
+            label3.Size = new System.Drawing.Size(1125, 80);
             label3.TabIndex = 4;
             label3.Text = "Treasury";
             // 
@@ -390,7 +390,7 @@ namespace LFS.Views.Dashboard
             tabPageManage.Location = new System.Drawing.Point(4, 24);
             tabPageManage.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             tabPageManage.Name = "tabPageManage";
-            tabPageManage.Size = new System.Drawing.Size(192, 72);
+            tabPageManage.Size = new System.Drawing.Size(1125, 652);
             tabPageManage.TabIndex = 4;
             tabPageManage.Text = "tabPageManage";
             tabPageManage.UseVisualStyleBackColor = true;
@@ -402,7 +402,7 @@ namespace LFS.Views.Dashboard
             ucManage1.Location = new System.Drawing.Point(0, 80);
             ucManage1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             ucManage1.Name = "ucManage1";
-            ucManage1.Size = new System.Drawing.Size(192, 0);
+            ucManage1.Size = new System.Drawing.Size(1125, 572);
             ucManage1.TabIndex = 6;
             // 
             // label5
@@ -413,7 +413,7 @@ namespace LFS.Views.Dashboard
             label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             label5.Name = "label5";
             label5.Padding = new System.Windows.Forms.Padding(5, 4, 5, 4);
-            label5.Size = new System.Drawing.Size(192, 80);
+            label5.Size = new System.Drawing.Size(1125, 80);
             label5.TabIndex = 5;
             label5.Text = "Manage";
             // 
@@ -423,7 +423,7 @@ namespace LFS.Views.Dashboard
             tabPageReports.Controls.Add(label1);
             tabPageReports.Location = new System.Drawing.Point(4, 24);
             tabPageReports.Name = "tabPageReports";
-            tabPageReports.Size = new System.Drawing.Size(192, 72);
+            tabPageReports.Size = new System.Drawing.Size(1125, 652);
             tabPageReports.TabIndex = 5;
             tabPageReports.Text = "tabPageReports";
             tabPageReports.UseVisualStyleBackColor = true;
@@ -435,7 +435,7 @@ namespace LFS.Views.Dashboard
             ucReports1.Location = new System.Drawing.Point(0, 80);
             ucReports1.Name = "ucReports1";
             ucReports1.Padding = new System.Windows.Forms.Padding(4);
-            ucReports1.Size = new System.Drawing.Size(192, 0);
+            ucReports1.Size = new System.Drawing.Size(1125, 572);
             ucReports1.TabIndex = 9;
             // 
             // label1
@@ -446,7 +446,7 @@ namespace LFS.Views.Dashboard
             label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             label1.Name = "label1";
             label1.Padding = new System.Windows.Forms.Padding(5, 4, 5, 4);
-            label1.Size = new System.Drawing.Size(192, 80);
+            label1.Size = new System.Drawing.Size(1125, 80);
             label1.TabIndex = 6;
             label1.Text = "Reports";
             // 
@@ -456,7 +456,7 @@ namespace LFS.Views.Dashboard
             tabPageMyAccount.Location = new System.Drawing.Point(4, 24);
             tabPageMyAccount.Name = "tabPageMyAccount";
             tabPageMyAccount.Padding = new System.Windows.Forms.Padding(3);
-            tabPageMyAccount.Size = new System.Drawing.Size(192, 72);
+            tabPageMyAccount.Size = new System.Drawing.Size(1125, 652);
             tabPageMyAccount.TabIndex = 6;
             tabPageMyAccount.Text = "tabPageMyAccount";
             tabPageMyAccount.UseVisualStyleBackColor = true;
@@ -468,7 +468,7 @@ namespace LFS.Views.Dashboard
             ucMyAccount1.Location = new System.Drawing.Point(3, 3);
             ucMyAccount1.Name = "ucMyAccount1";
             ucMyAccount1.Padding = new System.Windows.Forms.Padding(2);
-            ucMyAccount1.Size = new System.Drawing.Size(186, 66);
+            ucMyAccount1.Size = new System.Drawing.Size(1119, 646);
             ucMyAccount1.TabIndex = 8;
             // 
             // taxRatesToolStripMenuItem
@@ -496,7 +496,7 @@ namespace LFS.Views.Dashboard
             // toolStripStatusLabel2
             // 
             toolStripStatusLabel2.Name = "toolStripStatusLabel2";
-            toolStripStatusLabel2.Size = new System.Drawing.Size(856, 17);
+            toolStripStatusLabel2.Size = new System.Drawing.Size(887, 17);
             toolStripStatusLabel2.Spring = true;
             // 
             // tlStrpWhatsNew
@@ -616,8 +616,8 @@ namespace LFS.Views.Dashboard
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ToolStripMenuItem taxRatesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem discountRatesToolStripMenuItem;
-        private LFS.Budget.Dashboard.ucBudget ucBudget1;
-        private Accounting.ucAccounting ucAccounting1;
+        private OmniGov.App.Budget.Views.Dashboard.ucBudget ucBudget1;
+        private OmniGov.App.Accounting.Views.Dashboard.ucAccounting ucAccounting1;
         private Treasury.ucTreasury ucTreasury1;
         private Manage.ucManage ucManage1;
         private System.Windows.Forms.Panel panel4;

@@ -1,19 +1,18 @@
+using Budget.Data.Factories;
 using Budget.Domain.Models;
-using LFS.Budget.Views.Augmentation;
-using LFS.Budget.Views.Realignment;
-using LFS.Budget.Views.SupplementalAppropriations;
-using LFS.Helpers;
 using MySql.Data.MySqlClient;
-using OmniGov.Core.Repositories;
+using OmniGov.App.Budget.Views.Augmentation;
+using OmniGov.App.Budget.Views.Realignment;
+using OmniGov.App.Budget.Views.SupplementalAppropriations;
+using OmniGov.App.Helpers;
 using OmniGov.Core.Factories;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
-using Budget.Data.Factories;
 
-namespace LFS.Budget.Views.BudgetAppropriations
+namespace OmniGov.App.Budget.Views.BudgetAppropriations
 {
     public partial class frmBudgetAppropriations : Form
     {
@@ -689,4 +688,3 @@ namespace LFS.Budget.Views.BudgetAppropriations
         }
     }
 }
-

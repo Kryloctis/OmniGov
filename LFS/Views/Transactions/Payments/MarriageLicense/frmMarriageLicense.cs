@@ -1,14 +1,12 @@
-using LFS.Helpers;
-using LFS.Views.Transactions.Payments.BurialPermit;
-using OmniGov.Core.Repositories;
+using OmniGov.App.Helpers;
 using OmniGov.Core.Factories;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using Treasury.Domain.Entities;
 using Treasury.Data.Factories;
+using Treasury.Domain.Entities;
 
-namespace LFS.Views.Transactions.Payments.MarriageLicense
+namespace OmniGov.App.Views.Transactions.Payments.MarriageLicense
 {
     public partial class frmMarriageLicense : Form
     {
@@ -305,4 +303,3 @@ namespace LFS.Views.Transactions.Payments.MarriageLicense
         }
     }
 }
-

@@ -1,5 +1,4 @@
-using LFS.Budget.Dashboard;
-namespace LFS.Budget.Dashboard
+namespace OmniGov.App.Budget.Views.Dashboard
 {
     partial class ucBudget
     {
@@ -104,7 +103,7 @@ namespace LFS.Budget.Dashboard
 
         #endregion
 
-        private Budget.Dashboard.ucBudgetSummary ucBudgetSummary1;
+        private ucBudgetSummary ucBudgetSummary1;
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton tlStrpBtnAlltmntRelease;
         private System.Windows.Forms.ToolStripButton tlStrpBtnObligationRequest;

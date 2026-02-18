@@ -1,5 +1,5 @@
-using LFS.Helpers;
 using Microsoft.Reporting.WinForms;
+using OmniGov.App.Helpers;
 using System;
 using System.ComponentModel;
 using System.Data;
@@ -7,7 +7,7 @@ using System.Windows.Forms;
 using Treasury.Data.Factories;
 using Treasury.Domain.Entities;
 
-namespace LFS.Views.Transactions.Auction
+namespace OmniGov.App.Views.Transactions.Auction.AuctionReports
 {
     public partial class ucReportOfSale : UserControl
     {

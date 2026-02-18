@@ -1,7 +1,7 @@
 
-namespace LFS.Views.Reports.Financial_Statements
+namespace OmniGov.App.Accounting.Views.Reports.FinancialStatements
 {
-    partial class ucStatementOfCashFlows
+    partial class ucStatementOfFinancialPosition
     {
         /// <summary> 
         /// Required designer variable.
@@ -29,85 +29,83 @@ namespace LFS.Views.Reports.Financial_Statements
         /// </summary>
         private void InitializeComponent()
         {
+            panel1 = new System.Windows.Forms.Panel();
             panel2 = new System.Windows.Forms.Panel();
             cmbxFunds = new System.Windows.Forms.ComboBox();
-            dtPickerDate = new System.Windows.Forms.DateTimePicker();
+            dtAsOf = new System.Windows.Forms.DateTimePicker();
             btnRetrieve = new System.Windows.Forms.Button();
-            panel1 = new System.Windows.Forms.Panel();
             panel2.SuspendLayout();
             SuspendLayout();
+            // 
+            // panel1
+            // 
+            panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            panel1.Location = new System.Drawing.Point(0, 38);
+            panel1.Name = "panel1";
+            panel1.Size = new System.Drawing.Size(568, 307);
+            panel1.TabIndex = 3;
             // 
             // panel2
             // 
             panel2.Controls.Add(cmbxFunds);
-            panel2.Controls.Add(dtPickerDate);
+            panel2.Controls.Add(dtAsOf);
             panel2.Controls.Add(btnRetrieve);
             panel2.Dock = System.Windows.Forms.DockStyle.Top;
             panel2.Location = new System.Drawing.Point(0, 0);
             panel2.Name = "panel2";
             panel2.Padding = new System.Windows.Forms.Padding(4);
-            panel2.Size = new System.Drawing.Size(550, 37);
-            panel2.TabIndex = 5;
+            panel2.Size = new System.Drawing.Size(568, 38);
+            panel2.TabIndex = 4;
             // 
             // cmbxFunds
             // 
             cmbxFunds.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
             cmbxFunds.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             cmbxFunds.FormattingEnabled = true;
-            cmbxFunds.Location = new System.Drawing.Point(51, 7);
+            cmbxFunds.Location = new System.Drawing.Point(69, 7);
             cmbxFunds.Name = "cmbxFunds";
             cmbxFunds.Size = new System.Drawing.Size(200, 23);
-            cmbxFunds.TabIndex = 3;
+            cmbxFunds.TabIndex = 4;
             // 
-            // dtPickerDate
+            // dtAsOf
             // 
-            dtPickerDate.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
-            dtPickerDate.CustomFormat = "MMM dd, yyyy";
-            dtPickerDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            dtPickerDate.Location = new System.Drawing.Point(257, 7);
-            dtPickerDate.Name = "dtPickerDate";
-            dtPickerDate.Size = new System.Drawing.Size(130, 23);
-            dtPickerDate.TabIndex = 4;
+            dtAsOf.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+            dtAsOf.CustomFormat = "MMM dd, yyyy";
+            dtAsOf.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            dtAsOf.Location = new System.Drawing.Point(275, 7);
+            dtAsOf.Name = "dtAsOf";
+            dtAsOf.Size = new System.Drawing.Size(130, 23);
+            dtAsOf.TabIndex = 3;
             // 
             // btnRetrieve
             // 
             btnRetrieve.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
-            btnRetrieve.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            btnRetrieve.Location = new System.Drawing.Point(393, 7);
+            btnRetrieve.Location = new System.Drawing.Point(411, 7);
             btnRetrieve.Name = "btnRetrieve";
             btnRetrieve.Size = new System.Drawing.Size(150, 23);
             btnRetrieve.TabIndex = 5;
             btnRetrieve.Text = "Run Report";
-            btnRetrieve.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             btnRetrieve.UseVisualStyleBackColor = true;
             btnRetrieve.Click += btnRetrieve_Click;
             // 
-            // panel1
-            // 
-            panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            panel1.Location = new System.Drawing.Point(0, 37);
-            panel1.Name = "panel1";
-            panel1.Size = new System.Drawing.Size(550, 297);
-            panel1.TabIndex = 6;
-            // 
-            // ucStatementOfCashFlows
+            // ucStatementOfFinancialPosition
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            BackColor = System.Drawing.SystemColors.Control;
             Controls.Add(panel1);
             Controls.Add(panel2);
-            Name = "ucStatementOfCashFlows";
-            Size = new System.Drawing.Size(550, 334);
+            Name = "ucStatementOfFinancialPosition";
+            Size = new System.Drawing.Size(568, 345);
             panel2.ResumeLayout(false);
             ResumeLayout(false);
         }
 
         #endregion
-
-        private System.Windows.Forms.Panel panel2;
-        internal System.Windows.Forms.ComboBox cmbxFunds;
-        internal System.Windows.Forms.DateTimePicker dtPickerDate;
-        internal System.Windows.Forms.Button btnRetrieve;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.ComboBox cmbxFunds;
+        private System.Windows.Forms.DateTimePicker dtAsOf;
+        private System.Windows.Forms.Button btnRetrieve;
     }
 }

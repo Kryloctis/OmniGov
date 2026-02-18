@@ -1,9 +1,8 @@
-using LFS.Helpers;
-using LFS.Views.Transactions.RCI;
+using OmniGov.App.Helpers;
 using System;
 using System.Windows.Forms;
 
-namespace LFS.Views.Transactions.CheckIssuance.Obligations
+namespace OmniGov.App.Views.Transactions.CheckIssuance.Obligations
 
 {
     public partial class frmChckIssOblgtns : Form

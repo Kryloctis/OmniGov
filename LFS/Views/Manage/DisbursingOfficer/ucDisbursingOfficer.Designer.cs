@@ -1,5 +1,5 @@
 
-namespace LFS.Views.Manage.DisbursingOfficer
+namespace OmniGov.App.Views.Manage.DisbursingOfficer
 {
     partial class ucDisbursingOfficer
     {

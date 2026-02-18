@@ -1,13 +1,12 @@
-using LFS.Helpers;
-using OmniGov.Core.Repositories;
+using OmniGov.App.Helpers;
 using OmniGov.Core.Factories;
 using System;
 using System.ComponentModel;
 using System.Windows.Forms;
-using Treasury.Domain.Entities;
 using Treasury.Data.Factories;
+using Treasury.Domain.Entities;
 
-namespace LFS.Views.Transactions.Payments.CattleOwnership
+namespace OmniGov.App.Views.Transactions.Payments.CattleOwnership
 {
     public partial class ucCattleOwnership : UserControl
     {
@@ -125,4 +124,3 @@ namespace LFS.Views.Transactions.Payments.CattleOwnership
         }
     }
 }
-

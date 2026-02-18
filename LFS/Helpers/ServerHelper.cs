@@ -7,7 +7,7 @@ using System.Configuration;
 using System.Drawing;
 using System.Net.NetworkInformation;
 
-namespace LFS.Helpers
+namespace OmniGov.App.Helpers
 {
     public class ServerHelper
     {

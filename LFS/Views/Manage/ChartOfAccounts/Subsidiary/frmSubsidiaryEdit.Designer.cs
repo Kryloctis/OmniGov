@@ -1,5 +1,6 @@
+using OmniGov.App.Views.Manage.ChartOfAccounts.Subsidiary;
 
-namespace LFS.Views.Manage.ChartOfAccounts.Subsidiary
+namespace OmniGov.App.Views.Manage.ChartOfAccounts.Subsidiary
 {
     partial class frmSubsidiaryEdit
     {

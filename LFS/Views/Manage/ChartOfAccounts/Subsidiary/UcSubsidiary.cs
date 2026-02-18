@@ -1,11 +1,10 @@
-using LFS.Helpers;
-using OmniGov.Core.Repositories;
+using OmniGov.App.Helpers;
 using OmniGov.Core.Factories;
 using System;
 using System.ComponentModel;
 using System.Windows.Forms;
 
-namespace LFS.Views.Manage.ChartOfAccounts.Subsidiary
+namespace OmniGov.App.Views.Manage.ChartOfAccounts.Subsidiary
 {
     public partial class ucSubsidiary : UserControl
     {

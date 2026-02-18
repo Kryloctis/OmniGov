@@ -1,5 +1,5 @@
 
-namespace LFS.Views.Transactions.CheckIssuance.Deductions
+namespace OmniGov.App.Views.Transactions.CheckIssuance.Deductions
 {
     partial class frmDeductions
     {

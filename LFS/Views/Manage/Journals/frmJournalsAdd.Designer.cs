@@ -1,5 +1,6 @@
+using OmniGov.App.Views.Manage.Journals;
 
-namespace LFS.Views.Manage.Journals
+namespace OmniGov.App.Views.Manage.Journals
 {
     partial class frmJournalsAdd
     {

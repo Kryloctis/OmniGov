@@ -1,5 +1,5 @@
 
-namespace LFS.Views.Manage.ChartOfAccounts
+namespace OmniGov.App.Views.Manage.ChartOfAccounts
 {
     partial class frmChartOfAccounts
     {

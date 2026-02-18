@@ -1,4 +1,4 @@
-namespace LFS.Views.Dashboard.Manage
+namespace OmniGov.App.Views.Dashboard.Manage
 {
     partial class ucManage
     {

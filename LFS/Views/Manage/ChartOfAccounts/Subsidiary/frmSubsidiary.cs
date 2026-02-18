@@ -1,16 +1,14 @@
+using Accounting.Data.Factories;
 using Accounting.Domain.Entities;
-using LFS.Helpers;
-using LFS.Views.Manage.BeginningBalances;
-using LFS.Views.Manage.ChartOfAccounts.BeginningBalances;
 using MySql.Data.MySqlClient;
-using OmniGov.Core.Repositories;
+using OmniGov.App.Helpers;
+using OmniGov.App.Views.Manage.ChartOfAccounts.BeginningBalances;
 using OmniGov.Core.Factories;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using Accounting.Data.Factories;
 
-namespace LFS.Views.Manage.ChartOfAccounts.Subsidiary
+namespace OmniGov.App.Views.Manage.ChartOfAccounts.Subsidiary
 {
     public partial class frmSubsidiary : Form
     {

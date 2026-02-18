@@ -1,5 +1,5 @@
 
-namespace LFS.Views.Manage.ChartOfAccounts.MajorAccountGroup
+namespace OmniGov.App.Views.Manage.ChartOfAccounts.MajorAccountGroup
 {
     partial class UcMajorAccountGroup
     {

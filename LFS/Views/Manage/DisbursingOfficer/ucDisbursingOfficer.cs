@@ -1,13 +1,12 @@
-using LFS.Helpers;
-using LFS.Views.Manage.LinkUser;
-using OmniGov.Core.Repositories;
+using OmniGov.App.Helpers;
+using OmniGov.App.Views.Manage.LinkUser;
 using OmniGov.Core.Factories;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Forms;
 
-namespace LFS.Views.Manage.DisbursingOfficer
+namespace OmniGov.App.Views.Manage.DisbursingOfficer
 {
     public partial class ucDisbursingOfficer : UserControl
     {

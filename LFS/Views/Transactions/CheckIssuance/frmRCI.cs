@@ -1,5 +1,5 @@
-using LFS.Helpers;
 using MySql.Data.MySqlClient;
+using OmniGov.App.Helpers;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -8,7 +8,7 @@ using System.Windows.Forms;
 using Treasury.Data.Factories;
 using Treasury.Domain.Entities;
 
-namespace LFS.Views.Transactions.RCI
+namespace OmniGov.App.Views.Transactions.CheckIssuance
 {
     public partial class frmRCI : Form
     {

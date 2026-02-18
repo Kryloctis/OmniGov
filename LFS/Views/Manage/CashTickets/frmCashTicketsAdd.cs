@@ -1,9 +1,9 @@
-using LFS.Helpers;
+using OmniGov.App.Helpers;
 using System;
 using System.Windows.Forms;
 using Treasury.Data.Factories;
 
-namespace LFS.Views.Manage.CashTickets
+namespace OmniGov.App.Views.Manage.CashTickets
 {
     public partial class frmCashTicketsAdd : Form
     {

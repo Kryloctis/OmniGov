@@ -1,11 +1,10 @@
-using LFS.Helpers;
+using OmniGov.App.Helpers;
 using OmniGov.Core.Entities;
-using OmniGov.Core.Repositories;
 using OmniGov.Core.Factories;
 using System;
 using System.Windows.Forms;
 
-namespace LFS.Views.Manage.FunctionProgramProject.FunctionalClassification
+namespace OmniGov.App.Views.Manage.FunctionProgramProject.FunctionalClassification
 {
     public partial class frmFunctionalClassificationAdd : Form
     {

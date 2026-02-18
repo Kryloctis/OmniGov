@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace LFS.Views.Reports.Financial_Statements
+namespace OmniGov.App.Accounting.Views.Reports.FinancialStatements
 {
     public partial class StatementOfCashFlowsData
     {

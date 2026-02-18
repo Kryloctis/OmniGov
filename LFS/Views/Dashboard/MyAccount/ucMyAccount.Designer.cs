@@ -1,4 +1,4 @@
-namespace LFS.Views.Dashboard.MyAccount
+namespace OmniGov.App.Views.Dashboard.MyAccount
 {
     partial class ucMyAccount
     {

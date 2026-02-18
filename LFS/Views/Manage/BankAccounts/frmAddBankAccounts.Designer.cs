@@ -1,4 +1,5 @@
-namespace LFS.Views.Manage.BankAccounts
+using OmniGov.App.Views.Manage.BankAccounts;
+namespace OmniGov.App.Views.Manage.BankAccounts
 {
     partial class frmAddBankAccounts
     {

@@ -1,4 +1,5 @@
-namespace LFS.Views.Manage.TaxPayers
+using OmniGov.App.Views.Manage.RealProperties;
+namespace OmniGov.App.Views.Manage.RealProperties
 {
     partial class frmEditRealProperties
     {

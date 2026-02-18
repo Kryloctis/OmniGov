@@ -1,31 +1,31 @@
-using LFS.Helpers;
-using LFS.Views.Manage.CashTickets;
-using LFS.Views.Manage.CollectingOfficer;
-using LFS.Views.Manage.DisbursingOfficer;
-using LFS.Views.Manage.FeesChargesConfig;
-using LFS.Views.Manage.RealProperties;
-using LFS.Views.Manage.Receipts;
-using LFS.Views.Manage.TaxPayers;
-using LFS.Views.Transactions.Assessment;
-using LFS.Views.Transactions.Auction;
-using LFS.Views.Transactions.BankDeposits;
-using LFS.Views.Transactions.Biddings;
-using LFS.Views.Transactions.CashTicketIssuance;
-using LFS.Views.Transactions.Payments;
-using LFS.Views.Transactions.Payments.AF51_57;
-using LFS.Views.Transactions.Payments.BurialPermit;
-using LFS.Views.Transactions.Payments.CattleOwnership;
-using LFS.Views.Transactions.Payments.CattleTransferOfOwnership;
-using LFS.Views.Transactions.Payments.CommunityTaxCertificate;
-using LFS.Views.Transactions.Payments.MarriageLicense;
-using LFS.Views.Transactions.Payments.PaymentHistory;
-using LFS.Views.Transactions.RCI;
-using LFS.Views.Transactions.ReceiptsIssued;
-using LFS.Views.Transactions.ReleasedAndUnReleasedChecks;
+using OmniGov.App.Helpers;
+using OmniGov.App.Views.Manage.CashTicketIssuance;
+using OmniGov.App.Views.Manage.CashTickets;
+using OmniGov.App.Views.Manage.CollectingOfficer;
+using OmniGov.App.Views.Manage.DisbursingOfficer;
+using OmniGov.App.Views.Manage.FeesChargesConfig;
+using OmniGov.App.Views.Manage.RealProperties;
+using OmniGov.App.Views.Manage.Receipts;
+using OmniGov.App.Views.Manage.TaxPayers;
+using OmniGov.App.Views.Transactions.Assessment;
+using OmniGov.App.Views.Transactions.Auction;
+using OmniGov.App.Views.Transactions.BankDeposits;
+using OmniGov.App.Views.Transactions.Biddings;
+using OmniGov.App.Views.Transactions.CheckIssuance;
+using OmniGov.App.Views.Transactions.Payments.AF51And57;
+using OmniGov.App.Views.Transactions.Payments.BurialPermit;
+using OmniGov.App.Views.Transactions.Payments.CattleOwnership;
+using OmniGov.App.Views.Transactions.Payments.CattleTransferOfOwnership;
+using OmniGov.App.Views.Transactions.Payments.CommunityTaxCertificate;
+using OmniGov.App.Views.Transactions.Payments.MarriageLicense;
+using OmniGov.App.Views.Transactions.Payments.PaymentHistory;
+using OmniGov.App.Views.Transactions.Payments.RealProperty;
+using OmniGov.App.Views.Transactions.ReceiptsIssued;
+using OmniGov.App.Views.Transactions.ReleasedAndUnReleasedChecks;
 using System;
 using System.Windows.Forms;
 
-namespace LFS.Views.Dashboard.Treasury
+namespace OmniGov.App.Views.Dashboard.Treasury
 {
     public partial class ucTreasury : UserControl
     {
@@ -115,7 +115,7 @@ namespace LFS.Views.Dashboard.Treasury
         {
             try
             {
-                _ = new frmAF51_57().ShowDialog();
+                _ = new frmAF51And57().ShowDialog();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }

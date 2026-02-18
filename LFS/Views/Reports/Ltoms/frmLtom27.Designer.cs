@@ -1,4 +1,4 @@
-namespace LFS.Views.Reports.Ltoms
+namespace OmniGov.App.Views.Reports.Ltoms
 {
     partial class frmLtom27
     {

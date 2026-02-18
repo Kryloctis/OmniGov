@@ -1,5 +1,5 @@
 
-namespace LFS.Views.Manage.Amortization
+namespace OmniGov.App.Views.Manage.AmortizationSchedule
 {
     partial class ucAmortizationSchedule
     {

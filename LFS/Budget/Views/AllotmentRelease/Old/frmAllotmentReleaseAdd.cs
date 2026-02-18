@@ -1,9 +1,9 @@
 using Budget.Data.Factories;
-using LFS.Helpers;
+using OmniGov.App.Helpers;
 using System;
 using System.Windows.Forms;
 
-namespace LFS.Budget.Views.AllotmentRelease
+namespace OmniGov.App.Budget.Views.AllotmentRelease.Old
 {
     public partial class frmAllotmentReleaseAdd : Form
     {

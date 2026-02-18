@@ -1,5 +1,5 @@
 
-namespace LFS.Budget.Views.Obligations
+namespace OmniGov.App.Budget.Views.Obligations
 {
     partial class ucObligations
     {

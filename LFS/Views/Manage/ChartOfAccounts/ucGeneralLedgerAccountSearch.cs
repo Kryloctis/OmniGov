@@ -1,11 +1,11 @@
 using Accounting.Data.Factories;
-using LFS.Helpers;
+using OmniGov.App.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Windows.Forms;
 
-namespace LFS.Views.Manage.ChartOfAccounts
+namespace OmniGov.App.Views.Manage.ChartOfAccounts
 {
     public partial class ucGeneralLedgerAccountSearch : UserControl
     {

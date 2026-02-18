@@ -1,24 +1,24 @@
-using LFS.Helpers;
-using LFS.Views.Manage.AccountableForm;
-using LFS.Views.Manage.AllotmentClasses;
-using LFS.Views.Manage.BankAccounts;
-using LFS.Views.Manage.Banks;
-using LFS.Views.Manage.Barangay;
-using LFS.Views.Manage.ChartOfAccounts;
-using LFS.Views.Manage.FunctionProgramProject;
-using LFS.Views.Manage.Funds;
-using LFS.Views.Manage.Journals;
-using LFS.Views.Manage.Registry;
-using LFS.Views.Manage.RptDiscount;
-using LFS.Views.Manage.RptPenalties;
-using LFS.Views.Manage.RptTaxRates;
-using LFS.Views.Manage.Signatories;
-using LFS.Views.Manage.Users;
-using LFS.Views.Manage.Users.Roles;
+using OmniGov.App.Helpers;
+using OmniGov.App.Views.Manage.AccountableForm;
+using OmniGov.App.Views.Manage.AllotmentClasses;
+using OmniGov.App.Views.Manage.BankAccounts;
+using OmniGov.App.Views.Manage.Banks;
+using OmniGov.App.Views.Manage.Barangay;
+using OmniGov.App.Views.Manage.ChartOfAccounts;
+using OmniGov.App.Views.Manage.FunctionProgramProject;
+using OmniGov.App.Views.Manage.Funds;
+using OmniGov.App.Views.Manage.Journals;
+using OmniGov.App.Views.Manage.Registry;
+using OmniGov.App.Views.Manage.Roles;
+using OmniGov.App.Views.Manage.RptDiscounts;
+using OmniGov.App.Views.Manage.RptPenalties;
+using OmniGov.App.Views.Manage.RptTaxRates;
+using OmniGov.App.Views.Manage.Signatories;
+using OmniGov.App.Views.Manage.Users;
 using System;
 using System.Windows.Forms;
 
-namespace LFS.Views.Dashboard.Manage
+namespace OmniGov.App.Views.Dashboard.Manage
 {
     public partial class ucManage : UserControl
     {

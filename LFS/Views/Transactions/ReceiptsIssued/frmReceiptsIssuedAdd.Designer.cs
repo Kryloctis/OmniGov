@@ -1,5 +1,6 @@
+using OmniGov.App.Views.Transactions.ReceiptsIssued;
 
-namespace LFS.Views.Transactions.ReceiptsIssued
+namespace OmniGov.App.Views.Transactions.ReceiptsIssued
 {
     partial class frmReceiptsIssuedAdd
     {
@@ -32,7 +33,7 @@ namespace LFS.Views.Transactions.ReceiptsIssued
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
-            this.ucReceipts1 = new LFS.Views.Transactions.ReceiptsIssued.ucReceiptsIssued();
+            this.ucReceipts1 = new OmniGov.App.Views.Transactions.ReceiptsIssued.ucReceiptsIssued();
             this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 

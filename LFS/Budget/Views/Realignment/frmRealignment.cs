@@ -1,9 +1,9 @@
-using LFS.Budget.Views.BudgetAppropriations;
-using LFS.Helpers;
+using OmniGov.App.Budget.Views.BudgetAppropriations;
+using OmniGov.App.Helpers;
 using System;
 using System.Windows.Forms;
 
-namespace LFS.Budget.Views.Realignment
+namespace OmniGov.App.Budget.Views.Realignment
 {
     public partial class frmRealignment : Form
     {

@@ -1,5 +1,5 @@
 
-namespace LFS.Views.Manage.FunctionProgramProject.OthersFunctionProgramProject
+namespace OmniGov.App.Views.Manage.FunctionProgramProject.OthersFunctionProgramProject
 {
     partial class ucOthersFunctionProgramProject
     {

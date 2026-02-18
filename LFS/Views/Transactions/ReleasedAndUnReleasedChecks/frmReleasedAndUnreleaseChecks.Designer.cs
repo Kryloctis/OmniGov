@@ -1,4 +1,6 @@
-namespace LFS.Views.Transactions.ReleasedAndUnReleasedChecks
+using OmniGov.App.Views.Transactions.ReleasedAndUnReleasedChecks;
+
+namespace OmniGov.App.Views.Transactions.ReleasedAndUnReleasedChecks
 {
     partial class frmReleasedAndUnreleaseChecks
     {

@@ -1,5 +1,5 @@
 
-namespace LFS.Views.Manage.Receipts
+namespace OmniGov.App.Views.Manage.Receipts
 {
     partial class frmReceipts
     {

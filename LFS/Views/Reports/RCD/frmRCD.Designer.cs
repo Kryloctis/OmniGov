@@ -1,5 +1,5 @@
-using LFS.Views.Reports.Rcd;
-namespace LFS.Views.Reports.Rcd
+using OmniGov.App.Views.Reports.RCD;
+namespace OmniGov.App.Views.Reports.RCD
 {
     partial class frmRcd
     {

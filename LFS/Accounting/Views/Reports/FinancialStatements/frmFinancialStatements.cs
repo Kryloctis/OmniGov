@@ -1,8 +1,8 @@
-using LFS.Helpers;
+using OmniGov.App.Helpers;
 using System;
 using System.Windows.Forms;
 
-namespace LFS.Views.Reports.Financial_Statements
+namespace OmniGov.App.Accounting.Views.Reports.FinancialStatements
 {
     public partial class frmFinancialStatements : Form
     {

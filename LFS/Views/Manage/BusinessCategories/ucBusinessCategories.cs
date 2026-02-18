@@ -1,12 +1,11 @@
-using LFS.Helpers;
-using OmniGov.Core.Repositories;
+using OmniGov.App.Helpers;
 using OmniGov.Core.Factories;
 using System;
 using System.ComponentModel;
 using System.Windows.Forms;
 using Treasury.Data.Factories;
 
-namespace LFS.Views.Manage.BusinessCategories
+namespace OmniGov.App.Views.Manage.BusinessCategories
 {
     public partial class ucBusinessCategories : UserControl
     {

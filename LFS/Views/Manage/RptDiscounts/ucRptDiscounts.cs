@@ -1,12 +1,11 @@
-using LFS.Helpers;
-using OmniGov.Core.Repositories;
+using OmniGov.App.Helpers;
 using OmniGov.Core.Factories;
 using System;
 using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
 
-namespace LFS.Views.Manage.RptDiscount
+namespace OmniGov.App.Views.Manage.RptDiscounts
 {
     public partial class ucRptDiscounts : UserControl
     {

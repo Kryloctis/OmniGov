@@ -1,5 +1,5 @@
 
-namespace LFS.Views.Manage.JobOrders
+namespace OmniGov.App.Views.Manage.JobOrders
 {
     partial class ucJobOrder
     {

@@ -1,4 +1,4 @@
-namespace LFS.CustomTools
+namespace OmniGov.App.CustomTools
 {
     partial class CustomTabControl
     {

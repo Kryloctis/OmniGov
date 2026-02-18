@@ -1,7 +1,10 @@
 
-namespace LFS.Views.Transactions.Payments.AF51_57
+using OmniGov.App.Views.Transactions.Payments;
+
+
+namespace OmniGov.App.Views.Transactions.Payments.AF51And57
 {
-    partial class frmAF51_57
+    partial class frmAF51And57
     {
         /// <summary>
         /// Required designer variable.
@@ -42,7 +45,7 @@ namespace LFS.Views.Transactions.Payments.AF51_57
             tabPagePayment = new System.Windows.Forms.TabPage();
             ucPayment1 = new ucPayment();
             tabPageReceipt = new System.Windows.Forms.TabPage();
-            ucPrintReceipt1 = new BurialPermit.ucPrintReceipt();
+            ucPrintReceipt1 = new OmniGov.App.Views.Transactions.Payments.ucPrintReceipt();
             flowLayoutPanel2.SuspendLayout();
             flowLayoutPanel1.SuspendLayout();
             tabControlMain.SuspendLayout();
@@ -253,6 +256,6 @@ namespace LFS.Views.Transactions.Payments.AF51_57
         private ucPayment ucPayment1;
         private ucPaymentFeesCharges ucPaymentFeesCharges1;
         private System.Windows.Forms.TabPage tabPageReceipt;
-        private BurialPermit.ucPrintReceipt ucPrintReceipt1;
+        private OmniGov.App.Views.Transactions.Payments.ucPrintReceipt ucPrintReceipt1;
     }
 }

@@ -1,4 +1,4 @@
-using LFS.Helpers;
+using OmniGov.App.Helpers;
 using OmniGov.Core.Entities;
 using PropertyAssessment.Data.Factories;
 using System;
@@ -8,7 +8,7 @@ using System.Windows.Forms;
 using Treasury.Data.Factories;
 using Treasury.Domain.Entities;
 
-namespace LFS.Views.Manage.DatabaseSynchronization
+namespace OmniGov.App.Views.Manage.DatabaseSynchronization
 {
     public partial class frmDatabaseSynchronization : Form
     {

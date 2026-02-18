@@ -1,5 +1,6 @@
+using OmniGov.App.Views.Manage.Users;
 
-namespace LFS.Views.Manage.Users
+namespace OmniGov.App.Views.Manage.Users
 {
     partial class frmUsers
     {
@@ -52,7 +53,7 @@ namespace LFS.Views.Manage.Users
             searchTstrpBtn = new System.Windows.Forms.ToolStripButton();
             searchTstrpTxt = new System.Windows.Forms.ToolStripTextBox();
             miniToolStrip = new System.Windows.Forms.ToolStrip();
-            tabControl1 = new LFS.CustomTools.CustomTabControl();
+            tabControl1 = new OmniGov.App.CustomTools.CustomTabControl();
             tbPgCrud = new System.Windows.Forms.TabPage();
             ucUsers1 = new ucUsers();
             flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
@@ -469,7 +470,7 @@ namespace LFS.Views.Manage.Users
         private System.Windows.Forms.ToolStripButton searchTstrpBtn;
         private System.Windows.Forms.ToolStripTextBox searchTstrpTxt;
         private System.Windows.Forms.ToolStrip miniToolStrip;
-        private LFS.CustomTools.CustomTabControl tabControl1;
+        private OmniGov.App.CustomTools.CustomTabControl tabControl1;
         private System.Windows.Forms.TabPage tbPgCrud;
         private System.Windows.Forms.ToolStrip toolStrip2;
         private System.Windows.Forms.ToolStripButton tlStrpBtnBck;

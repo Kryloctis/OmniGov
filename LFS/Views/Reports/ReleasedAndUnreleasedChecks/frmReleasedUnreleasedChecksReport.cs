@@ -1,6 +1,5 @@
-using LFS.Helpers;
 using Microsoft.Reporting.WinForms;
-using OmniGov.Core.Repositories;
+using OmniGov.App.Helpers;
 using OmniGov.Core.Factories;
 using System;
 using System.Collections.Generic;
@@ -9,7 +8,7 @@ using System.Data;
 using System.Windows.Forms;
 using Treasury.Data.Factories;
 
-namespace LFS.Views.Reports.ReleasedAndUnreleasedCheques
+namespace OmniGov.App.Views.Reports.ReleasedAndUnreleasedChecks
 {
     public partial class frmReleasedUnreleasedChecksReport : Form
     {
@@ -219,4 +218,3 @@ namespace LFS.Views.Reports.ReleasedAndUnreleasedCheques
         }
     }
 }
-

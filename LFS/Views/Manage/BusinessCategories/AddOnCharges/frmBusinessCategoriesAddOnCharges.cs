@@ -1,4 +1,4 @@
-using LFS.Helpers;
+using OmniGov.App.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -6,7 +6,7 @@ using System.Windows.Forms;
 using Treasury.Data.Factories;
 using Treasury.Domain.Entities;
 
-namespace LFS.Views.Manage.BusinessCategories.AddOnCharges
+namespace OmniGov.App.Views.Manage.BusinessCategories.AddOnCharges
 {
     public partial class frmBusinessCategoriesAddOnCharges : Form
     {

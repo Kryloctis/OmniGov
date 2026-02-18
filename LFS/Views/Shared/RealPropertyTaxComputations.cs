@@ -1,7 +1,7 @@
 using System;
 using Treasury.Data.Factories;
 
-namespace LFS.Views.Shared
+namespace OmniGov.App.Views.Shared
 {
     public static class RealPropertyTaxComputations
     {

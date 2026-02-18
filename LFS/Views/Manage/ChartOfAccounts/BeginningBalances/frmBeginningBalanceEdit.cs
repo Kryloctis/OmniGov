@@ -1,13 +1,12 @@
 using Accounting.Data.Factories;
 using Accounting.Domain.Entities;
-using LFS.Helpers;
-using LFS.Views.Manage.BeginningBalances;
-using LFS.Views.Manage.ChartOfAccounts.Subsidiary;
+using OmniGov.App.Helpers;
+using OmniGov.App.Views.Manage.ChartOfAccounts.Subsidiary;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
-namespace LFS.Views.Manage.ChartOfAccounts.BeginningBalances
+namespace OmniGov.App.Views.Manage.ChartOfAccounts.BeginningBalances
 {
     public partial class frmBeginningBalanceEdit : Form
     {

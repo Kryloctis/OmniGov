@@ -1,5 +1,5 @@
 
-namespace LFS.Views.Reports.TrialBalance
+namespace OmniGov.App.Accounting.Views.Reports.TrialBalance
 {
     partial class ucPreClosingTrialBalance
     {

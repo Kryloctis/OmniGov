@@ -1,5 +1,6 @@
+using OmniGov.App.Views.Manage.RptDiscounts;
 
-namespace LFS.Views.Manage.RptDiscount
+namespace OmniGov.App.Views.Manage.RptDiscounts
 {
     partial class frmAddRptDiscount
     {
@@ -32,7 +33,7 @@ namespace LFS.Views.Manage.RptDiscount
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
-            this.ucRptDiscounts1 = new LFS.Views.Manage.RptDiscount.ucRptDiscounts();
+            this.ucRptDiscounts1 = new OmniGov.App.Views.Manage.RptDiscounts.ucRptDiscounts();
             this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 

@@ -1,7 +1,6 @@
-using LFS.Helpers;
-using LFS.Views.Transactions.CheckIssuance.Deductions;
-using LFS.Views.Transactions.CheckIssuance.Obligations;
-using OmniGov.Core.Repositories;
+using OmniGov.App.Helpers;
+using OmniGov.App.Views.Transactions.CheckIssuance.Deductions;
+using OmniGov.App.Views.Transactions.CheckIssuance.Obligations;
 using OmniGov.Core.Factories;
 using System;
 using System.Collections.Generic;
@@ -10,7 +9,7 @@ using System.Data;
 using System.Windows.Forms;
 using Treasury.Data.Factories;
 
-namespace LFS.Views.Transactions.RCI
+namespace OmniGov.App.Views.Transactions.CheckIssuance
 {
     public partial class ucRCI : UserControl
     {
@@ -307,4 +306,3 @@ namespace LFS.Views.Transactions.RCI
         }
     }
 }
-

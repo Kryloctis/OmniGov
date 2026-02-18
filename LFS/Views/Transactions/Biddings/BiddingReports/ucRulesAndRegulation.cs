@@ -1,11 +1,11 @@
-using LFS.Helpers;
 using Microsoft.Reporting.WinForms;
+using OmniGov.App.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace LFS.Views.Transactions.Biddings.BiddingReports
+namespace OmniGov.App.Views.Transactions.Biddings.BiddingReports
 {
     public partial class ucRulesAndRegulation : UserControl
     {

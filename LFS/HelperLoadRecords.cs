@@ -1,6 +1,6 @@
 using Accounting.Data.Factories;
 using Budget.Data.Factories;
-using LFS.Helpers;
+using OmniGov.App.Helpers;
 using OmniGov.Core.Factories;
 using System;
 using System.Collections.Generic;
@@ -9,7 +9,7 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace LFS
+namespace OmniGov.App
 {
     public class HelperLoadRecords
     {

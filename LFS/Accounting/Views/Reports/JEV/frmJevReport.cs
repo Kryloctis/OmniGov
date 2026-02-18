@@ -1,13 +1,13 @@
 using Accounting.Data.Factories;
-using LFS.Helpers;
 using Microsoft.Reporting.WinForms;
+using OmniGov.App.Helpers;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
 
-namespace LFS.Views.Reports.JEV
+namespace OmniGov.App.Accounting.Views.Reports.JEV
 {
     public partial class frmJEVReport : Form
     {

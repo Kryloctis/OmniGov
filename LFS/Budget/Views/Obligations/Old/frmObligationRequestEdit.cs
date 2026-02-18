@@ -1,9 +1,9 @@
 using Budget.Data.Factories;
-using LFS.Helpers;
+using OmniGov.App.Helpers;
 using System;
 using System.Windows.Forms;
 
-namespace LFS.Budget.Views.Obligations
+namespace OmniGov.App.Budget.Views.Obligations.Old
 {
     public partial class frmObligationRequestEdit : Form
     {

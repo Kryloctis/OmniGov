@@ -1,4 +1,4 @@
-namespace LFS.Views.Manage.TaxPayers
+namespace OmniGov.App.Views.Manage.RealProperties
 {
     partial class ucRealProperties
     {

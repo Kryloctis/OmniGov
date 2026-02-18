@@ -1,5 +1,5 @@
 
-namespace LFS.Views.Reports.ConsolidatedReceipts
+namespace OmniGov.App.Views.Reports.ConsolidatedReceipts
 {
     partial class frmConsolidatedReceipts
     {

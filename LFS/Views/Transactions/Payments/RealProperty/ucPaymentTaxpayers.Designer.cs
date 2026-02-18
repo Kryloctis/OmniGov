@@ -1,4 +1,4 @@
-namespace LFS.Views.Transactions.Payments.RealProperty
+namespace OmniGov.App.Views.Transactions.Payments.RealProperty
 {
     partial class ucPaymentTaxpayers
     {

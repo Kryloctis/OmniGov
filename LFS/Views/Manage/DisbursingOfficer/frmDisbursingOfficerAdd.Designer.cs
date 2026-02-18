@@ -1,4 +1,5 @@
-namespace LFS.Views.Manage.DisbursingOfficer
+using OmniGov.App.Views.Manage.DisbursingOfficer;
+namespace OmniGov.App.Views.Manage.DisbursingOfficer
 {
     partial class frmDisbursingOfficerAdd
     {

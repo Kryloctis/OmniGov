@@ -1,5 +1,5 @@
 
-namespace LFS.Budget.Views.SupplementalAppropriations
+namespace OmniGov.App.Budget.Views.SupplementalAppropriations
 {
     partial class frmSupplementalAppropriationsMain
     {
@@ -94,7 +94,7 @@ namespace LFS.Budget.Views.SupplementalAppropriations
             // 
             // btnSave
             // 
-            this.btnSave.Image = global::LFS.Properties.Resources.save14px;
+            this.btnSave.Image = global::OmniGov.App.Properties.Resources.save14px;
             this.btnSave.Location = new System.Drawing.Point(336, 3);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 23);

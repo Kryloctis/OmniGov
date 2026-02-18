@@ -1,6 +1,5 @@
-using LFS.Budget.Views.Augmentation;
 
-namespace LFS.Budget.Views.Augmentation
+namespace OmniGov.App.Budget.Views.Augmentation
 {
     partial class frmAugmentation
     {
@@ -66,7 +65,7 @@ namespace LFS.Budget.Views.Augmentation
             // 
             // btnAdd
             // 
-            this.btnAdd.Image = global::LFS.Properties.Resources.add;
+            this.btnAdd.Image = global::OmniGov.App.Properties.Resources.add;
             this.btnAdd.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnAdd.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnAdd.Margin = new System.Windows.Forms.Padding(10, 1, 0, 2);
@@ -77,7 +76,7 @@ namespace LFS.Budget.Views.Augmentation
             // 
             // btnEdit
             // 
-            this.btnEdit.Image = global::LFS.Properties.Resources.edit;
+            this.btnEdit.Image = global::OmniGov.App.Properties.Resources.edit;
             this.btnEdit.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnEdit.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnEdit.Name = "btnEdit";
@@ -87,7 +86,7 @@ namespace LFS.Budget.Views.Augmentation
             // 
             // btnDelete
             // 
-            this.btnDelete.Image = global::LFS.Properties.Resources.delete;
+            this.btnDelete.Image = global::OmniGov.App.Properties.Resources.delete;
             this.btnDelete.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnDelete.Name = "btnDelete";
@@ -187,7 +186,7 @@ namespace LFS.Budget.Views.Augmentation
             // btnSearch
             // 
             this.btnSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSearch.Image = global::LFS.Properties.Resources.find1;
+            this.btnSearch.Image = global::OmniGov.App.Properties.Resources.find1;
             this.btnSearch.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnSearch.Location = new System.Drawing.Point(731, 12);
             this.btnSearch.Name = "btnSearch";

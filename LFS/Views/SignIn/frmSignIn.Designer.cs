@@ -1,5 +1,5 @@
 
-namespace LFS.Views.SignIn
+namespace OmniGov.App.Views.SignIn
 {
     partial class frmSignIn
     {

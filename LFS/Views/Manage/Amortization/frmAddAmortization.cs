@@ -1,8 +1,8 @@
-using LFS.Helpers;
+using OmniGov.App.Helpers;
 using System;
 using System.Windows.Forms;
 
-namespace LFS.Views.Manage.Amortization
+namespace OmniGov.App.Views.Manage.Amortization
 {
     public partial class frmAddAmortization : Form
     {

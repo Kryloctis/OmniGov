@@ -1,10 +1,9 @@
-using LFS.Helpers;
-using OmniGov.Core.Repositories;
+using OmniGov.App.Helpers;
 using OmniGov.Core.Factories;
 using System;
 using System.Windows.Forms;
 
-namespace LFS.Views.Manage.Funds
+namespace OmniGov.App.Views.Manage.Funds
 {
     public partial class frmFundEdit : Form
     {

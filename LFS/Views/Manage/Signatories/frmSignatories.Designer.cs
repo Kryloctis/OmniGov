@@ -1,5 +1,5 @@
 
-namespace LFS.Views.Manage.Signatories
+namespace OmniGov.App.Views.Manage.Signatories
 {
     partial class frmSignatories
     {

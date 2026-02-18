@@ -1,12 +1,11 @@
-using LFS.Helpers;
-using OmniGov.Core.Repositories;
+using Budget.Data.Factories;
+using OmniGov.App.Helpers;
 using OmniGov.Core.Factories;
 using System;
 using System.Data;
 using System.Windows.Forms;
-using Budget.Data.Factories;
 
-namespace LFS.Budget.Dashboard
+namespace OmniGov.App.Budget.Views.Dashboard
 {
     public partial class ucBudgetSummary : UserControl
     {
@@ -327,4 +326,3 @@ namespace LFS.Budget.Dashboard
         }
     }
 }
-

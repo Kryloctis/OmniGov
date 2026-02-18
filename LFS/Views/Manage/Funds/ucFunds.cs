@@ -1,12 +1,11 @@
-using LFS.Helpers;
+using OmniGov.App.Helpers;
 using OmniGov.Core.Entities;
-using OmniGov.Core.Repositories;
 using OmniGov.Core.Factories;
 using System;
 using System.ComponentModel;
 using System.Windows.Forms;
 
-namespace LFS.Views.Manage.Funds
+namespace OmniGov.App.Views.Manage.Funds
 {
     public partial class ucFunds : UserControl
     {

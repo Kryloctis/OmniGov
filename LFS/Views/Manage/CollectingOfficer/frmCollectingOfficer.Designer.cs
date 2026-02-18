@@ -1,5 +1,5 @@
 
-namespace LFS.Views.Manage.CollectingOfficer
+namespace OmniGov.App.Views.Manage.CollectingOfficer
 {
     partial class frmCollectingOfficer
     {

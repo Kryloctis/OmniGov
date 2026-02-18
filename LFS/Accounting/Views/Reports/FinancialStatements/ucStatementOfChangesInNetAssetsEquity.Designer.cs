@@ -1,5 +1,5 @@
 
-namespace LFS.Views.Reports.Financial_Statements
+namespace OmniGov.App.Accounting.Views.Reports.FinancialStatements
 {
     partial class ucStatementOfChangesInNetAssetsEquity
     {

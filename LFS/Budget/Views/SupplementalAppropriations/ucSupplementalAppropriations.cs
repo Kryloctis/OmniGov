@@ -1,10 +1,9 @@
-using LFS.Helpers;
-using OmniGov.Core.Repositories;
+using OmniGov.App.Helpers;
 using OmniGov.Core.Factories;
 using System;
 using System.Windows.Forms;
 
-namespace LFS.Budget.Views.SupplementalAppropriations
+namespace OmniGov.App.Budget.Views.SupplementalAppropriations
 {
     public partial class ucSupplementalAppropriations : UserControl
     {

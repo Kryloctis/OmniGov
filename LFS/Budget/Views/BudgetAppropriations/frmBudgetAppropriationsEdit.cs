@@ -1,10 +1,10 @@
 using Budget.Data.Factories;
 using Budget.Domain.Models;
-using LFS.Helpers;
+using OmniGov.App.Helpers;
 using System;
 using System.Windows.Forms;
 
-namespace LFS.Budget.Views.BudgetAppropriations
+namespace OmniGov.App.Budget.Views.BudgetAppropriations
 {
     public partial class frmBudgetAppropriationsEdit : Form
     {

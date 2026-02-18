@@ -1,5 +1,6 @@
+using OmniGov.App.Views.Manage.RptPenalties;
 
-namespace LFS.Views.Manage.RptPenalties
+namespace OmniGov.App.Views.Manage.RptPenalties
 {
     partial class frmAddRptPenalty
     {
@@ -33,7 +34,7 @@ namespace LFS.Views.Manage.RptPenalties
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.ucRptPenalties1 = new LFS.Views.Manage.RptPenalties.ucRptPenalties();
+            this.ucRptPenalties1 = new OmniGov.App.Views.Manage.RptPenalties.ucRptPenalties();
             this.flowLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();

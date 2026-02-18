@@ -1,9 +1,9 @@
-using LFS.Helpers;
+using OmniGov.App.Helpers;
 using System;
 using System.Windows.Forms;
 using Treasury.Data.Factories;
 
-namespace LFS.Views.Transactions.CashTicketIssuance
+namespace OmniGov.App.Views.Manage.CashTicketIssuance
 {
     public partial class frmCashTicketAddIssuance : Form
     {

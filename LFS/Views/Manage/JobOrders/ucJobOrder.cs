@@ -1,7 +1,7 @@
-using LFS.Views.Manage.LinkUser;
+using OmniGov.App.Views.Manage.LinkUser;
 using System.Windows.Forms;
 
-namespace LFS.Views.Manage.JobOrders
+namespace OmniGov.App.Views.Manage.JobOrders
 {
     public partial class ucJobOrder : UserControl
     {

@@ -1,21 +1,20 @@
-using LFS.DataSets;
-using LFS.Helpers;
-using LFS.Views.Transactions.Payments.BurialPermit;
 using Microsoft.Reporting.WinForms;
+using OmniGov.App.DataSets;
+using OmniGov.App.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using Treasury.Data.Factories;
 
-namespace LFS.Views.Transactions.Payments.AF51_57;
+namespace OmniGov.App.Views.Transactions.Payments.AF51And57;
 
-public partial class frmAF51_57 : Form
+public partial class frmAF51And57 : Form
 {
     private readonly ucPaymentFeesCharges ucPaymentFeesCharges;
     private readonly ucPayment ucPayment;
     private ucPrintReceipt ucPrintReceipt;
 
-    public frmAF51_57()
+    public frmAF51And57()
     {
         InitializeComponent();
         Helper.LoadFormIcon(this);

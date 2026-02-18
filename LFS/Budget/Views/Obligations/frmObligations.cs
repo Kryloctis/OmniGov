@@ -1,6 +1,6 @@
 using Budget.Data.Factories;
 using Budget.Domain.Models;
-using LFS.Helpers;
+using OmniGov.App.Helpers;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -8,7 +8,7 @@ using System.Data;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace LFS.Budget.Views.Obligations
+namespace OmniGov.App.Budget.Views.Obligations
 {
     public partial class frmObligations : Form
     {
@@ -324,7 +324,7 @@ namespace LFS.Budget.Views.Obligations
             {
                 var parameters = ((string srchKey, string status, DateTime dtFrom, DateTime dtTo, int rowLimit))e.Argument;
 
-                var service = new Services.ObligationService();
+                var service = new OmniGov.App.Budget.Services.ObligationService();
                 e.Result = service.GetObligationRequests(
                     parameters.srchKey,
                     parameters.status,

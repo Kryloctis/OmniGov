@@ -1,6 +1,6 @@
-using LFS.Helpers;
-using LFS.Views.Manage.TaxPayers;
-using LFS.Views.Transactions.Payments;
+using OmniGov.App.Helpers;
+using OmniGov.App.Views.Manage.TaxPayers;
+using OmniGov.App.Views.Transactions.Payments;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -8,7 +8,7 @@ using System.Windows.Forms;
 using Treasury.Data.Factories;
 using Treasury.Domain.Entities;
 
-namespace LFS.Views.Transactions.Biddings
+namespace OmniGov.App.Views.Transactions.Biddings
 {
     public partial class frmBiddings : Form
     {

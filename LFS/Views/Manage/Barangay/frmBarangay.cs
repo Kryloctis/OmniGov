@@ -1,6 +1,5 @@
-using LFS.Helpers;
+using OmniGov.App.Helpers;
 using OmniGov.Core.Entities;
-using OmniGov.Core.Repositories;
 using OmniGov.Core.Factories;
 using System;
 using System.Collections.Generic;
@@ -8,7 +7,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
 
-namespace LFS.Views.Manage.Barangay
+namespace OmniGov.App.Views.Manage.Barangay
 {
     public partial class frmBarangay : Form
     {

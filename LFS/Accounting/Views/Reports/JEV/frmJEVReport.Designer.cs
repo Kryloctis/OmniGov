@@ -1,5 +1,5 @@
 
-namespace LFS.Views.Reports.JEV
+namespace OmniGov.App.Accounting.Views.Reports.JEV
 {
     partial class frmJEVReport
     {

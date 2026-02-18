@@ -1,4 +1,4 @@
-using LFS.Helpers;
+using OmniGov.App.Helpers;
 using OmniGov.Core.Factories;
 using System;
 using System.Collections.Generic;
@@ -6,9 +6,8 @@ using System.ComponentModel;
 using System.Data;
 using System.Linq;
 using System.Windows.Forms;
-using RadioButton = System.Windows.Forms.RadioButton;
 
-namespace LFS.Views.SignIn
+namespace OmniGov.App.Views.SignIn
 {
     public partial class frmDatabaseConfig : Form
     {

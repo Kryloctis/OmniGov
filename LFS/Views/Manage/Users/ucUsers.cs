@@ -1,8 +1,7 @@
-using LFS.CustomTools;
-using LFS.Helpers;
-using LFS.Properties;
+using OmniGov.App.CustomTools;
+using OmniGov.App.Helpers;
+using OmniGov.App.Properties;
 using OmniGov.Core.Entities;
-using OmniGov.Core.Repositories;
 using OmniGov.Core.Factories;
 using System;
 using System.ComponentModel;
@@ -11,7 +10,7 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace LFS.Views.Manage.Users
+namespace OmniGov.App.Views.Manage.Users
 {
     public partial class ucUsers : UserControl
     {
@@ -366,4 +365,3 @@ namespace LFS.Views.Manage.Users
         }
     }
 }
-

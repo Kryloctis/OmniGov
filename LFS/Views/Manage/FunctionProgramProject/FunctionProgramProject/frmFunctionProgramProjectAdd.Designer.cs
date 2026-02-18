@@ -1,5 +1,6 @@
+using OmniGov.App.Views.Manage.FunctionProgramProject.FunctionProgramProject;
 
-namespace LFS.Views.Manage.FunctionProgramProject.FunctionProgramProject
+namespace OmniGov.App.Views.Manage.FunctionProgramProject.FunctionProgramProject
 {
     partial class frmFunctionProgramProjectAdd
     {
@@ -32,7 +33,7 @@ namespace LFS.Views.Manage.FunctionProgramProject.FunctionProgramProject
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
-            this.ucFunctionProgramProject1 = new LFS.Views.Manage.FunctionProgramProject.FunctionProgramProject.ucFunctionProgramProject();
+            this.ucFunctionProgramProject1 = new OmniGov.App.Views.Manage.FunctionProgramProject.FunctionProgramProject.ucFunctionProgramProject();
             this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -62,7 +63,7 @@ namespace LFS.Views.Manage.FunctionProgramProject.FunctionProgramProject
             // 
             // btnSave
             // 
-            this.btnSave.Image = global::LFS.Properties.Resources.save14px;
+            this.btnSave.Image = global::OmniGov.App.Properties.Resources.save14px;
             this.btnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnSave.Location = new System.Drawing.Point(276, 2);
             this.btnSave.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);

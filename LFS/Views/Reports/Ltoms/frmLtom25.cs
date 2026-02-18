@@ -1,16 +1,15 @@
-using LFS.Helpers;
 using Microsoft.Reporting.WinForms;
-using OmniGov.Core.Repositories;
+using OmniGov.App.Helpers;
 using OmniGov.Core.Factories;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Windows.Forms;
-using Treasury.Domain.Entities;
 using Treasury.Data.Factories;
+using Treasury.Domain.Entities;
 
-namespace LFS.Views.Reports.Ltoms
+namespace OmniGov.App.Views.Reports.Ltoms
 {
     public partial class frmLtom25 : Form
     {
@@ -195,4 +194,3 @@ namespace LFS.Views.Reports.Ltoms
         }
     }
 }
-

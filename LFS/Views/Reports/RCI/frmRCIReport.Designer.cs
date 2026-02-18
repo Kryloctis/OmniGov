@@ -1,5 +1,5 @@
 
-namespace LFS.Views.Reports.RCI
+namespace OmniGov.App.Views.Reports.RCI
 {
     partial class frmRciReport
     {

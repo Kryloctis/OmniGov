@@ -1,4 +1,5 @@
-namespace LFS.Budget.Views.Obligations
+using OmniGov.App.Budget.Views.Obligations;
+namespace OmniGov.App.Budget.Views.Obligations
 {
     partial class frmObligations
     {
@@ -28,7 +29,7 @@ namespace LFS.Budget.Views.Obligations
         /// </summary>
         private void InitializeComponent()
         {
-            customTabControl1 = new LFS.CustomTools.CustomTabControl();
+            customTabControl1 = new OmniGov.App.CustomTools.CustomTabControl();
             tbPgMain = new System.Windows.Forms.TabPage();
             panel10 = new System.Windows.Forms.Panel();
             panel7 = new System.Windows.Forms.Panel();

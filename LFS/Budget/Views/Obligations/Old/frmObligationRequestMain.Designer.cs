@@ -1,6 +1,6 @@
-using LFS.Budget.Views.Obligations;
+using OmniGov.App.Budget.Views.Obligations.Old;
 
-namespace LFS.Budget.Views.Obligations
+namespace OmniGov.App.Budget.Views.Obligations.Old
 {
     partial class frmObligationRequestMain
     {
@@ -49,7 +49,7 @@ namespace LFS.Budget.Views.Obligations
             this.toolStripStatusLabel4 = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblCreatedBy = new System.Windows.Forms.ToolStripStatusLabel();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.ucObligationRequestMain1 = new LFS.Budget.Views.Obligations.ucObligationRequestMain();
+            this.ucObligationRequestMain1 = new OmniGov.App.Budget.Views.Obligations.Old.ucObligationRequestMain();
             this.toolStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.statusStrip2.SuspendLayout();
@@ -78,7 +78,7 @@ namespace LFS.Budget.Views.Obligations
             // 
             // btnSave
             // 
-            this.btnSave.Image = global::LFS.Properties.Resources.save_filled_20px;
+            this.btnSave.Image = global::OmniGov.App.Properties.Resources.save_filled_20px;
             this.btnSave.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnSave.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnSave.Name = "btnSave";
@@ -89,7 +89,7 @@ namespace LFS.Budget.Views.Obligations
             // 
             // btnCancel
             // 
-            this.btnCancel.Image = global::LFS.Properties.Resources.symbol_cancel_20px;
+            this.btnCancel.Image = global::OmniGov.App.Properties.Resources.symbol_cancel_20px;
             this.btnCancel.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnCancel.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnCancel.Name = "btnCancel";
@@ -100,7 +100,7 @@ namespace LFS.Budget.Views.Obligations
             // 
             // btnDelete
             // 
-            this.btnDelete.Image = global::LFS.Properties.Resources.button_rounded_remove_20px;
+            this.btnDelete.Image = global::OmniGov.App.Properties.Resources.button_rounded_remove_20px;
             this.btnDelete.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnDelete.Name = "btnDelete";
@@ -117,7 +117,7 @@ namespace LFS.Budget.Views.Obligations
             // btnSearch
             // 
             this.btnSearch.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.btnSearch.Image = global::LFS.Properties.Resources.find_20px;
+            this.btnSearch.Image = global::OmniGov.App.Properties.Resources.find_20px;
             this.btnSearch.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnSearch.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnSearch.Name = "btnSearch";
@@ -128,7 +128,7 @@ namespace LFS.Budget.Views.Obligations
             // 
             // btnApprove
             // 
-            this.btnApprove.Image = global::LFS.Properties.Resources.document_color_green_ok_2_20px;
+            this.btnApprove.Image = global::OmniGov.App.Properties.Resources.document_color_green_ok_2_20px;
             this.btnApprove.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnApprove.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnApprove.Name = "btnApprove";
@@ -139,7 +139,7 @@ namespace LFS.Budget.Views.Obligations
             // 
             // btnDisapprove
             // 
-            this.btnDisapprove.Image = global::LFS.Properties.Resources.document_color_red_cancel_20px;
+            this.btnDisapprove.Image = global::OmniGov.App.Properties.Resources.document_color_red_cancel_20px;
             this.btnDisapprove.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnDisapprove.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnDisapprove.Name = "btnDisapprove";
@@ -150,7 +150,7 @@ namespace LFS.Budget.Views.Obligations
             // 
             // btnCancelObligation
             // 
-            this.btnCancelObligation.Image = global::LFS.Properties.Resources.document_color_magenta_forbidden_20px;
+            this.btnCancelObligation.Image = global::OmniGov.App.Properties.Resources.document_color_magenta_forbidden_20px;
             this.btnCancelObligation.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnCancelObligation.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnCancelObligation.Name = "btnCancelObligation";

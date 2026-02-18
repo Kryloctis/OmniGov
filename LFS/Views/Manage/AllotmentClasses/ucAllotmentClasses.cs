@@ -1,12 +1,11 @@
-using LFS.Helpers;
+using OmniGov.App.Helpers;
 using OmniGov.Core.Entities;
-using OmniGov.Core.Repositories;
 using OmniGov.Core.Factories;
 using System;
 using System.ComponentModel;
 using System.Windows.Forms;
 
-namespace LFS.Views.Manage.AllotmentClasses
+namespace OmniGov.App.Views.Manage.AllotmentClasses
 {
     public partial class ucAllotmentClasses : UserControl
     {
@@ -125,4 +124,3 @@ namespace LFS.Views.Manage.AllotmentClasses
         }
     }
 }
-

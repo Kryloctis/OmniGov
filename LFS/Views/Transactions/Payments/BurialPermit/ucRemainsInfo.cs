@@ -1,12 +1,11 @@
-using LFS.Helpers;
-using OmniGov.Core.Repositories;
+using OmniGov.App.Helpers;
 using OmniGov.Core.Factories;
 using System;
 using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
 
-namespace LFS.Views.Transactions.Payments.BurialPermit
+namespace OmniGov.App.Views.Transactions.Payments.BurialPermit
 {
     public partial class ucRemainsInfo : UserControl
     {
@@ -172,4 +171,3 @@ namespace LFS.Views.Transactions.Payments.BurialPermit
         }
     }
 }
-

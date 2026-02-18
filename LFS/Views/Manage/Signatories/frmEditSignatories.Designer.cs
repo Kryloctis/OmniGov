@@ -1,5 +1,6 @@
+using OmniGov.App.Views.Manage.Signatories;
 
-namespace LFS.Views.Manage.Signatories
+namespace OmniGov.App.Views.Manage.Signatories
 {
     partial class frmEditSignatories
     {
@@ -32,7 +33,7 @@ namespace LFS.Views.Manage.Signatories
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
-            this.ucSignatories1 = new LFS.Views.Manage.Signatories.ucSignatories();
+            this.ucSignatories1 = new OmniGov.App.Views.Manage.Signatories.ucSignatories();
             this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -59,7 +60,7 @@ namespace LFS.Views.Manage.Signatories
             // 
             // btnSave
             // 
-            this.btnSave.Image = global::LFS.Properties.Resources.save14px;
+            this.btnSave.Image = global::OmniGov.App.Properties.Resources.save14px;
             this.btnSave.Location = new System.Drawing.Point(302, 3);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(95, 23);

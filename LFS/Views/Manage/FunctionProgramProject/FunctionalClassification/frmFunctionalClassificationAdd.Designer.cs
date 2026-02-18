@@ -1,5 +1,6 @@
+using OmniGov.App.Views.Manage.FunctionProgramProject.FunctionalClassification;
 
-namespace LFS.Views.Manage.FunctionProgramProject.FunctionalClassification
+namespace OmniGov.App.Views.Manage.FunctionProgramProject.FunctionalClassification
 {
     partial class frmFunctionalClassificationAdd
     {

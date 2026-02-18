@@ -1,4 +1,4 @@
-using LFS.Helpers;
+using OmniGov.App.Helpers;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -7,7 +7,7 @@ using System.Windows.Forms;
 using Treasury.Data.Factories;
 using Treasury.Domain.Entities;
 
-namespace LFS.Views.Manage.TaxPayers
+namespace OmniGov.App.Views.Manage.TaxPayers
 {
     public partial class frmTaxpayers : Form
     {

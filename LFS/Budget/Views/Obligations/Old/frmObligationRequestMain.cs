@@ -1,7 +1,7 @@
 using Budget.Data.Factories;
 using Budget.Domain.Models;
-using LFS.Helpers;
 using MySql.Data.MySqlClient;
+using OmniGov.App.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -9,7 +9,7 @@ using System.Drawing;
 using System.Transactions;
 using System.Windows.Forms;
 
-namespace LFS.Budget.Views.Obligations
+namespace OmniGov.App.Budget.Views.Obligations.Old
 {
     public partial class frmObligationRequestMain : Form
     {

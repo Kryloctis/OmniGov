@@ -1,5 +1,5 @@
 
-namespace LFS.Budget.Views.Reports
+namespace OmniGov.App.Budget.Views.Reports
 {
     partial class frmSAAO
     {

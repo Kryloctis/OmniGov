@@ -1,5 +1,4 @@
-using LFS.Helpers;
-using OmniGov.Core.Repositories;
+using OmniGov.App.Helpers;
 using OmniGov.Core.Factories;
 using System;
 using System.ComponentModel;
@@ -7,7 +6,7 @@ using System.Data;
 using System.Windows.Forms;
 using Treasury.Data.Factories;
 
-namespace LFS.Views.Manage.Receipts
+namespace OmniGov.App.Views.Manage.Receipts
 {
     public partial class ucReceipts : UserControl
     {

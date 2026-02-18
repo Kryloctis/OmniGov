@@ -1,10 +1,10 @@
 using Accounting.Data.Factories;
 using Accounting.Domain.Entities;
-using LFS.Helpers;
+using OmniGov.App.Helpers;
 using System;
 using System.Windows.Forms;
 
-namespace LFS.Views.Manage.ChartOfAccounts.Subsidiary
+namespace OmniGov.App.Views.Manage.ChartOfAccounts.Subsidiary
 {
     public partial class frmSubsidiaryAdd : Form
     {

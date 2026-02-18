@@ -1,5 +1,8 @@
 
-namespace LFS.Views.Manage.ChartOfAccounts.AccountGroup
+using OmniGov.App.Views.Manage.ChartOfAccounts.AccountGroup;
+
+
+namespace OmniGov.App.Views.Manage.ChartOfAccounts.AccountGroup
 {
     partial class frmAccountGroupEdit
     {
@@ -30,7 +33,7 @@ namespace LFS.Views.Manage.ChartOfAccounts.AccountGroup
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmAccountGroupEdit));
-            this.ucAccountGroup1 = new LFS.Views.Manage.ChartOfAccounts.AccountGroup.UcAccountGroup();
+            this.ucAccountGroup1 = new OmniGov.App.Views.Manage.ChartOfAccounts.AccountGroup.UcAccountGroup();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();

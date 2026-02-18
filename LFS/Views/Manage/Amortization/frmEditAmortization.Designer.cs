@@ -1,5 +1,6 @@
+using OmniGov.App.Views.Manage.Amortization;
 
-namespace LFS.Views.Manage.Amortization
+namespace OmniGov.App.Views.Manage.Amortization
 {
     partial class frmEditAmortization
     {
@@ -32,7 +33,7 @@ namespace LFS.Views.Manage.Amortization
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
-            this.ucAmortization1 = new LFS.Views.Manage.Amortization.ucAmortization();
+            this.ucAmortization1 = new OmniGov.App.Views.Manage.Amortization.ucAmortization();
             this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -60,7 +61,7 @@ namespace LFS.Views.Manage.Amortization
             // 
             // btnSave
             // 
-            this.btnSave.Image = global::LFS.Properties.Resources.save14px;
+            this.btnSave.Image = global::OmniGov.App.Properties.Resources.save14px;
             this.btnSave.Location = new System.Drawing.Point(353, 3);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 23);

@@ -1,4 +1,4 @@
-namespace LFS.Views.Transactions.Payments.CattleTransferOfOwnership
+namespace OmniGov.App.Views.Transactions.Payments.CattleTransferOfOwnership
 {
     partial class frmCattleTransfer
     {
@@ -39,13 +39,13 @@ namespace LFS.Views.Transactions.Payments.CattleTransferOfOwnership
             tabControlMain = new System.Windows.Forms.TabControl();
             tabPageCattleTransfer = new System.Windows.Forms.TabPage();
             groupBox1 = new System.Windows.Forms.GroupBox();
-            ucCattleTransfer1 = new OtherPayments.CattleTransferOfOwnership.ucCattleTransfer();
+            ucCattleTransfer1 = new CattleTransferOfOwnership.ucCattleTransfer();
             tabPageFeesCharges = new System.Windows.Forms.TabPage();
             ucPaymentFeesCharges1 = new ucPaymentFeesCharges();
             tabPagePayment = new System.Windows.Forms.TabPage();
             ucPayment1 = new ucPayment();
             tabPageReceipt = new System.Windows.Forms.TabPage();
-            ucPrintReceipt1 = new BurialPermit.ucPrintReceipt();
+            ucPrintReceipt1 = new OmniGov.App.Views.Transactions.Payments.ucPrintReceipt();
             flowLayoutPanel2.SuspendLayout();
             flowLayoutPanel1.SuspendLayout();
             tabControlMain.SuspendLayout();
@@ -310,9 +310,9 @@ namespace LFS.Views.Transactions.Payments.CattleTransferOfOwnership
         private ucPaymentFeesCharges ucPaymentFeesCharges1;
         private ucPayment ucPayment1;
         private System.Windows.Forms.GroupBox groupBox1;
-        private OtherPayments.CattleTransferOfOwnership.ucCattleTransfer ucCattleTransfer1;
+        private CattleTransferOfOwnership.ucCattleTransfer ucCattleTransfer1;
         private System.Windows.Forms.RadioButton radCattleTransfer;
         private System.Windows.Forms.TabPage tabPageReceipt;
-        private BurialPermit.ucPrintReceipt ucPrintReceipt1;
+        private OmniGov.App.Views.Transactions.Payments.ucPrintReceipt ucPrintReceipt1;
     }
 }

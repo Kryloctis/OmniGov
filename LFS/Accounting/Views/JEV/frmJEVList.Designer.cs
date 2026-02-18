@@ -1,5 +1,6 @@
+using OmniGov.App.Accounting.Views.JEV;
 
-namespace LFS.Views.Transactions.JEV
+namespace OmniGov.App.Accounting.Views.JEV
 {
     partial class frmJevList
     {
@@ -60,7 +61,7 @@ namespace LFS.Views.Transactions.JEV
             label5 = new System.Windows.Forms.Label();
             toolStrip2 = new System.Windows.Forms.ToolStrip();
             tlStrpCmbxLimit = new System.Windows.Forms.ToolStripComboBox();
-            customTabControl1 = new LFS.CustomTools.CustomTabControl();
+            customTabControl1 = new OmniGov.App.CustomTools.CustomTabControl();
             tbPgMain = new System.Windows.Forms.TabPage();
             statusStrip1 = new System.Windows.Forms.StatusStrip();
             tbPgCrud = new System.Windows.Forms.TabPage();

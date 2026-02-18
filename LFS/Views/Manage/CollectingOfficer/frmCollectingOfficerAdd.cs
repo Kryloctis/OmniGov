@@ -1,10 +1,10 @@
-using LFS.Helpers;
+using OmniGov.App.Helpers;
 using System;
 using System.Windows.Forms;
 using Treasury.Data.Factories;
 using Treasury.Domain.Entities;
 
-namespace LFS.Views.Manage.CollectingOfficer
+namespace OmniGov.App.Views.Manage.CollectingOfficer
 {
     public partial class frmCollectingOfficerAdd : Form
     {

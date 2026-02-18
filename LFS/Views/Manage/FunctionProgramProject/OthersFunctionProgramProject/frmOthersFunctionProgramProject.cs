@@ -1,13 +1,12 @@
-using LFS.Helpers;
+using OmniGov.App.Helpers;
 using OmniGov.Core.Entities;
-using OmniGov.Core.Repositories;
 using OmniGov.Core.Factories;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Windows.Forms;
 
-namespace LFS.Views.Manage.FunctionProgramProject.OthersFunctionProgramProject
+namespace OmniGov.App.Views.Manage.FunctionProgramProject.OthersFunctionProgramProject
 {
     public partial class frmOthersFunctionProgramProject : Form
     {

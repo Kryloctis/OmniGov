@@ -1,11 +1,10 @@
-using LFS.Helpers;
-using OmniGov.Core.Repositories;
+using OmniGov.App.Helpers;
 using OmniGov.Core.Factories;
 using System;
 using System.ComponentModel;
 using System.Windows.Forms;
 
-namespace LFS.Views.Transactions.Payments.MarriageLicense
+namespace OmniGov.App.Views.Transactions.Payments.MarriageLicense
 {
     public partial class ucMarriageDetails : UserControl
     {
@@ -58,4 +57,3 @@ namespace LFS.Views.Transactions.Payments.MarriageLicense
         private void txtLicenseNo_Validated(object sender, EventArgs e) => Helper.ClearErrorTextBox(errorProvider1, txtLicenseNo);
     }
 }
-

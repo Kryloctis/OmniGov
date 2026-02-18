@@ -1,11 +1,12 @@
 using Accounting.Data.Factories;
 using Accounting.Domain.Entities;
-using LFS.Helpers;
+using OmniGov.App.Helpers;
+using OmniGov.App.Views.Manage.AmortizationSchedule;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
-namespace LFS.Views.Manage.Amortization
+namespace OmniGov.App.Views.Manage.Amortization
 {
     public partial class frmAmortization : Form
     {

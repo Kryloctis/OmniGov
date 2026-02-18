@@ -1,11 +1,10 @@
 using Accounting.Data.Factories;
-using LFS.Helpers;
-using LFS.Views.Manage.BeginningBalances;
-using LFS.Views.Manage.ChartOfAccounts.AccountGroup;
-using LFS.Views.Manage.ChartOfAccounts.BeginningBalances;
-using LFS.Views.Manage.ChartOfAccounts.MajorAccountGroup;
-using LFS.Views.Manage.ChartOfAccounts.Subsidiary;
 using MySql.Data.MySqlClient;
+using OmniGov.App.Helpers;
+using OmniGov.App.Views.Manage.ChartOfAccounts.AccountGroup;
+using OmniGov.App.Views.Manage.ChartOfAccounts.BeginningBalances;
+using OmniGov.App.Views.Manage.ChartOfAccounts.MajorAccountGroup;
+using OmniGov.App.Views.Manage.ChartOfAccounts.Subsidiary;
 using OmniGov.Core.Entities;
 using OmniGov.Core.Factories;
 using System;
@@ -13,7 +12,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Windows.Forms;
 
-namespace LFS.Views.Manage.ChartOfAccounts
+namespace OmniGov.App.Views.Manage.ChartOfAccounts
 {
     public partial class frmChartOfAccounts : Form
     {

@@ -1,6 +1,6 @@
-using LFS.DataSets;
-using LFS.Helpers;
 using Microsoft.Reporting.WinForms;
+using OmniGov.App.DataSets;
+using OmniGov.App.Helpers;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,7 +9,7 @@ using System.Linq;
 using System.Windows.Forms;
 using Treasury.Data.Factories;
 
-namespace LFS.Views.Reports.Ltoms
+namespace OmniGov.App.Views.Reports.Ltoms
 {
     public partial class frmLtom22 : Form
     {

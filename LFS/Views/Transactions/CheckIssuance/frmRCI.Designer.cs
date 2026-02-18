@@ -1,5 +1,5 @@
 
-namespace LFS.Views.Transactions.RCI
+namespace OmniGov.App.Views.Transactions.CheckIssuance
 {
     partial class frmRCI
     {

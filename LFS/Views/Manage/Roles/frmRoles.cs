@@ -1,7 +1,6 @@
-using LFS.Helpers;
 using MySql.Data.MySqlClient;
+using OmniGov.App.Helpers;
 using OmniGov.Core.Entities;
-using OmniGov.Core.Repositories;
 using OmniGov.Core.Factories;
 using System;
 using System.Collections.Generic;
@@ -10,7 +9,7 @@ using System.Data;
 using System.Text;
 using System.Windows.Forms;
 
-namespace LFS.Views.Manage.Users.Roles
+namespace OmniGov.App.Views.Manage.Roles
 {
     public partial class frmRoles : Form
     {

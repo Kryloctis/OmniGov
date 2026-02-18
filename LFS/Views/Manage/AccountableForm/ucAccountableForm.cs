@@ -1,12 +1,11 @@
-using LFS.Helpers;
-using OmniGov.Core.Repositories;
+using OmniGov.App.Helpers;
 using OmniGov.Core.Factories;
 using System;
 using System.ComponentModel;
 using System.Windows.Forms;
 using Treasury.Data.Factories;
 
-namespace LFS.Views.Manage.AccountableForm
+namespace OmniGov.App.Views.Manage.AccountableForm
 {
     public partial class ucAccountableForm : UserControl
     {
@@ -78,4 +77,3 @@ namespace LFS.Views.Manage.AccountableForm
         }
     }
 }
-

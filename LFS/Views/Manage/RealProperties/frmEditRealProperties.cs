@@ -1,10 +1,9 @@
-using LFS.Helpers;
-using LFS.Views.Manage.RealProperties;
+using OmniGov.App.Helpers;
 using System;
 using System.Windows.Forms;
 using Treasury.Data.Factories;
 
-namespace LFS.Views.Manage.TaxPayers
+namespace OmniGov.App.Views.Manage.RealProperties
 {
     public partial class frmEditRealProperties : Form
     {

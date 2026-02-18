@@ -1,5 +1,5 @@
 
-namespace LFS.Views.Manage.Users.Roles
+namespace OmniGov.App.Views.Manage.Roles
 {
     partial class ucRoles
     {

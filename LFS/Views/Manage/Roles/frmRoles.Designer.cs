@@ -1,5 +1,6 @@
+using OmniGov.App.Views.Manage.Roles;
 
-namespace LFS.Views.Manage.Users.Roles
+namespace OmniGov.App.Views.Manage.Roles
 {
     partial class frmRoles
     {
@@ -53,7 +54,7 @@ namespace LFS.Views.Manage.Users.Roles
             panel1 = new System.Windows.Forms.Panel();
             btnShowSidePanel = new System.Windows.Forms.Button();
             cmbxRowLimit = new System.Windows.Forms.ComboBox();
-            customTabControl1 = new LFS.CustomTools.CustomTabControl();
+            customTabControl1 = new OmniGov.App.CustomTools.CustomTabControl();
             tbPgList = new System.Windows.Forms.TabPage();
             tbPgCrud = new System.Windows.Forms.TabPage();
             flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
@@ -471,7 +472,7 @@ namespace LFS.Views.Manage.Users.Roles
         private System.Windows.Forms.ComboBox cmbxRowLimit;
         private System.Windows.Forms.RichTextBox rchTxtBxPrivileges;
         private System.Windows.Forms.Label label1;
-        private CustomTools.CustomTabControl customTabControl1;
+        private OmniGov.App.CustomTools.CustomTabControl customTabControl1;
         private System.Windows.Forms.TabPage tbPgList;
         private System.Windows.Forms.TabPage tbPgCrud;
         private ucRoles ucRoles1;

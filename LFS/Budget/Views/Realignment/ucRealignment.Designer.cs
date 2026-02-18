@@ -1,5 +1,5 @@
 
-namespace LFS.Budget.Views.Realignment
+namespace OmniGov.App.Budget.Views.Realignment
 {
     partial class ucRealignment
     {

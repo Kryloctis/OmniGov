@@ -1,4 +1,7 @@
-namespace LFS.Views.Transactions.Payments.CommunityTaxCertificate
+using OmniGov.App.Views.Transactions.Payments;
+using OmniGov.App.Views.Transactions.Payments.CommunityTaxCertificate;
+
+namespace OmniGov.App.Views.Transactions.Payments.CommunityTaxCertificate
 {
     partial class frmCommunityTaxCertificate
     {
@@ -38,7 +41,7 @@ namespace LFS.Views.Transactions.Payments.CommunityTaxCertificate
             ucTaxDue1 = new ucTaxDue();
             tabPagePayment = new System.Windows.Forms.TabPage();
             tabPageReceipt = new System.Windows.Forms.TabPage();
-            ucPrintReceipt1 = new BurialPermit.ucPrintReceipt();
+            ucPrintReceipt1 = new OmniGov.App.Views.Transactions.Payments.ucPrintReceipt();
             flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             radTaxpayer = new System.Windows.Forms.RadioButton();
             radTaxDues = new System.Windows.Forms.RadioButton();
@@ -357,7 +360,7 @@ namespace LFS.Views.Transactions.Payments.CommunityTaxCertificate
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.TabPage tabPagePayment;
         private System.Windows.Forms.TabPage tabPageReceipt;
-        private BurialPermit.ucPrintReceipt ucPrintReceipt1;
+        private OmniGov.App.Views.Transactions.Payments.ucPrintReceipt ucPrintReceipt1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
         private System.Windows.Forms.RadioButton radTaxpayer;
         private System.Windows.Forms.RadioButton radTaxDues;

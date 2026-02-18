@@ -1,5 +1,5 @@
 
-namespace LFS.Views.Manage.BeginningBalances
+namespace OmniGov.App.Views.Manage.ChartOfAccounts.BeginningBalances
 {
     partial class UcBeginningBalances
     {

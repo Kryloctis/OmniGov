@@ -1,5 +1,5 @@
 
-namespace LFS.Views.Manage.AmortizationSchedule
+namespace OmniGov.App.Views.Manage.AmortizationSchedule
 {
     partial class frmEditAmortizationSchedule
     {
@@ -29,7 +29,7 @@ namespace LFS.Views.Manage.AmortizationSchedule
         /// </summary>
         private void InitializeComponent()
         {
-            this.ucAmortizationSchedule1 = new LFS.Views.Manage.Amortization.ucAmortizationSchedule();
+            this.ucAmortizationSchedule1 = new OmniGov.App.Views.Manage.AmortizationSchedule.ucAmortizationSchedule();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
@@ -68,7 +68,7 @@ namespace LFS.Views.Manage.AmortizationSchedule
             // 
             // btnSave
             // 
-            this.btnSave.Image = global::LFS.Properties.Resources.save14px;
+            this.btnSave.Image = global::OmniGov.App.Properties.Resources.save14px;
             this.btnSave.Location = new System.Drawing.Point(266, 3);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 23);
@@ -106,7 +106,7 @@ namespace LFS.Views.Manage.AmortizationSchedule
 
         #endregion
 
-        private Amortization.ucAmortizationSchedule ucAmortizationSchedule1;
+        private ucAmortizationSchedule ucAmortizationSchedule1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnSave;

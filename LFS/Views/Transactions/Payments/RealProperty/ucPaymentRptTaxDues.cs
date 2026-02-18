@@ -1,6 +1,5 @@
-using LFS.Helpers;
-using LFS.Views.Shared;
-using OmniGov.Core.Repositories;
+using OmniGov.App.Helpers;
+using OmniGov.App.Views.Shared;
 using OmniGov.Core.Factories;
 using System;
 using System.Collections.Generic;
@@ -10,10 +9,10 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using Treasury.Domain.Entities;
 using Treasury.Data.Factories;
+using Treasury.Domain.Entities;
 
-namespace LFS.Views.Transactions.Payments.RealProperty
+namespace OmniGov.App.Views.Transactions.Payments.RealProperty
 {
     public partial class ucPaymentRptTaxDues : UserControl
     {
@@ -474,4 +473,3 @@ namespace LFS.Views.Transactions.Payments.RealProperty
         }
     }
 }
-

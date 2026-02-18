@@ -1,5 +1,5 @@
-using LFS.Helpers;
-using OmniGov.Core.Repositories;
+using Budget.Data.Factories;
+using OmniGov.App.Helpers;
 using OmniGov.Core.Factories;
 using System;
 using System.Collections.Generic;
@@ -7,9 +7,8 @@ using System.ComponentModel;
 using System.Data;
 using System.Linq;
 using System.Windows.Forms;
-using Budget.Data.Factories;
 
-namespace LFS.Budget.Views.AllotmentRelease
+namespace OmniGov.App.Budget.Views.AllotmentRelease.Old
 {
     public partial class ucAllotmentReleaseMain : UserControl
     {
@@ -660,4 +659,3 @@ namespace LFS.Budget.Views.AllotmentRelease
         }
     }
 }
-

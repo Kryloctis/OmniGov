@@ -1,5 +1,6 @@
+using OmniGov.App.Views.Transactions.BankDeposits;
 
-namespace LFS.Views.Transactions.BankDeposits
+namespace OmniGov.App.Views.Transactions.BankDeposits
 {
     partial class frmBankDeposits
     {

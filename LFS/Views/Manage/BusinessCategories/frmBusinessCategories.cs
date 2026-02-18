@@ -1,6 +1,6 @@
-using LFS.Helpers;
-using LFS.Views.Manage.BusinessCategories.AddOnCharges;
 using MySql.Data.MySqlClient;
+using OmniGov.App.Helpers;
+using OmniGov.App.Views.Manage.BusinessCategories.AddOnCharges;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -9,7 +9,7 @@ using System.Windows.Forms;
 using Treasury.Data.Factories;
 using Treasury.Domain.Entities;
 
-namespace LFS.Views.Manage.BusinessCategories
+namespace OmniGov.App.Views.Manage.BusinessCategories
 {
     public partial class frmBusinessCategories : Form
     {

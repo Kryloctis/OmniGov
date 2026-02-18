@@ -1,5 +1,5 @@
-using LFS.Helpers;
-using LFS.Views.Manage.JobOrders;
+using OmniGov.App.Helpers;
+using OmniGov.App.Views.Manage.JobOrders;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -8,7 +8,7 @@ using System.Windows.Forms;
 using Treasury.Data.Factories;
 using Treasury.Domain.Entities;
 
-namespace LFS.Views.Manage.CollectingOfficer
+namespace OmniGov.App.Views.Manage.CollectingOfficer
 {
     public partial class frmCollectingOfficer : Form
     {

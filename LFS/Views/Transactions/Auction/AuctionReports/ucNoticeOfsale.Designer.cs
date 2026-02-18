@@ -1,4 +1,4 @@
-namespace LFS.Views.Transactions.Auction
+namespace OmniGov.App.Views.Transactions.Auction.AuctionReports
 {
     partial class ucNoticeOfSale
     {

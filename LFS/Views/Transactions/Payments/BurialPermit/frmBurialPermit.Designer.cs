@@ -1,4 +1,7 @@
-namespace LFS.Views.Transactions.Payments.BurialPermit
+using OmniGov.App.Views.Transactions.Payments;
+using OmniGov.App.Views.Transactions.Payments.BurialPermit;
+
+namespace OmniGov.App.Views.Transactions.Payments.BurialPermit
 {
     partial class frmBurialPermit
     {

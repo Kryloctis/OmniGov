@@ -1,6 +1,6 @@
-using LFS.Budget.Views.SupplementalAppropriations;
+using OmniGov.App.Budget.Views.SupplementalAppropriations;
 
-namespace LFS.Budget.Views.SupplementalAppropriations
+namespace OmniGov.App.Budget.Views.SupplementalAppropriations
 {
     partial class frmSupplementalAppropriationsEdit
     {
@@ -30,7 +30,7 @@ namespace LFS.Budget.Views.SupplementalAppropriations
         /// </summary>
         private void InitializeComponent()
         {
-            this.ucSupplementalAppropriations1 = new LFS.Budget.Views.SupplementalAppropriations.ucSupplementalAppropriations();
+            this.ucSupplementalAppropriations1 = new OmniGov.App.Budget.Views.SupplementalAppropriations.ucSupplementalAppropriations();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnOk = new System.Windows.Forms.Button();
             this.flowLayoutPanel1.SuspendLayout();
@@ -57,7 +57,7 @@ namespace LFS.Budget.Views.SupplementalAppropriations
             // 
             // btnOk
             // 
-            this.btnOk.Image = global::LFS.Properties.Resources.ok14px;
+            this.btnOk.Image = global::OmniGov.App.Properties.Resources.ok14px;
             this.btnOk.Location = new System.Drawing.Point(350, 3);
             this.btnOk.Name = "btnOk";
             this.btnOk.Padding = new System.Windows.Forms.Padding(0, 0, 5, 0);

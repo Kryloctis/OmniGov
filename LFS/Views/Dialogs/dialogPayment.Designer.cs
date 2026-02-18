@@ -1,4 +1,4 @@
-namespace LFS.Views.Dialogs
+namespace OmniGov.App.Views.Dialogs
 {
     partial class dialogPayment
     {

@@ -1,4 +1,4 @@
-namespace LFS.Views.Manage.BusinessAdOnCharges
+namespace OmniGov.App.Views.Manage.BusinessAddOnCharges
 {
     partial class ucBusinessAddOnCharges
     {

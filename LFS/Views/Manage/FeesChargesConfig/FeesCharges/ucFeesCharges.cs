@@ -1,12 +1,11 @@
-using LFS.Helpers;
-using OmniGov.Core.Repositories;
+using OmniGov.App.Helpers;
 using OmniGov.Core.Factories;
 using System;
 using System.ComponentModel;
 using System.Windows.Forms;
 using Treasury.Data.Factories;
 
-namespace LFS.Views.Manage.FeesChargesConfig.FeesCharges
+namespace OmniGov.App.Views.Manage.FeesChargesConfig.FeesCharges
 {
     public partial class ucFeesCharges : UserControl
     {

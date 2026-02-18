@@ -1,13 +1,12 @@
-using LFS.Helpers;
+using Accounting.Data.Factories;
 using Microsoft.Reporting.WinForms;
-using OmniGov.Core.Repositories;
+using OmniGov.App.Helpers;
 using OmniGov.Core.Factories;
 using System;
 using System.Data;
 using System.Windows.Forms;
-using Accounting.Data.Factories;
 
-namespace LFS.Views.Reports.Financial_Statements
+namespace OmniGov.App.Accounting.Views.Reports.FinancialStatements
 {
     public partial class ucStatementOfFinancialPosition : UserControl
     {

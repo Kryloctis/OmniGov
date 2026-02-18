@@ -1,5 +1,5 @@
 
-namespace LFS.Views.Reports.RptReports
+namespace OmniGov.App.Views.Reports.RptReports
 {
     partial class frmCertifiedListRptDelinquences
     {

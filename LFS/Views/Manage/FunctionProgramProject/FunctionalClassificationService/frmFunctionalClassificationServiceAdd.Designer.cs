@@ -1,5 +1,6 @@
+using OmniGov.App.Views.Manage.FunctionProgramProject.FunctionalClassificationService;
 
-namespace LFS.Views.Manage.FunctionProgramProject.FunctonalClassificationService
+namespace OmniGov.App.Views.Manage.FunctionProgramProject.FunctionalClassificationService
 {
     partial class frmFunctionalClassificationServiceAdd
     {
@@ -32,7 +33,7 @@ namespace LFS.Views.Manage.FunctionProgramProject.FunctonalClassificationService
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
-            this.ucFunctonalClassificationServices1 = new LFS.Views.Manage.FunctionProgramProject.FunctonalClassificationService.ucFunctionalClassificationServices();
+            this.ucFunctonalClassificationServices1 = new OmniGov.App.Views.Manage.FunctionProgramProject.FunctionalClassificationService.ucFunctionalClassificationServices();
             this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -62,7 +63,7 @@ namespace LFS.Views.Manage.FunctionProgramProject.FunctonalClassificationService
             // 
             // btnSave
             // 
-            this.btnSave.Image = global::LFS.Properties.Resources.save14px;
+            this.btnSave.Image = global::OmniGov.App.Properties.Resources.save14px;
             this.btnSave.Location = new System.Drawing.Point(281, 2);
             this.btnSave.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnSave.Name = "btnSave";

@@ -1,5 +1,5 @@
 
-namespace LFS.Views.Manage.ChartOfAccounts.BeginningBalances
+namespace OmniGov.App.Views.Manage.ChartOfAccounts.BeginningBalances
 {
     partial class frmBeginningBalanceEdit
     {
@@ -29,7 +29,7 @@ namespace LFS.Views.Manage.ChartOfAccounts.BeginningBalances
         /// </summary>
         private void InitializeComponent()
         {
-            this.ucBeginningBalances1 = new LFS.Views.Manage.BeginningBalances.UcBeginningBalances();
+            this.ucBeginningBalances1 = new OmniGov.App.Views.Manage.ChartOfAccounts.BeginningBalances.UcBeginningBalances();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
@@ -71,7 +71,7 @@ namespace LFS.Views.Manage.ChartOfAccounts.BeginningBalances
             // 
             // btnSave
             // 
-            this.btnSave.Image = global::LFS.Properties.Resources.save14px;
+            this.btnSave.Image = global::OmniGov.App.Properties.Resources.save14px;
             this.btnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnSave.Location = new System.Drawing.Point(342, 3);
             this.btnSave.Name = "btnSave";
@@ -95,7 +95,7 @@ namespace LFS.Views.Manage.ChartOfAccounts.BeginningBalances
             // 
             // btnDelete
             // 
-            this.btnDelete.Image = global::LFS.Properties.Resources.delete;
+            this.btnDelete.Image = global::OmniGov.App.Properties.Resources.delete;
             this.btnDelete.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnDelete.Margin = new System.Windows.Forms.Padding(10, 1, 0, 2);
@@ -134,7 +134,7 @@ namespace LFS.Views.Manage.ChartOfAccounts.BeginningBalances
 
         #endregion
 
-        private Manage.BeginningBalances.UcBeginningBalances ucBeginningBalances1;
+        private BeginningBalances.UcBeginningBalances ucBeginningBalances1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnSave;

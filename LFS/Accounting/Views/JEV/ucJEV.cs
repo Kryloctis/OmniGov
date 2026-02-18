@@ -1,7 +1,7 @@
+using Accounting.Data.Factories;
 using Accounting.Domain.Entities;
-using LFS.Helpers;
-using LFS.Views.Transactions.JEV.JournalForms;
-using OmniGov.Core.Repositories;
+using OmniGov.App.Accounting.Views.JEV.JournalForms;
+using OmniGov.App.Helpers;
 using OmniGov.Core.Factories;
 using System;
 using System.Collections.Generic;
@@ -11,9 +11,8 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using Accounting.Data.Factories;
 
-namespace LFS.Views.Transactions.JEV
+namespace OmniGov.App.Accounting.Views.JEV
 {
     public partial class ucJev : UserControl
     {

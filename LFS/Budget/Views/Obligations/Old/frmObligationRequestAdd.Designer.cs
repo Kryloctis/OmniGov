@@ -1,6 +1,6 @@
-using LFS.Budget.Views.Obligations;
+using OmniGov.App.Budget.Views.Obligations.Old;
 
-namespace LFS.Budget.Views.Obligations
+namespace OmniGov.App.Budget.Views.Obligations.Old
 {
     partial class frmObligationRequestAdd
     {
@@ -30,7 +30,7 @@ namespace LFS.Budget.Views.Obligations
         /// </summary>
         private void InitializeComponent()
         {
-            this.ucObligationRequest1 = new LFS.Budget.Views.Obligations.ucObligationRequest();
+            this.ucObligationRequest1 = new OmniGov.App.Budget.Views.Obligations.Old.ucObligationRequest();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnAddToList = new System.Windows.Forms.Button();

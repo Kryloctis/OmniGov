@@ -1,5 +1,6 @@
+using OmniGov.App.Views.Manage.RptTaxRates;
 
-namespace LFS.Views.Manage.RptTaxRates
+namespace OmniGov.App.Views.Manage.RptTaxRates
 {
     partial class frmEditRptTaxRates
     {
@@ -32,7 +33,7 @@ namespace LFS.Views.Manage.RptTaxRates
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnUpdate = new System.Windows.Forms.Button();
-            this.ucRptTaxRates1 = new LFS.Views.Manage.RptTaxRates.ucRptTaxRates();
+            this.ucRptTaxRates1 = new OmniGov.App.Views.Manage.RptTaxRates.ucRptTaxRates();
             this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 

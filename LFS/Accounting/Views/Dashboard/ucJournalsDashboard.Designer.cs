@@ -1,5 +1,5 @@
 
-namespace LFS.Views.Dashboard.AccountingDashboard
+namespace OmniGov.App.Accounting.Views.Dashboard
 {
     partial class ucJournalsDashboard
     {

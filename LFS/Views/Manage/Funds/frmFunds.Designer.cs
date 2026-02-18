@@ -1,5 +1,5 @@
 
-namespace LFS.Views.Manage.Funds
+namespace OmniGov.App.Views.Manage.Funds
 {
     partial class frmFunds
     {

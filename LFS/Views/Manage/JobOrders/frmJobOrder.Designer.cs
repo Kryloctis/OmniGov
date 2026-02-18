@@ -1,5 +1,5 @@
 
-namespace LFS.Views.Manage.JobOrders
+namespace OmniGov.App.Views.Manage.JobOrders
 {
     partial class frmJobOrder
     {
@@ -113,7 +113,7 @@ namespace LFS.Views.Manage.JobOrders
             // 
             // btnAdd
             // 
-            this.btnAdd.Image = global::LFS.Properties.Resources.button_rounded_add_20px;
+            this.btnAdd.Image = global::OmniGov.App.Properties.Resources.button_rounded_add_20px;
             this.btnAdd.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnAdd.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnAdd.Name = "btnAdd";
@@ -125,7 +125,7 @@ namespace LFS.Views.Manage.JobOrders
             // btnEdit
             // 
             this.btnEdit.Enabled = false;
-            this.btnEdit.Image = global::LFS.Properties.Resources.button_rounded_edit_20px;
+            this.btnEdit.Image = global::OmniGov.App.Properties.Resources.button_rounded_edit_20px;
             this.btnEdit.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnEdit.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnEdit.Name = "btnEdit";
@@ -136,7 +136,7 @@ namespace LFS.Views.Manage.JobOrders
             // btnDelete
             // 
             this.btnDelete.Enabled = false;
-            this.btnDelete.Image = global::LFS.Properties.Resources.button_rounded_remove_20px;
+            this.btnDelete.Image = global::OmniGov.App.Properties.Resources.button_rounded_remove_20px;
             this.btnDelete.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnDelete.Name = "btnDelete";

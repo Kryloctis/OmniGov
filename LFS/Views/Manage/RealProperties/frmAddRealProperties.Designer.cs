@@ -1,4 +1,4 @@
-namespace LFS.Views.Manage.RealProperties
+namespace OmniGov.App.Views.Manage.RealProperties
 {
     partial class frmAddRealProperties
     {
@@ -28,7 +28,7 @@ namespace LFS.Views.Manage.RealProperties
         /// </summary>
         private void InitializeComponent()
         {
-            ucRealProperties1 = new TaxPayers.ucRealProperties();
+            ucRealProperties1 = new ucRealProperties();
             flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             btnCancel = new System.Windows.Forms.Button();
             btnSave = new System.Windows.Forms.Button();
@@ -101,7 +101,7 @@ namespace LFS.Views.Manage.RealProperties
 
         #endregion
 
-        private TaxPayers.ucRealProperties ucRealProperties1;
+        private ucRealProperties ucRealProperties1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnSave;

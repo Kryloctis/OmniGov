@@ -1,5 +1,5 @@
 
-namespace LFS.Views.Manage.LinkUser
+namespace OmniGov.App.Views.Manage.LinkUser
 {
     partial class frmLinkUser
     {

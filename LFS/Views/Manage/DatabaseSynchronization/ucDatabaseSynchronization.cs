@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 
-namespace LFS.Views.Manage.DatabaseSynchronization
+namespace OmniGov.App.Views.Manage.DatabaseSynchronization
 {
     public partial class ucDatabaseSynchronization : UserControl
     {

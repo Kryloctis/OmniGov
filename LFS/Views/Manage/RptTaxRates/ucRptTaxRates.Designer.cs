@@ -1,5 +1,5 @@
 
-namespace LFS.Views.Manage.RptTaxRates
+namespace OmniGov.App.Views.Manage.RptTaxRates
 {
     partial class ucRptTaxRates
     {

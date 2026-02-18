@@ -1,5 +1,6 @@
+using OmniGov.App.Views.Transactions.CheckIssuance;
 
-namespace LFS.Views.Transactions.RCI
+namespace OmniGov.App.Views.Transactions.CheckIssuance
 {
     partial class frmRCIEdit
     {
@@ -32,7 +33,7 @@ namespace LFS.Views.Transactions.RCI
             flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             btnCancel = new System.Windows.Forms.Button();
             btnSave = new System.Windows.Forms.Button();
-            ucrci2 = new LFS.Views.Transactions.RCI.ucRCI();
+            ucrci2 = new OmniGov.App.Views.Transactions.CheckIssuance.ucRCI();
             flowLayoutPanel1.SuspendLayout();
             SuspendLayout();
             // 

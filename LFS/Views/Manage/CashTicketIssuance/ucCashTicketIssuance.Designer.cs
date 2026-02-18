@@ -1,4 +1,4 @@
-namespace LFS.Views.Transactions.CashTicketIssuance
+namespace OmniGov.App.Views.Manage.CashTicketIssuance
 {
     partial class ucCashTicketIssuance
     {

@@ -1,13 +1,11 @@
-using LFS.Helpers;
-using OmniGov.Core.Repositories;
+using OmniGov.App.Helpers;
 using OmniGov.Core.Factories;
 using System;
 using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
-using Treasury.Data;
 
-namespace LFS.Views.Transactions.Payments.MarriageLicense
+namespace OmniGov.App.Views.Transactions.Payments.MarriageLicense
 {
     public partial class ucSpouseInfo : UserControl
     {
@@ -211,4 +209,3 @@ namespace LFS.Views.Transactions.Payments.MarriageLicense
         }
     }
 }
-

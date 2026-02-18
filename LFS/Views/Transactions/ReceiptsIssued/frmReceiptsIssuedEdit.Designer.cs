@@ -1,5 +1,6 @@
+using OmniGov.App.Views.Transactions.ReceiptsIssued;
 
-namespace LFS.Views.Transactions.ReceiptsIssued
+namespace OmniGov.App.Views.Transactions.ReceiptsIssued
 {
     partial class frmReceiptsIssuedEdit
     {

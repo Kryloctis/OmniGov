@@ -1,5 +1,5 @@
 
-namespace LFS.Budget.Views.BudgetAppropriations
+namespace OmniGov.App.Budget.Views.BudgetAppropriations
 {
     partial class frmBudgetAppropriationsEdit
     {
@@ -32,7 +32,7 @@ namespace LFS.Budget.Views.BudgetAppropriations
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
-            this.ucBudgetAppropriations1 = new LFS.Budget.Views.BudgetAppropriations.ucBudgetAppropriations();
+            this.ucBudgetAppropriations1 = new OmniGov.App.Budget.Views.BudgetAppropriations.ucBudgetAppropriations();
             this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -59,7 +59,7 @@ namespace LFS.Budget.Views.BudgetAppropriations
             // 
             // btnSave
             // 
-            this.btnSave.Image = global::LFS.Properties.Resources.save14px;
+            this.btnSave.Image = global::OmniGov.App.Properties.Resources.save14px;
             this.btnSave.Location = new System.Drawing.Point(406, 3);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 23);

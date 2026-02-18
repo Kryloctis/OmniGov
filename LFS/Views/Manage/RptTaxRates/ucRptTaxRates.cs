@@ -1,11 +1,10 @@
-using LFS.Helpers;
-using OmniGov.Core.Repositories;
+using OmniGov.App.Helpers;
 using OmniGov.Core.Factories;
 using System;
 using System.ComponentModel;
 using System.Windows.Forms;
 
-namespace LFS.Views.Manage.RptTaxRates
+namespace OmniGov.App.Views.Manage.RptTaxRates
 {
     public partial class ucRptTaxRates : UserControl
     {

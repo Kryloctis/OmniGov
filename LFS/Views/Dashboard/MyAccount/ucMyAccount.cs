@@ -1,8 +1,7 @@
-using LFS.Helpers;
-using LFS.Properties;
-using LFS.Views.SignIn;
+using OmniGov.App.Helpers;
+using OmniGov.App.Properties;
+using OmniGov.App.Views.SignIn;
 using OmniGov.Core.Entities;
-using OmniGov.Core.Repositories;
 using OmniGov.Core.Factories;
 using System;
 using System.ComponentModel;
@@ -11,7 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace LFS.Views.Dashboard.MyAccount
+namespace OmniGov.App.Views.Dashboard.MyAccount
 {
     public partial class ucMyAccount : UserControl
     {
@@ -362,4 +361,3 @@ namespace LFS.Views.Dashboard.MyAccount
         }
     }
 }
-

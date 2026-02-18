@@ -1,12 +1,11 @@
-using LFS.Helpers;
 using Microsoft.Reporting.WinForms;
-using OmniGov.Core.Repositories;
+using OmniGov.App.Helpers;
 using OmniGov.Core.Factories;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
-namespace LFS.Views.Reports.GeneralCollection
+namespace OmniGov.App.Views.Reports.AbstractOfGeneralCollection
 {
     public partial class AbstractOfGeneralCollection : Form
     {
@@ -82,4 +81,3 @@ namespace LFS.Views.Reports.GeneralCollection
         }
     }
 }
-

@@ -1,4 +1,5 @@
-namespace LFS.Views.Manage.CashTickets
+using OmniGov.App.Views.Manage.CashTickets;
+namespace OmniGov.App.Views.Manage.CashTickets
 {
     partial class frmCashTicketEdit
     {

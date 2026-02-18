@@ -1,12 +1,11 @@
-using LFS.Helpers;
-using OmniGov.Core.Repositories;
+using Budget.Data.Factories;
+using OmniGov.App.Helpers;
 using OmniGov.Core.Factories;
 using System;
 using System.ComponentModel;
 using System.Windows.Forms;
-using Budget.Data.Factories;
 
-namespace LFS.Budget.Views.AllotmentRelease
+namespace OmniGov.App.Budget.Views.AllotmentRelease
 {
     public partial class frmAllotmentRelease : Form
     {
@@ -100,4 +99,3 @@ namespace LFS.Budget.Views.AllotmentRelease
         }
     }
 }
-

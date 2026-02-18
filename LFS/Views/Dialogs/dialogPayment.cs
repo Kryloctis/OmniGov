@@ -1,6 +1,6 @@
 using System.Windows.Forms;
 
-namespace LFS.Views.Dialogs
+namespace OmniGov.App.Views.Dialogs
 {
     public partial class dialogPayment : Form
     {

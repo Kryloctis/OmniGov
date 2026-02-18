@@ -1,7 +1,7 @@
 using System;
 using System.Windows.Forms;
 
-namespace LFS.CustomTools
+namespace OmniGov.App.CustomTools
 {
     /// <summary>
     /// A TabControl without visible headers.

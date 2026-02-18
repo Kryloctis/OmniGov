@@ -1,6 +1,5 @@
-using LFS.Budget.Dashboard;
 
-namespace LFS.Budget.Dashboard
+namespace OmniGov.App.Budget.Views.Dashboard
 {
     partial class ucBudgetSummary
     {

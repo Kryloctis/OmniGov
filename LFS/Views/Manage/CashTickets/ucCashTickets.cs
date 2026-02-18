@@ -1,12 +1,11 @@
-using OmniGov.Core.Repositories;
 using OmniGov.Core.Factories;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using Treasury.Domain.Entities;
 using Treasury.Data.Factories;
+using Treasury.Domain.Entities;
 
-namespace LFS.Views.Manage.CashTickets
+namespace OmniGov.App.Views.Manage.CashTickets
 {
     public partial class ucCashTickets : UserControl
     {

@@ -1,4 +1,4 @@
-namespace LFS.Views.Reports.TaxClearance
+namespace OmniGov.App.Views.Reports.TaxClearance
 {
     partial class frmTaxClearance
     {

@@ -1,4 +1,4 @@
-namespace LFS.Views.Transactions.Payments
+namespace OmniGov.App.Views.Transactions.Payments
 {
     partial class ucPaymentRegistry
     {
@@ -40,7 +40,7 @@ namespace LFS.Views.Transactions.Payments
             toolStrip2 = new System.Windows.Forms.ToolStrip();
             btnBack = new System.Windows.Forms.ToolStripButton();
             backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            ucTaxPayers1 = new Manage.TaxPayers.ucTaxPayers();
+            ucTaxPayers1 = new OmniGov.App.Views.Manage.TaxPayers.ucTaxPayers();
             tabControlRegistry.SuspendLayout();
             tabRegistryList.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgRegistry).BeginInit();
@@ -227,6 +227,6 @@ namespace LFS.Views.Transactions.Payments
         private System.Windows.Forms.ToolStrip toolStrip2;
         private System.Windows.Forms.ToolStripButton btnBack;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
-        private Manage.TaxPayers.ucTaxPayers ucTaxPayers1;
+        private OmniGov.App.Views.Manage.TaxPayers.ucTaxPayers ucTaxPayers1;
     }
 }

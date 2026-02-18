@@ -2,7 +2,7 @@ using Accounting.Data.Factories;
 using System.Data;
 using System.Text.RegularExpressions;
 
-namespace LFS.Budget.Helpers
+namespace OmniGov.App.Budget.Helpers
 {
     public static class BudgetHelper
     {

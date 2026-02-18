@@ -1,4 +1,6 @@
-namespace LFS.Views.Dashboard.Treasury
+using OmniGov.App.Views.Dashboard.Treasury;
+
+namespace OmniGov.App.Views.Dashboard.Treasury
 {
     partial class ucTreasury
     {

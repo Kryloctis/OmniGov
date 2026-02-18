@@ -1,8 +1,6 @@
-using LFS.DataSets;
-using LFS.Helpers;
-using LFS.Views.Transactions.Payments.BurialPermit;
-using LFS.Views.Transactions.Payments.RealProperty;
 using Microsoft.Reporting.WinForms;
+using OmniGov.App.DataSets;
+using OmniGov.App.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -10,7 +8,7 @@ using System.Windows.Forms;
 using Treasury.Data.Factories;
 using Treasury.Domain.Entities;
 
-namespace LFS.Views.Transactions.Payments
+namespace OmniGov.App.Views.Transactions.Payments.RealProperty
 {
     public partial class frmPaymentRpt : Form
     {

@@ -1,12 +1,11 @@
-using LFS.Helpers;
-using OmniGov.Core.Repositories;
+using OmniGov.App.Helpers;
 using OmniGov.Core.Factories;
 using System;
 using System.Windows.Forms;
-using Treasury.Domain.Entities;
 using Treasury.Data.Factories;
+using Treasury.Domain.Entities;
 
-namespace LFS.Views.Transactions.Biddings
+namespace OmniGov.App.Views.Transactions.Biddings
 {
     public partial class ucBiddings : UserControl
     {
@@ -186,4 +185,3 @@ namespace LFS.Views.Transactions.Biddings
         }
     }
 }
-

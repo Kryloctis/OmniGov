@@ -1,4 +1,6 @@
-namespace LFS.Views.Transactions.Payments
+using OmniGov.App.Views.Transactions.Payments;
+
+namespace OmniGov.App.Views.Transactions.Payments.RealProperty
 {
     partial class frmPaymentRpt
     {
@@ -38,7 +40,7 @@ namespace LFS.Views.Transactions.Payments
             tabPagePayment = new System.Windows.Forms.TabPage();
             ucPayment1 = new ucPayment();
             tabPageReceipt = new System.Windows.Forms.TabPage();
-            ucPrintReceipt1 = new BurialPermit.ucPrintReceipt();
+            ucPrintReceipt1 = new OmniGov.App.Views.Transactions.Payments.ucPrintReceipt();
             flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             btnCancel = new System.Windows.Forms.Button();
             btnNext = new System.Windows.Forms.Button();
@@ -359,6 +361,6 @@ namespace LFS.Views.Transactions.Payments
         private Microsoft.Reporting.WinForms.ReportViewer reportViewer1;
         private System.Windows.Forms.TabPage tabPageReceipt;
         private System.Windows.Forms.RadioButton radReceipt;
-        private BurialPermit.ucPrintReceipt ucPrintReceipt1;
+        private OmniGov.App.Views.Transactions.Payments.ucPrintReceipt ucPrintReceipt1;
     }
 }

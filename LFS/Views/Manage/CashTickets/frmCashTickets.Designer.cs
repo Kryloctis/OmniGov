@@ -1,4 +1,4 @@
-namespace LFS.Views.Manage.CashTickets
+namespace OmniGov.App.Views.Manage.CashTickets
 {
     partial class frmCashTickets
     {

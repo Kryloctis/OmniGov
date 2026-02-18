@@ -1,5 +1,4 @@
-
-namespace LFS.Budget.Views.AllotmentRelease
+namespace OmniGov.App.Budget.Views.AllotmentRelease.Old
 {
     partial class ucAllotmentReleaseMain
     {

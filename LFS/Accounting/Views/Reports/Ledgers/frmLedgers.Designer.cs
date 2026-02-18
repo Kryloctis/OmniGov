@@ -1,4 +1,5 @@
-namespace LFS.Views.Reports.Ledgers
+using OmniGov.App.Accounting.Views.Reports.Ledgers;
+namespace OmniGov.App.Accounting.Views.Reports.Ledgers
 {
     partial class frmLedgers
     {

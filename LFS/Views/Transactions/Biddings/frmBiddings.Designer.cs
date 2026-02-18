@@ -1,4 +1,5 @@
-namespace LFS.Views.Transactions.Biddings
+using OmniGov.App.Views.Transactions.Biddings;
+namespace OmniGov.App.Views.Transactions.Biddings
 {
     partial class frmBiddings
     {
@@ -54,7 +55,7 @@ namespace LFS.Views.Transactions.Biddings
             groupBox1 = new System.Windows.Forms.GroupBox();
             panel1 = new System.Windows.Forms.Panel();
             cbxNewTaxpayer = new System.Windows.Forms.CheckBox();
-            ucTaxPayers1 = new Manage.TaxPayers.ucTaxPayers();
+            ucTaxPayers1 = new OmniGov.App.Views.Manage.TaxPayers.ucTaxPayers();
             groupBox2 = new System.Windows.Forms.GroupBox();
             ucBiddings1 = new ucBiddings();
             toolStrip2 = new System.Windows.Forms.ToolStrip();
@@ -592,7 +593,7 @@ namespace LFS.Views.Transactions.Biddings
         private System.Windows.Forms.Button btnConfirmPayment;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
-        private Manage.TaxPayers.ucTaxPayers ucTaxPayers1;
+        private OmniGov.App.Views.Manage.TaxPayers.ucTaxPayers ucTaxPayers1;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Button btnPayment;
         private System.Windows.Forms.Button btnProceedToPayment;

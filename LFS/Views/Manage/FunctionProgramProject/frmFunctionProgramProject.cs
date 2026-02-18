@@ -1,11 +1,10 @@
-using LFS.Helpers;
-using LFS.Views.Manage.FunctionProgramProject.FunctionalClassification;
-using LFS.Views.Manage.FunctionProgramProject.FunctionProgramProject;
-using LFS.Views.Manage.FunctionProgramProject.FunctonalClassificationService;
-using LFS.Views.Manage.FunctionProgramProject.OthersFunctionProgramProject;
 using MySql.Data.MySqlClient;
+using OmniGov.App.Helpers;
+using OmniGov.App.Views.Manage.FunctionProgramProject.FunctionalClassification;
+using OmniGov.App.Views.Manage.FunctionProgramProject.FunctionalClassificationService;
+using OmniGov.App.Views.Manage.FunctionProgramProject.FunctionProgramProject;
+using OmniGov.App.Views.Manage.FunctionProgramProject.OthersFunctionProgramProject;
 using OmniGov.Core.Entities;
-using OmniGov.Core.Repositories;
 using OmniGov.Core.Factories;
 using System;
 using System.Collections.Generic;
@@ -13,7 +12,7 @@ using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace LFS.Views.Manage.FunctionProgramProject
+namespace OmniGov.App.Views.Manage.FunctionProgramProject
 {
     public partial class frmFunctionProgramProject : Form
     {

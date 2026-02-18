@@ -1,5 +1,5 @@
 
-namespace LFS.Budget.Views.SupplementalAppropriations
+namespace OmniGov.App.Budget.Views.SupplementalAppropriations
 {
     partial class ucSupplementalAppropriations
     {

@@ -1,5 +1,8 @@
 
-namespace LFS.Views.Manage.JobOrders
+using OmniGov.App.Views.Manage.JobOrders;
+
+
+namespace OmniGov.App.Views.Manage.JobOrders
 {
     partial class frmJobOrderAdd
     {
@@ -33,7 +36,7 @@ namespace LFS.Views.Manage.JobOrders
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
-            this.ucJobOrder1 = new LFS.Views.Manage.JobOrders.ucJobOrder();
+            this.ucJobOrder1 = new OmniGov.App.Views.Manage.JobOrders.ucJobOrder();
             this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 

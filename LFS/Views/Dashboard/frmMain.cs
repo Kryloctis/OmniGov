@@ -1,16 +1,16 @@
-using LFS.Helpers;
-using LFS.Views.Dashboard.Accounting;
-using LFS.Views.Dashboard.Manage;
-using LFS.Views.Dashboard.MyAccount;
-using LFS.Views.Dashboard.Reports;
-using LFS.Views.Dashboard.Treasury;
-using LFS.Views.SignIn;
+using OmniGov.App.Accounting.Views.Dashboard;
+using OmniGov.App.Budget.Views.Dashboard;
+using OmniGov.App.Helpers;
+using OmniGov.App.Views.Dashboard.Manage;
+using OmniGov.App.Views.Dashboard.MyAccount;
+using OmniGov.App.Views.Dashboard.Reports;
+using OmniGov.App.Views.Dashboard.Treasury;
+using OmniGov.App.Views.SignIn;
 using System;
 using System.Diagnostics;
 using System.Windows.Forms;
-using LFS.Budget.Dashboard;
 
-namespace LFS.Views.Dashboard
+namespace OmniGov.App.Views.Dashboard
 {
     public partial class frmMain : Form
     {

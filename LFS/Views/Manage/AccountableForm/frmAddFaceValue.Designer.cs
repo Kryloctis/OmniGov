@@ -1,5 +1,6 @@
+using OmniGov.App.Views.Manage.AccountableForm;
 
-namespace LFS.Views.Manage.AccountableForm
+namespace OmniGov.App.Views.Manage.AccountableForm
 {
     partial class frmAddFaceValue
     {

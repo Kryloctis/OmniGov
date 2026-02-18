@@ -1,5 +1,4 @@
-using LFS.Helpers;
-using OmniGov.Core.Repositories;
+using OmniGov.App.Helpers;
 using OmniGov.Core.Factories;
 using System;
 using System.ComponentModel;
@@ -7,7 +6,7 @@ using System.Data;
 using System.Windows.Forms;
 using Treasury.Data.Factories;
 
-namespace LFS.Views.Transactions.Payments.RealProperty
+namespace OmniGov.App.Views.Transactions.Payments.RealProperty
 {
     public partial class ucPaymentTaxpayers : UserControl
     {
@@ -164,4 +163,3 @@ namespace LFS.Views.Transactions.Payments.RealProperty
         }
     }
 }
-

@@ -1,6 +1,4 @@
-using LFS.Budget.Views.BudgetAppropriations;
-
-namespace LFS.Budget.Views.BudgetAppropriations
+namespace OmniGov.App.Budget.Views.BudgetAppropriations
 {
     partial class frmBudgetAppropriationsAdd
     {

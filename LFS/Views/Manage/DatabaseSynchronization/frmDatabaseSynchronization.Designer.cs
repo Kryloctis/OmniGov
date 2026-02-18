@@ -1,4 +1,5 @@
-namespace LFS.Views.Manage.DatabaseSynchronization
+using OmniGov.App.Views.Manage.DatabaseSynchronization;
+namespace OmniGov.App.Views.Manage.DatabaseSynchronization
 {
     partial class frmDatabaseSynchronization
     {
@@ -32,7 +33,7 @@ namespace LFS.Views.Manage.DatabaseSynchronization
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnStop = new System.Windows.Forms.Button();
             this.btnSync = new System.Windows.Forms.Button();
-            this.ucDatabaseSynchronization1 = new LFS.Views.Manage.DatabaseSynchronization.ucDatabaseSynchronization();
+            this.ucDatabaseSynchronization1 = new OmniGov.App.Views.Manage.DatabaseSynchronization.ucDatabaseSynchronization();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 

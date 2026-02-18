@@ -1,5 +1,5 @@
 
-namespace LFS.Views.Manage.RptPenalties
+namespace OmniGov.App.Views.Manage.RptPenalties
 {
     partial class ucRptPenalties
     {

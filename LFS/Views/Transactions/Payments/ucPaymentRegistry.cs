@@ -1,6 +1,5 @@
-using LFS.Helpers;
-using LFS.Views.Manage.TaxPayers;
-using OmniGov.Core.Repositories;
+using OmniGov.App.Helpers;
+using OmniGov.App.Views.Manage.TaxPayers;
 using OmniGov.Core.Factories;
 using System;
 using System.ComponentModel;
@@ -8,7 +7,7 @@ using System.Data;
 using System.Windows.Forms;
 using Treasury.Data.Factories;
 
-namespace LFS.Views.Transactions.Payments
+namespace OmniGov.App.Views.Transactions.Payments
 {
     public partial class ucPaymentRegistry : UserControl
     {
@@ -175,4 +174,3 @@ namespace LFS.Views.Transactions.Payments
         }
     }
 }
-

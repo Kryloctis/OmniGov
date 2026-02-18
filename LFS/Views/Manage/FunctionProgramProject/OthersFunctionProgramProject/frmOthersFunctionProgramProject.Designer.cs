@@ -1,5 +1,5 @@
 
-namespace LFS.Views.Manage.FunctionProgramProject.OthersFunctionProgramProject
+namespace OmniGov.App.Views.Manage.FunctionProgramProject.OthersFunctionProgramProject
 {
     partial class frmOthersFunctionProgramProject
     {
@@ -71,7 +71,7 @@ namespace LFS.Views.Manage.FunctionProgramProject.OthersFunctionProgramProject
             // 
             // toolStripBtnAdd
             // 
-            this.toolStripBtnAdd.Image = global::LFS.Properties.Resources.button_rounded_add_24px;
+            this.toolStripBtnAdd.Image = global::OmniGov.App.Properties.Resources.button_rounded_add_24px;
             this.toolStripBtnAdd.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.toolStripBtnAdd.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripBtnAdd.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -84,7 +84,7 @@ namespace LFS.Views.Manage.FunctionProgramProject.OthersFunctionProgramProject
             // 
             // toolStripBtnEdit
             // 
-            this.toolStripBtnEdit.Image = global::LFS.Properties.Resources.button_rounded_edit_24px;
+            this.toolStripBtnEdit.Image = global::OmniGov.App.Properties.Resources.button_rounded_edit_24px;
             this.toolStripBtnEdit.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.toolStripBtnEdit.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripBtnEdit.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -97,7 +97,7 @@ namespace LFS.Views.Manage.FunctionProgramProject.OthersFunctionProgramProject
             // 
             // toolStripBtnDelete
             // 
-            this.toolStripBtnDelete.Image = global::LFS.Properties.Resources.button_rounded_remove_24px;
+            this.toolStripBtnDelete.Image = global::OmniGov.App.Properties.Resources.button_rounded_remove_24px;
             this.toolStripBtnDelete.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.toolStripBtnDelete.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripBtnDelete.ImageTransparentColor = System.Drawing.Color.Magenta;

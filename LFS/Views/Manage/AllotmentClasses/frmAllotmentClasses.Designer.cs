@@ -1,5 +1,5 @@
 
-namespace LFS.Views.Manage.AllotmentClasses
+namespace OmniGov.App.Views.Manage.AllotmentClasses
 {
     partial class frmAllotmentClasses
     {

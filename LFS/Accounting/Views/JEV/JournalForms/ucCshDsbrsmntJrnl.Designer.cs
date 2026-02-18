@@ -1,4 +1,4 @@
-namespace LFS.Views.Transactions.JEV.JournalForms
+namespace OmniGov.App.Accounting.Views.JEV.JournalForms
 {
     partial class ucCshDsbrsmntJrnl
     {

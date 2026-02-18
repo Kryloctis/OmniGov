@@ -1,4 +1,5 @@
-namespace LFS.Views.Manage.BusinessAdOnCharges
+using OmniGov.App.Views.Manage.BusinessAddOnCharges;
+namespace OmniGov.App.Views.Manage.BusinessAddOnCharges
 {
     partial class frmEditBusinessAddOnCharges
     {
@@ -31,7 +32,7 @@ namespace LFS.Views.Manage.BusinessAdOnCharges
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
-            this.ucBusinessAddOnCharges1 = new LFS.Views.Manage.BusinessAdOnCharges.ucBusinessAddOnCharges();
+            this.ucBusinessAddOnCharges1 = new OmniGov.App.Views.Manage.BusinessAddOnCharges.ucBusinessAddOnCharges();
             this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 

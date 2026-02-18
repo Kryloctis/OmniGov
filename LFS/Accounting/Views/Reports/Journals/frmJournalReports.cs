@@ -1,8 +1,8 @@
-using LFS.Helpers;
+using OmniGov.App.Helpers;
 using System;
 using System.Windows.Forms;
 
-namespace LFS.Views.Reports.Journals
+namespace OmniGov.App.Accounting.Views.Reports.Journals
 {
     public partial class frmJournalReports : Form
     {

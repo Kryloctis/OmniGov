@@ -1,4 +1,7 @@
-namespace LFS.Views.Transactions.Payments.MarriageLicense
+using OmniGov.App.Views.Transactions.Payments;
+using OmniGov.App.Views.Transactions.Payments.MarriageLicense;
+
+namespace OmniGov.App.Views.Transactions.Payments.MarriageLicense
 {
     partial class frmMarriageLicense
     {
@@ -53,7 +56,7 @@ namespace LFS.Views.Transactions.Payments.MarriageLicense
             groupBox3 = new System.Windows.Forms.GroupBox();
             ucSpouseInfoBride1 = new ucSpouseInfo();
             tabPageReceipt = new System.Windows.Forms.TabPage();
-            ucPrintReceipt1 = new BurialPermit.ucPrintReceipt();
+            ucPrintReceipt1 = new OmniGov.App.Views.Transactions.Payments.ucPrintReceipt();
             flowLayoutPanel1.SuspendLayout();
             flowLayoutPanel2.SuspendLayout();
             tabPagePayment.SuspendLayout();
@@ -433,6 +436,6 @@ namespace LFS.Views.Transactions.Payments.MarriageLicense
         private ucSpouseInfo ucSpouseInfoGroom1;
         private ucSpouseInfo ucSpouseInfoBride1;
         private System.Windows.Forms.TabPage tabPageReceipt;
-        private BurialPermit.ucPrintReceipt ucPrintReceipt1;
+        private OmniGov.App.Views.Transactions.Payments.ucPrintReceipt ucPrintReceipt1;
     }
 }

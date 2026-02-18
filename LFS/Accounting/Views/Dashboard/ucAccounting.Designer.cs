@@ -1,4 +1,4 @@
-namespace LFS.Views.Dashboard.Accounting
+namespace OmniGov.App.Accounting.Views.Dashboard
 {
     partial class ucAccounting
     {
@@ -29,7 +29,7 @@ namespace LFS.Views.Dashboard.Accounting
         private void InitializeComponent()
         {
             ucJevDashboard1 = new ucJevDashboard();
-            ucJournalsDashboard1 = new LFS.Views.Dashboard.AccountingDashboard.ucJournalsDashboard();
+            ucJournalsDashboard1 = new OmniGov.App.Accounting.Views.Dashboard.ucJournalsDashboard();
             panel2 = new System.Windows.Forms.Panel();
             label2 = new System.Windows.Forms.Label();
             panel2.SuspendLayout();
@@ -92,7 +92,7 @@ namespace LFS.Views.Dashboard.Accounting
 
         #endregion
         private ucJevDashboard ucJevDashboard1;
-        private AccountingDashboard.ucJournalsDashboard ucJournalsDashboard1;
+        private ucJournalsDashboard ucJournalsDashboard1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label label2;
     }

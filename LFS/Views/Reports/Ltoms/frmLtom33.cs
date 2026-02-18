@@ -1,6 +1,6 @@
-using LFS.Helpers;
-using LFS.Views.Transactions.Biddings.BiddingReports;
 using Microsoft.Reporting.WinForms;
+using OmniGov.App.Helpers;
+using OmniGov.App.Views.Transactions.Biddings.BiddingReports;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,7 +9,7 @@ using System.Linq;
 using System.Windows.Forms;
 using Treasury.Data.Factories;
 
-namespace LFS.Views.Reports.Ltoms
+namespace OmniGov.App.Views.Reports.Ltoms
 {
     public partial class frmLtom33 : Form
     {

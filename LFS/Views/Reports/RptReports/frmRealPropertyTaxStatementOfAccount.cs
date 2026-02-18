@@ -1,14 +1,14 @@
-using LFS.DataSets;
-using LFS.Helpers;
-using LFS.Views.Shared;
 using Microsoft.Reporting.WinForms;
+using OmniGov.App.DataSets;
+using OmniGov.App.Helpers;
+using OmniGov.App.Views.Shared;
 using System;
 using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
 using Treasury.Data.Factories;
 
-namespace LFS.Views.Reports.RptReports
+namespace OmniGov.App.Views.Reports.RptReports
 {
     public partial class frmRealPropertyTaxStatementOfAccount : Form
     {

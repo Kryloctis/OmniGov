@@ -1,5 +1,5 @@
 
-namespace LFS.Views.Dashboard
+namespace OmniGov.App.Accounting.Views.Dashboard
 {
     partial class ucJevDashboard
     {

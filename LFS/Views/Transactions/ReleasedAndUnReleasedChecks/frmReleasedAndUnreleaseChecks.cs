@@ -1,13 +1,12 @@
-using LFS.Helpers;
-using OmniGov.Core.Repositories;
+using OmniGov.App.Helpers;
 using OmniGov.Core.Factories;
 using System;
 using System.Data;
 using System.Windows.Forms;
-using Treasury.Domain.Entities;
 using Treasury.Data.Factories;
+using Treasury.Domain.Entities;
 
-namespace LFS.Views.Transactions.ReleasedAndUnReleasedChecks
+namespace OmniGov.App.Views.Transactions.ReleasedAndUnReleasedChecks
 {
     public partial class frmReleasedAndUnreleaseChecks : Form
     {
@@ -254,4 +253,3 @@ namespace LFS.Views.Transactions.ReleasedAndUnReleasedChecks
         }
     }
 }
-

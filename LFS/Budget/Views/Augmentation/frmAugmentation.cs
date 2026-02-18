@@ -1,8 +1,8 @@
-using LFS.Helpers;
+using OmniGov.App.Helpers;
 using System;
 using System.Windows.Forms;
 
-namespace LFS.Budget.Views.Augmentation
+namespace OmniGov.App.Budget.Views.Augmentation
 {
     public partial class frmAugmentation : Form
     {

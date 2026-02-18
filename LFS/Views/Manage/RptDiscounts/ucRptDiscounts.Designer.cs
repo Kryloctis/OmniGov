@@ -1,5 +1,5 @@
 
-namespace LFS.Views.Manage.RptDiscount
+namespace OmniGov.App.Views.Manage.RptDiscounts
 {
     partial class ucRptDiscounts
     {

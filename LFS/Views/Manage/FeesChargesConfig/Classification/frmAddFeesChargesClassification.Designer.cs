@@ -1,4 +1,5 @@
-namespace LFS.Views.Manage.FeesChargesConfig
+using OmniGov.App.Views.Manage.FeesChargesConfig.Classification;
+namespace OmniGov.App.Views.Manage.FeesChargesConfig.Classification
 {
     partial class frmAddFeesChargesClassification
     {

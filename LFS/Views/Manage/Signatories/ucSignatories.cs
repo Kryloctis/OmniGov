@@ -1,5 +1,4 @@
-using LFS.Helpers;
-using OmniGov.Core.Repositories;
+using OmniGov.App.Helpers;
 using OmniGov.Core.Factories;
 using System;
 using System.Collections.Generic;
@@ -7,7 +6,7 @@ using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace LFS.Views.Manage.Signatories
+namespace OmniGov.App.Views.Manage.Signatories
 {
     public partial class ucSignatories : UserControl
     {

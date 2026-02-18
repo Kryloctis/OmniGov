@@ -1,14 +1,13 @@
-using LFS.Helpers;
+using Accounting.Data.Factories;
+using OmniGov.App.Helpers;
 using OmniGov.Core.Entities;
-using OmniGov.Core.Repositories;
 using OmniGov.Core.Factories;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Windows.Forms;
-using Accounting.Data.Factories;
 
-namespace LFS.Views.Manage.Journals.DefaultAccounts
+namespace OmniGov.App.Views.Manage.Journals.DefaultAccounts
 {
     public partial class frmDefaultAccounts : Form
     {

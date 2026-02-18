@@ -1,6 +1,6 @@
-using LFS.DataSets;
-using LFS.Helpers;
 using Microsoft.Reporting.WinForms;
+using OmniGov.App.DataSets;
+using OmniGov.App.Helpers;
 using OmniGov.Core.Entities;
 using System;
 using System.ComponentModel;
@@ -9,7 +9,7 @@ using System.Windows.Forms;
 using Treasury.Data.Factories;
 using Treasury.Domain.Entities;
 
-namespace LFS.Views.Reports.Rcd
+namespace OmniGov.App.Views.Reports.RCD
 {
     public partial class ucRcdReport : UserControl
     {

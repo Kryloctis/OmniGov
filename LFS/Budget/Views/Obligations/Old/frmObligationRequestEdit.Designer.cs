@@ -1,6 +1,6 @@
-using LFS.Budget.Views.Obligations;
+using OmniGov.App.Budget.Views.Obligations.Old;
 
-namespace LFS.Budget.Views.Obligations
+namespace OmniGov.App.Budget.Views.Obligations.Old
 {
     partial class frmObligationRequestEdit
     {
@@ -30,7 +30,7 @@ namespace LFS.Budget.Views.Obligations
         /// </summary>
         private void InitializeComponent()
         {
-            this.ucObligationRequest1 = new LFS.Budget.Views.Obligations.ucObligationRequest();
+            this.ucObligationRequest1 = new OmniGov.App.Budget.Views.Obligations.Old.ucObligationRequest();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnOk = new System.Windows.Forms.Button();
@@ -68,7 +68,7 @@ namespace LFS.Budget.Views.Obligations
             // 
             // btnOk
             // 
-            this.btnOk.Image = global::LFS.Properties.Resources.ok14px;
+            this.btnOk.Image = global::OmniGov.App.Properties.Resources.ok14px;
             this.btnOk.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnOk.Location = new System.Drawing.Point(391, 3);
             this.btnOk.Name = "btnOk";

@@ -1,24 +1,24 @@
-using LFS.Helpers;
-using LFS.Views.Reports.Cashbook;
-using LFS.Views.Reports.ConsolidatedReceipts;
-using LFS.Views.Reports.DailyCashPositionReport;
-using LFS.Views.Reports.Financial_Statements;
-using LFS.Views.Reports.JEV;
-using LFS.Views.Reports.Journals;
-using LFS.Views.Reports.Ledgers;
-using LFS.Views.Reports.Ltoms;
-using LFS.Views.Reports.Rcd;
-using LFS.Views.Reports.RCI;
-using LFS.Views.Reports.ReleasedAndUnreleasedCheques;
-using LFS.Views.Reports.RptReports;
-using LFS.Views.Reports.TaxClearance;
-using LFS.Views.Reports.TrialBalance;
+using OmniGov.App.Accounting.Views.Reports.FinancialStatements;
+using OmniGov.App.Accounting.Views.Reports.JEV;
+using OmniGov.App.Accounting.Views.Reports.Journals;
+using OmniGov.App.Accounting.Views.Reports.Ledgers;
+using OmniGov.App.Accounting.Views.Reports.TrialBalance;
+using OmniGov.App.Budget.Views.Reports;
+using OmniGov.App.Helpers;
+using OmniGov.App.Views.Reports.Cashbook;
+using OmniGov.App.Views.Reports.ConsolidatedReceipts;
+using OmniGov.App.Views.Reports.DailyCashPositionReport;
+using OmniGov.App.Views.Reports.Ltoms;
+using OmniGov.App.Views.Reports.RCD;
+using OmniGov.App.Views.Reports.RCI;
+using OmniGov.App.Views.Reports.ReleasedAndUnreleasedChecks;
+using OmniGov.App.Views.Reports.RptReports;
+using OmniGov.App.Views.Reports.TaxClearance;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using LFS.Budget.Views.Reports;
 
-namespace LFS.Views.Dashboard.Reports
+namespace OmniGov.App.Views.Dashboard.Reports
 {
     public partial class ucReports : UserControl
     {

@@ -1,6 +1,6 @@
-using LFS.Budget.Views.AllotmentRelease;
+using OmniGov.App.Budget.Views.AllotmentRelease.Old;
 
-namespace LFS.Budget.Views.AllotmentRelease
+namespace OmniGov.App.Budget.Views.AllotmentRelease.Old
 {
     partial class frmAllotmentReleaseEdit
     {
@@ -33,7 +33,7 @@ namespace LFS.Budget.Views.AllotmentRelease
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnOk = new System.Windows.Forms.Button();
-            this.ucAllotmentRelease1 = new LFS.Budget.Views.AllotmentRelease.ucAllotmentRelease();
+            this.ucAllotmentRelease1 = new OmniGov.App.Budget.Views.AllotmentRelease.Old.ucAllotmentRelease();
             this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 

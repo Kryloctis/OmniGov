@@ -1,11 +1,10 @@
-using LFS.Helpers;
-using OmniGov.Core.Repositories;
+using Accounting.Data.Factories;
+using OmniGov.App.Helpers;
 using OmniGov.Core.Factories;
 using System;
 using System.Windows.Forms;
-using Accounting.Data.Factories;
 
-namespace LFS.Views.Dashboard.AccountingDashboard
+namespace OmniGov.App.Accounting.Views.Dashboard
 {
     public partial class ucJournalsDashboard : UserControl
     {

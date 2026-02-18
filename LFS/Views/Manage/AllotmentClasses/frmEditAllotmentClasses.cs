@@ -1,10 +1,9 @@
-using LFS.Helpers;
-using OmniGov.Core.Repositories;
+using OmniGov.App.Helpers;
 using OmniGov.Core.Factories;
 using System;
 using System.Windows.Forms;
 
-namespace LFS.Views.Manage.AllotmentClasses
+namespace OmniGov.App.Views.Manage.AllotmentClasses
 {
     public partial class frmEditAllotmentClasses : Form
     {
@@ -76,4 +75,3 @@ namespace LFS.Views.Manage.AllotmentClasses
         }
     }
 }
-

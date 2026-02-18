@@ -1,9 +1,8 @@
-using LFS.Helpers;
-using LFS.Views.Manage.Amortization;
+using OmniGov.App.Helpers;
 using System;
 using System.Windows.Forms;
 
-namespace LFS.Views.Manage.AmortizationSchedule
+namespace OmniGov.App.Views.Manage.AmortizationSchedule
 {
     public partial class frmAddAmortizationSchedule : Form
     {

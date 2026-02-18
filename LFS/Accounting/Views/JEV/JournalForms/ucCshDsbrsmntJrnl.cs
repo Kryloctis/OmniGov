@@ -1,13 +1,13 @@
 using Accounting.Data.Factories;
 using Accounting.Domain.Entities;
-using LFS.Helpers;
+using OmniGov.App.Helpers;
 using System;
 using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
 using Treasury.Data.Factories;
 
-namespace LFS.Views.Transactions.JEV.JournalForms
+namespace OmniGov.App.Accounting.Views.JEV.JournalForms
 {
     public partial class ucCshDsbrsmntJrnl : UserControl
     {

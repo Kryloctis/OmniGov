@@ -1,5 +1,8 @@
 
-namespace LFS.Views.Manage.ChartOfAccounts
+using OmniGov.App.Views.Manage.ChartOfAccounts;
+
+
+namespace OmniGov.App.Views.Manage.ChartOfAccounts
 {
     partial class ucGeneralLedgerAccountSearch
     {

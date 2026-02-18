@@ -1,5 +1,5 @@
 
-namespace LFS.Views.Transactions.CheckIssuance.Obligations
+namespace OmniGov.App.Views.Transactions.CheckIssuance.Obligations
 {
     partial class frmChckIssOblgtns
     {

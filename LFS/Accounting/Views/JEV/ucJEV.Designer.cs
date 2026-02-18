@@ -1,5 +1,6 @@
+using OmniGov.App.Accounting.Views.JEV.JournalForms;
 
-namespace LFS.Views.Transactions.JEV
+namespace OmniGov.App.Accounting.Views.JEV
 {
     partial class ucJev
     {
@@ -48,17 +49,17 @@ namespace LFS.Views.Transactions.JEV
             label8 = new System.Windows.Forms.Label();
             label12 = new System.Windows.Forms.Label();
             label11 = new System.Windows.Forms.Label();
-            cstmTbCtrlJrnls = new LFS.CustomTools.CustomTabControl();
+            cstmTbCtrlJrnls = new OmniGov.App.CustomTools.CustomTabControl();
             tbPgCshRcptsJrnl = new System.Windows.Forms.TabPage();
-            ucCshRcptsJrnl1 = new LFS.Views.Transactions.JEV.JournalForms.ucCshRcptsJrnl();
+            ucCshRcptsJrnl1 = new OmniGov.App.Accounting.Views.JEV.JournalForms.ucCshRcptsJrnl();
             tbPgGenJrnl = new System.Windows.Forms.TabPage();
             ucGenJrnl1 = new ucGenJrnl();
             tbPgCshDsbrsmntJrnl = new System.Windows.Forms.TabPage();
-            ucCshDsbrsmntJrnl1 = new LFS.Views.Transactions.JEV.JournalForms.ucCshDsbrsmntJrnl();
+            ucCshDsbrsmntJrnl1 = new OmniGov.App.Accounting.Views.JEV.JournalForms.ucCshDsbrsmntJrnl();
             tbPgChkDsbrsmntJrnl = new System.Windows.Forms.TabPage();
-            ucChkDsbrsmntJrnl1 = new LFS.Views.Transactions.JEV.JournalForms.ucChkDsbrsmntJrnl();
+            ucChkDsbrsmntJrnl1 = new OmniGov.App.Accounting.Views.JEV.JournalForms.ucChkDsbrsmntJrnl();
             tbPgAuthDbtAccDsbrsmntJrnl = new System.Windows.Forms.TabPage();
-            ucAuthDbtAccDsbrsmntJrnl1 = new LFS.Views.Transactions.JEV.JournalForms.ucAuthDbtAccDsbrsmntJrnl();
+            ucAuthDbtAccDsbrsmntJrnl1 = new OmniGov.App.Accounting.Views.JEV.JournalForms.ucAuthDbtAccDsbrsmntJrnl();
             panel1 = new System.Windows.Forms.Panel();
             statusStrip2 = new System.Windows.Forms.StatusStrip();
             toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();

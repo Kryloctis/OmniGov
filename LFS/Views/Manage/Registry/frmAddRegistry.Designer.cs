@@ -1,4 +1,5 @@
-namespace LFS.Views.Manage.Registry
+using OmniGov.App.Views.Manage.Registry;
+namespace OmniGov.App.Views.Manage.Registry
 {
     partial class frmAddRegistry
     {

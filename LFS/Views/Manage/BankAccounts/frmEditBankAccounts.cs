@@ -1,9 +1,9 @@
-using LFS.Helpers;
+using OmniGov.App.Helpers;
 using System;
 using System.Windows.Forms;
 using Treasury.Data.Factories;
 
-namespace LFS.Views.Manage.BankAccounts
+namespace OmniGov.App.Views.Manage.BankAccounts
 {
     public partial class frmEditBankAccounts : Form
     {

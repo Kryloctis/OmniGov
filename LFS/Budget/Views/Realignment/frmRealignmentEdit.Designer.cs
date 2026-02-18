@@ -1,6 +1,6 @@
-using LFS.Budget.Views.Realignment;
+using OmniGov.App.Budget.Views.Realignment;
 
-namespace LFS.Budget.Views.Realignment
+namespace OmniGov.App.Budget.Views.Realignment
 {
     partial class frmRealignmentEdit
     {

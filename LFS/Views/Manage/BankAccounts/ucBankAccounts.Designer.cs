@@ -1,4 +1,4 @@
-namespace LFS.Views.Manage.BankAccounts
+namespace OmniGov.App.Views.Manage.BankAccounts
 {
     partial class ucBankAccounts
     {

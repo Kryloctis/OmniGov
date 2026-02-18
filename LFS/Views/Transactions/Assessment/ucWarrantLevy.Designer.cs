@@ -1,4 +1,4 @@
-namespace LFS.Views.Transactions.Assessment
+namespace OmniGov.App.Views.Transactions.Assessment
 {
     partial class ucWarrantLevy
     {

@@ -1,4 +1,4 @@
-namespace LFS.Views.Reports.Rcd
+namespace OmniGov.App.Views.Reports.RCD
 {
     partial class ucRcd
     {

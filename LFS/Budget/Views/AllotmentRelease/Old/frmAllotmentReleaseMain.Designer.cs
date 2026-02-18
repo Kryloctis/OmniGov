@@ -1,6 +1,4 @@
-using LFS.Budget.Views.AllotmentRelease;
-
-namespace LFS.Budget.Views.AllotmentRelease
+namespace OmniGov.App.Budget.Views.AllotmentRelease.Old
 {
     partial class frmAllotmentReleaseMain
     {
@@ -37,7 +35,7 @@ namespace LFS.Budget.Views.AllotmentRelease
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.btnCancel = new System.Windows.Forms.ToolStripButton();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.ucAllotmentReleaseMain1 = new LFS.Budget.Views.AllotmentRelease.ucAllotmentReleaseMain();
+            this.ucAllotmentReleaseMain1 = new OmniGov.App.Budget.Views.AllotmentRelease.Old.ucAllotmentReleaseMain();
             this.toolStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -61,7 +59,7 @@ namespace LFS.Budget.Views.AllotmentRelease
             // 
             // btnSave
             // 
-            this.btnSave.Image = global::LFS.Properties.Resources.save_filled_20px;
+            this.btnSave.Image = global::OmniGov.App.Properties.Resources.save_filled_20px;
             this.btnSave.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnSave.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnSave.Name = "btnSave";
@@ -73,7 +71,7 @@ namespace LFS.Budget.Views.AllotmentRelease
             // btnSearch
             // 
             this.btnSearch.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.btnSearch.Image = global::LFS.Properties.Resources.find_20px;
+            this.btnSearch.Image = global::OmniGov.App.Properties.Resources.find_20px;
             this.btnSearch.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnSearch.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnSearch.Name = "btnSearch";
@@ -84,7 +82,7 @@ namespace LFS.Budget.Views.AllotmentRelease
             // 
             // btnDelete
             // 
-            this.btnDelete.Image = global::LFS.Properties.Resources.button_rounded_remove_20px;
+            this.btnDelete.Image = global::OmniGov.App.Properties.Resources.button_rounded_remove_20px;
             this.btnDelete.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnDelete.Name = "btnDelete";
@@ -100,7 +98,7 @@ namespace LFS.Budget.Views.AllotmentRelease
             // 
             // btnCancel
             // 
-            this.btnCancel.Image = global::LFS.Properties.Resources.symbol_cancel_20px;
+            this.btnCancel.Image = global::OmniGov.App.Properties.Resources.symbol_cancel_20px;
             this.btnCancel.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnCancel.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnCancel.Name = "btnCancel";

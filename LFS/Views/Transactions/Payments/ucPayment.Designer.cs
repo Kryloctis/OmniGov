@@ -1,4 +1,4 @@
-namespace LFS.Views.Transactions.Payments
+namespace OmniGov.App.Views.Transactions.Payments
 {
     partial class ucPayment
     {

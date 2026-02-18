@@ -1,4 +1,5 @@
-namespace LFS.Views.Manage.BusinessCategories
+using OmniGov.App.Views.Manage.BusinessCategories;
+namespace OmniGov.App.Views.Manage.BusinessCategories
 {
     partial class frmAddBusinessCategories
     {
@@ -32,7 +33,7 @@ namespace LFS.Views.Manage.BusinessCategories
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.ucBusinessCategories1 = new LFS.Views.Manage.BusinessCategories.ucBusinessCategories();
+            this.ucBusinessCategories1 = new OmniGov.App.Views.Manage.BusinessCategories.ucBusinessCategories();
             this.flowLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();

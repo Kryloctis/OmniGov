@@ -1,11 +1,9 @@
-using LFS.Helpers;
-using LFS.Properties;
-using LFS.Views.Dashboard;
-using OmniGov.Core.Interfaces.Repositories;
-using OmniGov.Core.Interfaces.Services;
+using OmniGov.App.Helpers;
+using OmniGov.App.Properties;
+using OmniGov.App.Views.Dashboard;
 using OmniGov.Core.Interfaces.Factories;
+using OmniGov.Core.Interfaces.Services;
 using OmniGov.Core.Services;
-using OmniGov.Core.Factories;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,7 +11,7 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace LFS.Views.SignIn
+namespace OmniGov.App.Views.SignIn
 {
     public partial class frmSignIn : Form
     {
@@ -238,4 +236,3 @@ namespace LFS.Views.SignIn
         }
     }
 }
-

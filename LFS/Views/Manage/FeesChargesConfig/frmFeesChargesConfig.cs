@@ -1,6 +1,6 @@
-using LFS.Helpers;
-using LFS.Views.Manage.FeesChargesConfig.Classification;
-using LFS.Views.Manage.FeesChargesConfig.FeesCharges;
+using OmniGov.App.Helpers;
+using OmniGov.App.Views.Manage.FeesChargesConfig.Classification;
+using OmniGov.App.Views.Manage.FeesChargesConfig.FeesCharges;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -10,7 +10,7 @@ using System.Windows.Forms;
 using Treasury.Data.Factories;
 using Treasury.Domain.Entities;
 
-namespace LFS.Views.Manage.FeesChargesConfig
+namespace OmniGov.App.Views.Manage.FeesChargesConfig
 {
     public partial class frmFeesChargesConfig : Form
     {

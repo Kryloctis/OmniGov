@@ -1,10 +1,10 @@
-using LFS.Helpers;
+using OmniGov.App.Helpers;
 using System;
 using System.Windows.Forms;
 using Treasury.Data.Factories;
 using Treasury.Domain.Entities;
 
-namespace LFS.Views.Manage.Receipts
+namespace OmniGov.App.Views.Manage.Receipts
 {
     public partial class frmReceiptsAdd : Form
     {

@@ -1,4 +1,6 @@
-namespace LFS.Views.Transactions.Auction
+using OmniGov.App.Views.Transactions.Auction;
+using OmniGov.App.Views.Transactions.Auction.AuctionReports;
+namespace OmniGov.App.Views.Transactions.Auction
 {
     partial class frmAuction
     {

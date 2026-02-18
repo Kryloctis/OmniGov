@@ -1,7 +1,7 @@
+using Accounting.Data.Factories;
 using Accounting.Domain.Entities;
-using LFS.Helpers;
-using LFS.Views.Dashboard;
-using OmniGov.Core.Repositories;
+using OmniGov.App.Accounting.Views.Dashboard;
+using OmniGov.App.Helpers;
 using OmniGov.Core.Factories;
 using System;
 using System.Collections.Generic;
@@ -9,9 +9,8 @@ using System.ComponentModel;
 using System.Data;
 using System.Linq;
 using System.Windows.Forms;
-using Accounting.Data.Factories;
 
-namespace LFS.Views.Transactions.JEV
+namespace OmniGov.App.Accounting.Views.JEV
 {
     public partial class frmJevList : Form
     {

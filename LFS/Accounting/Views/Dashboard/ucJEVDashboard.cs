@@ -1,13 +1,12 @@
-using LFS.Helpers;
-using LFS.Views.Transactions.JEV;
-using OmniGov.Core.Repositories;
+using Accounting.Data.Factories;
+using OmniGov.App.Accounting.Views.JEV;
+using OmniGov.App.Helpers;
 using OmniGov.Core.Factories;
 using System;
 using System.Data;
 using System.Windows.Forms;
-using Accounting.Data.Factories;
 
-namespace LFS.Views.Dashboard
+namespace OmniGov.App.Accounting.Views.Dashboard
 {
     public partial class ucJevDashboard : UserControl
     {

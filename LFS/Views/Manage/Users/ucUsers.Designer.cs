@@ -1,5 +1,5 @@
 
-namespace LFS.Views.Manage.Users
+namespace OmniGov.App.Views.Manage.Users
 {
     partial class ucUsers
     {
@@ -51,7 +51,7 @@ namespace LFS.Views.Manage.Users
             txtSuffix = new System.Windows.Forms.TextBox();
             label7 = new System.Windows.Forms.Label();
             panel2 = new System.Windows.Forms.Panel();
-            customTabControl1 = new LFS.CustomTools.CustomTabControl();
+            customTabControl1 = new OmniGov.App.CustomTools.CustomTabControl();
             tbPgRole = new System.Windows.Forms.TabPage();
             flwLytPnlRole = new System.Windows.Forms.FlowLayoutPanel();
             tbPgUserInfo = new System.Windows.Forms.TabPage();
@@ -473,7 +473,7 @@ namespace LFS.Views.Manage.Users
         internal System.Windows.Forms.TextBox txtLastname;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label1;
-        private CustomTools.CustomTabControl customTabControl1;
+        private OmniGov.App.CustomTools.CustomTabControl customTabControl1;
         private System.Windows.Forms.TabPage tbPgRole;
         private System.Windows.Forms.TabPage tbPgUserInfo;
         private System.Windows.Forms.TabPage tbPgAccInf;

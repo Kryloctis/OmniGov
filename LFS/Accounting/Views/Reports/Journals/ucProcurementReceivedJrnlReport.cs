@@ -1,14 +1,13 @@
-using LFS.Helpers;
+using Accounting.Data.Factories;
 using Microsoft.Reporting.WinForms;
-using OmniGov.Core.Repositories;
+using OmniGov.App.Helpers;
 using OmniGov.Core.Factories;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Windows.Forms;
-using Accounting.Data.Factories;
 
-namespace LFS.Views.Reports.Journals
+namespace OmniGov.App.Accounting.Views.Reports.Journals
 {
     public partial class ucProcurementReceivedJrnlReport : UserControl
 

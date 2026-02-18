@@ -1,6 +1,5 @@
-using LFS.Helpers;
 using Microsoft.Reporting.WinForms;
-using OmniGov.Core.Repositories;
+using OmniGov.App.Helpers;
 using OmniGov.Core.Factories;
 using System;
 using System.Collections.Generic;
@@ -9,7 +8,7 @@ using System.Data;
 using System.Windows.Forms;
 using Treasury.Data.Factories;
 
-namespace LFS.Views.Reports.RCI
+namespace OmniGov.App.Views.Reports.RCI
 {
     public partial class frmRciReport : Form
     {
@@ -258,4 +257,3 @@ namespace LFS.Views.Reports.RCI
         }
     }
 }
-

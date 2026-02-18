@@ -1,5 +1,4 @@
-using LFS.Helpers;
-using OmniGov.Core.Repositories;
+using OmniGov.App.Helpers;
 using OmniGov.Core.Factories;
 using System;
 using System.Collections.Generic;
@@ -7,11 +6,11 @@ using System.ComponentModel;
 using System.Data;
 using System.Linq;
 using System.Windows.Forms;
+using Treasury.Data.Factories;
 using Treasury.Domain.Entities;
 using Color = System.Drawing.Color;
-using Treasury.Data.Factories;
 
-namespace LFS.Views.Transactions.Payments
+namespace OmniGov.App.Views.Transactions.Payments
 {
     public partial class ucPayment : UserControl
     {
@@ -432,4 +431,3 @@ namespace LFS.Views.Transactions.Payments
         }
     }
 }
-

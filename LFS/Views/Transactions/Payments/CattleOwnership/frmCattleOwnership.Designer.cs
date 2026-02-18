@@ -1,4 +1,7 @@
-namespace LFS.Views.Transactions.Payments.CattleOwnership
+using OmniGov.App.Views.Transactions.Payments;
+using OmniGov.App.Views.Transactions.Payments.CattleOwnership;
+
+namespace OmniGov.App.Views.Transactions.Payments.CattleOwnership
 {
     partial class frmCattleOwnership
     {
@@ -43,7 +46,7 @@ namespace LFS.Views.Transactions.Payments.CattleOwnership
             tabPageFeesCharges = new System.Windows.Forms.TabPage();
             ucPaymentFeesCharges1 = new ucPaymentFeesCharges();
             tabPageReceipt = new System.Windows.Forms.TabPage();
-            ucPrintReceipt1 = new BurialPermit.ucPrintReceipt();
+            ucPrintReceipt1 = new OmniGov.App.Views.Transactions.Payments.ucPrintReceipt();
             flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             radCattleOwnershipInfo = new System.Windows.Forms.RadioButton();
             flowLayoutPanel1.SuspendLayout();
@@ -313,6 +316,6 @@ namespace LFS.Views.Transactions.Payments.CattleOwnership
         private System.Windows.Forms.GroupBox groupBox1;
         private ucCattleOwnership ucCattleOwnership1;
         private System.Windows.Forms.TabPage tabPageReceipt;
-        private BurialPermit.ucPrintReceipt ucPrintReceipt1;
+        private OmniGov.App.Views.Transactions.Payments.ucPrintReceipt ucPrintReceipt1;
     }
 }

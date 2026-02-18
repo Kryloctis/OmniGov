@@ -1,11 +1,10 @@
-using LFS.Helpers;
-using OmniGov.Core.Repositories;
+using OmniGov.App.Helpers;
 using OmniGov.Core.Factories;
 using System;
 using System.Data;
 using System.Windows.Forms;
 
-namespace LFS.Views.Manage.FunctionProgramProject.FunctonalClassificationService
+namespace OmniGov.App.Views.Manage.FunctionProgramProject.FunctionalClassificationService
 {
     public partial class ucFunctionalClassificationServices : UserControl
     {

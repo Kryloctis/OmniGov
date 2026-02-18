@@ -1,13 +1,11 @@
-using LFS.Helpers;
-using LFS.Views.Transactions.CheckIssuance.Obligations;
+using OmniGov.App.Budget.Views.AllotmentRelease.Old;
+using OmniGov.App.Budget.Views.BudgetAppropriations;
+using OmniGov.App.Budget.Views.Obligations;
+using OmniGov.App.Helpers;
 using System;
 using System.Windows.Forms;
-using LFS.Budget.Dashboard;
-using LFS.Budget.Views.AllotmentRelease;
-using LFS.Budget.Views.BudgetAppropriations;
-using LFS.Budget.Views.Obligations;
 
-namespace LFS.Budget.Dashboard
+namespace OmniGov.App.Budget.Views.Dashboard
 {
     public partial class ucBudget : UserControl
     {
