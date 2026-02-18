@@ -1,5 +1,4 @@
-using OmniGov.Core.Repositories;
-using OmniGov.Core.Services;
+using OmniGov.Core.Interfaces.Services;
 using System.Data;
 using Treasury.Domain.Entities;
 using Treasury.Domain.Interfaces;
@@ -8,18 +7,18 @@ namespace Treasury.Data.Repositories
 {
     internal class BidRepository : IBidRepository
     {
-        private GenericCommands mySqlGenericCommands;
-        private string tableName = "bid";
-        private string viewTableName = "view_bid";
+        private readonly IGenericCommands _genericCommands;
+        private readonly string tableName = "bid";
+        private readonly string viewTableName = "view_bid";
 
-        public BidRepository(GenericCommands mySqlGenericCommands)
+        public BidRepository(IGenericCommands genericCommands)
         {
-            this.mySqlGenericCommands = mySqlGenericCommands;
+            _genericCommands = genericCommands ?? throw new ArgumentNullException(nameof(genericCommands));
         }
 
         public bool Delete(List<BidModel> entityList)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public Dictionary<string, string> GetBidderWinnerAndBidDetails(int taxpayersId, int rptId)
@@ -33,7 +32,7 @@ namespace Treasury.Data.Repositories
 
             string query = $"SELECT * FROM {viewTableName} WHERE taxpayers_id = @taxpayers_id AND real_properties_id = @real_properties_id  ORDER BY bid_amount DESC LIMIT 1";
 
-            DataTable dataTable = mySqlGenericCommands.ExecuteReader(query, parameters);
+            DataTable dataTable = _genericCommands.ExecuteReader(query, parameters);
 
             if (dataTable.Rows.Count > 0)
             {
@@ -58,7 +57,7 @@ namespace Treasury.Data.Repositories
 
             string query = $"SELECT * FROM {viewTableName} WHERE auction_id = @auction_id  ORDER BY bid_amount DESC LIMIT 1";
 
-            DataTable dataTable = mySqlGenericCommands.ExecuteReader(query, parameters);
+            DataTable dataTable = _genericCommands.ExecuteReader(query, parameters);
 
             if (dataTable.Rows.Count > 0)
             {
@@ -83,7 +82,7 @@ namespace Treasury.Data.Repositories
 
             string query = $"SELECT * FROM {viewTableName} WHERE rpt_auction_id = @rpt_auction_id AND bidders_id = @bidders_id";
 
-            DataTable dataTable = mySqlGenericCommands.ExecuteReader(query, parameters);
+            DataTable dataTable = _genericCommands.ExecuteReader(query, parameters);
 
             if (dataTable.Rows.Count > 0)
             {
@@ -120,7 +119,7 @@ namespace Treasury.Data.Repositories
 
             string query = $"SELECT rpt_auction_id, complete_arp_no, assessed_value, auction_id, name, address, municipality, province, contact_info, MAX(bid_amount) AS bid_amount FROM  {viewTableName} WHERE auction_id = @auction_id GROUP BY rpt_auction_id ORDER BY bid_amount DESC";
 
-            return mySqlGenericCommands.FillBySearch(query, new DataTable(), parameters);
+            return _genericCommands.FillBySearch(query, new DataTable(), parameters);
         }
 
         public Dictionary<string, string> GetViewRecordById(int bidId)
@@ -133,7 +132,7 @@ namespace Treasury.Data.Repositories
 
             string query = $"SELECT * FROM {viewTableName} WHERE id = @id";
 
-            DataTable dataTable = mySqlGenericCommands.ExecuteReader(query, parameters);
+            DataTable dataTable = _genericCommands.ExecuteReader(query, parameters);
 
             if (dataTable.Rows.Count > 0)
             {
@@ -150,7 +149,7 @@ namespace Treasury.Data.Repositories
         public DataTable GetViewRecords()
         {
             string query = $"SELECT * FROM {viewTableName}";
-            return mySqlGenericCommands.Fill(query, new DataTable());
+            return _genericCommands.Fill(query, new DataTable());
         }
 
         public DataTable GetViewRecordsByAuctionId(int auctionId)
@@ -161,7 +160,7 @@ namespace Treasury.Data.Repositories
 
             string query = $"SELECT * FROM {viewTableName} WHERE auction_id = @auction_id";
 
-            return mySqlGenericCommands.FillBySearch(query, new DataTable(), parameters);
+            return _genericCommands.FillBySearch(query, new DataTable(), parameters);
         }
 
         public bool IdExist(int id)
@@ -182,7 +181,7 @@ namespace Treasury.Data.Repositories
             };
 
             string query = $"INSERT INTO {tableName} (rpt_auction_id, bidders_id, ordinance_no, date, bid_amount, created_by) VALUES (@rpt_auction_id, @bidders_id, @ordinance_no, @date, @bid_amount, @created_by)";
-            return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+            return _genericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public bool Update(BidModel entity)
@@ -203,8 +202,7 @@ namespace Treasury.Data.Repositories
 
             string query = $"SELECT * FROM {viewTableName} WHERE real_properties_id = @real_properties_id  ORDER BY bid_amount DESC LIMIT 1";
 
-            return mySqlGenericCommands.FillBySearch(query, new DataTable(), parameters);
+            return _genericCommands.FillBySearch(query, new DataTable(), parameters);
         }
     }
 }
-

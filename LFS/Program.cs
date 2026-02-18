@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using OmniGov.Core.Services;
 using System;
 using System.Windows.Forms;
+using Treasury.Data.Services;
 
 namespace LFS
 {
@@ -42,7 +43,7 @@ namespace LFS
             services.AddAccountingServices();
 
             // TODO: Add Treasury services
-            // services.AddTreasuryServices();
+            services.AddTreasuryServices();
 
             // TODO: Add RPT services
             // services.AddRptServices();

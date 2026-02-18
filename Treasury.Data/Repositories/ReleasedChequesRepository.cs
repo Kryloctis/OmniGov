@@ -1,5 +1,4 @@
-using OmniGov.Core.Repositories;
-using OmniGov.Core.Services;
+using OmniGov.Core.Interfaces.Services;
 using System.Data;
 using Treasury.Domain.Entities;
 using Treasury.Domain.Interfaces;
@@ -8,27 +7,13 @@ namespace Treasury.Data.Repositories
 {
     internal class ReleasedChequesRepository : IReleasedCheques
     {
-        private readonly GenericCommands _dbGenericCommands;
+        private readonly IGenericCommands _genericCommands;
         private readonly string tableName = "released_cheques";
         private readonly string viewTableName = "view_released_cheques";
 
-        public ReleasedChequesRepository(GenericCommands dbGenericCommands)
+        public ReleasedChequesRepository(IGenericCommands genericCommands)
         {
-            _dbGenericCommands = dbGenericCommands;
-        }
-
-        public int CountRecords()
-        {
-            try
-            {
-                string query = $"SELECT COUNT(*) FROM {tableName}";
-
-                return int.Parse(_dbGenericCommands.ExecuteScalar(query));
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            _genericCommands = genericCommands ?? throw new ArgumentNullException(nameof(genericCommands));
         }
 
         public bool Delete(List<ReleasedChequesModel> entityList)
@@ -56,7 +41,7 @@ namespace Treasury.Data.Repositories
             string query = $"SELECT * FROM {viewTableName}";
 
             var dtRCI = new DataTable();
-            return _dbGenericCommands.Fill(query, dtRCI);
+            return _genericCommands.Fill(query, dtRCI);
         }
 
         public DataTable GetViewRecords(int bankAccountID, int fundsID, string searchText, bool showReleasedOnly)
@@ -73,7 +58,7 @@ namespace Treasury.Data.Repositories
             string query = $"SELECT * FROM {viewTableName} WHERE bank_accounts_id = @bank_accounts_id AND funds_id = @funds_id AND (cheque_no LIKE  @search_text OR payee LIKE @search_text) {showReleasedOnlyQuery}";
 
             var dtRCI = new DataTable();
-            return _dbGenericCommands.FillBySearch(query, dtRCI, parameters);
+            return _genericCommands.FillBySearch(query, dtRCI, parameters);
         }
 
         public DataTable GetViewRecordsByBankAccountID(int bankAccountIDID)
@@ -84,7 +69,7 @@ namespace Treasury.Data.Repositories
             };
 
             string query = $"SELECT * FROM {viewTableName} WHERE bank_accounts_id = @bank_accouns_id";
-            return _dbGenericCommands.ExecuteReader(query, parameters);
+            return _genericCommands.ExecuteReader(query, parameters);
         }
 
         public DataTable GetViewRecordsByBankAccountIDAndPeriodCoveredReleased(int bankAccountID, string periodCovered)
@@ -96,7 +81,7 @@ namespace Treasury.Data.Repositories
             };
 
             string query = $"SELECT * FROM {viewTableName} WHERE bank_accounts_id = @bank_accouns_id AND date_released <= @date_released";
-            return _dbGenericCommands.ExecuteReader(query, parameters);
+            return _genericCommands.ExecuteReader(query, parameters);
         }
 
         public DataTable GetViewRecordsByBankAccountIDAndPeriodCoveredUnReleased(int bankAccountID, string periodCovered)
@@ -108,7 +93,7 @@ namespace Treasury.Data.Repositories
             };
 
             string query = $"SELECT * FROM {viewTableName} WHERE bank_accounts_id = @bank_accouns_id AND date_released IS NULL AND cheque_date <= @cheque_date";
-            return _dbGenericCommands.ExecuteReader(query, parameters);
+            return _genericCommands.ExecuteReader(query, parameters);
         }
 
         public bool IdExist(int id)
@@ -127,7 +112,7 @@ namespace Treasury.Data.Repositories
                 };
 
                 string query = $"INSERT INTO {tableName} (rci_id, date_released) VALUES (@rci_id, @date_released)";
-                return _dbGenericCommands.ExecuteNonQuery(query, parameters);
+                return _genericCommands.ExecuteNonQuery(query, parameters);
             }
             catch (Exception)
             {
@@ -144,7 +129,7 @@ namespace Treasury.Data.Repositories
 
             string query = $"UPDATE {tableName} SET released_cheques_id ";
 
-            return _dbGenericCommands.ExecuteNonQuery(query, parameters);
+            return _genericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public bool Update(ReleasedChequesModel entity)
@@ -153,4 +138,3 @@ namespace Treasury.Data.Repositories
         }
     }
 }
-

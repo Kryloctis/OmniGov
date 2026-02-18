@@ -1,5 +1,4 @@
-using OmniGov.Core.Repositories;
-using OmniGov.Core.Services;
+using OmniGov.Core.Interfaces.Services;
 using System.Data;
 using System.Transactions;
 using Treasury.Domain.Entities;
@@ -9,17 +8,12 @@ namespace Treasury.Data.Repositories
 {
     public class RptDiscountsRepository : IRptDiscountsRepository
     {
-        private GenericCommands _mySqlGenericCommands;
+        private readonly IGenericCommands _genericCommands;
         private readonly string tableName = "rpt_discounts";
 
-        public RptDiscountsRepository(GenericCommands mySqlGenericCommands)
+        public RptDiscountsRepository(IGenericCommands genericCommands)
         {
-            _mySqlGenericCommands = mySqlGenericCommands;
-        }
-
-        public int CountRecords()
-        {
-            throw new NotImplementedException();
+            _genericCommands = genericCommands ?? throw new ArgumentNullException(nameof(genericCommands));
         }
 
         public bool Delete(List<RptDiscountsModel> entityList)
@@ -34,7 +28,7 @@ namespace Treasury.Data.Repositories
                     };
 
                     string query = $"DELETE FROM {tableName} WHERE id = @id";
-                    _ = _mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+                    _ = _genericCommands.ExecuteNonQuery(query, parameters);
                 }
 
                 scope.Complete();
@@ -53,7 +47,7 @@ namespace Treasury.Data.Repositories
 
             string query = $"SELECT * FROM {tableName} WHERE id = @id";
 
-            using (var reader = _mySqlGenericCommands.ExecuteReader(query, parameters))
+            using (var reader = _genericCommands.ExecuteReader(query, parameters))
             {
                 if (reader.Rows.Count < 1)
                     return dict;
@@ -74,7 +68,7 @@ namespace Treasury.Data.Repositories
         {
             string query = $"SELECT * FROM {tableName}";
             var dataTable = new DataTable();
-            return _mySqlGenericCommands.Fill(query, dataTable);
+            return _genericCommands.Fill(query, dataTable);
         }
 
         public DataTable GetRecordsBySearch(string searchText)
@@ -86,7 +80,7 @@ namespace Treasury.Data.Repositories
 
             string query = $"SELECT * FROM {tableName} WHERE description LIKE @searchText";
             var dataTable = new DataTable();
-            return _mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
+            return _genericCommands.FillBySearch(query, dataTable, parameters);
         }
 
         public bool IdExist(int id)
@@ -105,7 +99,7 @@ namespace Treasury.Data.Repositories
             };
 
             string query = $"INSERT INTO {tableName} (month, description, rate, is_advance) VALUES (@month, @description, @rate, @is_advance)";
-            return _mySqlGenericCommands.ExecuteNonQuery(query, parameter);
+            return _genericCommands.ExecuteNonQuery(query, parameter);
         }
 
         public bool Update(RptDiscountsModel entity)
@@ -120,7 +114,7 @@ namespace Treasury.Data.Repositories
             };
 
             string query = $"UPDATE {tableName} SET month = @month, description = @description, rate = @rate, is_advance = @is_advance  WHERE id = @id";
-            return _mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+            return _genericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public bool DescriptionExist(string description)
@@ -131,7 +125,7 @@ namespace Treasury.Data.Repositories
             };
 
             string query = $"SELECT id FROM {tableName} WHERE description = @description";
-            string result = _mySqlGenericCommands.ExecuteScalar(query, parameters);
+            string result = _genericCommands.ExecuteScalar(query, parameters);
             if (!string.IsNullOrEmpty(result))
                 return true;
             else
@@ -147,7 +141,7 @@ namespace Treasury.Data.Repositories
             };
 
             string query = $"SELECT id FROM {tableName} WHERE id <> @id AND description = @description";
-            string result = _mySqlGenericCommands.ExecuteScalar(query, parameters);
+            string result = _genericCommands.ExecuteScalar(query, parameters);
             if (!string.IsNullOrEmpty(result))
                 return true;
             else
@@ -166,7 +160,7 @@ namespace Treasury.Data.Repositories
 
             string query = $"SELECT * FROM {tableName} WHERE month = @month AND is_advance = @is_advance";
 
-            using (var reader = _mySqlGenericCommands.ExecuteReader(query, parameters))
+            using (var reader = _genericCommands.ExecuteReader(query, parameters))
             {
                 if (reader.Rows.Count == 0)
                     return dict;
@@ -184,4 +178,3 @@ namespace Treasury.Data.Repositories
         }
     }
 }
-

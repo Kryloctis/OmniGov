@@ -1,5 +1,4 @@
-using OmniGov.Core.Repositories;
-using OmniGov.Core.Services;
+using OmniGov.Core.Interfaces.Services;
 using System.Data;
 using System.Transactions;
 using Treasury.Domain.Entities;
@@ -9,12 +8,12 @@ namespace Treasury.Data.Repositories
 {
     internal class AuctionRepository : IAuctionRepository
     {
-        private GenericCommands mySqlGenericCommands;
+        private readonly IGenericCommands _genericCommands;
         private readonly string tableName = "auction";
 
-        public AuctionRepository(GenericCommands mySqlGenericCommands)
+        public AuctionRepository(IGenericCommands genericCommands)
         {
-            this.mySqlGenericCommands = mySqlGenericCommands;
+            _genericCommands = genericCommands ?? throw new ArgumentNullException(nameof(genericCommands));
         }
 
         public int CountRecords()
@@ -30,7 +29,7 @@ namespace Treasury.Data.Repositories
                 {
                     var parameters = new object[][] { new object[] { "@id", DbType.Int32, entity.Id } };
                     string query = $"DELETE FROM {tableName} WHERE id = @id";
-                    _ = mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+                    _ = _genericCommands.ExecuteNonQuery(query, parameters);
                 }
 
                 scope.Complete();
@@ -47,7 +46,7 @@ namespace Treasury.Data.Repositories
         {
             string query = $"SELECT id, start_date, end_date, location, created_at FROM {tableName}";
 
-            return mySqlGenericCommands.Fill(query, new DataTable());
+            return _genericCommands.Fill(query, new DataTable());
         }
 
         public DataTable GetRecordsBySearch(string searchText)
@@ -76,7 +75,7 @@ namespace Treasury.Data.Repositories
             };
 
             string query = $"INSERT INTO {tableName} (start_date, end_date, location, created_by) VALUES (@start_date, @end_date, @location, @created_by)";
-            return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+            return _genericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public bool Update(AuctionModel entity)
@@ -91,7 +90,7 @@ namespace Treasury.Data.Repositories
             };
 
             string query = $"UPDATE {tableName} SET  start_date = @start_date, end_date = @end_date, location = @location, updated_by = @updated_by WHERE id = @id;";
-            return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+            return _genericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public Dictionary<string, string> GetRecordById(int id)
@@ -99,7 +98,7 @@ namespace Treasury.Data.Repositories
             var recordDictionary = new Dictionary<string, string>();
             var parameters = new object[][] { new object[] { "@id", DbType.Int32, id } };
             string query = $"SELECT * FROM {tableName} WHERE id = @id";
-            DataTable dataTable = mySqlGenericCommands.ExecuteReader(query, parameters);
+            DataTable dataTable = _genericCommands.ExecuteReader(query, parameters);
 
             if (dataTable.Rows.Count > 0)
             {
@@ -117,8 +116,7 @@ namespace Treasury.Data.Repositories
         {
             string query = $"SELECT id, CONCAT(DATE_FORMAT(start_date, '%M %e, %Y'), ' - ' , DATE_FORMAT(end_date,  '%M %e, %Y')) AS date FROM {tableName}";
 
-            return mySqlGenericCommands.Fill(query, new DataTable());
+            return _genericCommands.Fill(query, new DataTable());
         }
     }
 }
-

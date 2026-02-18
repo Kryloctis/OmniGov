@@ -1,5 +1,4 @@
-using OmniGov.Core.Repositories;
-using OmniGov.Core.Services;
+using OmniGov.Core.Interfaces.Services;
 using System.Data;
 using System.Transactions;
 using Treasury.Domain.Entities;
@@ -9,17 +8,12 @@ namespace Treasury.Data.Repositories
 {
     public class RptTaxRatesRepository : IRptTaxRatesRepository
     {
-        private GenericCommands mySqlGenericCommands;
+        private readonly IGenericCommands _genericCommands;
         private readonly string tableName = "rpt_tax_rates";
 
-        public RptTaxRatesRepository(GenericCommands mySqlGenericCommands)
+        public RptTaxRatesRepository(IGenericCommands genericCommands)
         {
-            this.mySqlGenericCommands = mySqlGenericCommands;
-        }
-
-        public int CountRecords()
-        {
-            throw new NotImplementedException();
+            _genericCommands = genericCommands ?? throw new ArgumentNullException(nameof(genericCommands));
         }
 
         public bool Delete(List<RptTaxRatesModel> entityList)
@@ -34,7 +28,7 @@ namespace Treasury.Data.Repositories
                     };
 
                     string query = $"DELETE FROM {tableName} WHERE id = @id";
-                    _ = mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+                    _ = _genericCommands.ExecuteNonQuery(query, parameters);
                 }
 
                 scope.Complete();
@@ -53,7 +47,7 @@ namespace Treasury.Data.Repositories
 
             string query = $"SELECT * FROM {tableName} WHERE id = @id";
 
-            using (var items = mySqlGenericCommands.ExecuteReader(query, parameters))
+            using (var items = _genericCommands.ExecuteReader(query, parameters))
             {
                 if (items.Rows.Count < 1)
                     return dict;
@@ -73,7 +67,7 @@ namespace Treasury.Data.Repositories
         {
             string query = $"SELECT * FROM {tableName}";
             var dataTable = new DataTable();
-            return mySqlGenericCommands.Fill(query, dataTable);
+            return _genericCommands.Fill(query, dataTable);
         }
 
         public DataTable GetRecordsBySearch(string searchText)
@@ -85,7 +79,7 @@ namespace Treasury.Data.Repositories
 
             string query = $"SELECT * FROM {tableName} WHERE code LIKE @searchText OR description LIKE @searchText";
             var dataTable = new DataTable();
-            return mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
+            return _genericCommands.FillBySearch(query, dataTable, parameters);
         }
 
         public bool IdExist(int id)
@@ -103,7 +97,7 @@ namespace Treasury.Data.Repositories
             };
 
             string query = $"INSERT INTO {tableName} (code, description, rate) VALUES (@code, @description, @rate)";
-            return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+            return _genericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public bool Update(RptTaxRatesModel entity)
@@ -117,7 +111,7 @@ namespace Treasury.Data.Repositories
              };
 
             string query = $"UPDATE {tableName} SET code = @code, description = @description, rate = @rate WHERE id = @id";
-            return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+            return _genericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public decimal GetTaxRateByDescription(string description)
@@ -128,9 +122,8 @@ namespace Treasury.Data.Repositories
             };
 
             string query = $"SELECT rate FROM {tableName} WHERE description = @description";
-            string result = mySqlGenericCommands.ExecuteScalar(query, parameters);
+            string result = _genericCommands.ExecuteScalar(query, parameters);
             return string.IsNullOrWhiteSpace(result) ? 0 : Convert.ToDecimal(result);
         }
     }
 }
-

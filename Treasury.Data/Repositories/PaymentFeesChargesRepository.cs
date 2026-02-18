@@ -1,5 +1,4 @@
-using OmniGov.Core.Repositories;
-using OmniGov.Core.Services;
+using OmniGov.Core.Interfaces.Services;
 using System.Data;
 using System.Transactions;
 using Treasury.Domain.Entities;
@@ -10,16 +9,11 @@ namespace Treasury.Data.Repositories
     internal class PaymentFeesChargesRepository : IPaymentFeesCharges
     {
         private readonly string tableName = "payment_fees_charges";
-        private GenericCommands mySqlGenericCommands;
+        private readonly IGenericCommands _genericCommands;
 
-        public PaymentFeesChargesRepository(GenericCommands mySqlGenericCommands)
+        public PaymentFeesChargesRepository(IGenericCommands genericCommands)
         {
-            this.mySqlGenericCommands = mySqlGenericCommands;
-        }
-
-        public int CountRecords()
-        {
-            throw new NotImplementedException();
+            _genericCommands = genericCommands ?? throw new ArgumentNullException(nameof(genericCommands));
         }
 
         public bool Delete(List<PaymentFeesChargesModel> entityList)
@@ -30,7 +24,7 @@ namespace Treasury.Data.Repositories
                 {
                     var parameters = new object[][] { new object[] { "@id", DbType.Int32, model.Id } };
                     string query = $"DELETE FROM {tableName} WHERE id = @id";
-                    _ = mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+                    _ = _genericCommands.ExecuteNonQuery(query, parameters);
                 }
 
                 scope.Complete();
@@ -47,7 +41,7 @@ namespace Treasury.Data.Repositories
         {
             string query = $"SELECT * FROM {tableName}";
             var dataTable = new DataTable();
-            return mySqlGenericCommands.Fill(query, dataTable);
+            return _genericCommands.Fill(query, dataTable);
         }
 
         public DataTable GetRecordsBySearch(string searchText)
@@ -59,7 +53,7 @@ namespace Treasury.Data.Repositories
 
             string query = $"SELECT * FROM {tableName} WHERE unit LIKE @search_key OR sub_total LIKE @search_key";
             var dataTable = new DataTable();
-            return mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
+            return _genericCommands.FillBySearch(query, dataTable, parameters);
         }
 
         public bool IdExist(int id)
@@ -78,7 +72,7 @@ namespace Treasury.Data.Repositories
             };
 
             string query = $"INSERT INTO {tableName} (payment_collections_id, other_payment_rates_id, unit, sub_total ) VALUES (@payment_collections_id, @other_payment_rates_id, @unit, @sub_total)";
-            return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+            return _genericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public bool InsertBulk(List<PaymentFeesChargesModel> entityList)
@@ -105,8 +99,7 @@ namespace Treasury.Data.Repositories
             };
 
             string query = $"UPDATE {tableName} SET payment_collections_id = @payment_collections_id, other_payment_rates_id = @other_payment_rates_id, unit = @unit, sub_total = @sub_total WHERE id = @id";
-            return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+            return _genericCommands.ExecuteNonQuery(query, parameters);
         }
     }
 }
-

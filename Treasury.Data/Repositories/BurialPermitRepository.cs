@@ -1,5 +1,4 @@
-using OmniGov.Core.Repositories;
-using OmniGov.Core.Services;
+using OmniGov.Core.Interfaces.Services;
 using System.Data;
 using System.Transactions;
 using Treasury.Domain.Entities;
@@ -9,12 +8,12 @@ namespace Treasury.Data.Repositories
 {
     internal class BurialPermitRepository : IBurialPermitRepository
     {
-        private GenericCommands mySqlGenericCommands;
+        private readonly IGenericCommands _genericCommands;
         private readonly string tableName = "burial_permit";
 
-        public BurialPermitRepository(GenericCommands mySqlGenericCommands)
+        public BurialPermitRepository(IGenericCommands genericCommands)
         {
-            this.mySqlGenericCommands = mySqlGenericCommands;
+            _genericCommands = genericCommands ?? throw new ArgumentNullException(nameof(genericCommands));
         }
 
         public bool IdExist(int id)
@@ -61,7 +60,7 @@ namespace Treasury.Data.Repositories
 
             string query = $"INSERT INTO {tableName} (payment_collections_id, remains_registry_id, remains_age, death_date, cause_of_death, cemetery, disinterment, is_infectious, is_embalmed, disposition, created_by) VALUES (@payment_collections_id, @remains_registry_id, @remains_age, @death_date, @cause_of_death, @cemetery, @disinterment, @is_infectious, @is_embalmed, @disposition, @created_by)";
 
-            return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+            return _genericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public bool Update(BurialPermitModel entity)
@@ -83,7 +82,7 @@ namespace Treasury.Data.Repositories
             };
 
             string query = $"UPDATE {tableName} SET payment_collections_id = @payment_collections_id, remains_registry_id = @remains_registry_id, permission = @permission, remains_age = @remains_age, death_date = @death_date, cause_of_death = @cause_of_death, cemetery = @cemetery, disinterment = @disinterment, is_infectious = @is_infectious, is_embalmed = @is_embalmed, disposition = @disposition, updated_by = @updated_by WHERE id = @id;";
-            return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+            return _genericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public bool Delete(List<BurialPermitModel> entityList)
@@ -98,7 +97,7 @@ namespace Treasury.Data.Repositories
                     };
 
                     string query = $"DELETE FROM {tableName} WHERE id = @id";
-                    _ = mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+                    _ = _genericCommands.ExecuteNonQuery(query, parameters);
                 }
 
                 scope.Complete();
@@ -107,4 +106,3 @@ namespace Treasury.Data.Repositories
         }
     }
 }
-

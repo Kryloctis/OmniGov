@@ -1,5 +1,4 @@
-using OmniGov.Core.Repositories;
-using OmniGov.Core.Services;
+using OmniGov.Core.Interfaces.Services;
 using System.Data;
 using System.Transactions;
 using Treasury.Domain.Entities;
@@ -9,17 +8,12 @@ namespace Treasury.Data.Repositories
 {
     public class RCIDeductionsRepository : IRciDeductionsRepository
     {
-        private readonly GenericCommands _dbGenericCommands;
+        private readonly IGenericCommands _genericCommands;
         private readonly string tableName = "rci_deductions";
 
-        public RCIDeductionsRepository(GenericCommands dbGenericCommands)
+        public RCIDeductionsRepository(IGenericCommands genericCommands)
         {
-            _dbGenericCommands = dbGenericCommands;
-        }
-
-        public int CountRecords()
-        {
-            throw new NotImplementedException();
+            _genericCommands = genericCommands ?? throw new ArgumentNullException(nameof(genericCommands));
         }
 
         public bool Delete(List<RCIDeductionsModel> entityList)
@@ -38,7 +32,7 @@ namespace Treasury.Data.Repositories
 
                 string query = $"DELETE FROM {tableName} WHERE rci_id = @id";
 
-                _ = _dbGenericCommands.ExecuteNonQuery(query, parameters);
+                _ = _genericCommands.ExecuteNonQuery(query, parameters);
 
                 scope.Complete();
                 return true;
@@ -55,7 +49,7 @@ namespace Treasury.Data.Repositories
             string query = $"SELECT description, amount FROM {tableName} WHERE rci_id = @rciId";
             var dtRCIDeduction = new DataTable();
 
-            return _dbGenericCommands.FillBySearch(query, dtRCIDeduction, parameter);
+            return _genericCommands.FillBySearch(query, dtRCIDeduction, parameter);
         }
 
         public Dictionary<string, string> GetRecordByID(int Id)
@@ -89,4 +83,3 @@ namespace Treasury.Data.Repositories
         }
     }
 }
-

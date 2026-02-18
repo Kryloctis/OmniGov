@@ -1,5 +1,4 @@
-using OmniGov.Core.Repositories;
-using OmniGov.Core.Services;
+using OmniGov.Core.Interfaces.Services;
 using System.Data;
 using System.Transactions;
 using Treasury.Domain.Entities;
@@ -10,11 +9,11 @@ namespace Treasury.Data.Repositories
     public class BanksRepository : IBanksRepository
     {
         private readonly string tableName = "banks";
-        private GenericCommands mySqlGenericCommands;
+        private readonly IGenericCommands _genericCommands;
 
-        public BanksRepository(GenericCommands mySqlGenericCommands)
+        public BanksRepository(IGenericCommands genericCommands)
         {
-            this.mySqlGenericCommands = mySqlGenericCommands;
+            _genericCommands = genericCommands ?? throw new ArgumentNullException(nameof(genericCommands));
         }
 
         public Dictionary<string, string> GetRecordByID(int Id)
@@ -28,7 +27,7 @@ namespace Treasury.Data.Repositories
 
             string query = $"SELECT * FROM {tableName} WHERE id = @id";
 
-            DataTable dataTable = mySqlGenericCommands.ExecuteReader(query, parameters);
+            DataTable dataTable = _genericCommands.ExecuteReader(query, parameters);
 
             if (dataTable.Rows.Count > 0)
             {
@@ -45,7 +44,7 @@ namespace Treasury.Data.Repositories
         public DataTable GetRecords()
         {
             string query = $"SELECT * FROM {tableName}";
-            return mySqlGenericCommands.Fill(query, new DataTable());
+            return _genericCommands.Fill(query, new DataTable());
         }
 
         public bool Insert(BanksModel entity)
@@ -58,7 +57,7 @@ namespace Treasury.Data.Repositories
             };
 
             string query = $"INSERT INTO {tableName} (bank_code, bank_name, bank_branch) VALUES (@bank_code, @bank_name, @bank_branch)";
-            return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+            return _genericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public bool Update(BanksModel entity)
@@ -72,7 +71,7 @@ namespace Treasury.Data.Repositories
             };
 
             string query = $"UPDATE {tableName} SET bank_code = @bank_code, bank_name = @bank_name, bank_branch = @bank_branch WHERE id = @id";
-            return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+            return _genericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public bool Delete(List<BanksModel> entityList)
@@ -83,7 +82,7 @@ namespace Treasury.Data.Repositories
                 {
                     var parameters = new object[][] { new object[] { "@id", DbType.Int16, entity.Id }, };
                     string query = $"DELETE FROM {tableName} WHERE id = @id";
-                    _ = mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+                    _ = _genericCommands.ExecuteNonQuery(query, parameters);
                 }
 
                 scope.Complete();
@@ -99,7 +98,7 @@ namespace Treasury.Data.Repositories
             };
 
             string query = $"SELECT id FROM {tableName} WHERE id = @id";
-            string queryResult = mySqlGenericCommands.ExecuteScalar(query, parameters);
+            string queryResult = _genericCommands.ExecuteScalar(query, parameters);
             return !string.IsNullOrEmpty(queryResult);
         }
 
@@ -111,7 +110,7 @@ namespace Treasury.Data.Repositories
             };
 
             string query = $"SELECT account_no FROM {tableName} WHERE account_no = @account_no";
-            string queryResult = mySqlGenericCommands.ExecuteScalar(query, parameters);
+            string queryResult = _genericCommands.ExecuteScalar(query, parameters);
             return !string.IsNullOrEmpty(queryResult);
         }
 
@@ -124,7 +123,7 @@ namespace Treasury.Data.Repositories
             };
 
             string query = $"SELECT account_no FROM {tableName} WHERE id <> @id AND account_no = @account_no";
-            string queryResult = mySqlGenericCommands.ExecuteScalar(query, parameters);
+            string queryResult = _genericCommands.ExecuteScalar(query, parameters);
             return !string.IsNullOrEmpty(queryResult);
         }
 
@@ -136,13 +135,13 @@ namespace Treasury.Data.Repositories
             };
 
             string query = $"SELECT * FROM {tableName} WHERE bank_code LIKE @search_text OR bank_name LIKE @search_text OR bank_branch LIKE @search_text";
-            return mySqlGenericCommands.FillBySearch(query, new DataTable(), parameters);
+            return _genericCommands.FillBySearch(query, new DataTable(), parameters);
         }
 
         public int GetLastInsertedId()
         {
             string query = $"SELECT MAX(id) FROM {tableName}";
-            return Convert.ToInt32(mySqlGenericCommands.ExecuteScalar(query));
+            return Convert.ToInt32(_genericCommands.ExecuteScalar(query));
         }
 
         public bool BankExistByNameBranch(string name, string branch)
@@ -154,7 +153,7 @@ namespace Treasury.Data.Repositories
             };
 
             string query = $"SELECT id FROM {tableName} WHERE @bank_name = bank_name AND @bank_branch = bank_branch";
-            string result = mySqlGenericCommands.ExecuteScalar(query, parameters);
+            string result = _genericCommands.ExecuteScalar(query, parameters);
             return !string.IsNullOrEmpty(result);
         }
 
@@ -167,7 +166,7 @@ namespace Treasury.Data.Repositories
             };
 
             string query = $"SELECT id FROM {tableName} WHERE bank_name = @bank_name AND bank_branch = @bank_branch";
-            return Convert.ToInt32(mySqlGenericCommands.ExecuteScalar(query, parameters));
+            return Convert.ToInt32(_genericCommands.ExecuteScalar(query, parameters));
         }
 
         public DataTable GetRecords(int rowLimit, string searchKey)
@@ -179,8 +178,7 @@ namespace Treasury.Data.Repositories
             };
 
             string query = $"SELECT * FROM {tableName} WHERE (bank_code LIKE @search_key OR bank_name LIKE @search_key OR bank_branch LIKE @search_key) LIMIT @row_limit";
-            return mySqlGenericCommands.FillBySearch(query, new DataTable(), parameters);
+            return _genericCommands.FillBySearch(query, new DataTable(), parameters);
         }
     }
 }
-

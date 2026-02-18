@@ -1,5 +1,4 @@
-using OmniGov.Core.Repositories;
-using OmniGov.Core.Services;
+using OmniGov.Core.Interfaces.Services;
 using System.Data;
 using System.Transactions;
 using Treasury.Domain.Entities;
@@ -12,11 +11,11 @@ namespace Treasury.Data.Repositories
         private readonly string tableName = "rpt_assessment_posts";
         private readonly string rptTaxDues = "rpt_tax_dues";
         private readonly string viewRptPropertyAssessments = "view_rpt_property_assessments";
-        private GenericCommands mySqlGenericCommands;
+        private readonly IGenericCommands _genericCommands;
 
-        public RptAssessmentPostsRepository(GenericCommands mySqlGenericCommands)
+        public RptAssessmentPostsRepository(IGenericCommands genericCommands)
         {
-            this.mySqlGenericCommands = mySqlGenericCommands;
+            _genericCommands = genericCommands ?? throw new ArgumentNullException(nameof(genericCommands));
         }
 
         public bool BulkInsert(List<RptAssessmentPostsModel> assessmentPostingModels)
@@ -48,7 +47,7 @@ namespace Treasury.Data.Repositories
 
             string query = $"SELECT * FROM {tableName} WHERE id = @id";
 
-            DataTable dataTable = mySqlGenericCommands.ExecuteReader(query, parameters);
+            DataTable dataTable = _genericCommands.ExecuteReader(query, parameters);
 
             if (dataTable.Rows.Count > 0)
             {
@@ -73,7 +72,7 @@ namespace Treasury.Data.Repositories
             };
 
             string query = $"SELECT * FROM {tableName} WHERE complete_arp_no = @complete_arp_no AND year = @year";
-            DataTable dataTable = mySqlGenericCommands.ExecuteReader(query, parameters);
+            DataTable dataTable = _genericCommands.ExecuteReader(query, parameters);
 
             if (dataTable.Rows.Count > 0)
             {
@@ -91,7 +90,7 @@ namespace Treasury.Data.Repositories
         {
             string query = $"SELECT * FROM {tableName}";
             var dataTable = new DataTable();
-            return mySqlGenericCommands.Fill(query, dataTable);
+            return _genericCommands.Fill(query, dataTable);
         }
 
         public DataTable GetViewRecordsByArpNoPeriod(string arpNo, DateTime periodFrom, DateTime periodTo)
@@ -105,7 +104,7 @@ namespace Treasury.Data.Repositories
 
             string query = $"SELECT * FROM {viewRptPropertyAssessments} WHERE complete_arp_no = @complete_arp_no AND posted_at <= @period_to AND posted_at >= @period_from ";
             var dataTable = new DataTable();
-            return mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
+            return _genericCommands.FillBySearch(query, dataTable, parameters);
         }
 
         public DataTable GetRecordsByOwnerName_IsCancelled(string ownerName, bool isCancelled)
@@ -124,7 +123,7 @@ namespace Treasury.Data.Repositories
                 query = $"SELECT * FROM {tableName} WHERE taxpayer_name = @taxpayer_name {isCancelledQuery} GROUP BY complete_arp_no ORDER BY complete_arp_no ASC";
 
             var dataTable = new DataTable();
-            return mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
+            return _genericCommands.FillBySearch(query, dataTable, parameters);
         }
 
         public DataTable GetRecordsBySearch(string searchText)
@@ -136,7 +135,7 @@ namespace Treasury.Data.Repositories
 
             string query = $"SELECT * FROM {tableName} GROUP BY taxpayer_name";
             var dataTable = new DataTable();
-            return mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
+            return _genericCommands.FillBySearch(query, dataTable, parameters);
         }
 
         public bool IdExist(int id)
@@ -183,7 +182,7 @@ namespace Treasury.Data.Repositories
 
             string query = $"INSERT INTO {tableName} (real_taxpayers_id, complete_arp_no, property_pin, taxpayer_tin, taxpayer_name, taxpayer_contact_info, taxpayer_address, street, barangay_name, municipality_name, province_name, property_kind, effectivity_quarterly, effectivity_year, other_improvements, assessed_value, area, lot_no, classification_code, classification_name, actual_use_code, actual_use_name, gr_year, is_taxable, is_cancelled, penalty_rate, penalty_frequency, basic_rate, sef_rate, year, posted_by) VALUES (@real_taxpayers_id, @complete_arp_no, @property_pin, @taxpayer_tin, @taxpayer_name, @taxpayer_contact_info, @taxpayer_address, @street, @barangay_name, @municipality_name, @province_name, @property_kind, @effectivity_quarterly, @effectivity_year, @other_improvements, @assessed_value, @area, @lot_no, @classification_code, @classification_name, @actual_use_code, @actual_use_name, @gr_year, @is_taxable, @is_cancelled, @penalty_rate, @penalty_frequency, @basic_rate, @sef_rate, @year, @posted_by)";
 
-            return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+            return _genericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public bool IsPropertyPosted(string arpNo)
@@ -194,7 +193,7 @@ namespace Treasury.Data.Repositories
             };
 
             string query = $"SELECT complete_arp_no FROM {tableName} WHERE complete_arp_no = @complete_arp_no";
-            string queryResult = mySqlGenericCommands.ExecuteScalar(query, parameters);
+            string queryResult = _genericCommands.ExecuteScalar(query, parameters);
 
             if (!string.IsNullOrEmpty(queryResult))
                 return true;
@@ -215,7 +214,7 @@ namespace Treasury.Data.Repositories
             };
 
             string query = $"SELECT COALESCE(MIN(year), 0) AS min_year FROM {tableName} WHERE complete_arp_no = @complete_arp_no";
-            return Convert.ToInt32(mySqlGenericCommands.ExecuteScalar(query, parameters));
+            return Convert.ToInt32(_genericCommands.ExecuteScalar(query, parameters));
         }
 
         public DataTable GetViewRecordsByOwnerNamePeriod(string ownerName, DateTime periodFrom, DateTime periodTo)
@@ -230,7 +229,7 @@ namespace Treasury.Data.Repositories
             string query = $"SELECT * FROM {viewRptPropertyAssessments} WHERE taxpayer_name = @taxpayer_name AND posted_at <= @periodTo AND posted_at >= @periodFrom ORDER BY complete_arp_no ASC";
 
             var dataTable = new DataTable();
-            return mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
+            return _genericCommands.FillBySearch(query, dataTable, parameters);
         }
 
         public DataTable GetViewDelinquentRecordsByBarangayNamePeriod(string barangayName, DateTime periodFrom, DateTime periodTo)
@@ -245,7 +244,7 @@ namespace Treasury.Data.Repositories
             string query = $"SELECT * FROM {viewRptPropertyAssessments} WHERE barangay_name = @barangay_name AND posted_at <= @periodTo AND posted_at >= @periodFrom AND rpt_payments_id IS NULL ORDER BY complete_arp_no ASC";
             var dataTable = new DataTable();
 
-            return mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
+            return _genericCommands.FillBySearch(query, dataTable, parameters);
         }
 
         public DataTable GetViewDelinquentRecordsByOwnerNamePeriod(string ownerName, DateTime periodFrom, DateTime periodTo)
@@ -260,14 +259,14 @@ namespace Treasury.Data.Repositories
             string query = $"SELECT * FROM {viewRptPropertyAssessments} WHERE taxpayer_name = @taxpayer_name AND posted_at <= @periodTo AND posted_at >= @periodFrom AND rpt_payments_id IS NULL ORDER BY complete_arp_no ASC";
             var dataTable = new DataTable();
 
-            return mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
+            return _genericCommands.FillBySearch(query, dataTable, parameters);
         }
 
         public DataTable GetBarangayRecords()
         {
             string query = $"SELECT * FROM {tableName} GROUP BY barangay_name";
             var dataTable = new DataTable();
-            return mySqlGenericCommands.Fill(query, dataTable);
+            return _genericCommands.Fill(query, dataTable);
         }
 
         public DataTable GetViewRecordsByTaxpayerIdArpNoShowPaid(int realTaxpayersId, int calendarYear, string completeArpNo, bool showPaidAssessments)
@@ -284,7 +283,7 @@ namespace Treasury.Data.Repositories
             string query = $"SELECT * FROM {viewRptPropertyAssessments} WHERE {subQuery} year = @year AND real_taxpayers_id = @real_taxpayers_id AND complete_arp_no = @complete_arp_no ORDER BY complete_arp_no ASC";
 
             var dataTable = new DataTable();
-            return mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
+            return _genericCommands.FillBySearch(query, dataTable, parameters);
         }
 
         public DataTable GetRecordsByRealTaxpayersId(int realTaxpayersId, bool showIsCancelled)
@@ -297,7 +296,7 @@ namespace Treasury.Data.Repositories
             string subQuery = showIsCancelled ? string.Empty : " AND is_cancelled = 0";
             string query = $"SELECT * FROM {tableName} WHERE real_taxpayers_id = @real_taxpayers_id AND is_taxable = 1{subQuery} GROUP BY complete_arp_no ORDER BY complete_arp_no ASC";
             var dataTable = new DataTable();
-            return mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
+            return _genericCommands.FillBySearch(query, dataTable, parameters);
         }
 
         public Dictionary<string, string> GetViewRecentAssessmentRecord(string arpNo, int assessmentYear)
@@ -312,7 +311,7 @@ namespace Treasury.Data.Repositories
 
             string query = $"SELECT * FROM {viewRptPropertyAssessments} WHERE complete_arp_no = @complete_arp_no AND year < @year ORDER BY year DESC";
 
-            DataTable dataTable = mySqlGenericCommands.ExecuteReader(query, parameters);
+            DataTable dataTable = _genericCommands.ExecuteReader(query, parameters);
 
             if (dataTable.Rows.Count > 0)
             {
@@ -335,7 +334,7 @@ namespace Treasury.Data.Repositories
 
             string query = $"SELECT * FROM {viewRptPropertyAssessments} WHERE real_taxpayers_id = @real_taxpayers_id GROUP BY complete_arp_no";
             var dataTable = new DataTable();
-            return mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
+            return _genericCommands.FillBySearch(query, dataTable, parameters);
         }
 
         public DataTable Get_View_List_Of_Real_Property_Tax_Delinquences_By_ID(int realPropertyID)
@@ -348,7 +347,7 @@ namespace Treasury.Data.Repositories
             string query = $"SELECT * FROM {viewRptPropertyAssessments} WHERE (DATE(posted_at) <= DATE(NOW()) && MONTH(posted_at) > 3) AND rpt_assessment_posts_id = @real_property_id ORDER BY complete_arp_no ASC";
 
             var dataTable = new DataTable();
-            return mySqlGenericCommands.FillBySearch(query, dataTable, parameter);
+            return _genericCommands.FillBySearch(query, dataTable, parameter);
         }
 
         public DataTable Get_View_List_Of_Real_Property_Tax_Delinquences_By_TaxpayerID(int taxPayerID)
@@ -361,7 +360,7 @@ namespace Treasury.Data.Repositories
             string query = $"SELECT * FROM {viewRptPropertyAssessments} WHERE (DATE(posted_at) <= DATE(NOW()) && MONTH(posted_at) > 3) AND real_taxpayers_id = @real_taxpayers_id  GROUP BY complete_arp_no ORDER BY complete_arp_no ASC";
 
             var dataTable = new DataTable();
-            return mySqlGenericCommands.FillBySearch(query, dataTable, parameter);
+            return _genericCommands.FillBySearch(query, dataTable, parameter);
         }
 
         public DataTable GetViewDeliquentRecords()
@@ -369,7 +368,7 @@ namespace Treasury.Data.Repositories
             string query = $"SELECT * FROM {viewRptPropertyAssessments} WHERE (DATE(posted_at) <= DATE(NOW()) && MONTH(posted_at) > 3) AND rpt_payments_id IS NULL ORDER BY complete_arp_no ASC";
             var dataTable = new DataTable();
 
-            return mySqlGenericCommands.Fill(query, dataTable);
+            return _genericCommands.Fill(query, dataTable);
         }
 
         public DataTable GetViewDelinquentRecords(string completeArpNo, DateTime date)
@@ -380,7 +379,7 @@ namespace Treasury.Data.Repositories
             };
 
             string query = $"SELECT * FROM {viewRptPropertyAssessments} WHERE complete_arp_no = @complete_arp_no";
-            return mySqlGenericCommands.FillBySearch(query, new DataTable(), parameters);
+            return _genericCommands.FillBySearch(query, new DataTable(), parameters);
         }
 
         public DataTable GetViewRecords(DateTime date)
@@ -391,8 +390,7 @@ namespace Treasury.Data.Repositories
             };
 
             string query = $"SELECT * FROM {viewRptPropertyAssessments} WHERE DATE(posted_at) <= @posted_at";
-            return mySqlGenericCommands.FillBySearch(query, new DataTable(), parameters);
+            return _genericCommands.FillBySearch(query, new DataTable(), parameters);
         }
     }
 }
-

@@ -1,5 +1,4 @@
-using OmniGov.Core.Repositories;
-using OmniGov.Core.Services;
+using OmniGov.Core.Interfaces.Services;
 using System.Data;
 using System.Transactions;
 using Treasury.Domain.Entities;
@@ -12,11 +11,11 @@ namespace Treasury.Data.Repositories
         private readonly string tableName = "delinquent_notice";
         private readonly string viewTableName = "view_delinquent_notice";
 
-        private GenericCommands mySqlGenericCommands;
+        private readonly IGenericCommands _genericCommands;
 
-        public DelinquentNoticeRepository(GenericCommands mySqlGenericCommands)
+        public DelinquentNoticeRepository(IGenericCommands genericCommands)
         {
-            this.mySqlGenericCommands = mySqlGenericCommands;
+            _genericCommands = genericCommands ?? throw new ArgumentNullException(nameof(genericCommands));
         }
 
         public bool Delete(List<DelinquentNoticeModel> entityList)
@@ -27,7 +26,7 @@ namespace Treasury.Data.Repositories
                 {
                     var parameters = new object[][] { new object[] { "@id", DbType.Int32, entity.Id } };
                     string query = $"DELETE FROM {tableName} WHERE id = @id";
-                    _ = mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+                    _ = _genericCommands.ExecuteNonQuery(query, parameters);
                 }
 
                 scope.Complete();
@@ -42,7 +41,7 @@ namespace Treasury.Data.Repositories
             var parameters = new object[][] { new object[] { "@delinquent_notice_id", DbType.Int32, Id } };
             string query = $"SELECT * FROM {viewTableName} WHERE delinquent_notice_id = @delinquent_notice_id";
 
-            DataTable dataTable = mySqlGenericCommands.ExecuteReader(query, parameters);
+            DataTable dataTable = _genericCommands.ExecuteReader(query, parameters);
 
             if (dataTable.Rows.Count > 0)
             {
@@ -63,7 +62,7 @@ namespace Treasury.Data.Repositories
             var parameters = new object[][] { new object[] { "@id", DbType.Int32, Id } };
             string query = $"SELECT * FROM {tableName} WHERE id = @id";
 
-            DataTable dataTable = mySqlGenericCommands.ExecuteReader(query, parameters);
+            DataTable dataTable = _genericCommands.ExecuteReader(query, parameters);
 
             if (dataTable.Rows.Count > 0)
             {
@@ -80,7 +79,7 @@ namespace Treasury.Data.Repositories
         public DataTable GetRecords()
         {
             string query = $"SELECT * FROM {tableName}";
-            return mySqlGenericCommands.Fill(query, new DataTable());
+            return _genericCommands.Fill(query, new DataTable());
         }
 
         public DataTable GetRecordsBySearch(string searchText)
@@ -91,7 +90,7 @@ namespace Treasury.Data.Repositories
             };
 
             string query = $"SELECT * FROM {tableName} WHERE notice_type LIKE @search_text";
-            return mySqlGenericCommands.FillBySearch(query, new DataTable(), parameters);
+            return _genericCommands.FillBySearch(query, new DataTable(), parameters);
         }
 
         public DataTable GetViewRecordsBySearch(int rowLimit, string searchKey)
@@ -103,7 +102,7 @@ namespace Treasury.Data.Repositories
             };
 
             string query = $"SELECT * FROM {viewTableName} WHERE (taxpayers_name LIKE @search_key OR complete_arp_no LIKE @search_key) ORDER BY taxpayers_name ASC LIMIT @row_limit ";
-            return mySqlGenericCommands.FillBySearch(query, new DataTable(), parameters);
+            return _genericCommands.FillBySearch(query, new DataTable(), parameters);
         }
 
         public bool IdExist(int id)
@@ -122,7 +121,7 @@ namespace Treasury.Data.Repositories
             };
 
             string query = $"INSERT INTO {tableName} (real_properties_id, notice_type, notice_date, created_by) VALUES (@real_properties_id, @notice_type, @notice_date, @created_by)";
-            return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+            return _genericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public bool Update(DelinquentNoticeModel entity)
@@ -137,7 +136,7 @@ namespace Treasury.Data.Repositories
             };
 
             string query = $"UPDATE {tableName} SET  real_properties_id = @real_properties_id, notice_type = @notice_type, notice_date = @notice_date, updated_by = @updated_by WHERE id = @id;";
-            return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+            return _genericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public DataTable GetViewRecords(string noticeType)
@@ -148,7 +147,7 @@ namespace Treasury.Data.Repositories
             };
 
             string query = $"SELECT * FROM {viewTableName} WHERE notice_type = @notice_type";
-            return mySqlGenericCommands.FillBySearch(query, new DataTable(), parameters);
+            return _genericCommands.FillBySearch(query, new DataTable(), parameters);
         }
 
         public DataTable GetViewRecordsByRptId(int rptId, string noticeType)
@@ -160,7 +159,7 @@ namespace Treasury.Data.Repositories
             };
 
             string query = $"SELECT * FROM {viewTableName} WHERE real_properties_id = @real_properties_id AND notice_type = @notice_type";
-            return mySqlGenericCommands.FillBySearch(query, new DataTable(), parameters);
+            return _genericCommands.FillBySearch(query, new DataTable(), parameters);
         }
 
         public Dictionary<string, string> GetDelinquencyStatusByRptId(int rptId)
@@ -170,7 +169,7 @@ namespace Treasury.Data.Repositories
             var parameters = new object[][] { new object[] { "@real_properties_id", DbType.Int32, rptId } };
             string query = $"SELECT * FROM {tableName} WHERE real_properties_id = @real_properties_id";
 
-            DataTable dataTable = mySqlGenericCommands.ExecuteReader(query, parameters);
+            DataTable dataTable = _genericCommands.ExecuteReader(query, parameters);
 
             if (dataTable.Rows.Count > 0)
             {
@@ -185,4 +184,3 @@ namespace Treasury.Data.Repositories
         }
     }
 }
-

@@ -1,5 +1,4 @@
-using OmniGov.Core.Repositories;
-using OmniGov.Core.Services;
+using OmniGov.Core.Interfaces.Services;
 using System.Data;
 using System.Transactions;
 using Treasury.Domain.Entities;
@@ -11,11 +10,11 @@ namespace Treasury.Data.Repositories
     {
         private readonly string tableName = "business_categories_has_add_on_charges";
         private readonly string viewTableName = "view_business_categories_has_add_on_charges";
-        private GenericCommands _mySqlGenericCommands;
+        private readonly IGenericCommands _genericCommands;
 
-        public BusinessCategoriesHasAddOnChargesRepository(GenericCommands mySqlGenericCommands)
+        public BusinessCategoriesHasAddOnChargesRepository(IGenericCommands genericCommands)
         {
-            _mySqlGenericCommands = mySqlGenericCommands;
+            _genericCommands = genericCommands ?? throw new ArgumentNullException(nameof(genericCommands));
         }
 
         public bool BusinessCategoriesHasAddOnCharges(int businessCategoriesId, int addOnChargesId)
@@ -28,7 +27,7 @@ namespace Treasury.Data.Repositories
 
             string query = $"SELECT business_categories_id FROM {tableName} WHERE business_categories_id = @business_categories_id AND business_add_on_charges_id = @business_add_on_charges_id";
 
-            string result = _mySqlGenericCommands.ExecuteScalar(query, parameters);
+            string result = _genericCommands.ExecuteScalar(query, parameters);
             if (string.IsNullOrEmpty(result))
                 return false;
             return true;
@@ -49,7 +48,7 @@ namespace Treasury.Data.Repositories
             var parameters = new object[][] { new object[] { "@business_categories_id", DbType.Int32, businessCategoriesId }, };
 
             string query = $"DELETE FROM {tableName} WHERE business_categories_id = @business_categories_id";
-            return _mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+            return _genericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public Dictionary<string, string> GetRecordByID(int Id)
@@ -76,7 +75,7 @@ namespace Treasury.Data.Repositories
 
             string query = $"SELECT * FROM {viewTableName} WHERE business_categories_id = @business_categories_id";
             var dataTable = new DataTable();
-            return _mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
+            return _genericCommands.FillBySearch(query, dataTable, parameters);
         }
 
         public bool IdExist(int id)
@@ -93,7 +92,7 @@ namespace Treasury.Data.Repositories
             };
 
             string query = $"INSERT INTO {tableName} (business_categories_id, business_add_on_charges_id) VALUES (@business_categories_id, @business_add_on_charges_id)";
-            return _mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+            return _genericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public bool Insert(int businessCategoriesId, List<BusinessCategoriesHasAddOnChargesModel> businessCategoriesHasAddOnChargesModels)
@@ -115,4 +114,3 @@ namespace Treasury.Data.Repositories
         }
     }
 }
-

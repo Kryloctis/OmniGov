@@ -1,5 +1,4 @@
-using OmniGov.Core.Repositories;
-using OmniGov.Core.Services;
+using OmniGov.Core.Interfaces.Services;
 using System.Data;
 using System.Transactions;
 using Treasury.Domain.Entities;
@@ -9,20 +8,16 @@ namespace Treasury.Data.Repositories
 {
     public class RptPaymentsRepository : IRptPaymentRepository
     {
-        private GenericCommands mySqlGenericCommands;
-        private IRptTaxDuesRepository rptTaxDuesRepository;
+        private readonly IGenericCommands _genericCommands;
+        private readonly IRptTaxDuesRepository _rptTaxDuesRepository;
+
         private readonly string tableName = "rpt_payments";
         private readonly string viewTableName = "view_rpt_payments";
 
-        public RptPaymentsRepository(GenericCommands mySqlGenericCommands, IRptTaxDuesRepository rptTaxDuesRepository)
+        public RptPaymentsRepository(IGenericCommands genericCommands, IRptTaxDuesRepository rptTaxDuesRepository)
         {
-            this.mySqlGenericCommands = mySqlGenericCommands;
-            this.rptTaxDuesRepository = rptTaxDuesRepository;
-        }
-
-        public int CountRecords()
-        {
-            throw new NotImplementedException();
+            _genericCommands = genericCommands ?? throw new ArgumentNullException(nameof(genericCommands));
+            _rptTaxDuesRepository = rptTaxDuesRepository ?? throw new ArgumentNullException(nameof(rptTaxDuesRepository));
         }
 
         public bool Delete(List<RptPaymentsModel> entityList)
@@ -59,7 +54,7 @@ namespace Treasury.Data.Repositories
             };
 
             string query = $"INSERT INTO  {tableName}  (payment_collections_id, posted_by ) VALUES (@payment_collections_id, @posted_by)";
-            return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+            return _genericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public bool Update(RptPaymentsModel entity)
@@ -70,7 +65,7 @@ namespace Treasury.Data.Repositories
         public int GetLastInsertedID(int createdBy)
         {
             string query = $"SELECT COALESCE(MAX(id)) FROM {tableName}";
-            return Convert.ToInt32(mySqlGenericCommands.ExecuteScalar(query));
+            return Convert.ToInt32(_genericCommands.ExecuteScalar(query));
         }
 
         public bool InsertWithRptTaxDues(RptPaymentsModel rptPaymentModel, List<RptTaxDuesModel> rptTaxDuesModels)
@@ -80,7 +75,7 @@ namespace Treasury.Data.Repositories
                 _ = Insert(rptPaymentModel);
                 foreach (var model in rptTaxDuesModels)
                     model.RptPaymentsId = GetLastInsertedID(rptPaymentModel.PostedBy);
-                _ = rptTaxDuesRepository.BulkInsert(rptTaxDuesModels);
+                _ = _rptTaxDuesRepository.BulkInsert(rptTaxDuesModels);
 
                 scope.Complete();
                 return true;
@@ -105,7 +100,7 @@ namespace Treasury.Data.Repositories
 
             string query = $"SELECT * FROM {viewTableName} WHERE taxpayer_name = @taxpayer_name {filter}";
             var dataTable = new DataTable();
-            return mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
+            return _genericCommands.FillBySearch(query, dataTable, parameters);
         }
 
         public Dictionary<string, string> GetViewRecordById(int Id)
@@ -119,7 +114,7 @@ namespace Treasury.Data.Repositories
 
             string query = $"SELECT rpt_payment_posts_id, taxpayer_name, taxpayer_tin, taxpayer_address, taxpayer_contact, rpt_payment_posts_posted_at, rpt_payment_posts_posted_by, payment_collections_id, payment_collections_collecting_officers_id, payment_collections_job_orders_id, payment_collections_funds_id, payment_collections_accountable_forms_id, payment_collections_payee, payment_collections_receipt_no, payment_collections_payment_date, payment_collections_amount, payment_collections_is_cancelled, payment_collections_created_at, payment_collections_created_by, payment_collections_updated_at, payment_collections_updated_by FROM {viewTableName} WHERE rpt_payment_posts_id = @rpt_payment_posts_id";
 
-            DataTable dataTable = mySqlGenericCommands.ExecuteReader(query, parameters);
+            DataTable dataTable = _genericCommands.ExecuteReader(query, parameters);
 
             if (dataTable.Rows.Count > 0)
             {
@@ -143,7 +138,7 @@ namespace Treasury.Data.Repositories
             string query = $"SELECT * FROM {viewTableName} WHERE rpt_assessment_posts_id = @rpt_assessment_posts_id ";
 
             var dataTable = new DataTable();
-            return mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
+            return _genericCommands.FillBySearch(query, dataTable, parameters);
         }
 
         Dictionary<string, string> IRptPaymentRepository.GetRecordByAssessmentPostId(int assessmentPostId)
@@ -157,7 +152,7 @@ namespace Treasury.Data.Repositories
 
             string query = $"SELECT * FROM {viewTableName} WHERE rpt_assessment_posts_id = @rpt_assessment_posts_id";
 
-            DataTable dataTable = mySqlGenericCommands.ExecuteReader(query, parameters);
+            DataTable dataTable = _genericCommands.ExecuteReader(query, parameters);
 
             if (dataTable.Rows.Count > 0)
             {
@@ -172,4 +167,3 @@ namespace Treasury.Data.Repositories
         }
     }
 }
-

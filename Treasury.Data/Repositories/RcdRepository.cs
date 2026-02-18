@@ -1,6 +1,5 @@
 using OmniGov.Core.Entities;
-using OmniGov.Core.Repositories;
-using OmniGov.Core.Services;
+using OmniGov.Core.Interfaces.Services;
 using System.Data;
 using System.Transactions;
 using Treasury.Domain.Entities;
@@ -12,21 +11,16 @@ namespace Treasury.Data.Repositories
     {
         private readonly string tableName = "rcd";
         private readonly string viewTableName = "view_rcd";
-        private GenericCommands mySqlGenericCommands;
-        private IRcdCollections rcdCollections;
-        private IRcdDeposits rcdDeposits;
+        private readonly IGenericCommands _genericCommands;
+        private readonly IRcdCollections _rcdCollections;
+        private readonly IRcdDeposits _rcdDeposits;
 
-        public RcdRepository(GenericCommands mySqlGenericCommands, IRcdCollections rcdCollections, IRcdDeposits rcdDeposits)
+        public RcdRepository(IGenericCommands genericCommands, IRcdCollections rcdCollections, IRcdDeposits rcdDeposits)
 
         {
-            this.mySqlGenericCommands = mySqlGenericCommands;
-            this.rcdCollections = rcdCollections;
-            this.rcdDeposits = rcdDeposits;
-        }
-
-        public int CountRecords()
-        {
-            throw new NotImplementedException();
+            _genericCommands = genericCommands ?? throw new ArgumentNullException(nameof(genericCommands));
+            _rcdCollections = rcdCollections ?? throw new ArgumentNullException(nameof(rcdCollections));
+            _rcdDeposits = rcdDeposits ?? throw new ArgumentNullException(nameof(rcdDeposits));
         }
 
         public bool Delete(List<RcdModel> entityList)
@@ -37,9 +31,9 @@ namespace Treasury.Data.Repositories
                 {
                     var parameters = new object[][] { new object[] { "@id", DbType.Int32, entity.Id } };
                     string query = $"DELETE FROM {tableName} WHERE id = @id";
-                    _ = rcdCollections.DeleteByRcdId(entity);
-                    _ = rcdDeposits.DeleteByRcdId(entity);
-                    _ = mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+                    _ = _rcdCollections.DeleteByRcdId(entity);
+                    _ = _rcdDeposits.DeleteByRcdId(entity);
+                    _ = _genericCommands.ExecuteNonQuery(query, parameters);
                 }
 
                 scope.Complete();
@@ -54,7 +48,7 @@ namespace Treasury.Data.Repositories
             var parameters = new object[][] { new object[] { "@id", DbType.Int32, Id } };
             string query = $"SELECT * FROM {tableName} WHERE id = @id";
 
-            DataTable dataTable = mySqlGenericCommands.ExecuteReader(query, parameters);
+            DataTable dataTable = _genericCommands.ExecuteReader(query, parameters);
 
             if (dataTable.Rows.Count > 0)
             {
@@ -71,14 +65,14 @@ namespace Treasury.Data.Repositories
         public DataTable GetRecords()
         {
             string query = $"SELECT * FROM {tableName}";
-            return mySqlGenericCommands.Fill(query, new DataTable());
+            return _genericCommands.Fill(query, new DataTable());
         }
 
         public DataTable GetRecordsBySearch(string searchText)
         {
             var parameters = new object[][] { new object[] { "@search_key", DbType.String, $"%{searchText}%" } };
             string query = $"SELECT * FROM {tableName} WHERE report_no LIKE @search_key";
-            return mySqlGenericCommands.FillBySearch(query, new DataTable(), parameters);
+            return _genericCommands.FillBySearch(query, new DataTable(), parameters);
         }
 
         public DataTable GetViewRecords(string searchKey, DateTime date, int rowFilter)
@@ -91,7 +85,7 @@ namespace Treasury.Data.Repositories
             };
 
             string query = $"SELECT * FROM {viewTableName} WHERE (report_no LIKE @search_key OR first_name LIKE @search_key OR last_name LIKE @search_key) AND (DATE(date) <= @date) LIMIT @row_filter";
-            return mySqlGenericCommands.FillBySearch(query, new DataTable(), parameters);
+            return _genericCommands.FillBySearch(query, new DataTable(), parameters);
         }
 
         public bool IdExist(int id)
@@ -110,14 +104,14 @@ namespace Treasury.Data.Repositories
             };
 
             string query = $"INSERT INTO {tableName} (funds_id, report_no, date, created_by) VALUES (@funds_id, @report_no, @date, @created_by)";
-            return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+            return _genericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public bool reportNoExist(string reportNo)
         {
             var parameters = new object[][] { new object[] { "@report_no", DbType.String, reportNo } };
             string query = $"SELECT id FROM {tableName} WHERE report_no = @report_no";
-            string result = mySqlGenericCommands.ExecuteScalar(query, parameters);
+            string result = _genericCommands.ExecuteScalar(query, parameters);
             return !string.IsNullOrWhiteSpace(result);
         }
 
@@ -130,7 +124,7 @@ namespace Treasury.Data.Repositories
             };
 
             string query = $"SELECT id FROM {tableName} WHERE report_no = @report_no AND id <> @id";
-            string result = mySqlGenericCommands.ExecuteScalar(query, parameters);
+            string result = _genericCommands.ExecuteScalar(query, parameters);
             return !string.IsNullOrWhiteSpace(result);
         }
 
@@ -145,26 +139,26 @@ namespace Treasury.Data.Repositories
             };
 
             string query = $"UPDATE {tableName} SET  report_no = @report_no, funds_id = @funds_id, date = @date WHERE id = @id;";
-            return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+            return _genericCommands.ExecuteNonQuery(query, parameters);
         }
 
-        public bool InsertWithCollectionsDeposits(RcdModel rcdModel, List<RcdCollectionsModel> rcdCollectionsModels, List<RcdDepositsModel> rcdDepositsModels)
+        public bool InsertWithCollectionsDeposits(RcdModel rcdModel, List<RcdCollectionsModel> _rcdCollectionsModels, List<RcdDepositsModel> _rcdDepositsModels)
         {
             using (var scope = new TransactionScope())
             {
                 _ = Insert(rcdModel);
 
                 int lastInsertedId = GetLastInsertedId(rcdModel.CreatedBy);
-                foreach (RcdCollectionsModel rcdCollectionsModel in rcdCollectionsModels)
+                foreach (RcdCollectionsModel _rcdCollectionsModel in _rcdCollectionsModels)
                 {
-                    rcdCollectionsModel.RcdModel = new RcdModel() { Id = lastInsertedId };
-                    _ = rcdCollections.Insert(rcdCollectionsModel);
+                    _rcdCollectionsModel.RcdModel = new RcdModel() { Id = lastInsertedId };
+                    _ = _rcdCollections.Insert(_rcdCollectionsModel);
                 }
 
-                foreach (RcdDepositsModel rcdDepositsModel in rcdDepositsModels)
+                foreach (RcdDepositsModel _rcdDepositsModel in _rcdDepositsModels)
                 {
-                    rcdDepositsModel.RcdModel = new RcdModel() { Id = lastInsertedId };
-                    _ = rcdDeposits.Insert(rcdDepositsModel);
+                    _rcdDepositsModel.RcdModel = new RcdModel() { Id = lastInsertedId };
+                    _ = _rcdDeposits.Insert(_rcdDepositsModel);
                 }
 
                 scope.Complete();
@@ -172,24 +166,24 @@ namespace Treasury.Data.Repositories
             }
         }
 
-        public bool UpdateWithCollectionsDeposits(RcdModel rcdModel, List<RcdCollectionsModel> rcdCollectionsModels, List<RcdDepositsModel> rcdDepositsModels)
+        public bool UpdateWithCollectionsDeposits(RcdModel rcdModel, List<RcdCollectionsModel> _rcdCollectionsModels, List<RcdDepositsModel> _rcdDepositsModels)
         {
             using (var scope = new TransactionScope())
             {
                 _ = Update(rcdModel);
-                _ = rcdCollections.DeleteByRcdId(rcdModel);
-                _ = rcdDeposits.DeleteByRcdId(rcdModel);
+                _ = _rcdCollections.DeleteByRcdId(rcdModel);
+                _ = _rcdDeposits.DeleteByRcdId(rcdModel);
 
-                foreach (RcdCollectionsModel rcdCollectionsModel in rcdCollectionsModels)
+                foreach (RcdCollectionsModel _rcdCollectionsModel in _rcdCollectionsModels)
                 {
-                    rcdCollectionsModel.RcdModel = new RcdModel() { Id = rcdModel.Id };
-                    _ = rcdCollections.Insert(rcdCollectionsModel);
+                    _rcdCollectionsModel.RcdModel = new RcdModel() { Id = rcdModel.Id };
+                    _ = _rcdCollections.Insert(_rcdCollectionsModel);
                 }
 
-                foreach (RcdDepositsModel rcdDepositsModel in rcdDepositsModels)
+                foreach (RcdDepositsModel _rcdDepositsModel in _rcdDepositsModels)
                 {
-                    rcdDepositsModel.RcdModel = new RcdModel() { Id = rcdModel.Id };
-                    _ = rcdDeposits.Insert(rcdDepositsModel);
+                    _rcdDepositsModel.RcdModel = new RcdModel() { Id = rcdModel.Id };
+                    _ = _rcdDeposits.Insert(_rcdDepositsModel);
                 }
 
                 scope.Complete();
@@ -202,7 +196,7 @@ namespace Treasury.Data.Repositories
             var recordDictionary = new Dictionary<string, string>();
             var parameters = new object[][] { new object[] { "@id", DbType.Int32, id } };
             string query = $"SELECT * FROM {viewTableName} WHERE id = @id";
-            DataTable dataTable = mySqlGenericCommands.ExecuteReader(query, parameters);
+            DataTable dataTable = _genericCommands.ExecuteReader(query, parameters);
 
             if (dataTable.Rows.Count > 0)
             {
@@ -220,8 +214,7 @@ namespace Treasury.Data.Repositories
         {
             var parameters = new object[][] { new object[] { "@created_by", DbType.Int32, usersModel.Id } };
             string query = $"SELECT MAX(id) FROM {tableName} WHERE created_by = @created_by";
-            return Convert.ToInt32(mySqlGenericCommands.ExecuteScalar(query, parameters));
+            return Convert.ToInt32(_genericCommands.ExecuteScalar(query, parameters));
         }
     }
 }
-

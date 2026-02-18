@@ -1,5 +1,4 @@
-using OmniGov.Core.Repositories;
-using OmniGov.Core.Services;
+using OmniGov.Core.Interfaces.Services;
 using System.Data;
 using System.Transactions;
 using Treasury.Domain.Entities;
@@ -14,11 +13,11 @@ namespace Treasury.Data.Repositories
         private readonly string tableRciDeductions = "rci_deductions";
 
         private readonly string viewTableName = "view_rci";
-        private GenericCommands mySqlGenericCommands;
+        private readonly IGenericCommands _genericCommands;
 
-        public RciRepository(GenericCommands mySqlGenericCommands)
+        public RciRepository(IGenericCommands genericCommands)
         {
-            this.mySqlGenericCommands = mySqlGenericCommands;
+            _genericCommands = genericCommands ?? throw new ArgumentNullException(nameof(genericCommands));
         }
 
         public Dictionary<string, string> GetRecordByID(int Id)
@@ -29,7 +28,7 @@ namespace Treasury.Data.Repositories
         public DataTable GetRecords()
         {
             string query = $"SELECT * FROM {viewTableName}";
-            return mySqlGenericCommands.Fill(query, new DataTable());
+            return _genericCommands.Fill(query, new DataTable());
         }
 
         public DataTable GetViewRecordsByBankAccountIdAndMonth(int bankAccountID, string month)
@@ -41,7 +40,7 @@ namespace Treasury.Data.Repositories
             };
 
             string query = $"SELECT * FROM {viewTableName} WHERE bank_accounts_id = @bank_accouns_id AND MONTH(cheque_date) = @month";
-            return mySqlGenericCommands.ExecuteReader(query, parameters);
+            return _genericCommands.ExecuteReader(query, parameters);
         }
 
         public bool Insert(RciModel entity)
@@ -58,7 +57,7 @@ namespace Treasury.Data.Repositories
 
             string query = $"INSERT INTO {tableName} (cheques_id, funds_id, function_program_project_id, dv_no, payee, nature_of_payment) VALUES(@cheques_id, @funds_id, @function_program_project_id, @dv_no, @payee, @nature_of_payment)";
 
-            return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+            return _genericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public bool Update(RciModel entity)
@@ -75,7 +74,7 @@ namespace Treasury.Data.Repositories
 
             string query = $"UPDATE {tableName} SET funds_id = @funds_id, function_program_project_id = @function_program_project_id, dv_no = @dv_no, payee = @payee, nature_of_payment = @nature_of_payment WHERE id = @id";
 
-            return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+            return _genericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public bool Delete(List<RciModel> entityList)
@@ -90,7 +89,7 @@ namespace Treasury.Data.Repositories
                     };
 
                     string query = $"DELETE FROM {tableName} WHERE id = @id";
-                    _ = mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+                    _ = _genericCommands.ExecuteNonQuery(query, parameters);
                 }
 
                 scope.Complete();
@@ -106,7 +105,7 @@ namespace Treasury.Data.Repositories
             };
 
             string query = $"SELECT id FROM {tableName} WHERE id = @id";
-            string queryResult = mySqlGenericCommands.ExecuteScalar(query, parameters);
+            string queryResult = _genericCommands.ExecuteScalar(query, parameters);
 
             return !string.IsNullOrEmpty(queryResult);
         }
@@ -120,7 +119,7 @@ namespace Treasury.Data.Repositories
 
             string query = $"SELECT * FROM {viewTableName} WHERE payee LIKE @searchText OR bank_name LIKE @searchText  OR bank_account_no LIKE @searchText OR obligation_no LIKE @searchText";
 
-            return mySqlGenericCommands.FillBySearch(query, new DataTable(), parameter);
+            return _genericCommands.FillBySearch(query, new DataTable(), parameter);
         }
 
         public DataTable GetRecordsByBankAndAccountID(int bankID, int bankAccountsID)
@@ -132,7 +131,7 @@ namespace Treasury.Data.Repositories
             };
 
             string query = $"SELECT * FROM {viewTableName} WHERE bank_id = @bank_id AND bank_accounts_id = @bank_accounts_id";
-            return mySqlGenericCommands.FillBySearch(query, new DataTable(), parameter);
+            return _genericCommands.FillBySearch(query, new DataTable(), parameter);
         }
 
         public bool SaveRciDvObligations(int rciId, string obligationNo, DateTime dateEntry)
@@ -145,7 +144,7 @@ namespace Treasury.Data.Repositories
             };
 
             string query = $"INSERT INTO {tableRciObligations} (rci_id, obligation_no, date_entry) VALUES(@rciId, @obligationNo, @date_entry)";
-            return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+            return _genericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public bool SaveRciDeductions(int rciId, string description, decimal amount)
@@ -158,19 +157,19 @@ namespace Treasury.Data.Repositories
             };
 
             string query = $"INSERT INTO {tableRciDeductions} (rci_id, description, amount) VALUES(@rciId, @obligationNo, @amount)";
-            return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+            return _genericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public int GetLastInsertId()
         {
             string query = $"SELECT MAX(id) FROM {tableName}";
-            return Convert.ToInt32(mySqlGenericCommands.ExecuteScalar(query));
+            return Convert.ToInt32(_genericCommands.ExecuteScalar(query));
         }
 
         public DataTable GetViewRecords()
         {
             string query = $"SELECT * FROM {viewTableName}";
-            return mySqlGenericCommands.Fill(query, new DataTable());
+            return _genericCommands.Fill(query, new DataTable());
         }
 
         public DataTable GetViewRecordsBySearch(string searchText)
@@ -182,7 +181,7 @@ namespace Treasury.Data.Repositories
 
             string query = $"SELECT * FROM {viewTableName} WHERE cheque_no LIKE @search_text OR bank_account_no LIKE @search_text OR bank_name LIKE @search_text OR dv_no LIKE @search_text OR obligation_no LIKE @search_text OR payee LIKE @search_text";
 
-            return mySqlGenericCommands.FillBySearch(query, new DataTable(), parameters);
+            return _genericCommands.FillBySearch(query, new DataTable(), parameters);
         }
 
         public Dictionary<string, string> GetViewRecordById(int Id)
@@ -195,7 +194,7 @@ namespace Treasury.Data.Repositories
             };
 
             string query = $"SELECT * FROM {viewTableName} WHERE id = @id";
-            var dataTable = mySqlGenericCommands.ExecuteReader(query, parameters);
+            var dataTable = _genericCommands.ExecuteReader(query, parameters);
             if (dataTable.Rows.Count > 0)
             {
                 DataRow row = dataTable.Rows[0];
@@ -209,4 +208,3 @@ namespace Treasury.Data.Repositories
         }
     }
 }
-

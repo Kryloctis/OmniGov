@@ -1,5 +1,4 @@
-using OmniGov.Core.Repositories;
-using OmniGov.Core.Services;
+using OmniGov.Core.Interfaces.Services;
 using System.Data;
 using System.Transactions;
 using Treasury.Domain.Entities;
@@ -10,18 +9,13 @@ namespace Treasury.Data.Repositories
     public class PaymentCollectionHasChequesRepository : IPaymentCollectionHasChequesRepository
     {
         private readonly string tableName = "payment_collection_has_cheques";
-        private IChequesRepository _chequesRepository;
-        private GenericCommands _mySqlGenericCommands;
+        private readonly IChequesRepository _chequesRepository;
+        private readonly IGenericCommands _genericCommands;
 
-        public PaymentCollectionHasChequesRepository(GenericCommands mySqlGenericCommands, IChequesRepository chequesRepository)
+        public PaymentCollectionHasChequesRepository(IGenericCommands genericCommands, IChequesRepository chequesRepository)
         {
-            _mySqlGenericCommands = mySqlGenericCommands;
-            _chequesRepository = chequesRepository;
-        }
-
-        public int CountRecords()
-        {
-            throw new NotImplementedException();
+            _genericCommands = genericCommands ?? throw new ArgumentNullException(nameof(genericCommands));
+            _chequesRepository = chequesRepository ?? throw new ArgumentNullException(nameof(chequesRepository));
         }
 
         public bool Delete(List<PaymentCollectionHasChequesModel> entityList)
@@ -36,7 +30,7 @@ namespace Treasury.Data.Repositories
                     };
 
                     string query = $"DELETE FROM {tableName} WHERE payment_collection_id = @payment_collection_id";
-                    _ = _mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+                    _ = _genericCommands.ExecuteNonQuery(query, parameters);
                 }
                 scope.Complete();
                 return true;
@@ -72,7 +66,7 @@ namespace Treasury.Data.Repositories
             };
 
             string query = $"INSERT INTO {tableName} (payment_collections_id, cheques_id) VALUES (@payment_collections_id, @cheques_id)";
-            return _mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+            return _genericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public bool InsertWithCheques(PaymentCollectionHasChequesModel entity)
@@ -97,4 +91,3 @@ namespace Treasury.Data.Repositories
         }
     }
 }
-

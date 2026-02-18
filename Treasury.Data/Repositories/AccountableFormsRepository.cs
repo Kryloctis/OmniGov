@@ -1,5 +1,4 @@
-using OmniGov.Core.Repositories;
-using OmniGov.Core.Services;
+using OmniGov.Core.Interfaces.Services;
 using System.Data;
 using System.Transactions;
 using Treasury.Domain.Entities;
@@ -11,11 +10,11 @@ namespace Treasury.Data.Repositories
     {
         private readonly string tableName = "accountable_forms";
         private readonly string viewTableName = "view_accountable_forms";
-        private GenericCommands mySqlGenericCommands;
+        private readonly IGenericCommands _genericCommands;
 
-        public AccountableFormsRepository(GenericCommands mySqlGenericCommands)
+        public AccountableFormsRepository(IGenericCommands genericCommands)
         {
-            this.mySqlGenericCommands = mySqlGenericCommands;
+            _genericCommands = genericCommands ?? throw new ArgumentNullException(nameof(genericCommands));
         }
 
         public Dictionary<string, string> GetRecordByID(int Id)
@@ -28,7 +27,7 @@ namespace Treasury.Data.Repositories
 
             string query = $"SELECT acc_form_no, acc_form_desc FROM {tableName} WHERE id = @id";
 
-            using (var reader = mySqlGenericCommands.ExecuteReader(query, parameters))
+            using (var reader = _genericCommands.ExecuteReader(query, parameters))
             {
                 if (reader.Rows.Count < 1)
                     return record;
@@ -48,7 +47,7 @@ namespace Treasury.Data.Repositories
             string query = $"SELECT * FROM {viewTableName}";
 
             var dataTable = new DataTable();
-            return mySqlGenericCommands.Fill(query, dataTable);
+            return _genericCommands.Fill(query, dataTable);
         }
 
         public bool Insert(AccountableFormsModel entity)
@@ -61,7 +60,7 @@ namespace Treasury.Data.Repositories
             };
 
             string query = $"INSERT INTO {tableName} (acc_form_no,acc_form_desc, is_cash_ticket) VALUES (@acc_form_no,@acc_form_desc, @is_cash_ticket)";
-            return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+            return _genericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public bool Update(AccountableFormsModel entity)
@@ -75,7 +74,7 @@ namespace Treasury.Data.Repositories
             };
 
             string query = $"UPDATE {tableName} SET acc_form_no = @acc_form_no, acc_form_desc = @acc_form_desc, is_cash_ticket = @is_cash_ticket WHERE id = @id";
-            return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+            return _genericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public bool Delete(List<AccountableFormsModel> entityList)
@@ -90,7 +89,7 @@ namespace Treasury.Data.Repositories
                     };
 
                     string query = $"DELETE FROM {tableName} WHERE id = @id";
-                    _ = mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+                    _ = _genericCommands.ExecuteNonQuery(query, parameters);
                 }
 
                 scope.Complete();
@@ -102,7 +101,7 @@ namespace Treasury.Data.Repositories
         {
             string query = $"SELECT COUNT(*) FROM {tableName}";
 
-            return int.Parse(mySqlGenericCommands.ExecuteScalar(query));
+            return int.Parse(_genericCommands.ExecuteScalar(query));
         }
 
         public bool IdExist(int id)
@@ -113,7 +112,7 @@ namespace Treasury.Data.Repositories
             };
 
             string query = $"SELECT id FROM {tableName} WHERE id = @id";
-            string queryResult = mySqlGenericCommands.ExecuteScalar(query, parameters);
+            string queryResult = _genericCommands.ExecuteScalar(query, parameters);
 
             // if query is not null, means found some record, so true
             if (!string.IsNullOrEmpty(queryResult)) return true;
@@ -128,7 +127,7 @@ namespace Treasury.Data.Repositories
             };
 
             string query = $"SELECT acc_form_no FROM {tableName} WHERE acc_form_no = @acc_form_no";
-            string queryResult = mySqlGenericCommands.ExecuteScalar(query, parameters);
+            string queryResult = _genericCommands.ExecuteScalar(query, parameters);
 
             // if query is not null, means found some record, so true
             if (!string.IsNullOrEmpty(queryResult)) return true;
@@ -145,7 +144,7 @@ namespace Treasury.Data.Repositories
             };
 
             string query = $"SELECT acc_form_no FROM {tableName} WHERE id <> @id AND acc_form_no = @acc_form_no";
-            string queryResult = mySqlGenericCommands.ExecuteScalar(query, parameters);
+            string queryResult = _genericCommands.ExecuteScalar(query, parameters);
 
             // if query is not null, means found some record, so true
             if (!string.IsNullOrEmpty(queryResult)) return true;
@@ -163,7 +162,7 @@ namespace Treasury.Data.Repositories
             string query = $"SELECT * FROM {viewTableName} WHERE acc_form_no  LIKE @search_text OR acc_form_desc  LIKE @search_text";
 
             var dataTable = new DataTable();
-            return mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
+            return _genericCommands.FillBySearch(query, dataTable, parameters);
         }
 
         public DataTable GetCashTicketsAccountableForm()
@@ -171,7 +170,7 @@ namespace Treasury.Data.Repositories
             string query = $"SELECT * FROM {viewTableName} WHERE is_cash_ticket = 1";
 
             var dataTable = new DataTable();
-            return mySqlGenericCommands.Fill(query, dataTable);
+            return _genericCommands.Fill(query, dataTable);
         }
 
         public Dictionary<string, string> GetRecordByAccFormNo(string accFormNo)
@@ -185,7 +184,7 @@ namespace Treasury.Data.Repositories
 
             string query = $"SELECT id, acc_form_no, acc_form_desc FROM {tableName} WHERE acc_form_no = @acc_form_no";
 
-            using (var reader = mySqlGenericCommands.ExecuteReader(query, parameters))
+            using (var reader = _genericCommands.ExecuteReader(query, parameters))
             {
                 if (reader.Rows.Count < 1)
                     return dict;
@@ -211,8 +210,7 @@ namespace Treasury.Data.Repositories
             string query = $"SELECT * FROM {tableName} WHERE acc_form_no = @acc_form_no";
 
             var dataTable = new DataTable();
-            return mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
+            return _genericCommands.FillBySearch(query, dataTable, parameters);
         }
     }
 }
-

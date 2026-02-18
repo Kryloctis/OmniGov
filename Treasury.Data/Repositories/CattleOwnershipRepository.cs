@@ -1,5 +1,4 @@
-using OmniGov.Core.Repositories;
-using OmniGov.Core.Services;
+using OmniGov.Core.Interfaces.Services;
 using System.Data;
 using System.Transactions;
 using Treasury.Domain.Entities;
@@ -10,16 +9,11 @@ namespace Treasury.Data.Repositories
     internal class CattleOwnershipRepository : ICattleOwnershipRepository
     {
         private readonly string tableName = "cattle_ownership";
-        private GenericCommands mySqlGenericCommands;
+        private readonly IGenericCommands _genericCommands;
 
-        public CattleOwnershipRepository(GenericCommands mySqlGenericCommands)
+        public CattleOwnershipRepository(IGenericCommands genericCommands)
         {
-            this.mySqlGenericCommands = mySqlGenericCommands;
-        }
-
-        public int CountRecords()
-        {
-            throw new NotImplementedException();
+            _genericCommands = genericCommands ?? throw new ArgumentNullException(nameof(genericCommands));
         }
 
         public bool Delete(List<CattleOwnershipModel> entityList)
@@ -30,7 +24,7 @@ namespace Treasury.Data.Repositories
                 {
                     var parameters = new object[][] { new object[] { "@id", DbType.Int32, cattleOwnershipModel.Id } };
                     string query = $"DELETE FROM {tableName} WHERE id = @id";
-                    _ = mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+                    _ = _genericCommands.ExecuteNonQuery(query, parameters);
                 }
 
                 scope.Complete();
@@ -46,7 +40,7 @@ namespace Treasury.Data.Repositories
             };
 
             string query = $"SELECT COALESCE(MAX(id)) FROM {tableName} WHERE created_by = @created_by";
-            return Convert.ToInt32(mySqlGenericCommands.ExecuteScalar(query, parameters));
+            return Convert.ToInt32(_genericCommands.ExecuteScalar(query, parameters));
         }
 
         public Dictionary<string, string> GetRecordByID(int Id)
@@ -59,7 +53,7 @@ namespace Treasury.Data.Repositories
             };
 
             string query = $"SELECT * FROM {tableName} WHERE id = @id";
-            DataTable dataTable = mySqlGenericCommands.ExecuteReader(query, parameters);
+            DataTable dataTable = _genericCommands.ExecuteReader(query, parameters);
 
             if (dataTable.Rows.Count > 0)
             {
@@ -82,14 +76,14 @@ namespace Treasury.Data.Repositories
 
             string query = $"SELECT * FROM {tableName} WHERE taxpayers_id = @taxpayers_id";
             var dataTable = new DataTable();
-            return mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
+            return _genericCommands.FillBySearch(query, dataTable, parameters);
         }
 
         public DataTable GetRecords()
         {
             string query = $"SELECT * FROM {tableName}";
             var dataTable = new DataTable();
-            return mySqlGenericCommands.Fill(query, dataTable);
+            return _genericCommands.Fill(query, dataTable);
         }
 
         public DataTable GetRecordsByIDAndSearch(int oldOwnerID, string searchKey)
@@ -103,7 +97,7 @@ namespace Treasury.Data.Repositories
             string query = $"SELECT * FROM {tableName} WHERE owner_id = @owner_id AND description LIKE @searchKey AND cattle_type LIKE @searchKey";
 
             var dataTable = new DataTable();
-            return mySqlGenericCommands.FillBySearch(query, dataTable, parameter);
+            return _genericCommands.FillBySearch(query, dataTable, parameter);
         }
 
         public DataTable GetRecordsBySearch(string searchText)
@@ -132,7 +126,7 @@ namespace Treasury.Data.Repositories
 
             string query = $"INSERT INTO {tableName} (payment_collections_id, taxpayers_id, cattle_name, cattle_sex, cattle_age, cattle_years, description, created_by) VALUES (@payment_collections_id, @taxpayers_id, @cattle_name, @cattle_sex, @cattle_age, @cattle_years, @description, @created_by)";
 
-            return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+            return _genericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public bool Update(CattleOwnershipModel entity)
@@ -151,8 +145,7 @@ namespace Treasury.Data.Repositories
             };
 
             string query = $"UPDATE {tableName} SET payment_collections_id = @payment_collections_id, taxpayers_id = @taxpayers_id, cattle_name = @cattle_name, cattle_sex = @cattle_sex, cattle_age = @cattle_age, cattle_years = @cattle_years, description = @description, updated_by = @updated_by WHERE id = @id;";
-            return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+            return _genericCommands.ExecuteNonQuery(query, parameters);
         }
     }
 }
-

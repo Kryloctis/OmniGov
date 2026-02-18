@@ -1,5 +1,4 @@
-using OmniGov.Core.Repositories;
-using OmniGov.Core.Services;
+using OmniGov.Core.Interfaces.Services;
 using System.Data;
 using Treasury.Domain.Entities;
 using Treasury.Domain.Interfaces;
@@ -9,17 +8,17 @@ namespace Treasury.Data.Repositories
     public class TaxTypesRepository : ITaxTypesRepository
     {
         private readonly string tableName = "tax_type";
-        private GenericCommands mySqlGenericCommands;
+        private readonly IGenericCommands _genericCommands;
 
-        public TaxTypesRepository(GenericCommands mySqlGenericCommands)
+        public TaxTypesRepository(IGenericCommands genericCommands)
         {
-            this.mySqlGenericCommands = mySqlGenericCommands;
+            _genericCommands = genericCommands ?? throw new ArgumentNullException(nameof(genericCommands));
         }
 
         public int CountRecords()
         {
             string query = $"SELECT COUNT(id) FROM {tableName} ";
-            return Convert.ToInt32(mySqlGenericCommands.ExecuteNonQuery(query));
+            return Convert.ToInt32(_genericCommands.ExecuteNonQuery(query));
         }
 
         public bool Delete(List<TaxTypesModel> entityList)
@@ -35,7 +34,7 @@ namespace Treasury.Data.Repositories
             };
 
             string query = $"UPDATE {tableName} SET is_deleted = 1 WHERE id = @id OR parent = @id";
-            return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+            return _genericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public Dictionary<string, string> GetRecordByID(int Id)
@@ -49,7 +48,7 @@ namespace Treasury.Data.Repositories
 
             string query = $"SELECT * FROM {tableName} WHERE id = @id";
 
-            using (var reader = mySqlGenericCommands.ExecuteReader(query, parameters))
+            using (var reader = _genericCommands.ExecuteReader(query, parameters))
             {
                 if (reader.Rows.Count < 1)
                     return record;
@@ -74,7 +73,7 @@ namespace Treasury.Data.Repositories
             string query = $"SELECT * FROM {tableName}";
 
             var dataTable = new DataTable();
-            return mySqlGenericCommands.Fill(query, dataTable);
+            return _genericCommands.Fill(query, dataTable);
         }
 
         public DataTable GetRecordsBySearch(string searchText)
@@ -87,7 +86,7 @@ namespace Treasury.Data.Repositories
             string query = $"SELECT * FROM {tableName} WHERE description LIKE @search_text";
 
             var dtFunds = new DataTable();
-            return mySqlGenericCommands.FillBySearch(query, dtFunds, parameters);
+            return _genericCommands.FillBySearch(query, dtFunds, parameters);
         }
 
         public DataTable GetTaxTypeCodes()
@@ -95,7 +94,7 @@ namespace Treasury.Data.Repositories
             string query = $"SELECT id, code, description, parent FROM {tableName}  ORDER BY parent, id DESC";
 
             var dt = new DataTable();
-            return mySqlGenericCommands.Fill(query, dt);
+            return _genericCommands.Fill(query, dt);
         }
 
         public bool IdExist(int id)
@@ -117,7 +116,7 @@ namespace Treasury.Data.Repositories
 
             string query = $"INSERT INTO {tableName} (code, description, parent, funds_id, coa_account_code, blgf_account_code) VALUES (@code, @description, @parent, @funds_id, @coa_account_code, @blgf_account_code)";
 
-            return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+            return _genericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public bool UnDeleteTaxType(int taxTypeID)
@@ -128,7 +127,7 @@ namespace Treasury.Data.Repositories
             };
 
             string query = $"UPDATE {tableName} SET is_deleted = 0 WHERE id = @id OR parent = @id";
-            return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+            return _genericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public bool Update(TaxTypesModel entity)
@@ -146,8 +145,7 @@ namespace Treasury.Data.Repositories
 
             string query = $"UPDATE {tableName} SET code = @code, description = @description, parent = @parent, funds_id = @funds_id, coa_account_code = @coa_account_code, blgf_account_code = @blgf_account_code WHERE id = @id";
 
-            return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+            return _genericCommands.ExecuteNonQuery(query, parameters);
         }
     }
 }
-

@@ -1,6 +1,5 @@
 using OmniGov.Core.Entities;
-using OmniGov.Core.Repositories;
-using OmniGov.Core.Services;
+using OmniGov.Core.Interfaces.Services;
 using System.Data;
 using System.Transactions;
 using Treasury.Data.Factories;
@@ -13,35 +12,48 @@ namespace Treasury.Data.Repositories
     {
         private readonly string tableName = "payment_collections";
         private readonly string viewTableName = "view_payment_collections";
-        private GenericCommands mySqlGenericCommands;
-        private IRptPaymentRepository rptPaymentRepository;
-        private IMarriageLicenseRepository marriageLicenseRepository;
-        private ICattleOwnershipRepository cattleOwnershipRepository;
-        private IPrevCattleOwnership prevCattleOwnershipRepository;
-        private IBurialPermitRepository burialPermitRepository;
-        private IPaymentCollectionHasChequesRepository paymentCollectionHasChequesRepository;
-        private IPaymentFeesCharges paymentFeesCharges;
-        private IRcdCollections rcdCollectionsRepository;
-        private IRcdDeposits rcdDepositsRepository;
-        private IBidRepository biddingsRepository;
-        private IBiddersRepository biddersRepository;
-        private ICommunityTaxCertificateRepository communityTaxCertificateRepository;
+        private readonly IGenericCommands _genericCommands;
+        private readonly IRptPaymentRepository _rptPaymentRepository;
+        private readonly IMarriageLicenseRepository _marriageLicenseRepository;
+        private readonly ICattleOwnershipRepository _cattleOwnershipRepository;
+        private readonly IPrevCattleOwnership _prevCattleOwnershipRepository;
+        private readonly IBurialPermitRepository _burialPermitRepository;
+        private readonly IPaymentCollectionHasChequesRepository _paymentCollectionHasChequesRepository;
+        private readonly IPaymentFeesCharges _paymentFeesCharges;
+        private readonly IRcdCollections _rcdCollectionsRepository;
+        private readonly IRcdDeposits _rcdDepositsRepository;
+        private readonly IBidRepository _biddingsRepository;
+        private readonly IBiddersRepository _biddersRepository;
+        private readonly ICommunityTaxCertificateRepository _communityTaxCertificateRepository;
 
-        public PaymentCollectionsRepository(GenericCommands mySqlGenericCommandsLFS, IRptPaymentRepository rptPaymentRepository, IMarriageLicenseRepository marriageLicenseRepository, ICattleOwnershipRepository cattleOwnershipRepository, IPrevCattleOwnership prevCattleOwnership, IBurialPermitRepository burialPermitRepository, IPaymentCollectionHasChequesRepository paymentCollectionHasChequesRepository, IPaymentFeesCharges paymentFeesCharges, IRcdCollections rcdCollections, IRcdDeposits rcdDeposits, IBidRepository biddingsRepository, IBiddersRepository biddersRepository, ICommunityTaxCertificateRepository communityTaxCertificateRepository)
+        public PaymentCollectionsRepository(
+            IGenericCommands genericCommands,
+            IRptPaymentRepository rptPaymentRepository,
+            IMarriageLicenseRepository marriageLicenseRepository,
+            ICattleOwnershipRepository cattleOwnershipRepository,
+            IPrevCattleOwnership prevCattleOwnership,
+            IBurialPermitRepository burialPermitRepository,
+            IPaymentCollectionHasChequesRepository paymentCollectionHasChequesRepository,
+            IPaymentFeesCharges paymentFeesCharges,
+            IRcdCollections rcdCollections,
+            IRcdDeposits rcdDeposits,
+            IBidRepository biddingsRepository,
+            IBiddersRepository biddersRepository,
+            ICommunityTaxCertificateRepository communityTaxCertificateRepository)
         {
-            this.mySqlGenericCommands = mySqlGenericCommandsLFS;
-            this.rptPaymentRepository = rptPaymentRepository;
-            this.marriageLicenseRepository = marriageLicenseRepository;
-            this.cattleOwnershipRepository = cattleOwnershipRepository;
-            this.prevCattleOwnershipRepository = prevCattleOwnership;
-            this.burialPermitRepository = burialPermitRepository;
-            this.paymentCollectionHasChequesRepository = paymentCollectionHasChequesRepository;
-            this.paymentFeesCharges = paymentFeesCharges;
-            this.rcdCollectionsRepository = rcdCollections;
-            this.rcdDepositsRepository = rcdDeposits;
-            this.biddingsRepository = biddingsRepository;
-            this.biddersRepository = biddersRepository;
-            this.communityTaxCertificateRepository = communityTaxCertificateRepository;
+            _genericCommands = genericCommands ?? throw new ArgumentNullException(nameof(genericCommands));
+            _rptPaymentRepository = rptPaymentRepository ?? throw new ArgumentNullException(nameof(rptPaymentRepository));
+            _marriageLicenseRepository = marriageLicenseRepository ?? throw new ArgumentNullException(nameof(marriageLicenseRepository));
+            _cattleOwnershipRepository = cattleOwnershipRepository ?? throw new ArgumentNullException(nameof(cattleOwnershipRepository));
+            _prevCattleOwnershipRepository = prevCattleOwnership ?? throw new ArgumentNullException(nameof(prevCattleOwnership));
+            _burialPermitRepository = burialPermitRepository ?? throw new ArgumentNullException(nameof(burialPermitRepository));
+            _paymentCollectionHasChequesRepository = paymentCollectionHasChequesRepository ?? throw new ArgumentNullException(nameof(paymentCollectionHasChequesRepository));
+            _paymentFeesCharges = paymentFeesCharges ?? throw new ArgumentNullException(nameof(paymentFeesCharges));
+            _rcdCollectionsRepository = rcdCollections ?? throw new ArgumentNullException(nameof(rcdCollections));
+            _rcdDepositsRepository = rcdDeposits ?? throw new ArgumentNullException(nameof(rcdDeposits));
+            _biddingsRepository = biddingsRepository ?? throw new ArgumentNullException(nameof(biddingsRepository));
+            _biddersRepository = biddersRepository ?? throw new ArgumentNullException(nameof(biddersRepository));
+            _communityTaxCertificateRepository = communityTaxCertificateRepository ?? throw new ArgumentNullException(nameof(_communityTaxCertificateRepository));
         }
 
         public Dictionary<string, string> GetRecordByID(int Id)
@@ -55,7 +67,7 @@ namespace Treasury.Data.Repositories
 
             string query = $"SELECT * FROM {tableName} WHERE id = @id";
 
-            DataTable dataTable = mySqlGenericCommands.ExecuteReader(query, parameters);
+            DataTable dataTable = _genericCommands.ExecuteReader(query, parameters);
 
             if (dataTable.Rows.Count > 0)
             {
@@ -74,7 +86,7 @@ namespace Treasury.Data.Repositories
             string query = $"SELECT * FROM {viewTableName}";
 
             var dataTable = new DataTable();
-            return mySqlGenericCommands.Fill(query, dataTable);
+            return _genericCommands.Fill(query, dataTable);
         }
 
         public bool Insert(PaymentCollectionsModel entity)
@@ -94,7 +106,7 @@ namespace Treasury.Data.Repositories
 
             string query = $"INSERT INTO {tableName} (collecting_officers_id, job_orders_id, accountable_forms_id, payee, receipt_no, payment_date, amount, is_cancelled, created_by) VALUES (@collecting_officers_id, @job_orders_id, @accountable_forms_id, @payee, @receipt_no, @payment_date, @amount, @is_cancelled, @created_by)";
 
-            return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+            return _genericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public bool Update(PaymentCollectionsModel entity)
@@ -115,7 +127,7 @@ namespace Treasury.Data.Repositories
 
             string query = $"UPDATE {tableName} SET collecting_officers_id = @collecting_officers_id, job_orders_id = @job_orders_id, accountable_forms_id = @accountable_forms_id, payee = @payee, receipt_no = @receipt_no, payment_date = @payment_date, amount = @amount, is_cancelled = @is_cancelled, updated_by = @updated_by WHERE id = @id;";
 
-            return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+            return _genericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public bool Delete(List<PaymentCollectionsModel> entityList)
@@ -130,7 +142,7 @@ namespace Treasury.Data.Repositories
                     };
 
                     string query = $"DELETE FROM {tableName} WHERE id = @id";
-                    _ = mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+                    _ = _genericCommands.ExecuteNonQuery(query, parameters);
                 }
 
                 scope.Complete();
@@ -141,7 +153,7 @@ namespace Treasury.Data.Repositories
         public int CountRecords()
         {
             string query = $"SELECT COUNT(*) FROM {tableName}";
-            return int.Parse(mySqlGenericCommands.ExecuteScalar(query));
+            return int.Parse(_genericCommands.ExecuteScalar(query));
         }
 
         public bool IdExist(int id)
@@ -152,7 +164,7 @@ namespace Treasury.Data.Repositories
             };
 
             string query = $"SELECT id FROM {tableName} WHERE id = @id";
-            string queryResult = mySqlGenericCommands.ExecuteScalar(query, parameters);
+            string queryResult = _genericCommands.ExecuteScalar(query, parameters);
 
             if (!string.IsNullOrEmpty(queryResult))
                 return true;
@@ -169,7 +181,7 @@ namespace Treasury.Data.Repositories
             };
 
             string query = $"SELECT id FROM {tableName} WHERE receipt_no = @receipt_no AND accountable_forms_id = @accountable_forms_id";
-            string queryResult = mySqlGenericCommands.ExecuteScalar(query, parameters);
+            string queryResult = _genericCommands.ExecuteScalar(query, parameters);
 
             if (!string.IsNullOrEmpty(queryResult))
                 return true;
@@ -187,7 +199,7 @@ namespace Treasury.Data.Repositories
             string query = $"SELECT * FROM {viewTableName}  WHERE acc_form_desc LIKE @searchText || acc_form_no LIKE @searchText";
 
             var dataTable = new DataTable();
-            return mySqlGenericCommands.FillBySearch(query, dataTable, parameter);
+            return _genericCommands.FillBySearch(query, dataTable, parameter);
         }
 
         public DataTable GetRecordByLedger(object[] parameter)
@@ -205,7 +217,7 @@ namespace Treasury.Data.Repositories
             string query = $"SELECT * FROM {viewTableName} WHERE {columnFilter} = @co_id AND payment_date BETWEEN @collection_from AND @collection_to ";
 
             var dataTable = new DataTable();
-            return mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
+            return _genericCommands.FillBySearch(query, dataTable, parameters);
         }
 
         public DataTable GetCollectionsPerCollector()
@@ -213,7 +225,7 @@ namespace Treasury.Data.Repositories
             string query = $"SELECT co_id, co_first_name, co_mid_initial, co_last_name, jo_id, jo_first_name, jo_mid_initial, jo_last_name, SUM(amount) AS amount FROM {viewTableName} GROUP BY jo_id";
 
             var dataTable = new DataTable();
-            return mySqlGenericCommands.FillBySearch(query, dataTable);
+            return _genericCommands.FillBySearch(query, dataTable);
         }
 
         public int GetLastInsertedID(int createdById)
@@ -224,7 +236,7 @@ namespace Treasury.Data.Repositories
             };
 
             string query = $"SELECT COALESCE(MAX(id)) FROM {tableName} WHERE created_by = @created_by";
-            return Convert.ToInt32(mySqlGenericCommands.ExecuteScalar(query, parameters));
+            return Convert.ToInt32(_genericCommands.ExecuteScalar(query, parameters));
         }
 
         public List<int> GetRecordsReceiptsByAccFormId(int accountableFormId)
@@ -237,7 +249,7 @@ namespace Treasury.Data.Repositories
 
             string query = $"SELECT receipt_no FROM {tableName} WHERE accountable_forms_id = @accountable_forms_id";
 
-            foreach (DataRow row in mySqlGenericCommands.ExecuteReader(query, parameters).Rows)
+            foreach (DataRow row in _genericCommands.ExecuteReader(query, parameters).Rows)
                 receiptNos.Add(Convert.ToInt32(row["receipt_no"]));
 
             return receiptNos;
@@ -253,7 +265,7 @@ namespace Treasury.Data.Repositories
 
             string query = $"SELECT COALESCE(COUNT(id), 0) FROM {viewTableName} WHERE co_id = @co_id AND acc_form_id = @acc_form_id";
 
-            return Convert.ToInt32(mySqlGenericCommands.ExecuteScalar(query, parameter));
+            return Convert.ToInt32(_genericCommands.ExecuteScalar(query, parameter));
         }
 
         public bool ReceiptAlreadyUsed(int accountableFormID, int receiptNumberFrom)
@@ -266,7 +278,7 @@ namespace Treasury.Data.Repositories
 
             string query = $"SELECT id FROM {tableName} WHERE receipt_no = @receipt_no AND accountable_forms_id = @accountable_forms_id";
 
-            string queryResult = mySqlGenericCommands.ExecuteScalar(query, parameters);
+            string queryResult = _genericCommands.ExecuteScalar(query, parameters);
 
             if (!string.IsNullOrEmpty(queryResult))
                 return true;
@@ -282,15 +294,15 @@ namespace Treasury.Data.Repositories
                 int paymentCollectionId = GetLastInsertedID(paymentCollectionsModel.CreatedBy);
                 rptPaymentsModel.PaymentCollectionsId = paymentCollectionId;
                 //paymentCollectionHasChequesModel.PaymentCollectionId = paymentCollectionId;
-                rptPaymentRepository.InsertWithRptTaxDues(rptPaymentsModel, rptTaxDuesModels);
-                //paymentCollectionHasChequesRepository.InsertWithCheques(paymentCollectionHasChequesModel);
+                _rptPaymentRepository.InsertWithRptTaxDues(rptPaymentsModel, rptTaxDuesModels);
+                //_paymentCollectionHasChequesRepository.InsertWithCheques(paymentCollectionHasChequesModel);
 
                 scope.Complete();
                 return true;
             }
         }
 
-        public bool InsertWithMarriageLicensePayment(PaymentCollectionsModel paymentCollectionsModel, PaymentCollectionHasChequesModel paymentCollectionHasChequesModel, MarriageLicenseModel marriageLicenseModel, List<PaymentFeesChargesModel> paymentFeesChargesModels)
+        public bool InsertWithMarriageLicensePayment(PaymentCollectionsModel paymentCollectionsModel, PaymentCollectionHasChequesModel paymentCollectionHasChequesModel, MarriageLicenseModel marriageLicenseModel, List<PaymentFeesChargesModel> _paymentFeesChargesModels)
         {
             using (var scope = new TransactionScope())
             {
@@ -298,17 +310,17 @@ namespace Treasury.Data.Repositories
                 int paymentCollectionId = GetLastInsertedID(paymentCollectionsModel.CreatedBy);
                 //paymentCollectionHasChequesModel.PaymentCollectionId = paymentCollectionId;
                 marriageLicenseModel.PaymentCollectionsId = paymentCollectionId;
-                marriageLicenseRepository.Insert(marriageLicenseModel);
-                paymentFeesChargesModels.ForEach(model => model.PaymentCollectionsId = paymentCollectionId);
-                paymentFeesCharges.InsertBulk(paymentFeesChargesModels);
-                //paymentCollectionHasChequesRepository.InsertWithCheques(paymentCollectionHasChequesModel);
+                _marriageLicenseRepository.Insert(marriageLicenseModel);
+                _paymentFeesChargesModels.ForEach(model => model.PaymentCollectionsId = paymentCollectionId);
+                _paymentFeesCharges.InsertBulk(_paymentFeesChargesModels);
+                //_paymentCollectionHasChequesRepository.InsertWithCheques(paymentCollectionHasChequesModel);
 
                 scope.Complete();
                 return true;
             }
         }
 
-        public bool InsertWithBurialPermitPayment(PaymentCollectionsModel paymentCollectionsModel, PaymentCollectionHasChequesModel paymentCollectionHasChequesModel, BurialPermitModel burialPermitModel, List<PaymentFeesChargesModel> paymentFeesChargesModels)
+        public bool InsertWithBurialPermitPayment(PaymentCollectionsModel paymentCollectionsModel, PaymentCollectionHasChequesModel paymentCollectionHasChequesModel, BurialPermitModel burialPermitModel, List<PaymentFeesChargesModel> _paymentFeesChargesModels)
         {
             using (var scope = new TransactionScope())
             {
@@ -316,17 +328,17 @@ namespace Treasury.Data.Repositories
                 int paymentCollectionId = GetLastInsertedID(paymentCollectionsModel.CreatedBy);
                 burialPermitModel.PaymentCollectionsId = paymentCollectionId;
                 //paymentCollectionHasChequesModel.PaymentCollectionId = paymentCollectionId;
-                burialPermitRepository.Insert(burialPermitModel);
-                paymentFeesChargesModels.ForEach(model => model.PaymentCollectionsId = paymentCollectionId);
-                paymentFeesCharges.InsertBulk(paymentFeesChargesModels);
-                //paymentCollectionHasChequesRepository.InsertWithCheques(paymentCollectionHasChequesModel);
+                _burialPermitRepository.Insert(burialPermitModel);
+                _paymentFeesChargesModels.ForEach(model => model.PaymentCollectionsId = paymentCollectionId);
+                _paymentFeesCharges.InsertBulk(_paymentFeesChargesModels);
+                //_paymentCollectionHasChequesRepository.InsertWithCheques(paymentCollectionHasChequesModel);
 
                 scope.Complete();
                 return true;
             }
         }
 
-        public bool InsertWithCattleOwnershipPayment(PaymentCollectionsModel paymentCollectionsModel, PaymentCollectionHasChequesModel paymentCollectionHasChequesModel, CattleOwnershipModel cattleOwnershipModel, List<PaymentFeesChargesModel> paymentFeesChargesModels)
+        public bool InsertWithCattleOwnershipPayment(PaymentCollectionsModel paymentCollectionsModel, PaymentCollectionHasChequesModel paymentCollectionHasChequesModel, CattleOwnershipModel cattleOwnershipModel, List<PaymentFeesChargesModel> _paymentFeesChargesModels)
         {
             using (var scope = new TransactionScope())
             {
@@ -334,26 +346,26 @@ namespace Treasury.Data.Repositories
                 int paymentCollectionId = GetLastInsertedID(paymentCollectionsModel.CreatedBy);
                 //paymentCollectionHasChequesModel.PaymentCollectionId = paymentCollectionId;
                 cattleOwnershipModel.PaymentCollectionId = paymentCollectionId;
-                cattleOwnershipRepository.Insert(cattleOwnershipModel);
-                paymentFeesChargesModels.ForEach(model => model.PaymentCollectionsId = paymentCollectionId);
-                paymentFeesCharges.InsertBulk(paymentFeesChargesModels);
-                //paymentCollectionHasChequesRepository.InsertWithCheques(paymentCollectionHasChequesModel);
+                _cattleOwnershipRepository.Insert(cattleOwnershipModel);
+                _paymentFeesChargesModels.ForEach(model => model.PaymentCollectionsId = paymentCollectionId);
+                _paymentFeesCharges.InsertBulk(_paymentFeesChargesModels);
+                //_paymentCollectionHasChequesRepository.InsertWithCheques(paymentCollectionHasChequesModel);
 
                 scope.Complete();
                 return true;
             }
         }
 
-        public bool InsertWithFeesCharges(PaymentCollectionsModel paymentCollectionsModel, PaymentCollectionHasChequesModel paymentCollectionHasChequesModel, List<PaymentFeesChargesModel> paymentFeesChargesModels)
+        public bool InsertWithFeesCharges(PaymentCollectionsModel paymentCollectionsModel, PaymentCollectionHasChequesModel paymentCollectionHasChequesModel, List<PaymentFeesChargesModel> _paymentFeesChargesModels)
         {
             using (var scope = new TransactionScope())
             {
                 _ = Insert(paymentCollectionsModel);
                 int paymentCollectionId = GetLastInsertedID(paymentCollectionsModel.CreatedBy);
                 //paymentCollectionHasChequesModel.PaymentCollectionId = paymentCollectionId;
-                paymentFeesChargesModels.ForEach(model => model.PaymentCollectionsId = paymentCollectionId);
-                paymentFeesCharges.InsertBulk(paymentFeesChargesModels);
-                //paymentCollectionHasChequesRepository.InsertWithCheques(paymentCollectionHasChequesModel);
+                _paymentFeesChargesModels.ForEach(model => model.PaymentCollectionsId = paymentCollectionId);
+                _paymentFeesCharges.InsertBulk(_paymentFeesChargesModels);
+                //_paymentCollectionHasChequesRepository.InsertWithCheques(paymentCollectionHasChequesModel);
 
                 scope.Complete();
                 return true;
@@ -373,7 +385,7 @@ namespace Treasury.Data.Repositories
 
             string query = $"SELECT * FROM {viewTableName} WHERE co_id = @co_id AND acc_form_id = @acc_form_id AND (payee LIKE @search_key OR receipt_no LIKE @search_key OR amount LIKE @search_key) LIMIT @row_filter";
             var dataTable = new DataTable();
-            return mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
+            return _genericCommands.FillBySearch(query, dataTable, parameters);
         }
 
         public DataTable GerViewRecordsByJoIdAccFormId(int joId, int accFormId, string searchKey, int rowFilter)
@@ -388,10 +400,10 @@ namespace Treasury.Data.Repositories
 
             string query = $"SELECT * FROM {viewTableName} WHERE jo_id = @jo_id AND acc_form_id = @acc_form_id AND (payee LIKE @search_key OR receipt_no LIKE @search_key OR amount LIKE @search_key) LIMIT @row_filter";
             var dataTable = new DataTable();
-            return mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
+            return _genericCommands.FillBySearch(query, dataTable, parameters);
         }
 
-        public bool InsertWithPrevCattleOwnership(PaymentCollectionsModel paymentCollectionsModel, PaymentCollectionHasChequesModel paymentCollectionHasChequesModel, CattleOwnershipModel cattleOwnershipModel, PrevCattleOwnershipModel prevCattleOwnershipModel, List<PaymentFeesChargesModel> paymentFeesChargesModels)
+        public bool InsertWithPrevCattleOwnership(PaymentCollectionsModel paymentCollectionsModel, PaymentCollectionHasChequesModel paymentCollectionHasChequesModel, CattleOwnershipModel cattleOwnershipModel, PrevCattleOwnershipModel prevCattleOwnershipModel, List<PaymentFeesChargesModel> _paymentFeesChargesModels)
         {
             using (var scope = new TransactionScope())
             {
@@ -399,12 +411,12 @@ namespace Treasury.Data.Repositories
                 int lastPaymentCollectionId = GetLastInsertedID(paymentCollectionsModel.CreatedBy);
 
                 cattleOwnershipModel.PaymentCollectionId = lastPaymentCollectionId;
-                cattleOwnershipRepository.Insert(cattleOwnershipModel);
-                int lastCattleOwnershipId = cattleOwnershipRepository.GetLastInsertedId(cattleOwnershipModel.CreatedBy);
+                _cattleOwnershipRepository.Insert(cattleOwnershipModel);
+                int lastCattleOwnershipId = _cattleOwnershipRepository.GetLastInsertedId(cattleOwnershipModel.CreatedBy);
                 prevCattleOwnershipModel.CattleOwnershipId = lastCattleOwnershipId;
-                prevCattleOwnershipRepository.Insert(prevCattleOwnershipModel);
-                paymentFeesChargesModels.ForEach(model => model.PaymentCollectionsId = lastPaymentCollectionId);
-                paymentFeesCharges.InsertBulk(paymentFeesChargesModels);
+                _prevCattleOwnershipRepository.Insert(prevCattleOwnershipModel);
+                _paymentFeesChargesModels.ForEach(model => model.PaymentCollectionsId = lastPaymentCollectionId);
+                _paymentFeesCharges.InsertBulk(_paymentFeesChargesModels);
 
                 scope.Complete();
                 return true;
@@ -419,8 +431,8 @@ namespace Treasury.Data.Repositories
                 new object[] { "@created_by", DbType.Int32, createdBy.Id}
             };
 
-            string query = $"SELECT acc_form_id, acc_form_no, acc_form_desc, MIN(receipt_no) AS receipt_from, MAX(receipt_no) AS receipt_to, SUM(amount) AS total_amount FROM {viewTableName} WHERE created_by = @created_by AND DATE(payment_date) < DATE(@date) AND id NOT IN (SELECT payment_collections_id FROM {rcdCollectionsRepository.GetTableName()}) GROUP BY acc_form_id ORDER BY acc_form_no ASC";
-            return mySqlGenericCommands.FillBySearch(query, new DataTable(), parameters);
+            string query = $"SELECT acc_form_id, acc_form_no, acc_form_desc, MIN(receipt_no) AS receipt_from, MAX(receipt_no) AS receipt_to, SUM(amount) AS total_amount FROM {viewTableName} WHERE created_by = @created_by AND DATE(payment_date) < DATE(@date) AND id NOT IN (SELECT payment_collections_id FROM {_rcdCollectionsRepository.GetTableName()}) GROUP BY acc_form_id ORDER BY acc_form_no ASC";
+            return _genericCommands.FillBySearch(query, new DataTable(), parameters);
         }
 
         public DataTable GetViewConsolidatedRcdRecords(RcdCollectionsModel rcdCollectionsModel)
@@ -430,8 +442,8 @@ namespace Treasury.Data.Repositories
                 new object[] { "@rcd_id", DbType.Int32, rcdCollectionsModel.RcdModel.Id},
             };
 
-            string query = $"SELECT acc_form_id, acc_form_no, acc_form_desc, MIN(receipt_no) AS receipt_from, MAX(receipt_no) AS receipt_to, SUM(amount) AS total_amount, created_by FROM {viewTableName} WHERE id IN (SELECT payment_collections_id FROM {rcdCollectionsRepository.GetTableName()} WHERE rcd_id = @rcd_id) GROUP BY acc_form_id ORDER BY acc_form_no ASC";
-            return mySqlGenericCommands.FillBySearch(query, new DataTable(), parameters);
+            string query = $"SELECT acc_form_id, acc_form_no, acc_form_desc, MIN(receipt_no) AS receipt_from, MAX(receipt_no) AS receipt_to, SUM(amount) AS total_amount, created_by FROM {viewTableName} WHERE id IN (SELECT payment_collections_id FROM {_rcdCollectionsRepository.GetTableName()} WHERE rcd_id = @rcd_id) GROUP BY acc_form_id ORDER BY acc_form_no ASC";
+            return _genericCommands.FillBySearch(query, new DataTable(), parameters);
         }
 
         public List<RcdCollectionsModel> GetRcdCollections(DateTime date, UsersModel createdBy)
@@ -444,9 +456,9 @@ namespace Treasury.Data.Repositories
                 new object[] { "@created_by", DbType.Int32, createdBy.Id}
             };
 
-            string query = $"SELECT * FROM {viewTableName} WHERE created_by = @created_by AND DATE(payment_date) < DATE(@date) AND id NOT IN (SELECT payment_collections_id FROM {rcdCollectionsRepository.GetTableName()}) ORDER BY acc_form_no ASC ";
+            string query = $"SELECT * FROM {viewTableName} WHERE created_by = @created_by AND DATE(payment_date) < DATE(@date) AND id NOT IN (SELECT payment_collections_id FROM {_rcdCollectionsRepository.GetTableName()}) ORDER BY acc_form_no ASC ";
 
-            using (DataTable dataTable = mySqlGenericCommands.ExecuteReader(query, parameters))
+            using (DataTable dataTable = _genericCommands.ExecuteReader(query, parameters))
             {
                 foreach (DataRow dataRow in dataTable.Rows)
                 {
@@ -471,9 +483,9 @@ namespace Treasury.Data.Repositories
                 new object[] { "@rcd_id", DbType.Int32, rcdModel.Id},
             };
 
-            string query = $"SELECT * FROM {viewTableName} WHERE id IN (SELECT payment_collections_id FROM {rcdCollectionsRepository.GetTableName()} WHERE rcd_id = @rcd_id) ORDER BY acc_form_no ASC ";
+            string query = $"SELECT * FROM {viewTableName} WHERE id IN (SELECT payment_collections_id FROM {_rcdCollectionsRepository.GetTableName()} WHERE rcd_id = @rcd_id) ORDER BY acc_form_no ASC ";
 
-            using (DataTable dataTable = mySqlGenericCommands.ExecuteReader(query, parameters))
+            using (DataTable dataTable = _genericCommands.ExecuteReader(query, parameters))
             {
                 foreach (DataRow dataRow in dataTable.Rows)
                 {
@@ -504,11 +516,11 @@ namespace Treasury.Data.Repositories
 
                 biddersModel.PaymentCollectionsId = lastPaymentCollectionId;
                 biddersModel.TaxpayersId = lastInsertedTaxpayerId;
-                biddersRepository.Insert(biddersModel);
+                _biddersRepository.Insert(biddersModel);
 
-                int lastInsertedBiddersId = biddersRepository.GetLastInsertedId(biddersModel.CreatedBy);
+                int lastInsertedBiddersId = _biddersRepository.GetLastInsertedId(biddersModel.CreatedBy);
                 bidModel.BiddersId = lastInsertedBiddersId;
-                biddingsRepository.Insert(bidModel);
+                _biddingsRepository.Insert(bidModel);
 
                 scope.Complete();
                 return true;
@@ -525,7 +537,7 @@ namespace Treasury.Data.Repositories
 
             string query = $"UPDATE {tableName} SET  is_cancelled = @is_cancelled WHERE id = @id";
 
-            return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+            return _genericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public bool InsertWithCommunityTaxCertificate(PaymentCollectionsModel paymentCollectionsModel, CommunityTaxCertificateModel communityTaxCertificateModel)
@@ -536,7 +548,7 @@ namespace Treasury.Data.Repositories
                 int paymentCollectionId = GetLastInsertedID(paymentCollectionsModel.CreatedBy);
                 //paymentCollectionHasChequesModel.PaymentCollectionId = paymentCollectionId;
                 communityTaxCertificateModel.PaymentCollectionsId = paymentCollectionId;
-                communityTaxCertificateRepository.Insert(communityTaxCertificateModel);
+                _communityTaxCertificateRepository.Insert(communityTaxCertificateModel);
                 //paymentCollectionHasChequesRepository.InsertWithCheques(paymentCollectionHasChequesModel);
 
                 scope.Complete();
@@ -545,4 +557,3 @@ namespace Treasury.Data.Repositories
         }
     }
 }
-

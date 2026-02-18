@@ -1,5 +1,4 @@
-using OmniGov.Core.Repositories;
-using OmniGov.Core.Services;
+using OmniGov.Core.Interfaces.Services;
 using System.Data;
 using System.Transactions;
 using Treasury.Domain.Entities;
@@ -11,11 +10,11 @@ namespace Treasury.Data.Repositories
     {
         private readonly string tableName = "bank_accounts";
         private readonly string viewTableName = "view_bank_accounts";
-        private GenericCommands mySqlGenericCommands;
+        private readonly IGenericCommands _genericCommands;
 
-        public BankAccountsRepository(GenericCommands mySqlGenericCommands)
+        public BankAccountsRepository(IGenericCommands genericCommands)
         {
-            this.mySqlGenericCommands = mySqlGenericCommands;
+            _genericCommands = genericCommands ?? throw new ArgumentNullException(nameof(genericCommands));
         }
 
         public bool Delete(List<BankAccountsModel> entityList)
@@ -27,7 +26,7 @@ namespace Treasury.Data.Repositories
                     var parameters = new object[][] { new object[] { @"id", DbType.Int32, entity.Id } };
 
                     string query = $"DELETE FROM {tableName} WHERE id = @id";
-                    _ = mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+                    _ = _genericCommands.ExecuteNonQuery(query, parameters);
                 }
 
                 scope.Complete();
@@ -46,7 +45,7 @@ namespace Treasury.Data.Repositories
 
             string query = $"SELECT * FROM {tableName} WHERE id = @id";
 
-            DataTable dataTable = mySqlGenericCommands.ExecuteReader(query, parameters);
+            DataTable dataTable = _genericCommands.ExecuteReader(query, parameters);
 
             if (dataTable.Rows.Count > 0)
             {
@@ -63,7 +62,7 @@ namespace Treasury.Data.Repositories
         public DataTable GetRecords()
         {
             string query = $"SELECT * FROM {tableName}";
-            return mySqlGenericCommands.Fill(query, new DataTable());
+            return _genericCommands.Fill(query, new DataTable());
         }
 
         public DataTable GetRecordsBySearch(string searchText)
@@ -74,13 +73,13 @@ namespace Treasury.Data.Repositories
             };
 
             string query = $"SELECT * FROM {tableName} WHERE account_no LIKE @searchText";
-            return mySqlGenericCommands.FillBySearch(query, new DataTable(), parameters);
+            return _genericCommands.FillBySearch(query, new DataTable(), parameters);
         }
 
         public DataTable GetViewRecords()
         {
             string query = $"SELECT * FROM {viewTableName}";
-            return mySqlGenericCommands.Fill(query, new DataTable());
+            return _genericCommands.Fill(query, new DataTable());
         }
 
         public DataTable GetViewRecordsBySearch(int rowLimit, string searchKey)
@@ -92,7 +91,7 @@ namespace Treasury.Data.Repositories
             };
 
             string query = $"SELECT * FROM {viewTableName} WHERE (account_no LIKE @searchText OR bank_name LIKE @searchText) LIMIT @row_limit";
-            return mySqlGenericCommands.FillBySearch(query, new DataTable(), parameters);
+            return _genericCommands.FillBySearch(query, new DataTable(), parameters);
         }
 
         public bool IdExist(int id)
@@ -109,7 +108,7 @@ namespace Treasury.Data.Repositories
             };
 
             string query = $"INSERT INTO {tableName} (banks_id, account_no) VALUES (@banks_id, @account_no)";
-            return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+            return _genericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public bool Update(BankAccountsModel entity)
@@ -122,7 +121,7 @@ namespace Treasury.Data.Repositories
             };
 
             string query = $"UPDATE {tableName} SET banks_id = @banks_id, account_no = @account_no WHERE id = @id";
-            return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+            return _genericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public Dictionary<string, string> GetViewRecordById(int id)
@@ -135,7 +134,7 @@ namespace Treasury.Data.Repositories
             };
 
             string query = $"SELECT * FROM {viewTableName} WHERE id = @id";
-            DataTable dataTable = mySqlGenericCommands.ExecuteReader(query, parameters);
+            DataTable dataTable = _genericCommands.ExecuteReader(query, parameters);
 
             if (dataTable.Rows.Count > 0)
             {
@@ -157,8 +156,7 @@ namespace Treasury.Data.Repositories
             };
 
             string query = $"SELECT * FROM {tableName} WHERE banks_id = @banks_id";
-            return mySqlGenericCommands.FillBySearch(query, new DataTable(), parameters);
+            return _genericCommands.FillBySearch(query, new DataTable(), parameters);
         }
     }
 }
-

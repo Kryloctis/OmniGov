@@ -1,5 +1,4 @@
-using OmniGov.Core.Repositories;
-using OmniGov.Core.Services;
+using OmniGov.Core.Interfaces.Services;
 using System.Data;
 using System.Transactions;
 using Treasury.Domain.Entities;
@@ -10,11 +9,11 @@ namespace Treasury.Data.Repositories
     public class RcdDepositsRepository : IRcdDeposits
     {
         private readonly string tableName = "rcd_deposits";
-        private GenericCommands mySqlGenericCommands;
+        private readonly IGenericCommands _genericCommands;
 
-        public RcdDepositsRepository(GenericCommands mySqlGenericCommands)
+        public RcdDepositsRepository(IGenericCommands genericCommands)
         {
-            this.mySqlGenericCommands = mySqlGenericCommands;
+            _genericCommands = genericCommands ?? throw new ArgumentNullException(nameof(genericCommands));
         }
 
         public bool BulkInsert(List<RcdDepositsModel> rcdDepositsModels)
@@ -44,7 +43,7 @@ namespace Treasury.Data.Repositories
         {
             var parameters = new object[][] { new object[] { "@rcd_id", DbType.Int32, rcdModel.Id } };
             string query = $"DELETE FROM {tableName} WHERE rcd_id = @rcd_id";
-            return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+            return _genericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public Dictionary<string, string> GetRecordByID(int Id)
@@ -81,7 +80,7 @@ namespace Treasury.Data.Repositories
             };
 
             string query = $"INSERT INTO {tableName} (rcd_id, bank_deposits_id) VALUES  (@rcd_id, @bank_deposits_id)";
-            return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+            return _genericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public bool Update(RcdDepositsModel entity)
@@ -90,4 +89,3 @@ namespace Treasury.Data.Repositories
         }
     }
 }
-

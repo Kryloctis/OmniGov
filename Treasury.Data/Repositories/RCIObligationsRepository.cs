@@ -1,5 +1,4 @@
-using OmniGov.Core.Repositories;
-using OmniGov.Core.Services;
+using OmniGov.Core.Interfaces.Services;
 using System.Data;
 using System.Transactions;
 using Treasury.Domain.Entities;
@@ -9,12 +8,12 @@ namespace Treasury.Data.Repositories
 {
     public class RCIObligationsRepository : IRciObligationsRepository
     {
-        private readonly GenericCommands _dbGenericCommands;
+        private readonly IGenericCommands _genericCommands;
         private readonly string tableName = "rci_obligations";
 
-        public RCIObligationsRepository(GenericCommands dbGenericCommands)
+        public RCIObligationsRepository(IGenericCommands genericCommands)
         {
-            _dbGenericCommands = dbGenericCommands;
+            _genericCommands = genericCommands ?? throw new ArgumentNullException(nameof(genericCommands));
         }
 
         public int CountRecords()
@@ -24,28 +23,21 @@ namespace Treasury.Data.Repositories
 
         public bool Delete(List<RCIObligationsModel> entityList)
         {
-            try
+            using (var scope = new TransactionScope())
             {
-                using (var scope = new TransactionScope())
+                foreach (var entity in entityList)
                 {
-                    foreach (var entity in entityList)
+                    var parameters = new object[][]
                     {
-                        var parameters = new object[][]
-                        {
                             new object[] { "@id", DbType.Int32, entity.Id},
-                        };
+                    };
 
-                        string query = $"DELETE FROM {tableName} WHERE id = @id";
-                        _ = _dbGenericCommands.ExecuteNonQuery(query, parameters);
-                    }
-
-                    scope.Complete();
-                    return true;
+                    string query = $"DELETE FROM {tableName} WHERE id = @id";
+                    _ = _genericCommands.ExecuteNonQuery(query, parameters);
                 }
-            }
-            catch (Exception)
-            {
-                throw;
+
+                scope.Complete();
+                return true;
             }
         }
 
@@ -60,12 +52,11 @@ namespace Treasury.Data.Repositories
 
                 string query = $"DELETE FROM {tableName} WHERE rci_id = @id";
 
-                _ = _dbGenericCommands.ExecuteNonQuery(query, parameters);
+                _ = _genericCommands.ExecuteNonQuery(query, parameters);
 
                 scope.Complete();
                 return true;
             }
-            ;
         }
 
         public Dictionary<string, string> GetRecordByID(int Id)
@@ -80,21 +71,14 @@ namespace Treasury.Data.Repositories
 
         public DataTable GetRecordsByRCIId(int rciId)
         {
-            try
-            {
-                var parameter = new object[][] {
-                    new object[] {"@rciId", DbType.Int32, rciId}
-                };
+            var parameter = new object[][] {
+                new object[] {"@rciId", DbType.Int32, rciId}
+            };
 
-                string query = $"SELECT obligation_no, date_entry FROM {tableName} WHERE rci_id = @rciId";
-                var dtRCI = new DataTable();
+            string query = $"SELECT obligation_no, date_entry FROM {tableName} WHERE rci_id = @rciId";
+            var dtRCI = new DataTable();
 
-                return _dbGenericCommands.FillBySearch(query, dtRCI, parameter);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            return _genericCommands.FillBySearch(query, dtRCI, parameter);
         }
 
         public DataTable GetRecordsBySearch(string searchText)
@@ -109,42 +93,27 @@ namespace Treasury.Data.Repositories
 
         public bool Insert(RCIObligationsModel entity)
         {
-            try
+            var parameters = new object[][]
             {
-                var parameters = new object[][]
-                {
-                    new object[] { "@rci_id", DbType.Int32, entity.Rcid},
-                    new object[] { "@obligations_id", DbType.String, entity.Obid}
-                };
+                new object[] { "@rci_id", DbType.Int32, entity.Rcid},
+                new object[] { "@obligations_id", DbType.String, entity.Obid}
+            };
 
-                string query = $"INSERT INTO {tableName} (rci_id,obligations_id) VALUES (@rci_id,@obligations_id)";
-                return _dbGenericCommands.ExecuteNonQuery(query, parameters);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            string query = $"INSERT INTO {tableName} (rci_id,obligations_id) VALUES (@rci_id,@obligations_id)";
+            return _genericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public bool Update(RCIObligationsModel entity)
         {
-            try
+            var parameters = new object[][]
             {
-                var parameters = new object[][]
-                {
-                    new object[] { "@id", DbType.Int32, entity.Id},
-                    new object[] { "@rci_id", DbType.Int32, entity.Rcid},
-                    new object[] { "@obligations_id", DbType.String, entity.Obid}
-                };
+                new object[] { "@id", DbType.Int32, entity.Id},
+                new object[] { "@rci_id", DbType.Int32, entity.Rcid},
+                new object[] { "@obligations_id", DbType.String, entity.Obid}
+            };
 
-                string query = $"UPDATE {tableName} SET rci_id = @rci_id, obligations_id = @obligations_id WHERE id = @id";
-                return _dbGenericCommands.ExecuteNonQuery(query, parameters);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            string query = $"UPDATE {tableName} SET rci_id = @rci_id, obligations_id = @obligations_id WHERE id = @id";
+            return _genericCommands.ExecuteNonQuery(query, parameters);
         }
     }
 }
-

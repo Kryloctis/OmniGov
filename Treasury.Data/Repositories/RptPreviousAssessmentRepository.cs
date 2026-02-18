@@ -1,5 +1,4 @@
-using OmniGov.Core.Repositories;
-using OmniGov.Core.Services;
+using OmniGov.Core.Interfaces.Services;
 using System.Data;
 using Treasury.Domain.Entities;
 using Treasury.Domain.Interfaces;
@@ -9,12 +8,11 @@ namespace Treasury.Data.Repositories
     public class RptPreviousAssessmentRepository : IRptPreviousAssessment
     {
         private readonly string tableName = "rpt_previous_assessment";
+        private readonly IGenericCommands _genericCommands;
 
-        private GenericCommands mySqlGenericCommands;
-
-        public RptPreviousAssessmentRepository(GenericCommands mySqlGenericCommands)
+        public RptPreviousAssessmentRepository(IGenericCommands genericCommands)
         {
-            this.mySqlGenericCommands = mySqlGenericCommands;
+            _genericCommands = genericCommands ?? throw new ArgumentNullException(nameof(genericCommands));
         }
 
         string IRptPreviousAssessment.tableName { get => tableName; }
@@ -33,7 +31,7 @@ namespace Treasury.Data.Repositories
         {
             var parameters = new object[][] { new object[] { "@real_properties_id", DbType.Int32, realPropertyId } };
             string query = $"DELETE FROM {tableName} WHERE real_properties_id = @real_properties_id";
-            return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+            return _genericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public Dictionary<string, string> GetRecordByID(int Id)
@@ -42,7 +40,7 @@ namespace Treasury.Data.Repositories
             var parameters = new object[][] { new object[] { "@id", DbType.Int32, Id } };
             string query = $"SELECT * FROM {tableName} WHERE id = @id";
 
-            using (var reader = mySqlGenericCommands.ExecuteReader(query, parameters))
+            using (var reader = _genericCommands.ExecuteReader(query, parameters))
             {
                 if (reader.Rows.Count < 1)
                     return dict;
@@ -69,7 +67,7 @@ namespace Treasury.Data.Repositories
         {
             string query = $"SELECT * FROM {tableName}";
             var dataTable = new DataTable();
-            return mySqlGenericCommands.Fill(query, dataTable);
+            return _genericCommands.Fill(query, dataTable);
         }
 
         public DataTable GetRecordsByRptId(int rptId)
@@ -81,7 +79,7 @@ namespace Treasury.Data.Repositories
 
             string query = $"SELECT * FROM {tableName} WHERE real_properties_id = @real_properties_id";
             var dataTabe = new DataTable();
-            return mySqlGenericCommands.FillBySearch(query, dataTabe, parameters);
+            return _genericCommands.FillBySearch(query, dataTabe, parameters);
         }
 
         public DataTable GetRecordsBySearch(string searchText)
@@ -115,7 +113,7 @@ namespace Treasury.Data.Repositories
 
             string query = $"INSERT INTO {tableName} (real_properties_id, taxpayers_id, complete_arp_no, pin,  assessed_value, date_of_entry, effectivity_quarter, effectivity_year, gr_year, is_taxable, is_cancelled, recording_person, created_by) VALUES (@real_properties_id, @taxpayers_id, @complete_arp_no, @pin,  @assessed_value, @date_of_entry, @effectivity_quarter, @effectivity_year, @gr_year, @is_taxable, @is_cancelled, @recording_person, @created_by)";
 
-            return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+            return _genericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public bool Update(RptPreviousAssessmentModel entity)
@@ -124,4 +122,3 @@ namespace Treasury.Data.Repositories
         }
     }
 }
-

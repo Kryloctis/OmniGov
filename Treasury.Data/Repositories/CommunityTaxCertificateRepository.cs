@@ -1,5 +1,4 @@
-using OmniGov.Core.Repositories;
-using OmniGov.Core.Services;
+using OmniGov.Core.Interfaces.Services;
 using System.Data;
 using Treasury.Domain.Entities;
 using Treasury.Domain.Interfaces;
@@ -8,12 +7,12 @@ namespace Treasury.Data.Repositories
 {
     internal class CommunityTaxCertificateRepository : ICommunityTaxCertificateRepository
     {
-        private GenericCommands mySqlGenericCommands;
+        private readonly IGenericCommands _genericCommands;
         private readonly string tableName = "community_tax_certificate";
 
-        public CommunityTaxCertificateRepository(GenericCommands mySqlGenericCommands)
+        public CommunityTaxCertificateRepository(IGenericCommands genericCommands)
         {
-            this.mySqlGenericCommands = mySqlGenericCommands;
+            _genericCommands = genericCommands ?? throw new ArgumentNullException(nameof(genericCommands));
         }
 
         public bool Delete(List<CommunityTaxCertificateModel> entityList)
@@ -69,7 +68,7 @@ namespace Treasury.Data.Repositories
             };
 
             string query = $"INSERT INTO {tableName} (payment_collections_id, year, place_of_issued, date_issued,  first_name, middle_name, last_name, sex, citizenship, address, tin, icr_no, place_of_birth, height, weight, civil_status, date_of_birth, profession_occupation_business, basic_community_tax, additional_community_tax, created_by) VALUES (@payment_collections_id, @year, @place_of_issued, @date_issued, @first_name, @middle_name, @last_name, @sex, @citizenship, @address, @tin, @icr_no, @place_of_birth, @height, @weight, @civil_status, @date_of_birth, @profession_occupation_business,  @basic_community_tax, @additional_community_tax,  @created_by)";
-            return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+            return _genericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public bool Update(CommunityTaxCertificateModel entity)
@@ -78,4 +77,3 @@ namespace Treasury.Data.Repositories
         }
     }
 }
-

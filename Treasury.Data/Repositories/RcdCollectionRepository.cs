@@ -1,5 +1,4 @@
-using OmniGov.Core.Repositories;
-using OmniGov.Core.Services;
+using OmniGov.Core.Interfaces.Services;
 using System.Data;
 using System.Transactions;
 using Treasury.Domain.Entities;
@@ -10,11 +9,11 @@ namespace Treasury.Data.Repositories
     public class RcdCollectionRepository : IRcdCollections
     {
         private readonly string tableName = "rcd_collections";
-        private GenericCommands mySqlGenericCommands;
+        private readonly IGenericCommands _genericCommands;
 
-        public RcdCollectionRepository(GenericCommands mySqlGenericCommands)
+        public RcdCollectionRepository(IGenericCommands genericCommands)
         {
-            this.mySqlGenericCommands = mySqlGenericCommands;
+            _genericCommands = genericCommands ?? throw new ArgumentNullException(nameof(genericCommands));
         }
 
         public bool BulkInsert(List<RcdCollectionsModel> rcdCollectionsModels)
@@ -44,7 +43,7 @@ namespace Treasury.Data.Repositories
             var parameters = new object[][] { new object[] { "@rcd_id", DbType.Int32, rcdModel.Id } };
 
             string query = $"DELETE FROM {tableName} WHERE rcd_id = @rcd_id";
-            return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+            return _genericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public Dictionary<string, string> GetRecordByID(int Id)
@@ -55,7 +54,7 @@ namespace Treasury.Data.Repositories
         public DataTable GetRecords()
         {
             string query = $"SELECT * FROM {tableName}";
-            return mySqlGenericCommands.Fill(query, new DataTable());
+            return _genericCommands.Fill(query, new DataTable());
         }
 
         public DataTable GetRecordsBySearch(string searchText)
@@ -82,7 +81,7 @@ namespace Treasury.Data.Repositories
             };
 
             string query = $"INSERT INTO {tableName} (rcd_id, payment_collections_id) VALUES (@rcd_id, @payment_collections_id)";
-            return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+            return _genericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public bool Update(RcdCollectionsModel entity)
@@ -91,4 +90,3 @@ namespace Treasury.Data.Repositories
         }
     }
 }
-

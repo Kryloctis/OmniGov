@@ -1,5 +1,4 @@
-using OmniGov.Core.Repositories;
-using OmniGov.Core.Services;
+using OmniGov.Core.Interfaces.Services;
 using System.Data;
 using Treasury.Domain.Entities;
 using Treasury.Domain.Interfaces;
@@ -8,12 +7,12 @@ namespace Treasury.Data.Repositories
 {
     internal class TaxpayerTypeRepository : ITaxpayerTypeRepository
     {
-        private GenericCommands _mySqlGenericCommands;
+        private readonly IGenericCommands _genericCommands;
         private readonly string tableName = "taxpayer_type";
 
-        public TaxpayerTypeRepository(GenericCommands mySqlGenericCommands)
+        public TaxpayerTypeRepository(IGenericCommands genericCommands)
         {
-            _mySqlGenericCommands = mySqlGenericCommands;
+            _genericCommands = genericCommands ?? throw new ArgumentNullException(nameof(genericCommands));
         }
 
         public bool IdExist(int id)
@@ -25,7 +24,7 @@ namespace Treasury.Data.Repositories
         {
             string query = $"SELECT * FROM {tableName}";
             var dataTable = new DataTable();
-            return _mySqlGenericCommands.Fill(query, dataTable);
+            return _genericCommands.Fill(query, dataTable);
         }
 
         public DataTable GetRecordsBySearch(string searchText)
@@ -52,7 +51,7 @@ namespace Treasury.Data.Repositories
             };
 
             string query = $"INSERT INTO {tableName} (code, taxpayer_type) VALUES (@code, @taxpayer_type)";
-            return _mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+            return _genericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public bool Update(TaxpayerTypeModel entity)
@@ -65,7 +64,7 @@ namespace Treasury.Data.Repositories
             };
 
             string query = $"UPDATE {tableName} SET code = @code, taxpayer_type = @taxpayer_type WHERE id = @id";
-            return _mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+            return _genericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public bool Delete(List<TaxpayerTypeModel> entityList)
@@ -77,7 +76,7 @@ namespace Treasury.Data.Repositories
         {
             var parameters = new object[][] { new object[] { "@taxpayer_type", DbType.String, name } };
             string query = $"SELECT id FROM {tableName} WHERE taxpayer_type = @taxpayer_type";
-            string result = _mySqlGenericCommands.ExecuteScalar(query, parameters);
+            string result = _genericCommands.ExecuteScalar(query, parameters);
             if (!string.IsNullOrEmpty(result))
                 return true;
             return false;
@@ -87,7 +86,7 @@ namespace Treasury.Data.Repositories
         {
             var parameters = new object[][] { new object[] { "@taxpayer_type", DbType.String, name } };
             string query = $"SELECT id FROM {tableName} WHERE taxpayer_type = @taxpayer_type";
-            string result = _mySqlGenericCommands.ExecuteScalar(query, parameters);
+            string result = _genericCommands.ExecuteScalar(query, parameters);
             if (!string.IsNullOrEmpty(result))
                 return true;
             return false;
@@ -97,14 +96,13 @@ namespace Treasury.Data.Repositories
         {
             var parameters = new object[][] { new object[] { "@taxpayer_type", DbType.String, name } };
             string query = $"SELECT id FROM {tableName} WHERE taxpayer_type = @taxpayer_type";
-            return Convert.ToInt32(_mySqlGenericCommands.ExecuteScalar(query, parameters));
+            return Convert.ToInt32(_genericCommands.ExecuteScalar(query, parameters));
         }
 
         public int GetLastInsertedId()
         {
             string query = $"SELECT MAX(id) FROM {tableName}";
-            return Convert.ToInt32(_mySqlGenericCommands.ExecuteScalar(query));
+            return Convert.ToInt32(_genericCommands.ExecuteScalar(query));
         }
     }
 }
-

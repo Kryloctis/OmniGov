@@ -1,5 +1,4 @@
-using OmniGov.Core.Repositories;
-using OmniGov.Core.Services;
+using OmniGov.Core.Interfaces.Services;
 using System.Data;
 using System.Transactions;
 using Treasury.Domain.Entities;
@@ -9,17 +8,12 @@ namespace Treasury.Data.Repositories
 {
     public class JobOrderRepository : IJobOrder
     {
-        private GenericCommands mySqlGenericCommands;
+        private readonly IGenericCommands _genericCommands;
         private string tableName = "job_orders";
 
-        public JobOrderRepository(GenericCommands mySqlGenericCommands)
+        public JobOrderRepository(IGenericCommands genericCommands)
         {
-            this.mySqlGenericCommands = mySqlGenericCommands;
-        }
-
-        public int CountRecords()
-        {
-            throw new System.NotImplementedException();
+            _genericCommands = genericCommands ?? throw new ArgumentNullException(nameof(genericCommands));
         }
 
         public bool Delete(List<JobOrderModel> entityList)
@@ -34,7 +28,7 @@ namespace Treasury.Data.Repositories
                     };
 
                     string query = $"UPDATE {tableName} SET is_deleted = 1 WHERE id = @id";
-                    _ = mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+                    _ = _genericCommands.ExecuteNonQuery(query, parameters);
                 }
 
                 scope.Complete();
@@ -53,7 +47,7 @@ namespace Treasury.Data.Repositories
 
             string query = $"SELECT id, prefix, first_name, mid_initial, last_name, suffix, job_title, created_at, updated_at, users_id FROM {tableName} WHERE id = @id";
 
-            using (var reader = mySqlGenericCommands.ExecuteReader(query, parameters))
+            using (var reader = _genericCommands.ExecuteReader(query, parameters))
             {
                 if (reader.Rows.Count == 0)
                     return record;
@@ -106,7 +100,7 @@ namespace Treasury.Data.Repositories
 
             string query = $"INSERT INTO {tableName} (users_id, prefix, first_name, mid_initial, last_name, suffix, job_title) VALUES (@users_id, @prefix, @first_name, @mid_initial, @last_name, @suffix, @job_title)";
 
-            return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+            return _genericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public bool IsUserJobOrder(int userId)
@@ -117,7 +111,7 @@ namespace Treasury.Data.Repositories
             };
 
             string query = $"SELECT COUNT(*) FROM {tableName} WHERE users_id = @users_id";
-            return Convert.ToInt32(mySqlGenericCommands.ExecuteScalar(query, parameter)) > 0;
+            return Convert.ToInt32(_genericCommands.ExecuteScalar(query, parameter)) > 0;
         }
 
         public bool Update(JobOrderModel entity)
@@ -134,7 +128,7 @@ namespace Treasury.Data.Repositories
 
             string query = $"SELECT id FROM {tableName} WHERE users_id = @users_id AND is_deleted = 0 LIMIT 1";
 
-            return int.Parse(mySqlGenericCommands.ExecuteScalar(query, parameter));
+            return int.Parse(_genericCommands.ExecuteScalar(query, parameter));
         }
 
         public Dictionary<string, string> GetRecordByUserID(int Id)
@@ -148,7 +142,7 @@ namespace Treasury.Data.Repositories
 
             string query = $"SELECT id, prefix, first_name, mid_initial, last_name, suffix, job_title, created_at, updated_at, users_id FROM {tableName} WHERE users_id = @users_id AND is_deleted = 0";
 
-            using (var reader = mySqlGenericCommands.ExecuteReader(query, parameters))
+            using (var reader = _genericCommands.ExecuteReader(query, parameters))
             {
                 if (reader.Rows.Count == 0)
                     return record;
@@ -172,4 +166,3 @@ namespace Treasury.Data.Repositories
         }
     }
 }
-

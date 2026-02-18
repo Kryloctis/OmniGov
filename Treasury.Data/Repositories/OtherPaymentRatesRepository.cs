@@ -1,5 +1,4 @@
-using OmniGov.Core.Repositories;
-using OmniGov.Core.Services;
+using OmniGov.Core.Interfaces.Services;
 using System.Data;
 using System.Transactions;
 using Treasury.Domain.Entities;
@@ -10,16 +9,11 @@ namespace Treasury.Data.Repositories
     internal class OtherPaymentRatesRepository : IOtherPaymentRatesRepository
     {
         private readonly string tableName = "other_payment_rates";
-        private GenericCommands mySqlGenericCommands;
+        private readonly IGenericCommands _genericCommands;
 
-        public OtherPaymentRatesRepository(GenericCommands mySqlGenericCommands)
+        public OtherPaymentRatesRepository(IGenericCommands genericCommands)
         {
-            this.mySqlGenericCommands = mySqlGenericCommands;
-        }
-
-        public int CountRecords()
-        {
-            throw new System.NotImplementedException();
+            _genericCommands = genericCommands ?? throw new ArgumentNullException(nameof(genericCommands));
         }
 
         public bool Delete(List<OtherPaymentRatesModel> entityList)
@@ -34,7 +28,7 @@ namespace Treasury.Data.Repositories
                     };
 
                     string query = $"DELETE FROM {tableName} WHERE id = @id";
-                    _ = mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+                    _ = _genericCommands.ExecuteNonQuery(query, parameters);
                 }
 
                 scope.Complete();
@@ -50,7 +44,7 @@ namespace Treasury.Data.Repositories
 
             string query = $"SELECT * FROM {tableName} WHERE id = @id";
 
-            using (var reader = mySqlGenericCommands.ExecuteReader(query, parameters))
+            using (var reader = _genericCommands.ExecuteReader(query, parameters))
             {
                 if (reader.Rows.Count < 1)
                     return dict;
@@ -72,7 +66,7 @@ namespace Treasury.Data.Repositories
         {
             string query = $"SELECT * FROM {tableName}";
             var dataTable = new DataTable();
-            return mySqlGenericCommands.Fill(query, dataTable);
+            return _genericCommands.Fill(query, dataTable);
         }
 
         public DataTable GetRecordsBySearch(string searchText)
@@ -84,7 +78,7 @@ namespace Treasury.Data.Repositories
 
             string query = $"SELECT * FROM {tableName} WHERE description LIKE @search_text";
             var dataTable = new DataTable();
-            return mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
+            return _genericCommands.FillBySearch(query, dataTable, parameters);
         }
 
         public DataTable GetRecordsByTaxTypeID(int taxTypeID)
@@ -99,7 +93,7 @@ namespace Treasury.Data.Repositories
             string query = $"SELECT * FROM {tableName} WHERE tax_type_id = @tax_type_id";
             var dataTable = new DataTable();
 
-            return mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
+            return _genericCommands.FillBySearch(query, dataTable, parameters);
         }
 
         public DataTable GetRecordsByTaxTypeIDAndDescription(int taxTypeID, string description)
@@ -115,7 +109,7 @@ namespace Treasury.Data.Repositories
             string query = $"SELECT * FROM {tableName} WHERE tax_type_id = @tax_type_id AND description LIKE @description";
             var dataTable = new DataTable();
 
-            return mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
+            return _genericCommands.FillBySearch(query, dataTable, parameters);
         }
 
         public bool IdExist(int id)
@@ -136,7 +130,7 @@ namespace Treasury.Data.Repositories
             };
 
             string query = $"INSERT INTO {tableName} (tax_type_id, description, amount, starting_year, is_rate_editable, created_by) VALUES (@tax_type_id, @description, @amount, @starting_year, @is_rate_editable, @created_by)";
-            return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+            return _genericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public bool Update(OtherPaymentRatesModel entity)
@@ -154,8 +148,7 @@ namespace Treasury.Data.Repositories
 
             string query = $"UPDATE {tableName} SET tax_type_id = @tax_type_id, description = @description, amount = @amount, starting_year = @starting_year, is_rate_editable = @is_rate_editable WHERE id = @id";
 
-            return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+            return _genericCommands.ExecuteNonQuery(query, parameters);
         }
     }
 }
-

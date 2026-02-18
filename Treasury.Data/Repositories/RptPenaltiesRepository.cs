@@ -1,5 +1,4 @@
-using OmniGov.Core.Repositories;
-using OmniGov.Core.Services;
+using OmniGov.Core.Interfaces.Services;
 using System.Data;
 using System.Transactions;
 using Treasury.Domain.Entities;
@@ -9,12 +8,12 @@ namespace Treasury.Data.Repositories
 {
     public class RptPenaltiesRepository : IRptPenaltiesRepository
     {
-        private GenericCommands _mySqlGenericCommands;
+        private readonly IGenericCommands _genericCommands;
         private readonly string tableName = "rpt_penalties";
 
-        public RptPenaltiesRepository(GenericCommands mySqlGenericCommands)
+        public RptPenaltiesRepository(IGenericCommands genericCommands)
         {
-            _mySqlGenericCommands = mySqlGenericCommands;
+            _genericCommands = genericCommands ?? throw new ArgumentNullException(nameof(genericCommands));
         }
 
         public int CountRecords()
@@ -34,7 +33,7 @@ namespace Treasury.Data.Repositories
                     };
 
                     string query = $"DELETE FROM {tableName} WHERE id = @id";
-                    _ = _mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+                    _ = _genericCommands.ExecuteNonQuery(query, parameters);
                 }
 
                 scope.Complete();
@@ -53,7 +52,7 @@ namespace Treasury.Data.Repositories
 
             string query = $"SELECT * FROM {tableName} WHERE id = @id";
 
-            using (var items = _mySqlGenericCommands.ExecuteReader(query, parameters))
+            using (var items = _genericCommands.ExecuteReader(query, parameters))
             {
                 if (items.Rows.Count < 1)
                     return dict;
@@ -73,7 +72,7 @@ namespace Treasury.Data.Repositories
         {
             string query = $"SELECT * FROM {tableName}";
             var dataTable = new DataTable();
-            return _mySqlGenericCommands.Fill(query, dataTable);
+            return _genericCommands.Fill(query, dataTable);
         }
 
         public DataTable GetRecordsBySearch(string searchText)
@@ -85,7 +84,7 @@ namespace Treasury.Data.Repositories
 
             string query = $"SELECT * FROM {tableName} WHERE description LIKE @searchText";
             var dataTable = new DataTable();
-            return _mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
+            return _genericCommands.FillBySearch(query, dataTable, parameters);
         }
 
         public bool IdExist(int id)
@@ -103,7 +102,7 @@ namespace Treasury.Data.Repositories
             };
 
             string query = $"INSERT INTO {tableName} (description, rate, frequency) VALUES (@description, @rate, @frequency)";
-            return _mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+            return _genericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public bool Update(RptPenaltiesModel entity)
@@ -117,7 +116,7 @@ namespace Treasury.Data.Repositories
             };
 
             string query = $"UPDATE {tableName} SET description = @description, rate = @rate, frequency = @frequency WHERE id = @id";
-            return _mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+            return _genericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public Dictionary<string, string> GetRecordByDescription(string description)
@@ -130,7 +129,7 @@ namespace Treasury.Data.Repositories
             };
 
             string query = $"SELECT id, description, frequency, rate FROM {tableName} WHERE description = @description";
-            using (var reader = _mySqlGenericCommands.ExecuteReader(query, parameters))
+            using (var reader = _genericCommands.ExecuteReader(query, parameters))
             {
                 if (reader.Rows.Count < 1)
                     return dict;
@@ -147,4 +146,3 @@ namespace Treasury.Data.Repositories
         }
     }
 }
-

@@ -1,118 +1,107 @@
-using OmniGov.Core.Factories;
-using OmniGov.Core.Services;
-using Treasury.Data.Repositories;
 using Treasury.Domain.Interfaces;
 
 namespace Treasury.Data.Factories
 {
     public class TreasuryFactory
     {
-        private static GenericCommands genericCommands;
+        private static T Resolve<T>() where T : notnull => OmniGov.Core.Services.ServiceLocator.GetRequiredService<T>();
 
-        public static IDisbursingOfficerRepository DisbursingOfficerRepository() => new DisbursingOfficerRepository(genericCommands);
+        public static IDisbursingOfficerRepository DisbursingOfficerRepository() => Resolve<IDisbursingOfficerRepository>();
 
-        public static ICollectingOfficerRepository CollectingOfficerRepository() => new CollectingOfficerRepository(genericCommands);
+        public static ICollectingOfficerRepository CollectingOfficerRepository() => Resolve<ICollectingOfficerRepository>();
 
-        public static IBanksRepository BanksRepository() => new BanksRepository(genericCommands);
+        public static IBanksRepository BanksRepository() => Resolve<IBanksRepository>();
 
-        public static IBankAccountsRepository BankAccountsRepository() => new BankAccountsRepository(genericCommands);
+        public static IBankAccountsRepository BankAccountsRepository() => Resolve<IBankAccountsRepository>();
 
-        public static IRciObligationsRepository RCIObligationsRepository() => new RCIObligationsRepository(genericCommands);
+        public static IRciObligationsRepository RCIObligationsRepository() => Resolve<IRciObligationsRepository>();
 
-        public static IRciDeductionsRepository RCIDeductionsRepository() => new RCIDeductionsRepository(genericCommands);
+        public static IRciDeductionsRepository RCIDeductionsRepository() => Resolve<IRciDeductionsRepository>();
 
-        public static IRciRepository RciRepository() => new RciRepository(genericCommands);
+        public static IRciRepository RciRepository() => Resolve<IRciRepository>();
 
-        public static IAccountableFormsRepository AccountableFormsRepository() => new AccountableFormsRepository(genericCommands);
+        public static IAccountableFormsRepository AccountableFormsRepository() => Resolve<IAccountableFormsRepository>();
 
-        public static IPaymentCollectionsRepository PaymentCollectionsRepository() => new PaymentCollectionsRepository(genericCommands, RptPaymentepository(), MarriageLicenseRepository(), CattleOwnershipRepository(), PrevCattleOwnershipRepository(), BurialPermitRepository(), PaymentCollectionHasChequesRepository(), PaymentFeesChargesRepository(), RcdCollectionsRepository(), RcdDepositsRepository(), BidRepository(), BiddersRepository(), CommunityTaxCertificateRepository());
+        public static IPaymentCollectionsRepository PaymentCollectionsRepository() => Resolve<IPaymentCollectionsRepository>();
 
-        public static IBankDepositsRepository BankDepositsRepository() => new BankDepositsRepository(genericCommands, RcdDepositsRepository());
+        public static IBankDepositsRepository BankDepositsRepository() => Resolve<IBankDepositsRepository>();
 
-        public static IReceiptsRepository ReceiptsRepository() => new ReceiptsRepository(genericCommands);
+        public static IReceiptsRepository ReceiptsRepository() => Resolve<IReceiptsRepository>();
 
-        public static IReceiptsIssuedRepository ReceiptsIssuedRepository() => new ReceiptsIssuedRepository(genericCommands);
+        public static IReceiptsIssuedRepository ReceiptsIssuedRepository() => Resolve<IReceiptsIssuedRepository>();
 
-        public static IJobOrder JobOrderRepository() => new JobOrderRepository(genericCommands);
+        public static IJobOrder JobOrderRepository() => Resolve<IJobOrder>();
 
-        public static ICollectingOfficerHasJobOrders CollectingOfficerHasJobOrdersRepository() => new CollectingOfficerHasJobOrdersRepository(genericCommands);
+        public static ICollectingOfficerHasJobOrders CollectingOfficerHasJobOrdersRepository() => Resolve<ICollectingOfficerHasJobOrders>();
 
-        public static IRptDiscountsRepository RptDiscountRepository() => new RptDiscountsRepository(genericCommands);
+        public static IRptDiscountsRepository RptDiscountRepository() => Resolve<IRptDiscountsRepository>();
 
-        public static IRptPenaltiesRepository RptPenaltiesRepository() => new RptPenaltiesRepository(genericCommands);
+        public static IRptPenaltiesRepository RptPenaltiesRepository() => Resolve<IRptPenaltiesRepository>();
 
-        public static IRptTaxRatesRepository RptTaxRatesRepository() => new RptTaxRatesRepository(genericCommands);
+        public static IRptTaxRatesRepository RptTaxRatesRepository() => Resolve<IRptTaxRatesRepository>();
 
-        public static IRptAssessmentPostsRepository RptAssessmentPostsRepository() => new RptAssessmentPostsRepository(genericCommands);
+        public static IRptAssessmentPostsRepository RptAssessmentPostsRepository() => Resolve<IRptAssessmentPostsRepository>();
 
-        public static IRptTaxDuesRepository RptTaxDuesRepository() => new RptTaxDuesRepository(genericCommands);
+        public static IRptTaxDuesRepository RptTaxDuesRepository() => Resolve<IRptTaxDuesRepository>();
 
-        public static IRptPaymentRepository RptPaymentepository() => new RptPaymentsRepository(genericCommands, RptTaxDuesRepository());
+        public static IRptPaymentRepository RptPaymentepository() => Resolve<IRptPaymentRepository>();
 
-        public static IRealPropertiesRepository RealPropertiesRepository() => new RealPropertiesRepository(genericCommands,
-                                                                                                            Factory.ProvincesRepository(),
-                                                                                                            Factory.MunicipalitiesRepository(),
-                                                                                                            Factory.BarangayRepository(),
-                                                                                                            Factory.ActualUseCodesRepository(),
-                                                                                                            Factory.ClassificationCodesRepository(),
-                                                                                                            TaxpayerTypeRepository(),
-                                                                                                            TaxpayersRepository(),
-                                                                                                            RptPreviousAssessmentRepository());
+        public static IRealPropertiesRepository RealPropertiesRepository() => Resolve<IRealPropertiesRepository>();
 
-        public static ITaxpayersRepository TaxpayersRepository() => new TaxpayerRepository(genericCommands);
+        public static ITaxpayersRepository TaxpayersRepository() => Resolve<ITaxpayersRepository>();
 
-        public static ITaxpayerTypeRepository TaxpayerTypeRepository() => new TaxpayerTypeRepository(genericCommands);
+        public static ITaxpayerTypeRepository TaxpayerTypeRepository() => Resolve<ITaxpayerTypeRepository>();
 
-        public static IRptPreviousAssessment RptPreviousAssessmentRepository() => new RptPreviousAssessmentRepository(genericCommands);
+        public static IRptPreviousAssessment RptPreviousAssessmentRepository() => Resolve<IRptPreviousAssessment>();
 
-        public static IBusinessCategoriesRepository BusinessCategoriesRepository() => new BusinessCategoriesRepository(genericCommands);
+        public static IBusinessCategoriesRepository BusinessCategoriesRepository() => Resolve<IBusinessCategoriesRepository>();
 
-        public static IBusinessAdOnChargesRepository BusinessAddOnChargesRepository() => new BusinessAddOnChargesRepository(genericCommands);
+        public static IBusinessAdOnChargesRepository BusinessAddOnChargesRepository() => Resolve<IBusinessAdOnChargesRepository>();
 
-        public static IBusinessCategoriesHasAddOnCharges BusinessCategoriesHasAddOnCharges() => new BusinessCategoriesHasAddOnChargesRepository(genericCommands);
+        public static IBusinessCategoriesHasAddOnCharges BusinessCategoriesHasAddOnCharges() => Resolve<IBusinessCategoriesHasAddOnCharges>();
 
-        public static IChequesRepository ChequesRepository() => new ChequesRepository(genericCommands);
+        public static IChequesRepository ChequesRepository() => Resolve<IChequesRepository>();
 
-        public static IPaymentCollectionHasChequesRepository PaymentCollectionHasChequesRepository() => new PaymentCollectionHasChequesRepository(genericCommands, ChequesRepository());
+        public static IPaymentCollectionHasChequesRepository PaymentCollectionHasChequesRepository() => Resolve<IPaymentCollectionHasChequesRepository>();
 
-        public static IReleasedCheques ReleasedChequesRepository() => new ReleasedChequesRepository(genericCommands);
+        public static IReleasedCheques ReleasedChequesRepository() => Resolve<IReleasedCheques>();
 
-        public static ITaxTypesRepository TaxTypesRepository() => new TaxTypesRepository(genericCommands);
+        public static ITaxTypesRepository TaxTypesRepository() => Resolve<ITaxTypesRepository>();
 
-        public static IOtherPaymentRatesRepository OtherPaymentRatesRepository() => new OtherPaymentRatesRepository(genericCommands);
+        public static IOtherPaymentRatesRepository OtherPaymentRatesRepository() => Resolve<IOtherPaymentRatesRepository>();
 
-        public static IMarriageLicenseRepository MarriageLicenseRepository() => new MarriageLicenseRepository(genericCommands);
+        public static IMarriageLicenseRepository MarriageLicenseRepository() => Resolve<IMarriageLicenseRepository>();
 
-        public static IBurialPermitRepository BurialPermitRepository() => new BurialPermitRepository(genericCommands);
+        public static IBurialPermitRepository BurialPermitRepository() => Resolve<IBurialPermitRepository>();
 
-        public static ICattleOwnershipRepository CattleOwnershipRepository() => new CattleOwnershipRepository(genericCommands);
+        public static ICattleOwnershipRepository CattleOwnershipRepository() => Resolve<ICattleOwnershipRepository>();
 
-        public static IPaymentFeesCharges PaymentFeesChargesRepository() => new PaymentFeesChargesRepository(genericCommands);
+        public static IPaymentFeesCharges PaymentFeesChargesRepository() => Resolve<IPaymentFeesCharges>();
 
-        public static IPrevCattleOwnership PrevCattleOwnershipRepository() => new PrevCattleOwnershipRepository(genericCommands);
+        public static IPrevCattleOwnership PrevCattleOwnershipRepository() => Resolve<IPrevCattleOwnership>();
 
-        public static IRcdRepository RcdRepository() => new RcdRepository(genericCommands, RcdCollectionsRepository(), RcdDepositsRepository());
+        public static IRcdRepository RcdRepository() => Resolve<IRcdRepository>();
 
-        public static IRcdCollections RcdCollectionsRepository() => new RcdCollectionRepository(genericCommands);
+        public static IRcdCollections RcdCollectionsRepository() => Resolve<IRcdCollections>();
 
-        public static IRcdDeposits RcdDepositsRepository() => new RcdDepositsRepository(genericCommands);
+        public static IRcdDeposits RcdDepositsRepository() => Resolve<IRcdDeposits>();
 
-        public static IDelinquentNotice DelinquentNoticeRepository() => new DelinquentNoticeRepository(genericCommands);
+        public static IDelinquentNotice DelinquentNoticeRepository() => Resolve<IDelinquentNotice>();
 
-        public static IRptLevy RptLevyRepository() => new RptLevyRepository(genericCommands);
+        public static IRptLevy RptLevyRepository() => Resolve<IRptLevy>();
 
-        public static IAuctionRepository AuctionRepository() => new AuctionRepository(genericCommands);
+        public static IAuctionRepository AuctionRepository() => Resolve<IAuctionRepository>();
 
-        public static IRptAuctionRepository RptAuctionRepository() => new RptAuctionRepository(genericCommands);
+        public static IRptAuctionRepository RptAuctionRepository() => Resolve<IRptAuctionRepository>();
 
-        public static IBiddersRepository BiddersRepository() => new BiddersRepository(genericCommands);
+        public static IBiddersRepository BiddersRepository() => Resolve<IBiddersRepository>();
 
-        public static IBidRepository BidRepository() => new BidRepository(genericCommands);
+        public static IBidRepository BidRepository() => Resolve<IBidRepository>();
 
-        public static ICommunityTaxCertificateRepository CommunityTaxCertificateRepository() => new CommunityTaxCertificateRepository(genericCommands);
+        public static ICommunityTaxCertificateRepository CommunityTaxCertificateRepository() => Resolve<ICommunityTaxCertificateRepository>();
 
-        public static ICashTicketsRepository CashTicketsRepository() => new CashTicketsRepository(genericCommands);
+        public static ICashTicketsRepository CashTicketsRepository() => Resolve<ICashTicketsRepository>();
 
-        public static ICashTicketsIssuedRepository CashTicketsIssuedRepository() => new CashTicketsIssuedRepository(genericCommands);
+        public static ICashTicketsIssuedRepository CashTicketsIssuedRepository() => Resolve<ICashTicketsIssuedRepository>();
     }
 }

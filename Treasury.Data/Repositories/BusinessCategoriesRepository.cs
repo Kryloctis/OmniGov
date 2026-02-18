@@ -1,5 +1,4 @@
-using OmniGov.Core.Repositories;
-using OmniGov.Core.Services;
+using OmniGov.Core.Interfaces.Services;
 using System.Data;
 using System.Transactions;
 using Treasury.Domain.Entities;
@@ -9,13 +8,13 @@ namespace Treasury.Data.Repositories
 {
     internal class BusinessCategoriesRepository : IBusinessCategoriesRepository
     {
-        private readonly GenericCommands _dbGenericCommands;
+        private readonly IGenericCommands _dbGenericCommands;
         private const string tableName = "business_categories";
         private const string viewTableName = "view_business_categories";
 
-        public BusinessCategoriesRepository(GenericCommands dbGenericCommands)
+        public BusinessCategoriesRepository(IGenericCommands dbGenericCommands)
         {
-            _dbGenericCommands = dbGenericCommands;
+            _dbGenericCommands = dbGenericCommands ?? throw new ArgumentNullException(nameof(dbGenericCommands));
         }
 
         public bool IdExist(int id)
@@ -147,4 +146,3 @@ namespace Treasury.Data.Repositories
         }
     }
 }
-

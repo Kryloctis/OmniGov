@@ -1,5 +1,4 @@
-using OmniGov.Core.Repositories;
-using OmniGov.Core.Services;
+using OmniGov.Core.Interfaces.Services;
 using System.Data;
 using System.Transactions;
 using Treasury.Domain.Entities;
@@ -9,17 +8,12 @@ namespace Treasury.Data.Repositories
 {
     internal class BusinessAddOnChargesRepository : IBusinessAdOnChargesRepository
     {
-        private readonly GenericCommands _dbGenericCommands;
+        private readonly IGenericCommands _genericCommands;
         private readonly string tableName = "business_add_on_charges";
 
-        public BusinessAddOnChargesRepository(GenericCommands dbGenericCommands)
+        public BusinessAddOnChargesRepository(IGenericCommands genericCommands)
         {
-            _dbGenericCommands = dbGenericCommands;
-        }
-
-        public int CountRecords()
-        {
-            throw new System.NotImplementedException();
+            _genericCommands = genericCommands ?? throw new ArgumentNullException(nameof(genericCommands));
         }
 
         public bool Delete(List<BusinessAddOnChargesModel> entityList)
@@ -31,7 +25,7 @@ namespace Treasury.Data.Repositories
                     var parameters = new object[][] { new object[] { @"id", DbType.Int32, entity.BusinessAddOnChargesID } };
 
                     string query = $"DELETE FROM {tableName} WHERE id = @id";
-                    _ = _dbGenericCommands.ExecuteNonQuery(query, parameters);
+                    _ = _genericCommands.ExecuteNonQuery(query, parameters);
                 }
 
                 scope.Complete();
@@ -47,7 +41,7 @@ namespace Treasury.Data.Repositories
             };
 
             string query = $"SELECT id FROM {tableName} WHERE description = @description";
-            string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
+            string queryResult = _genericCommands.ExecuteScalar(query, parameters);
 
             if (!string.IsNullOrEmpty(queryResult))
                 return true;
@@ -64,7 +58,7 @@ namespace Treasury.Data.Repositories
             };
 
             string query = $"SELECT id FROM {tableName} WHERE id <> @id AND description = @description";
-            string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
+            string queryResult = _genericCommands.ExecuteScalar(query, parameters);
             if (!string.IsNullOrEmpty(queryResult))
                 return true;
 
@@ -80,7 +74,7 @@ namespace Treasury.Data.Repositories
             };
             string query = $"SELECT code, description, is_applied_each_business FROM {tableName} WHERE id = @business_add_on_charges_id";
 
-            using (var items = _dbGenericCommands.ExecuteReader(query, parameter))
+            using (var items = _genericCommands.ExecuteReader(query, parameter))
             {
                 if (items.Rows.Count < 1)
                     return dict;
@@ -101,7 +95,7 @@ namespace Treasury.Data.Repositories
             string query = $"SELECT * FROM {tableName}";
 
             var dt = new DataTable();
-            return _dbGenericCommands.Fill(query, dt);
+            return _genericCommands.Fill(query, dt);
         }
 
         public DataTable GetRecordsBySearch(string searchText)
@@ -114,7 +108,7 @@ namespace Treasury.Data.Repositories
             string query = $"SELECT * FROM {tableName} WHERE code LIKE @search_text OR description LIKE @search_text";
 
             var dtBarangay = new DataTable();
-            return _dbGenericCommands.FillBySearch(query, dtBarangay, parameters);
+            return _genericCommands.FillBySearch(query, dtBarangay, parameters);
         }
 
         public bool IdExist(int id)
@@ -134,7 +128,7 @@ namespace Treasury.Data.Repositories
 
             string query = $"INSERT INTO {tableName} (code, description, is_applied_each_business, created_by) VALUES (@code, @description, @is_applied_each_business, @created_by)";
 
-            return _dbGenericCommands.ExecuteNonQuery(query, parameters);
+            return _genericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public bool Update(BusinessAddOnChargesModel entity)
@@ -147,8 +141,7 @@ namespace Treasury.Data.Repositories
             };
 
             string query = $"UPDATE {tableName} SET code = @code, description= @description, is_applied_each_business = @is_applied_each_business  WHERE id = @id";
-            return _dbGenericCommands.ExecuteNonQuery(query, parameters);
+            return _genericCommands.ExecuteNonQuery(query, parameters);
         }
     }
 }
-
