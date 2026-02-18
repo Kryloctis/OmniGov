@@ -1,8 +1,10 @@
+using OmniGov.Core.Interfaces.Repositories;
+using PropertyAssessment.Domain.Entities;
 using System.Collections.Generic;
 
-namespace RPT.Domain.Interfaces
+namespace PropertyAssessment.Domain.Interfaces
 {
-    public interface IPreviousAssessment : IRptRepository<PreviousAssessmentModel>
+    public interface IPreviousAssessment : IRepository<PreviousAssessmentModel>
     {
         Dictionary<string, string> GetRecordByRealPropertiesId(int realPropertiesId);
     }

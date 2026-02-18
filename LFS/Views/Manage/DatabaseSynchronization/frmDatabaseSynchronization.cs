@@ -1,6 +1,6 @@
 using LFS.Helpers;
 using OmniGov.Core.Entities;
-using RPT.Data.Repositories;
+using PropertyAssessment.Data.Factories;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -48,7 +48,7 @@ namespace LFS.Views.Manage.DatabaseSynchronization
         {
             try
             {
-                var dtRealProperties = RptFactory.RealPropertiesRepository().GetViewLFSRealPropertiesRecords();
+                var dtRealProperties = PropertyAssessmentFactory.RealPropertiesRepository().GetViewLFSRealPropertiesRecords();
                 int totalProgressCount = dtRealProperties.Rows.Count;
                 int progressCount = 0;
                 int remainingItems = dtRealProperties.Rows.Count;
@@ -106,7 +106,7 @@ namespace LFS.Views.Manage.DatabaseSynchronization
                     bool classificationIsSpecial = Convert.ToBoolean(Convert.ToByte(row["classification_is_special"]));
 
                     //RPT Previous Assessment
-                    var dictPreviousAssessment = RptFactory.PreviousAssessmentRepository().GetRecordByRealPropertiesId(realPropertiesId);
+                    var dictPreviousAssessment = PropertyAssessmentFactory.PreviousAssessmentRepository().GetRecordByRealPropertiesId(realPropertiesId);
                     string prevAssessmentCompleteArpNo = dictPreviousAssessment["arp_no"].ToString();
                     string prevAssessmentPin = dictPreviousAssessment["pin"].ToString();
                     string prevAssessmentOwner = dictPreviousAssessment["previous_owner"].ToString();

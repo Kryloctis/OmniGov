@@ -1,25 +1,21 @@
-using RPT.Domain.Interfaces;
-using RPT.Domain.Models;
+using OmniGov.Core.Interfaces.Services;
+using PropertyAssessment.Domain.Entities;
+using PropertyAssessment.Domain.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Data;
 
-namespace RPT.Data.Repositories
+namespace PropertyAssessment.Data.Repositories
 {
     public class LandAppraisalRepository : ILandAppraisalRepository
     {
-        private RptGenericCommands _mySqlGenericCommandsRPT;
+        private IGenericCommands _genericCommands;
         private readonly string tableName = "land_appraisal";
         private readonly string viewTableName = "view_land_appraisal";
 
-        public LandAppraisalRepository(RptGenericCommands mySqlGenericCommandsRPT)
+        public LandAppraisalRepository(IGenericCommands genericCommands)
         {
-            _mySqlGenericCommandsRPT = mySqlGenericCommandsRPT;
-        }
-
-        public int CountRecords()
-        {
-            throw new NotImplementedException();
+            _genericCommands = genericCommands ?? throw new ArgumentNullException(nameof(genericCommands));
         }
 
         public bool Delete(List<LandAppraisalModel> entityList)
@@ -65,9 +61,8 @@ namespace RPT.Data.Repositories
             };
 
             string query = $"SELECT COALESCE(SUM(area), 0) AS total_area FROM {viewTableName} WHERE land_properties_id = @land_properties_id";
-            decimal totalArea = Convert.ToDecimal(_mySqlGenericCommandsRPT.ExecuteScalar(query, parameters));
+            decimal totalArea = Convert.ToDecimal(_genericCommands.ExecuteScalar(query, parameters));
             return totalArea;
         }
     }
 }
-

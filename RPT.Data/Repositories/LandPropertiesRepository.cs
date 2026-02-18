@@ -1,25 +1,21 @@
-using RPT.Domain.Interfaces;
-using RPT.Domain.Models;
+using OmniGov.Core.Interfaces.Services;
+using PropertyAssessment.Domain.Entities;
+using PropertyAssessment.Domain.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Data;
 
-namespace RPT.Data.Repositories
+namespace PropertyAssessment.Data.Repositories
 {
     public class LandPropertiesRepository : ILandPropertiesRepository
     {
-        private RptGenericCommands _mySqlGenericCommandsRPT;
+        private IGenericCommands _genericCommands;
         private readonly string tableName = "land_properties";
         private readonly string viewTableName = "view_land_properties";
 
-        public LandPropertiesRepository(RptGenericCommands mySqlGenericCommandsRPT)
+        public LandPropertiesRepository(IGenericCommands genericCommands)
         {
-            _mySqlGenericCommandsRPT = mySqlGenericCommandsRPT;
-        }
-
-        public int CountRecords()
-        {
-            throw new NotImplementedException();
+            _genericCommands = genericCommands ?? throw new ArgumentNullException(nameof(genericCommands));
         }
 
         public bool Delete(List<LandPropertiesModel> entityList)
@@ -52,7 +48,7 @@ namespace RPT.Data.Repositories
 
             string query = $"SELECT real_properties_id, transaction_codes_id, pin, owners_id, barangays_id, property_kind, arp_no, owner_name, owner_address, owner_contact, owner_tin, admin_name, admin_address, admin_contact, admin_tin, street, is_taxable, effectivity_quarter, effectivity_year, memoranda, date_of_entry, gryear, appraised_by, appraised_date, recom_approval_by, recom_approval_date, approved_by, approved_date, is_cancelled, is_pending, created_at, created_by, updated_at, updated_by, complete_arp_no, transaction_code, transaction, owner_types_id, owner_type_code, owner_type, real_owner_name, municipalities_id, barangay_code, barangay_name, is_poblacion, municipality_code, municipality_name, province_code, province_name, land_properties_id, land_restrictions_id, restriction, title_cert, title_cert_date, survey_no, lot_no, block_no, boundary_north, boundary_east, boundary_south, boundary_west, sketch FROM {viewTableName} WHERE complete_arp_no = @complete_arp_no";
 
-            using (var reader = _mySqlGenericCommandsRPT.ExecuteReader(query, parameters))
+            using (var reader = _genericCommands.ExecuteReader(query, parameters))
             {
                 if (reader.Rows.Count < 1)
                     return dict;
@@ -143,4 +139,3 @@ namespace RPT.Data.Repositories
         }
     }
 }
-

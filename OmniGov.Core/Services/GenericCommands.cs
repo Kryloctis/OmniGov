@@ -17,11 +17,6 @@ namespace OmniGov.Core.Services
             _connectionProvider = connectionProvider;
         }
 
-        public GenericCommands(string? connectionName)
-        {
-            _explicitConnectionName = connectionName;
-        }
-
         private string GetConnectionString()
         {
             if (_connectionString != null) return _connectionString;

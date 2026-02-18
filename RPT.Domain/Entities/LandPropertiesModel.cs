@@ -1,4 +1,4 @@
-namespace RPT.Domain.Models
+namespace PropertyAssessment.Domain.Entities
 {
     public class LandPropertiesModel
     {

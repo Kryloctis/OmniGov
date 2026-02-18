@@ -1,8 +1,9 @@
-using RPT.Domain.Models;
+using OmniGov.Core.Interfaces.Repositories;
+using PropertyAssessment.Domain.Entities;
 
-namespace RPT.Domain.Interfaces
+namespace PropertyAssessment.Domain.Interfaces
 {
-    public interface IBuildingDetailsRepository : IRptRepository<BuildingDetailsModel>
+    public interface IBuildingDetailsRepository : IRepository<BuildingDetailsModel>
     {
         public decimal GetTotalAreaByBuildingPropertiesId(int buildingPropertiesId);
     }

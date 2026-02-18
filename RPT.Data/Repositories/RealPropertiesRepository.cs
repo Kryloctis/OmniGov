@@ -1,10 +1,11 @@
-using RPT.Domain.Interfaces;
-using RPT.Domain.Models;
+using OmniGov.Core.Interfaces.Services;
+using PropertyAssessment.Domain.Entities;
+using PropertyAssessment.Domain.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Data;
 
-namespace RPT.Data.Repositories
+namespace PropertyAssessment.Data.Repositories
 {
     public class RealPropertiesRepository : IRealPropertiesRepository
     {
@@ -13,16 +14,11 @@ namespace RPT.Data.Repositories
         private readonly string viewPropertyAssessessment = "view_property_assessment";
         private readonly string viewRealProperties = "view_real_properties";
         private readonly string tableName = "real_properties";
-        private RptGenericCommands _mySqlGenericCommandsRPT;
+        private readonly IGenericCommands _genericCommands;
 
-        public RealPropertiesRepository(RptGenericCommands mySqlGenericCommandsRPT)
+        public RealPropertiesRepository(IGenericCommands genericCommands)
         {
-            _mySqlGenericCommandsRPT = mySqlGenericCommandsRPT;
-        }
-
-        public int CountRecords()
-        {
-            throw new NotImplementedException();
+            _genericCommands = genericCommands ?? throw new ArgumentNullException(nameof(_genericCommands));
         }
 
         public bool Delete(List<RealPropertiesModel> entityList)
@@ -41,7 +37,7 @@ namespace RPT.Data.Repositories
 
             string query = $"SELECT transaction_codes_id, owners_id, barangays_id, property_identifier, property_kind, arp_no, pin_section, pin_lot, owner_name, owner_address, owner_contact, owner_tin, admin_name, admin_address, admin_contact, admin_tin, street, is_taxable, effectivity_quarter, effectivity_year, memoranda, date_of_entry, gryear, appraised_by, appraised_date, recom_approval_by, recom_approval_date, approved_by, approved_date, is_cancelled, is_pending, created_at, created_by, updated_at, updated_by FROM {tableName} WHERE id = @id";
 
-            using (var reader = _mySqlGenericCommandsRPT.ExecuteReader(query, parameters))
+            using (var reader = _genericCommands.ExecuteReader(query, parameters))
             {
                 if (reader.Rows.Count < 1)
                     return dict;
@@ -125,22 +121,15 @@ namespace RPT.Data.Repositories
             string query = $"SELECT property_kind, complete_arp_no, pin, owner_name, owner_address, market_value, assessed_value  FROM {viewPropertyAssessmentGrouped} WHERE property_kind = @property_kind AND (complete_arp_no LIKE @searchText OR owner_name LIKE @searchText ) LIMIT 30";
 
             var dataTable = new DataTable();
-            return _mySqlGenericCommandsRPT.FillBySearch(query, dataTable, parameters);
+            return _genericCommands.FillBySearch(query, dataTable, parameters);
         }
 
         public DataTable GetBarangays()
         {
-            try
-            {
-                string query = $"SELECT id, code, name, is_poblacion FROM {tableName} ORDER BY code";
+            string query = $"SELECT id, code, name, is_poblacion FROM {tableName} ORDER BY code";
 
-                var dtBarangay = new DataTable();
-                return _mySqlGenericCommandsRPT.Fill(query, dtBarangay);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            var dtBarangay = new DataTable();
+            return _genericCommands.Fill(query, dtBarangay);
         }
 
         public DataTable GetPropertiesBy_Quarter_Year_BarangayId_Search(int effectivityYear, int barangayId, string searchText)
@@ -163,7 +152,7 @@ namespace RPT.Data.Repositories
             string query = $"SELECT * FROM {viewLfsRealProperties} WHERE (owner_name LIKE @search_text OR complete_arp_no LIKE @search_text OR owner_address LIKE @search_text)  AND effectivity_year <= @effectivity_year {BarangayId()} ";
 
             var dtProperties = new DataTable();
-            return _mySqlGenericCommandsRPT.FillBySearch(query, dtProperties, parameters);
+            return _genericCommands.FillBySearch(query, dtProperties, parameters);
         }
 
         public Dictionary<string, string> GetViewRealPropertiesById(int Id)
@@ -172,7 +161,7 @@ namespace RPT.Data.Repositories
 
             var parameters = new object[][] { new object[] { "@id", DbType.Int32, Id } };
             string query = $"SELECT transaction_codes_id, owners_id, barangays_id, property_kind, arp_no, pin, owner_name, owner_address, owner_contact, owner_tin, admin_name, admin_address, admin_contact, admin_tin, street, is_taxable, effectivity_quarter, effectivity_year, memoranda, date_of_entry, gryear, appraised_by, appraised_date, recom_approval_by, recom_approval_date, approved_by, approved_date, is_cancelled, is_pending, created_at, created_by, updated_at, updated_by, complete_arp_no, transaction_code, transaction, owner_types_id, owner_type_code, owner_type, real_owner_name, municipalities_id, barangay_code, barangay_name, is_poblacion, municipality_code, municipality_name, province_code, province_name FROM {viewRealProperties} WHERE id = @id";
-            using (var reader = _mySqlGenericCommandsRPT.ExecuteReader(query, parameters))
+            using (var reader = _genericCommands.ExecuteReader(query, parameters))
             {
                 if (reader.Rows.Count < 1)
                     return dict;
@@ -242,14 +231,14 @@ namespace RPT.Data.Repositories
 
             string query = $"SELECT COALESCE(SUM(assessed_value), 0) AS assessed_value FROM {viewPropertyAssessessment} WHERE complete_arp_no = @complete_arp_no AND actual_use_code = 'AIM'";
 
-            return Convert.ToDecimal(_mySqlGenericCommandsRPT.ExecuteScalar(query, parameters));
+            return Convert.ToDecimal(_genericCommands.ExecuteScalar(query, parameters));
         }
 
         public DataTable GetViewLFSRealPropertiesRecords()
         {
             string query = $"SELECT * FROM {viewLfsRealProperties}";
             var dataTable = new DataTable();
-            return _mySqlGenericCommandsRPT.Fill(query, dataTable);
+            return _genericCommands.Fill(query, dataTable);
         }
 
         public Dictionary<string, string> GetViewLFSRealPropertiesRecordById(int Id)
@@ -258,7 +247,7 @@ namespace RPT.Data.Repositories
             var parameters = new object[][] { new object[] { "@real_properties_id", DbType.Int32, Id } };
             string query = $"SELECT real_properties_id, real_properties_identifier, land_bldg_mach_properties_id, transaction_codes_id, transaction_code, pin, property_kind, barangays_id, barangays_code, barangays_name, municipalities_code, municipality_name, provinces_code, provinces_name, gryear, complete_arp_no, is_taxable, is_cancelled, owner_tin, owner_name, owner_address, owner_contact, real_owners_id, real_owner_tin, real_owner_name, real_owner_street, real_owner_barangay, real_owner_municipality, real_owner_province, real_owner_contact_info, real_owner_type_code, real_owner_type, effectivity_quarter, effectivity_year, date_of_entry, street, classification_codes_id, classification_code, classification_name, classification_is_special, actual_use_codes_id, actual_use_code, actual_use_name, actual_use_is_government, land_lot_no, land_area, other_improvements, assessed_value FROM {viewLfsRealProperties} WHERE real_properties_id = @real_properties_id";
 
-            using (var reader = _mySqlGenericCommandsRPT.ExecuteReader(query, parameters))
+            using (var reader = _genericCommands.ExecuteReader(query, parameters))
             {
                 if (reader.Rows.Count < 1)
                     return dict;
@@ -320,4 +309,3 @@ namespace RPT.Data.Repositories
         }
     }
 }
-

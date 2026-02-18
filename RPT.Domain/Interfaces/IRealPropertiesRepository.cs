@@ -1,10 +1,11 @@
-using RPT.Domain.Models;
+using OmniGov.Core.Interfaces.Repositories;
+using PropertyAssessment.Domain.Entities;
 using System.Collections.Generic;
 using System.Data;
 
-namespace RPT.Domain.Interfaces
+namespace PropertyAssessment.Domain.Interfaces
 {
-    public interface IRealPropertiesRepository : IRptRepository<RealPropertiesModel>
+    public interface IRealPropertiesRepository : IRepository<RealPropertiesModel>
     {
         Dictionary<string, string> GetViewRealPropertiesById(int Id);
 

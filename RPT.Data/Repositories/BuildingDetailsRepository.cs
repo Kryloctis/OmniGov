@@ -1,23 +1,19 @@
-using RPT.Domain.Interfaces;
-using RPT.Domain.Models;
+using OmniGov.Core.Interfaces.Services;
+using PropertyAssessment.Domain.Entities;
+using PropertyAssessment.Domain.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Data;
 
-namespace RPT.Data.Repositories
+namespace PropertyAssessment.Data.Repositories
 {
     public class BuildingDetailsRepository : IBuildingDetailsRepository
     {
-        private RptGenericCommands _mySqlGenericCommandsRPT;
+        private IGenericCommands _genericCommands;
 
-        public BuildingDetailsRepository(RptGenericCommands mySqlGenericCommandsRPT)
+        public BuildingDetailsRepository(IGenericCommands genericCommands)
         {
-            _mySqlGenericCommandsRPT = mySqlGenericCommandsRPT;
-        }
-
-        public int CountRecords()
-        {
-            throw new NotImplementedException();
+            _genericCommands = genericCommands ?? throw new ArgumentNullException(nameof(genericCommands));
         }
 
         public bool Delete(List<BuildingDetailsModel> entityList)
@@ -48,7 +44,7 @@ namespace RPT.Data.Repositories
             };
 
             string query = $"SELECT COALESCE(SUM(area), 0) AS total_area FROM {buidlingPropertiesId} WHERE building_properties_id = @building_properties_id";
-            decimal totalArea = Convert.ToDecimal(_mySqlGenericCommandsRPT.ExecuteScalar(query, parameters));
+            decimal totalArea = Convert.ToDecimal(_genericCommands.ExecuteScalar(query, parameters));
             return totalArea;
         }
 
@@ -68,4 +64,3 @@ namespace RPT.Data.Repositories
         }
     }
 }
-

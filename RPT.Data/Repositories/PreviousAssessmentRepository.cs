@@ -1,23 +1,20 @@
-using RPT.Domain.Interfaces;
+using OmniGov.Core.Interfaces.Services;
+using PropertyAssessment.Domain.Entities;
+using PropertyAssessment.Domain.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Data;
 
-namespace RPT.Data.Repositories
+namespace PropertyAssessment.Data.Repositories
 {
     public class PreviousAssessmentRepository : IPreviousAssessment
     {
         private readonly string tableName = "previous_assessment";
-        private RptGenericCommands _mySqlGenericCommandsRPT;
+        private IGenericCommands _genericCommands;
 
-        public PreviousAssessmentRepository(RptGenericCommands mySqlGenericCommandsRPT)
+        public PreviousAssessmentRepository(IGenericCommands genericCommands)
         {
-            _mySqlGenericCommandsRPT = mySqlGenericCommandsRPT;
-        }
-
-        public int CountRecords()
-        {
-            throw new NotImplementedException();
+            _genericCommands = genericCommands ?? throw new ArgumentNullException(nameof(genericCommands));
         }
 
         public bool Delete(List<PreviousAssessmentModel> entityList)
@@ -36,7 +33,7 @@ namespace RPT.Data.Repositories
             var parameters = new object[][] { new object[] { "@real_properties_id", DbType.Int32, realPropertiesId } };
             string query = $"SELECT id, pin, arp_no, assessed_value, previous_owner, effectivity_assessment, recording_person, date_recorded FROM {tableName} WHERE real_properties_id = @real_properties_id LIMIT 1";
 
-            using (var reader = _mySqlGenericCommandsRPT.ExecuteReader(query, parameters))
+            using (var reader = _genericCommands.ExecuteReader(query, parameters))
             {
                 if (reader.Rows.Count < 1)
                     return dict;
@@ -82,4 +79,3 @@ namespace RPT.Data.Repositories
         }
     }
 }
-

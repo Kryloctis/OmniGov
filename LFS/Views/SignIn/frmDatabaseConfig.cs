@@ -1,7 +1,5 @@
 using LFS.Helpers;
-using OmniGov.Core.Repositories;
 using OmniGov.Core.Factories;
-using RPT.Data.Repositories;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -126,7 +124,7 @@ namespace LFS.Views.SignIn
                 {
                     _frmSignIn.lblServer.Text = $"(F12) Server: {ServerHelper.selectedServer.MunicipalityName}, {ServerHelper.selectedServer.ProvinceName}";
                     Factory.ServerRepository().ApplyConnection(ServerHelper.selectedServer.LfsInstance);
-                    RptFactory.ServerRepository().ApplyConnection(ServerHelper.selectedServer.RpmsInstance);
+                    Factory.ServerRepository().ApplyConnection(ServerHelper.selectedServer.RpmsInstance);
                     this.Close();
                 }
                 ;
@@ -159,4 +157,3 @@ namespace LFS.Views.SignIn
         }
     }
 }
-
