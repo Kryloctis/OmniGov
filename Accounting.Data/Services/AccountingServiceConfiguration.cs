@@ -2,8 +2,6 @@
 using Accounting.Domain.Interfaces;
 using Accounting.Domain.Interfaces.Factories;
 using Microsoft.Extensions.DependencyInjection;
-using OmniGov.Core.Interfaces.Services;
-using OmniGov.Core.Services;
 
 namespace Accounting.Data.Services
 {

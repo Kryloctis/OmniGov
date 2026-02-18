@@ -9,11 +9,11 @@ namespace Accounting.Data.Repositories
     public class AmortizationScheduleRepository : IAmortizationScheduleRepository
     {
         private readonly string tableName = "amortization_sched";
-        private IGenericCommands genericCommands;
+        private readonly IGenericCommands _genericCommands;
 
         public AmortizationScheduleRepository(IGenericCommands genericCommands)
         {
-            this.genericCommands = genericCommands;
+            _genericCommands = genericCommands ?? throw new ArgumentNullException(nameof(genericCommands));
         }
 
         public bool Delete(List<AmortizationScheduleModel> entityList)
@@ -28,7 +28,7 @@ namespace Accounting.Data.Repositories
                     };
 
                     string query = $"DELETE FROM {tableName} WHERE id = @id";
-                    _ = genericCommands.ExecuteNonQuery(query, parameters);
+                    _ = _genericCommands.ExecuteNonQuery(query, parameters);
                 }
 
                 scope.Complete();
@@ -47,7 +47,7 @@ namespace Accounting.Data.Repositories
 
             string query = $"SELECT id, amortization_id, date, principal_amount, interest_amount, grt_amount FROM {tableName} WHERE id = @id";
 
-            using (var reader = genericCommands.ExecuteReader(query, parameters))
+            using (var reader = _genericCommands.ExecuteReader(query, parameters))
             {
                 if (reader.Rows.Count < 1)
                     return record;
@@ -74,7 +74,7 @@ namespace Accounting.Data.Repositories
         public DataTable GetRecordsByAmortizationId(int amortizationId)
         {
             string query = $"SELECT id, amortization_id, date, principal_amount, interest_amount, grt_amount FROM {tableName} WHERE amortization_id = {amortizationId}";
-            return genericCommands.Fill(query, new DataTable());
+            return _genericCommands.Fill(query, new DataTable());
         }
 
         public DataTable GetRecordsBySearch(string searchText)
@@ -100,7 +100,7 @@ namespace Accounting.Data.Repositories
 
             string query = $"INSERT INTO {tableName} (amortization_id, date, principal_amount, interest_amount, grt_amount) VALUES (@amortization_id, @date, @principal_amount, @interest_amount, @grt_amount)";
 
-            return genericCommands.ExecuteNonQuery(query, parameters);
+            return _genericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public bool Update(AmortizationScheduleModel entity)
@@ -117,7 +117,7 @@ namespace Accounting.Data.Repositories
 
             string query = $"UPDATE {tableName} SET amortization_id = @amortization_id, date = @date, principal_amount = @principal_amount, interest_amount = @interest_amount, grt_amount = @grt_amount WHERE id = @id ";
 
-            return genericCommands.ExecuteNonQuery(query, parameters);
+            return _genericCommands.ExecuteNonQuery(query, parameters);
         }
     }
 }

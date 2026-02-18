@@ -8,13 +8,12 @@ namespace Accounting.Data.Repositories
 {
     public class AmortizationRepository : IAmortizationRepository
     {
-        private IGenericCommands genericCommands;
-
+        private readonly IGenericCommands _genericCommands;
         private readonly string tableName = "amortization";
 
         public AmortizationRepository(IGenericCommands genericCommands)
         {
-            this.genericCommands = genericCommands;
+            _genericCommands = genericCommands ?? throw new ArgumentNullException(nameof(genericCommands));
         }
 
         public bool Delete(List<AmortizationModel> entityList)
@@ -29,7 +28,7 @@ namespace Accounting.Data.Repositories
                     };
 
                     string query = $"DELETE FROM {tableName} WHERE id = @id";
-                    _ = genericCommands.ExecuteNonQuery(query, parameters);
+                    _ = _genericCommands.ExecuteNonQuery(query, parameters);
                 }
 
                 scope.Complete();
@@ -48,7 +47,7 @@ namespace Accounting.Data.Repositories
 
             string query = $"SELECT id, bank_name, amortization_term, interest, amount_released FROM {tableName} WHERE id = @id";
 
-            using (var reader = genericCommands.ExecuteReader(query, parameters))
+            using (var reader = _genericCommands.ExecuteReader(query, parameters))
             {
                 if (reader.Rows.Count < 1)
                     return record;
@@ -69,7 +68,7 @@ namespace Accounting.Data.Repositories
         public DataTable GetRecords()
         {
             string query = $"SELECT id, bank_name, amortization_term, interest, amount_released FROM {tableName}";
-            return genericCommands.Fill(query, new DataTable());
+            return _genericCommands.Fill(query, new DataTable());
         }
 
         public DataTable GetRecordsBySearch(string searchText)
@@ -94,7 +93,7 @@ namespace Accounting.Data.Repositories
 
             string query = $"INSERT INTO {tableName} (bank_name, amortization_term, interest, amount_released) VALUES (@bank_name, @amortization_term, @interest, @amount_released)";
 
-            return genericCommands.ExecuteNonQuery(query, parameters);
+            return _genericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public bool Update(AmortizationModel entity)
@@ -110,7 +109,7 @@ namespace Accounting.Data.Repositories
 
             string query = $"UPDATE {tableName} SET bank_name = @bank_name, amortization_term = @amortization_term, interest = @interest, amount_released = @amount_released WHERE id = @id ";
 
-            return genericCommands.ExecuteNonQuery(query, parameters);
+            return _genericCommands.ExecuteNonQuery(query, parameters);
         }
     }
 }

@@ -8,13 +8,13 @@ namespace Accounting.Data.Repositories
 {
     public class JEVAccountsRepository : IJEVAccountsRepository
     {
-        private IGenericCommands genericCommands;
+        private readonly IGenericCommands _genericCommands;
         private const string tableName = "jev_accounts";
         private const string viewTableName = "view_jev_accounts";
 
         public JEVAccountsRepository(IGenericCommands genericCommands)
         {
-            this.genericCommands = genericCommands;
+            _genericCommands = genericCommands ?? throw new ArgumentNullException(nameof(genericCommands));
         }
 
         public bool DeleteByJevId(int jevId)
@@ -25,7 +25,7 @@ namespace Accounting.Data.Repositories
             };
 
             string query = $"DELETE FROM {tableName} WHERE jev_id = @id";
-            return genericCommands.ExecuteNonQuery(query, parameters);
+            return _genericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public bool Delete(List<JEVAccountsModel> entityList)
@@ -69,7 +69,7 @@ namespace Accounting.Data.Repositories
 
             string query = $"INSERT INTO {tableName} (jev_id, function_program_project_id, general_ledger_accounts_id, subsidiary_ledger_accounts_id, obligation_no, is_deposit, is_debit, amount) VALUES (@jev_id, @fpp_id, @general_ledger_accounts_id, @subsidiary_ledger_accounts_id,  @obligation_no, @is_deposit, @is_debit, @amount);";
 
-            return genericCommands.ExecuteNonQuery(query, parameters);
+            return _genericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public bool Update(JEVAccountsModel entity)
@@ -82,7 +82,7 @@ namespace Accounting.Data.Repositories
             string query = $"SELECT id, jev_id, funds_id, fund_code, fund_name, journals_id, journal_name, is_special, jev_no, full_jev_no, date_entry, explanation, is_approved, is_disapproved, is_cancelled, fpp_id, fpp_code, fpp_name, general_ledger_accounts_id, account_code, general_ledger_accounts_code, general_ledger_accounts_name, general_ledger_accounts_is_contra_account, sub_maj_acc_group_id, sub_maj_acc_group_code, sub_maj_acc_group_name, maj_acc_group_id, maj_acc_group_code, maj_acc_group_name, account_group_id, account_group_code, account_group_name, subsidiary_ledger_accounts_id, subsidiary_ledger_accounts_code, subsidiary_ledger_accounts_name, obligation_no, is_deposit, is_debit, amount FROM {viewTableName}";
 
             DataTable datatable = new DataTable();
-            return genericCommands.Fill(query, datatable);
+            return _genericCommands.Fill(query, datatable);
         }
 
         public DataTable GetViewRecordsByLedgerAccounts()
@@ -90,7 +90,7 @@ namespace Accounting.Data.Repositories
             string query = $"SELECT id, jev_id, funds_id, fund_code, fund_name, journals_id, journal_name, is_special, jev_no, full_jev_no, date_entry, explanation, is_approved, is_disapproved, is_cancelled, fpp_id, fpp_code, fpp_name, general_ledger_accounts_id, account_code, general_ledger_accounts_code, general_ledger_accounts_name, general_ledger_accounts_is_contra_account, sub_maj_acc_group_id, sub_maj_acc_group_code, sub_maj_acc_group_name, maj_acc_group_id, maj_acc_group_code, maj_acc_group_name, account_group_id, account_group_code, account_group_name, subsidiary_ledger_accounts_id, subsidiary_ledger_accounts_code, subsidiary_ledger_accounts_name, obligation_no, is_deposit, is_debit, amount FROM {viewTableName} GROUP BY general_ledger_accounts_id";
 
             DataTable datatable = new DataTable();
-            return genericCommands.Fill(query, datatable);
+            return _genericCommands.Fill(query, datatable);
         }
 
         public DataTable GetViewRecordsByJevId(int jevId)
@@ -103,7 +103,7 @@ namespace Accounting.Data.Repositories
             string query = $"SELECT id, fpp_id, general_ledger_accounts_id, subsidiary_ledger_accounts_id, account_code, obligation_no, is_debit, is_deposit, fpp_name, general_ledger_accounts_name, subsidiary_ledger_accounts_code, subsidiary_ledger_accounts_name, amount, fpp_code FROM {viewTableName} WHERE jev_id = @jev_id";
 
             DataTable dataTable = new DataTable();
-            return genericCommands.FillBySearch(query, dataTable, parameters);
+            return _genericCommands.FillBySearch(query, dataTable, parameters);
         }
 
         public DataTable GetViewRecordsByFundJournalDate(string fundName, string journalName, DateTime dateEntry)
@@ -118,7 +118,7 @@ namespace Accounting.Data.Repositories
             string query = $"SELECT jev_id, date_entry, jev_no, full_jev_no, explanation, general_ledger_accounts_id, general_ledger_accounts_name, account_code, is_deposit, is_debit, amount FROM {viewTableName} WHERE is_approved = 1 AND is_cancelled = 0 AND is_disapproved = 0 AND fund_name = @fund_name AND journal_name = @journal_name AND MONTH(date_entry) = MONTH(@date_entry) AND YEAR(date_entry) = YEAR(@date_entry)";
 
             DataTable dataTable = new DataTable();
-            return genericCommands.FillBySearch(query, dataTable, parameters);
+            return _genericCommands.FillBySearch(query, dataTable, parameters);
         }
 
         public int CountByJevId(int jevId)
@@ -130,7 +130,7 @@ namespace Accounting.Data.Repositories
 
             string query = $"SELECT COUNT(*) FROM {tableName} WHERE jev_id = @jev_id";
 
-            return int.Parse(genericCommands.ExecuteScalar(query, parameters));
+            return int.Parse(_genericCommands.ExecuteScalar(query, parameters));
         }
 
         //Where general ledger report gets data for display
@@ -146,7 +146,7 @@ namespace Accounting.Data.Repositories
             string query = $"SELECT jev_id, date_entry, date_entry, jev_no, full_jev_no, journal_name, explanation, general_ledger_accounts_name, account_code, is_deposit, is_debit, amount FROM {viewTableName} WHERE is_approved = 1 AND is_cancelled = 0 AND is_disapproved = 0 AND funds_id = @funds_id AND general_ledger_accounts_id = @general_ledger_accounts_id AND YEAR(date_entry) = @year";
 
             DataTable dataTable = new DataTable();
-            return genericCommands.FillBySearch(query, dataTable, parameters);
+            return _genericCommands.FillBySearch(query, dataTable, parameters);
         }
 
         //Where subsidiary ledger report gets data for display
@@ -163,7 +163,7 @@ namespace Accounting.Data.Repositories
             string query = $"SELECT jev_id, date_entry, jev_no, full_jev_no, journal_name, explanation, general_ledger_accounts_name, account_code, is_deposit, is_debit, amount FROM {viewTableName} WHERE is_approved = 1 AND is_cancelled = 0 AND is_disapproved = 0 AND funds_id = @funds_id AND general_ledger_accounts_id = @general_ledger_accounts_id AND subsidiary_ledger_accounts_id = @subsidiary_ledger_accounts_id AND YEAR(date_entry) = @year";
 
             DataTable dataTable = new DataTable();
-            return genericCommands.FillBySearch(query, dataTable, parameters);
+            return _genericCommands.FillBySearch(query, dataTable, parameters);
         }
 
         //Where trial balances and financial statements report gets data for display
@@ -181,7 +181,7 @@ namespace Accounting.Data.Repositories
 
             string query = $"SELECT COALESCE(SUM(IF(is_debit = 1, amount, 0)),0) AS debit, COALESCE(SUM(IF(is_debit = 0, amount, 0)),0) AS credit FROM {viewTableName} WHERE funds_id = @funds_id AND is_approved = 1 AND is_cancelled = 0 AND is_disapproved = 0 AND account_group_id = @account_group_id AND date_entry <= @date_entry AND YEAR(date_entry) = @year ";
 
-            using (DataTable reader = genericCommands.ExecuteReader(query, parameters))
+            using (DataTable reader = _genericCommands.ExecuteReader(query, parameters))
             {
                 foreach (DataRow item in reader.Rows)
                 {
@@ -206,7 +206,7 @@ namespace Accounting.Data.Repositories
 
             string query = $"SELECT COALESCE(SUM(IF(is_debit = 1, amount, 0)),0) AS debit, COALESCE(SUM(IF(is_debit = 0, amount, 0)),0) AS credit FROM {viewTableName} WHERE funds_id = @funds_id AND is_approved = 1 AND is_cancelled = 0 AND is_disapproved = 0 AND maj_acc_group_id = @maj_acc_group_id AND date_entry <= @date_entry AND YEAR(date_entry) = @year ";
 
-            using (DataTable reader = genericCommands.ExecuteReader(query, parameters))
+            using (DataTable reader = _genericCommands.ExecuteReader(query, parameters))
             {
                 foreach (DataRow item in reader.Rows)
                 {
@@ -231,7 +231,7 @@ namespace Accounting.Data.Repositories
 
             string query = $"SELECT COALESCE(SUM(IF(is_debit = 1, amount, 0)),0) AS debit, COALESCE(SUM(IF(is_debit = 0, amount, 0)),0) AS credit FROM {viewTableName} WHERE funds_id = @funds_id AND is_approved = 1 AND is_cancelled = 0 AND is_disapproved = 0 AND sub_maj_acc_group_id = @sub_maj_acc_group_id AND date_entry <= @date_entry AND YEAR(date_entry) = @year ";
 
-            using (DataTable reader = genericCommands.ExecuteReader(query, parameters))
+            using (DataTable reader = _genericCommands.ExecuteReader(query, parameters))
             {
                 foreach (DataRow item in reader.Rows)
                 {
@@ -256,7 +256,7 @@ namespace Accounting.Data.Repositories
 
             string query = $"SELECT COALESCE(SUM(IF(is_debit = 1, amount, 0)),0) AS debit, COALESCE(SUM(IF(is_debit = 0, amount, 0)),0) AS credit FROM {viewTableName} WHERE funds_id = @funds_id AND is_approved =1 AND is_cancelled = 0 AND is_disapproved = 0 AND general_ledger_accounts_id = @general_ledger_accounts_id AND date_entry <= @date_entry AND YEAR(date_entry) = @year ";
 
-            using (DataTable reader = genericCommands.ExecuteReader(query, parameters))
+            using (DataTable reader = _genericCommands.ExecuteReader(query, parameters))
             {
                 foreach (DataRow item in reader.Rows)
                 {
@@ -282,7 +282,7 @@ namespace Accounting.Data.Repositories
 
             string query = $"SELECT SUM(CASE WHEN is_debit = 1 THEN amount ELSE 0 END) AS total_debit, SUM(CASE WHEN is_debit = 0 THEN amount ELSE 0 END) AS total_credit FROM {viewTableName} WHERE funds_id = @funds_id AND general_ledger_accounts_id = @general_ledger_accounts_id AND YEAR(date_entry) = @year AND is_approved = 1 AND is_cancelled = 0 AND is_disapproved = 0 AND  subsidiary_ledger_accounts_id = @subsidiary_ledger_accounts_id GROUP BY subsidiary_ledger_accounts_id";
 
-            using (DataTable record = genericCommands.ExecuteReader(query, parameters))
+            using (DataTable record = _genericCommands.ExecuteReader(query, parameters))
             {
                 if (record.Rows.Count < 1)
                 {

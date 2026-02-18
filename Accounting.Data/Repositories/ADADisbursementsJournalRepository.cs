@@ -8,11 +8,11 @@ namespace Accounting.Data.Repositories
     public class ADADisbursementsJournalRepository : IADADisbursementsJournalRepository
     {
         private const string tableName = "ada_disbursement_journal";
-        private IGenericCommands genericCommands;
+        private readonly IGenericCommands _genericCommands;
 
         public ADADisbursementsJournalRepository(IGenericCommands genericCommands)
         {
-            this.genericCommands = genericCommands;
+            _genericCommands = genericCommands ?? throw new ArgumentNullException(nameof(genericCommands));
         }
 
         public bool Delete(List<ADADisbursementsJournalModel> entityList)
@@ -46,7 +46,7 @@ namespace Accounting.Data.Repositories
 
             string query = $"SELECT * FROM {tableName} WHERE jev_id = @jev_id";
 
-            DataTable dataTable = genericCommands.ExecuteReader(query, parameters);
+            DataTable dataTable = _genericCommands.ExecuteReader(query, parameters);
 
             if (dataTable.Rows.Count > 0)
             {
@@ -75,7 +75,7 @@ namespace Accounting.Data.Repositories
             };
 
             string query = $"INSERT INTO {tableName} (jev_id, ada_no, dv_no) VALUES (@jev_id, @ada_no, @dv_no)";
-            return genericCommands.ExecuteNonQuery(query, parameters);
+            return _genericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public bool Update(ADADisbursementsJournalModel entity)
@@ -93,7 +93,7 @@ namespace Accounting.Data.Repositories
             };
 
             string query = $"UPDATE {tableName} SET ada_no = @ada_no, dv_no = @dv_no WHERE jev_id = @jev_id";
-            return genericCommands.ExecuteNonQuery(query, parameters);
+            return _genericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public Dictionary<string, string> GetViewRecordByJevID(int jevId)
@@ -107,7 +107,7 @@ namespace Accounting.Data.Repositories
 
             string query = $"SELECT * FROM {tableName} WHERE jev_id = @jev_id";
 
-            DataTable dataTable = genericCommands.ExecuteReader(query, parameters);
+            DataTable dataTable = _genericCommands.ExecuteReader(query, parameters);
 
             if (dataTable.Rows.Count > 0)
             {
@@ -131,7 +131,7 @@ namespace Accounting.Data.Repositories
                 };
 
                 string query = $"SELECT id FROM {tableName} WHERE jev_id = @jev_id";
-                string queryResult = genericCommands.ExecuteScalar(query, parameters);
+                string queryResult = _genericCommands.ExecuteScalar(query, parameters);
 
                 // if query is not null, means found some record, so true
                 if (!string.IsNullOrEmpty(queryResult)) return true;
@@ -153,7 +153,7 @@ namespace Accounting.Data.Repositories
             };
 
             string query = $"DELETE FROM {tableName} WHERE jev_id = @jev_id";
-            return genericCommands.ExecuteNonQuery(query, parameters);
+            return _genericCommands.ExecuteNonQuery(query, parameters);
         }
     }
 }

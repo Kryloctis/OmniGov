@@ -9,11 +9,11 @@ namespace Accounting.Data.Repositories
     {
         private readonly string tableName = "general_journal";
         private readonly string viewTableName = "view_general_journal";
-        private IGenericCommands genericCommands;
+        private readonly IGenericCommands _genericCommands;
 
         public GeneralJournalRepository(IGenericCommands genericCommands)
         {
-            this.genericCommands = genericCommands;
+            _genericCommands = genericCommands ?? throw new ArgumentNullException(nameof(genericCommands));
         }
 
         public bool Delete(List<GeneralJournalModel> entityList)
@@ -52,7 +52,7 @@ namespace Accounting.Data.Repositories
             };
 
             string query = $"INSERT INTO {tableName} (jev_id, dv_no, check_no, or_no) VALUES (@jev_id, @dv_no, @check_no, @or_no);";
-            return genericCommands.ExecuteNonQuery(query, parameters);
+            return _genericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public bool Update(GeneralJournalModel entity)
@@ -70,7 +70,7 @@ namespace Accounting.Data.Repositories
             string query = $"SELECT id FROM {tableName} WHERE jev_id = @jev_id";
 
             // if query is not null, means found some record, so true
-            return !string.IsNullOrEmpty(genericCommands.ExecuteScalar(query, parameters));
+            return !string.IsNullOrEmpty(_genericCommands.ExecuteScalar(query, parameters));
         }
 
         public bool UpdateByJevId(GeneralJournalModel entity)
@@ -84,7 +84,7 @@ namespace Accounting.Data.Repositories
             };
 
             string query = $"UPDATE {tableName} SET dv_no = @dv_no, check_no = @check_no, or_no = @or_no WHERE jev_id = @jev_id";
-            return genericCommands.ExecuteNonQuery(query, parameters);
+            return _genericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public Dictionary<string, string> GetViewRecordByJevID(int jevId)
@@ -98,7 +98,7 @@ namespace Accounting.Data.Repositories
 
             string query = $"SELECT funds_id, journals_id, jev_no, date_entry, ref_no, payee, explanation, is_approved, created_at, created_by, updated_at, updated_by, general_journal_id, dv_no, check_no, or_no FROM {viewTableName} WHERE jev_id = @jev_id";
 
-            DataTable dataTable = genericCommands.ExecuteReader(query, parameters);
+            DataTable dataTable = _genericCommands.ExecuteReader(query, parameters);
 
             if (dataTable.Rows.Count > 0)
             {
@@ -120,7 +120,7 @@ namespace Accounting.Data.Repositories
             };
 
             string query = $"DELETE FROM {tableName} WHERE jev_id = @id";
-            return genericCommands.ExecuteNonQuery(query, parameters);
+            return _genericCommands.ExecuteNonQuery(query, parameters);
         }
     }
 }

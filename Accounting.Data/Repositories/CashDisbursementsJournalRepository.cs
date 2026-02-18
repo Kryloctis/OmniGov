@@ -9,13 +9,13 @@ namespace Accounting.Data.Repositories
 {
     internal class CashDisbursementsJournalRepository : ICashDisbursementsJournalRepository
     {
-        private IGenericCommands genericCommands;
+        private readonly IGenericCommands _genericCommands;
         private const string tableName = "cash_disbursement_journal";
         private const string viewTableName = "view_cash_disbursement_journal";
 
         public CashDisbursementsJournalRepository(IGenericCommands genericCommands)
         {
-            this.genericCommands = genericCommands;
+            _genericCommands = genericCommands ?? throw new ArgumentNullException(nameof(genericCommands));
         }
 
         public bool Delete(List<CashDisbursementsJournalModel> entityList)
@@ -54,7 +54,7 @@ namespace Accounting.Data.Repositories
             };
 
             string query = $"INSERT INTO {tableName} (jev_id, disbursing_officers_id, dv_no, date_paid) VALUES (@jev_id, @disbursing_officers_id, @dv_no, @date_paid)";
-            return genericCommands.ExecuteNonQuery(query, parameters);
+            return _genericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public bool Update(CashDisbursementsJournalModel entity)
@@ -73,7 +73,7 @@ namespace Accounting.Data.Repositories
             };
 
             string query = $"UPDATE {tableName} SET disbursing_officers_id = @disbursing_officers_id, dv_no = @dv_no, date_paid = @date_paid WHERE jev_id = @jev_id";
-            return genericCommands.ExecuteNonQuery(query, parameters);
+            return _genericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public bool JevIdExist(int jevId)
@@ -86,7 +86,7 @@ namespace Accounting.Data.Repositories
             string query = $"SELECT id FROM {tableName} WHERE jev_id = @jev_id";
 
             // if query is not null, means found some record, so true
-            return !string.IsNullOrEmpty(genericCommands.ExecuteScalar(query, parameters));
+            return !string.IsNullOrEmpty(_genericCommands.ExecuteScalar(query, parameters));
         }
 
         public Dictionary<string, string> GetViewRecordByJevID(int jevId)
@@ -100,7 +100,7 @@ namespace Accounting.Data.Repositories
 
             string query = $"SELECT id, disbursing_officers_id, dv_no, date_paid, first_name, mid_initial, last_name, full_name, job_title FROM {viewTableName} WHERE jev_id = @jev_id";
 
-            DataTable dataTable = genericCommands.ExecuteReader(query, parameters);
+            DataTable dataTable = _genericCommands.ExecuteReader(query, parameters);
 
             if (dataTable.Rows.Count > 0)
             {
@@ -122,7 +122,7 @@ namespace Accounting.Data.Repositories
             };
 
             string query = $"DELETE FROM {tableName} WHERE jev_id = @id";
-            return genericCommands.ExecuteNonQuery(query, parameters);
+            return _genericCommands.ExecuteNonQuery(query, parameters);
         }
     }
 }
