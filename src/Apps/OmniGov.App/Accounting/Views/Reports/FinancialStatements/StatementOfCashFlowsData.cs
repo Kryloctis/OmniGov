@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-
 namespace OmniGov.App.Accounting.Views.Reports.FinancialStatements
 {
     public partial class StatementOfCashFlowsData

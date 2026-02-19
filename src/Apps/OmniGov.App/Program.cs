@@ -4,8 +4,6 @@ using Microsoft.Extensions.DependencyInjection;
 using OmniGov.App.Views.SignIn;
 using OmniGov.Core.Services;
 using PropertyAssessment.Data.Services;
-using System;
-using System.Windows.Forms;
 using Treasury.Data.Services;
 
 namespace OmniGov.App

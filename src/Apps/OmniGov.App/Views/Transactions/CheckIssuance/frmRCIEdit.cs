@@ -1,9 +1,7 @@
 using OmniGov.App.Helpers;
 using OmniGov.App.Views.Transactions.CheckIssuance.Deductions;
 using OmniGov.App.Views.Transactions.CheckIssuance.Obligations;
-using System;
 using System.Data;
-using System.Windows.Forms;
 using Treasury.Data.Factories;
 using Treasury.Domain.Entities;
 

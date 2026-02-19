@@ -6,11 +6,7 @@ using OmniGov.App.Views.Manage.FunctionProgramProject.FunctionProgramProject;
 using OmniGov.App.Views.Manage.FunctionProgramProject.OthersFunctionProgramProject;
 using OmniGov.Core.Entities;
 using OmniGov.Core.Factories;
-using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Drawing;
-using System.Windows.Forms;
 
 namespace OmniGov.App.Views.Manage.FunctionProgramProject
 {

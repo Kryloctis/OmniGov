@@ -1,5 +1,6 @@
+using OmniGov.App.Accounting.Views.Reports.JournalEntryVoucher;
 
-namespace OmniGov.App.Accounting.Views.Reports.JEV
+namespace OmniGov.App.Accounting.Views.Reports.JournalEntryVoucher
 {
     partial class frmJEVReport
     {

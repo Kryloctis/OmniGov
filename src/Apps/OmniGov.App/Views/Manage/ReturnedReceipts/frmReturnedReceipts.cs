@@ -1,6 +1,4 @@
 using OmniGov.App.Helpers;
-using System;
-using System.Windows.Forms;
 using Treasury.Data.Factories;
 
 namespace OmniGov.App.Views.Manage.ReturnedReceipts

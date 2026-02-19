@@ -3,12 +3,9 @@ using OmniGov.App.Properties;
 using OmniGov.App.Views.SignIn;
 using OmniGov.Core.Entities;
 using OmniGov.Core.Factories;
-using System;
 using System.ComponentModel;
 using System.Data;
-using System.Linq;
 using System.Text;
-using System.Windows.Forms;
 
 namespace OmniGov.App.Views.Dashboard.MyAccount
 {

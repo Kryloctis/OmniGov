@@ -1,10 +1,7 @@
 using OmniGov.App.Helpers;
 using OmniGov.App.Views.Manage.TaxPayers;
 using OmniGov.App.Views.Transactions.Payments;
-using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Windows.Forms;
 using Treasury.Data.Factories;
 using Treasury.Domain.Entities;
 

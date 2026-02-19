@@ -2,7 +2,6 @@
 using PropertyAssessment.Data.Repositories;
 using PropertyAssessment.Domain.Interfaces;
 using PropertyAssessment.Domain.Interfaces.Factories;
-using System;
 
 namespace PropertyAssessment.Data.Factories
 {

@@ -22,8 +22,6 @@ using OmniGov.App.Views.Transactions.Payments.PaymentHistory;
 using OmniGov.App.Views.Transactions.Payments.RealProperty;
 using OmniGov.App.Views.Transactions.ReceiptsIssued;
 using OmniGov.App.Views.Transactions.ReleasedAndUnReleasedChecks;
-using System;
-using System.Windows.Forms;
 
 namespace OmniGov.App.Views.Dashboard.Treasury
 {

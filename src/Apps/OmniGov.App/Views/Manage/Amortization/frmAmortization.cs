@@ -2,9 +2,6 @@ using Accounting.Data.Factories;
 using Accounting.Domain.Entities;
 using OmniGov.App.Helpers;
 using OmniGov.App.Views.Manage.AmortizationSchedule;
-using System;
-using System.Collections.Generic;
-using System.Windows.Forms;
 
 namespace OmniGov.App.Views.Manage.Amortization
 {

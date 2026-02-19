@@ -1,4 +1,4 @@
-namespace OmniGov.App.Accounting.Views.JEV.JournalForms
+namespace OmniGov.App.Accounting.Views.JournalEntryVoucher.JournalForms
 {
     partial class ucAuthDbtAccDsbrsmntJrnl
     {

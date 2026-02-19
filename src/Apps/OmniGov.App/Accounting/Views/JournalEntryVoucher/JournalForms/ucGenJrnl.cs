@@ -1,8 +1,7 @@
 using Accounting.Data.Factories;
 using Accounting.Domain.Entities;
-using System.Windows.Forms;
 
-namespace OmniGov.App.Accounting.Views.JEV.JournalForms
+namespace OmniGov.App.Accounting.Views.JournalEntryVoucher.JournalForms
 {
     public partial class ucGenJrnl : UserControl
     {

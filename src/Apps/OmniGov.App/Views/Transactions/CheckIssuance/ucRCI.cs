@@ -2,11 +2,8 @@ using OmniGov.App.Helpers;
 using OmniGov.App.Views.Transactions.CheckIssuance.Deductions;
 using OmniGov.App.Views.Transactions.CheckIssuance.Obligations;
 using OmniGov.Core.Factories;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Windows.Forms;
 using Treasury.Data.Factories;
 
 namespace OmniGov.App.Views.Transactions.CheckIssuance

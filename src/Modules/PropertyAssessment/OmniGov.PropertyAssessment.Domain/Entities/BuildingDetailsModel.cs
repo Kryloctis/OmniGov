@@ -1,5 +1,3 @@
-using System;
-
 namespace PropertyAssessment.Domain.Entities
 {
     public class BuildingDetailsModel

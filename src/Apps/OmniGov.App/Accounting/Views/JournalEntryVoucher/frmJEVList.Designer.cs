@@ -1,6 +1,6 @@
-using OmniGov.App.Accounting.Views.JEV;
+using OmniGov.App.Accounting.Views.JournalEntryVoucher;
 
-namespace OmniGov.App.Accounting.Views.JEV
+namespace OmniGov.App.Accounting.Views.JournalEntryVoucher
 {
     partial class frmJevList
     {

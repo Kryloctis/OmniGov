@@ -1,10 +1,6 @@
 ﻿using Microsoft.Reporting.WinForms;
 using OmniGov.App.Helpers;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Windows.Forms;
 using Treasury.Data.Factories;
 
 namespace OmniGov.App.Views.Transactions.Biddings.BiddingReports

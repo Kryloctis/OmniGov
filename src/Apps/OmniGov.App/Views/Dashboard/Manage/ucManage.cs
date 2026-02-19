@@ -15,8 +15,6 @@ using OmniGov.App.Views.Manage.RptPenalties;
 using OmniGov.App.Views.Manage.RptTaxRates;
 using OmniGov.App.Views.Manage.Signatories;
 using OmniGov.App.Views.Manage.Users;
-using System;
-using System.Windows.Forms;
 
 namespace OmniGov.App.Views.Dashboard.Manage
 {

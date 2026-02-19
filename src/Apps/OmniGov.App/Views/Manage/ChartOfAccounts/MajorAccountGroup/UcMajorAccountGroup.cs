@@ -1,8 +1,6 @@
 using OmniGov.App.Helpers;
 using OmniGov.Core.Factories;
-using System;
 using System.Data;
-using System.Windows.Forms;
 
 namespace OmniGov.App.Views.Manage.ChartOfAccounts.MajorAccountGroup
 {

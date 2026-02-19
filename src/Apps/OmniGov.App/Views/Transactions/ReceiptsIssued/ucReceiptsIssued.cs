@@ -1,9 +1,7 @@
 using OmniGov.App.Helpers;
 using OmniGov.Core.Factories;
-using System;
 using System.ComponentModel;
 using System.Data;
-using System.Windows.Forms;
 using Treasury.Data.Factories;
 
 namespace OmniGov.App.Views.Transactions.ReceiptsIssued

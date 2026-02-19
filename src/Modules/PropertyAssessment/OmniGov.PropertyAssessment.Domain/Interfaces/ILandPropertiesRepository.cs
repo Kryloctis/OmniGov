@@ -1,6 +1,5 @@
 using OmniGov.Core.Interfaces.Repositories;
 using PropertyAssessment.Domain.Entities;
-using System.Collections.Generic;
 
 namespace PropertyAssessment.Domain.Interfaces
 {

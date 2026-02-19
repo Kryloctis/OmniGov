@@ -1,13 +1,10 @@
 ﻿using Accounting.Data.Factories;
 using Microsoft.Reporting.WinForms;
 using OmniGov.App.Helpers;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Windows.Forms;
 
-namespace OmniGov.App.Accounting.Views.Reports.JEV
+namespace OmniGov.App.Accounting.Views.Reports.JournalEntryVoucher
 {
     public partial class frmJEVReport : Form
     {

@@ -1,8 +1,6 @@
 using OmniGov.Core.Interfaces.Services;
 using PropertyAssessment.Domain.Entities;
 using PropertyAssessment.Domain.Interfaces;
-using System;
-using System.Collections.Generic;
 using System.Data;
 
 namespace PropertyAssessment.Data.Repositories

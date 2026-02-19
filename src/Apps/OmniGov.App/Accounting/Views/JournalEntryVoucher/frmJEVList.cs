@@ -3,14 +3,10 @@ using Accounting.Domain.Entities;
 using OmniGov.App.Accounting.Views.Dashboard;
 using OmniGov.App.Helpers;
 using OmniGov.Core.Factories;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Linq;
-using System.Windows.Forms;
 
-namespace OmniGov.App.Accounting.Views.JEV
+namespace OmniGov.App.Accounting.Views.JournalEntryVoucher
 {
     public partial class frmJevList : Form
     {
@@ -558,4 +554,3 @@ namespace OmniGov.App.Accounting.Views.JEV
         }
     }
 }
-

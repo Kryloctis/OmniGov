@@ -1,18 +1,13 @@
 using Accounting.Data.Factories;
 using Accounting.Domain.Entities;
-using OmniGov.App.Accounting.Views.JEV.JournalForms;
+using OmniGov.App.Accounting.Views.JournalEntryVoucher.JournalForms;
 using OmniGov.App.Helpers;
 using OmniGov.Core.Factories;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
 using System.Text;
-using System.Windows.Forms;
 
-namespace OmniGov.App.Accounting.Views.JEV
+namespace OmniGov.App.Accounting.Views.JournalEntryVoucher
 {
     public partial class ucJev : UserControl
     {

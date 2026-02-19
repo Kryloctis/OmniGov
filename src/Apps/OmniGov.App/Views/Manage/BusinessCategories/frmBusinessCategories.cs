@@ -1,11 +1,8 @@
 using MySql.Data.MySqlClient;
 using OmniGov.App.Helpers;
 using OmniGov.App.Views.Manage.BusinessCategories.AddOnCharges;
-using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
-using System.Windows.Forms;
 using Treasury.Data.Factories;
 using Treasury.Domain.Entities;
 

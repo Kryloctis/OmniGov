@@ -3,9 +3,6 @@ using OmniGov.App.Helpers;
 using OmniGov.App.Views.Manage.Journals.DefaultAccounts;
 using OmniGov.Core.Entities;
 using OmniGov.Core.Factories;
-using System;
-using System.Collections.Generic;
-using System.Windows.Forms;
 
 namespace OmniGov.App.Views.Manage.Journals
 {
