@@ -1,4 +1,4 @@
-using Microsoft.Reporting.WinForms;
+﻿using Microsoft.Reporting.WinForms;
 using OmniGov.App.Helpers;
 using OmniGov.Core.Factories;
 using System;
@@ -207,7 +207,7 @@ namespace OmniGov.App.Views.Reports.RCI
                 var reportParameters = new List<ReportParameter>
                 {
                     new("paramFund", fundName),
-                    new("paramLGUName", ServerHelper.selectedServer.MunicipalityName),
+                    new("paramLGUName", (ServerHelper.SelectedProfile?.Name ?? "")),
                     new("paramBankaccount", bankDetails),
                     new("paramMonth", dtpPeriodCover.Value.ToString()),
                     new("paramDepartmentHeadSignatory", departmentHeadSignatory),
@@ -257,3 +257,4 @@ namespace OmniGov.App.Views.Reports.RCI
         }
     }
 }
+

@@ -1,4 +1,4 @@
-using Microsoft.Reporting.WinForms;
+﻿using Microsoft.Reporting.WinForms;
 using OmniGov.App.Helpers;
 using System;
 using System.Collections.Generic;
@@ -133,7 +133,7 @@ namespace OmniGov.App.Views.Reports.Ltoms
             List<ReportParameter> reportParameters = new List<ReportParameter>();
 
             reportParameters.Add(new ReportParameter("paramLGU", "Titay"));
-            reportParameters.Add(new ReportParameter("paramLGU", ServerHelper.selectedServer.MunicipalityName));
+            reportParameters.Add(new ReportParameter("paramLGU", (ServerHelper.SelectedProfile?.Name ?? "")));
 
             progressCount += tasks["Initialize Parameters"];
             Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
@@ -179,3 +179,4 @@ namespace OmniGov.App.Views.Reports.Ltoms
         }
     }
 }
+

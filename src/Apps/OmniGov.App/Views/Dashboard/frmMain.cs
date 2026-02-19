@@ -1,4 +1,4 @@
-using OmniGov.App.Accounting.Views.Dashboard;
+﻿using OmniGov.App.Accounting.Views.Dashboard;
 using OmniGov.App.Budget.Views.Dashboard;
 using OmniGov.App.Helpers;
 using OmniGov.App.Views.Dashboard.Manage;
@@ -6,9 +6,7 @@ using OmniGov.App.Views.Dashboard.MyAccount;
 using OmniGov.App.Views.Dashboard.Reports;
 using OmniGov.App.Views.Dashboard.Treasury;
 using OmniGov.App.Views.SignIn;
-using System;
 using System.Diagnostics;
-using System.Windows.Forms;
 
 namespace OmniGov.App.Views.Dashboard
 {
@@ -25,6 +23,7 @@ namespace OmniGov.App.Views.Dashboard
         public frmMain(frmSignIn frmSignIn)
         {
             InitializeComponent();
+            this.ShowInTaskbar = true;
             Helper.LoadFormIcon(this);
             this.frmSignIn = frmSignIn;
             Helper.RemoveTabcontrolTabs(tabControlMain);
@@ -91,7 +90,7 @@ namespace OmniGov.App.Views.Dashboard
                     radTreasury.Checked = true;
                     break;
 
-                case "tabPageSettings":
+                case "tabPageManage":
                     ucManage.OnLoad();
                     radManage.Checked = true;
                     break;
@@ -112,9 +111,9 @@ namespace OmniGov.App.Views.Dashboard
         {
             try
             {
-                tlStrpLblServer.Text = $"Server:{ServerHelper.selectedServer.MunicipalityName}, {ServerHelper.selectedServer.ProvinceName}";
+                tlStrpLblServer.Text = $"Server: {ServerHelper.SelectedProfile?.Name} ({ServerHelper.SelectedProfile?.ProvinceName})";
                 tlStrpLblVersion.Text = $"Version:{Helper.version}";
-                tlStrpLblLoggedUser.Text = $"Logged User:{UserHelper.loggedUser.FullName}";
+                tlStrpLblLoggedUser.Text = $"Logged User:{UserHelper.loggedUser?.FullName ?? "Unknown"}";
                 VerifyUserPrivileges();
                 LoadTabPagesContents(tabControlMain);
             }
@@ -145,8 +144,7 @@ namespace OmniGov.App.Views.Dashboard
             {
                 if (Helper.MessageBoxConfirm("Logout Now?"))
                 {
-                    Close();
-                    frmSignIn.Show();
+                    this.Close();
                 }
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
@@ -154,11 +152,7 @@ namespace OmniGov.App.Views.Dashboard
 
         private void Dashboard_FormClosed(object sender, FormClosedEventArgs e)
         {
-            try
-            {
-                frmSignIn.Show();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            // Do nothing, the caller (frmSignIn) handles showing itself.
         }
 
         private void radManage_CheckedChanged(object sender, EventArgs e)

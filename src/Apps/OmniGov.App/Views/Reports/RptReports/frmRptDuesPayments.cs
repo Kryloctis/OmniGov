@@ -1,4 +1,4 @@
-using Microsoft.Reporting.WinForms;
+﻿using Microsoft.Reporting.WinForms;
 using OmniGov.App.DataSets;
 using OmniGov.App.Helpers;
 using OmniGov.App.Views.Shared;
@@ -236,7 +236,7 @@ namespace OmniGov.App.Views.Reports.RptReports
 
             var parameter = new ReportParameter[]
             {
-                new("paramLGUName", ServerHelper.selectedServer.MunicipalityName),
+                new("paramLGUName", (ServerHelper.SelectedProfile?.Name ?? "")),
                 new("paramOwner", dictTaxpayer["name"]),
                 new("paramOwerTin", dictTaxpayer["tin"]),
                 new("paramOwnerAddress", Helper.GenerateFullAddress(dictTaxpayer["address"], string.Empty,  dictTaxpayer["municipality"],  dictTaxpayer["province"])),
@@ -256,3 +256,4 @@ namespace OmniGov.App.Views.Reports.RptReports
         }
     }
 }
+

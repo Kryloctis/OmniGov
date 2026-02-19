@@ -1,4 +1,4 @@
-using Microsoft.Reporting.WinForms;
+﻿using Microsoft.Reporting.WinForms;
 using OmniGov.App.Helpers;
 using System;
 using System.ComponentModel;
@@ -84,7 +84,7 @@ namespace OmniGov.App.Views.Transactions.Auction.AuctionReports
 
                 var reportParameters = new ReportParameter[]
                 {
-                    new("paramLGU", ServerHelper.selectedServer.MunicipalityName),
+                    new("paramLGU", (ServerHelper.SelectedProfile?.Name ?? "")),
                     new("paramDateOfPublicAuction", date)
                 };
 
@@ -100,3 +100,4 @@ namespace OmniGov.App.Views.Transactions.Auction.AuctionReports
         }
     }
 }
+

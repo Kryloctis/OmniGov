@@ -1,4 +1,4 @@
-using Microsoft.Reporting.WinForms;
+﻿using Microsoft.Reporting.WinForms;
 using OmniGov.App.DataSets;
 using OmniGov.App.Helpers;
 using System;
@@ -92,7 +92,7 @@ namespace OmniGov.App.Views.Transactions.Biddings.BiddingReports
 
                 var reportParameters = new ReportParameter[]
                 {
-                    new("paramLGU", ServerHelper.selectedServer.MunicipalityName),
+                    new("paramLGU", (ServerHelper.SelectedProfile?.Name ?? "")),
                     new("paramSignatoryTitle", string.Empty),
                     new("paramSignatory", string.Empty),
                 };
@@ -109,3 +109,4 @@ namespace OmniGov.App.Views.Transactions.Biddings.BiddingReports
         }
     }
 }
+

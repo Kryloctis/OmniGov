@@ -1,4 +1,4 @@
-using Accounting.Data.Factories;
+﻿using Accounting.Data.Factories;
 using Microsoft.Reporting.WinForms;
 using OmniGov.App.Helpers;
 using OmniGov.Core.Factories;
@@ -127,7 +127,7 @@ namespace OmniGov.App.Accounting.Views.Reports.TrialBalance
 
             var parameters = new ReportParameter[]
             {
-                new ReportParameter("paramLGUName", ServerHelper.selectedServer.MunicipalityName),
+                new ReportParameter("paramLGUName", (ServerHelper.SelectedProfile?.Name ?? "")),
                 new ReportParameter("paramFund", fundName),
                 new ReportParameter("paramCertifiedCorrectSignatory", certifiedCorrectSignatory),
                 new ReportParameter("paramCertifiedCorrectSignatoryTitle", certifiedCorrectSignatoryTitle),
@@ -164,4 +164,6 @@ namespace OmniGov.App.Accounting.Views.Reports.TrialBalance
         }
     }
 }
+
+
 

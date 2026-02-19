@@ -1,4 +1,4 @@
-using OmniGov.App.Helpers;
+﻿using OmniGov.App.Helpers;
 using OmniGov.Core.Entities;
 using OmniGov.Core.Factories;
 using System;
@@ -30,7 +30,7 @@ namespace OmniGov.App.Views.Manage.Barangay
             {
                 Code = txtCode.Text.Trim(),
                 Name = txtName.Text.Trim(),
-                MunicipalityId = ServerHelper.selectedServer.LguId,
+                MunicipalityId = (ServerHelper.SelectedProfile?.Id ?? 0),
             };
         }
 
@@ -124,4 +124,6 @@ namespace OmniGov.App.Views.Manage.Barangay
         }
     }
 }
+
+
 

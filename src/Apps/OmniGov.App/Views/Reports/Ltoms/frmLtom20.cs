@@ -1,4 +1,4 @@
-using Microsoft.Reporting.WinForms;
+﻿using Microsoft.Reporting.WinForms;
 using OmniGov.App.DataSets;
 using OmniGov.App.Helpers;
 using OmniGov.App.Views.Shared;
@@ -182,7 +182,7 @@ namespace OmniGov.App.Views.Reports.Ltoms
 
                 var parameters = new ReportParameter[]
                 {
-                    new ReportParameter("paramLgu", ServerHelper.selectedServer.MunicipalityName),
+                    new ReportParameter("paramLgu", (ServerHelper.SelectedProfile?.Name ?? "")),
                     new ReportParameter("paramDeclaredOwners", result.dictDelinquentNotice["taxpayers_name"]),
                     new ReportParameter("paramSignatory", string.Empty),
                     new ReportParameter("paramSignatoryTitle", string.Empty),
@@ -229,3 +229,4 @@ namespace OmniGov.App.Views.Reports.Ltoms
         }
     }
 }
+

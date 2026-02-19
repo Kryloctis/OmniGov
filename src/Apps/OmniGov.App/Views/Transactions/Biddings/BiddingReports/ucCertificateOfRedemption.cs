@@ -1,4 +1,4 @@
-using Microsoft.Reporting.WinForms;
+﻿using Microsoft.Reporting.WinForms;
 using OmniGov.App.Helpers;
 using System;
 using System.Collections.Generic;
@@ -80,7 +80,7 @@ namespace OmniGov.App.Views.Transactions.Biddings.BiddingReports
                 progressCount += tasks["Initialize Parameters"];
                 Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
 
-                reportParameters.Add(new ReportParameter("paramLGU", ServerHelper.selectedServer.MunicipalityName));
+                reportParameters.Add(new ReportParameter("paramLGU", (ServerHelper.SelectedProfile?.Name ?? "")));
                 reportParameters.Add(new ReportParameter("paramNameOfHighestBidder", nameOfBidder));
                 reportParameters.Add(new ReportParameter("paramDateOfAuction", dateOfAuction));
                 reportParameters.Add(new ReportParameter("paramOfficialReceiptNumber", receiptNumber));
@@ -133,3 +133,5 @@ namespace OmniGov.App.Views.Transactions.Biddings.BiddingReports
         }
     }
 }
+
+

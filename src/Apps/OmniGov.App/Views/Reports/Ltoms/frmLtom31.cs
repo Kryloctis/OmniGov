@@ -1,4 +1,4 @@
-using Microsoft.Reporting.WinForms;
+﻿using Microsoft.Reporting.WinForms;
 using OmniGov.App.DataSets;
 using OmniGov.App.Helpers;
 using System;
@@ -107,7 +107,7 @@ namespace OmniGov.App.Views.Reports.Ltoms
                 progressCount += tasks["Initialize Parameters"];
                 Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
 
-                reportParameters1.Add(new ReportParameter("paramLgu", ServerHelper.selectedServer.MunicipalityName));
+                reportParameters1.Add(new ReportParameter("paramLgu", (ServerHelper.SelectedProfile?.Name ?? "")));
                 progressCount += tasks["Set Parameter Values"];
 
                 Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
@@ -160,7 +160,7 @@ namespace OmniGov.App.Views.Reports.Ltoms
 
                 var reportParameters = new ReportParameter[]
                 {
-                    new ReportParameter("paramLGU", ServerHelper.selectedServer.MunicipalityName),
+                    new ReportParameter("paramLGU", (ServerHelper.SelectedProfile?.Name ?? "")),
                 };
 
                 report.DataSources.Add(new ReportDataSource(dataTable.TableName, dataTable));
@@ -185,3 +185,4 @@ namespace OmniGov.App.Views.Reports.Ltoms
         }
     }
 }
+

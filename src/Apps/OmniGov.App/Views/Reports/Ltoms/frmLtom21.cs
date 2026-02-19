@@ -1,4 +1,4 @@
-using Microsoft.Reporting.WinForms;
+﻿using Microsoft.Reporting.WinForms;
 using OmniGov.App.Helpers;
 using System;
 using System.Collections.Generic;
@@ -149,7 +149,7 @@ namespace OmniGov.App.Views.Reports.Ltoms
                 progressCount += tasks["Initialize Parameters"];
                 Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
 
-                reportParameters.Add(new ReportParameter("paramLgu", ServerHelper.selectedServer.MunicipalityName));
+                reportParameters.Add(new ReportParameter("paramLgu", (ServerHelper.SelectedProfile?.Name ?? "")));
                 reportParameters.Add(new ReportParameter("paramDeclaredOwners", dictRptAssessmentPost["taxpayer_name"]));
                 reportParameters.Add(new ReportParameter("paramSignatory", string.Empty));
                 reportParameters.Add(new ReportParameter("paramSignatoryTitle", string.Empty));
@@ -267,3 +267,4 @@ namespace OmniGov.App.Views.Reports.Ltoms
         }
     }
 }
+

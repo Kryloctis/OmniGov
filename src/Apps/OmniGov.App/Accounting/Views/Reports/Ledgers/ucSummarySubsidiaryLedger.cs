@@ -1,4 +1,4 @@
-using Accounting.Data.Factories;
+﻿using Accounting.Data.Factories;
 using Microsoft.Reporting.WinForms;
 using OmniGov.App.Helpers;
 using OmniGov.Core.Factories;
@@ -126,7 +126,7 @@ namespace OmniGov.App.Accounting.Views.Reports.Ledgers
 
             localReport.DataSources.Add(new ReportDataSource("dtSummarySubsidiaryLedger", DataTableSummarySubsidiaryLedger()));
 
-            string lguName = $"{ServerHelper.selectedServer.MunicipalityName} - {ServerHelper.selectedServer.ProvinceName}";
+            string lguName = $"{(ServerHelper.SelectedProfile?.Name ?? "")} - {(ServerHelper.SelectedProfile?.ProvinceName ?? "")}";
 
             var reportParameters = new ReportParameter[]
             {
@@ -297,4 +297,6 @@ namespace OmniGov.App.Accounting.Views.Reports.Ledgers
         }
     }
 }
+
+
 

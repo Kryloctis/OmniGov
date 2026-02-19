@@ -1,4 +1,4 @@
-using Accounting.Data.Factories;
+﻿using Accounting.Data.Factories;
 using Microsoft.Reporting.WinForms;
 using OmniGov.App.Helpers;
 using System;
@@ -200,7 +200,7 @@ namespace OmniGov.App.Accounting.Views.Reports.JEV
                 string jevNo = rprtParams.dictJev["jev_no"];
                 string fullJevNo = string.IsNullOrWhiteSpace(jevNo) ? "_ - _ - _ - _ " : $"{fundCode}-{year}-{month}-{jevNo}";
 
-                string lguName = $"{ServerHelper.selectedServer.MunicipalityName} - {ServerHelper.selectedServer.ProvinceName}";
+                string lguName = $"{(ServerHelper.SelectedProfile?.Name ?? "")} - {(ServerHelper.SelectedProfile?.ProvinceName ?? "")}";
 
                 var parameters = new ReportParameter[]
                 {
@@ -287,3 +287,5 @@ namespace OmniGov.App.Accounting.Views.Reports.JEV
         }
     }
 }
+
+

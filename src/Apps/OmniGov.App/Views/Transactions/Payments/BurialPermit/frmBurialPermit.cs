@@ -1,4 +1,4 @@
-using OmniGov.App.Helpers;
+﻿using OmniGov.App.Helpers;
 using OmniGov.Core.Factories;
 using System;
 using System.Collections.Generic;
@@ -159,7 +159,7 @@ namespace OmniGov.App.Views.Transactions.Payments.BurialPermit
 
             var dictReportParameters = new Dictionary<string, string>()
             {
-                {"paramMunicipality", ServerHelper.selectedServer.MunicipalityName.ToUpper()},
+                {"paramMunicipality", (ServerHelper.SelectedProfile?.Name ?? "").ToUpper()},
                 {"paramTransactionDate", ucPayment.PaymentCollectionsModel().PaymentDate.ToString()},
                 {"paramRemainName", remainName},
                 {"paramRemainSex", dictRegistry["sex"]},
@@ -290,3 +290,4 @@ namespace OmniGov.App.Views.Transactions.Payments.BurialPermit
         }
     }
 }
+

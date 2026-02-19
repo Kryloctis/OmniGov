@@ -1,51 +1,45 @@
 using OmniGov.App.Helpers;
-using OmniGov.Core.Factories;
-using System;
-using System.Collections.Generic;
+using OmniGov.Core.Interfaces.Factories;
+using OmniGov.Core.Models;
+using OmniGov.Core.Services;
 using System.ComponentModel;
-using System.Data;
-using System.Linq;
-using System.Windows.Forms;
 
 namespace OmniGov.App.Views.SignIn
 {
     public partial class frmDatabaseConfig : Form
     {
         private frmSignIn _frmSignIn;
+        private List<LguProfile> _loadedProfiles = new();
 
         public frmDatabaseConfig(frmSignIn frmSignIn)
-
         {
             InitializeComponent();
             Helper.LoadFormIcon(this);
             _frmSignIn = frmSignIn;
         }
 
-        private void LoadServers(List<ServerHelper> availableServers)
+        private void LoadServers(List<LguProfile> availableProfiles)
         {
-            int totalServers = availableServers.Count;
+            _loadedProfiles = availableProfiles;
+            int totalServers = availableProfiles.Count;
             int serverCount = 0;
 
             flowLayoutPanel1.Controls.Clear();
             progressBar1.Value = 0;
 
-            foreach (var model in availableServers)
+            foreach (var profile in availableProfiles)
             {
-                int lguId = model.LguId;
-                string municipalityName = model.MunicipalityName;
-                string provinceName = model.ProvinceName;
-
                 var radioButton = new RadioButton()
                 {
-                    Tag = lguId,
-                    Text = $"{municipalityName}, {provinceName}",
-                    Name = $"radBtn{municipalityName}{provinceName}",
+                    Tag = profile.Id,
+                    Text = $"{profile.Name}, {profile.ProvinceName}",
+                    Name = $"radBtn{profile.Name}{profile.ProvinceName}",
                     AutoSize = true
                 };
 
                 flowLayoutPanel1.Controls.Add(radioButton);
                 serverCount++;
-                int progressPercentage = (serverCount * 100) / totalServers;
+                int progressPercentage = totalServers > 0 ? (serverCount * 100) / totalServers : 0;
                 progressBar1.Value = progressPercentage;
             }
 
@@ -54,42 +48,28 @@ namespace OmniGov.App.Views.SignIn
 
         private void SelectCurrentServer()
         {
-            if (flowLayoutPanel1.Controls.OfType<RadioButton>().Count() < 1 || ServerHelper.selectedServer == null)
+            if (flowLayoutPanel1.Controls.OfType<RadioButton>().Count() < 1 || ServerHelper.SelectedProfile == null)
                 return;
 
             foreach (RadioButton radioButton in flowLayoutPanel1.Controls)
             {
-                if (Convert.ToInt32(radioButton.Tag) == ServerHelper.selectedServer.LguId)
-
+                if (Convert.ToInt32(radioButton.Tag) == ServerHelper.SelectedProfile.Id)
                     radioButton.Select();
             }
         }
 
         private bool SetSelectedServer()
         {
-            if (flowLayoutPanel1.Controls.OfType<RadioButton>().Count() < 1)
-                return false;
+            var selectedRadio = flowLayoutPanel1.Controls.OfType<RadioButton>().FirstOrDefault(r => r.Checked);
+            if (selectedRadio == null) return false;
 
-            foreach (RadioButton radioButton in flowLayoutPanel1.Controls)
+            int selectedId = Convert.ToInt32(selectedRadio.Tag);
+            var profile = _loadedProfiles.FirstOrDefault(p => p.Id == selectedId);
+
+            if (profile != null)
             {
-                if (radioButton.Checked)
-                {
-                    var radTag = radioButton.Tag;
-                    var selectedModel = ServerHelper.ServerProfiles().Where(g => g.LguId == Convert.ToInt32(radTag)).Select(m => new ServerHelper
-                    {
-                        LguId = m.LguId,
-                        MunicipalityCode = m.MunicipalityCode,
-                        MunicipalityName = m.MunicipalityName,
-                        ProvinceCode = m.ProvinceCode,
-                        ProvinceName = m.ProvinceName,
-                        LfsInstance = m.LfsInstance,
-                        RpmsInstance = m.RpmsInstance,
-                        Emblem = m.Emblem
-                    }).First();
-
-                    ServerHelper.selectedServer = selectedModel;
-                    return true;
-                }
+                ServerHelper.SelectedProfile = profile;
+                return true;
             }
             return false;
         }
@@ -119,14 +99,16 @@ namespace OmniGov.App.Views.SignIn
         {
             try
             {
-                if (SetSelectedServer())
+                if (SetSelectedServer() && ServerHelper.SelectedProfile != null)
                 {
-                    _frmSignIn.lblServer.Text = $"(F12) Server: {ServerHelper.selectedServer.MunicipalityName}, {ServerHelper.selectedServer.ProvinceName}";
-                    Factory.ServerRepository().ApplyConnection(ServerHelper.selectedServer.LfsInstance);
-                    Factory.ServerRepository().ApplyConnection(ServerHelper.selectedServer.RpmsInstance);
+                    var profile = ServerHelper.SelectedProfile;
+                    _frmSignIn.UpdateServerLabel(profile);
+
+                    var factory = ServiceLocator.GetRequiredService<IRepositoryFactory>();
+                    factory.ServerRepository().ApplyProfile(profile);
+
                     this.Close();
                 }
-                ;
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -135,11 +117,11 @@ namespace OmniGov.App.Views.SignIn
         {
             try
             {
-                var availableServers = ServerHelper.AvailableServerList();
+                var availableProfiles = ServerHelper.GetAvailableProfiles();
                 Invoke((MethodInvoker)delegate
-                    {
-                        LoadServers(availableServers);
-                    });
+                {
+                    LoadServers(availableProfiles);
+                });
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }

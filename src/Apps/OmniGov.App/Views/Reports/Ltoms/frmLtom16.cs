@@ -1,4 +1,4 @@
-using Microsoft.Reporting.WinForms;
+﻿using Microsoft.Reporting.WinForms;
 using OmniGov.App.DataSets;
 using OmniGov.App.Helpers;
 using OmniGov.App.Views.Shared;
@@ -100,7 +100,7 @@ namespace OmniGov.App.Views.Reports.Ltoms
 
                 var reportParameters = new ReportParameter[]
                 {
-                    new("paramLgu", ServerHelper.selectedServer.MunicipalityName),
+                    new("paramLgu", (ServerHelper.SelectedProfile?.Name ?? "")),
                     new("paramAsOf", parameter.ToString()),
                     new("paramDate", parameter.ToString()),
                     new("paramSignatory", ""),
@@ -150,3 +150,4 @@ namespace OmniGov.App.Views.Reports.Ltoms
         }
     }
 }
+

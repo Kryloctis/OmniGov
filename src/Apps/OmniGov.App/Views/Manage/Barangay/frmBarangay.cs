@@ -1,4 +1,4 @@
-using OmniGov.App.Helpers;
+﻿using OmniGov.App.Helpers;
 using OmniGov.Core.Entities;
 using OmniGov.Core.Factories;
 using System;
@@ -104,7 +104,7 @@ namespace OmniGov.App.Views.Manage.Barangay
                 };
                 dataTable.Columns.AddRange(dataColumns);
 
-                var dtBarangayFromDb = Factory.BarangayRepository().GetRecordsBySearch(parameters.rowLimit, parameters.searchKey, ServerHelper.selectedServer.LguId);
+                var dtBarangayFromDb = Factory.BarangayRepository().GetRecordsBySearch(parameters.rowLimit, parameters.searchKey, (ServerHelper.SelectedProfile?.Id ?? 0));
                 int totalProgressCount = dtBarangayFromDb.Rows.Count;
                 int progressCount = 0;
 
@@ -166,4 +166,6 @@ namespace OmniGov.App.Views.Manage.Barangay
         }
     }
 }
+
+
 

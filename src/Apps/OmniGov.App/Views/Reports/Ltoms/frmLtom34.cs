@@ -1,4 +1,4 @@
-using Microsoft.Reporting.WinForms;
+﻿using Microsoft.Reporting.WinForms;
 using OmniGov.App.Helpers;
 using System;
 using System.Collections.Generic;
@@ -89,7 +89,7 @@ namespace OmniGov.App.Views.Reports.Ltoms
                 Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
 
                 // Set Parameter Values
-                reportParameters.Add(new ReportParameter("paramLGU", ServerHelper.selectedServer.MunicipalityName));
+                reportParameters.Add(new ReportParameter("paramLGU", (ServerHelper.SelectedProfile?.Name ?? "")));
                 reportParameters.Add(new ReportParameter("paramSignatoryTitle", string.Empty));
                 reportParameters.Add(new ReportParameter("paramSignatory", string.Empty));
 
@@ -197,3 +197,4 @@ namespace OmniGov.App.Views.Reports.Ltoms
         }
     }
 }
+

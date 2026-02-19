@@ -1,4 +1,4 @@
-using Microsoft.Reporting.WinForms;
+﻿using Microsoft.Reporting.WinForms;
 using OmniGov.App.Helpers;
 using OmniGov.Core.Factories;
 using System;
@@ -191,7 +191,7 @@ namespace OmniGov.App.Views.Reports.DailyCashPositionReport
                 string preparedBySignatory = string.Empty;
                 string preparedBySignatoryTitle = string.Empty;
 
-                string lguName = $"{ServerHelper.selectedServer.MunicipalityName} - {ServerHelper.selectedServer.ProvinceName}";
+                string lguName = $"{(ServerHelper.SelectedProfile?.Name ?? "")} - {(ServerHelper.SelectedProfile?.ProvinceName ?? "")}";
 
                 ParseSignatory(dictPreparedBySignatory, ref preparedBySignatory, ref preparedBySignatoryTitle);
 
@@ -226,3 +226,4 @@ namespace OmniGov.App.Views.Reports.DailyCashPositionReport
         }
     }
 }
+

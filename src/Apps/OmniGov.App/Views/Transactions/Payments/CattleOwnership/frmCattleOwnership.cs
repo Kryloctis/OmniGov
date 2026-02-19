@@ -1,4 +1,4 @@
-using OmniGov.App.Helpers;
+﻿using OmniGov.App.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
@@ -107,8 +107,8 @@ namespace OmniGov.App.Views.Transactions.Payments.CattleOwnership
 
             var dictParameters = new Dictionary<string, string>()
             {
-                {"paramMunicipality", ServerHelper.selectedServer.MunicipalityName.ToUpper()},
-                {"paramProvince", ServerHelper.selectedServer.ProvinceName.ToUpper()},
+                {"paramMunicipality", (ServerHelper.SelectedProfile?.Name ?? "").ToUpper()},
+                {"paramProvince", (ServerHelper.SelectedProfile?.ProvinceName ?? "").ToUpper()},
                 {"paramTransactionDate", ucPayment.PaymentCollectionsModel().PaymentDate.ToString()},
                 {"paramOwnerName", dictTaxpayer["taxpayers_name"]},
                 {"paramOwnerMunicipality", dictTaxpayer["taxpayers_municipality"]},
@@ -235,3 +235,4 @@ namespace OmniGov.App.Views.Transactions.Payments.CattleOwnership
         }
     }
 }
+

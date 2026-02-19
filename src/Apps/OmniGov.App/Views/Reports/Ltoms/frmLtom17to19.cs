@@ -1,4 +1,4 @@
-using Microsoft.Reporting.WinForms;
+﻿using Microsoft.Reporting.WinForms;
 using OmniGov.App.DataSets;
 using OmniGov.App.Helpers;
 using OmniGov.App.Views.Shared;
@@ -210,7 +210,7 @@ namespace OmniGov.App.Views.Reports.Ltoms
                 string reportPath;
                 var propertyLocation = Helper.GenerateFullAddress(string.Empty, result.dictDelinquentNotice["barangay_name"], result.dictDelinquentNotice["municipalities_name"], result.dictDelinquentNotice["provinces_name"]);
 
-                string lguName = ServerHelper.selectedServer.MunicipalityName;
+                string lguName = (ServerHelper.SelectedProfile?.Name ?? "");
 
                 var parameters = new ReportParameter[]
                 {
@@ -311,3 +311,4 @@ namespace OmniGov.App.Views.Reports.Ltoms
         }
     }
 }
+

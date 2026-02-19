@@ -1,4 +1,4 @@
-using Microsoft.Reporting.WinForms;
+﻿using Microsoft.Reporting.WinForms;
 using OmniGov.App.DataSets;
 using OmniGov.App.Helpers;
 using System;
@@ -66,7 +66,7 @@ public partial class frmAF51And57 : Form
 
         var dictParameters = new Dictionary<string, string>()
         {
-            {"paramMunicipality",ServerHelper.selectedServer.MunicipalityName.ToUpper()},
+            {"paramMunicipality",(ServerHelper.SelectedProfile?.Name ?? "").ToUpper()},
             {"paramTransactionDate",ucPayment.PaymentCollectionsModel().PaymentDate.ToString()},
             {"paramTotalPayment",ucPayment.PaymentCollectionsModel().Amount.ToString()},
             {"paramTotalPaymentWords",new Helper.AmountToWords().ConvertAmountToWords(ucPayment.PaymentCollectionsModel().Amount.ToString())},
@@ -229,3 +229,4 @@ public partial class frmAF51And57 : Form
         catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
     }
 }
+

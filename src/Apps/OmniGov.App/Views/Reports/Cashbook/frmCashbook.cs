@@ -1,4 +1,4 @@
-using Microsoft.Reporting.WinForms;
+﻿using Microsoft.Reporting.WinForms;
 using OmniGov.App.Helpers;
 using System;
 using System.ComponentModel;
@@ -170,7 +170,7 @@ namespace OmniGov.App.Views.Reports.Cashbook
 
                 var localReport = reportViewer1.LocalReport;
                 var account = cmbxBank.Text;
-                string lguName = $"{ServerHelper.selectedServer.MunicipalityName} - {ServerHelper.selectedServer.ProvinceName}";
+                string lguName = $"{(ServerHelper.SelectedProfile?.Name ?? "")} - {(ServerHelper.SelectedProfile?.ProvinceName ?? "")}";
 
                 var parameters = new ReportParameter[]
                 {
@@ -192,3 +192,4 @@ namespace OmniGov.App.Views.Reports.Cashbook
         }
     }
 }
+

@@ -1,4 +1,4 @@
-using Microsoft.Reporting.WinForms;
+﻿using Microsoft.Reporting.WinForms;
 using OmniGov.App.DataSets;
 using OmniGov.App.Helpers;
 using OmniGov.Core.Entities;
@@ -147,7 +147,7 @@ namespace OmniGov.App.Views.Reports.RCD
 
                 var reportParameters = new ReportParameter[]
                 {
-                    new("paramLguName", ServerHelper.selectedServer.MunicipalityName),
+                    new("paramLguName", (ServerHelper.SelectedProfile?.Name ?? "")),
                     new("paramVerfSig", string.Empty),
                     new("paramReportNo", dictRcd["report_no"]),
                     new("paramDate", dictRcd["date"]),
@@ -170,3 +170,4 @@ namespace OmniGov.App.Views.Reports.RCD
         }
     }
 }
+

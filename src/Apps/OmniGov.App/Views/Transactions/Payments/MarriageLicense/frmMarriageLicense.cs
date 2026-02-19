@@ -1,4 +1,4 @@
-using OmniGov.App.Helpers;
+﻿using OmniGov.App.Helpers;
 using OmniGov.Core.Factories;
 using System;
 using System.Collections.Generic;
@@ -129,8 +129,8 @@ namespace OmniGov.App.Views.Transactions.Payments.MarriageLicense
 
             var dictReportParameters = new Dictionary<string, string>()
             {
-                { "paramMunicipality", ServerHelper.selectedServer.MunicipalityName.ToUpper() },
-                { "paramProvince", ServerHelper.selectedServer.ProvinceName.ToUpper() },
+                { "paramMunicipality", (ServerHelper.SelectedProfile?.Name ?? "").ToUpper() },
+                { "paramProvince", (ServerHelper.SelectedProfile?.ProvinceName ?? "").ToUpper() },
                 { "paramRegistryNo", ucMarriageDetails.GetMarriageDetails().registryNo },
                 { "paramDateIssued", ucMarriageDetails.GetMarriageDetails().issuedOn.ToString()},
                 { "paramGroomName", groomName },
@@ -303,3 +303,4 @@ namespace OmniGov.App.Views.Transactions.Payments.MarriageLicense
         }
     }
 }
+

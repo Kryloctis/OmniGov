@@ -1,4 +1,4 @@
-using Microsoft.Reporting.WinForms;
+﻿using Microsoft.Reporting.WinForms;
 using OmniGov.App.Helpers;
 using OmniGov.Core.Factories;
 using System;
@@ -157,7 +157,7 @@ namespace OmniGov.App.Views.Reports.ConsolidatedReceipts
                 ParseSignatory(dictTreasurer, ref treasurer, ref treasurerTitle);
                 ParseSignatory(dictPreparedBySignatory, ref preparedBySignatory, ref preparedBySignatoryTitle);
 
-                string lguName = $"{ServerHelper.selectedServer.MunicipalityName} - {ServerHelper.selectedServer.ProvinceName}";
+                string lguName = $"{(ServerHelper.SelectedProfile?.Name ?? "")} - {(ServerHelper.SelectedProfile?.ProvinceName ?? "")}";
 
                 var parameters = new ReportParameter[]
                 {
@@ -184,3 +184,4 @@ namespace OmniGov.App.Views.Reports.ConsolidatedReceipts
         }
     }
 }
+

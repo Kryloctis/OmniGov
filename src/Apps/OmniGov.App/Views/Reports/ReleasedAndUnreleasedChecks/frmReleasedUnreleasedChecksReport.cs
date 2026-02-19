@@ -1,4 +1,4 @@
-using Microsoft.Reporting.WinForms;
+﻿using Microsoft.Reporting.WinForms;
 using OmniGov.App.Helpers;
 using OmniGov.Core.Factories;
 using System;
@@ -196,7 +196,7 @@ namespace OmniGov.App.Views.Reports.ReleasedAndUnreleasedChecks
                 {
                     new("paramPeriodCovered", dtpPeriodCovered.Value.ToString()),
                     new("paramFund", "General Fund"),
-                    new("paramLGUName", ServerHelper.selectedServer.MunicipalityName),
+                    new("paramLGUName", (ServerHelper.SelectedProfile?.Name ?? "")),
                     new("paramBankAccount", bankDetails),
                     new("paramCertifiedCorrectSignatory", certifiedCorrectSig.signatoryName),
                     new("paramCertifiedCorrectSignatoryTitle", certifiedCorrectSig.signatoryTitle),
@@ -218,3 +218,4 @@ namespace OmniGov.App.Views.Reports.ReleasedAndUnreleasedChecks
         }
     }
 }
+

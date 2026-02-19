@@ -1,4 +1,4 @@
-using Microsoft.Reporting.WinForms;
+﻿using Microsoft.Reporting.WinForms;
 using OmniGov.App.Helpers;
 using System;
 using System.Collections.Generic;
@@ -57,7 +57,7 @@ namespace OmniGov.App.Views.Transactions.Biddings.BiddingReports
             var isRepresentative = !string.IsNullOrEmpty(dictBidder["representative_registry_id"]);
 
             reportParameters.Add(new ReportParameter("paramIsRepresentative", isRepresentative.ToString()));
-            reportParameters.Add(new ReportParameter("paramLGU", ServerHelper.selectedServer.MunicipalityName));
+            reportParameters.Add(new ReportParameter("paramLGU", (ServerHelper.SelectedProfile?.Name ?? "")));
             reportParameters.Add(new ReportParameter("paramCompleteAddress", dictBidder["address"]));
             reportParameters.Add(new ReportParameter("paramAssignedBidderNo", dictBidder["bidder_no"]));
             reportParameters.Add(new ReportParameter("paramOfficialReceiptNoForIndividualBidder", dictBidder["receipt_no"]));
@@ -101,3 +101,5 @@ namespace OmniGov.App.Views.Transactions.Biddings.BiddingReports
         }
     }
 }
+
+

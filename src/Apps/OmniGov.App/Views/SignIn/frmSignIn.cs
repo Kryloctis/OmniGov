@@ -3,55 +3,20 @@ using OmniGov.App.Properties;
 using OmniGov.App.Views.Dashboard;
 using OmniGov.Core.Interfaces.Factories;
 using OmniGov.Core.Interfaces.Services;
+using OmniGov.Core.Models;
 using OmniGov.Core.Services;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Drawing;
-using System.Linq;
-using System.Windows.Forms;
 
 namespace OmniGov.App.Views.SignIn
 {
     public partial class frmSignIn : Form
     {
+        private string errorMessage = string.Empty;
+
         public frmSignIn()
         {
             InitializeComponent();
             Helper.LoadFormIcon(this);
-        }
-
-        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
-        {
-            try
-            {
-                var availableServerList = ServerHelper.AvailableServerList();
-                e.Result = availableServerList.Count < 1 ? false : true;
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
-        {
-        }
-
-        private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
-            try
-            {
-                bool hostFound = (bool)e.Result;
-
-                if (hostFound)
-                {
-                    var serverHelpers = ServerHelper.AvailableServerList();
-                    SelectFirstServerLoaded(serverHelpers);
-                }
-                else
-                {
-                    lblServer.Text = $"(F12) Server: No server found.";
-                }
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void btnSignIn_Click(object sender, EventArgs e)
@@ -60,179 +25,142 @@ namespace OmniGov.App.Views.SignIn
             {
                 string username = txtUsername.Text;
                 string password = txtPassword.Text;
-                Image visibleImage = Resources.visible_16px;
 
                 if (!this.ValidateChildren())
                 {
-                    Helper.MessageBoxError(GetFormErrors());
+                    txtUsername.SelectAll();
                     return;
                 }
 
-                var factory = ServiceLocator.GetRequiredService<IRepositoryFactory>();
-                var userDict = factory.UsersRepository().GetUserRecordByAcc(username, password);
-                _ = new UserHelper(userDict);
+                if (!IsValidated(username, password))
+                {
+                    Helper.MessageBoxError(errorMessage);
+                    return;
+                }
 
-                var dashboardForm = new frmMain(this);
-                txtUsername.SelectAll();
-                txtUsername.Focus();
+                this.Hide();
+
+                using (var main = new frmMain(this))
+                {
+                    main.ShowDialog();
+                }
+
+                // When we return here, the main form has closed.
+                // We show the sign-in form again and reset fields.
+                this.Show();
                 txtPassword.Clear();
-
-                dashboardForm.Show();
-                Hide();
-
-                btnVisibility.Image = visibleImage;
-                txtPassword.PasswordChar = '•';
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.StackTrace); }
-        }
-
-        private void ToggleCharVisibility(TextBox textBox, Button button)
-        {
-            Image invisibleImage = Resources.invisible_16px;
-            Image visibleImage = Resources.visible_16px;
-
-            if (textBox.PasswordChar == '•')
-            {
-                button.Image = invisibleImage;
-                textBox.PasswordChar = default(char);
-            }
-            else
-            {
-                button.Image = visibleImage;
-                textBox.PasswordChar = '•';
-            }
-        }
-
-        private void btnVisibility_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                ToggleCharVisibility(txtPassword, btnVisibility);
+                txtUsername.Focus();
+                txtUsername.SelectAll();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private string GetFormErrors()
+        private bool IsValidated(string username, string password)
         {
-            string[] errorArray =
+            if (ServerHelper.SelectedProfile == null)
             {
-                txtUsername.Tag.ToString(),
-            };
-
-            var factory = ServiceLocator.GetRequiredService<IRepositoryFactory>();
-            return factory.CreateErrors(errorArray).GenerateErrorMessage();
-        }
-
-        private void OnLoad()
-        {
-            if (!backgroundWorker1.IsBusy)
-            {
-                lblServer.Text = "Scanning Server...";
-                backgroundWorker1.RunWorkerAsync();
+                errorMessage = "No server profile selected. Please press F12 to select a server.";
+                return false;
             }
 
-            txtUsername.Tag = string.Empty;
-            txtPassword.Tag = string.Empty;
-            txtVersion.Text = Helper.version;
-        }
-
-        private void SelectFirstServerLoaded(List<ServerHelper> serverHelpers)
-        {
-            ServerHelper.selectedServer = serverHelpers.First();
-
-            // Initialize connection provider with selected server connections
+            var factory = ServiceLocator.GetRequiredService<IRepositoryFactory>();
             var connectionProvider = ServiceLocator.GetRequiredService<IConnectionProvider>();
-            connectionProvider.SetLfsConnectionName(ServerHelper.selectedServer.LfsInstance);
-            connectionProvider.SetRptConnectionName(ServerHelper.selectedServer.RpmsInstance);
 
-            lblServer.Text = $"(F12) Server: {ServerHelper.selectedServer.MunicipalityName}, {ServerHelper.selectedServer.ProvinceName}.";
-        }
+            if (!connectionProvider.IsInitialized)
+            {
+                factory.ServerRepository().ApplyProfile(ServerHelper.SelectedProfile);
+            }
 
-        private void SignInForm_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.F12)
-                _ = new frmDatabaseConfig(this).ShowDialog();
+            var userRecord = factory.UsersRepository().GetUserRecordByAcc(username, password);
+
+            if (userRecord.Count < 1)
+            {
+                errorMessage = "Invalid username or password.";
+                return false;
+            }
+
+            // Initialize the user session
+            _ = new UserHelper(userRecord);
+
+            return true;
         }
 
         private void SignInForm_Load(object sender, EventArgs e)
         {
             try
             {
-                OnLoad();
+                txtVersion.Text = $"v{Helper.version}";
+
+                var profiles = ServerHelper.LoadProfiles();
+                if (profiles.Count > 0)
+                {
+                    ServerHelper.SelectedProfile = profiles[0];
+                    UpdateServerLabel(profiles[0]);
+
+                    var factory = ServiceLocator.GetRequiredService<IRepositoryFactory>();
+                    factory.ServerRepository().ApplyProfile(profiles[0]);
+                }
+                else
+                {
+                    lblServer.Text = "Server: None selected (F12)";
+                }
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        public void UpdateServerLabel(LguProfile profile)
+        {
+            if (profile != null)
+            {
+                lblServer.Text = $"(F12) Server: {profile.Name}, {profile.ProvinceName}";
+            }
+        }
+
+        private void SignInForm_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.F12)
+            {
+                var config = new frmDatabaseConfig(this);
+                config.ShowDialog();
+            }
         }
 
         private void SignInForm_VisibleChanged(object sender, EventArgs e)
         {
         }
 
-        private bool Server_Validated()
+        private void btnVisibility_Click(object sender, EventArgs e)
         {
-            string errorMessage;
-            bool isServerNull = ServerHelper.selectedServer == null;
-
-            if (!isServerNull)
+            if (txtPassword.PasswordChar == '*')
             {
-                var factory = ServiceLocator.GetRequiredService<IRepositoryFactory>();
-                bool lfsTestConnection = factory.ServerRepository().TestConnection(ServerHelper.selectedServer.LfsInstance);
-                // TODO: Add RPT test connection when RPT services are implemented
-                bool rptmTestConnection = true; // Temporary
-
-                bool isTestConnectionSucceed = lfsTestConnection && rptmTestConnection;
-
-                if (!isTestConnectionSucceed)
-                {
-                    errorMessage = "Server connection failed";
-                    txtUsername.Tag = errorMessage;
-                    txtPassword.Tag = errorMessage;
-                    return false;
-                }
-                return true;
+                txtPassword.PasswordChar = '\0';
+                btnVisibility.Image = Resources.invisible_16px;
             }
             else
             {
-                errorMessage = "No server found";
-                txtUsername.Tag = errorMessage;
-                txtPassword.Tag = errorMessage;
-                return false;
+                txtPassword.PasswordChar = '*';
+                btnVisibility.Image = Resources.visible_16px;
             }
         }
 
-        private bool Username_Password_Validated(string username, string password)
+        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
-            {
-                string errorMessage = "Please enter username and password.";
-                txtUsername.Tag = errorMessage;
-                txtPassword.Tag = errorMessage;
-                return false;
-            }
-            else if (!ServiceLocator.GetRequiredService<IRepositoryFactory>().UsersRepository().AccIsValidated(username, password))
-            {
-                string errorMessage = "Incorrect username or password.";
-                txtUsername.Tag = errorMessage;
-                txtPassword.Tag = errorMessage;
-                return false;
-            }
-            return true;
         }
 
-        private void Username_Password_Validated(object sender, EventArgs e)
+        private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            txtUsername.Tag = string.Empty;
-            txtPassword.Tag = string.Empty;
+        }
+
+        private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
         }
 
         private void Username_Password_Validating(object sender, CancelEventArgs e)
         {
-            try
-            {
-                string username = txtUsername.Text;
-                string password = txtPassword.Text;
-                e.Cancel = !Server_Validated() || !Username_Password_Validated(username, password);
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void Username_Password_Validated(object sender, EventArgs e)
+        {
         }
     }
 }

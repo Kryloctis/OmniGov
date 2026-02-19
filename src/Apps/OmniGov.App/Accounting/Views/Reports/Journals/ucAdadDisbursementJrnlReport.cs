@@ -1,4 +1,4 @@
-using Accounting.Data.Factories;
+﻿using Accounting.Data.Factories;
 using Microsoft.Reporting.WinForms;
 using OmniGov.App.Helpers;
 using OmniGov.Core.Factories;
@@ -164,7 +164,7 @@ namespace OmniGov.App.Accounting.Views.Reports.Journals
             var certifiedCorrectSignatoryTitle = string.Empty;
             ParseSignatory(dictSignatory, ref certifiedCorrectSignatory, ref certifiedCorrectSignatoryTitle);
 
-            string lguName = $"{ServerHelper.selectedServer.MunicipalityName} - {ServerHelper.selectedServer.ProvinceName}";
+            string lguName = $"{(ServerHelper.SelectedProfile?.Name ?? "")} - {(ServerHelper.SelectedProfile?.ProvinceName ?? "")}";
 
             var parameters = new[]
             {
@@ -210,4 +210,6 @@ namespace OmniGov.App.Accounting.Views.Reports.Journals
         }
     }
 }
+
+
 

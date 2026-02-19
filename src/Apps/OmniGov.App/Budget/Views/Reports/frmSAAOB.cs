@@ -1,4 +1,4 @@
-using Budget.Data.Factories;
+﻿using Budget.Data.Factories;
 using Microsoft.Reporting.WinForms;
 using OmniGov.App.Helpers;
 using OmniGov.Core.Factories;
@@ -202,8 +202,8 @@ namespace OmniGov.App.Budget.Views.Reports
                 var fundRepo = Factory.FundsRepository().GetRecordByID(args.fundId);
                 var parameters = new[]
                 {
-                    new ReportParameter("paramMunicipality", ServerHelper.selectedServer.MunicipalityName),
-                    new ReportParameter("paramProvince", ServerHelper.selectedServer.ProvinceName),
+                    new ReportParameter("paramMunicipality", (ServerHelper.SelectedProfile?.Name ?? "")),
+                    new ReportParameter("paramProvince", (ServerHelper.SelectedProfile?.ProvinceName ?? "")),
                     new ReportParameter("paramFundName", fundRepo["fund_name"]),
                     new ReportParameter("paramFundCode", fundRepo["fund_code"]),
                     new ReportParameter("paramDate", args.dtAsOf.ToString("MMMM dd, yyyy")),
@@ -239,4 +239,6 @@ namespace OmniGov.App.Budget.Views.Reports
         }
     }
 }
+
+
 

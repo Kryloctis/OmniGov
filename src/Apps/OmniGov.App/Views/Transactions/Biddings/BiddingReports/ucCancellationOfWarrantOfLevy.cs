@@ -1,4 +1,4 @@
-using Microsoft.Reporting.WinForms;
+﻿using Microsoft.Reporting.WinForms;
 using OmniGov.App.Helpers;
 using System;
 using System.Collections.Generic;
@@ -66,7 +66,7 @@ namespace OmniGov.App.Views.Transactions.Biddings.BiddingReports
                 progressCount += tasks["Initialize Parameters"];
                 Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
 
-                reportParameters.Add(new ReportParameter("paramLGU", ServerHelper.selectedServer.MunicipalityName));
+                reportParameters.Add(new ReportParameter("paramLGU", (ServerHelper.SelectedProfile?.Name ?? "")));
                 reportParameters.Add(new ReportParameter("paramWarrantOfLevyDate", dictWarrantLevy["date_issued"]));
                 reportParameters.Add(new ReportParameter("paramTaxDecNo", dictWarrantLevy["complete_arp_no"]));
                 reportParameters.Add(new ReportParameter("paramTCTNo", "-"));
@@ -112,3 +112,5 @@ namespace OmniGov.App.Views.Transactions.Biddings.BiddingReports
         }
     }
 }
+
+

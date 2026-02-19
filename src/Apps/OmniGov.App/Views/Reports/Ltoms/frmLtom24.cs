@@ -1,4 +1,4 @@
-using Microsoft.Reporting.WinForms;
+﻿using Microsoft.Reporting.WinForms;
 using OmniGov.App.DataSets;
 using OmniGov.App.Helpers;
 using OmniGov.App.Views.Shared;
@@ -211,7 +211,7 @@ namespace OmniGov.App.Views.Reports.Ltoms
 
                 var reportParameters = new ReportParameter[]
                 {
-                    new("paramLGU", ServerHelper.selectedServer.MunicipalityName),
+                    new("paramLGU", (ServerHelper.SelectedProfile?.Name ?? "")),
                     new("paramDateOfAuction", date),
                     new("paramPlaceOfAuction", location),
                     new("paramDeclaredOwner", dictAuctionProperty["taxpayer_name"]),
@@ -245,3 +245,4 @@ namespace OmniGov.App.Views.Reports.Ltoms
         }
     }
 }
+

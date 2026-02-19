@@ -1,4 +1,4 @@
-using Microsoft.Reporting.WinForms;
+﻿using Microsoft.Reporting.WinForms;
 using OmniGov.App.DataSets;
 using OmniGov.App.Helpers;
 using System;
@@ -126,7 +126,7 @@ namespace OmniGov.App.Views.Transactions.Payments.RealProperty
 
             decimal totalPayment = ucPaymentRptTaxDues.GetTotalTaxDue();
 
-            string lguName = $"{ServerHelper.selectedServer.MunicipalityName}";
+            string lguName = $"{(ServerHelper.SelectedProfile?.Name ?? "")}";
 
             var dictParameters = new Dictionary<string, string>()
             {
@@ -266,3 +266,4 @@ namespace OmniGov.App.Views.Transactions.Payments.RealProperty
         }
     }
 }
+

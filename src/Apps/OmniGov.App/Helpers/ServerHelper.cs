@@ -1,114 +1,76 @@
-using MySql.Data.MySqlClient;
 using OmniGov.Core.Interfaces.Factories;
+using OmniGov.Core.Models;
 using OmniGov.Core.Services;
-using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Drawing;
 using System.Net.NetworkInformation;
+using System.Text.Json;
 
 namespace OmniGov.App.Helpers
 {
     public class ServerHelper
     {
-        public static ServerHelper selectedServer;
+        public static LguProfile? SelectedProfile { get; set; }
 
-        internal int LguId { get; set; }
-        internal string MunicipalityCode { get; set; }
-        internal string MunicipalityName { get; set; }
-        internal string ProvinceCode { get; set; }
-        internal string ProvinceName { get; set; }
-        internal string LfsInstance { get; set; }
-        internal string RpmsInstance { get; set; }
-        internal Image Emblem { get; set; }
-
-        internal static List<ServerHelper> ServerProfiles()
+        public static List<LguProfile> LoadProfiles()
         {
-            var lguModelList = new List<ServerHelper>();
-            Image buugEmblem = Properties.Resources.lgu_buug_zsi;
-            Image titayEmblem = Properties.Resources.lgu_titay_zsi;
+            string jsonPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "servers.json");
 
-            var buugZsiModel = new ServerHelper()
+            // If not in base directory (e.g. during dev), check the project folder
+            if (!File.Exists(jsonPath))
             {
-                LguId = 1,
-                MunicipalityCode = "02",
-                MunicipalityName = "Buug",
-                ProvinceCode = "080",
-                ProvinceName = "Zamboanga Sibugay",
-                LfsInstance = "bg_zsi_lfs_instance",
-                RpmsInstance = "bg_zsi_rpm_instance",
-                Emblem = (Bitmap)buugEmblem
-            };
+                jsonPath = Path.Combine(Directory.GetCurrentDirectory(), "servers.json");
+            }
 
-            var titayZsiModel = new ServerHelper()
-            {
-                LguId = 2,
-                MunicipalityCode = "15",
-                MunicipalityName = "Titay",
-                ProvinceCode = "080",
-                ProvinceName = "Zamboanga Sibugay",
-                LfsInstance = "tty_zsi_lfs_instance",
-                RpmsInstance = "tty_zsi_rpm_instance",
-                Emblem = (Bitmap)titayEmblem
-            };
+            if (!File.Exists(jsonPath)) return new List<LguProfile>();
 
-            var demoModel = new ServerHelper()
-            {
-                LguId = 3,
-                MunicipalityCode = "Demo",
-                MunicipalityName = "Demo",
-                ProvinceCode = "Demo",
-                ProvinceName = "Demo",
-                LfsInstance = "demo_lfs_instance",
-                RpmsInstance = "demo_rpm_instance",
-                Emblem = null
-            };
-
-            lguModelList.Add(demoModel);
-            lguModelList.Add(buugZsiModel);
-            lguModelList.Add(titayZsiModel);
-
-            return lguModelList;
+            string jsonContent = File.ReadAllText(jsonPath);
+            var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
+            return JsonSerializer.Deserialize<List<LguProfile>>(jsonContent, options) ?? new List<LguProfile>();
         }
 
-        private static bool HostReachable(string connectionName)
+        public static Image? GetEmblem(string emblemName)
         {
-            string connStr = ConfigurationManager.ConnectionStrings[connectionName].ConnectionString;
-            var builder = new MySqlConnectionStringBuilder(connStr);
-            string server = builder.Server;
+            if (string.IsNullOrEmpty(emblemName)) return null;
 
-            // Always true for localhost or offline testing
+            // Try to find the image in resources
+            return Properties.Resources.ResourceManager.GetObject(emblemName) as Image;
+        }
+
+        public static bool HostReachable(DatabaseConfig config)
+        {
+            string server = config.Server;
+
             if (server.Equals("localhost", StringComparison.OrdinalIgnoreCase) ||
                 server is "127.0.0.1" or "::1")
                 return true;
 
-            using var ping = new Ping();
-            return ping.Send(server, 500)?.Status == IPStatus.Success;
+            try
+            {
+                using var ping = new Ping();
+                return ping.Send(server, 500)?.Status == IPStatus.Success;
+            }
+            catch { return false; }
         }
 
-        internal static List<ServerHelper> AvailableServerList()
+        public static List<LguProfile> GetAvailableProfiles()
         {
-            var availableServerList = new List<ServerHelper>();
+            var allProfiles = LoadProfiles();
+            var available = new List<LguProfile>();
 
-            foreach (ServerHelper model in ServerProfiles())
+            foreach (var profile in allProfiles)
             {
-                string lfsInstance = model.LfsInstance;
-                string rpmInstance = model.RpmsInstance;
+                if (!HostReachable(profile.LfsDatabase)) continue;
 
-                if (!HostReachable(lfsInstance)) continue;
-
-                // Use DI to test connections
                 var factory = ServiceLocator.GetRequiredService<IRepositoryFactory>();
-                bool isLfsdbConnected = factory.ServerRepository().TestConnection(lfsInstance);
-                bool isRpmsdbConnected = factory.ServerRepository().TestConnection(rpmInstance);
+                bool isLfsConnectable = factory.ServerRepository().TestConnection(profile.LfsDatabase);
+                bool isRptConnectable = factory.ServerRepository().TestConnection(profile.RptDatabase);
 
-                if (!isRpmsdbConnected || !isLfsdbConnected)
-                    continue;
-
-                availableServerList.Add(model);
+                if (isLfsConnectable && isRptConnectable)
+                {
+                    available.Add(profile);
+                }
             }
 
-            return availableServerList;
+            return available;
         }
     }
 }
