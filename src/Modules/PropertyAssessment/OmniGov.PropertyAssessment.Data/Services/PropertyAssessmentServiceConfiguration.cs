@@ -1,4 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using OmniGov.Core.Interfaces.Services;
+using OmniGov.Core.Services;
 using PropertyAssessment.Data.Factories;
 using PropertyAssessment.Data.Repositories;
 using PropertyAssessment.Domain.Interfaces;
@@ -18,11 +20,21 @@ namespace PropertyAssessment.Data.Services
 
         private static void RegisterPropertyAssessmentRepositories(IServiceCollection services)
         {
-            services.AddScoped<IBuildingDetailsRepository, BuildingDetailsRepository>();
-            services.AddScoped<ILandAppraisalRepository, LandAppraisalRepository>();
-            services.AddScoped<ILandPropertiesRepository, LandPropertiesRepository>();
-            services.AddScoped<IPreviousAssessment, PreviousAssessmentRepository>();
-            services.AddScoped<IRealPropertiesRepository, RealPropertiesRepository>();
+            // Create a factory method for GenericCommands targeted at RPT
+            services.AddScoped<IBuildingDetailsRepository>(sp => 
+                new BuildingDetailsRepository(new GenericCommands(sp.GetRequiredService<IConnectionProvider>(), DatabaseTarget.Rpt)));
+            
+            services.AddScoped<ILandAppraisalRepository>(sp => 
+                new LandAppraisalRepository(new GenericCommands(sp.GetRequiredService<IConnectionProvider>(), DatabaseTarget.Rpt)));
+            
+            services.AddScoped<ILandPropertiesRepository>(sp => 
+                new LandPropertiesRepository(new GenericCommands(sp.GetRequiredService<IConnectionProvider>(), DatabaseTarget.Rpt)));
+            
+            services.AddScoped<IPreviousAssessment>(sp => 
+                new PreviousAssessmentRepository(new GenericCommands(sp.GetRequiredService<IConnectionProvider>(), DatabaseTarget.Rpt)));
+            
+            services.AddScoped<IRealPropertiesRepository>(sp => 
+                new RealPropertiesRepository(new GenericCommands(sp.GetRequiredService<IConnectionProvider>(), DatabaseTarget.Rpt)));
         }
     }
 }
