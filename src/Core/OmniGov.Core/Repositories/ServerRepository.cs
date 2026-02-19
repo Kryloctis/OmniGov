@@ -1,5 +1,7 @@
+
 using OmniGov.Core.Interfaces.Repositories;
 using OmniGov.Core.Interfaces.Services;
+using OmniGov.Core.Models;
 
 namespace OmniGov.Core.Repositories
 {
@@ -14,19 +16,14 @@ namespace OmniGov.Core.Repositories
             this._connectionProvider = connectionProvider;
         }
 
-        public bool ApplyConnection(string connectionName)
+        public bool TestConnection(DatabaseConfig config)
         {
-            if (TestConnection(connectionName))
-            {
-                _connectionProvider.SetLfsConnectionName(connectionName);
-                return true;
-            }
-            return false;
+            return _genericCommands.TestConnection(config.ToConnectionString());
         }
 
-        public bool TestConnection(string connectionName)
+        public void ApplyProfile(LguProfile profile)
         {
-            return _genericCommands.TestConnection(connectionName);
+            _connectionProvider.SetActiveProfile(profile);
         }
     }
 }

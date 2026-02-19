@@ -1,37 +1,35 @@
 using MySql.Data.MySqlClient;
 using OmniGov.Core.Interfaces.Services;
-using System.Configuration;
 using System.Data;
 using System.Data.Common;
 
 namespace OmniGov.Core.Services
 {
+    public enum DatabaseTarget { Lfs, Rpt }
+
     public class GenericCommands : IGenericCommands
     {
         private readonly IConnectionProvider? _connectionProvider;
-        private readonly string? _explicitConnectionName;
-        private string? _connectionString;
+        private readonly DatabaseTarget _target;
 
-        public GenericCommands(IConnectionProvider connectionProvider)
+        public GenericCommands(IConnectionProvider connectionProvider) : this(connectionProvider, DatabaseTarget.Lfs)
+        {
+        }
+
+        public GenericCommands(IConnectionProvider connectionProvider, DatabaseTarget target)
         {
             _connectionProvider = connectionProvider;
+            _target = target;
         }
 
         private string GetConnectionString()
         {
-            if (_connectionString != null) return _connectionString;
+            string? connectionString = _connectionProvider?.GetConnectionString(_target == DatabaseTarget.Rpt);
 
-            string? connectionName = _connectionProvider?.GetLfsConnectionName() ?? _explicitConnectionName;
+            if (string.IsNullOrWhiteSpace(connectionString))
+                throw new InvalidOperationException($"GenericCommands cannot execute: No connection available for {_target}. Ensure a server profile is selected.");
 
-            if (string.IsNullOrWhiteSpace(connectionName))
-                throw new InvalidOperationException("GenericCommands cannot execute: No connection name was provided. Ensure the user is logged in.");
-
-            var settings = ConfigurationManager.ConnectionStrings[connectionName];
-            if (settings == null)
-                throw new InvalidOperationException($"Connection string '{connectionName}' not found in App.config.");
-
-            _connectionString = settings.ConnectionString;
-            return _connectionString;
+            return connectionString;
         }
 
         private void AddDbParameter(MySqlCommand command, object[] param)
@@ -144,12 +142,11 @@ namespace OmniGov.Core.Services
             }
         }
 
-        public bool TestConnection(string testConnectionName)
+        public bool TestConnection(string connectionString)
         {
             try
             {
-                string testConnectionString = ConfigurationManager.ConnectionStrings[testConnectionName].ConnectionString;
-                var builder = new MySqlConnectionStringBuilder(testConnectionString)
+                var builder = new MySqlConnectionStringBuilder(connectionString)
                 {
                     ConnectionTimeout = 2 // 2 seconds should be enough for a local/fast connection check
                 };

@@ -1,42 +1,29 @@
+
 using OmniGov.Core.Interfaces.Services;
+using OmniGov.Core.Models;
 
 namespace OmniGov.Core.Services
 {
-    /// <summary>
-    /// Manages database connection names for the application
-    /// </summary>
     public class ConnectionProvider : IConnectionProvider
     {
-        private string? _lfsConnectionName;
-        private string? _rptConnectionName;
+        private LguProfile? _activeProfile;
 
-        public bool IsInitialized => !string.IsNullOrWhiteSpace(_lfsConnectionName)
-                                   && !string.IsNullOrWhiteSpace(_rptConnectionName);
+        public bool IsInitialized => _activeProfile != null;
 
-        public string? GetLfsConnectionName()
+        public LguProfile? GetActiveProfile() => _activeProfile;
+
+        public void SetActiveProfile(LguProfile profile)
         {
-            return _lfsConnectionName;
+            _activeProfile = profile ?? throw new ArgumentNullException(nameof(profile));
         }
 
-        public string? GetRptConnectionName()
+        public string? GetConnectionString(bool useRpt = false)
         {
-            return _rptConnectionName;
-        }
+            if (_activeProfile == null) return null;
 
-        public void SetLfsConnectionName(string connectionName)
-        {
-            if (string.IsNullOrWhiteSpace(connectionName))
-                throw new ArgumentNullException(nameof(connectionName));
-
-            _lfsConnectionName = connectionName;
-        }
-
-        public void SetRptConnectionName(string connectionName)
-        {
-            if (string.IsNullOrWhiteSpace(connectionName))
-                throw new ArgumentNullException(nameof(connectionName));
-
-            _rptConnectionName = connectionName;
+            return useRpt 
+                ? _activeProfile.RptDatabase.ToConnectionString()
+                : _activeProfile.LfsDatabase.ToConnectionString();
         }
     }
 }

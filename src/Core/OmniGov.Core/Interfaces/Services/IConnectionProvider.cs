@@ -1,32 +1,30 @@
+
+using OmniGov.Core.Models;
+
 namespace OmniGov.Core.Interfaces.Services
 {
     /// <summary>
-    /// Provides database connection names for the application
+    /// Manages the active LGU profile and provides connection strings for the application
     /// </summary>
     public interface IConnectionProvider
     {
         /// <summary>
-        /// Gets the connection name for the LFS database
+        /// Gets the currently active LGU profile
         /// </summary>
-        string? GetLfsConnectionName();
+        LguProfile? GetActiveProfile();
 
         /// <summary>
-        /// Gets the connection name for the RPT database
+        /// Sets the active LGU profile
         /// </summary>
-        string? GetRptConnectionName();
+        void SetActiveProfile(LguProfile profile);
 
         /// <summary>
-        /// Sets the LFS connection name
+        /// Gets the connection string for the specified target (LFS or RPT)
         /// </summary>
-        void SetLfsConnectionName(string connectionName);
+        string? GetConnectionString(bool useRpt = false);
 
         /// <summary>
-        /// Sets the RPT connection name
-        /// </summary>
-        void SetRptConnectionName(string connectionName);
-
-        /// <summary>
-        /// Indicates whether connections have been initialized
+        /// Indicates whether a profile has been selected
         /// </summary>
         bool IsInitialized { get; }
     }

@@ -40,7 +40,7 @@ namespace OmniGov.Core.Interfaces.Services
         /// <summary>
         /// Tests the database connection
         /// </summary>
-        bool TestConnection(string connectionName);
+        bool TestConnection(string connectionString);
     }
 }
 
