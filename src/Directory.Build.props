@@ -1,0 +1,10 @@
+
+<Project>
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>OmniGov.$(MSBuildProjectName.Replace("OmniGov.", ""))</RootNamespace>
+    <AssemblyName>OmniGov.$(MSBuildProjectName.Replace("OmniGov.", ""))</AssemblyName>
+  </PropertyGroup>
+</Project>

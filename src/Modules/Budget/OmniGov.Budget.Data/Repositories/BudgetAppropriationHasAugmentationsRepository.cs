@@ -1,0 +1,74 @@
+using Budget.Domain.Interfaces;
+using Budget.Domain.Models;
+using OmniGov.Core.Interfaces.Services;
+using System.Data;
+using System.Transactions;
+
+namespace Budget.Data.Repositories
+{
+    public class BudgetAppropriationHasAugmentationsRepository : IBudgetAppropriationHasAugmentations
+    {
+        private readonly string tableName = "budget_appropriation_has_augmentations";
+        private IGenericCommands _genericCommands;
+
+        public BudgetAppropriationHasAugmentationsRepository(IGenericCommands genericCommands)
+        {
+            _genericCommands = genericCommands;
+        }
+
+        public bool Delete(List<BudgetAppropriationHasAugmentationsModel> entityList)
+        {
+            using (var scope = new TransactionScope())
+            {
+                foreach (var item in entityList)
+                {
+                    var parameters = new object[][] { new object[] { "@id", DbType.Int32, item.Id } };
+                    string query = $"DELETE FROM {tableName} WHERE id = @id";
+                    _ = _genericCommands.ExecuteNonQuery(query, parameters);
+                }
+
+                scope.Complete();
+                return true;
+            }
+        }
+
+        public Dictionary<string, string> GetRecordByID(int Id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public DataTable GetRecords()
+        {
+            throw new NotImplementedException();
+        }
+
+        public DataTable GetRecordsBySearch(string searchText)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool IdExist(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Insert(BudgetAppropriationHasAugmentationsModel entity)
+        {
+            var parameters = new object[][]
+            {
+                new object[] { "@augmentations_id", DbType.Int32, entity.AugmentationsId},
+                new object[] { "@budget_appropriations_id", DbType.Int32, entity.BudgetAppropriationsId},
+                new object[] { "@date_entry", DbType.DateTime, entity.DateEntry},
+                new object[] { "@remarks", DbType.String, entity.Remarks}
+            };
+
+            string query = $"INSERT INTO {tableName} (augmentations_id, budget_appropriations_id, date_entry, remarks) VALUES (@augmentations_id, @budget_appropriations_id, @date_entry, @remarks)";
+            return _genericCommands.ExecuteNonQuery(query, parameters);
+        }
+
+        public bool Update(BudgetAppropriationHasAugmentationsModel entity)
+        {
+            throw new NotImplementedException();
+        }
+    }
+}

@@ -1,0 +1,44 @@
+using OmniGov.Core.Entities;
+using OmniGov.Core.Interfaces.Repositories;
+using System.Data;
+using Treasury.Domain.Entities;
+
+namespace Treasury.Domain.Interfaces
+{
+    public interface IReceiptsIssuedRepository : IRepository<ReceiptsIssuedModel>
+    {
+        bool UpdateReturnedReceipt(ReceiptsIssuedModel entity);
+
+        bool UpdateLastIssued(ReceiptsIssuedModel entity);
+
+        bool ReceiptAvailabilityByQuantity(int receiptId, int receiptQuantity);
+
+        DataTable GetViewRecordsByCollectorId_AccFormId(int collectingOfficerId, int accountableFormID);
+
+        DataTable GetViewCollectorsAccountbleForms(int collectorId, bool collectorIsJO);
+
+        DataTable GettAccFormByCOid(string reportNumber);
+
+        DataTable GetAccountabilityForAccountableForms(DateTime date);
+
+        DataTable GetReturnedReceipts();
+
+        DataTable GetReturnedReceiptsBySearch(string searchKey);
+
+        int GetTotalIssuedReceiptByReceiptId(int receiptId);
+
+        bool CollectingOfficerHasReceiptAssigned(int id);
+
+        bool ReceiptHasIssuance(int receiptId);
+
+        DataTable GetRecordsBySearch(DateTime dateIssued, string searchText, int rowLimit);
+
+        bool ReceiptNumberInRange(int receiptId, int receiptNumber);
+
+        bool ReceiptNumberInRange(int receiptId, int receiptNumber, int receiptIssuedId);
+
+        Dictionary<string, string> GetViewRecordReceiptId(int receiptID);
+
+        Dictionary<string, string> GetViewRcdRecord(AccountableFormsModel accountableFormsModel, UsersModel usersModel);
+    }
+}

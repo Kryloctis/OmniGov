@@ -1,0 +1,7 @@
+﻿
+<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <ProjectReference Include="..\OmniGov.Budget.Domain\OmniGov.Budget.Domain.csproj" />
+    <ProjectReference Include="..\..\..\Core\OmniGov.Core\OmniGov.Core.csproj" />
+  </ItemGroup>
+</Project>

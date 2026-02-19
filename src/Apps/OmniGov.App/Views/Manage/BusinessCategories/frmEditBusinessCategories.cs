@@ -1,0 +1,91 @@
+using OmniGov.App.Helpers;
+using System;
+using System.Windows.Forms;
+using Treasury.Data.Factories;
+using Treasury.Domain.Entities;
+
+namespace OmniGov.App.Views.Manage.BusinessCategories
+{
+    public partial class frmEditBusinessCategories : Form
+    {
+        private int _businessCategoriesID;
+        private readonly frmBusinessCategories _frmBusinessCategories;
+        private readonly ucBusinessCategories _ucBusinessCategories;
+
+        public frmEditBusinessCategories(int businessCategoriesID, frmBusinessCategories frmBusinessCategories)
+        {
+            InitializeComponent();
+            _ucBusinessCategories = ucBusinessCategories1;
+            _businessCategoriesID = businessCategoriesID;
+            _frmBusinessCategories = frmBusinessCategories;
+            _ucBusinessCategories.businessCategoryID = businessCategoriesID;
+            _ucBusinessCategories.isEdit = true;
+        }
+
+        private void OnLoad()
+        {
+            LoadSelectedRecord();
+        }
+
+        private void frmEditBusinessCategories_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                OnLoad();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void LoadSelectedRecord()
+        {
+            var dictBusinessCategories = TreasuryFactory.BusinessCategoriesRepository().GetRecordByID(_businessCategoriesID);
+
+            var isLineOfBusiness = Convert.ToInt16(dictBusinessCategories["is_line_of_business"]);
+
+            _ucBusinessCategories.txtCode.Text = dictBusinessCategories["code"];
+            _ucBusinessCategories.txtOrdinanceReferenceNo.Text = dictBusinessCategories["ordinance_ref_no"];
+            _ucBusinessCategories.txtDescription.Text = dictBusinessCategories["description"];
+            _ucBusinessCategories.cbxLineOfBusiness.Checked = Convert.ToBoolean(isLineOfBusiness);
+        }
+
+        private bool UpdateBusinessCategories()
+        {
+            if (!_ucBusinessCategories.ValidateChildren())
+            {
+                Helper.MessageBoxError(_ucBusinessCategories.GetFormErrors());
+                return false;
+            }
+
+            var code = _ucBusinessCategories.txtCode.Text.Trim();
+            var ordinanceReferenceNo = _ucBusinessCategories.txtOrdinanceReferenceNo.Text.Trim();
+            var description = _ucBusinessCategories.txtDescription.Text.Trim();
+            var lineInBusiness = _ucBusinessCategories.cbxLineOfBusiness.Checked;
+
+            var businessCategoriesModel = new BusinessCategoriesModel()
+            {
+                BusinessCategoryID = _businessCategoriesID,
+                Code = code,
+                OrdinanceReferenceNumber = ordinanceReferenceNo,
+                Description = description,
+                LineOfBusiness = lineInBusiness
+            };
+
+            return TreasuryFactory.BusinessCategoriesRepository().Update(businessCategoriesModel);
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (UpdateBusinessCategories())
+                {
+                    Helper.MessageBoxSuccess("Business Categories has been updated.");
+                    _frmBusinessCategories.LoadBusinessCategories();
+                    Helper.DatagridViewRecordFinder(_frmBusinessCategories.dgBusinessCategories, "id", _businessCategoriesID.ToString());
+                    Close();
+                }
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+    }
+}
