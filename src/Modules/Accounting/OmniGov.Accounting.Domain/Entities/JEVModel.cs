@@ -6,7 +6,7 @@ namespace OmniGov.Accounting.Domain.Entities
         public byte FundsId { get; set; }
         public byte JournalsId { get; set; }
 
-        public string TrnsctionNo { get; set; } = null!;
+        public string TransactionNo { get; set; } = null!;
 
         public string? JevNo { get; set; }
         public DateTime DateEntry { get; set; }

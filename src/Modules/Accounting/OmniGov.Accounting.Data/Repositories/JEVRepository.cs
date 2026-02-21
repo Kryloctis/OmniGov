@@ -2,6 +2,7 @@ using OmniGov.Accounting.Domain.Entities;
 using OmniGov.Accounting.Domain.Interfaces;
 using OmniGov.Core.Interfaces.Services;
 using System.Data;
+using System.Data.Common;
 using System.Transactions;
 
 namespace OmniGov.Accounting.Data.Repositories
@@ -140,7 +141,7 @@ namespace OmniGov.Accounting.Data.Repositories
             {
                 new object[] { "@funds_id", DbType.Byte, entity.FundsId },
                 new object[] { "@journals_id", DbType.Byte, entity.JournalsId },
-                new object[] { "@transaction_no", DbType.String, entity.TrnsctionNo},
+                new object[] { "@transaction_no", DbType.String, entity.TransactionNo},
                 new object[] { "@jev_no", DbType.String, entity.JevNo },
                 new object[] { "@date_entry", DbType.Date, entity.DateEntry },
                 new object[] { "@ref_no", DbType.String, entity.RefNo },
@@ -161,7 +162,7 @@ namespace OmniGov.Accounting.Data.Repositories
             return int.Parse(_genericCommands.ExecuteScalar(query));
         }
 
-        public bool InsertJevGenJrnl(JevModel entity,
+        public bool InsertGeneralJournalEntry(JevModel entity,
                                               List<JEVAccountsModel> jevAccountsModelList,
                                               GeneralJournalModel generalJournalModel)
         {
@@ -181,7 +182,7 @@ namespace OmniGov.Accounting.Data.Repositories
             }
         }
 
-        public bool InsertJevCashDsbrsmntsJrnl(JevModel entity,
+        public bool InsertCashDisbursementsJournalEntry(JevModel entity,
                                                List<JEVAccountsModel> jevAccountsModelList,
                                                CashDisbursementsJournalModel cashDisbursementsJournalModel)
         {
@@ -201,7 +202,7 @@ namespace OmniGov.Accounting.Data.Repositories
             }
         }
 
-        public bool InsertJevChkDsbrsmntJrnl(JevModel jevModel,
+        public bool InsertCheckDisbursementsJournalEntry(JevModel jevModel,
                                                 List<JEVAccountsModel> jevAccountsModelList,
                                                 CheckDisbursementsJournalModel checkDisbursementsJournalModel)
         {
@@ -221,7 +222,7 @@ namespace OmniGov.Accounting.Data.Repositories
             }
         }
 
-        public bool InsertJevCashRcptsJrnl(JevModel entity,
+        public bool InsertCashReceiptsJournalEntry(JevModel entity,
                                            List<JEVAccountsModel> jevAccountsModelList,
                                            CashReceiptsJournalModel cashReceiptsJournalModel)
         {
@@ -241,7 +242,7 @@ namespace OmniGov.Accounting.Data.Repositories
             }
         }
 
-        public bool InsertJevAdaDsbrsmntsJrnl(JevModel entity,
+        public bool InsertADADisbursementsJournalEntry(JevModel entity,
                                                List<JEVAccountsModel> jevAccountsModelList,
                                                ADADisbursementsJournalModel aDADisbursementsJournalModel)
         {
@@ -261,7 +262,7 @@ namespace OmniGov.Accounting.Data.Repositories
             }
         }
 
-        public bool InsertJevProcRcvJrnl(JevModel entity, List<JEVAccountsModel> jevAccountsModels)
+        public bool InsertProcurementReceivedJournalEntry(JevModel entity, List<JEVAccountsModel> jevAccountsModels)
         {
             using (var scope = new TransactionScope())
             {
@@ -307,7 +308,7 @@ namespace OmniGov.Accounting.Data.Repositories
                 new object[] { "@id", DbType.Int32, entity.Id },
                 new object[] { "@funds_id", DbType.Byte, entity.FundsId },
                 new object[] { "@journals_id", DbType.Byte, entity.JournalsId },
-                new object[] { "@transaction_no", DbType.String, entity.TrnsctionNo},
+                new object[] { "@transaction_no", DbType.String, entity.TransactionNo},
                 new object[] { "@jev_no", DbType.String, entity.JevNo },
                 new object[] { "@date_entry", DbType.Date, entity.DateEntry },
                 new object[] { "@ref_no", DbType.String, entity.RefNo },
@@ -338,7 +339,7 @@ namespace OmniGov.Accounting.Data.Repositories
             return _genericCommands.ExecuteNonQuery(query, parameters);
         }
 
-        public bool UpdateJevGenJrnl(JevModel currentJev,
+        public bool UpdateGeneralJournalEntry(JevModel currentJev,
                                     (int jrnlId, string jrnlName) prevJournal,
                                     List<JEVAccountsModel> jevAccountsModelList,
                                     GeneralJournalModel generalJournalModel)
@@ -346,7 +347,7 @@ namespace OmniGov.Accounting.Data.Repositories
             using (var scope = new TransactionScope())
             {
                 _ = Update(currentJev);
-                _ = PendingJev(currentJev);
+                _ = SetJevStatus(currentJev.Id, JevModel.Status.pending, null);
 
                 _ = _jevAccountsRepository.DeleteByJevId(currentJev.Id);
                 jevAccountsModelList.ForEach(x => x.JEVId = currentJev.Id);
@@ -365,7 +366,7 @@ namespace OmniGov.Accounting.Data.Repositories
             }
         }
 
-        public bool UpdateJevChkDsbrsmntJrnl(JevModel currentJev,
+        public bool UpdateCheckDisbursementsJournalEntry(JevModel currentJev,
                                             (int jrnlId, string jrnlName) prevJournal,
                                             List<JEVAccountsModel> jevAccountsModelList,
                                             CheckDisbursementsJournalModel checkDisbursementsJournalModel)
@@ -373,7 +374,7 @@ namespace OmniGov.Accounting.Data.Repositories
             using (var scope = new TransactionScope())
             {
                 _ = Update(currentJev);
-                _ = PendingJev(currentJev);
+                _ = SetJevStatus(currentJev.Id, JevModel.Status.pending, null);
 
                 _ = _jevAccountsRepository.DeleteByJevId(currentJev.Id);
                 jevAccountsModelList.ForEach(x => x.JEVId = currentJev.Id);
@@ -392,7 +393,7 @@ namespace OmniGov.Accounting.Data.Repositories
             }
         }
 
-        public bool UpdateJevCshDsbrsmntsJrnl(JevModel currentJev,
+        public bool UpdateCashDisbursementsJournalEntry(JevModel currentJev,
                                             (int jrnlId, string jrnlName) prevJournal,
                                             List<JEVAccountsModel> jevAccountsModelList,
                                             CashDisbursementsJournalModel cashDisbursementsJournalModel)
@@ -400,7 +401,7 @@ namespace OmniGov.Accounting.Data.Repositories
             using (var scope = new TransactionScope())
             {
                 _ = Update(currentJev);
-                _ = PendingJev(currentJev);
+                _ = SetJevStatus(currentJev.Id, JevModel.Status.pending, null);
 
                 _ = _jevAccountsRepository.DeleteByJevId(currentJev.Id);
                 jevAccountsModelList.ForEach(x => x.JEVId = currentJev.Id);
@@ -419,7 +420,7 @@ namespace OmniGov.Accounting.Data.Repositories
             }
         }
 
-        public bool UpdateJevCshRcptsJrnl(JevModel currentJev,
+        public bool UpdateCashReceiptsJournalEntry(JevModel currentJev,
                                         (int jrnlId, string jrnlName) prevJournal,
                                         List<JEVAccountsModel> jevAccountsModelList,
                                         CashReceiptsJournalModel cashReceiptsJournalModel)
@@ -427,7 +428,7 @@ namespace OmniGov.Accounting.Data.Repositories
             using (var scope = new TransactionScope())
             {
                 _ = Update(currentJev);
-                _ = PendingJev(currentJev);
+                _ = SetJevStatus(currentJev.Id, JevModel.Status.pending, null);
 
                 _ = _jevAccountsRepository.DeleteByJevId(currentJev.Id);
                 jevAccountsModelList.ForEach(x => x.JEVId = currentJev.Id);
@@ -446,14 +447,14 @@ namespace OmniGov.Accounting.Data.Repositories
             }
         }
 
-        public bool UpdateJevProcRcvJrnl(JevModel currentJev,
+        public bool UpdateProcurementReceivedJournalEntry(JevModel currentJev,
                                         (int jrnlId, string jrnlName) prevJournal,
                                         List<JEVAccountsModel> jevAccountsModels)
         {
             using (var scope = new TransactionScope())
             {
                 _ = Update(currentJev);
-                _ = PendingJev(currentJev);
+                _ = SetJevStatus(currentJev.Id, JevModel.Status.pending, null);
 
                 _ = _jevAccountsRepository.DeleteByJevId(currentJev.Id);
                 jevAccountsModels.ForEach(x => x.JEVId = currentJev.Id);
@@ -467,7 +468,7 @@ namespace OmniGov.Accounting.Data.Repositories
             }
         }
 
-        public bool UpdateJevAdaDsbrsmntsJrnl(JevModel currentJev,
+        public bool UpdateADADisbursementsJournalEntry(JevModel currentJev,
                                             (int jrnlId, string jrnlName) prevJournal,
                                             List<JEVAccountsModel> jevAccountsModelList,
                                             ADADisbursementsJournalModel aDADisbursementsJournalModel)
@@ -475,7 +476,7 @@ namespace OmniGov.Accounting.Data.Repositories
             using (var scope = new TransactionScope())
             {
                 _ = Update(currentJev);
-                _ = PendingJev(currentJev);
+                _ = SetJevStatus(currentJev.Id, JevModel.Status.pending, null);
 
                 _ = _jevAccountsRepository.DeleteByJevId(currentJev.Id);
                 jevAccountsModelList.ForEach(x => x.JEVId = currentJev.Id);
@@ -528,58 +529,25 @@ namespace OmniGov.Accounting.Data.Repositories
                 new object[] { "@journal_name", DbType.String, journalName }
             };
 
-            string query = $"SELECT COALESCE(COUNT(*), 0) AS jev_count FROM {viewTableName} WHERE status = 'approved' {(fundName == "All" ? string.Empty : "AND fund_name = @fund_name")} AND journal_name = @journal_name AND YEAR(date_entry) <= @year";
+            string query = $"SELECT COALESCE(COUNT(*), 0) AS jev_count FROM {viewTableName} WHERE status = 'approved'  {(fundName == "All" ? string.Empty : "AND fund_name = @fund_name")} AND journal_name = @journal_name AND YEAR(date_entry) <= @year";
 
             return Convert.ToInt32(_genericCommands.ExecuteScalar(query, parameters));
         }
 
-        public bool JevNumberExistBy_JevNo_FundId_Year(string jevNo, int fundId, int year)
-        {
-            var parameters = new object[][]
-            {
-                new object [] { "@jev_no", DbType.String, jevNo },
-                new object [] { "@funds_id", DbType.Int32, fundId},
-                new object [] { "@year", DbType.Int16, year},
-            };
-
-            string query = $"SELECT * FROM {tableName} WHERE jev_no = @jev_no AND funds_id = @funds_id AND YEAR(date_entry) = @year";
-            string queryResult = _genericCommands.ExecuteScalar(query, parameters);
-
-            // if query is not null, means found some record, so true
-            return !string.IsNullOrEmpty(queryResult);
-        }
-
-        public bool JevNumberExistBy_JevId_JevNo_FundId_Year(int id, string jevNo, int fundId, int year)
-        {
-            var parameters = new object[][]
-            {
-                new object[] { "@id", DbType.Int32, id },
-                new object[] { "@jev_no", DbType.String, jevNo },
-                new object[] { "@funds_id", DbType.Int32, fundId},
-                new object[] { "@year", DbType.Int16, year}
-            };
-
-            string query = $"SELECT id FROM {tableName} WHERE id <> @id AND jev_no = @jev_no AND funds_id = @funds_id AND YEAR(date_entry) = @year";
-            string queryResult = _genericCommands.ExecuteScalar(query, parameters);
-
-            // if query is not null, means found some record, so true
-            return !string.IsNullOrEmpty(queryResult);
-        }
-
-        public int GetJevCount(string status, string journalName, string fundName, short year)
+        public int GetJevCount(JevModel.Status? status, string journalName, string fundName, short year)
         {
             var parameters = new object[][]
             {
                 new object[] { "@journal_name", DbType.String, journalName },
                 new object[] { "@fund_name", DbType.String, fundName},
                 new object[] { "@year", DbType.Int16, year},
-                new object[] { "@status", DbType.String, status }
             };
 
+            string statusQuery = status.HasValue ? $"status = '{status}' AND" : string.Empty;
             string journalQuery = journalName == "All" ? string.Empty : "journal_name = @journal_name AND";
             string fundQuery = fundName == "All" ? string.Empty : "fund_name = @fund_name AND";
 
-            string query = $"SELECT COALESCE(COUNT(*), 0) AS jev_count FROM {viewTableName} WHERE status = @status {journalQuery} {fundQuery} YEAR(date_entry) = @year";
+            string query = $"SELECT COALESCE(COUNT(*), 0) AS jev_count FROM {viewTableName} WHERE {statusQuery} {journalQuery} {fundQuery} YEAR(date_entry) = @year";
 
             return Convert.ToInt32(_genericCommands.ExecuteScalar(query, parameters));
         }
@@ -599,39 +567,6 @@ namespace OmniGov.Accounting.Data.Repositories
             return _genericCommands.FillBySearch(query, new DataTable(), parameters);
         }
 
-        //SFPs
-        public decimal GetSumByMajorAccountGroup(int fundId, int majorAccountGroupId, byte isDebit, DateTime dateEntry)
-        {
-            var parameters = new object[][]
-            {
-                new object[] { "@funds_id", DbType.Int32, fundId},
-                new object[] { "@major_account_group_id",DbType.Int32, majorAccountGroupId},
-                new object[] { "@is_debit",DbType.Byte, isDebit},
-                new object[] { "@date_entry", DbType.Date, dateEntry.Date },
-                new object[] { "@year", DbType.Int16, dateEntry.Year}
-            };
-
-            string query = $"SELECT COALESCE(SUM(b.amount), 0) AS amount FROM jev a JOIN jev_accounts b ON b.jev_id = a.id JOIN general_ledger_accounts c ON c.id = b.general_ledger_accounts_id JOIN sub_major_account_group d ON d.id = c.sub_major_account_group_id JOIN major_account_group e ON e.id = d.major_account_group_id JOIN account_group f ON f.id = e.account_group_id WHERE a.funds_id = @funds_id AND a.date_entry <= @date_entry AND YEAR(a.date_entry) = @year AND e.id  = @major_account_group_id AND b.is_debit = @is_debit";
-
-            bool isResultValid = int.TryParse(_genericCommands.ExecuteScalar(query, parameters), out int result);
-            return isResultValid ? result : 0;
-        }
-
-        public decimal GetSumPreviousYearTransactionsByFundIdAndMajAccountGroupId(int fundId, int majorAccountGroupId, byte isDebit, DateTime dateEntry)
-        {
-            var parameters = new object[][]
-            {
-                new object[] { "@funds_id", DbType.Int32, fundId},
-                new object[] { "@major_account_group_id",DbType.Int32, majorAccountGroupId},
-                new object[] { "@year", DbType.Int16, dateEntry.Year -1},
-                new object[] { "@is_debit", DbType.Byte, isDebit}
-            };
-            string query = $"SELECT COALESCE(SUM(b.amount), 0) AS amount FROM jev a JOIN jev_accounts b ON b.jev_id = a.id JOIN general_ledger_accounts c ON c.id = b.general_ledger_accounts_id JOIN sub_major_account_group d ON d.id = c.sub_major_account_group_id JOIN major_account_group e ON e.id = d.major_account_group_id JOIN account_group f ON f.id = e.account_group_id WHERE a.funds_id = @funds_id AND YEAR(a.date_entry) = @year AND e.id  = @major_account_group_id AND b.is_debit = @is_debit";
-
-            bool isResultValid = int.TryParse(_genericCommands.ExecuteScalar(query, parameters), out int result);
-            return isResultValid ? result : 0;
-        }
-
         public string GetLastJevNoSeries(int fundId)
         {
             var parameters = new object[][]
@@ -643,7 +578,7 @@ namespace OmniGov.Accounting.Data.Repositories
             return _genericCommands.ExecuteScalar(query, parameters);
         }
 
-        public string GetLastTrnsctionNo(int year)
+        public string GetLastTransactionNo(int year)
         {
             var parameters = new object[][]
             {
@@ -655,45 +590,8 @@ namespace OmniGov.Accounting.Data.Repositories
         }
 
         //Auditing Section
-        public bool PendingJev(JevModel entity)
-        {
-            var parameters = new object[][]
-            {
-                new object[] { "@id", DbType.Int32, entity.Id},
-                new object[] { "@remarks", DbType.String, entity.Remarks },
-                new object[] { "@status", DbType.String, entity.JevStatus}
-            };
-            string query = $"UPDATE {tableName} SET status = @status, remarks = NULL WHERE id = @id";
-            return _genericCommands.ExecuteNonQuery(query, parameters);
-        }
 
-        public bool CancelJev(JevModel entity)
-        {
-            var parameters = new object[][]
-            {
-                new object[] { "@id", DbType.Int32, entity.Id},
-                new object[] { "@remarks", DbType.String, entity.Remarks },
-                new object[] { "@status", DbType.String, entity.JevStatus},
-            };
-
-            string query = $"UPDATE {tableName} SET status = @status, remarks = @remarks WHERE id = @id";
-            return _genericCommands.ExecuteNonQuery(query, parameters);
-        }
-
-        public bool ApproveJev(JevModel entity)
-        {
-            var parameters = new object[][]
-            {
-                new object[] { "@id", DbType.Int32, entity.Id},
-                new object[] { "@jev_no", DbType.String, entity.JevNo},
-                new object[] { "@remarks", DbType.String, entity.Remarks }
-            };
-
-            string query = $"UPDATE {tableName} SET jev_no = @jev_no, is_approved = 1, remarks = @remarks  WHERE id = @id";
-            return _genericCommands.ExecuteNonQuery(query, parameters);
-        }
-
-        public bool SetJevStatus(int id, JevModel.Status status, string remarks)
+        public bool SetJevStatus(int id, JevModel.Status status, string? remarks)
         {
             object? jevNo = status == JevModel.Status.approved ? GetLastJevNoSeries(id)
                 : null;
@@ -702,7 +600,7 @@ namespace OmniGov.Accounting.Data.Repositories
             {
                 new object[] { "@id", DbType.Int32, id},
                 new object[] { "@jev_no", DbType.String, jevNo ?? DBNull.Value},
-                new object[] { "@remarks", DbType.String, remarks},
+                new object[] { "@remarks", DbType.String, remarks ?? (object)DBNull.Value},
                 new object[] { "@status", DbType.String, status },
             };
 
@@ -716,18 +614,6 @@ namespace OmniGov.Accounting.Data.Repositories
             }
 
             return result;
-        }
-
-        public bool DisapproveJev(JevModel entity)
-        {
-            var parameters = new object[][]
-            {
-                new object[] { "@id", DbType.Int32, entity.Id},
-                new object[] { "@remarks", DbType.String, entity.Remarks }
-            };
-
-            string query = $"UPDATE {tableName} SET is_disapproved = 1, is_cancelled = 0, remarks = @remarks WHERE id = @id";
-            return _genericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public DataTable GetViewRecords(JevModel.Status status)

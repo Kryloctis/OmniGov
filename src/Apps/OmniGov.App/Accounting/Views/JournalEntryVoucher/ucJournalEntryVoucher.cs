@@ -94,7 +94,7 @@ namespace OmniGov.App.Accounting.Views.JournalEntryVoucher
             bool journalValid = int.TryParse(cmbxJournal.SelectedValue.ToString(), out int journalId);
             model.JournalsId = (byte)journalId;
 
-            model.TrnsctionNo = new string(mskTxtTransNo.Text.Where(char.IsDigit).TakeLast(4).ToArray());
+            model.TransactionNo = new string(mskTxtTransNo.Text.Where(char.IsDigit).TakeLast(4).ToArray());
             model.DateEntry = dtpDateEntry.Value;
             model.RefNo = txtRefNo.Text.Trim();
             model.Payee = txtPayee.Text.Trim();
@@ -167,22 +167,22 @@ namespace OmniGov.App.Accounting.Views.JournalEntryVoucher
             switch (jrnlTyp)
             {
                 case "General Journal":
-                    return AccountingFactory.JEVRepository().InsertJevGenJrnl(LocalJevModel(), JevAcountsModelList(), ucGenJrnl.GeneralJournalModel());
+                    return AccountingFactory.JEVRepository().InsertGeneralJournalEntry(LocalJevModel(), JevAcountsModelList(), ucGenJrnl.GeneralJournalModel());
 
                 case "Procurement Received Journal":
-                    return AccountingFactory.JEVRepository().InsertJevProcRcvJrnl(LocalJevModel(), JevAcountsModelList());
+                    return AccountingFactory.JEVRepository().InsertProcurementReceivedJournalEntry(LocalJevModel(), JevAcountsModelList());
 
                 case "Cash Receipts Journal":
-                    return AccountingFactory.JEVRepository().InsertJevCashRcptsJrnl(LocalJevModel(), JevAcountsModelList(), ucCshRcptsJrnl.CashReceiptsJournalModel());
+                    return AccountingFactory.JEVRepository().InsertCashReceiptsJournalEntry(LocalJevModel(), JevAcountsModelList(), ucCshRcptsJrnl.CashReceiptsJournalModel());
 
                 case "Cash Disbursements Journal":
-                    return AccountingFactory.JEVRepository().InsertJevCashDsbrsmntsJrnl(LocalJevModel(), JevAcountsModelList(), ucCshDsbrsmntJrnl.CashDisbursementsJournalModel());
+                    return AccountingFactory.JEVRepository().InsertCashDisbursementsJournalEntry(LocalJevModel(), JevAcountsModelList(), ucCshDsbrsmntJrnl.CashDisbursementsJournalModel());
 
                 case "Check Disbursements Journal":
-                    return AccountingFactory.JEVRepository().InsertJevChkDsbrsmntJrnl(LocalJevModel(), JevAcountsModelList(), ucChkDsbrsmntJrnl.CheckDisbursementsJournalModel());
+                    return AccountingFactory.JEVRepository().InsertCheckDisbursementsJournalEntry(LocalJevModel(), JevAcountsModelList(), ucChkDsbrsmntJrnl.CheckDisbursementsJournalModel());
 
                 case "Authority to Debit Account Disbursement Journal":
-                    return AccountingFactory.JEVRepository().InsertJevAdaDsbrsmntsJrnl(LocalJevModel(), JevAcountsModelList(), ucAuthDbtAccDsbrsmntJrnl.ADADisbursementsJournalModel());
+                    return AccountingFactory.JEVRepository().InsertADADisbursementsJournalEntry(LocalJevModel(), JevAcountsModelList(), ucAuthDbtAccDsbrsmntJrnl.ADADisbursementsJournalModel());
 
                 default:
                     return false;
@@ -194,22 +194,22 @@ namespace OmniGov.App.Accounting.Views.JournalEntryVoucher
             switch (currentJrnlTyp)
             {
                 case "General Journal":
-                    return AccountingFactory.JEVRepository().UpdateJevGenJrnl(LocalJevModel(), prevJournal, JevAcountsModelList(), ucGenJrnl.GeneralJournalModel());
+                    return AccountingFactory.JEVRepository().UpdateGeneralJournalEntry(LocalJevModel(), prevJournal, JevAcountsModelList(), ucGenJrnl.GeneralJournalModel());
 
                 case "Procurement Received Journal":
-                    return AccountingFactory.JEVRepository().UpdateJevProcRcvJrnl(LocalJevModel(), prevJournal, JevAcountsModelList());
+                    return AccountingFactory.JEVRepository().UpdateProcurementReceivedJournalEntry(LocalJevModel(), prevJournal, JevAcountsModelList());
 
                 case "Cash Receipts Journal":
-                    return AccountingFactory.JEVRepository().UpdateJevCshRcptsJrnl(LocalJevModel(), prevJournal, JevAcountsModelList(), ucCshRcptsJrnl.CashReceiptsJournalModel());
+                    return AccountingFactory.JEVRepository().UpdateCashReceiptsJournalEntry(LocalJevModel(), prevJournal, JevAcountsModelList(), ucCshRcptsJrnl.CashReceiptsJournalModel());
 
                 case "Cash Disbursements Journal":
-                    return AccountingFactory.JEVRepository().UpdateJevCshDsbrsmntsJrnl(LocalJevModel(), prevJournal, JevAcountsModelList(), ucCshDsbrsmntJrnl.CashDisbursementsJournalModel());
+                    return AccountingFactory.JEVRepository().UpdateCashDisbursementsJournalEntry(LocalJevModel(), prevJournal, JevAcountsModelList(), ucCshDsbrsmntJrnl.CashDisbursementsJournalModel());
 
                 case "Check Disbursements Journal":
-                    return AccountingFactory.JEVRepository().UpdateJevChkDsbrsmntJrnl(LocalJevModel(), prevJournal, JevAcountsModelList(), ucChkDsbrsmntJrnl.CheckDisbursementsJournalModel());
+                    return AccountingFactory.JEVRepository().UpdateCheckDisbursementsJournalEntry(LocalJevModel(), prevJournal, JevAcountsModelList(), ucChkDsbrsmntJrnl.CheckDisbursementsJournalModel());
 
                 case "Authority to Debit Account Disbursement Journal":
-                    return AccountingFactory.JEVRepository().UpdateJevAdaDsbrsmntsJrnl(LocalJevModel(), prevJournal, JevAcountsModelList(), ucAuthDbtAccDsbrsmntJrnl.ADADisbursementsJournalModel());
+                    return AccountingFactory.JEVRepository().UpdateADADisbursementsJournalEntry(LocalJevModel(), prevJournal, JevAcountsModelList(), ucAuthDbtAccDsbrsmntJrnl.ADADisbursementsJournalModel());
 
                 default:
                     return false;
@@ -456,7 +456,7 @@ namespace OmniGov.App.Accounting.Views.JournalEntryVoucher
         private string GenTransctnNo()
         {
             DateTime dateEntry = dtpDateEntry.Value;
-            string seriesNo = AccountingFactory.JEVRepository().GetLastTrnsctionNo(dateEntry.Year);
+            string seriesNo = AccountingFactory.JEVRepository().GetLastTransactionNo(dateEntry.Year);
             string trnsctnNo = $"{dateEntry:yy}-{seriesNo}";
             return trnsctnNo;
         }
@@ -1031,12 +1031,10 @@ namespace OmniGov.App.Accounting.Views.JournalEntryVoucher
                                 MessageBoxButtons.YesNo,
                                 MessageBoxIcon.Warning) == DialogResult.Yes)
             {
-                var model = new JevModel()
-                {
-                    Id = jevId.Value,
-                    Remarks = txtRemarks.Text.Trim(),
-                };
-                return AccountingFactory.JEVRepository().CancelJev(model);
+                string remarks = txtRemarks.Text.Trim();
+                const JevModel.Status cancelled = JevModel.Status.cancelled;
+                int jevIdValue = jevId.Value;
+                return AccountingFactory.JEVRepository().SetJevStatus(jevIdValue, cancelled, remarks);
             }
             return false;
         }
@@ -1050,12 +1048,10 @@ namespace OmniGov.App.Accounting.Views.JournalEntryVoucher
                                 MessageBoxButtons.YesNo,
                                 MessageBoxIcon.Warning) == DialogResult.Yes)
             {
-                var model = new JevModel()
-                {
-                    Id = jevId.Value,
-                    Remarks = txtRemarks.Text.Trim(),
-                };
-                return AccountingFactory.JEVRepository().DisapproveJev(model);
+                string remarks = txtRemarks.Text.Trim();
+                const JevModel.Status disapproved = JevModel.Status.disapproved;
+                int jevIdValue = jevId.Value;
+                return AccountingFactory.JEVRepository().SetJevStatus(jevIdValue, disapproved, remarks);
             }
             return false;
         }
@@ -1066,16 +1062,18 @@ namespace OmniGov.App.Accounting.Views.JournalEntryVoucher
 
             if (Helper.MessageBoxConfirmCancel($"Confirm approval of JEV (Transaction No.{trnsctnNo})"))
             {
-                bool fundValid = int.TryParse(cmbxFunds.SelectedValue.ToString(), out int fundId);
+                bool fundValid = int.TryParse(cmbxFunds.SelectedValue?.ToString(), out int fundId);
                 string jevSeriesNo = AccountingFactory.JEVRepository().GetLastJevNoSeries(fundId);
                 string genJevNo = GenerateJevNoTemplate(jevSeriesNo);
 
                 if (fundValid)
                 {
                     jevNo = genJevNo;
+
                     string remarks = txtRemarks.Text.Trim();
-                    var status = JevModel.Status.approved;
-                    return AccountingFactory.JEVRepository().SetJevStatus(jevId.Value, status, remarks);
+                    const JevModel.Status approved = JevModel.Status.approved;
+                    int jevIdValue = jevId.Value;
+                    return AccountingFactory.JEVRepository().SetJevStatus(jevIdValue, approved, remarks);
                 }
                 else
                     throw new Exception("Fund is invalid.");

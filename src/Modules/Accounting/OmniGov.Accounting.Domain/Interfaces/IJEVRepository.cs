@@ -6,29 +6,29 @@ namespace OmniGov.Accounting.Domain.Interfaces
 {
     public interface IJEVRepository : IRepository<JevModel>
     {
-        bool InsertJevGenJrnl(JevModel entity, List<JEVAccountsModel> jevAccountsModelList, GeneralJournalModel generalJournalModel);
+        bool InsertGeneralJournalEntry(JevModel entity, List<JEVAccountsModel> jevAccountsModelList, GeneralJournalModel generalJournalModel);
 
-        bool InsertJevCashDsbrsmntsJrnl(JevModel entity, List<JEVAccountsModel> jevAccountsModelList, CashDisbursementsJournalModel cashDisbursementsJournalModel);
+        bool InsertCashDisbursementsJournalEntry(JevModel entity, List<JEVAccountsModel> jevAccountsModelList, CashDisbursementsJournalModel cashDisbursementsJournalModel);
 
-        bool InsertJevChkDsbrsmntJrnl(JevModel entity, List<JEVAccountsModel> jevAccountsModelList, CheckDisbursementsJournalModel checkDisbursementsJournalModel);
+        bool InsertCheckDisbursementsJournalEntry(JevModel entity, List<JEVAccountsModel> jevAccountsModelList, CheckDisbursementsJournalModel checkDisbursementsJournalModel);
 
-        bool InsertJevCashRcptsJrnl(JevModel entity, List<JEVAccountsModel> jevAccountsModelList, CashReceiptsJournalModel cashReceiptsJournalModel);
+        bool InsertCashReceiptsJournalEntry(JevModel entity, List<JEVAccountsModel> jevAccountsModelList, CashReceiptsJournalModel cashReceiptsJournalModel);
 
-        bool InsertJevProcRcvJrnl(JevModel entity, List<JEVAccountsModel> jevAccountsModels);
+        bool InsertProcurementReceivedJournalEntry(JevModel entity, List<JEVAccountsModel> jevAccountsModels);
 
-        bool InsertJevAdaDsbrsmntsJrnl(JevModel entity, List<JEVAccountsModel> jevAccountsModelList, ADADisbursementsJournalModel aDADisbursementsJournalModel);
+        bool InsertADADisbursementsJournalEntry(JevModel entity, List<JEVAccountsModel> jevAccountsModelList, ADADisbursementsJournalModel aDADisbursementsJournalModel);
 
-        bool UpdateJevGenJrnl(JevModel entity, (int jrnlId, string jrnlName) prevJournal, List<JEVAccountsModel> jevAccountsModelList, GeneralJournalModel generalJournalModel);
+        bool UpdateGeneralJournalEntry(JevModel entity, (int jrnlId, string jrnlName) prevJournal, List<JEVAccountsModel> jevAccountsModelList, GeneralJournalModel generalJournalModel);
 
-        bool UpdateJevCshDsbrsmntsJrnl(JevModel entity, (int jrnlId, string jrnlName) prevJournal, List<JEVAccountsModel> jevAccountsModelList, CashDisbursementsJournalModel cashDisbursementsJournalModel);
+        bool UpdateCashDisbursementsJournalEntry(JevModel entity, (int jrnlId, string jrnlName) prevJournal, List<JEVAccountsModel> jevAccountsModelList, CashDisbursementsJournalModel cashDisbursementsJournalModel);
 
-        bool UpdateJevChkDsbrsmntJrnl(JevModel entity, (int jrnlId, string jrnlName) prevJournal, List<JEVAccountsModel> jevAccountsModelList, CheckDisbursementsJournalModel checkDisbursementsJournalModel);
+        bool UpdateCheckDisbursementsJournalEntry(JevModel entity, (int jrnlId, string jrnlName) prevJournal, List<JEVAccountsModel> jevAccountsModelList, CheckDisbursementsJournalModel checkDisbursementsJournalModel);
 
-        bool UpdateJevCshRcptsJrnl(JevModel entity, (int jrnlId, string jrnlName) prevJournal, List<JEVAccountsModel> jevAccountsModelList, CashReceiptsJournalModel cashReceiptsJournalModel);
+        bool UpdateCashReceiptsJournalEntry(JevModel entity, (int jrnlId, string jrnlName) prevJournal, List<JEVAccountsModel> jevAccountsModelList, CashReceiptsJournalModel cashReceiptsJournalModel);
 
-        bool UpdateJevProcRcvJrnl(JevModel entity, (int jrnlId, string jrnlName) prevJournal, List<JEVAccountsModel> jevAccountsModels);
+        bool UpdateProcurementReceivedJournalEntry(JevModel entity, (int jrnlId, string jrnlName) prevJournal, List<JEVAccountsModel> jevAccountsModels);
 
-        bool UpdateJevAdaDsbrsmntsJrnl(JevModel entity, (int jrnlId, string jrnlName) prevJournal, List<JEVAccountsModel> jevAccountsModelList, ADADisbursementsJournalModel aDADisbursementsJournalModel);
+        bool UpdateADADisbursementsJournalEntry(JevModel entity, (int jrnlId, string jrnlName) prevJournal, List<JEVAccountsModel> jevAccountsModelList, ADADisbursementsJournalModel aDADisbursementsJournalModel);
 
         bool Delete(JevModel entity);
 
@@ -36,7 +36,7 @@ namespace OmniGov.Accounting.Domain.Interfaces
 
         int GetLastInsertedID();
 
-        string GetLastTrnsctionNo(int year);
+        string GetLastTransactionNo(int year);
 
         string GetLastJevNoSeries(int fundId);
 
@@ -44,35 +44,14 @@ namespace OmniGov.Accounting.Domain.Interfaces
 
         DataTable GetRecordsByJevNoAndDate(string searchText, sbyte jevDate, ushort year, byte journalId);
 
-        #region Validations
-
-        bool JevNumberExistBy_JevNo_FundId_Year(string jevNo, int fundId, int year);
-
-        bool JevNumberExistBy_JevId_JevNo_FundId_Year(int jevId, string jevNo, int fundId, int year);
-
-        #endregion Validations
-
         int JevCounterByJournal(string fundName, int year, string journalName);
 
-        int GetJevCount(string status, string journalName, string fundName, short year);
-
-        bool PendingJev(JevModel jevModel);
-
-        bool CancelJev(JevModel jevModel);
-
-        bool ApproveJev(JevModel jevModel);
-
-        bool DisapproveJev(JevModel jevModel);
+        int GetJevCount(JevModel.Status? status, string journalName, string fundName, short year);
 
         bool SetJevStatus(int id, JevModel.Status status, string remarks);
 
         DataTable GetViewRecords(string status, string searchTxt, string journalName, string fundName, short year);
 
         DataTable GetViewRecords(JevModel.Status status);
-
-        //SFPs
-        decimal GetSumByMajorAccountGroup(int fundId, int majorAccountGroupId, byte isDebit, DateTime dateEntry);
-
-        decimal GetSumPreviousYearTransactionsByFundIdAndMajAccountGroupId(int fundId, int majorAccountGroupId, byte isDebit, DateTime dateEntry);
     }
 }
