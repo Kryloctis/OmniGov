@@ -5,12 +5,12 @@ using System.Data;
 
 namespace OmniGov.Accounting.Data.Repositories
 {
-    public class ADADisbursementsJournalRepository : IADADisbursementsJournalRepository
+    public class AdaDisbursementsJournalRepository : IAdaDisbursementsJournalRepository
     {
         private const string tableName = "ada_disbursement_journal";
         private readonly IGenericCommands _genericCommands;
 
-        public ADADisbursementsJournalRepository(IGenericCommands genericCommands)
+        public AdaDisbursementsJournalRepository(IGenericCommands genericCommands)
         {
             _genericCommands = genericCommands ?? throw new ArgumentNullException(nameof(genericCommands));
         }

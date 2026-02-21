@@ -1,30 +1,30 @@
+using MySql.Data.MySqlClient;
 using OmniGov.Accounting.Domain.Entities;
 using OmniGov.Accounting.Domain.Interfaces;
 using OmniGov.Core.Interfaces.Services;
 using System.Data;
-using System.Data.Common;
 using System.Transactions;
 
 namespace OmniGov.Accounting.Data.Repositories
 {
-    public class JEVRepository : IJEVRepository
+    public class JevRepository : IJevRepository
     {
-        private readonly IJEVAccountsRepository _jevAccountsRepository;
+        private readonly IJevAccountsRepository _jevAccountsRepository;
         private readonly IGeneralJournalRepository _generalJournalRepository;
         private readonly ICashDisbursementsJournalRepository _cashDisbursementsJournalRepository;
         private readonly ICheckDisbursementsJournalRepository _checkDisbursementsJournalRepository;
         private readonly ICashReceiptsJournalRepository _cashReceiptsJournalRepository;
-        private readonly IADADisbursementsJournalRepository _adaDisbursementsJournalRepository;
+        private readonly IAdaDisbursementsJournalRepository _adaDisbursementsJournalRepository;
 
         private readonly IGenericCommands _genericCommands;
         private const string tableName = "jev";
         private const string viewTableName = "view_jev";
 
-        public JEVRepository(IGenericCommands genericCommands,
-            IJEVAccountsRepository jevAccountsRepository,
+        public JevRepository(IGenericCommands genericCommands,
+            IJevAccountsRepository jevAccountsRepository,
             ICheckDisbursementsJournalRepository checkDisbursementsJournalRepository,
             ICashReceiptsJournalRepository cashReceiptsJournalRepository,
-            IADADisbursementsJournalRepository adaDisbursementsJournalRepository,
+            IAdaDisbursementsJournalRepository adaDisbursementsJournalRepository,
             ICashDisbursementsJournalRepository cashDisbursementsJournalRepository,
             IGeneralJournalRepository generalJournalRepository)
         {
@@ -59,9 +59,9 @@ namespace OmniGov.Accounting.Data.Repositories
 
         public bool Delete(JevModel entity)
         {
-            var parameters = new object[][]
+            var parameters = new MySqlParameter[]
             {
-                new object[] { "@id", DbType.Int32, entity.Id},
+                new("@id", entity.Id)
             };
 
             string query = $"DELETE FROM {tableName} WHERE id = @id";
@@ -72,9 +72,9 @@ namespace OmniGov.Accounting.Data.Repositories
         {
             var recordDictionary = new Dictionary<string, string>();
 
-            var parameters = new object[][]
+            var parameters = new MySqlParameter[]
             {
-                new object[] { "@id", DbType.Int32, Id},
+                new("@id", Id)
             };
 
             string query = $"SELECT id, funds_id, fund_code, fund_name, journals_id, journal_name, is_special, transaction_no, jev_no, date_entry, ref_no, payee, explanation, status, created_at, created_by, created_by_name, updated_at, updated_by, updated_by_name FROM {viewTableName} WHERE id = @id";
@@ -101,12 +101,12 @@ namespace OmniGov.Accounting.Data.Repositories
 
         public DataTable GetRecordsByJevNoAndDate(string searchText, sbyte month, ushort year, byte journalId)
         {
-            var parameters = new object[][]
+            var parameters = new MySqlParameter[]
             {
-                new object[] { "@jev_no", DbType.String, $"%{searchText}%" },
-                new object[] { "@month", DbType.DateTime2, month },
-                new object[] { "@year", DbType.DateTime2, year },
-                new object[] { "@journalId", DbType.String, journalId }
+                new ("@jev_no", $"%{searchText}%"),
+                new ("@month", month),
+                new ("@year", year),
+                new ("@journalId", journalId)
             };
 
             string query = $@"SELECT * FROM {viewTableName}
@@ -117,12 +117,12 @@ namespace OmniGov.Accounting.Data.Repositories
 
         public DataTable GetRecordsBySearch(string searchText)
         {
-            var parameters = new object[][]
+            var parameters = new MySqlParameter[]
             {
-                new object[] { "@jev_no", DbType.String, $"%{searchText}%" },
-                new object[] { "@ref_no", DbType.String, $"%{searchText}%" },
-                new object[] { "@payee", DbType.String, $"%{searchText}%" },
-                new object[] { "@explanation", DbType.String, $"%{searchText}%" },
+                new ("@jev_no", $"%{searchText}%"),
+                new ("@ref_no", $"%{searchText}%"),
+                new ("@payee", $"%{searchText}%"),
+                new ("@explanation", $"%{searchText}%")
             };
 
             string query = $"SELECT * FROM {viewTableName} WHERE status = 'approved'AND (jev_no LIKE @jev_no OR ref_no LIKE @ref_no OR payee LIKE @payee OR explanation LIKE @explanation)";
@@ -137,18 +137,18 @@ namespace OmniGov.Accounting.Data.Repositories
 
         public bool Insert(JevModel entity)
         {
-            object[][] parameters = new object[][]
+            var parameters = new MySqlParameter[]
             {
-                new object[] { "@funds_id", DbType.Byte, entity.FundsId },
-                new object[] { "@journals_id", DbType.Byte, entity.JournalsId },
-                new object[] { "@transaction_no", DbType.String, entity.TransactionNo},
-                new object[] { "@jev_no", DbType.String, entity.JevNo },
-                new object[] { "@date_entry", DbType.Date, entity.DateEntry },
-                new object[] { "@ref_no", DbType.String, entity.RefNo },
-                new object[] { "@payee", DbType.String, entity.Payee },
-                new object[] { "@explanation", DbType.String, entity.Explanation},
-                new object[] { "@status", DbType.Boolean, entity.JevStatus},
-                new object[] { "@created_by", DbType.Byte, entity.CreatedBy },
+               new ("@funds_id", entity.FundsId),
+               new ("@journals_id", entity.JournalsId),
+               new ("@transaction_no", entity.TransactionNo),
+               new ("@jev_no", entity.JevNo),
+               new ("@date_entry", entity.DateEntry),
+               new ("@ref_no", entity.RefNo),
+               new ("@payee", entity.Payee),
+               new ("@explanation", entity.Explanation),
+               new ("@status", entity.JevStatus.ToString()),
+               new ("@created_by", entity.CreatedBy)
             };
 
             string query = $"INSERT INTO {tableName} (funds_id, journals_id, transaction_no, jev_no, date_entry, ref_no, payee, explanation, status, created_by) VALUES (@funds_id, @journals_id, @transaction_no, @jev_no, @date_entry, @ref_no, @payee, @explanation, @status, @created_by);";
@@ -303,21 +303,21 @@ namespace OmniGov.Accounting.Data.Repositories
 
         public bool Update(JevModel entity)
         {
-            var parameters = new object[][]
+            var parameters = new MySqlParameter[]
             {
-                new object[] { "@id", DbType.Int32, entity.Id },
-                new object[] { "@funds_id", DbType.Byte, entity.FundsId },
-                new object[] { "@journals_id", DbType.Byte, entity.JournalsId },
-                new object[] { "@transaction_no", DbType.String, entity.TransactionNo},
-                new object[] { "@jev_no", DbType.String, entity.JevNo },
-                new object[] { "@date_entry", DbType.Date, entity.DateEntry },
-                new object[] { "@ref_no", DbType.String, entity.RefNo },
-                new object[] { "@payee", DbType.String, entity.Payee },
-                new object[] { "@explanation", DbType.String, entity.Explanation },
-                new object[] { "@status", DbType.String, entity.JevStatus},
-                new object[] { "@updated_by", DbType.Byte, entity.UpdatedBy },
-                new object[] { "@is_edited", DbType.Byte, entity.IsEdited},
-                new object[] { "@remarks", DbType.String, entity.Remarks},
+                new("@id", entity.Id),
+                new("@funds_id", entity.FundsId),
+                new("@journals_id", entity.JournalsId),
+                new("@transaction_no", entity.TransactionNo),
+                new("@jev_no", entity.JevNo),
+                new("@date_entry", entity.DateEntry),
+                new("@ref_no", entity.RefNo),
+                new("@payee", entity.Payee),
+                new("@explanation", entity.Explanation),
+                new("@status", entity.JevStatus.ToString()),
+                new("@updated_by", entity.UpdatedBy),
+                new("@is_edited", entity.IsEdited),
+                new("@remarks", entity.Remarks)
             };
 
             string query = $@"UPDATE {tableName} SET
@@ -499,9 +499,9 @@ namespace OmniGov.Accounting.Data.Repositories
         {
             var recordDictionary = new Dictionary<string, string>();
 
-            var parameters = new object[][]
+            var parameters = new MySqlParameter[]
             {
-                new object[] { "@id", DbType.Int32, jevId},
+                new("@id", jevId)
             };
 
             string query = $"SELECT * FROM {viewTableName} WHERE id = @id";
@@ -522,11 +522,11 @@ namespace OmniGov.Accounting.Data.Repositories
 
         public int JevCounterByJournal(string fundName, int year, string journalName)
         {
-            var parameters = new object[][]
+            var parameters = new MySqlParameter[]
             {
-                new object[] { "@fund_name", DbType.String, fundName},
-                new object[] { "@year", DbType.Int32, year},
-                new object[] { "@journal_name", DbType.String, journalName }
+                new("@fund_name", fundName),
+                new("@year", year),
+                new("@journal_name", journalName)
             };
 
             string query = $"SELECT COALESCE(COUNT(*), 0) AS jev_count FROM {viewTableName} WHERE status = 'approved'  {(fundName == "All" ? string.Empty : "AND fund_name = @fund_name")} AND journal_name = @journal_name AND YEAR(date_entry) <= @year";
@@ -536,11 +536,11 @@ namespace OmniGov.Accounting.Data.Repositories
 
         public int GetJevCount(JevModel.Status? status, string journalName, string fundName, short year)
         {
-            var parameters = new object[][]
+            var parameters = new MySqlParameter[]
             {
-                new object[] { "@journal_name", DbType.String, journalName },
-                new object[] { "@fund_name", DbType.String, fundName},
-                new object[] { "@year", DbType.Int16, year},
+                new ("@journal_name", journalName),
+                new ("@fund_name", fundName),
+                new ("@year", year)
             };
 
             string statusQuery = status.HasValue ? $"status = '{status}' AND" : string.Empty;
@@ -554,13 +554,13 @@ namespace OmniGov.Accounting.Data.Repositories
 
         public DataTable GetViewRecords(string status, string searchTxt, string journalName, string fundName, short year)
         {
-            var parameters = new object[][]
+            var parameters = new MySqlParameter[]
             {
-                new object[] { "@journal_name", DbType.String, journalName},
-                new object[] { "@fund_name", DbType.String, fundName},
-                new object[] { "@searchTxt", DbType.String, $"%{searchTxt}%"},
-                new object[] { "@year", DbType.Int16, year},
-                new object[] { "@status", DbType.String, status},
+                new("@journal_name", journalName),
+                new("@fund_name", fundName),
+                new("@searchTxt", $"%{searchTxt}%"),
+                new("@year", year),
+                new("@status", status)
             };
 
             string query = $"SELECT * FROM {viewTableName} WHERE status = @status AND journal_name = @journal_name AND fund_name = @fund_name AND YEAR(date_entry) = @year AND (full_jev_no LIKE @searchTxt OR fund_name LIKE @searchTxt OR ref_no LIKE @searchTxt OR payee LIKE @searchTxt OR explanation LIKE @searchTxt) ORDER BY full_jev_no";
@@ -569,9 +569,9 @@ namespace OmniGov.Accounting.Data.Repositories
 
         public string GetLastJevNoSeries(int fundId)
         {
-            var parameters = new object[][]
+            var parameters = new MySqlParameter[]
             {
-                new object[] { "@funds_id", DbType.Int32, fundId}
+                new("@funds_id", fundId)
             };
 
             string query = $"SELECT COALESCE(LPAD(MAX(jev_no)+1, 4, '0'), '0001') AS jev_no FROM {tableName} WHERE funds_id = @funds_id";
@@ -580,9 +580,9 @@ namespace OmniGov.Accounting.Data.Repositories
 
         public string GetLastTransactionNo(int year)
         {
-            var parameters = new object[][]
+            var parameters = new MySqlParameter[]
             {
-                new object[] { "@date_entry_year", DbType.Int32, year}
+                new("@date_entry_year", year)
             };
 
             string query = $"SELECT COALESCE(LPAD(MAX(transaction_no)+1, 4, '0'), '0001') AS transaction_no FROM {tableName} WHERE YEAR(date_entry) = @date_entry_year";
@@ -596,12 +596,12 @@ namespace OmniGov.Accounting.Data.Repositories
             object? jevNo = status == JevModel.Status.approved ? GetLastJevNoSeries(id)
                 : null;
 
-            var parameters = new object[][]
+            var parameters = new MySqlParameter[]
             {
-                new object[] { "@id", DbType.Int32, id},
-                new object[] { "@jev_no", DbType.String, jevNo ?? DBNull.Value},
-                new object[] { "@remarks", DbType.String, remarks ?? (object)DBNull.Value},
-                new object[] { "@status", DbType.String, status },
+                new("@id", id),
+                new("@jev_no", jevNo ?? DBNull.Value),
+                new("@remarks", remarks ?? (object)DBNull.Value),
+                new("@status", status.ToString())
             };
 
             string query = $"UPDATE {tableName} SET jev_no = @jev_no, status = @status, remarks = @remarks  WHERE id = @id";
@@ -618,13 +618,13 @@ namespace OmniGov.Accounting.Data.Repositories
 
         public DataTable GetViewRecords(JevModel.Status status)
         {
-            var parameter = new object[][]
+            var parameter = new MySqlParameter[]
             {
-                new object[] { "@status", DbType.String, status}
+                new("@status", status.ToString())
             };
 
             string query = $"SELECT * FROM {viewTableName} WHERE status = @status";
-            return _genericCommands.Fill(query, new DataTable());
+            return _genericCommands.FillBySearch(query, new DataTable(), parameter);
         }
     }
 }

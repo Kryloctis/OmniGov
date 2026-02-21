@@ -45,7 +45,6 @@ namespace OmniGov.App.Accounting.Views.JournalEntryVoucher
             tlStrpBtnUpdate = new ToolStripButton();
             tlStrpBtnCreate = new ToolStripButton();
             panel4 = new Panel();
-            label10 = new Label();
             label8 = new Label();
             backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             customTabControl1 = new OmniGov.App.CustomTools.CustomTabControl();
@@ -72,14 +71,12 @@ namespace OmniGov.App.Accounting.Views.JournalEntryVoucher
             toolStrip3 = new ToolStrip();
             tlStrpBtnBack = new ToolStripButton();
             panel3 = new Panel();
-            label11 = new Label();
             lblCrudStat = new Label();
             tbPgView = new TabPage();
             ucJev2 = new ucJournalEntryVoucher();
             toolStrip4 = new ToolStrip();
             tlsStrpBtnBckView = new ToolStripButton();
             panel5 = new Panel();
-            label12 = new Label();
             label6 = new Label();
             tbPgReview = new TabPage();
             ucJevAudit = new ucJournalEntryVoucher();
@@ -90,7 +87,6 @@ namespace OmniGov.App.Accounting.Views.JournalEntryVoucher
             toolStrip5 = new ToolStrip();
             tlStrpBtnBckReview = new ToolStripButton();
             panel8 = new Panel();
-            label13 = new Label();
             label7 = new Label();
             reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
             panel7.SuspendLayout();
@@ -135,10 +131,10 @@ namespace OmniGov.App.Accounting.Views.JournalEntryVoucher
             // 
             dgJEV.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgJEV.Dock = DockStyle.Fill;
-            dgJEV.Location = new Point(20, 108);
+            dgJEV.Location = new Point(20, 93);
             dgJEV.Margin = new Padding(1);
             dgJEV.Name = "dgJEV";
-            dgJEV.Size = new Size(530, 430);
+            dgJEV.Size = new Size(530, 445);
             dgJEV.TabIndex = 7;
             dgJEV.ColumnAdded += dgJEV_ColumnAdded;
             dgJEV.SelectionChanged += dgJEV_SelectionChanged;
@@ -193,7 +189,7 @@ namespace OmniGov.App.Accounting.Views.JournalEntryVoucher
             // pbLoadRecords
             // 
             pbLoadRecords.Dock = DockStyle.Top;
-            pbLoadRecords.Location = new Point(20, 106);
+            pbLoadRecords.Location = new Point(20, 91);
             pbLoadRecords.Name = "pbLoadRecords";
             pbLoadRecords.Size = new Size(530, 2);
             pbLoadRecords.TabIndex = 25;
@@ -204,7 +200,7 @@ namespace OmniGov.App.Accounting.Views.JournalEntryVoucher
             toolStrip1.GripStyle = ToolStripGripStyle.Hidden;
             toolStrip1.ImageScalingSize = new Size(20, 20);
             toolStrip1.Items.AddRange(new ToolStripItem[] { tlStrpBtnReview, toolStripSeparator2, tlStrpBtnDelete, tlStrpBtnView, tlStrpBtnUpdate, tlStrpBtnCreate });
-            toolStrip1.Location = new Point(20, 71);
+            toolStrip1.Location = new Point(20, 56);
             toolStrip1.Name = "toolStrip1";
             toolStrip1.Padding = new Padding(4);
             toolStrip1.Size = new Size(530, 35);
@@ -272,24 +268,14 @@ namespace OmniGov.App.Accounting.Views.JournalEntryVoucher
             // 
             // panel4
             // 
-            panel4.Controls.Add(label10);
+            panel4.AutoSize = true;
             panel4.Controls.Add(label8);
             panel4.Dock = DockStyle.Top;
             panel4.Location = new Point(20, 20);
             panel4.Name = "panel4";
             panel4.Padding = new Padding(0, 0, 0, 15);
-            panel4.Size = new Size(530, 51);
+            panel4.Size = new Size(530, 36);
             panel4.TabIndex = 26;
-            // 
-            // label10
-            // 
-            label10.AutoSize = true;
-            label10.ForeColor = SystemColors.ControlDarkDark;
-            label10.Location = new Point(3, 21);
-            label10.Name = "label10";
-            label10.Size = new Size(297, 15);
-            label10.TabIndex = 1;
-            label10.Text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit";
             // 
             // label8
             // 
@@ -529,9 +515,9 @@ namespace OmniGov.App.Accounting.Views.JournalEntryVoucher
             ucJev1.AutoValidate = AutoValidate.Disable;
             ucJev1.BackColor = SystemColors.Control;
             ucJev1.Dock = DockStyle.Fill;
-            ucJev1.Location = new Point(0, 106);
+            ucJev1.Location = new Point(0, 91);
             ucJev1.Name = "ucJev1";
-            ucJev1.Size = new Size(818, 429);
+            ucJev1.Size = new Size(818, 444);
             ucJev1.TabIndex = 0;
             // 
             // flowLayoutPanel3
@@ -564,7 +550,7 @@ namespace OmniGov.App.Accounting.Views.JournalEntryVoucher
             toolStrip3.GripStyle = ToolStripGripStyle.Hidden;
             toolStrip3.ImageScalingSize = new Size(20, 20);
             toolStrip3.Items.AddRange(new ToolStripItem[] { tlStrpBtnBack });
-            toolStrip3.Location = new Point(0, 71);
+            toolStrip3.Location = new Point(0, 56);
             toolStrip3.Name = "toolStrip3";
             toolStrip3.Padding = new Padding(4, 4, 20, 4);
             toolStrip3.Size = new Size(818, 35);
@@ -586,24 +572,13 @@ namespace OmniGov.App.Accounting.Views.JournalEntryVoucher
             // 
             panel3.AutoSize = true;
             panel3.BackColor = SystemColors.Control;
-            panel3.Controls.Add(label11);
             panel3.Controls.Add(lblCrudStat);
             panel3.Dock = DockStyle.Top;
             panel3.Location = new Point(0, 0);
             panel3.Name = "panel3";
             panel3.Padding = new Padding(20, 20, 20, 15);
-            panel3.Size = new Size(818, 71);
+            panel3.Size = new Size(818, 56);
             panel3.TabIndex = 23;
-            // 
-            // label11
-            // 
-            label11.AutoSize = true;
-            label11.ForeColor = SystemColors.ControlDarkDark;
-            label11.Location = new Point(23, 41);
-            label11.Name = "label11";
-            label11.Size = new Size(297, 15);
-            label11.TabIndex = 24;
-            label11.Text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit";
             // 
             // lblCrudStat
             // 
@@ -633,9 +608,9 @@ namespace OmniGov.App.Accounting.Views.JournalEntryVoucher
             ucJev2.AutoValidate = AutoValidate.Disable;
             ucJev2.BackColor = SystemColors.Control;
             ucJev2.Dock = DockStyle.Fill;
-            ucJev2.Location = new Point(0, 98);
+            ucJev2.Location = new Point(0, 83);
             ucJev2.Name = "ucJev2";
-            ucJev2.Size = new Size(818, 497);
+            ucJev2.Size = new Size(818, 512);
             ucJev2.TabIndex = 22;
             // 
             // toolStrip4
@@ -644,7 +619,7 @@ namespace OmniGov.App.Accounting.Views.JournalEntryVoucher
             toolStrip4.GripStyle = ToolStripGripStyle.Hidden;
             toolStrip4.ImageScalingSize = new Size(20, 20);
             toolStrip4.Items.AddRange(new ToolStripItem[] { tlsStrpBtnBckView });
-            toolStrip4.Location = new Point(0, 71);
+            toolStrip4.Location = new Point(0, 56);
             toolStrip4.Name = "toolStrip4";
             toolStrip4.Padding = new Padding(0, 0, 20, 0);
             toolStrip4.Size = new Size(818, 27);
@@ -665,24 +640,13 @@ namespace OmniGov.App.Accounting.Views.JournalEntryVoucher
             // panel5
             // 
             panel5.AutoSize = true;
-            panel5.Controls.Add(label12);
             panel5.Controls.Add(label6);
             panel5.Dock = DockStyle.Top;
             panel5.Location = new Point(0, 0);
             panel5.Name = "panel5";
             panel5.Padding = new Padding(20, 20, 20, 15);
-            panel5.Size = new Size(818, 71);
+            panel5.Size = new Size(818, 56);
             panel5.TabIndex = 24;
-            // 
-            // label12
-            // 
-            label12.AutoSize = true;
-            label12.ForeColor = SystemColors.ControlDarkDark;
-            label12.Location = new Point(23, 41);
-            label12.Name = "label12";
-            label12.Size = new Size(297, 15);
-            label12.TabIndex = 25;
-            label12.Text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit";
             // 
             // label6
             // 
@@ -713,9 +677,9 @@ namespace OmniGov.App.Accounting.Views.JournalEntryVoucher
             ucJevAudit.AutoValidate = AutoValidate.Disable;
             ucJevAudit.BackColor = SystemColors.Control;
             ucJevAudit.Dock = DockStyle.Fill;
-            ucJevAudit.Location = new Point(0, 98);
+            ucJevAudit.Location = new Point(0, 83);
             ucJevAudit.Name = "ucJevAudit";
-            ucJevAudit.Size = new Size(818, 437);
+            ucJevAudit.Size = new Size(818, 452);
             ucJevAudit.TabIndex = 23;
             // 
             // flowLayoutPanel2
@@ -782,7 +746,7 @@ namespace OmniGov.App.Accounting.Views.JournalEntryVoucher
             toolStrip5.GripStyle = ToolStripGripStyle.Hidden;
             toolStrip5.ImageScalingSize = new Size(20, 20);
             toolStrip5.Items.AddRange(new ToolStripItem[] { tlStrpBtnBckReview });
-            toolStrip5.Location = new Point(0, 71);
+            toolStrip5.Location = new Point(0, 56);
             toolStrip5.Name = "toolStrip5";
             toolStrip5.Padding = new Padding(0, 0, 20, 0);
             toolStrip5.Size = new Size(818, 27);
@@ -804,24 +768,13 @@ namespace OmniGov.App.Accounting.Views.JournalEntryVoucher
             // 
             panel8.AutoSize = true;
             panel8.BackColor = SystemColors.Control;
-            panel8.Controls.Add(label13);
             panel8.Controls.Add(label7);
             panel8.Dock = DockStyle.Top;
             panel8.Location = new Point(0, 0);
             panel8.Name = "panel8";
             panel8.Padding = new Padding(20, 20, 20, 15);
-            panel8.Size = new Size(818, 71);
+            panel8.Size = new Size(818, 56);
             panel8.TabIndex = 25;
-            // 
-            // label13
-            // 
-            label13.AutoSize = true;
-            label13.ForeColor = SystemColors.ControlDarkDark;
-            label13.Location = new Point(23, 41);
-            label13.Name = "label13";
-            label13.Size = new Size(297, 15);
-            label13.TabIndex = 26;
-            label13.Text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit";
             // 
             // label7
             // 
@@ -944,7 +897,6 @@ namespace OmniGov.App.Accounting.Views.JournalEntryVoucher
         private TextBox txtSearch;
         private Label label5;
         private Panel panel4;
-        private Label label10;
         private Label label8;
         private Panel panel6;
         private Label lblPagination;
@@ -958,8 +910,5 @@ namespace OmniGov.App.Accounting.Views.JournalEntryVoucher
         private Label label7;
         private FlowLayoutPanel flowLayoutPanel3;
         private Button btnSubmit;
-        private Label label11;
-        private Label label12;
-        private Label label13;
     }
 }

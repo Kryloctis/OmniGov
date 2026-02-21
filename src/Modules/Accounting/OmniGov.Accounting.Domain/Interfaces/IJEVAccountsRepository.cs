@@ -4,7 +4,7 @@ using System.Data;
 
 namespace OmniGov.Accounting.Domain.Interfaces
 {
-    public interface IJEVAccountsRepository : IRepository<JEVAccountsModel>
+    public interface IJevAccountsRepository : IRepository<JEVAccountsModel>
     {
         bool BulkInsert(List<JEVAccountsModel> jEVAccountsModels);
 

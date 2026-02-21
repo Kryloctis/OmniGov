@@ -4,7 +4,7 @@ using System.Data;
 
 namespace OmniGov.Accounting.Domain.Interfaces
 {
-    public interface IJEVRepository : IRepository<JevModel>
+    public interface IJevRepository : IRepository<JevModel>
     {
         bool InsertGeneralJournalEntry(JevModel entity, List<JEVAccountsModel> jevAccountsModelList, GeneralJournalModel generalJournalModel);
 

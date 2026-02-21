@@ -18,7 +18,7 @@ namespace Accounting.Data.Services
 
         private static void RegisterAccountingRepositories(IServiceCollection services)
         {
-            services.AddScoped<IADADisbursementsJournalRepository, ADADisbursementsJournalRepository>();
+            services.AddScoped<IAdaDisbursementsJournalRepository, AdaDisbursementsJournalRepository>();
             services.AddScoped<IAmortizationRepository, AmortizationRepository>();
             services.AddScoped<IAmortizationScheduleRepository, AmortizationScheduleRepository>();
             services.AddScoped<IBeginningBalancesRepository, BeginningBalancesRepository>();
@@ -27,8 +27,8 @@ namespace Accounting.Data.Services
             services.AddScoped<IGeneralLedgerAccountsRepository, GeneralLedgerAccountsRepository>();
             services.AddScoped<ICheckDisbursementsJournalRepository, CheckDisbursementsJournalRepository>();
             services.AddScoped<IGeneralJournalRepository, GeneralJournalRepository>();
-            services.AddScoped<IJEVAccountsRepository, JEVAccountsRepository>();
-            services.AddScoped<IJEVRepository, JEVRepository>();
+            services.AddScoped<IJevAccountsRepository, JevAccountsRepository>();
+            services.AddScoped<IJevRepository, JevRepository>();
             services.AddScoped<ISubsidiaryLedgerAccountsRepository, SubsidiaryLedgerAccountsRepository>();
         }
     }

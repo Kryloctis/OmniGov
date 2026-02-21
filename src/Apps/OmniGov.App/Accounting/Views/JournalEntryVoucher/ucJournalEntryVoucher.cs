@@ -5,6 +5,7 @@ using OmniGov.App.Helpers;
 using OmniGov.Core.Factories;
 using System.ComponentModel;
 using System.Data;
+using System.Globalization;
 using System.Text;
 
 namespace OmniGov.App.Accounting.Views.JournalEntryVoucher
@@ -484,19 +485,23 @@ namespace OmniGov.App.Accounting.Views.JournalEntryVoucher
 
             switch (status)
             {
-                case "Pending":
+                case "draft":
+                    indctrColor = Color.FromKnownColor(KnownColor.ControlDarkDark);
+                    break;
+
+                case "pending":
                     indctrColor = Color.Gold;
                     break;
 
-                case "Approved":
+                case "approved":
                     indctrColor = Color.Green;
                     break;
 
-                case "Disapproved":
+                case "disapproved":
                     indctrColor = Color.Red;
                     break;
 
-                case "Cancelled":
+                case "cancelled":
                     indctrColor = Color.Purple;
                     break;
 
@@ -524,7 +529,8 @@ namespace OmniGov.App.Accounting.Views.JournalEntryVoucher
             string payee = dictJev["payee"];
             string explanation = dictJev["explanation"];
             string remarks = dictJev["remarks"];
-            string transactionNo = $"{dateEntry:yy}-{dictJev["transaction_no"]}";
+
+            string transactionNo = Helper.FormatTransactionNo(dictJev["transaction_no"].ToString());
 
             prevJournal = (jevId, journalName);
             mskTxtTransNo.Text = transactionNo;
@@ -539,21 +545,10 @@ namespace OmniGov.App.Accounting.Views.JournalEntryVoucher
             string fullJevNo = GenerateJevNoTemplate(jevSeriesNo);
             mskTxtJevNo.Text = fullJevNo;
 
-            var isValid = new List<bool>()
-            {
-                byte.TryParse($"{dictJev["is_approved"]}", out byte isApproved),
-                byte.TryParse($"{dictJev["is_disapproved"]}", out byte isDisapproved),
-                byte.TryParse($"{dictJev["is_cancelled"]}", out byte isCancelled)
-            };
-
-            if (!isValid.Contains(false))
-            {
-                string status = Helper.GetStatus(isApproved == 1, isDisapproved == 1, isCancelled == 1);
-                lblStatus.Text = $"Status: {status}";
-                ToggleJevStatIndctr(lblStatIndctr, status);
-            }
-            else
-                throw new Exception();
+            string status = dictJev["status"];
+            string formattedStatus = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(status);
+            lblStatus.Text = $"Status: {formattedStatus}";
+            ToggleJevStatIndctr(lblStatIndctr, status);
 
             bool createdByValid = int.TryParse($"{dictJev["created_by"]}", out int createdById);
             var dictCrtdBy = Factory.UsersRepository().GetRecordByID(createdById);

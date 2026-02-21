@@ -6,7 +6,7 @@ namespace OmniGov.Accounting.Data.Factories
     {
         private static T Resolve<T>() where T : notnull => OmniGov.Core.Services.ServiceLocator.GetRequiredService<T>();
 
-        public static IJEVRepository JEVRepository() => Resolve<IJEVRepository>();
+        public static IJevRepository JEVRepository() => Resolve<IJevRepository>();
 
         public static IAmortizationRepository AmortizationRepository() => Resolve<IAmortizationRepository>();
 
@@ -14,7 +14,7 @@ namespace OmniGov.Accounting.Data.Factories
 
         public static IBeginningBalancesRepository BeginningBalancesRepository() => Resolve<IBeginningBalancesRepository>();
 
-        public static IJEVAccountsRepository JEVAccountsRepository() => Resolve<IJEVAccountsRepository>();
+        public static IJevAccountsRepository JEVAccountsRepository() => Resolve<IJevAccountsRepository>();
 
         public static IGeneralJournalRepository GeneralJournalRepository() => Resolve<IGeneralJournalRepository>();
 
@@ -24,7 +24,7 @@ namespace OmniGov.Accounting.Data.Factories
 
         public static ICashReceiptsJournalRepository CashReceiptsJournalRepository() => Resolve<ICashReceiptsJournalRepository>();
 
-        public static IADADisbursementsJournalRepository ADADisbursementsJournalRepository() => Resolve<IADADisbursementsJournalRepository>();
+        public static IAdaDisbursementsJournalRepository ADADisbursementsJournalRepository() => Resolve<IAdaDisbursementsJournalRepository>();
 
         public static ISubsidiaryLedgerAccountsRepository SubsidiaryLedgerAccountsRepository() => Resolve<ISubsidiaryLedgerAccountsRepository>();
 

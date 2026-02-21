@@ -6,13 +6,13 @@ using System.Transactions;
 
 namespace OmniGov.Accounting.Data.Repositories
 {
-    public class JEVAccountsRepository : IJEVAccountsRepository
+    public class JevAccountsRepository : IJevAccountsRepository
     {
         private readonly IGenericCommands _genericCommands;
         private const string tableName = "jev_accounts";
         private const string viewTableName = "view_jev_accounts";
 
-        public JEVAccountsRepository(IGenericCommands genericCommands)
+        public JevAccountsRepository(IGenericCommands genericCommands)
         {
             _genericCommands = genericCommands ?? throw new ArgumentNullException(nameof(genericCommands));
         }

@@ -1,3 +1,4 @@
+using MySql.Data.MySqlClient;
 using OmniGov.Budget.Domain.Entities;
 using OmniGov.Budget.Domain.Interfaces;
 using OmniGov.Core.Interfaces.Services;
@@ -23,13 +24,13 @@ namespace OmniGov.Budget.Data.Repositories
         // bool methods
         public bool BudgetAppropriationContinuing(int fundId, int fppId, int? othersFPPId, int allotmentClassId, int generalLedgerAccountId)
         {
-            var parameters = new object[][]
+            var parameters = new MySqlParameter[]
             {
-                new object[] { "@funds_id", DbType.Int32, fundId},
-                new object[] { "@function_program_project_id", DbType.Int32, fppId},
-                new object[] { "@others_fpp_id", DbType.String, othersFPPId },
-                new object[] { "@allotment_classes_id", DbType.Int32, allotmentClassId},
-                new object[] { "@general_ledger_accounts_id", DbType.Int32, generalLedgerAccountId},
+                new MySqlParameter("@funds_id", fundId),
+                new MySqlParameter("@function_program_project_id", fppId),
+                new MySqlParameter("@others_fpp_id", othersFPPId ?? (object)DBNull.Value),
+                new MySqlParameter("@allotment_classes_id", allotmentClassId),
+                new MySqlParameter("@general_ledger_accounts_id", generalLedgerAccountId),
             };
 
             string query = $"SELECT id FROM {tableName} WHERE funds_id = @funds_id AND function_program_project_id = @function_program_project_id AND others_fpp_id <=> @others_fpp_id AND allotment_classes_id = @allotment_classes_id AND general_ledger_accounts_id = @general_ledger_accounts_id AND continuing = 1";

@@ -205,7 +205,6 @@ namespace OmniGov.App.Accounting.Views.JournalEntryVoucher
                     new DataColumn("updated_by_name", typeof(string)),
                 });
 
-                // Convert arguments to dictionary
                 var args = (ValueTuple<string, object>[])e.Argument;
                 var dict = args.ToDictionary(x => x.Item1, x => x.Item2);
 
@@ -215,7 +214,6 @@ namespace OmniGov.App.Accounting.Views.JournalEntryVoucher
                 string fund = dict["fund"]?.ToString() ?? string.Empty;
                 short year = Convert.ToInt16(dict["year"]);
 
-                // Retrieve data
                 var dtJevDb = AccountingFactory.JEVRepository().GetViewRecords(jevStatus, searchKey, journal, fund, year);
                 int totalCount = dtJevDb.Rows.Count;
                 int progress = 0;
@@ -229,16 +227,10 @@ namespace OmniGov.App.Accounting.Views.JournalEntryVoucher
                     }
 
                     var newRow = dataTable.NewRow();
-
-                    // Safely convert numeric flags to bool
-                    bool isApproved = Convert.ToInt32(row["is_approved"]) == 1;
-                    bool isDisapproved = Convert.ToInt32(row["is_disapproved"]) == 1;
-                    bool isCancelled = Convert.ToInt32(row["is_cancelled"]) == 1;
-
                     DateTime dateEntry = Convert.ToDateTime(row["date_entry"]);
-                    string transactionNo = $"{dateEntry:yy}-{row["transaction_no"]}";
 
-                    // Safely convert mixed numeric and string fields
+                    string transactionNo = Helper.FormatTransactionNo(row["transaction_no"].ToString());
+
                     newRow["id"] = Convert.ToInt32(row["id"]);
                     newRow["transaction_no"] = transactionNo;
                     newRow["jev_no"] = row["jev_no"]?.ToString();
@@ -249,7 +241,6 @@ namespace OmniGov.App.Accounting.Views.JournalEntryVoucher
                     newRow["created_at"] = row["created_at"]?.ToString();
                     newRow["updated_at"] = row["updated_at"]?.ToString();
 
-                    // Convert nullable IDs safely
                     string createdById = row["created_by"]?.ToString();
                     string updatedById = row["updated_by"]?.ToString();
 

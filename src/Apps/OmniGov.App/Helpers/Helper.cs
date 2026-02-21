@@ -374,18 +374,6 @@ namespace OmniGov.App.Helpers
 
         #region Miscellaneous
 
-        public static string GetStatus(bool isApproved, bool isDisapproved, bool isCancelled)
-        {
-            if (isCancelled)
-                return "Cancelled";
-            else if (isDisapproved)
-                return "Disapproved";
-            else if (isApproved)
-                return "Approved";
-            else
-                return "Pending";
-        }
-
         public static void ProgressCounter(BackgroundWorker backgroundWorker, int totalProgressCount, int progressCount, string progressText = "")
         {
             if (totalProgressCount <= 0)
@@ -873,6 +861,15 @@ namespace OmniGov.App.Helpers
                 lblUpdatedAt.Text = string.Empty;
             }
         }
+
+        public static string FormatTransactionNo(string rawTransactionNo)
+        {
+            int dash = rawTransactionNo.IndexOf('-');
+            if (dash <= 2 || dash == rawTransactionNo.Length - 1)
+                throw new FormatException($"Found an invalid transaction number: '{rawTransactionNo}'\nPlease contact your vendor...");
+
+            string transactionNo = $"{rawTransactionNo[2..dash]}-{rawTransactionNo[(dash + 1)..]}";
+            return transactionNo;
+        }
     }
 }
-

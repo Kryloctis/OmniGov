@@ -16,7 +16,7 @@ namespace OmniGov.Accounting.Data.Factories
             _genericCommands = genericCommands ?? throw new ArgumentNullException(nameof(genericCommands));
         }
 
-        public IADADisbursementsJournalRepository adaDisbursementsJournalRepository() => new OmniGov.Accounting.Data.Repositories.ADADisbursementsJournalRepository(_genericCommands);
+        public IAdaDisbursementsJournalRepository adaDisbursementsJournalRepository() => new OmniGov.Accounting.Data.Repositories.AdaDisbursementsJournalRepository(_genericCommands);
 
         public IAmortizationRepository amortizationRepository()
         => new OmniGov.Accounting.Data.Repositories.AmortizationRepository(_genericCommands);
@@ -42,11 +42,11 @@ namespace OmniGov.Accounting.Data.Factories
         public IGeneralLedgerAccountsRepository generalLedgerAccountsRepository()
         => new OmniGov.Accounting.Data.Repositories.GeneralLedgerAccountsRepository(_genericCommands);
 
-        public IJEVAccountsRepository jEVAccountsRepository()
-        => new OmniGov.Accounting.Data.Repositories.JEVAccountsRepository(_genericCommands);
+        public IJevAccountsRepository jEVAccountsRepository()
+        => new OmniGov.Accounting.Data.Repositories.JevAccountsRepository(_genericCommands);
 
-        public IJEVRepository jevRepository()
-        => new OmniGov.Accounting.Data.Repositories.JEVRepository(_genericCommands,
+        public IJevRepository jevRepository()
+        => new OmniGov.Accounting.Data.Repositories.JevRepository(_genericCommands,
                                             jEVAccountsRepository(),
                                             checkDisbursementsJournalRepository(),
                                             cashReceiptsJournalRepository(),

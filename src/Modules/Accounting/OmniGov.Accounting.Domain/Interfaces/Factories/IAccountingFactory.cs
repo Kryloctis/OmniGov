@@ -2,7 +2,7 @@
 {
     public interface IAccountingFactory
     {
-        IADADisbursementsJournalRepository adaDisbursementsJournalRepository();
+        IAdaDisbursementsJournalRepository adaDisbursementsJournalRepository();
 
         IAmortizationRepository amortizationRepository();
 
@@ -20,9 +20,9 @@
 
         IGeneralLedgerAccountsRepository generalLedgerAccountsRepository();
 
-        IJEVAccountsRepository jEVAccountsRepository();
+        IJevAccountsRepository jEVAccountsRepository();
 
-        IJEVRepository jevRepository();
+        IJevRepository jevRepository();
 
         ISubsidiaryLedgerAccountsRepository subsidiaryLedgerAccountsRepository();
     }

@@ -1,4 +1,5 @@
 using OmniGov.Accounting.Data.Factories;
+using OmniGov.Accounting.Domain.Entities;
 using OmniGov.App.Accounting.Views.JournalEntryVoucher;
 using OmniGov.App.Helpers;
 using OmniGov.Core.Factories;
@@ -60,17 +61,17 @@ namespace OmniGov.App.Accounting.Views.Dashboard
             string fundName = cmbxFunds.Text.Trim();
             short year = Convert.ToInt16(nudYear.Value);
 
-            var jevCount = AccountingFactory.JEVRepository().GetJevCount(string.Empty, journalName, fundName, year);
-            var approvedJEVCount = AccountingFactory.JEVRepository().GetJevCount("approved", journalName, fundName, year);
-            var pendingJEVCount = AccountingFactory.JEVRepository().GetJevCount("pending", journalName, fundName, year);
-            var disapprovedJEVCOunt = AccountingFactory.JEVRepository().GetJevCount("disapproved", journalName, fundName, year);
-            var cancelledJEVCount = AccountingFactory.JEVRepository().GetJevCount("cancelled", journalName, fundName, year);
+            var jevCount = AccountingFactory.JEVRepository().GetJevCount(null, journalName, fundName, year);
+            var approvedJevCount = AccountingFactory.JEVRepository().GetJevCount(JevModel.Status.approved, journalName, fundName, year);
+            var pendingJevCount = AccountingFactory.JEVRepository().GetJevCount(JevModel.Status.pending, journalName, fundName, year);
+            var disapprovedJevCount = AccountingFactory.JEVRepository().GetJevCount(JevModel.Status.disapproved, journalName, fundName, year);
+            var cancelledJevCount = AccountingFactory.JEVRepository().GetJevCount(JevModel.Status.cancelled, journalName, fundName, year);
 
             lblJEVCounter.Text = jevCount.ToString();
-            lblApprovedJEVCounter.Text = approvedJEVCount.ToString();
-            lblPendingJEVCounter.Text = pendingJEVCount.ToString();
-            lblDisapprovedJEVCounter.Text = disapprovedJEVCOunt.ToString();
-            lblCancelledJEVCounter.Text = cancelledJEVCount.ToString();
+            lblApprovedJEVCounter.Text = approvedJevCount.ToString();
+            lblPendingJEVCounter.Text = pendingJevCount.ToString();
+            lblDisapprovedJEVCounter.Text = disapprovedJevCount.ToString();
+            lblCancelledJEVCounter.Text = cancelledJevCount.ToString();
         }
 
         private void lnkPending_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -150,4 +151,3 @@ namespace OmniGov.App.Accounting.Views.Dashboard
         }
     }
 }
-
