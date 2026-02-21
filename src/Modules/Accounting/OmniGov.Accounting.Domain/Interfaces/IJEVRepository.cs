@@ -76,11 +76,9 @@ namespace Accounting.Domain.Interfaces
 
         bool TrnsctnNoExist(int jevId, string trnsctnNo);
 
-        DataTable GetViewRecords(string jevStatus, string searchTxt, string journalName, string fundName, short year, int rowLimit);
+        DataTable GetViewRecords(string jevStatus, string searchTxt, string journalName, string fundName, short year);
 
         DataTable GetViewRecords();
-
-        string GetJevStatus(int jevId);
 
         //SFPs
         decimal GetSumByMajorAccountGroup(int fundId, int majorAccountGroupId, byte isDebit, DateTime dateEntry);

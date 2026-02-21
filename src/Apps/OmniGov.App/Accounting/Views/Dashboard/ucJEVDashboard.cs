@@ -144,7 +144,7 @@ namespace OmniGov.App.Accounting.Views.Dashboard
         {
             try
             {
-                _ = new frmJevList(this).ShowDialog();
+                _ = new frmJournalEntryVoucher(this).ShowDialog();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }

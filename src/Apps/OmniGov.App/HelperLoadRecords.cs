@@ -1673,12 +1673,12 @@ namespace OmniGov.App
         {
             datagrid.DataSource = dataTable;
             datagrid.Columns["id"].Visible = false;
-            datagrid.Columns["trnsction_no"].HeaderText = "Trans. No.";
-            datagrid.Columns["trnsction_no"].MinimumWidth = 150;
+            datagrid.Columns["transaction_no"].HeaderText = "Transaction No.";
+            datagrid.Columns["transaction_no"].MinimumWidth = 100;
             datagrid.Columns["full_jev_no"].MinimumWidth = 150;
             datagrid.Columns["full_jev_no"].HeaderText = "JEV No.";
             datagrid.Columns["full_jev_no"].Resizable = DataGridViewTriState.False;
-            datagrid.Columns["date_entry"].DefaultCellStyle.Format = "MMMM dd, yyyy";
+            datagrid.Columns["date_entry"].DefaultCellStyle.Format = "MMM dd, yyyy";
             datagrid.Columns["date_entry"].MinimumWidth = 100;
             datagrid.Columns["date_entry"].Resizable = DataGridViewTriState.False;
             datagrid.Columns["date_entry"].HeaderText = "Date Entry";

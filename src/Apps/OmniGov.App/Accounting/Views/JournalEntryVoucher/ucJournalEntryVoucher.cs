@@ -9,7 +9,7 @@ using System.Text;
 
 namespace OmniGov.App.Accounting.Views.JournalEntryVoucher
 {
-    public partial class ucJev : UserControl
+    public partial class ucJournalEntryVoucher : UserControl
     {
         private bool isEdit;
         private int? jevId;
@@ -21,7 +21,7 @@ namespace OmniGov.App.Accounting.Views.JournalEntryVoucher
         private ucCshRcptsJrnl ucCshRcptsJrnl;
         private ucAuthDbtAccDsbrsmntJrnl ucAuthDbtAccDsbrsmntJrnl;
 
-        public ucJev()
+        public ucJournalEntryVoucher()
         {
             InitializeComponent();
             Helper.DatagridEditableRowStyle(dgAccounts, true);
@@ -524,10 +524,10 @@ namespace OmniGov.App.Accounting.Views.JournalEntryVoucher
             string payee = dictJev["payee"];
             string explanation = dictJev["explanation"];
             string remarks = dictJev["remarks"];
-            string trnsctnNo = $"{dateEntry:yy}-{dictJev["trns_no"]}";
+            string transactionNo = $"{dateEntry:yy}-{dictJev["transaction_no"]}";
 
             prevJournal = (jevId, journalName);
-            mskTxtTransNo.Text = trnsctnNo;
+            mskTxtTransNo.Text = transactionNo;
             cmbxJournal.SelectedValue = journalId;
             cmbxFunds.SelectedValue = fundId;
             txtExplanation.Text = explanation;
@@ -1022,11 +1022,11 @@ namespace OmniGov.App.Accounting.Views.JournalEntryVoucher
         }
 
         /////Auditing Section
-        internal bool CancelJev(out string trnsctnNo)
+        internal bool CancelJev(out string transactionnNo)
         {
-            trnsctnNo = mskTxtTransNo.Text;
+            transactionnNo = mskTxtTransNo.Text;
 
-            if (MessageBox.Show($"Confirm cancellation of JEV (Transaction No.{trnsctnNo})",
+            if (MessageBox.Show($"Confirm cancellation of JEV (Transaction No.{transactionnNo})",
                                 "Confirmation",
                                 MessageBoxButtons.YesNo,
                                 MessageBoxIcon.Warning) == DialogResult.Yes)
@@ -1092,4 +1092,3 @@ namespace OmniGov.App.Accounting.Views.JournalEntryVoucher
         }
     }
 }
-
