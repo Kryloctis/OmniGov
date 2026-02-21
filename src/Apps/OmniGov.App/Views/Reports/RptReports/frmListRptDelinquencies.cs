@@ -3,9 +3,9 @@ using OmniGov.App.DataSets;
 using OmniGov.App.Helpers;
 using OmniGov.App.Views.Shared;
 using OmniGov.Core.Factories;
+using OmniGov.Treasury.Data.Factories;
 using System.ComponentModel;
 using System.Data;
-using Treasury.Data.Factories;
 
 namespace OmniGov.App.Views.Reports.RptReports
 {

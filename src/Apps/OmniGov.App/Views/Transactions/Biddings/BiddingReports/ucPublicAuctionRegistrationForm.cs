@@ -1,7 +1,7 @@
 ﻿using Microsoft.Reporting.WinForms;
 using OmniGov.App.Helpers;
+using OmniGov.Treasury.Data.Factories;
 using System.ComponentModel;
-using Treasury.Data.Factories;
 
 namespace OmniGov.App.Views.Transactions.Biddings.BiddingReports
 {

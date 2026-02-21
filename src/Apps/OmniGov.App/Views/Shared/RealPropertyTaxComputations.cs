@@ -1,4 +1,4 @@
-using Treasury.Data.Factories;
+using OmniGov.Treasury.Data.Factories;
 
 namespace OmniGov.App.Views.Shared
 {

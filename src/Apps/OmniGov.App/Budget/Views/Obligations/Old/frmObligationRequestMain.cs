@@ -1,7 +1,7 @@
-using Budget.Data.Factories;
-using Budget.Domain.Models;
 using MySql.Data.MySqlClient;
 using OmniGov.App.Helpers;
+using OmniGov.Budget.Data.Factories;
+using OmniGov.Budget.Domain.Entities;
 using System.Data;
 using System.Transactions;
 

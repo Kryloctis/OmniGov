@@ -1,7 +1,7 @@
-using Accounting.Domain.Entities;
+using OmniGov.Accounting.Domain.Entities;
 using OmniGov.Core.Interfaces.Repositories;
 
-namespace Accounting.Domain.Interfaces
+namespace OmniGov.Accounting.Domain.Interfaces
 {
     public interface ICashReceiptsJournalRepository : IRepository<CashReceiptsJournalModel>
     {

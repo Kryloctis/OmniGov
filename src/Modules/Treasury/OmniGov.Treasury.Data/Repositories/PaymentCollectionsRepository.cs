@@ -1,12 +1,12 @@
 using OmniGov.Core.Entities;
 using OmniGov.Core.Interfaces.Services;
+using OmniGov.Treasury.Data.Factories;
+using OmniGov.Treasury.Domain.Entities;
+using OmniGov.Treasury.Domain.Interfaces;
 using System.Data;
 using System.Transactions;
-using Treasury.Data.Factories;
-using Treasury.Domain.Entities;
-using Treasury.Domain.Interfaces;
 
-namespace Treasury.Data.Repositories
+namespace OmniGov.Treasury.Data.Repositories
 {
     public class PaymentCollectionsRepository : IPaymentCollectionsRepository
     {

@@ -1,8 +1,8 @@
-using Accounting.Domain.Entities;
+using OmniGov.Accounting.Domain.Entities;
 using OmniGov.Core.Interfaces.Repositories;
 using System.Data;
 
-namespace Accounting.Domain.Interfaces
+namespace OmniGov.Accounting.Domain.Interfaces
 {
     public interface IJEVAccountsRepository : IRepository<JEVAccountsModel>
     {

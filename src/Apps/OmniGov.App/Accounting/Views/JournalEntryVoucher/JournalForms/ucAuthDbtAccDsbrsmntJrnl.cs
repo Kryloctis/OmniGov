@@ -1,5 +1,5 @@
-using Accounting.Data.Factories;
-using Accounting.Domain.Entities;
+using OmniGov.Accounting.Data.Factories;
+using OmniGov.Accounting.Domain.Entities;
 
 namespace OmniGov.App.Accounting.Views.JournalEntryVoucher.JournalForms
 {

@@ -1,10 +1,10 @@
 using Accounting.Data.Services;
-using Budget.Data.Services;
 using Microsoft.Extensions.DependencyInjection;
 using OmniGov.App.Views.SignIn;
+using OmniGov.Budget.Data.Services;
 using OmniGov.Core.Services;
-using PropertyAssessment.Data.Services;
-using Treasury.Data.Services;
+using OmniGov.PropertyAssessment.Data.Services;
+using OmniGov.Treasury.Data.Services;
 
 namespace OmniGov.App
 {

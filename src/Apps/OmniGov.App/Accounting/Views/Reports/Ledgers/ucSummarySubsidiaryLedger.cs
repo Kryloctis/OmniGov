@@ -1,5 +1,5 @@
-﻿using Accounting.Data.Factories;
-using Microsoft.Reporting.WinForms;
+﻿using Microsoft.Reporting.WinForms;
+using OmniGov.Accounting.Data.Factories;
 using OmniGov.App.Helpers;
 using OmniGov.Core.Factories;
 using System.ComponentModel;

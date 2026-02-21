@@ -1,10 +1,10 @@
-using Accounting.Domain.Entities;
-using Accounting.Domain.Interfaces;
+using OmniGov.Accounting.Domain.Entities;
+using OmniGov.Accounting.Domain.Interfaces;
 using OmniGov.Core.Interfaces.Services;
 using System.Data;
 using System.Transactions;
 
-namespace Accounting.Data.Repositories
+namespace OmniGov.Accounting.Data.Repositories
 {
     public class JEVRepository : IJEVRepository
     {
@@ -76,7 +76,7 @@ namespace Accounting.Data.Repositories
                 new object[] { "@id", DbType.Int32, Id},
             };
 
-            string query = $"SELECT id, funds_id, fund_code, fund_name, journals_id, journal_name, is_special, jev_no, date_entry, ref_no, payee, explanation, is_approved, is_disapproved, is_cancelled, created_at, created_by, created_by_name, updated_at, updated_by, updated_by_name FROM {viewTableName} WHERE id = @id";
+            string query = $"SELECT id, funds_id, fund_code, fund_name, journals_id, journal_name, is_special, transaction_no, jev_no, date_entry, ref_no, payee, explanation, status, created_at, created_by, created_by_name, updated_at, updated_by, updated_by_name FROM {viewTableName} WHERE id = @id";
 
             DataTable dataTable = _genericCommands.ExecuteReader(query, parameters);
 
@@ -98,7 +98,7 @@ namespace Accounting.Data.Repositories
             return _genericCommands.Fill(query, new DataTable());
         }
 
-        public DataTable GetRecordsByJEVNoAndDate(string searchText, sbyte month, ushort year, byte journalId)
+        public DataTable GetRecordsByJevNoAndDate(string searchText, sbyte month, ushort year, byte journalId)
         {
             var parameters = new object[][]
             {
@@ -108,7 +108,8 @@ namespace Accounting.Data.Repositories
                 new object[] { "@journalId", DbType.String, journalId }
             };
 
-            string query = $"SELECT id, funds_id, journals_id, jev_no, ref_no, payee, explanation, fund_code, is_approved, is_disapproved, is_cancelled, created_at, created_by, updated_at, updated_by, CONCAT_WS('-', fund_code,YEAR(date_entry),MONTH(date_entry),jev_no) AS full_jev_no, date_entry FROM {viewTableName} WHERE MONTH(date_entry) = @month AND YEAR(date_entry) = @year AND journals_id = @journalId AND is_approved = 1 AND is_disapproved = 0 AND is_cancelled =  0 AND jev_no LIKE @jev_no";
+            string query = $@"SELECT * FROM {viewTableName}
+                            WHERE MONTH(date_entry) = @month AND YEAR(date_entry) = @year AND journals_id = @journalId AND status='approved' AND jev_no LIKE @jev_no";
 
             return _genericCommands.FillBySearch(query, new DataTable(), parameters);
         }
@@ -123,7 +124,7 @@ namespace Accounting.Data.Repositories
                 new object[] { "@explanation", DbType.String, $"%{searchText}%" },
             };
 
-            string query = $"SELECT id, funds_id, journals_id, jev_no, full_jev_no, date_entry, ref_no, payee, explanation, fund_code, is_approved, is_disapproved, is_cancelled, created_at, created_by, updated_at, updated_by FROM {viewTableName} WHERE is_approved=1 AND (jev_no LIKE @jev_no OR ref_no LIKE @ref_no OR payee LIKE @payee OR explanation LIKE @explanation)";
+            string query = $"SELECT * FROM {viewTableName} WHERE status = 'approved'AND (jev_no LIKE @jev_no OR ref_no LIKE @ref_no OR payee LIKE @payee OR explanation LIKE @explanation)";
 
             return _genericCommands.FillBySearch(query, new DataTable(), parameters);
         }
@@ -144,12 +145,12 @@ namespace Accounting.Data.Repositories
                 new object[] { "@date_entry", DbType.Date, entity.DateEntry },
                 new object[] { "@ref_no", DbType.String, entity.RefNo },
                 new object[] { "@payee", DbType.String, entity.Payee },
-                new object[] { "@explanation", DbType.String, entity.Explanation },
-                new object[] { "@is_approved", DbType.Boolean, entity.IsApproved },
+                new object[] { "@explanation", DbType.String, entity.Explanation},
+                new object[] { "@status", DbType.Boolean, entity.JevStatus},
                 new object[] { "@created_by", DbType.Byte, entity.CreatedBy },
             };
 
-            string query = $"INSERT INTO {tableName} (funds_id, journals_id, transaction_no, jev_no, date_entry, ref_no, payee, explanation, is_approved, created_by) VALUES (@funds_id, @journals_id, @transaction_no, @jev_no, @date_entry, @ref_no, @payee, @explanation, @is_approved, @created_by);";
+            string query = $"INSERT INTO {tableName} (funds_id, journals_id, transaction_no, jev_no, date_entry, ref_no, payee, explanation, status, created_by) VALUES (@funds_id, @journals_id, @transaction_no, @jev_no, @date_entry, @ref_no, @payee, @explanation, @status, @created_by);";
 
             return _genericCommands.ExecuteNonQuery(query, parameters);
         }
@@ -312,15 +313,27 @@ namespace Accounting.Data.Repositories
                 new object[] { "@ref_no", DbType.String, entity.RefNo },
                 new object[] { "@payee", DbType.String, entity.Payee },
                 new object[] { "@explanation", DbType.String, entity.Explanation },
-                new object[] { "@is_approved", DbType.Boolean, entity.IsApproved},
-                new object[] { "@is_disapproved", DbType.Boolean, entity.IsDisapproved},
-                new object[] { "@is_cancelled", DbType.Boolean, entity.IsCancelled},
+                new object[] { "@status", DbType.String, entity.JevStatus},
                 new object[] { "@updated_by", DbType.Byte, entity.UpdatedBy },
                 new object[] { "@is_edited", DbType.Byte, entity.IsEdited},
                 new object[] { "@remarks", DbType.String, entity.Remarks},
             };
 
-            string query = $"UPDATE {tableName} SET funds_id = @funds_id, journals_id = @journals_id, transaction_no = @transaction_no, jev_no = @jev_no, date_entry = @date_entry, ref_no = @ref_no, payee = @payee, explanation = @explanation, is_approved = @is_approved, is_disapproved = @is_disapproved, is_cancelled = @is_cancelled, updated_by = @updated_by, is_edited = @is_edited, remarks = @remarks WHERE id = @id";
+            string query = $@"UPDATE {tableName} SET
+                                                funds_id = @funds_id,
+                                                journals_id = @journals_id,
+                                                transaction_no = @transaction_no,
+                                                jev_no = @jev_no,
+                                                date_entry = @date_entry,
+                                                ref_no = @ref_no,
+                                                payee = @payee,
+                                                explanation = @explanation,
+                                                status = @status,
+                                                updated_by = @updated_by,
+                                                is_edited = @is_edited,
+                                                remarks = @remarks
+                                                WHERE
+                                                id = @id";
 
             return _genericCommands.ExecuteNonQuery(query, parameters);
         }
@@ -515,10 +528,9 @@ namespace Accounting.Data.Repositories
                 new object[] { "@journal_name", DbType.String, journalName }
             };
 
-            string query = $"SELECT COUNT(*) FROM {viewTableName} WHERE is_approved = 1 AND is_cancelled = 0 AND is_disapproved = 0 {(fundName == "All" ? string.Empty : "AND fund_name = @fund_name")} AND journal_name = @journal_name AND YEAR(date_entry) <= @year";
+            string query = $"SELECT COALESCE(COUNT(*), 0) AS jev_count FROM {viewTableName} WHERE status = 'approved' {(fundName == "All" ? string.Empty : "AND fund_name = @fund_name")} AND journal_name = @journal_name AND YEAR(date_entry) <= @year";
 
-            bool isResultValid = int.TryParse(_genericCommands.ExecuteScalar(query, parameters), out int result);
-            return isResultValid ? result : 0;
+            return Convert.ToInt32(_genericCommands.ExecuteScalar(query, parameters));
         }
 
         public bool JevNumberExistBy_JevNo_FundId_Year(string jevNo, int fundId, int year)
@@ -560,100 +572,19 @@ namespace Accounting.Data.Repositories
             {
                 new object[] { "@journal_name", DbType.String, journalName },
                 new object[] { "@fund_name", DbType.String, fundName},
-                new object[] { "@year", DbType.Int16, year}
+                new object[] { "@year", DbType.Int16, year},
+                new object[] { "@status", DbType.String, status }
             };
 
             string journalQuery = journalName == "All" ? string.Empty : "journal_name = @journal_name AND";
             string fundQuery = fundName == "All" ? string.Empty : "fund_name = @fund_name AND";
 
-            string statusQuery;
+            string query = $"SELECT COALESCE(COUNT(*), 0) AS jev_count FROM {viewTableName} WHERE status = @status {journalQuery} {fundQuery} YEAR(date_entry) = @year";
 
-            switch (status)
-            {
-                case "pending":
-                    statusQuery = "is_approved = 0 AND is_disapproved = 0 AND is_cancelled = 0 AND";
-                    break;
-
-                case "approved":
-                    statusQuery = "is_approved = 1 AND is_disapproved = 0 AND is_cancelled = 0 AND";
-                    break;
-
-                case "disapproved":
-                    statusQuery = "is_approved = 0 AND is_disapproved = 1 AND is_cancelled = 0 AND";
-                    break;
-
-                case "cancelled":
-                    statusQuery = "is_cancelled = 1 AND";
-                    break;
-
-                default:
-                    statusQuery = string.Empty;
-                    break;
-            }
-
-            string query = $"SELECT COUNT(*) FROM {viewTableName} WHERE {statusQuery} {journalQuery} {fundQuery} YEAR(date_entry) = @year";
-
-            bool isResultValid = int.TryParse(_genericCommands.ExecuteScalar(query, parameters), out int result);
-            return isResultValid ? result : 0;
+            return Convert.ToInt32(_genericCommands.ExecuteScalar(query, parameters));
         }
 
-        public int TotalApproveJEV(short month, short year)
-        {
-            var parameters = new object[][]
-            {
-                new object[] { "@month", DbType.Int16, month},
-                new object[] { "@year", DbType.Int16, year}
-            };
-
-            string query = $"SELECT COUNT(*) FROM {tableName} WHERE is_approved=1 AND is_disapproved=0 AND is_cancelled=0 AND MONTH(date_entry)<=@month AND YEAR(date_entry)=@year";
-
-            bool isResultValid = int.TryParse(_genericCommands.ExecuteScalar(query, parameters), out int result);
-            return isResultValid ? result : 0;
-        }
-
-        public int TotalPendingJEV(short month, short year)
-        {
-            var parameters = new object[][]
-            {
-                new object[] { "@month", DbType.Int16, month},
-                new object[] { "@year", DbType.Int16, year}
-            };
-
-            string query = $"SELECT COUNT(*) FROM {tableName} WHERE  is_approved=0 AND is_disapproved=0 AND is_cancelled=0 AND MONTH(date_entry)<=@month AND YEAR(date_entry)=@year";
-
-            bool isResultValid = int.TryParse(_genericCommands.ExecuteScalar(query, parameters), out int result);
-            return isResultValid ? result : 0;
-        }
-
-        public int TotalDisapprovedJEV(short month, short year)
-        {
-            var parameters = new object[][]
-            {
-                new object[] { "@month", DbType.Int16, month},
-                new object[] { "@year", DbType.Int16, year}
-            };
-
-            string query = $"SELECT COUNT(*) FROM {tableName} WHERE  is_approved=0 AND is_disapproved=1 AND is_cancelled=0 AND MONTH(date_entry)<=@month AND YEAR(date_entry)=@year";
-
-            bool isResultValid = int.TryParse(_genericCommands.ExecuteScalar(query, parameters), out int result);
-            return isResultValid ? result : 0;
-        }
-
-        public int TotalCancelledJEV(short month, short year)
-        {
-            var parameters = new object[][]
-            {
-                new object[] { "@month", DbType.Int16, month},
-                new object[] { "@year", DbType.Int16, year}
-            };
-
-            string query = $"SELECT COUNT(*) FROM {tableName} WHERE is_approved=1 AND is_disapproved=0 AND is_cancelled=1 AND MONTH(date_entry)<=@month AND YEAR(date_entry)=@year";
-
-            bool isResultValid = int.TryParse(_genericCommands.ExecuteScalar(query, parameters), out int result);
-            return isResultValid ? result : 0;
-        }
-
-        public DataTable GetViewRecords(string jevStatus, string searchTxt, string journalName, string fundName, short year)
+        public DataTable GetViewRecords(string status, string searchTxt, string journalName, string fundName, short year)
         {
             var parameters = new object[][]
             {
@@ -661,34 +592,10 @@ namespace Accounting.Data.Repositories
                 new object[] { "@fund_name", DbType.String, fundName},
                 new object[] { "@searchTxt", DbType.String, $"%{searchTxt}%"},
                 new object[] { "@year", DbType.Int16, year},
+                new object[] { "@status", DbType.String, status},
             };
 
-            string jevStatusQuery;
-
-            switch (jevStatus)
-            {
-                case "pending":
-                    jevStatusQuery = $"is_approved = 0 AND is_disapproved = 0 AND is_cancelled = 0 AND ";
-                    break;
-
-                case "approved":
-                    jevStatusQuery = $"is_approved = 1 AND is_disapproved = 0 AND is_cancelled = 0 AND ";
-                    break;
-
-                case "disapproved":
-                    jevStatusQuery = $"is_approved = 0 AND is_disapproved = 1 AND is_cancelled = 0 AND ";
-                    break;
-
-                case "cancelled":
-                    jevStatusQuery = $"is_cancelled = 1 AND ";
-                    break;
-
-                default:
-                    jevStatusQuery = string.Empty;
-                    break;
-            }
-
-            string query = $"SELECT * FROM {viewTableName} WHERE {jevStatusQuery} journal_name = @journal_name AND fund_name = @fund_name AND YEAR(date_entry) = @year AND (full_jev_no LIKE @searchTxt OR fund_name LIKE @searchTxt OR ref_no LIKE @searchTxt OR payee LIKE @searchTxt OR explanation LIKE @searchTxt) ORDER BY full_jev_no";
+            string query = $"SELECT * FROM {viewTableName} WHERE status = @status AND journal_name = @journal_name AND fund_name = @fund_name AND YEAR(date_entry) = @year AND (full_jev_no LIKE @searchTxt OR fund_name LIKE @searchTxt OR ref_no LIKE @searchTxt OR payee LIKE @searchTxt OR explanation LIKE @searchTxt) ORDER BY full_jev_no";
             return _genericCommands.FillBySearch(query, new DataTable(), parameters);
         }
 
@@ -753,9 +660,10 @@ namespace Accounting.Data.Repositories
             var parameters = new object[][]
             {
                 new object[] { "@id", DbType.Int32, entity.Id},
-                new object[] { "@remarks", DbType.String, entity.Remarks }
+                new object[] { "@remarks", DbType.String, entity.Remarks },
+                new object[] { "@status", DbType.String, entity.JevStatus}
             };
-            string query = $"UPDATE {tableName} SET is_approved = 0, is_disapproved = 0, is_cancelled = 0, remarks = NULL WHERE id = @id";
+            string query = $"UPDATE {tableName} SET status = @status, remarks = NULL WHERE id = @id";
             return _genericCommands.ExecuteNonQuery(query, parameters);
         }
 
@@ -764,10 +672,11 @@ namespace Accounting.Data.Repositories
             var parameters = new object[][]
             {
                 new object[] { "@id", DbType.Int32, entity.Id},
-                new object[] { "@remarks", DbType.String, entity.Remarks }
+                new object[] { "@remarks", DbType.String, entity.Remarks },
+                new object[] { "@status", DbType.String, entity.JevStatus},
             };
 
-            string query = $"UPDATE {tableName} SET is_cancelled = 1, remarks = @remarks WHERE id = @id";
+            string query = $"UPDATE {tableName} SET status = @status, remarks = @remarks WHERE id = @id";
             return _genericCommands.ExecuteNonQuery(query, parameters);
         }
 
@@ -784,6 +693,31 @@ namespace Accounting.Data.Repositories
             return _genericCommands.ExecuteNonQuery(query, parameters);
         }
 
+        public bool SetJevStatus(int id, JevModel.Status status, string remarks)
+        {
+            object? jevNo = status == JevModel.Status.approved ? GetLastJevNoSeries(id)
+                : null;
+
+            var parameters = new object[][]
+            {
+                new object[] { "@id", DbType.Int32, id},
+                new object[] { "@jev_no", DbType.String, jevNo ?? DBNull.Value},
+                new object[] { "@remarks", DbType.String, remarks},
+                new object[] { "@status", DbType.String, status },
+            };
+
+            string query = $"UPDATE {tableName} SET jev_no = @jev_no, status = @status, remarks = @remarks  WHERE id = @id";
+
+            bool result;
+            using (var scope = new TransactionScope())
+            {
+                result = _genericCommands.ExecuteNonQuery(query, parameters);
+                scope.Complete();
+            }
+
+            return result;
+        }
+
         public bool DisapproveJev(JevModel entity)
         {
             var parameters = new object[][]
@@ -796,32 +730,14 @@ namespace Accounting.Data.Repositories
             return _genericCommands.ExecuteNonQuery(query, parameters);
         }
 
-        public bool TrnsctnNoExist(string trnsctnNo)
+        public DataTable GetViewRecords(JevModel.Status status)
         {
-            var parameters = new object[][]
+            var parameter = new object[][]
             {
-                new object[] { "@transaction_no", DbType.String, trnsctnNo }
+                new object[] { "@status", DbType.String, status}
             };
 
-            string query = $"SELECT * FROM {tableName} WHERE transaction_no = @transaction_no";
-            return !string.IsNullOrWhiteSpace(_genericCommands.ExecuteScalar(query, parameters));
-        }
-
-        public bool TrnsctnNoExist(int jevId, string trnsctnNo)
-        {
-            var parameters = new object[][]
-            {
-                new object[] { "@id", DbType.Int32, jevId },
-                new object[] { "@transaction_no", DbType.String, trnsctnNo }
-            };
-
-            string query = $"SELECT * FROM {tableName} WHERE id <> @id AND transaction_no = @transaction_no";
-            return !string.IsNullOrWhiteSpace(_genericCommands.ExecuteScalar(query, parameters));
-        }
-
-        public DataTable GetViewRecords()
-        {
-            string query = $"SELECT * FROM {viewTableName} WHERE is_approved = 1";
+            string query = $"SELECT * FROM {viewTableName} WHERE status = @status";
             return _genericCommands.Fill(query, new DataTable());
         }
     }

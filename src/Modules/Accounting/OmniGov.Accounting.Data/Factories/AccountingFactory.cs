@@ -1,6 +1,6 @@
-using Accounting.Domain.Interfaces;
+using OmniGov.Accounting.Domain.Interfaces;
 
-namespace Accounting.Data.Factories
+namespace OmniGov.Accounting.Data.Factories
 {
     public class AccountingFactory
     {

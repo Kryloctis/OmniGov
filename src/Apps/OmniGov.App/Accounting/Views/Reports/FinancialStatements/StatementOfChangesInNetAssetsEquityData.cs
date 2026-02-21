@@ -1,4 +1,4 @@
-using Accounting.Data.Factories;
+using OmniGov.Accounting.Data.Factories;
 
 namespace OmniGov.App.Accounting.Views.Reports.FinancialStatements
 {

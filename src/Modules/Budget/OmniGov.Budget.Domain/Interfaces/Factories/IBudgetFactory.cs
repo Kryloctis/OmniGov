@@ -1,6 +1,4 @@
-﻿using ACC.Domain.Interfaces;
-
-namespace Budget.Domain.Interfaces.Factories
+﻿namespace OmniGov.Budget.Domain.Interfaces.Factories
 {
     public interface IBudgetFactory
     {

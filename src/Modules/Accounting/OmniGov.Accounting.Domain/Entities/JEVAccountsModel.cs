@@ -1,4 +1,4 @@
-namespace Accounting.Domain.Entities
+namespace OmniGov.Accounting.Domain.Entities
 {
     public class JEVAccountsModel
     {

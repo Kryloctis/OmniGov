@@ -1,4 +1,5 @@
 using OmniGov.App.Accounting.Views.Reports.FinancialStatements;
+using OmniGov.App.Accounting.Views.Reports.JournalEntryVoucher;
 using OmniGov.App.Accounting.Views.Reports.Journals;
 using OmniGov.App.Accounting.Views.Reports.Ledgers;
 using OmniGov.App.Accounting.Views.Reports.TrialBalance;
@@ -13,7 +14,6 @@ using OmniGov.App.Views.Reports.RCI;
 using OmniGov.App.Views.Reports.ReleasedAndUnreleasedChecks;
 using OmniGov.App.Views.Reports.RptReports;
 using OmniGov.App.Views.Reports.TaxClearance;
-using OmniGov.App.Accounting.Views.Reports.JournalEntryVoucher;
 
 namespace OmniGov.App.Views.Dashboard.Reports
 {

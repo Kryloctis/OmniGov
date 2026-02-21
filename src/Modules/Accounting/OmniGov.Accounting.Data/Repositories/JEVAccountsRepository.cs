@@ -1,10 +1,10 @@
-using Accounting.Domain.Entities;
-using Accounting.Domain.Interfaces;
+using OmniGov.Accounting.Domain.Entities;
+using OmniGov.Accounting.Domain.Interfaces;
 using OmniGov.Core.Interfaces.Services;
 using System.Data;
 using System.Transactions;
 
-namespace Accounting.Data.Repositories
+namespace OmniGov.Accounting.Data.Repositories
 {
     public class JEVAccountsRepository : IJEVAccountsRepository
     {

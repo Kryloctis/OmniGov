@@ -1,4 +1,4 @@
-﻿namespace Accounting.Domain.Interfaces.Factories
+﻿namespace OmniGov.Accounting.Domain.Interfaces.Factories
 {
     public interface IAccountingFactory
     {

@@ -1,7 +1,7 @@
 using OmniGov.Core.Interfaces.Repositories;
-using Treasury.Domain.Entities;
+using OmniGov.Treasury.Domain.Entities;
 
-namespace Treasury.Domain.Interfaces
+namespace OmniGov.Treasury.Domain.Interfaces
 {
     public interface IRptDiscountsRepository : IRepository<RptDiscountsModel>
     {

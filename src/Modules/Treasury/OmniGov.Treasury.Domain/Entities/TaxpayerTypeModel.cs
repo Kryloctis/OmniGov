@@ -1,4 +1,4 @@
-namespace Treasury.Domain.Entities
+namespace OmniGov.Treasury.Domain.Entities
 {
     public class TaxpayerTypeModel
     {

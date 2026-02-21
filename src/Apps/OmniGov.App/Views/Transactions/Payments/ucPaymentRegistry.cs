@@ -1,9 +1,9 @@
 using OmniGov.App.Helpers;
 using OmniGov.App.Views.Manage.TaxPayers;
 using OmniGov.Core.Factories;
+using OmniGov.Treasury.Data.Factories;
 using System.ComponentModel;
 using System.Data;
-using Treasury.Data.Factories;
 
 namespace OmniGov.App.Views.Transactions.Payments
 {

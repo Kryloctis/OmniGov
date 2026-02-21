@@ -1,6 +1,6 @@
 using OmniGov.App.Helpers;
-using Treasury.Data.Factories;
-using Treasury.Domain.Entities;
+using OmniGov.Treasury.Data.Factories;
+using OmniGov.Treasury.Domain.Entities;
 
 namespace OmniGov.App.Views.Manage.AccountableForm
 {

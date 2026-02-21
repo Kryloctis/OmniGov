@@ -1,7 +1,8 @@
-﻿using Accounting.Data.Repositories;
-using Accounting.Domain.Interfaces;
-using Accounting.Domain.Interfaces.Factories;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
+using OmniGov.Accounting.Data.Factories;
+using OmniGov.Accounting.Data.Repositories;
+using OmniGov.Accounting.Domain.Interfaces;
+using OmniGov.Accounting.Domain.Interfaces.Factories;
 
 namespace Accounting.Data.Services
 {

@@ -1,11 +1,10 @@
-﻿using ACC.Domain.Interfaces;
-using Budget.Data.Factories;
-using Budget.Data.Repositories;
-using Budget.Domain.Interfaces;
-using Budget.Domain.Interfaces.Factories;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
+using OmniGov.Budget.Data.Factories;
+using OmniGov.Budget.Data.Repositories;
+using OmniGov.Budget.Domain.Interfaces;
+using OmniGov.Budget.Domain.Interfaces.Factories;
 
-namespace Budget.Data.Services
+namespace OmniGov.Budget.Data.Services
 {
     public static class BudgetServiceConfiguration
     {

@@ -1,8 +1,8 @@
-using Budget.Domain.Models;
+using OmniGov.Budget.Domain.Entities;
 using OmniGov.Core.Interfaces.Repositories;
 using System.Data;
 
-namespace Budget.Domain.Interfaces
+namespace OmniGov.Budget.Domain.Interfaces
 {
     public interface ISupplementalAppropriationsRepository : IRepository<SupplementalAppropriationsModel>
     {

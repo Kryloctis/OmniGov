@@ -1,10 +1,9 @@
-﻿using ACC.Domain.Interfaces;
-using Budget.Data.Repositories;
-using Budget.Domain.Interfaces;
-using Budget.Domain.Interfaces.Factories;
+﻿using OmniGov.Budget.Data.Repositories;
+using OmniGov.Budget.Domain.Interfaces;
+using OmniGov.Budget.Domain.Interfaces.Factories;
 using OmniGov.Core.Interfaces.Services;
 
-namespace Budget.Data.Factories
+namespace OmniGov.Budget.Data.Factories
 {
     public class BudgetFactoryRepository : IBudgetFactory
     {

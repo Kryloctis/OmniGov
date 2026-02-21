@@ -1,6 +1,6 @@
-using PropertyAssessment.Domain.Interfaces;
+using OmniGov.PropertyAssessment.Domain.Interfaces;
 
-namespace PropertyAssessment.Data.Factories
+namespace OmniGov.PropertyAssessment.Data.Factories
 {
     public class PropertyAssessmentFactory
     {

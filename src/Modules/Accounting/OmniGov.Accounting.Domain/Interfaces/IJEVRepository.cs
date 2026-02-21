@@ -1,8 +1,8 @@
-using Accounting.Domain.Entities;
+using OmniGov.Accounting.Domain.Entities;
 using OmniGov.Core.Interfaces.Repositories;
 using System.Data;
 
-namespace Accounting.Domain.Interfaces
+namespace OmniGov.Accounting.Domain.Interfaces
 {
     public interface IJEVRepository : IRepository<JevModel>
     {
@@ -42,7 +42,7 @@ namespace Accounting.Domain.Interfaces
 
         Dictionary<string, string> GetViewRecordByJEVId(int jevId);
 
-        DataTable GetRecordsByJEVNoAndDate(string searchText, sbyte jevDate, ushort year, byte journalId);
+        DataTable GetRecordsByJevNoAndDate(string searchText, sbyte jevDate, ushort year, byte journalId);
 
         #region Validations
 
@@ -56,14 +56,6 @@ namespace Accounting.Domain.Interfaces
 
         int GetJevCount(string status, string journalName, string fundName, short year);
 
-        int TotalApproveJEV(short month, short year);
-
-        int TotalPendingJEV(short month, short year);
-
-        int TotalDisapprovedJEV(short month, short year);
-
-        int TotalCancelledJEV(short month, short year);
-
         bool PendingJev(JevModel jevModel);
 
         bool CancelJev(JevModel jevModel);
@@ -72,13 +64,11 @@ namespace Accounting.Domain.Interfaces
 
         bool DisapproveJev(JevModel jevModel);
 
-        bool TrnsctnNoExist(string trnsctnNo);
+        bool SetJevStatus(int id, JevModel.Status status, string remarks);
 
-        bool TrnsctnNoExist(int jevId, string trnsctnNo);
+        DataTable GetViewRecords(string status, string searchTxt, string journalName, string fundName, short year);
 
-        DataTable GetViewRecords(string jevStatus, string searchTxt, string journalName, string fundName, short year);
-
-        DataTable GetViewRecords();
+        DataTable GetViewRecords(JevModel.Status status);
 
         //SFPs
         decimal GetSumByMajorAccountGroup(int fundId, int majorAccountGroupId, byte isDebit, DateTime dateEntry);

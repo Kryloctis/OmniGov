@@ -1,7 +1,7 @@
 using OmniGov.App.Helpers;
 using OmniGov.Core.Factories;
+using OmniGov.Treasury.Data.Factories;
 using System.ComponentModel;
-using Treasury.Data.Factories;
 
 namespace OmniGov.App.Views.Manage.FeesChargesConfig.FeesCharges
 {

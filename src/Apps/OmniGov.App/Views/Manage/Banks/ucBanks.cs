@@ -1,8 +1,8 @@
 using OmniGov.App.Helpers;
 using OmniGov.Core.Factories;
+using OmniGov.Treasury.Data.Factories;
+using OmniGov.Treasury.Domain.Entities;
 using System.ComponentModel;
-using Treasury.Data.Factories;
-using Treasury.Domain.Entities;
 
 namespace OmniGov.App.Views.Manage.Banks
 {

@@ -1,8 +1,8 @@
 ﻿using Microsoft.Reporting.WinForms;
 using OmniGov.App.Helpers;
+using OmniGov.Treasury.Data.Factories;
 using System.ComponentModel;
 using System.Data;
-using Treasury.Data.Factories;
 
 namespace OmniGov.App.Views.Reports.Ltoms
 {

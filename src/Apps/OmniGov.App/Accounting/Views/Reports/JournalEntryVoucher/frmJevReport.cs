@@ -1,5 +1,6 @@
-﻿using Accounting.Data.Factories;
-using Microsoft.Reporting.WinForms;
+﻿using Microsoft.Reporting.WinForms;
+using OmniGov.Accounting.Data.Factories;
+using OmniGov.Accounting.Domain.Entities;
 using OmniGov.App.Helpers;
 using System.ComponentModel;
 using System.Data;
@@ -249,7 +250,8 @@ namespace OmniGov.App.Accounting.Views.Reports.JournalEntryVoucher
 
         private void LoadJevCombobox()
         {
-            var dtJev = AccountingFactory.JEVRepository().GetViewRecords();
+            var jevStatus = JevModel.Status.approved;
+            var dtJev = AccountingFactory.JEVRepository().GetViewRecords(jevStatus);
             cmbxJev.DataSource = dtJev;
             cmbxJev.DisplayMember = "full_jev_no";
             cmbxJev.ValueMember = "id";
@@ -284,5 +286,3 @@ namespace OmniGov.App.Accounting.Views.Reports.JournalEntryVoucher
         }
     }
 }
-
-

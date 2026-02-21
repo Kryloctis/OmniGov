@@ -1,5 +1,5 @@
-using Accounting.Data.Factories;
-using Accounting.Domain.Entities;
+using OmniGov.Accounting.Data.Factories;
+using OmniGov.Accounting.Domain.Entities;
 using OmniGov.App.Helpers;
 using OmniGov.App.Views.Manage.ChartOfAccounts.Subsidiary;
 

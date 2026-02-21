@@ -1,9 +1,9 @@
-using Accounting.Data.Factories;
-using Accounting.Domain.Entities;
+using OmniGov.Accounting.Data.Factories;
+using OmniGov.Accounting.Domain.Entities;
 using OmniGov.App.Helpers;
+using OmniGov.Treasury.Data.Factories;
 using System.ComponentModel;
 using System.Data;
-using Treasury.Data.Factories;
 
 namespace OmniGov.App.Accounting.Views.JournalEntryVoucher.JournalForms
 {

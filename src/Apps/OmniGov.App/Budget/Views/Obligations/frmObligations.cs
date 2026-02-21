@@ -1,6 +1,6 @@
-using Budget.Data.Factories;
-using Budget.Domain.Models;
 using OmniGov.App.Helpers;
+using OmniGov.Budget.Data.Factories;
+using OmniGov.Budget.Domain.Entities;
 using System.ComponentModel;
 using System.Data;
 
