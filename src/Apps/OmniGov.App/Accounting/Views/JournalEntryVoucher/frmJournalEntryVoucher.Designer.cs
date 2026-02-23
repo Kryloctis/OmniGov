@@ -806,7 +806,7 @@ namespace OmniGov.App.Accounting.Views.JournalEntryVoucher
             ShowIcon = false;
             ShowInTaskbar = false;
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "Accounting > Transactions > Journal Entry Voucher (JEV)";
+            Text = "Accounting >  Journal Entry Voucher (JEV)";
             FormClosed += frmJEVList_FormClosed;
             Load += frmJEVList_Load;
             panel7.ResumeLayout(false);
