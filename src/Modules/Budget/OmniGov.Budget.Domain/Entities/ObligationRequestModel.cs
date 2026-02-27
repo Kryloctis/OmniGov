@@ -12,7 +12,10 @@ namespace OmniGov.Budget.Domain.Entities
         public string Explanation { get; set; }
         public string ReferenceNo { get; set; }
         public DateTime DateRequested { get; set; }
-        public string Status { get; set; }
+        public enum Status
+        { draft, pending, approved, disapproved, cancelled }
+
+        public Status ObligationStatus { get; set; }
         public string Remarks { get; set; }
         public int CreatedBy { get; set; }
         public int UpdatedBy { get; set; }

@@ -6,6 +6,7 @@ using OmniGov.Core.Factories;
 using System.ComponentModel;
 using System.Data;
 using System.Globalization;
+using System.Text;
 using static OmniGov.App.Helpers.Helper;
 
 namespace OmniGov.App.Budget.Views.Obligations
@@ -41,6 +42,7 @@ namespace OmniGov.App.Budget.Views.Obligations
 
         internal void LoadCrudMode(bool isEdit, int? oblgtnRqstId = null)
         {
+            this.isEdit = isEdit;
             OnLoad();
             if (isEdit)
             {
@@ -48,9 +50,13 @@ namespace OmniGov.App.Budget.Views.Obligations
                 var exemptCtrls = new List<Control>() { txtExplanation };
                 SetControlsReadOnly(true, panel3, exemptCtrls);
                 LoadSelectedRecord(oblgtnRqstId.Value);
+                txtRemarks.Enabled = true;
             }
             else
+            {
                 ResetForm();
+            }
+            UpdateTransactionNo();
         }
 
         internal void LoadViewMode(int oblgtnRqstId)
@@ -71,11 +77,11 @@ namespace OmniGov.App.Budget.Views.Obligations
         }
 
         //Models
-        internal (ObligationRequestModel oblgtnRqstModel, List<ObligationAccountModel> oblgtnAccsModel) ObligationRequestModel()
+        internal (ObligationRequestModel oblgtnRqstModel, List<ObligationAccountModel> oblgtnAccsModel) ObligationRequestModels()
         {
             var oblgtnRqst = new ObligationRequestModel()
             {
-                TransactionNo = BudgetFactory.ObligationRequestRepository().GetTransactionNo(dtDateRequest.Value.Year),
+                Id = this.oblgtnRqstId,
                 FppId = Convert.ToInt32(cmbxFPP.SelectedValue),
                 AllotmentClassId = Convert.ToInt32(cmbxAlltmntClss.SelectedValue),
                 FundId = Convert.ToInt32(cmbxFund.SelectedValue),
@@ -84,14 +90,19 @@ namespace OmniGov.App.Budget.Views.Obligations
                 Payee = txtPayee.Text.Trim(),
                 ReferenceNo = txtReferenceNo.Text.Trim(),
                 CreatedBy = UserHelper.loggedUser.Id,
+                UpdatedBy = UserHelper.loggedUser.Id,
+                ObligationStatus = ObligationRequestModel.Status.pending,
+                Remarks = txtRemarks.Text.Trim()
             };
 
-            if (this.isEdit) oblgtnRqst.Id = oblgtnRqstId;
+            oblgtnRqst.TransactionNo = isEdit ? mskTxtTransNo.Text.Replace("-", "") : string.Empty;
 
             var oblgtnAccs = new List<ObligationAccountModel>();
 
             foreach (DataGridViewRow dataGridViewRow in dgvEntries.Rows)
             {
+                if (dataGridViewRow.IsNewRow) continue;
+
                 var oblgtnAccModel = new ObligationAccountModel()
                 {
                     AllotmentAccountId = Convert.ToInt32(dataGridViewRow.Cells["account"].Value),
@@ -111,7 +122,7 @@ namespace OmniGov.App.Budget.Views.Obligations
         private void LoadSelectedRecord(int oblgtnRqstId)
         {
             var dictOblgtnRqst = BudgetFactory.ObligationRequestRepository().GetViewRecordById(oblgtnRqstId);
-            Enum.TryParse<Status>(dictOblgtnRqst["status"], out var status);
+            Enum.TryParse<ObligationRequestModel.Status>(dictOblgtnRqst["status"], out var status);
             int.TryParse(dictOblgtnRqst["fpp_id"], out int fppId);
 
             //Load Fields
@@ -123,6 +134,8 @@ namespace OmniGov.App.Budget.Views.Obligations
             dtDateRequest.Value = Convert.ToDateTime(dictOblgtnRqst["date_requested"]);
             txtReferenceNo.Text = dictOblgtnRqst["reference_no"];
             txtExplanation.Text = dictOblgtnRqst["explanation"];
+            txtRemarks.Text = dictOblgtnRqst["remarks"];
+            mskTxtOblgtnNo.Text = dictOblgtnRqst["obligation_no"];
 
             //Load Status
             SetStatus(status);
@@ -134,21 +147,23 @@ namespace OmniGov.App.Budget.Views.Obligations
         private void LoadOblgtnEntries(int oblgtnRqstId, DataGridView dgv)
         {
             var dtOblgtnAccs = BudgetFactory.ObligationRequestRepository().GetViewRecordsById(oblgtnRqstId);
-
-            var oblgtnParams = new List<OblgtnEntriesParameters>();
+            dgv.Rows.Clear();
 
             foreach (DataRow dtRow in dtOblgtnAccs.Rows)
             {
-                var oblgtRqstParam = new OblgtnEntriesParameters();
-                oblgtRqstParam.OthersFpp = dtRow.IsNull("others_fpp_id") ? 0 : Convert.ToInt32(dtRow["others_fpp_id"]);
-                oblgtRqstParam.GeneralLedgerAccId = (ushort)dtRow["general_ledger_accounts_id"];
-                oblgtRqstParam.AllotmentReleaseId = (uint)dtRow["allotment_release_id"];
-                oblgtRqstParam.Amount = (decimal)dtRow["amount"];
+                int rowIndex = dgv.Rows.Add();
+                dgv.Rows[rowIndex].Cells["others_fpp"].Value = dtRow.IsNull("others_fpp_id") ? 0 : Convert.ToInt32(dtRow["others_fpp_id"]);
 
-                oblgtnParams.Add(oblgtRqstParam);
+                // Triggering cascades manually to ensure IDs match
+                PopulateAllotmentReleaseCell(rowIndex, dgv);
+                dgv.Rows[rowIndex].Cells["aro_no"].Value = Convert.ToInt32(dtRow["allotment_release_id"]);
+
+                PopulateAccountsCell(rowIndex, dgv);
+                dgv.Rows[rowIndex].Cells["account"].Value = Convert.ToInt32(dtRow["allotment_account_id"]);
+
+                dgv.Rows[rowIndex].Cells["amount"].Value = Convert.ToDecimal(dtRow["amount"]);
+                GetUnobligatedBalance(rowIndex, dgv);
             }
-
-            dgv.DataSource = oblgtnParams;
         }
 
         private void ToggleEntriesButtons(DataGridView dgv, ToolStripButton btnRemove)
@@ -169,15 +184,14 @@ namespace OmniGov.App.Budget.Views.Obligations
 
         internal void ResetForm()
         {
-            if (isEdit)
-            {
-                isEdit = false;
-                oblgtnRqstId = 0;
-            }
+            this.oblgtnRqstId = 0;
+            this.isEdit = false;
 
             LoadFPP();
             LoadFunds();
-            cmbxFPP.Text = string.Empty;
+            
+            if (cmbxFPP.Items.Count > 0) cmbxFPP.SelectedIndex = 0;
+
             mskTxtOblgtnNo.Text = string.Empty;
             dtDateRequest.Value = DateTime.Now;
             txtReferenceNo.Text = string.Empty;
@@ -186,13 +200,28 @@ namespace OmniGov.App.Budget.Views.Obligations
             dgvEntries.Rows.Clear();
             errorProvider1.Clear();
             mskTxtOblgtnNo.Clear();
-            mskTxtTransNo.Clear();
+            txtRemarks.Clear();
+            txtRemarks.Enabled = false;
 
             //Reset Status
-            SetStatus(Status.draft);
+            SetStatus(ObligationRequestModel.Status.draft);
+            UpdateTransactionNo();
         }
 
-        private void SetStatus(Status status)
+        private void UpdateTransactionNo()
+        {
+            if (isEdit)
+            {
+                label6.Visible = true;
+            }
+            else
+            {
+                mskTxtTransNo.Clear();
+                label6.Visible = false;
+            }
+        }
+
+        private void SetStatus(ObligationRequestModel.Status status)
         {
             string _status = status.ToString();
 
@@ -202,15 +231,44 @@ namespace OmniGov.App.Budget.Views.Obligations
 
         internal string GetFormErrors()
         {
-            var errorArray = new string[]
-            {
-                errorProvider1.GetError(cmbxFPP),
-                errorProvider1.GetError(cmbxFund),
-                errorProvider1.GetError(cmbxAlltmntClss),
-                errorProvider1.GetError(txtPayee),
-            };
+            dgvEntries.EndEdit();
+            var errorList = new List<string>();
 
-            return Factory.CreateErrors(errorArray).GenerateErrorMessage();
+            // Collect errors from ErrorProvider
+            foreach (Control ctrl in new Control[] { cmbxFPP, cmbxFund, cmbxAlltmntClss, txtPayee })
+            {
+                string err = errorProvider1.GetError(ctrl);
+                if (!string.IsNullOrWhiteSpace(err)) errorList.Add(err);
+            }
+
+            if (dgvEntries.Rows.Cast<DataGridViewRow>().All(r => r.IsNewRow))
+                errorList.Add("At least one obligation entry is required.");
+
+            // Collect errors from DataGridView
+            var rowVal = RowsValidated(dgvEntries);
+            if (!rowVal.isValidated)
+            {
+                foreach (var err in rowVal.errors)
+                {
+                    if (!string.IsNullOrWhiteSpace(err)) errorList.Add(err);
+                }
+            }
+
+            if (errorList.Count == 0)
+                return null;
+
+            return Factory.CreateErrors(errorList.ToArray()).GenerateErrorMessage();
+        }
+
+        internal bool Approve() => SetAuditStatus(ObligationRequestModel.Status.approved, txtRemarks.Text.Trim());
+
+        internal bool Disapprove() => SetAuditStatus(ObligationRequestModel.Status.disapproved, txtRemarks.Text.Trim());
+
+        internal bool Cancel() => SetAuditStatus(ObligationRequestModel.Status.cancelled, txtRemarks.Text.Trim());
+
+        private bool SetAuditStatus(ObligationRequestModel.Status status, string remarks)
+        {
+            return BudgetFactory.ObligationRequestRepository().SetStatus(oblgtnRqstId, status, remarks);
         }
 
         private void SetControlsReadOnly(bool isReadOnly, Control parent, List<Control> exemptCtrls = null)
@@ -236,15 +294,6 @@ namespace OmniGov.App.Budget.Views.Obligations
             }
 
             dgvEntries.SelectionChanged -= dgvEntries_SelectionChanged;
-        }
-
-        private string GenerateObligationRequestNoTemplate()
-        {
-            string fundCode = Factory.FundsRepository().GetRecordByID(fundId)["fund_code"];
-
-            string obligationNoTemplate = $"{dtDateRequest.Value.ToString("MM")}-{dtDateRequest.Value.ToString("yy")}-{fundCode}";
-
-            return obligationNoTemplate;
         }
 
         private void LoadFPP()
@@ -406,14 +455,6 @@ namespace OmniGov.App.Budget.Views.Obligations
             return totalObligation;
         }
 
-        private record OblgtnEntriesParameters()
-        {
-            internal int? OthersFpp;
-            internal uint AllotmentReleaseId;
-            internal ushort GeneralLedgerAccId;
-            internal decimal Amount;
-        }
-
         private void InitializeEntriesTbl()
         {
             var dgColumns = DgvColumns();
@@ -476,6 +517,7 @@ namespace OmniGov.App.Budget.Views.Obligations
                     HeaderText = "Amount",
                     Name = "amount",
                     MinimumWidth = 200,
+                    ValueType = typeof(decimal),
                     DefaultCellStyle = {Format = "N2",
                                         NullValue = 0m},
                 },
@@ -486,6 +528,8 @@ namespace OmniGov.App.Budget.Views.Obligations
 
         private DataTable DtOthersFpp()
         {
+            if (cmbxFPP.SelectedValue == null) return new DataTable();
+
             bool fppValid = int.TryParse(cmbxFPP.SelectedValue.ToString(), out int fppId);
             var dtSubFpp = Factory.SubFPPRepository().GetRecordsByFppId(fppId);
             var dt = new DataTable();
@@ -558,7 +602,7 @@ namespace OmniGov.App.Budget.Views.Obligations
                 dgvEntries.Rows.Clear();
                 if (dgvColumn is not null) LoadOthersFpp(dgvColumn);
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            catch (Exception ex) { Helper.MessageBoxError($"{ex.Message}\n{ex.StackTrace}"); }
         }
 
         private void dgvEntries_CellValueChanged(object sender, DataGridViewCellEventArgs e)
@@ -588,55 +632,158 @@ namespace OmniGov.App.Budget.Views.Obligations
                 }
                 else
                 {
-                    //bool oblgtnBalIsValid = !decimal.TryParse(cellBalance.Value.ToString(), out var oblgtnBal);
-
-                    //if (result > oblgtnBal)
-                    //    cellAmount.Value = cellBalance.Value;
-                    //else
-                    //    cellAmount.Value = result;
+                    if (decimal.TryParse(cellBalance.Value?.ToString(), out var balance))
+                    {
+                        if (result > balance)
+                        {
+                            dgvEntries.CellValueChanged -= dgvEntries_CellValueChanged;
+                            cellAmount.Value = balance;
+                            dgvEntries.CellValueChanged += dgvEntries_CellValueChanged;
+                        }
+                    }
                 }
 
                 lblTotalOblgtn.Text = $"Total: {GetTotalObligations(dgvEntries.Rows).ToString("N2")}";
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            catch (Exception ex) { Helper.MessageBoxError($"{ex.Message}\n{ex.StackTrace}"); }
+        }
+
+        private (bool isValidated, string[] errors) RowsValidated(DataGridView dgv)
+        {
+            var errors = new List<string>();
+            bool hasErrors = false;
+
+            foreach (DataGridViewRow dgvRow in dgv.Rows)
+            {
+                if (dgvRow.IsNewRow) continue;
+
+                var rowErrors = new List<string>();
+                foreach (DataGridViewCell cell in dgvRow.Cells)
+                {
+                    string err = ValidateCell(cell, cell.Value);
+                    if (!string.IsNullOrEmpty(err))
+                    {
+                        rowErrors.Add(err);
+                        hasErrors = true;
+                    }
+                }
+
+                if (rowErrors.Any())
+                {
+                    var sb = new StringBuilder();
+                    sb.AppendLine($"Errors on row {dgvRow.Index + 1}:");
+                    foreach (var err in rowErrors)
+                        sb.AppendLine($"    - {err}");
+
+                    errors.Add(sb.ToString());
+                }
+            }
+
+            return (!hasErrors, errors.ToArray());
+        }
+
+        private string ValidateCell(DataGridViewCell cell, object formattedValue)
+        {
+            string col = cell.OwningColumn.Name;
+            string val = formattedValue?.ToString()?.Trim() ?? "";
+
+            switch (col)
+            {
+                case "aro_no":
+                    return (cell.Value == null || cell.Value.ToString() == "0") ? "Select ARO No." : "";
+
+                case "account":
+                    return (cell.Value == null || cell.Value.ToString() == "0") ? "Select Account" : "";
+
+                case "amount":
+                    if (!decimal.TryParse(val, out var amt) || amt <= 0m)
+                        return "Amount must be greater than 0";
+
+                    return "";
+
+                default:
+                    return "";
+            }
+        }
+
+        private void dgvEntries_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
+        {
+            try
+            {
+                var g = (DataGridView)sender;
+                if (g.Rows[e.RowIndex].IsNewRow) return;
+
+                var cell = g.Rows[e.RowIndex].Cells[e.ColumnIndex];
+                string err = ValidateCell(cell, e.FormattedValue);
+                cell.ErrorText = err;
+            }
+            catch (Exception ex) { Helper.MessageBoxError($"{ex.Message}\n{ex.StackTrace}"); }
+        }
+
+        private void dgvEntries_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
+        {
+            try
+            {
+                if (dgvEntries.CurrentCell?.OwningColumn?.Name == "amount" && e.Control is TextBox tb)
+                {
+                    tb.KeyPress -= Tb_KeyPress;
+                    tb.KeyPress += Tb_KeyPress;
+                }
+            }
+            catch (Exception ex) { Helper.MessageBoxError($"{ex.Message}\n{ex.StackTrace}"); }
+        }
+
+        private void Tb_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            TextBox tb = (TextBox)sender;
+
+            if (char.IsControl(e.KeyChar)) return;
+
+            bool isDigit = char.IsDigit(e.KeyChar);
+            bool isDecimal = e.KeyChar == '.' && !tb.Text.Contains('.');
+
+            e.Handled = !(isDigit || isDecimal);
         }
 
         private void dgvEntries_DataError(object sender, DataGridViewDataErrorEventArgs e)
         {
             try
             {
+                if (e.Exception is ArgumentException)
+                {
+                    e.ThrowException = false;
+                    e.Cancel = true;
+                }
+
                 if (dgvEntries.Columns[e.ColumnIndex].Name == "amount")
                 {
-                    // Replace invalid value with zero
                     dgvEntries.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = 0m;
-
                     e.ThrowException = false;
                     e.Cancel = true;
                 }
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            catch (Exception ex) { Helper.MessageBoxError($"{ex.Message}\n{ex.StackTrace}"); }
         }
 
         private void tlStrpBtnEntrAdd_Click(object sender, EventArgs e)
         {
             try
             {
-                //string jrnlType = cmbxJournal.Text;
-                //var validateRow = RowsValidated(dgAccounts, jrnlType);
+                var validateRow = RowsValidated(dgvEntries);
 
-                //if (!validateRow.isValidated)
-                //{
-                //    var errMssg = AccFactory.CreateErrors(validateRow.errors).GenerateErrorMessage();
-                //    Helper.MessageBoxError(errMssg);
-                //    return;
-                //}
+                if (!validateRow.isValidated)
+                {
+                    var errMssg = Factory.CreateErrors(validateRow.errors).GenerateErrorMessage();
+                    Helper.MessageBoxError(errMssg);
+                    return;
+                }
 
                 int r = dgvEntries.Rows.Add();
                 dgvEntries.Rows[r].Cells["others_fpp"].Value = 0;
                 dgvEntries.CurrentCell = dgvEntries.Rows[r].Cells["others_fpp"];
                 dgvEntries.BeginEdit(true);
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            catch (Exception ex) { Helper.MessageBoxError($"{ex.Message}\n{ex.StackTrace}"); }
         }
 
         private void tlStrpBtnEntrRemove_Click(object sender, EventArgs e)
@@ -652,11 +799,14 @@ namespace OmniGov.App.Budget.Views.Obligations
                 {
                     foreach (DataGridViewRow dgvRow in dgvEntries.SelectedRows)
                     {
-                        dgvEntries.Rows.RemoveAt(dgvRow.Index);
+                        if (!dgvRow.IsNewRow)
+                            dgvEntries.Rows.Remove(dgvRow);
                     }
+
+                    lblTotalOblgtn.Text = $"Total: {GetTotalObligations(dgvEntries.Rows).ToString("N2")}";
                 }
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            catch (Exception ex) { Helper.MessageBoxError($"{ex.Message}\n{ex.StackTrace}"); }
         }
 
         private void dgvEntries_CurrentCellDirtyStateChanged(object sender, EventArgs e)
@@ -666,7 +816,7 @@ namespace OmniGov.App.Budget.Views.Obligations
                 if (dgvEntries.IsCurrentCellDirty)
                     dgvEntries.CommitEdit(DataGridViewDataErrorContexts.Commit);
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            catch (Exception ex) { Helper.MessageBoxError($"{ex.Message}\n{ex.StackTrace}"); }
         }
 
         private void dgvEntries_SelectionChanged(object sender, EventArgs e)
@@ -675,24 +825,27 @@ namespace OmniGov.App.Budget.Views.Obligations
             {
                 ToggleEntriesButtons(dgvEntries, tlStrpBtnEntrRemove);
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            catch (Exception ex) { Helper.MessageBoxError($"{ex.Message}\n{ex.StackTrace}"); }
         }
 
         private void cmbxFPP_Validating(object sender, CancelEventArgs e)
         {
             try
             {
-                if (string.IsNullOrEmpty(cmbxFPP.Text))
-                    e.Cancel = Helper.ShowErrorComboBoxEmpty(errorProvider1, cmbxFPP, "FPP.");
-                else
+                ComboBox cmb = (ComboBox)sender;
+                string label = cmb.Name.Replace("cmbx", "");
+
+                if (string.IsNullOrEmpty(cmb.Text))
+                    e.Cancel = Helper.ShowErrorComboBoxEmpty(errorProvider1, cmb, label + ".");
+                else if (cmb == cmbxFPP)
                     e.Cancel = ShowErrorFPPNameNotExist();
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            catch (Exception ex) { Helper.MessageBoxError($"{ex.Message}\n{ex.StackTrace}"); }
         }
 
         private void cmbxFPP_Validated(object sender, EventArgs e)
         {
-            Helper.ClearErrorComboBox(errorProvider1, cmbxFPP);
+            Helper.ClearErrorComboBox(errorProvider1, (ComboBox)sender);
         }
 
         private void txtPayee_Validating(object sender, CancelEventArgs e)
@@ -701,12 +854,17 @@ namespace OmniGov.App.Budget.Views.Obligations
             {
                 e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtPayee, "Payee.");
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            catch (Exception ex) { Helper.MessageBoxError($"{ex.Message}\n{ex.StackTrace}"); }
         }
 
         private void txtPayee_Validated(object sender, EventArgs e)
         {
             Helper.ClearErrorTextBox(errorProvider1, txtPayee);
+        }
+
+        private void dtDateRequest_ValueChanged(object sender, EventArgs e)
+        {
+            UpdateTransactionNo();
         }
     }
 }

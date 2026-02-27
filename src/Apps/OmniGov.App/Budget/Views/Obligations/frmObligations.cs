@@ -13,6 +13,10 @@ namespace OmniGov.App.Budget.Views.Obligations
             InitializeComponent();
             Helper.LoadFormIcon(this);
             Helper.DatagridFullRowSelectStyle(dgvMain, true);
+
+            btnApprove.Click += btnApprove_Click;
+            btnDisapprove.Click += btnDisapprove_Click;
+            btnCancel.Click += btnCancel_Click;
         }
 
         private void frmObligations_Load(object sender, EventArgs e)
@@ -25,19 +29,19 @@ namespace OmniGov.App.Budget.Views.Obligations
                 EnableDisableButtons(dgvMain, tlStrpBtnCreate, tlStrpBtnUpdate, tlStrpBtnDelete, tlStrpBtnView, tlStrpBtnReview);
                 LoadOblgtnRecords();
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            catch (Exception ex) { Helper.MessageBoxError($"{ex.Message}\n{ex.StackTrace}"); }
         }
 
-        private string GetFltrStatus()
+        private ObligationRequestModel.Status GetFltrStatus()
         {
             if (radApproved.Checked)
-                return "approved";
+                return ObligationRequestModel.Status.approved;
             else if (radDisapproved.Checked)
-                return "disapproved";
+                return ObligationRequestModel.Status.disapproved;
             else if (radCancelled.Checked)
-                return "cancelled";
+                return ObligationRequestModel.Status.cancelled;
             else
-                return "pending";
+                return ObligationRequestModel.Status.pending;
         }
 
         private void EnableDisableButtons(DataGridView dgv, ToolStripButton btnCrt, ToolStripButton btnEdit, ToolStripButton btnDelete, ToolStripButton btnView, ToolStripButton btnReview)
@@ -60,7 +64,7 @@ namespace OmniGov.App.Budget.Views.Obligations
                 return;
             }
 
-            string status = GetFltrStatus()?.ToLower() ?? "";
+            string status = GetFltrStatus().ToString().ToLower();
 
             btnDelete.Text = selected > 0 ? $"Delete ({selected})" : "Delete";
 
@@ -151,7 +155,7 @@ namespace OmniGov.App.Budget.Views.Obligations
                 pbLoadRecords.Value = 0;
 
                 (string srchKey,
-                string status,
+                ObligationRequestModel.Status status,
                 DateTime dtFrom,
                 DateTime dtTo,
                 int rowLimit)
@@ -174,7 +178,7 @@ namespace OmniGov.App.Budget.Views.Obligations
             {
                 ToggleCrud(false);
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            catch (Exception ex) { Helper.MessageBoxError($"{ex.Message}\n{ex.StackTrace}"); }
         }
 
         private void tlStrpBtnUpdate_Click(object sender, EventArgs e)
@@ -192,7 +196,7 @@ namespace OmniGov.App.Budget.Views.Obligations
             {
                 ToggleView();
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            catch (Exception ex) { Helper.MessageBoxError($"{ex.Message}\n{ex.StackTrace}"); }
         }
 
         private void tlStrpBtnAudit_Click(object sender, EventArgs e)
@@ -201,7 +205,7 @@ namespace OmniGov.App.Budget.Views.Obligations
             {
                 ToggleReview();
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            catch (Exception ex) { Helper.MessageBoxError($"{ex.Message}\n{ex.StackTrace}"); }
         }
 
         private void tlStrpBtnDelete_Click(object sender, EventArgs e)
@@ -222,7 +226,7 @@ namespace OmniGov.App.Budget.Views.Obligations
                     }
                 }
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            catch (Exception ex) { Helper.MessageBoxError($"{ex.Message}\n{ex.StackTrace}"); }
         }
 
         private void tlStrpBtnCrudBack_Click(object sender, EventArgs e)
@@ -231,7 +235,7 @@ namespace OmniGov.App.Budget.Views.Obligations
             {
                 customTabControl1.SelectedTab = tbPgMain;
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            catch (Exception ex) { Helper.MessageBoxError($"{ex.Message}\n{ex.StackTrace}"); }
         }
 
         private void tlsStrpBtnBckView_Click(object sender, EventArgs e)
@@ -240,7 +244,7 @@ namespace OmniGov.App.Budget.Views.Obligations
             {
                 customTabControl1.SelectedTab = tbPgMain;
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            catch (Exception ex) { Helper.MessageBoxError($"{ex.Message}\n{ex.StackTrace}"); }
         }
 
         private void tlStrpBtnBckAudit_Click(object sender, EventArgs e)
@@ -249,14 +253,16 @@ namespace OmniGov.App.Budget.Views.Obligations
             {
                 customTabControl1.SelectedTab = tbPgMain;
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            catch (Exception ex) { Helper.MessageBoxError($"{ex.Message}\n{ex.StackTrace}"); }
         }
 
         private bool SaveOblgtnRqst((ObligationRequestModel oblgtnRqstModel, List<ObligationAccountModel> oblgtnAccModels) models)
         {
-            if (!ucObligationsCrud.ValidateChildren())
+            ucObligationsCrud.ValidateChildren();
+            string errs = ucObligationsCrud.GetFormErrors();
+            if (!string.IsNullOrWhiteSpace(errs))
             {
-                Helper.MessageBoxError(ucObligationsCrud.GetFormErrors());
+                Helper.MessageBoxError(errs);
                 return false;
             }
 
@@ -270,7 +276,7 @@ namespace OmniGov.App.Budget.Views.Obligations
         {
             try
             {
-                var models = ucObligationsCrud.ObligationRequestModel();
+                var models = ucObligationsCrud.ObligationRequestModels();
 
                 if (SaveOblgtnRqst(models))
                 {
@@ -290,7 +296,7 @@ namespace OmniGov.App.Budget.Views.Obligations
                     LoadOblgtnRecords();
                 }
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            catch (Exception ex) { Helper.MessageBoxError($"{ex.Message}\n{ex.StackTrace}"); }
         }
 
         private void dgvMain_SelectionChanged(object sender, EventArgs e)
@@ -299,7 +305,7 @@ namespace OmniGov.App.Budget.Views.Obligations
             {
                 EnableDisableButtons(dgvMain, tlStrpBtnCreate, tlStrpBtnUpdate, tlStrpBtnDelete, tlStrpBtnView, tlStrpBtnReview);
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            catch (Exception ex) { Helper.MessageBoxError($"{ex.Message}\n{ex.StackTrace}"); }
         }
 
 
@@ -307,7 +313,7 @@ namespace OmniGov.App.Budget.Views.Obligations
         {
             try
             {
-                var parameters = ((string srchKey, string status, DateTime dtFrom, DateTime dtTo, int rowLimit))e.Argument;
+                var parameters = ((string srchKey, ObligationRequestModel.Status status, DateTime dtFrom, DateTime dtTo, int rowLimit))e.Argument;
 
                 var service = new OmniGov.App.Budget.Services.ObligationService();
                 e.Result = service.GetObligationRequests(
@@ -319,7 +325,7 @@ namespace OmniGov.App.Budget.Views.Obligations
                     (current, total) => Helper.ProgressCounter(backgroundWorker1, total, current)
                 );
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            catch (Exception ex) { Helper.MessageBoxError($"{ex.Message}\n{ex.StackTrace}"); }
         }
 
         private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
@@ -328,7 +334,7 @@ namespace OmniGov.App.Budget.Views.Obligations
             {
                 pbLoadRecords.Value = e.ProgressPercentage;
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            catch (Exception ex) { Helper.MessageBoxError($"{ex.Message}\n{ex.StackTrace}"); }
         }
 
         private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -342,7 +348,7 @@ namespace OmniGov.App.Budget.Views.Obligations
                     dgvMain.CurrentCell = dgvMain.FirstDisplayedCell;
                 }
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            catch (Exception ex) { Helper.MessageBoxError($"{ex.Message}\n{ex.StackTrace}"); }
         }
 
         private void TxtSearch_TextChanged(object sender, EventArgs e)
@@ -354,7 +360,7 @@ namespace OmniGov.App.Budget.Views.Obligations
                 if (searchTxt.Length > 3 || searchTxt.Length < 1)
                     LoadOblgtnRecords();
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            catch (Exception ex) { Helper.MessageBoxError($"{ex.Message}\n{ex.StackTrace}"); }
         }
 
         private void radPending_CheckedChanged(object sender, EventArgs e)
@@ -363,7 +369,7 @@ namespace OmniGov.App.Budget.Views.Obligations
             {
                 LoadOblgtnRecords();
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            catch (Exception ex) { Helper.MessageBoxError($"{ex.Message}\n{ex.StackTrace}"); }
         }
 
         private void radApproved_CheckedChanged(object sender, EventArgs e)
@@ -372,7 +378,7 @@ namespace OmniGov.App.Budget.Views.Obligations
             {
                 LoadOblgtnRecords();
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            catch (Exception ex) { Helper.MessageBoxError($"{ex.Message}\n{ex.StackTrace}"); }
         }
 
         private void radDisapproved_CheckedChanged(object sender, EventArgs e)
@@ -381,7 +387,7 @@ namespace OmniGov.App.Budget.Views.Obligations
             {
                 LoadOblgtnRecords();
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            catch (Exception ex) { Helper.MessageBoxError($"{ex.Message}\n{ex.StackTrace}"); }
         }
 
         private void radCancelled_CheckedChanged(object sender, EventArgs e)
@@ -390,7 +396,7 @@ namespace OmniGov.App.Budget.Views.Obligations
             {
                 LoadOblgtnRecords();
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            catch (Exception ex) { Helper.MessageBoxError($"{ex.Message}\n{ex.StackTrace}"); }
         }
 
         private void dtPckrFrom_ValueChanged(object sender, EventArgs e)
@@ -400,7 +406,7 @@ namespace OmniGov.App.Budget.Views.Obligations
                 dtPckrTo.MinDate = dtPckrFrom.Value;
                 LoadOblgtnRecords();
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            catch (Exception ex) { Helper.MessageBoxError($"{ex.Message}\n{ex.StackTrace}"); }
         }
         private void dtPckrTo_ValueChanged(object sender, EventArgs e)
         {
@@ -408,7 +414,58 @@ namespace OmniGov.App.Budget.Views.Obligations
             {
                 LoadOblgtnRecords();
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            catch (Exception ex) { Helper.MessageBoxError($"{ex.Message}\n{ex.StackTrace}"); }
+        }
+
+        private void btnApprove_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (Helper.MessageBoxConfirm("Are you sure you want to approve this Obligation Request?"))
+                {
+                    if (ucObligationsAudit.Approve())
+                    {
+                        Helper.MessageBoxSuccess("Obligation Request has been approved.");
+                        customTabControl1.SelectedTab = tbPgMain;
+                        LoadOblgtnRecords();
+                    }
+                }
+            }
+            catch (Exception ex) { Helper.MessageBoxError($"{ex.Message}\n{ex.StackTrace}"); }
+        }
+
+        private void btnDisapprove_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (Helper.MessageBoxConfirm("Are you sure you want to disapprove this Obligation Request?"))
+                {
+                    if (ucObligationsAudit.Disapprove())
+                    {
+                        Helper.MessageBoxSuccess("Obligation Request has been disapproved.");
+                        customTabControl1.SelectedTab = tbPgMain;
+                        LoadOblgtnRecords();
+                    }
+                }
+            }
+            catch (Exception ex) { Helper.MessageBoxError($"{ex.Message}\n{ex.StackTrace}"); }
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (Helper.MessageBoxConfirm("Are you sure you want to cancel this Obligation Request?"))
+                {
+                    if (ucObligationsAudit.Cancel())
+                    {
+                        Helper.MessageBoxSuccess("Obligation Request has been cancelled.");
+                        customTabControl1.SelectedTab = tbPgMain;
+                        LoadOblgtnRecords();
+                    }
+                }
+            }
+            catch (Exception ex) { Helper.MessageBoxError($"{ex.Message}\n{ex.StackTrace}"); }
         }
     }
 }

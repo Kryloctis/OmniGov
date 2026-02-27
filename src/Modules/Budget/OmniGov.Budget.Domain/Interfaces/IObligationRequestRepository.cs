@@ -7,7 +7,7 @@ namespace OmniGov.Budget.Domain.Interfaces
     public interface IObligationRequestRepository : IRepository<ObligationRequestModel>
     {
         DataTable GetRecords(string srchKey,
-                            string status,
+                            ObligationRequestModel.Status status,
                             DateTime dtFrom,
                             DateTime dtTo,
                             int rowLimit);
@@ -17,7 +17,7 @@ namespace OmniGov.Budget.Domain.Interfaces
         DataTable GetViewRecordsById(int Id);
 
         DataTable GetViewRecordsBySearchAndStatus(string searchText,
-                                                string status,
+                                                ObligationRequestModel.Status status,
                                                 int fundId,
                                                 int allotmentClassId,
                                                 DateTime dateOfRequest);
@@ -35,6 +35,8 @@ namespace OmniGov.Budget.Domain.Interfaces
         bool Update(ObligationRequestModel entity, List<ObligationAccountModel> obligationAccountModels);
 
         bool DeleteById(int obligationRequestId);
+
+        bool SetStatus(int id, ObligationRequestModel.Status status, string? remarks);
 
         public string GetTransactionNo(int year);
     }

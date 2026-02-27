@@ -395,15 +395,17 @@ namespace OmniGov.App.Budget.Views.Obligations
             // 
             // dtDateRequest
             // 
+            //
             dtDateRequest.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             dtDateRequest.Location = new Point(105, 64);
             dtDateRequest.Margin = new Padding(3, 3, 3, 15);
             dtDateRequest.Name = "dtDateRequest";
             dtDateRequest.Size = new Size(239, 23);
             dtDateRequest.TabIndex = 8;
-            // 
+            dtDateRequest.ValueChanged += dtDateRequest_ValueChanged;
+            //
             // label6
-            // 
+            //
             label6.AutoSize = true;
             label6.Location = new Point(23, 27);
             label6.Name = "label6";
@@ -474,8 +476,10 @@ namespace OmniGov.App.Budget.Views.Obligations
             dgvEntries.Size = new Size(708, 214);
             dgvEntries.TabIndex = 12;
             dgvEntries.CellValueChanged += dgvEntries_CellValueChanged;
+            dgvEntries.CellValidating += dgvEntries_CellValidating;
             dgvEntries.CurrentCellDirtyStateChanged += dgvEntries_CurrentCellDirtyStateChanged;
             dgvEntries.DataError += dgvEntries_DataError;
+            dgvEntries.EditingControlShowing += dgvEntries_EditingControlShowing;
             dgvEntries.SelectionChanged += dgvEntries_SelectionChanged;
             // 
             // lblTotalOblgtn
