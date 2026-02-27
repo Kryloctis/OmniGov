@@ -31,9 +31,32 @@ If generating the new string formats requires extremely dense programmatic logic
 
 ---
 
-## 3. Schema Alterations and Migration Execution Plan
+## 3. Recommended Workflow for Solo Devs (ADO.NET Stack)
 
-### 3.1 `jev` (Journal Entry Voucher)
+Since you are not using Entity Framework (which auto-generates migrations) and rely on ADO.NET, handwriting complex `ALTER TABLE` scripts for large schemas is incredibly time-consuming. You can use MySQL Workbench to **automate** the generation of these scripts without risking direct execution on live data.
+
+### The "Auto-Generate Script" Method
+Whenever you update your visual `.mwb` model, follow these steps to securely generate your migration scripts:
+1. Make all your schema changes visually in MySQL Workbench (add columns, rename, drop, etc.).
+2. Go to **Database > Synchronize Model**.
+3. Follow the wizard steps until you reach the **"SQL Script"** or **"Model and Database Differences"** summary page. 
+   - *Workbench will now calculate and display all the necessary `ALTER TABLE` statements for you automatically.*
+4. **CRITICAL:** Do *not* click "Execute" to run this directly against production. 
+5. Instead, click **"Save to File..."** or copy the SQL.
+6. Save this file inside your repository as a new migration script (e.g., `scripts/db/migrations/V1.5__Auto_Generated_Schema_Updates.sql`).
+
+**Why this is the best approach for you:**
+- **Saves Massive Time:** You get 100% accurate SQL scripts generated instantly based on your visual diagram changes.
+- **Safe:** You get to review the script before it ever touches a database, preventing accidental `DROP` statements from ruining production.
+- **Maintains Audit Trail:** You commit the generated `.sql` file to Git, giving you perfect version control history, which ADO.NET applications lack by default.
+
+*(Note: Data Manipulation/DML scripts like `UPDATE jev SET status...` must still be handwritten, as Workbench only generates structural schema changes).*
+
+---
+
+## 4. Schema Alterations and Migration Execution Plan
+
+### 4.1 `jev` (Journal Entry Voucher)
 
 **Table Updates:**
 - Altered column: `trns_no` ➔ `transaction_no`

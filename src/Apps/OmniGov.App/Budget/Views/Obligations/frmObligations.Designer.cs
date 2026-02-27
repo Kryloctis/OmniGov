@@ -47,7 +47,6 @@ namespace OmniGov.App.Budget.Views.Obligations
             tlStrpBtnUpdate = new ToolStripButton();
             tlStrpBtnCreate = new ToolStripButton();
             panel4 = new Panel();
-            label10 = new Label();
             label3 = new Label();
             panel1 = new Panel();
             txtSearch = new TextBox();
@@ -70,14 +69,12 @@ namespace OmniGov.App.Budget.Views.Obligations
             toolStrip3 = new ToolStrip();
             tlStrpBtnCrudBack = new ToolStripButton();
             panel5 = new Panel();
-            label11 = new Label();
             lblCrudStat = new Label();
             tbPgView = new TabPage();
             ucObligationsView = new ucObligations();
             toolStrip4 = new ToolStrip();
             tlsStrpBtnBckView = new ToolStripButton();
             panel8 = new Panel();
-            label12 = new Label();
             label8 = new Label();
             tbPgReview = new TabPage();
             ucObligationsAudit = new ucObligations();
@@ -88,7 +85,6 @@ namespace OmniGov.App.Budget.Views.Obligations
             toolStrip5 = new ToolStrip();
             tlStrpBtnBckAudit = new ToolStripButton();
             panel9 = new Panel();
-            label13 = new Label();
             label9 = new Label();
             backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             customTabControl1.SuspendLayout();
@@ -157,10 +153,10 @@ namespace OmniGov.App.Budget.Views.Obligations
             panel7.Controls.Add(panel6);
             panel7.Controls.Add(pbLoadRecords);
             panel7.Dock = DockStyle.Fill;
-            panel7.Location = new Point(20, 106);
+            panel7.Location = new Point(20, 91);
             panel7.Name = "panel7";
             panel7.Padding = new Padding(4);
-            panel7.Size = new Size(607, 469);
+            panel7.Size = new Size(607, 484);
             panel7.TabIndex = 9;
             // 
             // dgvMain
@@ -170,7 +166,7 @@ namespace OmniGov.App.Budget.Views.Obligations
             dgvMain.Location = new Point(4, 6);
             dgvMain.Margin = new Padding(1);
             dgvMain.Name = "dgvMain";
-            dgvMain.Size = new Size(599, 427);
+            dgvMain.Size = new Size(599, 442);
             dgvMain.TabIndex = 7;
             dgvMain.SelectionChanged += dgvMain_SelectionChanged;
             // 
@@ -180,7 +176,7 @@ namespace OmniGov.App.Budget.Views.Obligations
             panel6.Controls.Add(button2);
             panel6.Controls.Add(button1);
             panel6.Dock = DockStyle.Bottom;
-            panel6.Location = new Point(4, 433);
+            panel6.Location = new Point(4, 448);
             panel6.Name = "panel6";
             panel6.Size = new Size(599, 32);
             panel6.TabIndex = 26;
@@ -232,7 +228,7 @@ namespace OmniGov.App.Budget.Views.Obligations
             toolStrip1.GripStyle = ToolStripGripStyle.Hidden;
             toolStrip1.ImageScalingSize = new Size(20, 20);
             toolStrip1.Items.AddRange(new ToolStripItem[] { tlStrpBtnReview, toolStripSeparator2, tlStrpBtnDelete, tlStrpBtnView, tlStrpBtnUpdate, tlStrpBtnCreate });
-            toolStrip1.Location = new Point(20, 71);
+            toolStrip1.Location = new Point(20, 56);
             toolStrip1.Name = "toolStrip1";
             toolStrip1.Padding = new Padding(4);
             toolStrip1.Size = new Size(607, 35);
@@ -300,24 +296,14 @@ namespace OmniGov.App.Budget.Views.Obligations
             // 
             // panel4
             // 
-            panel4.Controls.Add(label10);
+            panel4.AutoSize = true;
             panel4.Controls.Add(label3);
             panel4.Dock = DockStyle.Top;
             panel4.Location = new Point(20, 20);
             panel4.Name = "panel4";
             panel4.Padding = new Padding(0, 0, 0, 15);
-            panel4.Size = new Size(607, 51);
+            panel4.Size = new Size(607, 36);
             panel4.TabIndex = 14;
-            // 
-            // label10
-            // 
-            label10.AutoSize = true;
-            label10.ForeColor = SystemColors.ControlDarkDark;
-            label10.Location = new Point(3, 21);
-            label10.Name = "label10";
-            label10.Size = new Size(297, 15);
-            label10.TabIndex = 1;
-            label10.Text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit";
             // 
             // label3
             // 
@@ -554,9 +540,9 @@ namespace OmniGov.App.Budget.Views.Obligations
             // 
             ucObligationsCrud.AutoValidate = AutoValidate.Disable;
             ucObligationsCrud.Dock = DockStyle.Fill;
-            ucObligationsCrud.Location = new Point(0, 98);
+            ucObligationsCrud.Location = new Point(0, 83);
             ucObligationsCrud.Name = "ucObligationsCrud";
-            ucObligationsCrud.Size = new Size(874, 454);
+            ucObligationsCrud.Size = new Size(874, 469);
             ucObligationsCrud.TabIndex = 24;
             // 
             // panel2
@@ -588,7 +574,7 @@ namespace OmniGov.App.Budget.Views.Obligations
             toolStrip3.GripStyle = ToolStripGripStyle.Hidden;
             toolStrip3.ImageScalingSize = new Size(20, 20);
             toolStrip3.Items.AddRange(new ToolStripItem[] { tlStrpBtnCrudBack });
-            toolStrip3.Location = new Point(0, 71);
+            toolStrip3.Location = new Point(0, 56);
             toolStrip3.Name = "toolStrip3";
             toolStrip3.Padding = new Padding(0, 0, 20, 0);
             toolStrip3.Size = new Size(874, 27);
@@ -609,24 +595,13 @@ namespace OmniGov.App.Budget.Views.Obligations
             // panel5
             // 
             panel5.AutoSize = true;
-            panel5.Controls.Add(label11);
             panel5.Controls.Add(lblCrudStat);
             panel5.Dock = DockStyle.Top;
             panel5.Location = new Point(0, 0);
             panel5.Name = "panel5";
             panel5.Padding = new Padding(20, 20, 20, 15);
-            panel5.Size = new Size(874, 71);
+            panel5.Size = new Size(874, 56);
             panel5.TabIndex = 25;
-            // 
-            // label11
-            // 
-            label11.AutoSize = true;
-            label11.ForeColor = SystemColors.ControlDarkDark;
-            label11.Location = new Point(23, 41);
-            label11.Name = "label11";
-            label11.Size = new Size(297, 15);
-            label11.TabIndex = 2;
-            label11.Text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit";
             // 
             // lblCrudStat
             // 
@@ -655,9 +630,9 @@ namespace OmniGov.App.Budget.Views.Obligations
             // 
             ucObligationsView.AutoValidate = AutoValidate.Disable;
             ucObligationsView.Dock = DockStyle.Fill;
-            ucObligationsView.Location = new Point(0, 98);
+            ucObligationsView.Location = new Point(0, 83);
             ucObligationsView.Name = "ucObligationsView";
-            ucObligationsView.Size = new Size(874, 497);
+            ucObligationsView.Size = new Size(874, 512);
             ucObligationsView.TabIndex = 25;
             // 
             // toolStrip4
@@ -666,7 +641,7 @@ namespace OmniGov.App.Budget.Views.Obligations
             toolStrip4.GripStyle = ToolStripGripStyle.Hidden;
             toolStrip4.ImageScalingSize = new Size(20, 20);
             toolStrip4.Items.AddRange(new ToolStripItem[] { tlsStrpBtnBckView });
-            toolStrip4.Location = new Point(0, 71);
+            toolStrip4.Location = new Point(0, 56);
             toolStrip4.Name = "toolStrip4";
             toolStrip4.Padding = new Padding(0, 0, 20, 0);
             toolStrip4.Size = new Size(874, 27);
@@ -687,24 +662,13 @@ namespace OmniGov.App.Budget.Views.Obligations
             // panel8
             // 
             panel8.AutoSize = true;
-            panel8.Controls.Add(label12);
             panel8.Controls.Add(label8);
             panel8.Dock = DockStyle.Top;
             panel8.Location = new Point(0, 0);
             panel8.Name = "panel8";
             panel8.Padding = new Padding(20, 20, 20, 15);
-            panel8.Size = new Size(874, 71);
+            panel8.Size = new Size(874, 56);
             panel8.TabIndex = 26;
-            // 
-            // label12
-            // 
-            label12.AutoSize = true;
-            label12.ForeColor = SystemColors.ControlDarkDark;
-            label12.Location = new Point(23, 41);
-            label12.Name = "label12";
-            label12.Size = new Size(297, 15);
-            label12.TabIndex = 3;
-            label12.Text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit";
             // 
             // label8
             // 
@@ -713,9 +677,9 @@ namespace OmniGov.App.Budget.Views.Obligations
             label8.ForeColor = SystemColors.ControlDarkDark;
             label8.Location = new Point(23, 20);
             label8.Name = "label8";
-            label8.Size = new Size(190, 21);
+            label8.Size = new Size(151, 21);
             label8.TabIndex = 0;
-            label8.Text = "View Obligation Request";
+            label8.Text = "Obligation Request";
             // 
             // tbPgReview
             // 
@@ -734,9 +698,9 @@ namespace OmniGov.App.Budget.Views.Obligations
             // 
             ucObligationsAudit.AutoValidate = AutoValidate.Disable;
             ucObligationsAudit.Dock = DockStyle.Fill;
-            ucObligationsAudit.Location = new Point(0, 98);
+            ucObligationsAudit.Location = new Point(0, 83);
             ucObligationsAudit.Name = "ucObligationsAudit";
-            ucObligationsAudit.Size = new Size(874, 454);
+            ucObligationsAudit.Size = new Size(874, 469);
             ucObligationsAudit.TabIndex = 26;
             // 
             // flowLayoutPanel2
@@ -801,7 +765,7 @@ namespace OmniGov.App.Budget.Views.Obligations
             toolStrip5.GripStyle = ToolStripGripStyle.Hidden;
             toolStrip5.ImageScalingSize = new Size(20, 20);
             toolStrip5.Items.AddRange(new ToolStripItem[] { tlStrpBtnBckAudit });
-            toolStrip5.Location = new Point(0, 71);
+            toolStrip5.Location = new Point(0, 56);
             toolStrip5.Name = "toolStrip5";
             toolStrip5.Padding = new Padding(0, 0, 20, 0);
             toolStrip5.Size = new Size(874, 27);
@@ -822,24 +786,13 @@ namespace OmniGov.App.Budget.Views.Obligations
             // panel9
             // 
             panel9.AutoSize = true;
-            panel9.Controls.Add(label13);
             panel9.Controls.Add(label9);
             panel9.Dock = DockStyle.Top;
             panel9.Location = new Point(0, 0);
             panel9.Name = "panel9";
             panel9.Padding = new Padding(20, 20, 20, 15);
-            panel9.Size = new Size(874, 71);
+            panel9.Size = new Size(874, 56);
             panel9.TabIndex = 27;
-            // 
-            // label13
-            // 
-            label13.AutoSize = true;
-            label13.ForeColor = SystemColors.ControlDarkDark;
-            label13.Location = new Point(23, 41);
-            label13.Name = "label13";
-            label13.Size = new Size(297, 15);
-            label13.TabIndex = 4;
-            label13.Text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit";
             // 
             // label9
             // 
@@ -970,10 +923,6 @@ namespace OmniGov.App.Budget.Views.Obligations
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Panel panel9;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Panel panel10;
-        private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.Label label13;
     }
 }

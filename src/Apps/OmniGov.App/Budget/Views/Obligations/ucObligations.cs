@@ -5,6 +5,8 @@ using OmniGov.Budget.Domain.Entities;
 using OmniGov.Core.Factories;
 using System.ComponentModel;
 using System.Data;
+using System.Globalization;
+using static OmniGov.App.Helpers.Helper;
 
 namespace OmniGov.App.Budget.Views.Obligations
 {
@@ -22,21 +24,16 @@ namespace OmniGov.App.Budget.Views.Obligations
 
         private void OnLoad()
         {
-            Helper.DatagridEditableRowStyle(dgvEntries, true);
+            DatagridEditableRowStyle(dgvEntries, true);
             dgvEntries.RowTemplate.Height = 30;
+            tbControlDetailsEntries.SelectedTab = tbPgDetails;
 
-            /*
-            Note: The auto-validate in designer should be disabled in default. It causes designer error when navigating user control.
-            Enable auto-validation here in OnLoad function so that auto-validate will not be triggered when in design stage.
-             */
             this.AutoValidate = AutoValidate.EnableAllowFocusChange;
 
-            /*Pre-load fields*/
             LoadFPP();
             LoadAlltmntClss();
             LoadFunds();
 
-            /*Initializes datagridview columns*/
             InitializeEntriesTbl();
             dgvEntries.AutoResizeRows(DataGridViewAutoSizeRowsMode.AllCells);
             ToggleEntriesButtons(dgvEntries, tlStrpBtnEntrRemove);
@@ -52,13 +49,15 @@ namespace OmniGov.App.Budget.Views.Obligations
                 SetControlsReadOnly(true, panel3, exemptCtrls);
                 LoadSelectedRecord(oblgtnRqstId.Value);
             }
+            else
+                ResetForm();
         }
 
         internal void LoadViewMode(int oblgtnRqstId)
         {
             this.oblgtnRqstId = oblgtnRqstId;
             OnLoad();
-            SetControlsReadOnly(true, tabControl1, null);
+            SetControlsReadOnly(true, tbControlDetailsEntries, null);
             LoadSelectedRecord(oblgtnRqstId);
         }
 
@@ -67,7 +66,7 @@ namespace OmniGov.App.Budget.Views.Obligations
             this.oblgtnRqstId = oblgtnRqstId;
             var exemptCtrls = new List<Control>() { txtRemarks };
             OnLoad();
-            SetControlsReadOnly(true, tabControl1, exemptCtrls);
+            SetControlsReadOnly(true, tbControlDetailsEntries, exemptCtrls);
             LoadSelectedRecord(oblgtnRqstId);
         }
 
@@ -105,11 +104,17 @@ namespace OmniGov.App.Budget.Views.Obligations
             return (oblgtnRqst, oblgtnAccs);
         }
 
+        /// <summary>
+        /// Loads the selected record.
+        /// </summary>
+        /// <param name="oblgtnRqstId">The oblgtn RQST identifier.</param>
         private void LoadSelectedRecord(int oblgtnRqstId)
         {
             var dictOblgtnRqst = BudgetFactory.ObligationRequestRepository().GetViewRecordById(oblgtnRqstId);
-            int fppId = Convert.ToInt32(dictOblgtnRqst["fpp_id"]);
+            Enum.TryParse<Status>(dictOblgtnRqst["status"], out var status);
+            int.TryParse(dictOblgtnRqst["fpp_id"], out int fppId);
 
+            //Load Fields
             mskTxtTransNo.Text = BudgetHelper.GenTransactionNo(dictOblgtnRqst["transaction_no"]);
             cmbxFPP.SelectedValue = fppId;
             cmbxFund.SelectedValue = dictOblgtnRqst["funds_id"];
@@ -119,6 +124,10 @@ namespace OmniGov.App.Budget.Views.Obligations
             txtReferenceNo.Text = dictOblgtnRqst["reference_no"];
             txtExplanation.Text = dictOblgtnRqst["explanation"];
 
+            //Load Status
+            SetStatus(status);
+
+            //Load Obligation Entries
             LoadOblgtnEntries(oblgtnRqstId, dgvEntries);
         }
 
@@ -126,12 +135,20 @@ namespace OmniGov.App.Budget.Views.Obligations
         {
             var dtOblgtnAccs = BudgetFactory.ObligationRequestRepository().GetViewRecordsById(oblgtnRqstId);
 
-            foreach (DataRow row in dtOblgtnAccs.Rows)
+            var oblgtnParams = new List<OblgtnEntriesParameters>();
+
+            foreach (DataRow dtRow in dtOblgtnAccs.Rows)
             {
-                int newIndex = dgv.Rows.Add(
-                    int.TryParse(row["sub_fpp"].ToString(), out int subfpp) ? subfpp : 0
-                );
+                var oblgtRqstParam = new OblgtnEntriesParameters();
+                oblgtRqstParam.OthersFpp = dtRow.IsNull("others_fpp_id") ? 0 : Convert.ToInt32(dtRow["others_fpp_id"]);
+                oblgtRqstParam.GeneralLedgerAccId = (ushort)dtRow["general_ledger_accounts_id"];
+                oblgtRqstParam.AllotmentReleaseId = (uint)dtRow["allotment_release_id"];
+                oblgtRqstParam.Amount = (decimal)dtRow["amount"];
+
+                oblgtnParams.Add(oblgtRqstParam);
             }
+
+            dgv.DataSource = oblgtnParams;
         }
 
         private void ToggleEntriesButtons(DataGridView dgv, ToolStripButton btnRemove)
@@ -160,7 +177,6 @@ namespace OmniGov.App.Budget.Views.Obligations
 
             LoadFPP();
             LoadFunds();
-            cmbxFPP.SelectedValue = 0;
             cmbxFPP.Text = string.Empty;
             mskTxtOblgtnNo.Text = string.Empty;
             dtDateRequest.Value = DateTime.Now;
@@ -168,6 +184,20 @@ namespace OmniGov.App.Budget.Views.Obligations
             txtPayee.Text = string.Empty;
             txtExplanation.Text = string.Empty;
             dgvEntries.Rows.Clear();
+            errorProvider1.Clear();
+            mskTxtOblgtnNo.Clear();
+            mskTxtTransNo.Clear();
+
+            //Reset Status
+            SetStatus(Status.draft);
+        }
+
+        private void SetStatus(Status status)
+        {
+            string _status = status.ToString();
+
+            lblStatus.Text = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(_status);
+            lblStatIndctr.ForeColor = StatusColor(_status);
         }
 
         internal string GetFormErrors()
@@ -236,6 +266,14 @@ namespace OmniGov.App.Budget.Views.Obligations
             HelperLoadRecords.FppCombobox(dataTable, cmbxFPP, "fpp_code_name", "id");
         }
 
+        private void LoadOthersFpp(DataGridViewComboBoxColumn dgvCmbxColumn)
+        {
+            dgvCmbxColumn.DataSource = null;
+            dgvCmbxColumn.DataSource = DtOthersFpp();
+            dgvCmbxColumn.ValueMember = "id";
+            dgvCmbxColumn.DisplayMember = "others_fpp";
+        }
+
         private void LoadFunds()
         {
             var dtFunds = Factory.FundsRepository().GetRecords();
@@ -291,21 +329,10 @@ namespace OmniGov.App.Budget.Views.Obligations
             else { return false; }
         }
 
-        private void InitializeEntriesTbl()
-        {
-            var dgColumns = DgvColumns();
-
-            if (dgvEntries.Columns.Count != dgColumns.Count)
-            {
-                dgvEntries.Columns.Clear();
-                dgvEntries.Columns.AddRange(dgColumns.ToArray());
-            }
-        }
-
         private void PopulateAllotmentReleaseCell(int rowIndex, DataGridView dataGridView)
         {
             // Build DataSource
-            var othersFppId = (int)dataGridView.Rows[rowIndex].Cells["sub_fpp"].Value;
+            var othersFppId = (int)dataGridView.Rows[rowIndex].Cells["others_fpp"].Value;
             var dtAlltmntRlease = DtAllotmentRelease(string.Empty, othersFppId);
             var cell = (DataGridViewComboBoxCell)dataGridView.Rows[rowIndex].Cells["aro_no"];
             cell.DataSource = dtAlltmntRlease;
@@ -379,6 +406,25 @@ namespace OmniGov.App.Budget.Views.Obligations
             return totalObligation;
         }
 
+        private record OblgtnEntriesParameters()
+        {
+            internal int? OthersFpp;
+            internal uint AllotmentReleaseId;
+            internal ushort GeneralLedgerAccId;
+            internal decimal Amount;
+        }
+
+        private void InitializeEntriesTbl()
+        {
+            var dgColumns = DgvColumns();
+
+            if (dgvEntries.Columns.Count != dgColumns.Count)
+            {
+                dgvEntries.Columns.Clear();
+                dgvEntries.Columns.AddRange(dgColumns.ToArray());
+            }
+        }
+
         private List<DataGridViewColumn> DgvColumns()
         {
             var dtColumns = new List<DataGridViewColumn>
@@ -386,10 +432,10 @@ namespace OmniGov.App.Budget.Views.Obligations
                 new DataGridViewComboBoxColumn ()
                 {
                     HeaderText = "Sub FPP",
-                    Name = "sub_fpp",
+                    Name = "others_fpp",
                     ValueMember = "id",
                     DisplayMember = "others_fpp",
-                    DataSource = DtSubFpp(),
+                    DataSource = DtOthersFpp(),
                     FlatStyle = FlatStyle.Flat,
                     MinimumWidth = 120,
                 },
@@ -438,9 +484,7 @@ namespace OmniGov.App.Budget.Views.Obligations
             return dtColumns;
         }
 
-        #region DataSources
-
-        private DataTable DtSubFpp()
+        private DataTable DtOthersFpp()
         {
             bool fppValid = int.TryParse(cmbxFPP.SelectedValue.ToString(), out int fppId);
             var dtSubFpp = Factory.SubFPPRepository().GetRecordsByFppId(fppId);
@@ -506,9 +550,16 @@ namespace OmniGov.App.Budget.Views.Obligations
             return dataTable;
         }
 
-        #endregion DataSources
-
-        #region Events
+        private void cmbxFPP_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                var dgvColumn = (DataGridViewComboBoxColumn)dgvEntries.Columns["others_fpp"];
+                dgvEntries.Rows.Clear();
+                if (dgvColumn is not null) LoadOthersFpp(dgvColumn);
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
 
         private void dgvEntries_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
@@ -518,7 +569,7 @@ namespace OmniGov.App.Budget.Views.Obligations
 
                 string col = dgvEntries.Columns[e.ColumnIndex].Name;
 
-                if (col == "sub_fpp")
+                if (col == "others_fpp")
                     PopulateAllotmentReleaseCell(e.RowIndex, dgvEntries);
 
                 if (col == "aro_no")
@@ -537,12 +588,12 @@ namespace OmniGov.App.Budget.Views.Obligations
                 }
                 else
                 {
-                    bool oblgtnBalIsValid = !decimal.TryParse(cellBalance.Value.ToString(), out var oblgtnBal);
+                    //bool oblgtnBalIsValid = !decimal.TryParse(cellBalance.Value.ToString(), out var oblgtnBal);
 
-                    if (result > oblgtnBal)
-                        cellAmount.Value = cellBalance.Value;
-                    else
-                        cellAmount.Value = result;
+                    //if (result > oblgtnBal)
+                    //    cellAmount.Value = cellBalance.Value;
+                    //else
+                    //    cellAmount.Value = result;
                 }
 
                 lblTotalOblgtn.Text = $"Total: {GetTotalObligations(dgvEntries.Rows).ToString("N2")}";
@@ -581,8 +632,8 @@ namespace OmniGov.App.Budget.Views.Obligations
                 //}
 
                 int r = dgvEntries.Rows.Add();
-                dgvEntries.Rows[r].Cells["sub_fpp"].Value = 0;
-                dgvEntries.CurrentCell = dgvEntries.Rows[r].Cells["sub_fpp"];
+                dgvEntries.Rows[r].Cells["others_fpp"].Value = 0;
+                dgvEntries.CurrentCell = dgvEntries.Rows[r].Cells["others_fpp"];
                 dgvEntries.BeginEdit(true);
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
@@ -608,20 +659,6 @@ namespace OmniGov.App.Budget.Views.Obligations
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private void cmbxFPP_SelectionChangeCommitted(object sender, EventArgs e)
-        {
-            try
-            {
-                dgvEntries.Rows.Clear();
-                DataGridViewComboBoxColumn dgvColumn = (DataGridViewComboBoxColumn)dgvEntries.Columns["sub_fpp"];
-                dgvColumn.DataSource = null;
-                dgvColumn.DataSource = DtSubFpp();
-                dgvColumn.ValueMember = "id";
-                dgvColumn.DisplayMember = "others_fpp";
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
         private void dgvEntries_CurrentCellDirtyStateChanged(object sender, EventArgs e)
         {
             try
@@ -632,10 +669,6 @@ namespace OmniGov.App.Budget.Views.Obligations
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private void cmbxFPP_KeyDown(object sender, KeyEventArgs e)
-        {
-        }
-
         private void dgvEntries_SelectionChanged(object sender, EventArgs e)
         {
             try
@@ -644,10 +677,6 @@ namespace OmniGov.App.Budget.Views.Obligations
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
-
-        #endregion Events
-
-        #region Validation Events
 
         private void cmbxFPP_Validating(object sender, CancelEventArgs e)
         {
@@ -679,8 +708,5 @@ namespace OmniGov.App.Budget.Views.Obligations
         {
             Helper.ClearErrorTextBox(errorProvider1, txtPayee);
         }
-
-        #endregion Validation Events
     }
 }
-

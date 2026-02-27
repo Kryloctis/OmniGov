@@ -11,6 +11,15 @@ namespace OmniGov.App.Helpers
         internal static string updateReleaseLnk = "https://sites.google.com/view/perzeus/products/lfs";
         internal static string version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
 
+        public enum Status
+        {
+            draft,
+            pending,
+            approved,
+            disapproved,
+            cancelled
+        }
+
         public static Dictionary<string, string> GetSigtryByRefDoc(string reference, string documentName)
         {
             var dictSigRefDoc = new Dictionary<string, string>();
@@ -453,22 +462,22 @@ namespace OmniGov.App.Helpers
 
         public static Color StatusColor(string status)
         {
-            switch (status)
+            switch (status.ToLower())
             {
-                case "Approved":
+                case "approved":
                     return Color.FromArgb(201, 228, 197);
 
-                case "Disapproved":
+                case "disapproved":
                     return Color.FromArgb(246, 169, 169);
 
-                case "Cancelled":
+                case "cancelled":
                     return Color.FromArgb(200, 198, 198);
 
-                case "Pending":
+                case "pending":
                     return Color.FromArgb(255, 230, 153);
 
                 default:
-                    return Color.Black;
+                    return Color.FromKnownColor(KnownColor.ControlDark);
             }
         }
 

@@ -30,23 +30,11 @@ namespace OmniGov.Budget.Domain.Interfaces
 
         decimal GetSumObligationsByBudgetAppropriationAndStatus(int budgetAppropriationsId);
 
-        decimal GetSumObligationsById(int obligationRequestId);
-
-        bool ObligationRequestNoExist(string obligationNo);
-
-        bool ObligationRequestNoExist(int Id, string obligationNo);
-
         bool Insert(ObligationRequestModel entity, List<ObligationAccountModel> obligationAccountModels);
 
         bool Update(ObligationRequestModel entity, List<ObligationAccountModel> obligationAccountModels);
 
         bool DeleteById(int obligationRequestId);
-
-        bool SetObligationRequestStatus(int obligationRequestId, string status, string dissaprovalMessage = null);
-
-        string GetObligationRequestStatus(int obligationRequestId);
-
-        string GetLeastOblgtnNo();
 
         public string GetTransactionNo(int year);
     }

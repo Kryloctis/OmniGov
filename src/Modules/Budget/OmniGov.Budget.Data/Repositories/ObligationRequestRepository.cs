@@ -84,27 +84,7 @@ namespace OmniGov.Budget.Data.Repositories
                 new object[] { "@created_by", DbType.Int32, entity.CreatedBy },
             };
 
-            string query = $@"INSERT INTO {tableName}
-                            (payee,
-                            function_program_project_id,
-                            allotment_classes_id,
-                            funds_id,
-                            transaction_no,
-                            explanation,
-                            reference_no,
-                            date_requested,
-                            created_by)
-                            VALUES
-                            (@payee,
-                            @function_program_project_id,
-                            @allotment_classes_id,
-                            @funds_id,
-                            @transaction_no,
-                            @explanation,
-                            @reference_no,
-                            @date_requested,
-                            @created_by)";
-
+            string query = $@"INSERT INTO {tableName} (payee, function_program_project_id, allotment_classes_id, funds_id, transaction_no, explanation, reference_no, date_requested, created_by) VALUES (@payee, @function_program_project_id, @allotment_classes_id, @funds_id, @transaction_no, @explanation, @reference_no, @date_requested, @created_by)";
             return _genericCommands.ExecuteNonQuery(query, parameters);
         }
 
@@ -321,95 +301,6 @@ namespace OmniGov.Budget.Data.Repositories
             }
         }
 
-        public bool ObligationRequestNoExist(string obligationNo)
-        {
-            var parameters = new object[][]
-            {
-                new object[] { "@obligation_no", DbType.String, obligationNo }
-            };
-
-            string query = $"SELECT id FROM {tableName} WHERE obligation_no = @obligation_no";
-
-            return !string.IsNullOrEmpty(_genericCommands.ExecuteScalar(query, parameters));
-        }
-
-        public bool ObligationRequestNoExist(int Id, string obligationNo)
-        {
-            var parameters = new object[][]
-            {
-                new object[] { "@id",DbType.Int32, Id },
-                new object[] { "@obligation_no", DbType.String, obligationNo }
-            };
-
-            string query = $"SELECT id FROM {tableName} WHERE id <> @id AND obligation_no = @obligation_no";
-
-            return !string.IsNullOrEmpty(_genericCommands.ExecuteScalar(query, parameters));
-        }
-
-        public bool SetObligationRequestStatus(int obligationRequestId, string status, string disapprovalMessage = null)
-        {
-            var parameters = new object[][]
-            {
-                new object[] { "@id", DbType.Int32, obligationRequestId},
-                new object[] { "@disapproval_message", DbType.String, disapprovalMessage}
-            };
-
-            string Status()
-            {
-                switch (status)
-                {
-                    case "approve":
-                        return "is_approved = 1, is_disapproved = 0, is_cancelled = 0";
-
-                    case "disapprove":
-                        return "is_approved = 0, is_disapproved = 1, is_cancelled = 0 , disapproval_message = @disapproval_message";
-
-                    case "cancel":
-                        return "is_cancelled = 1";
-
-                    case "pending":
-                        return "is_cancelled= 0, is_disapproved = 0, is_approved = 0";
-
-                    default:
-                        return "is_cancelled= 0, is_disapproved = 0, is_approved = 0";
-                }
-            }
-
-            string query = $"UPDATE {tableName} SET {Status()}  WHERE id = @id";
-
-            return _genericCommands.ExecuteNonQuery(query, parameters);
-        }
-
-        public string GetObligationRequestStatus(int obligationRequestId)
-        {
-            var parameters = new object[][]
-            {
-                new object[] { "@id", DbType.Int32, obligationRequestId }
-            };
-
-            string query = $"SELECT is_approved, is_disapproved, is_cancelled FROM {tableName} WHERE id = @id";
-
-            using (var reader = _genericCommands.ExecuteReader(query, parameters))
-            {
-                if (reader.Rows.Count < 1)
-                    return string.Empty;
-
-                bool isApproved = Convert.ToBoolean(reader.Rows[0]["is_approved"]);
-                bool isDisapproved = Convert.ToBoolean(reader.Rows[0]["is_disapproved"]);
-                bool isCancelled = Convert.ToBoolean(reader.Rows[0]["is_cancelled"]);
-
-                if (isCancelled)
-                    return "Cancelled";
-                else if (isDisapproved && !isApproved)
-                    return "Disapproved";
-                else if (isApproved && !isDisapproved)
-                    return "Approved";
-                else if (!isApproved && !isDisapproved && !isCancelled)
-                    return "Pending";
-            }
-            return string.Empty;
-        }
-
         public DataTable GetViewRecordsBySearchAndStatus(string searchText, string status, int fundId, int allotmentClassId, DateTime dateOfRequest)
         {
             string Status()
@@ -457,18 +348,6 @@ namespace OmniGov.Budget.Data.Repositories
             return _genericCommands.FillBySearch(query, new DataTable(), parameters);
         }
 
-        public decimal GetSumObligationsById(int obligationRequestId)
-        {
-            var parameters = new object[][]
-            {
-                new object[] {"@obligation_request_id", DbType.Int32, obligationRequestId}
-            };
-
-            string query = $"SELECT COALESCE(SUM(amount), 0) FROM {viewTableName} WHERE obligation_request_id = @obligation_request_id";
-
-            return Convert.ToDecimal(_genericCommands.ExecuteScalar(query, parameters));
-        }
-
         public decimal GetSumObligationsByBudgetAppropriationAndStatus(int budgetAppropriationId)
         {
             var parameters = new object[][]
@@ -479,12 +358,6 @@ namespace OmniGov.Budget.Data.Repositories
             string query = $"SELECT COALESCE(SUM(amount), 0) FROM {viewTableName} WHERE budget_appropriations_id = @budget_appropriations_id AND is_cancelled = 0";
 
             return Convert.ToDecimal(_genericCommands.ExecuteScalar(query, parameters));
-        }
-
-        public string GetLeastOblgtnNo()
-        {
-            string query = $"SELECT COALESCE(LPAD(MAX(obligation_no)+1, 4, '0'),'0001') AS obligation_no FROM {viewTableName}";
-            return _genericCommands.ExecuteScalar(query);
         }
 
         public DataTable GetRecords(string srchKey, string status, DateTime dtFrom, DateTime dtTo, int rowLimit)
@@ -498,33 +371,8 @@ namespace OmniGov.Budget.Data.Repositories
                 new object[] {"@row_limit", DbType.Int32, rowLimit},
             };
 
-            string statusQuery;
-
-            switch (status)
-            {
-                case "pending":
-                    statusQuery = $"is_approved = 0 AND is_disapproved = 0 AND is_cancelled = 0 AND ";
-                    break;
-
-                case "approved":
-                    statusQuery = $"is_approved = 1 AND is_disapproved = 0 AND is_cancelled = 0 AND ";
-                    break;
-
-                case "disapproved":
-                    statusQuery = $"is_approved = 0 AND is_disapproved = 1 AND is_cancelled = 0 AND ";
-                    break;
-
-                case "cancelled":
-                    statusQuery = $"is_cancelled = 1 AND ";
-                    break;
-
-                default:
-                    statusQuery = string.Empty;
-                    break;
-            }
-
             string query = $@"SELECT * FROM {tableName}
-                                WHERE {statusQuery}
+                                WHERE status = @status AND
                                 (obligation_no LIKE @search_key OR payee LIKE @search_key) AND
                                 (date_requested >= @dt_from AND date_requested <= @dt_to) LIMIT @row_limit";
 

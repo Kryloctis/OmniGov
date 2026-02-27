@@ -1,0 +1,32 @@
+Title	URL	Assignees	Labels	Priority	Start Date	End Date
+Rename document and form title of SAAOB to Statement of Allotments, Obligations and Balances (SAOB)	https://github.com/Hyubane25/OmniGov/issues/35	Hyubane25				
+Rename document and form title of SAAOBB to Statement of Appropriations, Allotments, Obligations and Balances (SAAOB)	https://github.com/Hyubane25/OmniGov/issues/36					
+(Feat) Create report for Registry of Special Trust Fund.				Low		
+(Fix)  Statement of Changes of Assets/Equity Report] Total Assets & Total Liabilities must be equal.				Low		
+(Feat) Create CRUD for Registry of Special Trust Fund				Low		
+(Feat) Add "JEV (Journal Entry Voucher)" field and configure account assignment options for Statement of Cash Flows						
+(Feat) Implement return receipt feature for receipts issued from collecting officers	https://github.com/Hyubane25/OmniGov/issues/26	Hyubane25	Feature, Treasury Module	High		
+(Feat) Implement return of cash tickets feature for cash tickets issued from collecting officers	https://github.com/Hyubane25/OmniGov/issues/27	Hyubane25	Feature, Treasury Module	High		
+(Fixes) CTC Acc. form 16	https://github.com/Hyubane25/OmniGov/issues/29	Hyubane25	enhancement, Treasury Module	High		
+(Refactor) Implement dynamic application of "Tax Clearance Report" Signatories	https://github.com/Hyubane25/OmniGov/issues/30	Hyubane25	enhancement, Treasury Module	High		
+(Feat) Budget Augmentation CRUD functionalities.	https://github.com/Hyubane25/OmniGov/issues/16	Hyubane25	Budget Module, Feature	Medium		
+(Improvement) Set Transaction Log Report orientation into landscape.	https://github.com/Hyubane25/OmniGov/issues/21	Hyubane25	Accounting Module, enhancement	Low		
+(Feat) Add transaction no./code every Obligation Request transaction	https://github.com/Hyubane25/OmniGov/issues/34	Hyubane25	Budget Module, Feature	High		
+(Refactor) Be able to record non-account budget appropriation	https://github.com/Hyubane25/OmniGov/issues/32	Hyubane25	Budget Module, enhancement	High		
+(Refactor) Update SAAOB and SAAAOB reports capable to cater non-account budget appropriation records.	https://github.com/Hyubane25/OmniGov/issues/33	Hyubane25	Budget Module, enhancement	High		
+(Feat) Add amount field for cash tickets and total amount from total quantity of cash tickets indication	https://github.com/Hyubane25/OmniGov/issues/25	Hyubane25	Feature, Treasury Module	High		
+(Imp) Add transaction no./code every Journal Entry Voucher transaction	https://github.com/Hyubane25/OmniGov/issues/23	Hyubane25	Accounting Module, enhancement	High		
+(Bug) Fix receipt issuance add/edit form receipt option showing id instead of receipt name	https://github.com/Hyubane25/OmniGov/issues/22	Hyubane25	bug, Treasury Module	High	Nov 12, 2025	Nov 14, 2025
+(Imp) Journal Entry Voucher (JEV) Change label of "Date Entry" into "Transaction Date".	https://github.com/Hyubane25/OmniGov/issues/13					
+(Bug) No Journal Entry Voucher records shown on in lists even there is a record.	https://github.com/Hyubane25/OmniGov/issues/20	Hyubane25	Accounting Module, bug	High		
+(Bug) Fix Journal Entry Voucher (JEV) counter won't function properly.	https://github.com/Hyubane25/OmniGov/issues/19	Hyubane25	Accounting Module, bug	High		
+(Bug) Fix error on creating a property delinquency notice	https://github.com/Hyubane25/OmniGov/issues/28	Hyubane25	bug, Treasury Module	High	Oct 9, 2025	Oct 9, 2025
+(Bug) Fix Warrant of Levy record entry error	https://github.com/Hyubane25/OmniGov/issues/31	Hyubane25	bug, Treasury Module	High	Oct 9, 2025	Oct 10, 2025
+(Bug) Fix error on cash ticket inventory save	https://github.com/Hyubane25/OmniGov/issues/24	Hyubane25	bug, Treasury Module	High	Oct 9, 2025	Oct 10, 2025
+(Fix) Fees and Charges error on saving	https://github.com/Hyubane25/OmniGov/issues/18	Hyubane25	bug, Treasury Module	High	Oct 9, 2025	Oct 10, 2025
+Implement Automatic Server Discovery Based on User IP Lineup	https://github.com/Hyubane25/OmniGov/issues/3	Hyubane25	enhancement			
+Accounting Module	https://github.com/Hyubane25/OmniGov/issues/1	Hyubane25	bug			
+Dashboard	https://github.com/Hyubane25/OmniGov/issues/5	zionsploit	enhancement	Medium	Apr 29, 2025	May 5, 2025
+Reports	https://github.com/Hyubane25/OmniGov/issues/6	zionsploit	enhancement			
+Sotware architecture migration	https://github.com/Hyubane25/OmniGov/pull/39	Hyubane25	Accounting Module, Budget Module, documentation, enhancement, Feature, Treasury Module			
+Budget Module Guidelines		Hyubane25, zionsploit				

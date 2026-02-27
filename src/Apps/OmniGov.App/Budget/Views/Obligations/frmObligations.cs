@@ -31,13 +31,13 @@ namespace OmniGov.App.Budget.Views.Obligations
         private string GetFltrStatus()
         {
             if (radApproved.Checked)
-                return "Approved";
+                return "approved";
             else if (radDisapproved.Checked)
-                return "Disapproved";
+                return "disapproved";
             else if (radCancelled.Checked)
-                return "Cancelled";
+                return "cancelled";
             else
-                return "Pending";
+                return "pending";
         }
 
         private void EnableDisableButtons(DataGridView dgv, ToolStripButton btnCrt, ToolStripButton btnEdit, ToolStripButton btnDelete, ToolStripButton btnView, ToolStripButton btnReview)
@@ -144,15 +144,6 @@ namespace OmniGov.App.Budget.Views.Obligations
             return BudgetFactory.ObligationRequestRepository().Delete(models);
         }
 
-        private string GetUserFullName(string userId)
-        {
-            if (string.IsNullOrEmpty(userId))
-                return string.Empty;
-
-            var userData = Helper.GetUserDataById(Convert.ToInt32(userId));
-            return userData?["user_full_name"] ?? string.Empty;
-        }
-
         private void LoadOblgtnRecords()
         {
             if (!backgroundWorker1.IsBusy)
@@ -177,14 +168,6 @@ namespace OmniGov.App.Budget.Views.Obligations
             }
         }
 
-        private bool SaveOblgtnRqst((ObligationRequestModel oblgtnRqstModel, List<ObligationAccountModel> oblgtnAccModels) models)
-        {
-            if (models.oblgtnRqstModel.Id == 0)
-                return BudgetFactory.ObligationRequestRepository().Insert(models.oblgtnRqstModel, models.oblgtnAccModels);
-            else
-                return BudgetFactory.ObligationRequestRepository().Update(models.oblgtnRqstModel, models.oblgtnAccModels);
-        }
-
         private void tlStrpBtnCreate_Click(object sender, EventArgs e)
         {
             try
@@ -200,7 +183,7 @@ namespace OmniGov.App.Budget.Views.Obligations
             {
                 ToggleCrud(true);
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            catch (Exception ex) { Helper.MessageBoxError($"{ex.Message}\n{ex.StackTrace}"); }
         }
 
         private void tlStrpBtnView_Click(object sender, EventArgs e)
@@ -269,6 +252,20 @@ namespace OmniGov.App.Budget.Views.Obligations
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
+        private bool SaveOblgtnRqst((ObligationRequestModel oblgtnRqstModel, List<ObligationAccountModel> oblgtnAccModels) models)
+        {
+            if (!ucObligationsCrud.ValidateChildren())
+            {
+                Helper.MessageBoxError(ucObligationsCrud.GetFormErrors());
+                return false;
+            }
+
+            if (models.oblgtnRqstModel.Id == 0)
+                return BudgetFactory.ObligationRequestRepository().Insert(models.oblgtnRqstModel, models.oblgtnAccModels);
+            else
+                return BudgetFactory.ObligationRequestRepository().Update(models.oblgtnRqstModel, models.oblgtnAccModels); 
+        }
+
         private void btnCrudSubmit_Click(object sender, EventArgs e)
         {
             try
@@ -305,14 +302,6 @@ namespace OmniGov.App.Budget.Views.Obligations
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private void dtPckrFrom_ValueChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                dtPckrTo.MinDate = dtPckrFrom.Value;
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
 
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
@@ -404,6 +393,15 @@ namespace OmniGov.App.Budget.Views.Obligations
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
+        private void dtPckrFrom_ValueChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                dtPckrTo.MinDate = dtPckrFrom.Value;
+                LoadOblgtnRecords();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
         private void dtPckrTo_ValueChanged(object sender, EventArgs e)
         {
             try
