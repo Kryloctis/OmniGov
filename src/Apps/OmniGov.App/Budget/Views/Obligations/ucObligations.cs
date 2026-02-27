@@ -37,6 +37,7 @@ namespace OmniGov.App.Budget.Views.Obligations
 
             InitializeEntriesTbl();
             dgvEntries.AutoResizeRows(DataGridViewAutoSizeRowsMode.AllCells);
+
             ToggleEntriesButtons(dgvEntries, tlStrpBtnEntrRemove);
         }
 
@@ -56,7 +57,6 @@ namespace OmniGov.App.Budget.Views.Obligations
             {
                 ResetForm();
             }
-            UpdateTransactionNo();
         }
 
         internal void LoadViewMode(int oblgtnRqstId)
@@ -189,7 +189,7 @@ namespace OmniGov.App.Budget.Views.Obligations
 
             LoadFPP();
             LoadFunds();
-            
+
             if (cmbxFPP.Items.Count > 0) cmbxFPP.SelectedIndex = 0;
 
             mskTxtOblgtnNo.Text = string.Empty;
@@ -205,21 +205,9 @@ namespace OmniGov.App.Budget.Views.Obligations
 
             //Reset Status
             SetStatus(ObligationRequestModel.Status.draft);
-            UpdateTransactionNo();
         }
 
-        private void UpdateTransactionNo()
-        {
-            if (isEdit)
-            {
-                label6.Visible = true;
-            }
-            else
-            {
-                mskTxtTransNo.Clear();
-                label6.Visible = false;
-            }
-        }
+
 
         private void SetStatus(ObligationRequestModel.Status status)
         {
@@ -292,8 +280,6 @@ namespace OmniGov.App.Budget.Views.Obligations
                 if (item.HasChildren)
                     SetControlsReadOnly(isReadOnly, item, exemptCtrls);
             }
-
-            dgvEntries.SelectionChanged -= dgvEntries_SelectionChanged;
         }
 
         private void LoadFPP()
@@ -864,7 +850,6 @@ namespace OmniGov.App.Budget.Views.Obligations
 
         private void dtDateRequest_ValueChanged(object sender, EventArgs e)
         {
-            UpdateTransactionNo();
         }
     }
 }
