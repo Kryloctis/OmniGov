@@ -387,23 +387,15 @@ namespace OmniGov.App.Accounting.Views.JournalEntryVoucher
 
         private void dgAccounts_SelectionChanged(object sender, EventArgs e)
         {
-            try
-            {
-                ToggleAccEntriesButtons(dgAccounts, tlStrpBtnRemoveAcc);
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            ToggleAccEntriesButtons(dgAccounts, tlStrpBtnRemoveAcc);
         }
 
         private void txtPayee_Validating(object sender, CancelEventArgs e)
         {
-            try
+            if (txtPayee.Enabled)
             {
-                if (txtPayee.Enabled)
-                {
-                    e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtPayee, "Payee");
-                }
+                e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtPayee, "Payee");
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void txtPayee_Validated(object sender, EventArgs e)
@@ -413,45 +405,37 @@ namespace OmniGov.App.Accounting.Views.JournalEntryVoucher
 
         private void tlStrpBtnAddAcc_Click(object sender, EventArgs e)
         {
-            try
+            string jrnlType = cmbxJournal.Text;
+            var validateRow = RowsValidated(dgAccounts, jrnlType);
+
+            if (!validateRow.isValidated)
             {
-                string jrnlType = cmbxJournal.Text;
-                var validateRow = RowsValidated(dgAccounts, jrnlType);
-
-                if (!validateRow.isValidated)
-                {
-                    var errMssg = Factory.CreateErrors(validateRow.errors).GenerateErrorMessage();
-                    Helper.MessageBoxError(errMssg);
-                    return;
-                }
-
-                int r = dgAccounts.Rows.Add();
-                dgAccounts.CurrentCell = dgAccounts.Rows[r].Cells["is_debit"];
-                dgAccounts.BeginEdit(true);
+                var errMssg = Factory.CreateErrors(validateRow.errors).GenerateErrorMessage();
+                Helper.MessageBoxError(errMssg);
+                return;
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+
+            int r = dgAccounts.Rows.Add();
+            dgAccounts.CurrentCell = dgAccounts.Rows[r].Cells["is_debit"];
+            dgAccounts.BeginEdit(true);
         }
 
         private void tlStrpBtnRemoveAcc_Click(object sender, EventArgs e)
         {
-            try
+            int count = dgAccounts.SelectedRows.Count;
+            if (count == 0) return;
+
+            string msg = $"Are you sure you want to remove {(count == 1 ? "the accounting entry" : $"{count} accounting entries"})?";
+
+            if (MessageBox.Show(msg, "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
             {
-                int count = dgAccounts.SelectedRows.Count;
-                if (count == 0) return;
-
-                string msg = $"Are you sure you want to remove {(count == 1 ? "the accounting entry" : $"{count} accounting entries")}?";
-
-                if (MessageBox.Show(msg, "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                foreach (DataGridViewRow dgvRow in dgAccounts.SelectedRows)
                 {
-                    foreach (DataGridViewRow dgvRow in dgAccounts.SelectedRows)
-                    {
-                        dgAccounts.Rows.RemoveAt(dgvRow.Index);
-                    }
-
-                    SumDebitCredit();
+                    dgAccounts.Rows.RemoveAt(dgvRow.Index);
                 }
+
+                SumDebitCredit();
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private string GenTransctnNo()
@@ -600,48 +584,28 @@ namespace OmniGov.App.Accounting.Views.JournalEntryVoucher
 
         private void cmbxJournal_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            try
-            {
-                var cmbxIndex = cmbxJournal.SelectedIndex;
-                ToggleJournalFields(cmbxJournal.GetItemText(cmbxJournal.Items[cmbxIndex]));
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            var cmbxIndex = cmbxJournal.SelectedIndex;
+            ToggleJournalFields(cmbxJournal.GetItemText(cmbxJournal.Items[cmbxIndex]));
         }
 
         private void cmbxJournal_Validating(object sender, CancelEventArgs e)
         {
-            try
-            {
-                e.Cancel = Helper.ShowErrorComboBoxEmpty(errorProvider1, cmbxJournal, "Journal");
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            e.Cancel = Helper.ShowErrorComboBoxEmpty(errorProvider1, cmbxJournal, "Journal");
         }
 
         private void cmbxJournal_Validated(object sender, EventArgs e)
         {
-            try
-            {
-                Helper.ClearErrorComboBox(errorProvider1, cmbxJournal);
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            Helper.ClearErrorComboBox(errorProvider1, cmbxJournal);
         }
 
         private void cmbxFunds_Validating(object sender, CancelEventArgs e)
         {
-            try
-            {
-                e.Cancel = Helper.ShowErrorComboBoxEmpty(errorProvider1, cmbxFunds, "Fund");
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            e.Cancel = Helper.ShowErrorComboBoxEmpty(errorProvider1, cmbxFunds, "Fund");
         }
 
         private void cmbxFunds_Validated(object sender, EventArgs e)
         {
-            try
-            {
-                Helper.ClearErrorComboBox(errorProvider1, cmbxFunds);
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            Helper.ClearErrorComboBox(errorProvider1, cmbxFunds);
         }
 
         private void InitializeJevAccTbl(string jrnlName)
@@ -803,11 +767,7 @@ namespace OmniGov.App.Accounting.Views.JournalEntryVoucher
 
         private void dgAccounts_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
-            try
-            {
-                SumDebitCredit();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            SumDebitCredit();
         }
 
         private void PopulateSubsidiaryCell(int rowIndex)
@@ -846,24 +806,19 @@ namespace OmniGov.App.Accounting.Views.JournalEntryVoucher
         {
             var errMssg = string.Empty;
             if (dgAccounts.Rows.Count <= 0)
-                return (Fail("No account entries found."));
+                return (false, "No account entries found.");
 
             decimal.TryParse(tlStrpLblDebit.Text, out decimal debit);
             decimal.TryParse(tlStrpLblCredit.Text, out decimal credit);
 
             var rowVal = RowsValidated(dgAccounts, cmbxJournal.Text);
             if (!rowVal.isValidated)
-                return Fail("Invalid accounting entry");
+                return (false, "Invalid accounting entry");
 
             if (debit != credit)
-                return Fail("Debit and credit totals are not balanced.");
+                return (false, "Debit and credit totals are not balanced.");
 
             return (true, string.Empty);
-
-            (bool isValid, string errMssg) Fail(string msg)
-            {
-                return (false, msg);
-            }
         }
 
         private (bool isValidated, string[] errors) RowsValidated(DataGridView dgv, string journalType)
@@ -938,29 +893,21 @@ namespace OmniGov.App.Accounting.Views.JournalEntryVoucher
 
         private void dgAccounts_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
         {
-            try
-            {
-                var g = (DataGridView)sender;
-                var cell = g.Rows[e.RowIndex].Cells[e.ColumnIndex];
-                string jrnlName = cmbxJournal.Text;
+            var g = (DataGridView)sender;
+            var cell = g.Rows[e.RowIndex].Cells[e.ColumnIndex];
+            string jrnlName = cmbxJournal.Text;
 
-                string err = ValidateCell(cell, e.FormattedValue, jrnlName);
-                cell.ErrorText = err; // empty = no error
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            string err = ValidateCell(cell, e.FormattedValue, jrnlName);
+            cell.ErrorText = err; // empty = no error
         }
 
         private void dgAccounts_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
         {
-            try
+            if (dgAccounts.CurrentCell?.OwningColumn?.Name == "amount" && e.Control is TextBox tb)
             {
-                if (dgAccounts.CurrentCell?.OwningColumn?.Name == "amount" && e.Control is TextBox tb)
-                {
-                    tb.KeyPress -= Tb_KeyPress;
-                    tb.KeyPress += Tb_KeyPress;
-                }
+                tb.KeyPress -= Tb_KeyPress;
+                tb.KeyPress += Tb_KeyPress;
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void Tb_KeyPress(object sender, KeyPressEventArgs e)
@@ -978,42 +925,26 @@ namespace OmniGov.App.Accounting.Views.JournalEntryVoucher
 
         private void dgAccounts_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
-            try
-            {
-                if (e.RowIndex < 0 || e.ColumnIndex < 0) return;
+            if (e.RowIndex < 0 || e.ColumnIndex < 0) return;
 
-                string col = dgAccounts.Columns[e.ColumnIndex].Name;
+            string col = dgAccounts.Columns[e.ColumnIndex].Name;
 
-                if (col == "gen_ldgr_acc")
-                    PopulateSubsidiaryCell(e.RowIndex);
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            if (col == "gen_ldgr_acc")
+                PopulateSubsidiaryCell(e.RowIndex);
         }
 
         private void dgAccounts_CurrentCellDirtyStateChanged(object sender, EventArgs e)
         {
-            try
-            {
-                if (dgAccounts.IsCurrentCellDirty)
-                    dgAccounts.CommitEdit(DataGridViewDataErrorContexts.Commit);
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            if (dgAccounts.IsCurrentCellDirty)
+                dgAccounts.CommitEdit(DataGridViewDataErrorContexts.Commit);
         }
 
         private void cmbxJournal_SelectedIndexChanged(object sender, EventArgs e)
         {
-            try
-            {
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void lblStatus_TextChanged(object sender, EventArgs e)
         {
-            try
-            {
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         /////Auditing Section
