@@ -52,11 +52,7 @@ namespace OmniGov.App.Views.Manage.AccountableForm
 
         private void frmEditFaceValue_Load(object sender, EventArgs e)
         {
-            try
-            {
-                uc.LoadSelectedData(faceValueId);
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            uc.LoadSelectedData(faceValueId);
         }
     }
 }

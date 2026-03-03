@@ -61,14 +61,10 @@ namespace OmniGov.App.Views.Dashboard.MyAccount
 
         internal void OnLoad(frmMain frmMain, frmSignIn frmSignIn)
         {
-            try
-            {
-                LoadCurrentUserAccount();
-                LoadListOfPermissions();
-                this.frmMain = frmMain;
-                this.frmSignIn = frmSignIn;
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            LoadCurrentUserAccount();
+            LoadListOfPermissions();
+            this.frmMain = frmMain;
+            this.frmSignIn = frmSignIn;
         }
 
         private void LoadListOfPermissions()
@@ -121,16 +117,12 @@ namespace OmniGov.App.Views.Dashboard.MyAccount
 
         private void btnUpdateProfile_Click(object sender, EventArgs e)
         {
-            try
+            if (UpdateProfile())
             {
-                if (UpdateProfile())
-                {
-                    Helper.MessageBoxSuccess("Account Profile Updated.");
-                    ResetForm(btnProfileCancel);
-                    LoadCurrentUserAccount();
-                }
+                Helper.MessageBoxSuccess("Account Profile Updated.");
+                ResetForm(btnProfileCancel);
+                LoadCurrentUserAccount();
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void AccountProfileValidation(bool validate)
@@ -179,17 +171,13 @@ namespace OmniGov.App.Views.Dashboard.MyAccount
 
         private void btnUpdateAccountSec_Click(object sender, EventArgs e)
         {
-            try
+            if (UpdateAccountSecurity())
             {
-                if (UpdateAccountSecurity())
-                {
-                    Helper.MessageBoxSuccess("Account Security Updated. Please log in with your new password to continue.");
-                    ResetForm(btnSecurityCancel);
-                    frmMain.Close();
-                    frmSignIn.Show();
-                }
+                Helper.MessageBoxSuccess("Account Security Updated. Please log in with your new password to continue.");
+                ResetForm(btnSecurityCancel);
+                frmMain.Close();
+                frmSignIn.Show();
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private bool UpdateAccountSecurity()
@@ -245,11 +233,7 @@ namespace OmniGov.App.Views.Dashboard.MyAccount
 
         private void txtOldPassword_Validating(object sender, CancelEventArgs e)
         {
-            try
-            {
-                e.Cancel = !CurrentPasswordValidation(txtCurrentPassword);
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            e.Cancel = !CurrentPasswordValidation(txtCurrentPassword);
         }
 
         private bool CurrentPasswordValidation(TextBox txtBoxCurrentPassowrd)
@@ -296,11 +280,7 @@ namespace OmniGov.App.Views.Dashboard.MyAccount
 
         private void txtConfirmPassword_Validating(object sender, CancelEventArgs e)
         {
-            try
-            {
-                e.Cancel = !PasswordMatch();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            e.Cancel = !PasswordMatch();
         }
 
         private void txtConfirmPassword_Validated(object sender, EventArgs e)
@@ -310,11 +290,7 @@ namespace OmniGov.App.Views.Dashboard.MyAccount
 
         private void txtProfileCurrentPassword_Validating(object sender, CancelEventArgs e)
         {
-            try
-            {
-                e.Cancel = !CurrentPasswordValidation(txtProfileCurrentPassword);
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            e.Cancel = !CurrentPasswordValidation(txtProfileCurrentPassword);
         }
 
         private void txtProfileCurrentPassword_Validated(object sender, EventArgs e)
@@ -350,11 +326,7 @@ namespace OmniGov.App.Views.Dashboard.MyAccount
 
         private void btnEditAcc_Click(object sender, EventArgs e)
         {
-            try
-            {
-                TogglePanels();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            TogglePanels();
         }
     }
 }

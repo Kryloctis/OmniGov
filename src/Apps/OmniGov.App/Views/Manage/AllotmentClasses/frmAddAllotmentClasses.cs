@@ -29,11 +29,7 @@ namespace OmniGov.App.Views.Manage.AllotmentClasses
 
         private void frmAllotmentClassesAdd_Load(object sender, EventArgs e)
         {
-            try
-            {
-                uc.OnLoad(false, null);
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            uc.OnLoad(false, null);
         }
 
         private void btnSave_Click(object sender, EventArgs e)

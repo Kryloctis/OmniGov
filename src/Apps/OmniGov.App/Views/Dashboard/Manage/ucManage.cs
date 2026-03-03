@@ -47,146 +47,82 @@ namespace OmniGov.App.Views.Dashboard.Manage
 
         private void btnUsers_Click(object sender, EventArgs e)
         {
-            try
-            {
-                _ = new frmUsers().ShowDialog();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            _ = new frmUsers().ShowDialog();
         }
 
         private void btnRoles_Click(object sender, EventArgs e)
         {
-            try
-            {
-                _ = new frmRoles().ShowDialog();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            _ = new frmRoles().ShowDialog();
         }
 
         private void btnFunds_Click(object sender, EventArgs e)
         {
-            try
-            {
-                _ = new frmFunds().ShowDialog();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            _ = new frmFunds().ShowDialog();
         }
 
         private void btnAccForms_Click(object sender, EventArgs e)
         {
-            try
-            {
-                _ = new frmAccountableForm().ShowDialog();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            _ = new frmAccountableForm().ShowDialog();
         }
 
         private void btnAllotmentClasses_Click(object sender, EventArgs e)
         {
-            try
-            {
-                _ = new frmAllotmentClasses().ShowDialog();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            _ = new frmAllotmentClasses().ShowDialog();
         }
 
         private void btnFpp_Click(object sender, EventArgs e)
         {
-            try
-            {
-                _ = new frmFunctionProgramProject().ShowDialog();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            _ = new frmFunctionProgramProject().ShowDialog();
         }
 
         private void btnBarangays_Click(object sender, EventArgs e)
         {
-            try
-            {
-                _ = new frmBarangay().ShowDialog();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            _ = new frmBarangay().ShowDialog();
         }
 
         private void btnDocSignatories_Click(object sender, EventArgs e)
         {
-            try
-            {
-                _ = new frmSignatories().ShowDialog();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            _ = new frmSignatories().ShowDialog();
         }
 
         private void btnRegistry_Click(object sender, EventArgs e)
         {
-            try
-            {
-                _ = new frmRegistry().ShowDialog();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            _ = new frmRegistry().ShowDialog();
         }
 
         private void btnBanks_Click(object sender, EventArgs e)
         {
-            try
-            {
-                _ = new frmBanks().ShowDialog();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            _ = new frmBanks().ShowDialog();
         }
 
         private void btnBankAccs_Click(object sender, EventArgs e)
         {
-            try
-            {
-                _ = new frmBankAccounts().ShowDialog();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            _ = new frmBankAccounts().ShowDialog();
         }
 
         private void btnTaxRate_Click(object sender, EventArgs e)
         {
-            try
-            {
-                _ = new frmRptTaxRates().ShowDialog();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            _ = new frmRptTaxRates().ShowDialog();
         }
 
         private void btnPenalty_Click(object sender, EventArgs e)
         {
-            try
-            {
-                _ = new frmRptPenalties().ShowDialog();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            _ = new frmRptPenalties().ShowDialog();
         }
 
         private void btnDiscount_Click(object sender, EventArgs e)
         {
-            try
-            {
-                _ = new frmRptDiscounts().ShowDialog();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            _ = new frmRptDiscounts().ShowDialog();
         }
 
         private void btnChrtAccs_Click(object sender, EventArgs e)
         {
-            try
-            {
-                _ = new frmChartOfAccounts().ShowDialog();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            _ = new frmChartOfAccounts().ShowDialog();
         }
 
         private void btnJrnls_Click(object sender, EventArgs e)
         {
-            try
-            {
-                _ = new frmJournals().ShowDialog();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            _ = new frmJournals().ShowDialog();
         }
     }
 }

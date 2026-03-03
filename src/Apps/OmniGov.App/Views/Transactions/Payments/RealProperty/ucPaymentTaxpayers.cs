@@ -144,20 +144,12 @@ namespace OmniGov.App.Views.Transactions.Payments.RealProperty
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            try
-            {
-                LoadTaxpayers();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            LoadTaxpayers();
         }
 
         private void CmbxRowFiter_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            try
-            {
-                LoadTaxpayers();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            LoadTaxpayers();
         }
     }
 }

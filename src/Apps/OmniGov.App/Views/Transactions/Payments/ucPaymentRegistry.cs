@@ -84,47 +84,43 @@ namespace OmniGov.App.Views.Transactions.Payments
 
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
-            try
+            if (e.Argument is not DataTable sourceDb)
+                return;
+
+            var dataTable = new DataTable();
+            dataTable.Columns.AddRange(RegistryColumns());
+
+            int progressCount = 0;
+            int totalProgressCount = sourceDb.Rows.Count;
+
+            foreach (DataRow row in sourceDb.Rows)
             {
-                if (e.Argument is not DataTable sourceDb)
-                    return;
+                var newRow = dataTable.NewRow();
+                int taxpayerId = Convert.ToInt32(row["taxpayers_id"]);
+                string taxpayerTin = row["taxpayers_tin"].ToString();
+                string taxpayerName = row["taxpayers_name"].ToString();
+                string taxpayerTypeCode = row["taxpayer_type"].ToString();
+                string street = string.IsNullOrEmpty(row["taxpayers_street"].ToString()) ? string.Empty : $"{row["taxpayers_street"]},";
+                string barangay = string.IsNullOrEmpty(row["taxpayers_barangay"].ToString()) ? string.Empty : $"{row["taxpayers_barangay"]},";
+                string municipality = string.IsNullOrEmpty(row["taxpayers_municipality"].ToString()) ? string.Empty : $"{row["taxpayers_municipality"]},";
+                string province = string.IsNullOrEmpty(row["taxpayers_province"].ToString()) ? string.Empty : $"{row["taxpayers_province"]},";
+                string taxpayerAddress = $"{street} {barangay} {municipality} {province}";
+                string taxpayerContactInfo = row["taxpayers_contact_info"].ToString();
 
-                var dataTable = new DataTable();
-                dataTable.Columns.AddRange(RegistryColumns());
+                newRow["taxpayers_id"] = taxpayerId;
+                newRow["taxpayer_type_code"] = taxpayerTypeCode;
+                newRow["taxpayers_tin"] = taxpayerTin;
+                newRow["taxpayers_name"] = taxpayerName;
+                newRow["taxpayers_address"] = taxpayerAddress;
+                newRow["taxpayers_contact_info"] = taxpayerContactInfo;
 
-                int progressCount = 0;
-                int totalProgressCount = sourceDb.Rows.Count;
+                progressCount++;
+                Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
 
-                foreach (DataRow row in sourceDb.Rows)
-                {
-                    var newRow = dataTable.NewRow();
-                    int taxpayerId = Convert.ToInt32(row["taxpayers_id"]);
-                    string taxpayerTin = row["taxpayers_tin"].ToString();
-                    string taxpayerName = row["taxpayers_name"].ToString();
-                    string taxpayerTypeCode = row["taxpayer_type"].ToString();
-                    string street = string.IsNullOrEmpty(row["taxpayers_street"].ToString()) ? string.Empty : $"{row["taxpayers_street"]},";
-                    string barangay = string.IsNullOrEmpty(row["taxpayers_barangay"].ToString()) ? string.Empty : $"{row["taxpayers_barangay"]},";
-                    string municipality = string.IsNullOrEmpty(row["taxpayers_municipality"].ToString()) ? string.Empty : $"{row["taxpayers_municipality"]},";
-                    string province = string.IsNullOrEmpty(row["taxpayers_province"].ToString()) ? string.Empty : $"{row["taxpayers_province"]},";
-                    string taxpayerAddress = $"{street} {barangay} {municipality} {province}";
-                    string taxpayerContactInfo = row["taxpayers_contact_info"].ToString();
-
-                    newRow["taxpayers_id"] = taxpayerId;
-                    newRow["taxpayer_type_code"] = taxpayerTypeCode;
-                    newRow["taxpayers_tin"] = taxpayerTin;
-                    newRow["taxpayers_name"] = taxpayerName;
-                    newRow["taxpayers_address"] = taxpayerAddress;
-                    newRow["taxpayers_contact_info"] = taxpayerContactInfo;
-
-                    progressCount++;
-                    Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
-
-                    dataTable.Rows.Add(newRow);
-                }
-
-                e.Result = dataTable;
+                dataTable.Rows.Add(newRow);
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+
+            e.Result = dataTable;
         }
 
         private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
@@ -144,21 +140,13 @@ namespace OmniGov.App.Views.Transactions.Payments
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            try
-            {
-                LoadRegistry();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            LoadRegistry();
         }
 
         private void ucRegistry_Load(object sender, EventArgs e)
         {
-            try
-            {
-                OnLoad();
-                ucTaxPayers1.chckIsActive.Enabled = false;
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            OnLoad();
+            ucTaxPayers1.chckIsActive.Enabled = false;
         }
 
         private void btnRegister_Click(object sender, EventArgs e)

@@ -42,16 +42,12 @@ namespace OmniGov.App.Views.Manage.AccountableForm
 
         private void SaveAccountableForm()
         {
-            try
+            if (SaveData())
             {
-                if (SaveData())
-                {
-                    Helper.MessageBoxSuccess("Accountable Form has been saved.");
-                    _frmAccountableForm.LoadRecords();
-                    uc.ResetForm();
-                }
+                Helper.MessageBoxSuccess("Accountable Form has been saved.");
+                _frmAccountableForm.LoadRecords();
+                uc.ResetForm();
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void frmAddAccountableForm_KeyDown(object sender, KeyEventArgs e)

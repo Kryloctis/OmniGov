@@ -112,12 +112,8 @@ namespace OmniGov.App.Views.Transactions.Payments.RealProperty
 
         private void chckBoxProperties_MouseClick(object sender, MouseEventArgs e)
         {
-            try
-            {
-                bool isChecked = chckBoxProperties.Checked;
-                Helper.CheckUncheckCheckBoxRows(dgProperties, "is_selected", isChecked);
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            bool isChecked = chckBoxProperties.Checked;
+            Helper.CheckUncheckCheckBoxRows(dgProperties, "is_selected", isChecked);
         }
 
         private void dgProperties_CurrentCellDirtyStateChanged(object sender, EventArgs e)
@@ -128,22 +124,14 @@ namespace OmniGov.App.Views.Transactions.Payments.RealProperty
 
         private void dgProperties_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
-            try
-            {
-                Helper.CheckUncheckCheckBoxHeader(dgProperties, "is_selected", chckBoxProperties);
-                LoadTaxDues(dgTaxDues);
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            Helper.CheckUncheckCheckBoxHeader(dgProperties, "is_selected", chckBoxProperties);
+            LoadTaxDues(dgTaxDues);
         }
 
         private void dgProperties_ColumnAdded(object sender, DataGridViewColumnEventArgs e)
         {
-            try
-            {
-                if (e.Column.Name != "is_selected")
-                    e.Column.ReadOnly = true;
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            if (e.Column.Name != "is_selected")
+                e.Column.ReadOnly = true;
         }
 
         private void chckBxCancelled_CheckedChanged(object sender, EventArgs e)
@@ -388,83 +376,59 @@ namespace OmniGov.App.Views.Transactions.Payments.RealProperty
 
         private void dgTaxDues_CurrentCellDirtyStateChanged(object sender, EventArgs e)
         {
-            try
-            {
-                if (dgTaxDues.CurrentCell is DataGridViewCheckBoxCell)
-                    dgTaxDues.CommitEdit(DataGridViewDataErrorContexts.Commit);
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            if (dgTaxDues.CurrentCell is DataGridViewCheckBoxCell)
+                dgTaxDues.CommitEdit(DataGridViewDataErrorContexts.Commit);
         }
 
         private void dgTaxDues_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
-            try
+            if (dgTaxDues.Rows.Count < 1)
+                return;
+
+            int totalRowCount = dgTaxDues.Rows.Count;
+            int unpaidRowCount = 0;
+            int checkedRowCount = 0;
+
+            foreach (DataGridViewRow row in dgTaxDues.Rows)
             {
-                if (dgTaxDues.Rows.Count < 1)
-                    return;
+                if (row.Cells["status"].Value.ToString() == "Unpaid")
+                    unpaidRowCount += 1;
 
-                int totalRowCount = dgTaxDues.Rows.Count;
-                int unpaidRowCount = 0;
-                int checkedRowCount = 0;
-
-                foreach (DataGridViewRow row in dgTaxDues.Rows)
-                {
-                    if (row.Cells["status"].Value.ToString() == "Unpaid")
-                        unpaidRowCount += 1;
-
-                    if (Convert.ToBoolean(row.Cells["is_selected"].Value) == true)
-                        checkedRowCount += 1;
-                }
-
-                if (unpaidRowCount == checkedRowCount)
-                    chckBxTaxDues.Checked = true;
-                else
-                    chckBxTaxDues.Checked = false;
-
-                txtTotalDue.Text = GetTotalTaxDue().ToString("N2");
+                if (Convert.ToBoolean(row.Cells["is_selected"].Value) == true)
+                    checkedRowCount += 1;
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+
+            if (unpaidRowCount == checkedRowCount)
+                chckBxTaxDues.Checked = true;
+            else
+                chckBxTaxDues.Checked = false;
+
+            txtTotalDue.Text = GetTotalTaxDue().ToString("N2");
         }
 
         private void chckBxTaxDues_MouseClick(object sender, MouseEventArgs e)
         {
-            try
+            bool isChecked = chckBxTaxDues.Checked;
+            foreach (DataGridViewRow row in dgTaxDues.Rows)
             {
-                bool isChecked = chckBxTaxDues.Checked;
-                foreach (DataGridViewRow row in dgTaxDues.Rows)
-                {
-                    if (row.Cells["status"].Value.ToString() == "Unpaid")
-                        row.Cells["is_selected"].Value = isChecked;
-                }
+                if (row.Cells["status"].Value.ToString() == "Unpaid")
+                    row.Cells["is_selected"].Value = isChecked;
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void dgTaxDues_Validating(object sender, CancelEventArgs e)
         {
-            try
-            {
-                e.Cancel = !TaxDuesValidated();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            e.Cancel = !TaxDuesValidated();
         }
 
         private void chckShowPaidUnpaid_CheckedChanged(object sender, EventArgs e)
         {
-            try
-            {
-                LoadTaxDues(dgTaxDues);
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            LoadTaxDues(dgTaxDues);
         }
 
         private void nudCalendarYear_ValueChanged(object sender, EventArgs e)
         {
-            try
-            {
-                LoadTaxDues(dgTaxDues);
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            LoadTaxDues(dgTaxDues);
         }
     }
 }

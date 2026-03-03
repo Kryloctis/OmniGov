@@ -28,36 +28,24 @@ namespace OmniGov.App.Views.Manage.AllotmentClasses
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            try
-            {
-                _ = new frmAddAllotmentClasses(this).ShowDialog();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            _ = new frmAddAllotmentClasses(this).ShowDialog();
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            try
+            if (DeleteData())
             {
-                if (DeleteData())
-                {
-                    Helper.MessageBoxError($"{dgAllotmentClasses.Rows.Count} record/s has been deleted.");
-                    LoadRecords();
-                }
+                Helper.MessageBoxError($"{dgAllotmentClasses.Rows.Count} record/s has been deleted.");
+                LoadRecords();
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            try
-            {
-                int rowIndex = dgAllotmentClasses.CurrentRow.Index;
-                int allotmentId = Convert.ToInt32(dgAllotmentClasses.Rows[rowIndex].Cells["id"].Value);
+            int rowIndex = dgAllotmentClasses.CurrentRow.Index;
+            int allotmentId = Convert.ToInt32(dgAllotmentClasses.Rows[rowIndex].Cells["id"].Value);
 
-                _ = new frmEditAllotmentClasses(this, allotmentId).ShowDialog();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            _ = new frmEditAllotmentClasses(this, allotmentId).ShowDialog();
         }
 
         private bool DeleteData()
@@ -90,66 +78,46 @@ namespace OmniGov.App.Views.Manage.AllotmentClasses
 
         private void frmAllotmentClasses_Load(object sender, EventArgs e)
         {
-            try
-            {
-                HelperLoadRecords.ComboboxRowLimitFilter(cmbxRowLimit);
-                LoadRecords();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            HelperLoadRecords.ComboboxRowLimitFilter(cmbxRowLimit);
+            LoadRecords();
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            try
-            {
-                LoadRecords();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            LoadRecords();
         }
 
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
-            try
-            {
-                var parameters = ((int rowLimit, string searchKey))e.Argument;
+            var parameters = ((int rowLimit, string searchKey))e.Argument;
 
-                var dtAllotmentClasses = Factory.AllotmentClassesRepository().GetRecordsBySearch(parameters.rowLimit, parameters.searchKey.Trim());
-                int totalProgressCount = dtAllotmentClasses.Rows.Count;
-                int progressCount = 0;
+            var dtAllotmentClasses = Factory.AllotmentClassesRepository().GetRecordsBySearch(parameters.rowLimit, parameters.searchKey.Trim());
+            int totalProgressCount = dtAllotmentClasses.Rows.Count;
+            int progressCount = 0;
 
-                dtAllotmentClasses.Rows.Cast<DataRow>().ToList().ForEach(row => { progressCount++; Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount); });
+            dtAllotmentClasses.Rows.Cast<DataRow>().ToList().ForEach(row => { progressCount++; Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount); });
 
-                e.Result = dtAllotmentClasses;
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            e.Result = dtAllotmentClasses;
         }
 
         private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            try
-            {
-                progressBar1.Value = e.ProgressPercentage;
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            progressBar1.Value = e.ProgressPercentage;
         }
 
         private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            try
+            if (e.Result is not DataTable dataTable)
+                return;
+
+            if (dataTable.Rows.Count < 1)
             {
-                if (e.Result is not DataTable dataTable)
-                    return;
-
-                if (dataTable.Rows.Count < 1)
-                {
-                    progressBar1.Value = 100;
-                }
-
-                HelperLoadRecords.AllotmentClassesDatagridView(dataTable, dgAllotmentClasses);
-                dgAllotmentClasses.CurrentCell = dgAllotmentClasses.FirstDisplayedCell;
-                lblRecordCount.Text = dgAllotmentClasses.Rows.Count.ToString();
+                progressBar1.Value = 100;
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+
+            HelperLoadRecords.AllotmentClassesDatagridView(dataTable, dgAllotmentClasses);
+            dgAllotmentClasses.CurrentCell = dgAllotmentClasses.FirstDisplayedCell;
+            lblRecordCount.Text = dgAllotmentClasses.Rows.Count.ToString();
         }
     }
 }

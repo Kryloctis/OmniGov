@@ -159,15 +159,11 @@ namespace OmniGov.App.Views.Transactions.ReceiptsIssued
 
         private void ucReceiptsIssued_Load(object sender, EventArgs e)
         {
-            try
+            if (!DesignMode)
             {
-                if (!DesignMode)
-                {
-                    LoadCollectors();
-                    LoadReceipts();
-                }
+                LoadCollectors();
+                LoadReceipts();
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void ComputeReceiptIssueQuantity()
@@ -225,25 +221,21 @@ namespace OmniGov.App.Views.Transactions.ReceiptsIssued
 
         private bool ReceiptNumberInRange(int receiptNumber)
         {
-            try
-            {
-                int receiptId = Convert.ToInt32(cmbReceipt.SelectedValue);
-                bool isReceiptNumberExist;
-                bool isReceiptNumberInRange;
+            int receiptId = Convert.ToInt32(cmbReceipt.SelectedValue);
+            bool isReceiptNumberExist;
+            bool isReceiptNumberInRange;
 
-                isReceiptNumberExist = TreasuryFactory.ReceiptsRepository().ReceiptNumberExist(receiptId, receiptNumber);
+            isReceiptNumberExist = TreasuryFactory.ReceiptsRepository().ReceiptNumberExist(receiptId, receiptNumber);
 
-                if (isEdit)
-                    isReceiptNumberInRange = TreasuryFactory.ReceiptsIssuedRepository().ReceiptNumberInRange(receiptId, receiptNumber, receiptIssuedId);
-                else
-                    isReceiptNumberInRange = TreasuryFactory.ReceiptsIssuedRepository().ReceiptNumberInRange(receiptId, receiptNumber);
+            if (isEdit)
+                isReceiptNumberInRange = TreasuryFactory.ReceiptsIssuedRepository().ReceiptNumberInRange(receiptId, receiptNumber, receiptIssuedId);
+            else
+                isReceiptNumberInRange = TreasuryFactory.ReceiptsIssuedRepository().ReceiptNumberInRange(receiptId, receiptNumber);
 
-                if (isReceiptNumberExist && isReceiptNumberInRange)
-                    return true;
-                else
-                    return false;
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); return false; }
+            if (isReceiptNumberExist && isReceiptNumberInRange)
+                return true;
+            else
+                return false;
         }
 
         private bool ReceiptNumberExist(int receiptNumber)
@@ -345,14 +337,7 @@ namespace OmniGov.App.Views.Transactions.ReceiptsIssued
 
         private void cmbReceipt_SelectedValueChanged(object sender, EventArgs e)
         {
-            try
-            {
-                ControlsConfiguration();
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
+            ControlsConfiguration();
         }
 
         private void txtReceiptIssuedFrom_KeyPress(object sender, KeyPressEventArgs e)

@@ -34,19 +34,12 @@ namespace OmniGov.App.Views.Transactions.ReleasedAndUnReleasedChecks
 
         internal void LoadBanks()
         {
-            try
-            {
-                var bankRepository = TreasuryFactory.BanksRepository();
-                var dtBank = bankRepository.GetRecords();
-                cmbxBank.DataSource = dtBank;
-                cmbxBank.ValueMember = "id";
-                cmbxBank.DisplayMember = "bank_name";
-                LoadBankAccounts();
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
+            var bankRepository = TreasuryFactory.BanksRepository();
+            var dtBank = bankRepository.GetRecords();
+            cmbxBank.DataSource = dtBank;
+            cmbxBank.ValueMember = "id";
+            cmbxBank.DisplayMember = "bank_name";
+            LoadBankAccounts();
         }
 
         private void LoadBankAccounts()
@@ -166,23 +159,18 @@ namespace OmniGov.App.Views.Transactions.ReleasedAndUnReleasedChecks
 
         private bool ReleasedCheque()
         {
-            try
+            int selectedrowindex = dgReleasedAndUnreleaseCheques.SelectedCells[0].RowIndex;
+            int RCIID = Convert.ToInt32(dgReleasedAndUnreleaseCheques.Rows[selectedrowindex].Cells["rci_id"].Value);
+            int chequeID = Convert.ToInt32(dgReleasedAndUnreleaseCheques.Rows[selectedrowindex].Cells["cheques_id"].Value);
+
+            var releasedChequesModel = new ReleasedChequesModel()
             {
-                int selectedrowindex = dgReleasedAndUnreleaseCheques.SelectedCells[0].RowIndex;
-                int RCIID = Convert.ToInt32(dgReleasedAndUnreleaseCheques.Rows[selectedrowindex].Cells["rci_id"].Value);
-                int chequeID = Convert.ToInt32(dgReleasedAndUnreleaseCheques.Rows[selectedrowindex].Cells["cheques_id"].Value);
+                RCIID = RCIID,
+                DateReleased = DateTime.Now,
+            };
 
-                var releasedChequesModel = new ReleasedChequesModel()
-                {
-                    RCIID = RCIID,
-                    DateReleased = DateTime.Now,
-                };
-
-                var releasedChequesRepository = TreasuryFactory.ReleasedChequesRepository();
-                return releasedChequesRepository.Insert(releasedChequesModel);
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-            return false;
+            var releasedChequesRepository = TreasuryFactory.ReleasedChequesRepository();
+            return releasedChequesRepository.Insert(releasedChequesModel);
         }
 
         private void cmbxBank_SelectedValueChanged(object sender, EventArgs e)
@@ -224,30 +212,18 @@ namespace OmniGov.App.Views.Transactions.ReleasedAndUnReleasedChecks
 
         private void btnToggleFilter_Click(object sender, EventArgs e)
         {
-            try
-            {
-                TogglePreviewPermissions();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            TogglePreviewPermissions();
         }
 
         private void btnApplyFilter_Click(object sender, EventArgs e)
         {
-            try
-            {
-                LoadChecks();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            LoadChecks();
         }
 
         private void dgReleasedAndUnreleaseCheques_SelectionChanged(object sender, EventArgs e)
         {
-            try
-            {
-                int selectedRowCount = dgReleasedAndUnreleaseCheques.SelectedRows.Count;
-                btnAdd.Text = $"Release({selectedRowCount})";
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            int selectedRowCount = dgReleasedAndUnreleaseCheques.SelectedRows.Count;
+            btnAdd.Text = $"Release({selectedRowCount})";
         }
     }
 }

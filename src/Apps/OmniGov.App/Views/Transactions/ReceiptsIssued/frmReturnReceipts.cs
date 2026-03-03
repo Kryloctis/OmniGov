@@ -34,16 +34,12 @@ namespace OmniGov.App.Views.Transactions.ReceiptsIssued
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            try
+            if (SaveData())
             {
-                if (SaveData())
-                {
-                    Helper.MessageBoxSuccess("Receipt successfully returned.");
-                    frmReceiptsIssued.LoadRecords();
-                    Close();
-                }
+                Helper.MessageBoxSuccess("Receipt successfully returned.");
+                frmReceiptsIssued.LoadRecords();
+                Close();
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }

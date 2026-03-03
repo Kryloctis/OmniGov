@@ -140,37 +140,21 @@ namespace OmniGov.App.Views.Manage.ChartOfAccounts
         {
             int selectedRowsCount = dgAccountGroup.SelectedRows.Count;
 
-            try
+            if (selectedRowsCount > 0)
             {
-                if (selectedRowsCount > 0)
+                if (Helper.MessageBoxConfirmDelete(selectedRowsCount))
                 {
-                    if (Helper.MessageBoxConfirmDelete(selectedRowsCount))
+                    var accountGroupModelList = new List<AccountGroupModel>();
+                    foreach (DataGridViewRow row in dgAccountGroup.SelectedRows)
                     {
-                        var accountGroupModelList = new List<AccountGroupModel>();
-                        foreach (DataGridViewRow row in dgAccountGroup.SelectedRows)
-                        {
-                            int accountGroupId = Convert.ToInt16(row.Cells[0].Value.ToString());
-                            accountGroupModelList.Add(new AccountGroupModel() { Id = accountGroupId });
-                        }
-
-                        var accountGroupRepository = Factory.AccountGroupRepository();
-                        _ = accountGroupRepository.Delete(accountGroupModelList);
-                        LoadAccountGroup();
+                        int accountGroupId = Convert.ToInt16(row.Cells[0].Value.ToString());
+                        accountGroupModelList.Add(new AccountGroupModel() { Id = accountGroupId });
                     }
+
+                    var accountGroupRepository = Factory.AccountGroupRepository();
+                    _ = accountGroupRepository.Delete(accountGroupModelList);
+                    LoadAccountGroup();
                 }
-            }
-            catch (MySqlException Mysqlex)
-            {
-                switch (Mysqlex.Number)
-                {
-                    case 1451:
-                        Helper.MessageBoxError($"Cannot delete selected records. It is referenced by atleast one record.");
-                        break;
-                }
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
             }
         }
 
@@ -178,36 +162,20 @@ namespace OmniGov.App.Views.Manage.ChartOfAccounts
         {
             int selectedRowsCount = dgMajorAccountGroup.SelectedRows.Count;
 
-            try
+            if (selectedRowsCount > 0)
             {
-                if (selectedRowsCount > 0)
+                if (Helper.MessageBoxConfirmDelete(selectedRowsCount))
                 {
-                    if (Helper.MessageBoxConfirmDelete(selectedRowsCount))
+                    var majorAccountGroupModelList = new List<MajorAccountGroupModel>();
+                    foreach (DataGridViewRow row in dgMajorAccountGroup.SelectedRows)
                     {
-                        var majorAccountGroupModelList = new List<MajorAccountGroupModel>();
-                        foreach (DataGridViewRow row in dgMajorAccountGroup.SelectedRows)
-                        {
-                            int majorAccountGroupId = Convert.ToInt16(row.Cells[0].Value.ToString());
-                            majorAccountGroupModelList.Add(new MajorAccountGroupModel() { Id = majorAccountGroupId });
-                        }
-
-                        _ = Factory.MajorAccountGroupRepository().Delete(majorAccountGroupModelList);
-                        LoadMajorAccountGroup();
+                        int majorAccountGroupId = Convert.ToInt16(row.Cells[0].Value.ToString());
+                        majorAccountGroupModelList.Add(new MajorAccountGroupModel() { Id = majorAccountGroupId });
                     }
+
+                    _ = Factory.MajorAccountGroupRepository().Delete(majorAccountGroupModelList);
+                    LoadMajorAccountGroup();
                 }
-            }
-            catch (MySqlException Mysqlex)
-            {
-                switch (Mysqlex.Number)
-                {
-                    case 1451:
-                        Helper.MessageBoxError($"Cannot delete selected records. It is referenced by atleast one record.");
-                        break;
-                }
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
             }
         }
 
@@ -226,61 +194,49 @@ namespace OmniGov.App.Views.Manage.ChartOfAccounts
 
         private void frmChartOfAccounts_Load(object sender, EventArgs e)
         {
-            try
-            {
-                OnLoad();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            OnLoad();
         }
 
         private void BtnAdd_Click(object sender, EventArgs e)
         {
-            try
+            if (tabControl1.SelectedTab == tabControl1.TabPages["tabSubsidiaryLedgers"])
             {
-                if (tabControl1.SelectedTab == tabControl1.TabPages["tabSubsidiaryLedgers"])
-                {
-                }
-                else if (tabControl1.SelectedTab == tabControl1.TabPages["tabGeneralLedgers"])
-                {
-                }
-                else if (tabControl1.SelectedTab == tabControl1.TabPages["tabSubMajorAccount"])
-                {
-                }
-                else if (tabControl1.SelectedTab == tabControl1.TabPages["tabMajorAccount"])
-                {
-                    _ = new frmMajorAccountGroupAdd(this).ShowDialog();
-                }
-                else
-                    _ = new frmAccountGroupAdd(this).ShowDialog();
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            else if (tabControl1.SelectedTab == tabControl1.TabPages["tabGeneralLedgers"])
+            {
+            }
+            else if (tabControl1.SelectedTab == tabControl1.TabPages["tabSubMajorAccount"])
+            {
+            }
+            else if (tabControl1.SelectedTab == tabControl1.TabPages["tabMajorAccount"])
+            {
+                _ = new frmMajorAccountGroupAdd(this).ShowDialog();
+            }
+            else
+                _ = new frmAccountGroupAdd(this).ShowDialog();
         }
 
         private void BtnEdit_Click(object sender, EventArgs e)
         {
-            try
+            if (tabControl1.SelectedTab == tabControl1.TabPages["tabSubsidiaryLedgers"])
             {
-                if (tabControl1.SelectedTab == tabControl1.TabPages["tabSubsidiaryLedgers"])
-                {
-                }
-                else if (tabControl1.SelectedTab == tabControl1.TabPages["tabGeneralLedgers"])
-                {
-                }
-                else if (tabControl1.SelectedTab == tabControl1.TabPages["tabSubMajorAccount"])
-                {
-                }
-                else if (tabControl1.SelectedTab == tabControl1.TabPages["tabMajorAccount"])
-                {
-                    short majorAccountGroupId = short.Parse(dgMajorAccountGroup.SelectedCells[0].Value.ToString());
-                    _ = new frmMajorAccountGroupEdit(this, majorAccountGroupId).ShowDialog();
-                }
-                else
-                {
-                    byte accountGroupId = byte.Parse(dgAccountGroup.SelectedCells[0].Value.ToString());
-                    _ = new frmAccountGroupEdit(this, accountGroupId).ShowDialog();
-                }
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            else if (tabControl1.SelectedTab == tabControl1.TabPages["tabGeneralLedgers"])
+            {
+            }
+            else if (tabControl1.SelectedTab == tabControl1.TabPages["tabSubMajorAccount"])
+            {
+            }
+            else if (tabControl1.SelectedTab == tabControl1.TabPages["tabMajorAccount"])
+            {
+                short majorAccountGroupId = short.Parse(dgMajorAccountGroup.SelectedCells[0].Value.ToString());
+                _ = new frmMajorAccountGroupEdit(this, majorAccountGroupId).ShowDialog();
+            }
+            else
+            {
+                byte accountGroupId = byte.Parse(dgAccountGroup.SelectedCells[0].Value.ToString());
+                _ = new frmAccountGroupEdit(this, accountGroupId).ShowDialog();
+            }
         }
 
         private void BtnDelete_Click(object sender, EventArgs e)
@@ -313,11 +269,7 @@ namespace OmniGov.App.Views.Manage.ChartOfAccounts
 
         private void BtnSubsidiary_Click(object sender, EventArgs e)
         {
-            try
-            {
-                ShowSubsidiaryForm();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            ShowSubsidiaryForm();
         }
 
         private void ShowSetBalanceForm()
@@ -347,14 +299,10 @@ namespace OmniGov.App.Views.Manage.ChartOfAccounts
 
         private void BtnSetBalance_Click(object sender, EventArgs e)
         {
-            try
-            {
-                if (dgGeneralLedgerAccounts.Rows.Count < 1)
-                    return;
+            if (dgGeneralLedgerAccounts.Rows.Count < 1)
+                return;
 
-                ShowSetBalanceForm();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            ShowSetBalanceForm();
         }
 
         private void DisableEditDeleteButtons()
@@ -365,41 +313,37 @@ namespace OmniGov.App.Views.Manage.ChartOfAccounts
 
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            try
+            if (tabControl1.SelectedTab == tabControl1.TabPages["tabGeneralLedgers"])
             {
-                if (tabControl1.SelectedTab == tabControl1.TabPages["tabGeneralLedgers"])
-                {
-                    DisplayRecordCount(dgGeneralLedgerAccounts);
-                    DisableEditDeleteButtons();
-                    SetActionControls(dgGeneralLedgerAccounts);
-                    dgGeneralLedgerAccounts_SelectionChanged(dgGeneralLedgerAccounts, null);
-                }
-                else if (tabControl1.SelectedTab == tabControl1.TabPages["tabSubMajorAccount"])
-                {
-                    LoadSubMajorAccountGroup();
-                    DisableEditDeleteButtons();
-                    BtnSubsidiary.Enabled = false;
-                    BtnSetBalance.Enabled = false;
-                    SetActionControls(dgSubMajorAccount);
-                }
-                else if (tabControl1.SelectedTab == tabControl1.TabPages["tabMajorAccount"])
-                {
-                    LoadMajorAccountGroup();
-                    DisableEditDeleteButtons();
-                    SetActionControls(dgMajorAccountGroup);
-                    BtnSubsidiary.Enabled = false;
-                    BtnSetBalance.Enabled = false;
-                }
-                else
-                {
-                    LoadAccountGroup();
-                    DisableEditDeleteButtons();
-                    SetActionControls(dgAccountGroup);
-                    BtnSubsidiary.Enabled = false;
-                    BtnSetBalance.Enabled = false;
-                }
+                DisplayRecordCount(dgGeneralLedgerAccounts);
+                DisableEditDeleteButtons();
+                SetActionControls(dgGeneralLedgerAccounts);
+                dgGeneralLedgerAccounts_SelectionChanged(dgGeneralLedgerAccounts, null);
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            else if (tabControl1.SelectedTab == tabControl1.TabPages["tabSubMajorAccount"])
+            {
+                LoadSubMajorAccountGroup();
+                DisableEditDeleteButtons();
+                BtnSubsidiary.Enabled = false;
+                BtnSetBalance.Enabled = false;
+                SetActionControls(dgSubMajorAccount);
+            }
+            else if (tabControl1.SelectedTab == tabControl1.TabPages["tabMajorAccount"])
+            {
+                LoadMajorAccountGroup();
+                DisableEditDeleteButtons();
+                SetActionControls(dgMajorAccountGroup);
+                BtnSubsidiary.Enabled = false;
+                BtnSetBalance.Enabled = false;
+            }
+            else
+            {
+                LoadAccountGroup();
+                DisableEditDeleteButtons();
+                SetActionControls(dgAccountGroup);
+                BtnSubsidiary.Enabled = false;
+                BtnSetBalance.Enabled = false;
+            }
         }
 
         private void DisplayRecordCount(DataGridView dataGridView)
@@ -428,92 +372,60 @@ namespace OmniGov.App.Views.Manage.ChartOfAccounts
 
         private void dgGeneralLedgerAccounts_SelectionChanged(object sender, EventArgs e)
         {
-            try
-            {
-                SetActionControls(dgGeneralLedgerAccounts);
+            SetActionControls(dgGeneralLedgerAccounts);
 
-                if (dgGeneralLedgerAccounts.SelectedRows.Count == 1)
-                {
-                    BtnSubsidiary.Enabled = true;
-                    BtnSetBalance.Enabled = true;
-                    EnableDisableSubsidiaryButton();
-                    return;
-                }
-                BtnSubsidiary.Enabled = false;
-                BtnSetBalance.Enabled = false;
+            if (dgGeneralLedgerAccounts.SelectedRows.Count == 1)
+            {
+                BtnSubsidiary.Enabled = true;
+                BtnSetBalance.Enabled = true;
+                EnableDisableSubsidiaryButton();
+                return;
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            BtnSubsidiary.Enabled = false;
+            BtnSetBalance.Enabled = false;
         }
 
         private void dgAccountGroup_SelectionChanged(object sender, EventArgs e)
         {
-            try
-            {
-                SetActionControls(dgAccountGroup);
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            SetActionControls(dgAccountGroup);
         }
 
         private void dgMajorAccountGroup_SelectionChanged(object sender, EventArgs e)
         {
-            try
-            {
-                SetActionControls(dgMajorAccountGroup);
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            SetActionControls(dgMajorAccountGroup);
         }
 
         private void cmbAccountGroup_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            try
-            {
-                LoadMajorAccountGroup();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            LoadMajorAccountGroup();
         }
 
         private void cmbMajorAccount_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            try
-            {
-                LoadSubMajorAccountGroup();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            LoadSubMajorAccountGroup();
         }
 
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
-            try
-            {
-                if (txtSearch.TextLength > 2)
-                    LoadGeneralLedgers(0);
+            if (txtSearch.TextLength > 2)
+                LoadGeneralLedgers(0);
 
-                if (string.IsNullOrEmpty(txtSearch.Text))
-                {
-                    var dataTable = (DataTable)dgGeneralLedgerAccounts.DataSource;
-                    dataTable.Rows.Clear();
-                }
+            if (string.IsNullOrEmpty(txtSearch.Text))
+            {
+                var dataTable = (DataTable)dgGeneralLedgerAccounts.DataSource;
+                dataTable.Rows.Clear();
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void btnRetrieveAll_Click(object sender, EventArgs e)
         {
-            try
-            {
-                txtSearch.Clear();
-                LoadGeneralLedgers(0);
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            txtSearch.Clear();
+            LoadGeneralLedgers(0);
         }
 
         private void dgSubMajorAccount_SelectionChanged(object sender, EventArgs e)
         {
-            try
-            {
-                SetActionControls(dgSubMajorAccount);
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            SetActionControls(dgSubMajorAccount);
         }
     }
 }

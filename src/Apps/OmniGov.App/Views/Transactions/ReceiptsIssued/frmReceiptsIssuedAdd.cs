@@ -6,14 +6,14 @@ namespace OmniGov.App.Views.Transactions.ReceiptsIssued
 {
     public partial class frmReceiptsIssuedAdd : Form
     {
-        private readonly frmReceiptsIssued frmReceiptIssued;
+        private readonly frmReceiptsIssued _frmReceiptIssued;
         private readonly ucReceiptsIssued uc;
 
         public frmReceiptsIssuedAdd(frmReceiptsIssued frmReceiptsIssued)
         {
             InitializeComponent();
             Helper.LoadFormIcon(this);
-            frmReceiptIssued = frmReceiptsIssued;
+            _frmReceiptIssued = frmReceiptsIssued;
             uc = ucReceipts1;
         }
 
@@ -58,16 +58,12 @@ namespace OmniGov.App.Views.Transactions.ReceiptsIssued
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            try
+            if (SaveData())
             {
-                if (SaveData())
-                {
-                    Helper.MessageBoxSuccess("Receipt issued has been saved.");
-                    frmReceiptIssued.LoadRecords();
-                    uc.ResetForm();
-                }
+                Helper.MessageBoxSuccess("Receipt issued has been saved.");
+                _frmReceiptIssued.LoadRecords();
+                uc.ResetForm();
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }

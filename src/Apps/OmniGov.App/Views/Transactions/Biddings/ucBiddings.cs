@@ -61,19 +61,15 @@ namespace OmniGov.App.Views.Transactions.Biddings
 
         internal void OnLoad(bool isEdit, int? biddingId)
         {
-            try
+            this.biddingId = biddingId;
+            this.isEdit = isEdit;
+            if (isEdit)
             {
-                this.biddingId = biddingId;
-                this.isEdit = isEdit;
-                if (isEdit)
-                {
-                    LoadSelectedRecord(biddingId.Value);
-                    nudBidAmount.Enabled = false;
-                }
-                else ResetForm();
-                errorProvider1.Clear();
+                LoadSelectedRecord(biddingId.Value);
+                nudBidAmount.Enabled = false;
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            else ResetForm();
+            errorProvider1.Clear();
         }
 
         private void LoadSelectedRecord(int biddingId)
@@ -160,11 +156,7 @@ namespace OmniGov.App.Views.Transactions.Biddings
 
         private void txtAssignedBidderNo_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            try
-            {
-                e.Cancel = !AssignedBidderNoValidated(errorProvider1, txtAssignedBidderNo);
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            e.Cancel = !AssignedBidderNoValidated(errorProvider1, txtAssignedBidderNo);
         }
 
         private void txtAssignedBidderNo_Validated(object sender, EventArgs e)

@@ -18,11 +18,7 @@ namespace OmniGov.App.Views.Transactions.ReceiptsIssued
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            try
-            {
-                _ = new frmReceiptsIssuedAdd(this).ShowDialog();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            _ = new frmReceiptsIssuedAdd(this).ShowDialog();
         }
 
         private bool DeleteRecords()
@@ -46,20 +42,11 @@ namespace OmniGov.App.Views.Transactions.ReceiptsIssued
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            try
+            if (DeleteRecords())
             {
-                if (DeleteRecords())
-                {
-                    Helper.MessageBoxSuccess("Issued receipts has been deleted.");
-                    LoadRecords();
-                }
+                Helper.MessageBoxSuccess("Issued receipts has been deleted.");
+                LoadRecords();
             }
-            catch (MySqlException ex)
-            {
-                if (ex.Number == 1451)
-                    Helper.MessageBoxError("Can't delete issued receipt. The receipt was already used by a collecting officer.");
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void ShowRecordTimeStamp()
@@ -68,35 +55,30 @@ namespace OmniGov.App.Views.Transactions.ReceiptsIssued
 
         private void dgissue_SelectionChanged(object sender, EventArgs e)
         {
-            try
-            {
-                Helper.EnableDisableToolStripButtons(dgReceiptIssued, btnEdit, btnDelete);
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            Helper.EnableDisableToolStripButtons(dgReceiptIssued, btnEdit, btnDelete);
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            try
-            {
-                int receiptIssuedID = Convert.ToInt32(dgReceiptIssued.SelectedRows[0].Cells["id"].Value);
-                _ = new frmReceiptsIssuedEdit(this, receiptIssuedID).ShowDialog();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+       
+            int receiptIssuedID = Convert.ToInt32(dgReceiptIssued.SelectedRows[0].Cells["id"].Value);
+            _ = new frmReceiptsIssuedEdit(this, receiptIssuedID).ShowDialog();
+         
         }
 
         private void btnReturn_Click(object sender, EventArgs e)
         {
-            Helper.MessageBoxSuccess("To be fixed.");
-            //int issuanceId = Convert.ToInt32(dgReceiptIssued.CurrentRow.Cells["id"].Value);
-            //int lastIssued = string.IsNullOrEmpty(dgReceiptIssued.CurrentRow.Cells["last_issued"].Value.ToString()) ? 0 : Convert.ToInt32(dgReceiptIssued.CurrentRow.Cells["last_issued"].Value);
+         
+                int issuanceId = Convert.ToInt32(dgReceiptIssued.CurrentRow.Cells["id"].Value);
+                int lastIssued = string.IsNullOrEmpty(dgReceiptIssued.CurrentRow.Cells["last_issued"].Value.ToString()) ? 0 : Convert.ToInt32(dgReceiptIssued.CurrentRow.Cells["last_issued"].Value);
+                //int lastIssued = string.IsNullOrEmpty(dgReceiptIssued.CurrentRow.Cells["last_issued"].Value.ToString()) ? 0 : Convert.ToInt32(dgReceiptIssued.CurrentRow.Cells["last_issued"].Value);
 
-            //int issuedSerialNoFrom = string.IsNullOrEmpty(dgReceiptIssued.CurrentRow.Cells["serial_number_from"].ToString()) ? 0 : Convert.ToInt32(dgReceiptIssued.CurrentRow.Cells["serial_number_from"].Value);
+                //int issuedSerialNoFrom = string.IsNullOrEmpty(dgReceiptIssued.CurrentRow.Cells["serial_number_from"].ToString()) ? 0 : Convert.ToInt32(dgReceiptIssued.CurrentRow.Cells["serial_number_from"].Value);
 
-            //int returnSerialNoFrom = lastIssued == 0 ? issuedSerialNoFrom : lastIssued + 1;
-            //int returnSerialNoTo = string.IsNullOrEmpty(dgReceiptIssued.CurrentRow.Cells["serial_number_to"].ToString()) ? 0 : Convert.ToInt32(dgReceiptIssued.CurrentRow.Cells["serial_number_to"].Value);
+                //int returnSerialNoFrom = lastIssued == 0 ? issuedSerialNoFrom : lastIssued + 1;
+                //int returnSerialNoTo = string.IsNullOrEmpty(dgReceiptIssued.CurrentRow.Cells["serial_number_to"].ToString()) ? 0 : Convert.ToInt32(dgReceiptIssued.CurrentRow.Cells["serial_number_to"].Value);
 
-            //_ = new frmReturnReceipts(this, issuanceId, returnSerialNoFrom, returnSerialNoTo).ShowDialog();
+                //_ = new frmReturnReceipts(this, issuanceId, returnSerialNoFrom, returnSerialNoTo).ShowDialog();
         }
 
         private string CollectingOfficerFullName(DataRow row)
@@ -193,60 +175,40 @@ namespace OmniGov.App.Views.Transactions.ReceiptsIssued
 
         private void bgwLoadIssuedReceipts_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            try
+            if (e.Result is not DataTable dataTable)
             {
-                if (e.Result is not DataTable dataTable)
-                {
-                    pbLoadRecords.Value = 100;
-                    return;
-                }
-
-                if (dataTable.Rows.Count < 1)
-                    pbLoadRecords.Value = 100;
-
-                HelperLoadRecords.ReceiptsIssuedDatagridView(dataTable, dgReceiptIssued);
-                dgReceiptIssued.CurrentCell = dgReceiptIssued.FirstDisplayedCell;
-                lblRecordCount.Text = dgReceiptIssued.Rows.Count.ToString();
-                Helper.EnableDisableToolStripButtons(dgReceiptIssued, btnEdit, btnDelete);
+                pbLoadRecords.Value = 100;
+                return;
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+
+            if (dataTable.Rows.Count < 1)
+                pbLoadRecords.Value = 100;
+
+            HelperLoadRecords.ReceiptsIssuedDatagridView(dataTable, dgReceiptIssued);
+            dgReceiptIssued.CurrentCell = dgReceiptIssued.FirstDisplayedCell;
+            lblRecordCount.Text = dgReceiptIssued.Rows.Count.ToString();
+            Helper.EnableDisableToolStripButtons(dgReceiptIssued, btnEdit, btnDelete);
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            try
-            {
-                LoadRecords();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            LoadRecords();
         }
 
         private void frmReceiptsIssued_Load(object sender, EventArgs e)
         {
-            try
-            {
-                HelperLoadRecords.ComboboxRowLimitFilter(cmbxRowFilter);
-                LoadRecords();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            HelperLoadRecords.ComboboxRowLimitFilter(cmbxRowFilter);
+            LoadRecords();
         }
 
         private void dtpDateIssued_ValueChanged(object sender, EventArgs e)
         {
-            try
-            {
-                LoadRecords();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            LoadRecords();
         }
 
         private void cmbxRowFilter_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            try
-            {
-                LoadRecords();
-            }
-            catch (Exception ex) { MessageBox.Show(ex.Message); }
+            LoadRecords();
         }
     }
 }

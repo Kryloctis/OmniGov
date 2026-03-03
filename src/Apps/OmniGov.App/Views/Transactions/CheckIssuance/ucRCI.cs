@@ -40,17 +40,10 @@ namespace OmniGov.App.Views.Transactions.CheckIssuance
         {
             if (!DesignMode)
             {
-                try
-                {
-                    LoadBanks();
-                    LoadBankAccounts();
-                    LoadFunds();
-                    LoadFPP();
-                }
-                catch (Exception ex)
-                {
-                    Helper.MessageBoxSuccess(ex.Message);
-                }
+                LoadBanks();
+                LoadBankAccounts();
+                LoadFunds();
+                LoadFPP();
             }
         }
 

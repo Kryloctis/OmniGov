@@ -172,20 +172,12 @@ namespace OmniGov.App.Views.Transactions.Payments
         {
             string printerName = cmbxPrinter.Text;
             PrintReport(reportViewerPrint, printerName);
-            try
-            {
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.StackTrace); }
         }
 
         private async void lnkLblRefresh_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            try
-            {
-                var localReport = reportViewerPrint.LocalReport;
-                await PopulatePrinterComboBox(cmbxPrinter, localReport);
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            var localReport = reportViewerPrint.LocalReport;
+            await PopulatePrinterComboBox(cmbxPrinter, localReport);
         }
     }
 }
