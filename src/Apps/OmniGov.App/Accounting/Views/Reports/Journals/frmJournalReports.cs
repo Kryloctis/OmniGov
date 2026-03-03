@@ -25,20 +25,12 @@ namespace OmniGov.App.Accounting.Views.Reports.Journals
 
         private void frmJournalReports_Load(object sender, EventArgs e)
         {
-            try
-            {
-                ToggleContents(tabControlJournals);
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            ToggleContents(tabControlJournals);
         }
 
         private void tabControlJournals_SelectedIndexChanged(object sender, EventArgs e)
         {
-            try
-            {
-                ToggleContents(tabControlJournals);
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            ToggleContents(tabControlJournals);
         }
 
         private void ToggleContents(TabControl tabControl)

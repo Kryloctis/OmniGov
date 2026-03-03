@@ -135,14 +135,7 @@ namespace OmniGov.App.Accounting.Views.Reports.Journals
 
         private void btnRunReport_Click(object sender, EventArgs e)
         {
-            try
-            {
-                LoadReport(reportViewer1);
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            LoadReport(reportViewer1);
         }
     }
 }
-
-
-
