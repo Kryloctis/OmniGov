@@ -32,16 +32,12 @@ namespace OmniGov.App.Accounting.Views.JournalEntryVoucher
 
         private void frmJEVList_Load(object sender, EventArgs e)
         {
-            try
-            {
-                VerifyUserPrivileges();
-                LoadJournals();
-                LoadFunds();
-                nudYear.Value = Helper.GetCurrentDate().Year;
-                LoadJevRecords();
-                EnableDisableButtons(dgJEV, tlStrpBtnCreate, tlStrpBtnUpdate, tlStrpBtnDelete, tlStrpBtnView, tlStrpBtnReview);
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            VerifyUserPrivileges();
+            LoadJournals();
+            LoadFunds();
+            nudYear.Value = Helper.GetCurrentDate().Year;
+            LoadJevRecords();
+            EnableDisableButtons(dgJEV, tlStrpBtnCreate, tlStrpBtnUpdate, tlStrpBtnDelete, tlStrpBtnView, tlStrpBtnReview);
         }
 
         private DataTable DatatableJournals()
@@ -127,11 +123,7 @@ namespace OmniGov.App.Accounting.Views.JournalEntryVoucher
 
         private void dgJEV_SelectionChanged(object sender, EventArgs e)
         {
-            try
-            {
-                EnableDisableButtons(dgJEV, tlStrpBtnCreate, tlStrpBtnUpdate, tlStrpBtnDelete, tlStrpBtnView, tlStrpBtnReview);
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            EnableDisableButtons(dgJEV, tlStrpBtnCreate, tlStrpBtnUpdate, tlStrpBtnDelete, tlStrpBtnView, tlStrpBtnReview);
         }
 
         private void dgJEV_ColumnAdded(object sender, DataGridViewColumnEventArgs e)

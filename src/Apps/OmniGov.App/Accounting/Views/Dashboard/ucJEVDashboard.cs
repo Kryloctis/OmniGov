@@ -76,78 +76,39 @@ namespace OmniGov.App.Accounting.Views.Dashboard
 
         private void lnkPending_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            try
-            {
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void lnkApproved_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            try
-            {
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void linkDisapproved_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            try
-            {
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void lnkCancelled_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            try
-            {
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        private void lnkJEV_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            try
-            {
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void nudYear_ValueChanged(object sender, EventArgs e)
+
         {
-            try
-            {
-                LoadJEVCounter();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            LoadJEVCounter();
         }
 
         private void cmbxJournals_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            try
-            {
-                LoadJEVCounter();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            LoadJEVCounter();
         }
 
         private void cmbxFunds_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            try
-            {
-                LoadJEVCounter();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            LoadJEVCounter();
         }
 
         private void tlStrpBtnJev_Click(object sender, EventArgs e)
         {
-            try
-            {
-                _ = new frmJournalEntryVoucher(this).ShowDialog();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            _ = new frmJournalEntryVoucher(this).ShowDialog();
         }
     }
 }

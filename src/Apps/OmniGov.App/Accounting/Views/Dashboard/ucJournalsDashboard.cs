@@ -91,12 +91,7 @@ namespace OmniGov.App.Accounting.Views.Dashboard
 
         private void numdYear_ValueChanged(object sender, EventArgs e)
         {
-            try
-            {
-                LoadCounters();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            LoadCounters();
         }
     }
 }
-
