@@ -16,15 +16,8 @@ namespace OmniGov.App.Views.Manage.Amortization
 
         internal void LoadAmortizationRecords()
         {
-            try
-            {
-                var dtAmortizationRecords = AccountingFactory.AmortizationRepository().GetRecords();
-                HelperLoadRecords.AmortizationDataGridView(dtAmortizationRecords, dgAmortization);
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
+            var dtAmortizationRecords = AccountingFactory.AmortizationRepository().GetRecords();
+            HelperLoadRecords.AmortizationDataGridView(dtAmortizationRecords, dgAmortization);
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -84,51 +77,36 @@ namespace OmniGov.App.Views.Manage.Amortization
 
         private bool DeleteAmortizationRecords()
         {
-            try
-            {
-                var amortizationModelList = new List<AmortizationModel>();
+            var amortizationModelList = new List<AmortizationModel>();
 
-                foreach (DataGridViewRow row in dgAmortization.SelectedRows)
+            foreach (DataGridViewRow row in dgAmortization.SelectedRows)
+            {
+                int amortizationId = int.Parse(row.Cells[0].Value.ToString());
+                var amortizationModel = new AmortizationModel()
                 {
-                    int amortizationId = int.Parse(row.Cells[0].Value.ToString());
-                    var amortizationModel = new AmortizationModel()
-                    {
-                        Id = amortizationId
-                    };
+                    Id = amortizationId
+                };
 
-                    amortizationModelList.Add(amortizationModel);
-                }
+                amortizationModelList.Add(amortizationModel);
+            }
 
-                return AccountingFactory.AmortizationRepository().Delete(amortizationModelList);
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
-            return false;
+            return AccountingFactory.AmortizationRepository().Delete(amortizationModelList);
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            try
-            {
-                int selectedRowsCount = dgAmortization.SelectedRows.Count;
+            int selectedRowsCount = dgAmortization.SelectedRows.Count;
 
-                if (selectedRowsCount > 0)
+            if (selectedRowsCount > 0)
+            {
+                if (Helper.MessageBoxConfirmDelete(selectedRowsCount))
                 {
-                    if (Helper.MessageBoxConfirmDelete(selectedRowsCount))
+                    if (DeleteAmortizationRecords())
                     {
-                        if (DeleteAmortizationRecords())
-                        {
-                            LoadAmortizationRecords();
-                            Helper.MessageBoxSuccess("Amortization/s has been deleted.");
-                        }
+                        LoadAmortizationRecords();
+                        Helper.MessageBoxSuccess("Amortization/s has been deleted.");
                     }
                 }
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
             }
         }
     }
