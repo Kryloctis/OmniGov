@@ -64,11 +64,7 @@ namespace OmniGov.App.Views.Manage.Banks
 
         private void txtbankname_Validating(object sender, CancelEventArgs e)
         {
-            try
-            {
-                e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtBankName, "bank name.");
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtBankName, "bank name.");
         }
 
         private void txtbankname_Validated(object sender, EventArgs e)
