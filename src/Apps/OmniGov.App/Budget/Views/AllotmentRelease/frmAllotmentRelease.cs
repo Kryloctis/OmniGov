@@ -32,14 +32,10 @@ namespace OmniGov.App.Budget.Views.AllotmentRelease
 
         private void frmAllotmentRelease_Load(object sender, EventArgs e)
         {
-            try
-            {
-                Helper.DatagridFullRowSelectStyle(dgvMain, true);
-                LoadFunds();
-                LoadAllotmentClasses();
-                PreLoadDateIssuedFields();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            Helper.DatagridFullRowSelectStyle(dgvMain, true);
+            LoadFunds();
+            LoadAllotmentClasses();
+            PreLoadDateIssuedFields();
         }
 
         private void LoadAllotmentReleaseRecords()
@@ -65,35 +61,23 @@ namespace OmniGov.App.Budget.Views.AllotmentRelease
 
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
-            try
-            {
-                var parameters = ((string searchTxt, int fundId, int allotmentClass, DateTime dateFrom, DateTime dateTo))e.Argument;
+            var parameters = ((string searchTxt, int fundId, int allotmentClass, DateTime dateFrom, DateTime dateTo))e.Argument;
 
-                var dbDtSrc = BudgetFactory.AllotmentReleaseRepository().
-                                        GetViewRecordsBySearch(
-                                            parameters.fundId,
-                                            parameters.allotmentClass,
-                                            parameters.dateFrom,
-                                            parameters.searchTxt
-                                        );
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            var dbDtSrc = BudgetFactory.AllotmentReleaseRepository().
+                                    GetViewRecordsBySearch(
+                                        parameters.fundId,
+                                        parameters.allotmentClass,
+                                        parameters.dateFrom,
+                                        parameters.searchTxt
+                                    );
         }
 
         private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            try
-            {
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            try
-            {
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }

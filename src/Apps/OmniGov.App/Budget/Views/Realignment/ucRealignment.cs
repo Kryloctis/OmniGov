@@ -60,38 +60,31 @@ namespace OmniGov.App.Budget.Views.Realignment
 
         internal void LoadFPP(bool isSearch)
         {
-            try
-            {
-                cmbFPP.DroppedDown = false;
-                Cursor.Current = Cursors.Default;
+            cmbFPP.DroppedDown = false;
+            Cursor.Current = Cursors.Default;
 
-                if (DataTableFPP().Rows.Count == 0)
-                {
-                    cmbFPP.DataSource = null;
-                    cmbFPP.DropDownHeight = 100;
-                    return;
-                }
+            if (DataTableFPP().Rows.Count == 0)
+            {
+                cmbFPP.DataSource = null;
+                cmbFPP.DropDownHeight = 100;
+                return;
+            }
                 ;
 
-                var fppDict = new Dictionary<string, string>();
+            var fppDict = new Dictionary<string, string>();
 
-                foreach (DataRow item in DataTableFPP().Rows)
-                {
-                    string fppId = item["id"].ToString();
-                    string fppName = $"{item["fpp_code"]} - {item["fpp_name"]}";
-
-                    fppDict.Add(fppId, fppName);
-                }
-
-                cmbFPP.DataSource = new BindingSource(fppDict, null);
-                cmbFPP.DisplayMember = "value";
-                cmbFPP.ValueMember = "key";
-                cmbFPP.DropDownHeight = 400;
-            }
-            catch (Exception ex)
+            foreach (DataRow item in DataTableFPP().Rows)
             {
-                Helper.MessageBoxError(ex.Message);
+                string fppId = item["id"].ToString();
+                string fppName = $"{item["fpp_code"]} - {item["fpp_name"]}";
+
+                fppDict.Add(fppId, fppName);
             }
+
+            cmbFPP.DataSource = new BindingSource(fppDict, null);
+            cmbFPP.DisplayMember = "value";
+            cmbFPP.ValueMember = "key";
+            cmbFPP.DropDownHeight = 400;
         }
 
         internal void LoadOthersFPPByFPPIdCombobox()
@@ -114,32 +107,25 @@ namespace OmniGov.App.Budget.Views.Realignment
 
         private void LoadBudgetAppropriationAccounts()
         {
-            try
+            if (DatatableAccounts().Rows.Count == 0)
             {
-                if (DatatableAccounts().Rows.Count == 0)
-                {
-                    cmbAccount.DataSource = null;
-                    cmbAccount.Items.Clear();
-                    return;
-                }
-
-                var accountDict = new Dictionary<ushort, string>();
-                foreach (DataRow item in DatatableAccounts().Rows)
-                {
-                    ushort accountId = Convert.ToUInt16(item["general_ledger_accounts_id"]);
-                    string accountName = $"{item["account_code"]} - {item["general_ledger_accounts_name"]}";
-
-                    accountDict.Add(accountId, accountName);
-                }
-
-                cmbAccount.DataSource = new BindingSource(accountDict, null);
-                cmbAccount.DisplayMember = "value";
-                cmbAccount.ValueMember = "key";
+                cmbAccount.DataSource = null;
+                cmbAccount.Items.Clear();
+                return;
             }
-            catch (Exception ex)
+
+            var accountDict = new Dictionary<ushort, string>();
+            foreach (DataRow item in DatatableAccounts().Rows)
             {
-                Helper.MessageBoxError(ex.Message);
+                ushort accountId = Convert.ToUInt16(item["general_ledger_accounts_id"]);
+                string accountName = $"{item["account_code"]} - {item["general_ledger_accounts_name"]}";
+
+                accountDict.Add(accountId, accountName);
             }
+
+            cmbAccount.DataSource = new BindingSource(accountDict, null);
+            cmbAccount.DisplayMember = "value";
+            cmbAccount.ValueMember = "key";
         }
 
         private DataTable DatatableAccounts()
@@ -151,11 +137,7 @@ namespace OmniGov.App.Budget.Views.Realignment
 
         private void ucRealignment_Load(object sender, EventArgs e)
         {
-            try
-            {
-                OnLoad();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            OnLoad();
         }
 
         private void OnLoad()
@@ -196,17 +178,13 @@ namespace OmniGov.App.Budget.Views.Realignment
 
         private void CmbxLedgerAccout_TextChanged(object sender, EventArgs e)
         {
-            try
+            if (string.IsNullOrEmpty(cmbAccount.Text))
             {
-                if (string.IsNullOrEmpty(cmbAccount.Text))
-                {
-                    cmbAccount.TextChanged -= new EventHandler(CmbxLedgerAccout_TextChanged);
-                    LoadBudgetAppropriationAccounts();
-                    cmbAccount.SelectedIndex = -1;
-                    cmbAccount.TextChanged += new EventHandler(CmbxLedgerAccout_TextChanged);
-                }
+                cmbAccount.TextChanged -= new EventHandler(CmbxLedgerAccout_TextChanged);
+                LoadBudgetAppropriationAccounts();
+                cmbAccount.SelectedIndex = -1;
+                cmbAccount.TextChanged += new EventHandler(CmbxLedgerAccout_TextChanged);
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void FilterSearchDetails()
@@ -249,18 +227,12 @@ namespace OmniGov.App.Budget.Views.Realignment
             FilterSearchDetails();
         }
 
-        #region Validations
-
         private void cmbAllotmentClass_Validating(object sender, CancelEventArgs e)
         {
-            try
-            {
-                e.Cancel = Helper.ShowErrorComboBoxEmpty(errorProvider1, cmbAllotmentClass, "allotment class");
+            e.Cancel = Helper.ShowErrorComboBoxEmpty(errorProvider1, cmbAllotmentClass, "allotment class");
 
-                if (!string.IsNullOrWhiteSpace(cmbAllotmentClass.Text))
-                    e.Cancel = false;
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            if (!string.IsNullOrWhiteSpace(cmbAllotmentClass.Text))
+                e.Cancel = false;
         }
 
         private void cmbAllotmentClass_Validated(object sender, EventArgs e)
@@ -280,14 +252,10 @@ namespace OmniGov.App.Budget.Views.Realignment
 
         private void cmbFPP_Validating(object sender, CancelEventArgs e)
         {
-            try
-            {
-                e.Cancel = Helper.ShowErrorComboBoxEmpty(errorProvider1, cmbFPP, "FPP");
+            e.Cancel = Helper.ShowErrorComboBoxEmpty(errorProvider1, cmbFPP, "FPP");
 
-                if (!string.IsNullOrWhiteSpace(cmbFPP.Text))
-                    e.Cancel = false;
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            if (!string.IsNullOrWhiteSpace(cmbFPP.Text))
+                e.Cancel = false;
         }
 
         private void cmbFPP_Validated(object sender, EventArgs e)
@@ -297,14 +265,10 @@ namespace OmniGov.App.Budget.Views.Realignment
 
         private void cmbAccount_Validating(object sender, CancelEventArgs e)
         {
-            try
-            {
-                e.Cancel = Helper.ShowErrorComboBoxEmpty(errorProvider1, cmbAccount, "accounts");
+            e.Cancel = Helper.ShowErrorComboBoxEmpty(errorProvider1, cmbAccount, "accounts");
 
-                if (!string.IsNullOrWhiteSpace(cmbAccount.Text))
-                    e.Cancel = false;
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            if (!string.IsNullOrWhiteSpace(cmbAccount.Text))
+                e.Cancel = false;
         }
 
         private void cmbAccount_Validated(object sender, EventArgs e)
@@ -314,31 +278,24 @@ namespace OmniGov.App.Budget.Views.Realignment
 
         private void nudAmount_Validating(object sender, CancelEventArgs e)
         {
-            try
+            e.Cancel = Helper.ShowErrorNumericUpDownEmpty(errorProvider1, nudAmount, "amount");
+
+            decimal appropriationBalance = Convert.ToDecimal(txtAppropriationBalance.Text);
+            decimal realignmentAmount = nudAmount.Value;
+            decimal remainingBalance = appropriationBalance - realignmentAmount;
+
+            bool isBudgetNotEnough = remainingBalance < 0;
+
+            if (isBudgetNotEnough)
             {
-                e.Cancel = Helper.ShowErrorNumericUpDownEmpty(errorProvider1, nudAmount, "amount");
-
-                decimal appropriationBalance = Convert.ToDecimal(txtAppropriationBalance.Text);
-                decimal realignmentAmount = nudAmount.Value;
-                decimal remainingBalance = appropriationBalance - realignmentAmount;
-
-                bool isBudgetNotEnough = remainingBalance < 0;
-
-                if (isBudgetNotEnough)
-                {
-                    errorProvider1.SetError(nudAmount, "insufficient budget appropriation to realign.");
-                    e.Cancel = true;
-                }
+                errorProvider1.SetError(nudAmount, "insufficient budget appropriation to realign.");
+                e.Cancel = true;
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void nudAmount_Validated(object sender, EventArgs e)
         {
             Helper.ClearErrorNumericUpDown(errorProvider1, nudAmount);
         }
-
-        #endregion Validations
     }
 }
-

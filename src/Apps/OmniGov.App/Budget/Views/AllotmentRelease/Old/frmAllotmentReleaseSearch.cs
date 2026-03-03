@@ -19,75 +19,53 @@ namespace OmniGov.App.Budget.Views.AllotmentRelease.Old
 
         private void LoadFunds()
         {
-            try
-            {
-                var dtFunds = Factory.FundsRepository().GetRecords();
-                HelperLoadRecords.FundsComboBox(dtFunds, cmbxFunds, "id", "fund_name");
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
+            var dtFunds = Factory.FundsRepository().GetRecords();
+            HelperLoadRecords.FundsComboBox(dtFunds, cmbxFunds, "id", "fund_name");
         }
 
         private void LoadAllotmentClasses()
         {
-            try
-            {
-                var dtFunds = Factory.AllotmentClassesRepository().GetRecords();
-                HelperLoadRecords.AllotmentClasssesCombobox(dtFunds, cmbxAllotmentClasses, "allotment_code", "id");
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
+            var dtFunds = Factory.AllotmentClassesRepository().GetRecords();
+            HelperLoadRecords.AllotmentClasssesCombobox(dtFunds, cmbxAllotmentClasses, "allotment_code", "id");
         }
 
         private DataTable AllotmentReleaseDatatable()
         {
             var dataTable = new DataTable();
 
-            try
+            var continuingColumn = new DataColumn();
+            continuingColumn.DataType = typeof(Image);
+            continuingColumn.ColumnName = "continuing";
+
+            string searchTxt = txtSearch.Text.Trim();
+            dataTable.Columns.Add("allotment_release_id");
+            dataTable.Columns.Add("full_aro_no");
+            dataTable.Columns.Add("date_issued");
+            dataTable.Columns.Add("purpose");
+            dataTable.Columns.Add("total_allotment_release");
+            dataTable.Columns.Add(continuingColumn);
+
+            int fundId = Convert.ToInt32(cmbxFunds.SelectedValue);
+            int allotmentClassId = Convert.ToInt32(cmbxAllotmentClasses.SelectedValue);
+            var dateIssued = dtDateIssued.Value;
+
+            var dtAllotmentReleaseSearch = BudgetFactory.AllotmentReleaseRepository().GetViewRecordsBySearch(fundId, allotmentClassId, dateIssued, searchTxt);
+
+            foreach (DataRow row in dtAllotmentReleaseSearch.Rows)
             {
-                var continuingColumn = new DataColumn();
-                continuingColumn.DataType = typeof(Image);
-                continuingColumn.ColumnName = "continuing";
+                int rowAllotmentReleaseId = Convert.ToInt32(row["allotment_release_id"]);
+                string rowFullAroNo = row["full_aro_no"].ToString();
+                DateTime rowDateIssued = Convert.ToDateTime(row["date_issued"]);
+                string rowPurpose = row["purpose"].ToString();
+                bool rowIsContinuing = Convert.ToBoolean(row["continuing"]);
+                string rowTotalAllotmentRelease = BudgetFactory.AllotmentReleaseRepository().GetTotalAllotmentReleaseById(rowAllotmentReleaseId).ToString("N2");
 
-                string searchTxt = txtSearch.Text.Trim();
-                dataTable.Columns.Add("allotment_release_id");
-                dataTable.Columns.Add("full_aro_no");
-                dataTable.Columns.Add("date_issued");
-                dataTable.Columns.Add("purpose");
-                dataTable.Columns.Add("total_allotment_release");
-                dataTable.Columns.Add(continuingColumn);
+                var item = new dynamic[] { rowAllotmentReleaseId, rowFullAroNo, rowDateIssued.ToString("MMM dd, yyyy"), rowPurpose, rowTotalAllotmentRelease, rowIsContinuing ? Properties.Resources.ok14px : null };
 
-                int fundId = Convert.ToInt32(cmbxFunds.SelectedValue);
-                int allotmentClassId = Convert.ToInt32(cmbxAllotmentClasses.SelectedValue);
-                var dateIssued = dtDateIssued.Value;
-
-                var dtAllotmentReleaseSearch = BudgetFactory.AllotmentReleaseRepository().GetViewRecordsBySearch(fundId, allotmentClassId, dateIssued, searchTxt);
-
-                foreach (DataRow row in dtAllotmentReleaseSearch.Rows)
-                {
-                    int rowAllotmentReleaseId = Convert.ToInt32(row["allotment_release_id"]);
-                    string rowFullAroNo = row["full_aro_no"].ToString();
-                    DateTime rowDateIssued = Convert.ToDateTime(row["date_issued"]);
-                    string rowPurpose = row["purpose"].ToString();
-                    bool rowIsContinuing = Convert.ToBoolean(row["continuing"]);
-                    string rowTotalAllotmentRelease = BudgetFactory.AllotmentReleaseRepository().GetTotalAllotmentReleaseById(rowAllotmentReleaseId).ToString("N2");
-
-                    var item = new dynamic[] { rowAllotmentReleaseId, rowFullAroNo, rowDateIssued.ToString("MMM dd, yyyy"), rowPurpose, rowTotalAllotmentRelease, rowIsContinuing ? Properties.Resources.ok14px : null };
-
-                    if (rowDateIssued.Year == dateIssued.Year || rowIsContinuing)
-                        dataTable.Rows.Add(item);
-                }
-
-                return dataTable;
+                if (rowDateIssued.Year == dateIssued.Year || rowIsContinuing)
+                    dataTable.Rows.Add(item);
             }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
+
             return dataTable;
         }
 

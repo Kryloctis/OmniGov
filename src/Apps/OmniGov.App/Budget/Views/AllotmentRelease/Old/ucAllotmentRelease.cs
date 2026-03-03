@@ -63,41 +63,34 @@ namespace OmniGov.App.Budget.Views.AllotmentRelease.Old
 
         private void LoadBudgetAppropriations()
         {
-            try
+            cmbxBudgetAppropriations.DroppedDown = false;
+            Cursor.Current = Cursors.Default;
+
+            if (DatatableBudgetAppropriations().Rows.Count == 0) return;
+
+            var accountDict = new Dictionary<int, string>();
+            foreach (DataRow item in DatatableBudgetAppropriations().Rows)
             {
-                cmbxBudgetAppropriations.DroppedDown = false;
-                Cursor.Current = Cursors.Default;
+                int accountId = Convert.ToInt32(item["id"]);
+                string remarks = string.IsNullOrEmpty(item["remarks"].ToString()) ? string.Empty : $"({item["remarks"]})";
+                string accountName = $"{item["account_code"]} - {item["general_ledger_accounts_name"]} {remarks}";
+                bool isContinuing = Convert.ToByte(item["continuing"]) == 1 ? true : false;
+                short year = Convert.ToInt16(item["year"]);
 
-                if (DatatableBudgetAppropriations().Rows.Count == 0) return;
-
-                var accountDict = new Dictionary<int, string>();
-                foreach (DataRow item in DatatableBudgetAppropriations().Rows)
-                {
-                    int accountId = Convert.ToInt32(item["id"]);
-                    string remarks = string.IsNullOrEmpty(item["remarks"].ToString()) ? string.Empty : $"({item["remarks"]})";
-                    string accountName = $"{item["account_code"]} - {item["general_ledger_accounts_name"]} {remarks}";
-                    bool isContinuing = Convert.ToByte(item["continuing"]) == 1 ? true : false;
-                    short year = Convert.ToInt16(item["year"]);
-
-                    if (!isContinuing && year == nudYear.Value)
-                        accountDict.Add(accountId, accountName);
-                    else if (isContinuing && year <= nudYear.Value)
-                        accountDict.Add(accountId, accountName);
-                }
-
-                cmbxBudgetAppropriations.DataSource = accountDict.Count == 0 ? null : new BindingSource(accountDict, null);
-                cmbxBudgetAppropriations.DisplayMember = "value";
-                cmbxBudgetAppropriations.ValueMember = "key";
-
-                cmbxBudgetAppropriations.TextChanged -= new EventHandler(CmbxLedgerAccout_TextChanged);
-                cmbxBudgetAppropriations.SelectedValue = _budgetAppropriationId;
-                cmbxBudgetAppropriations.TextChanged += new EventHandler(CmbxLedgerAccout_TextChanged);
-                cmbxBudgetAppropriations.SelectedValueChanged += new EventHandler(cmbxBudgetAppropriations_SelectedValueChanged);
+                if (!isContinuing && year == nudYear.Value)
+                    accountDict.Add(accountId, accountName);
+                else if (isContinuing && year <= nudYear.Value)
+                    accountDict.Add(accountId, accountName);
             }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
+
+            cmbxBudgetAppropriations.DataSource = accountDict.Count == 0 ? null : new BindingSource(accountDict, null);
+            cmbxBudgetAppropriations.DisplayMember = "value";
+            cmbxBudgetAppropriations.ValueMember = "key";
+
+            cmbxBudgetAppropriations.TextChanged -= new EventHandler(CmbxLedgerAccout_TextChanged);
+            cmbxBudgetAppropriations.SelectedValue = _budgetAppropriationId;
+            cmbxBudgetAppropriations.TextChanged += new EventHandler(CmbxLedgerAccout_TextChanged);
+            cmbxBudgetAppropriations.SelectedValueChanged += new EventHandler(cmbxBudgetAppropriations_SelectedValueChanged);
         }
 
         private void cmbxBudgetAppropriations_SelectedValueChanged(object sender, EventArgs e)
@@ -150,14 +143,10 @@ namespace OmniGov.App.Budget.Views.AllotmentRelease.Old
 
         private void OnLoad()
         {
-            try
-            {
-                nudYear.Maximum = dateIssued.Year;
-                nudYear.Value = dateIssued.Year;
-                LoadBudgetAppropriations();
-                txtUnreleasedBal.Text = GetBudgetAppropriationBalance().ToString("N2");
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            nudYear.Maximum = dateIssued.Year;
+            nudYear.Value = dateIssued.Year;
+            LoadBudgetAppropriations();
+            txtUnreleasedBal.Text = GetBudgetAppropriationBalance().ToString("N2");
         }
 
         private void ucAllotmentRelease_Load(object sender, EventArgs e)
@@ -183,24 +172,17 @@ namespace OmniGov.App.Budget.Views.AllotmentRelease.Old
         {
             decimal appropriationBalance = 0;
 
-            try
+            if (cmbxBudgetAppropriations.SelectedIndex > -1)
             {
-                if (cmbxBudgetAppropriations.SelectedIndex > -1)
-                {
-                    int budgetAppropriationId = Convert.ToInt32(cmbxBudgetAppropriations.SelectedValue);
-                    var budgetAppropriationDict = BudgetFactory.BudgetAppropriationsRepository().GetViewRecordByIdDateEntry(budgetAppropriationId, dateIssued);
-                    var dtAllotmentRelease = BudgetFactory.AllotmentReleaseRepository().GetViewRecordsByBudgetAppropriationId(budgetAppropriationId);
+                int budgetAppropriationId = Convert.ToInt32(cmbxBudgetAppropriations.SelectedValue);
+                var budgetAppropriationDict = BudgetFactory.BudgetAppropriationsRepository().GetViewRecordByIdDateEntry(budgetAppropriationId, dateIssued);
+                var dtAllotmentRelease = BudgetFactory.AllotmentReleaseRepository().GetViewRecordsByBudgetAppropriationId(budgetAppropriationId);
 
-                    decimal budgetAppropriation = budgetAppropriationDict.Values.Count == 0 ? 0 : Convert.ToDecimal(budgetAppropriationDict["amount"]);
-                    decimal totalAllotmentRelease = Convert.ToDecimal(dtAllotmentRelease.Rows.Count == 0 ? 0 : dtAllotmentRelease.Compute("Sum(amount)", string.Empty));
-                    decimal totalSupplementalAppropriation = BudgetFactory.SupplementalAppropriationsRepository().GetSumSupplementalAppropriationsBy_BudgetAppropriationsId_DateEntry(budgetAppropriationId, dateIssued);
+                decimal budgetAppropriation = budgetAppropriationDict.Values.Count == 0 ? 0 : Convert.ToDecimal(budgetAppropriationDict["amount"]);
+                decimal totalAllotmentRelease = Convert.ToDecimal(dtAllotmentRelease.Rows.Count == 0 ? 0 : dtAllotmentRelease.Compute("Sum(amount)", string.Empty));
+                decimal totalSupplementalAppropriation = BudgetFactory.SupplementalAppropriationsRepository().GetSumSupplementalAppropriationsBy_BudgetAppropriationsId_DateEntry(budgetAppropriationId, dateIssued);
 
-                    appropriationBalance = ((budgetAppropriation + totalSupplementalAppropriation) - totalAllotmentRelease) + (budgetAppropriationId == _budgetAppropriationId ? _amount : 0);
-                }
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
+                appropriationBalance = ((budgetAppropriation + totalSupplementalAppropriation) - totalAllotmentRelease) + (budgetAppropriationId == _budgetAppropriationId ? _amount : 0);
             }
 
             return appropriationBalance < 0 ? 0 : appropriationBalance;
@@ -234,27 +216,21 @@ namespace OmniGov.App.Budget.Views.AllotmentRelease.Old
 
         private bool AmountNotValidated()
         {
-            try
-            {
-                var isEmpty = Helper.ShowErrorNumericUpDownEmpty(errorProvider1, nudAmount, "Amount");
+            var isEmpty = Helper.ShowErrorNumericUpDownEmpty(errorProvider1, nudAmount, "Amount");
 
-                if (isEmpty)
-                {
-                    return true;
-                }
-                else if (nudAmount.Value == 0)
-                {
-                    errorProvider1.SetError(nudAmount, Helper.ErrorMessage("Amount"));
-                    return true;
-                }
-                else if (AmountExceeds())
-                    return AmountExceeds();
-            }
-            catch (Exception ex)
+            if (isEmpty)
             {
-                Helper.MessageBoxError(ex.StackTrace);
+                return true;
             }
-            return false;
+            else if (nudAmount.Value == 0)
+            {
+                errorProvider1.SetError(nudAmount, Helper.ErrorMessage("Amount"));
+                return true;
+            }
+            else if (AmountExceeds())
+                return AmountExceeds();
+            else
+                return false;
         }
 
         private void nudAmount_Validating(object sender, CancelEventArgs e)
@@ -269,30 +245,22 @@ namespace OmniGov.App.Budget.Views.AllotmentRelease.Old
 
         private bool AllotmentReleaseExist()
         {
-            try
+            bool allotmentReleaseExist;
+            int allotmentReleaseId = _ucAllotmentMain.allotmentReleaseId;
+            int budgetAppropriationId = Convert.ToInt32(cmbxBudgetAppropriations.SelectedValue);
+            var dateIssued = _ucAllotmentMain.dtDateIssued.Value;
+
+            if (allotmentReleaseId == 0)
+                allotmentReleaseExist = BudgetFactory.AllotmentReleaseRepository().AllotmentReleaseExist(budgetAppropriationId, dateIssued);
+            else
+                allotmentReleaseExist = BudgetFactory.AllotmentReleaseRepository().AllotmentReleaseExist(allotmentReleaseId, budgetAppropriationId, dateIssued);
+
+            if (allotmentReleaseExist && budgetAppropriationId != _budgetAppropriationId)
             {
-                bool allotmentReleaseExist;
-                int allotmentReleaseId = _ucAllotmentMain.allotmentReleaseId;
-                int budgetAppropriationId = Convert.ToInt32(cmbxBudgetAppropriations.SelectedValue);
-                var dateIssued = _ucAllotmentMain.dtDateIssued.Value;
-
-                if (allotmentReleaseId == 0)
-                    allotmentReleaseExist = BudgetFactory.AllotmentReleaseRepository().AllotmentReleaseExist(budgetAppropriationId, dateIssued);
-                else
-                    allotmentReleaseExist = BudgetFactory.AllotmentReleaseRepository().AllotmentReleaseExist(allotmentReleaseId, budgetAppropriationId, dateIssued);
-
-                if (allotmentReleaseExist && budgetAppropriationId != _budgetAppropriationId)
-                {
-                    errorProvider1.SetError(cmbxBudgetAppropriations, "Budget appropriation acount you entered has an allotment released on the date it was issued.");
-                    return allotmentReleaseExist;
-                }
-
-                return false;
+                errorProvider1.SetError(cmbxBudgetAppropriations, "Budget appropriation acount you entered has an allotment released on the date it was issued.");
+                return allotmentReleaseExist;
             }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
+
             return false;
         }
 
@@ -316,27 +284,21 @@ namespace OmniGov.App.Budget.Views.AllotmentRelease.Old
 
         private bool BudgetAppropriationNotValidated()
         {
-            try
-            {
-                var isEmpty = Helper.ShowErrorComboBoxEmpty(errorProvider1, cmbxBudgetAppropriations, "Budget Appropriation");
+            var isEmpty = Helper.ShowErrorComboBoxEmpty(errorProvider1, cmbxBudgetAppropriations, "Budget Appropriation");
 
-                if (isEmpty)
-                    return true;
-                else if (cmbxBudgetAppropriations.FindStringExact(cmbxBudgetAppropriations.Text) < 0 && !string.IsNullOrEmpty(cmbxBudgetAppropriations.Text))
-                {
-                    errorProvider1.SetError(cmbxBudgetAppropriations, "Budget Appropriation doesn't exist in your records");
-                    return true;
-                }
-                else if (BudgetAppropriationExistOnList())
-                    return true;
-                else if (AllotmentReleaseExist())
-                    return true;
-            }
-            catch (Exception ex)
+            if (isEmpty)
+                return true;
+            else if (cmbxBudgetAppropriations.FindStringExact(cmbxBudgetAppropriations.Text) < 0 && !string.IsNullOrEmpty(cmbxBudgetAppropriations.Text))
             {
-                Helper.MessageBoxError(ex.StackTrace);
+                errorProvider1.SetError(cmbxBudgetAppropriations, "Budget Appropriation doesn't exist in your records");
+                return true;
             }
-            return false;
+            else if (BudgetAppropriationExistOnList())
+                return true;
+            else if (AllotmentReleaseExist())
+                return true;
+            else
+                return false;
         }
 
         private void cmbxBudgetAppropriations_Validating(object sender, CancelEventArgs e)

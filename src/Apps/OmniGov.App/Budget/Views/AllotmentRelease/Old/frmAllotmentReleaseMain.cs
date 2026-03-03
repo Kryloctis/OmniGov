@@ -20,60 +20,53 @@ namespace OmniGov.App.Budget.Views.AllotmentRelease.Old
 
         internal void LoadSelected()
         {
-            try
+            var dtAllotmentRelease = BudgetFactory.AllotmentReleaseRepository().GetViewRecordsById(uc.allotmentReleaseId);
+            int fppId = Convert.ToInt32(dtAllotmentRelease.Rows[0]["function_program_project_id"]);
+            string subFPPId = dtAllotmentRelease.Rows[0]["others_fpp_id"].ToString();
+            int fundId = Convert.ToInt32(dtAllotmentRelease.Rows[0]["funds_id"]);
+            int allotmentClassId = Convert.ToInt32(dtAllotmentRelease.Rows[0]["allotment_classes_id"]);
+            string aroNo = dtAllotmentRelease.Rows[0]["aro_no"].ToString();
+            var dateIssued = Convert.ToDateTime(dtAllotmentRelease.Rows[0]["date_issued"]);
+            string purpose = dtAllotmentRelease.Rows[0]["purpose"].ToString();
+
+            uc.cmbxFPP.SelectedValue = fppId;
+            uc.cmbxSubFPP.SelectedValue = string.IsNullOrEmpty(subFPPId) ? 0 : Convert.ToInt32(subFPPId);
+            uc.CheckedFund(fundId);
+            uc.CheckedAllotmentClass(allotmentClassId);
+            uc.mskSeriesNo.Text = aroNo;
+            uc.dtDateIssued.Value = dateIssued;
+            uc.txtPurpose.Text = purpose;
+
+            uc.dgAllotmentRelease.Rows.Clear();
+
+            uc.panel1.Enabled = false;
+            uc.dtDateIssued.Enabled = false;
+
+            foreach (DataRow row in dtAllotmentRelease.Rows)
             {
-                var dtAllotmentRelease = BudgetFactory.AllotmentReleaseRepository().GetViewRecordsById(uc.allotmentReleaseId);
-                int fppId = Convert.ToInt32(dtAllotmentRelease.Rows[0]["function_program_project_id"]);
-                string subFPPId = dtAllotmentRelease.Rows[0]["others_fpp_id"].ToString();
-                int fundId = Convert.ToInt32(dtAllotmentRelease.Rows[0]["funds_id"]);
-                int allotmentClassId = Convert.ToInt32(dtAllotmentRelease.Rows[0]["allotment_classes_id"]);
-                string aroNo = dtAllotmentRelease.Rows[0]["aro_no"].ToString();
-                var dateIssued = Convert.ToDateTime(dtAllotmentRelease.Rows[0]["date_issued"]);
-                string purpose = dtAllotmentRelease.Rows[0]["purpose"].ToString();
+                short year = Convert.ToInt16(row["year"]);
+                int budgetAppropriationId = Convert.ToInt32(row["budget_appropriations_id"]);
+                string accountName = row["ledger_name"].ToString();
+                string accountCode = row["account_code"].ToString();
+                string remarks = row["remarks"].ToString();
+                decimal amount = Convert.ToDecimal(row["amount"]);
+                string fullAccountName = $"{accountName} {(string.IsNullOrEmpty(remarks) ? string.Empty : $"({remarks})")}";
 
-                uc.cmbxFPP.SelectedValue = fppId;
-                uc.cmbxSubFPP.SelectedValue = string.IsNullOrEmpty(subFPPId) ? 0 : Convert.ToInt32(subFPPId);
-                uc.CheckedFund(fundId);
-                uc.CheckedAllotmentClass(allotmentClassId);
-                uc.mskSeriesNo.Text = aroNo;
-                uc.dtDateIssued.Value = dateIssued;
-                uc.txtPurpose.Text = purpose;
-
-                uc.dgAllotmentRelease.Rows.Clear();
-
-                uc.panel1.Enabled = false;
-                uc.dtDateIssued.Enabled = false;
-
-                foreach (DataRow row in dtAllotmentRelease.Rows)
+                var records = new object[]
                 {
-                    short year = Convert.ToInt16(row["year"]);
-                    int budgetAppropriationId = Convert.ToInt32(row["budget_appropriations_id"]);
-                    string accountName = row["ledger_name"].ToString();
-                    string accountCode = row["account_code"].ToString();
-                    string remarks = row["remarks"].ToString();
-                    decimal amount = Convert.ToDecimal(row["amount"]);
-                    string fullAccountName = $"{accountName} {(string.IsNullOrEmpty(remarks) ? string.Empty : $"({remarks})")}";
-
-                    var records = new object[]
-                    {
                         year,
                         budgetAppropriationId,
                         fullAccountName,
                         accountCode,
                         amount
-                    };
+                };
 
-                    uc.dgAllotmentRelease.Rows.Add(records);
-                }
+                uc.dgAllotmentRelease.Rows.Add(records);
+            }
 
-                btnDelete.Enabled = true;
-                btnSave.Text = "Update";
-                uc.isEdit = true;
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.StackTrace);
-            }
+            btnDelete.Enabled = true;
+            btnSave.Text = "Update";
+            uc.isEdit = true;
         }
 
         private List<AllotmentAccountModel> AllotmentAccountModelList()
@@ -99,72 +92,48 @@ namespace OmniGov.App.Budget.Views.AllotmentRelease.Old
 
         private bool InsertData()
         {
-            try
-            {
-                string allotmentReleaseNo = uc.mskSeriesNo.Text;
-                string purpose = uc.txtPurpose.Text.Trim();
+            string allotmentReleaseNo = uc.mskSeriesNo.Text;
+            string purpose = uc.txtPurpose.Text.Trim();
 
-                var allotmemtReleaseModel = new AllotmentReleaseModel()
-                {
-                    ARONumber = allotmentReleaseNo,
-                    Purpose = purpose,
-                    DateIssued = uc.dtDateIssued.Value
-                };
-
-                return BudgetFactory.AllotmentReleaseRepository().Insert(allotmemtReleaseModel, AllotmentAccountModelList());
-            }
-            catch (Exception ex)
+            var allotmemtReleaseModel = new AllotmentReleaseModel()
             {
-                Helper.MessageBoxError(ex.Message);
-            }
-            return false;
+                ARONumber = allotmentReleaseNo,
+                Purpose = purpose,
+                DateIssued = uc.dtDateIssued.Value
+            };
+
+            return BudgetFactory.AllotmentReleaseRepository().Insert(allotmemtReleaseModel, AllotmentAccountModelList());
         }
 
         private bool UpdateData()
         {
-            try
-            {
-                string allotmentReleaseNo = uc.mskSeriesNo.Text;
-                string purpose = uc.txtPurpose.Text.Trim();
+            string allotmentReleaseNo = uc.mskSeriesNo.Text;
+            string purpose = uc.txtPurpose.Text.Trim();
 
-                var allotmemtReleaseModel = new AllotmentReleaseModel()
-                {
-                    ID = uc.allotmentReleaseId,
-                    ARONumber = allotmentReleaseNo,
-                    Purpose = purpose,
-                    DateIssued = uc.dtDateIssued.Value
-                };
-
-                return BudgetFactory.AllotmentReleaseRepository().Update(allotmemtReleaseModel, AllotmentAccountModelList());
-            }
-            catch (Exception ex)
+            var allotmemtReleaseModel = new AllotmentReleaseModel()
             {
-                Helper.MessageBoxError(ex.Message);
-            }
-            return false;
+                ID = uc.allotmentReleaseId,
+                ARONumber = allotmentReleaseNo,
+                Purpose = purpose,
+                DateIssued = uc.dtDateIssued.Value
+            };
+
+            return BudgetFactory.AllotmentReleaseRepository().Update(allotmemtReleaseModel, AllotmentAccountModelList());
         }
 
         private bool SaveData()
         {
-            try
+            bool saveData;
+            if (!uc.ValidateChildren())
             {
-                bool saveData;
-                if (!uc.ValidateChildren())
-                {
-                    Helper.MessageBoxError(uc.GetFormErrors());
-                    return false;
-                }
+                Helper.MessageBoxError(uc.GetFormErrors());
+                return false;
+            }
 
-                if (!uc.isEdit)
-                    return saveData = InsertData();
-                else
-                    return saveData = UpdateData();
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
-            return false;
+            if (!uc.isEdit)
+                return saveData = InsertData();
+            else
+                return saveData = UpdateData();
         }
 
         private void BtnSave_Click(object sender, EventArgs e)
@@ -204,20 +173,9 @@ namespace OmniGov.App.Budget.Views.AllotmentRelease.Old
 
         private bool Delete()
         {
-            try
+            if (Helper.MessageBoxConfirmDelete(1))
             {
-                if (Helper.MessageBoxConfirmDelete(1))
-                {
-                    return BudgetFactory.AllotmentReleaseRepository().Delete(uc.allotmentReleaseId);
-                }
-            }
-            catch (MySqlException ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
-            catch (Exception)
-            {
-                throw;
+                return BudgetFactory.AllotmentReleaseRepository().Delete(uc.allotmentReleaseId);
             }
             return false;
         }
