@@ -176,12 +176,9 @@ namespace OmniGov.App.Accounting.Views.JournalEntryVoucher
 
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
-            try
+            var dataTable = new DataTable();
+            dataTable.Columns.AddRange(new[]
             {
-                // Define columns once
-                var dataTable = new DataTable();
-                dataTable.Columns.AddRange(new[]
-                {
                     new DataColumn("id", typeof(int)),
                     new DataColumn("transaction_no", typeof(string)),
                     new DataColumn("jev_no", typeof(string)),
@@ -246,8 +243,6 @@ namespace OmniGov.App.Accounting.Views.JournalEntryVoucher
                 }
 
                 e.Result = dataTable;
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
@@ -272,11 +267,7 @@ namespace OmniGov.App.Accounting.Views.JournalEntryVoucher
 
         private void frmJEVList_FormClosed(object sender, FormClosedEventArgs e)
         {
-            try
-            {
-                backgroundWorker1.CancelAsync();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            backgroundWorker1.CancelAsync();
         }
 
         private void ToggleCrud(bool isEdit)
@@ -312,20 +303,12 @@ namespace OmniGov.App.Accounting.Views.JournalEntryVoucher
 
         private void tlStrpBtnCreate_Click(object sender, EventArgs e)
         {
-            try
-            {
-                ToggleCrud(false);
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            ToggleCrud(false);
         }
 
         private void tlStrpBtnUpdate_Click(object sender, EventArgs e)
         {
-            try
-            {
-                ToggleCrud(true);
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            ToggleCrud(true);
         }
 
         private bool DeleteJev(DataGridViewSelectedRowCollection dataGridViewSelectedRowCollection)
@@ -344,62 +327,46 @@ namespace OmniGov.App.Accounting.Views.JournalEntryVoucher
 
         private void tlStrpBtnDelete_Click(object sender, EventArgs e)
         {
-            try
+            var slctdRows = dgJEV.SelectedRows;
+            if (Helper.MessageBoxConfirmDelete(slctdRows.Count))
             {
-                var slctdRows = dgJEV.SelectedRows;
-                if (Helper.MessageBoxConfirmDelete(slctdRows.Count))
+                if (DeleteJev(slctdRows))
                 {
-                    if (DeleteJev(slctdRows))
-                    {
-                        Helper.MessageBoxSuccess($"{slctdRows.Count} JEV records has been deleted");
-                        LoadJevRecords();
-                    }
+                    Helper.MessageBoxSuccess($"{slctdRows.Count} JEV records has been deleted");
+                    LoadJevRecords();
                 }
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void tlStrpBtnBack_Click(object sender, EventArgs e)
         {
-            try
-            {
-                customTabControl1.SelectedTab = tbPgMain;
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            customTabControl1.SelectedTab = tbPgMain;
         }
 
         private void btnSubmit_Click(object sender, EventArgs e)
         {
-            try
+            if (!ucJev.ValidateChildren() || !ucJev.AccEntriesValidated().isValid)
             {
-                if (!ucJev.ValidateChildren() || !ucJev.AccEntriesValidated().isValid)
-                {
-                    Helper.MessageBoxError(ucJev.GetFormErrors());
-                    return;
-                }
-
-                bool jevIsSubmitted = ucJev.SubmitJev(out string message, out bool isEdit);
-
-                if (jevIsSubmitted)
-                {
-                    Helper.MessageBoxSuccess(message);
-                    LoadJevRecords();
-                    ucJev.ResetForm();
-
-                    if (isEdit)
-                        customTabControl1.SelectedTab = tbPgMain;
-                }
+                Helper.MessageBoxError(ucJev.GetFormErrors());
+                return;
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+
+            bool jevIsSubmitted = ucJev.SubmitJev(out string message, out bool isEdit);
+
+            if (jevIsSubmitted)
+            {
+                Helper.MessageBoxSuccess(message);
+                LoadJevRecords();
+                ucJev.ResetForm();
+
+                if (isEdit)
+                    customTabControl1.SelectedTab = tbPgMain;
+            }
         }
 
         private void tlStrpBtnView_Click(object sender, EventArgs e)
         {
-            try
-            {
-                ToggleView();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            ToggleView();
         }
 
         private void ToggleReview()
@@ -413,175 +380,111 @@ namespace OmniGov.App.Accounting.Views.JournalEntryVoucher
 
         private void tlStrpBtnReview_Click(object sender, EventArgs e)
         {
-            try
-            {
-                ToggleReview();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            ToggleReview();
         }
 
         private void tlsStrpBtnBckView_Click(object sender, EventArgs e)
         {
-            try
-            {
-                customTabControl1.SelectedTab = tbPgMain;
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            customTabControl1.SelectedTab = tbPgMain;
         }
 
         private void tlStrpBtnBckReview_Click(object sender, EventArgs e)
         {
-            try
-            {
-                customTabControl1.SelectedTab = tbPgMain;
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            customTabControl1.SelectedTab = tbPgMain;
         }
 
         private void btnApprove_Click(object sender, EventArgs e)
         {
-            try
+            if (ucJevAudit.ApproveJev(out string jevNo, out string trnsctnNo))
             {
-                if (ucJevAudit.ApproveJev(out string jevNo, out string trnsctnNo))
-                {
-                    Helper.MessageBoxSuccess($"JEV (Transaction No.{trnsctnNo}) has been Approved\nJEV No. {jevNo}");
-                    int rowIndex = dgJEV.CurrentCell.RowIndex;
-                    int jevId = Convert.ToInt32(dgJEV.Rows[rowIndex].Cells["id"].Value);
-                    ucJevView.OnLoad(true, jevId);
-                    ucJevView.SetJevReadOnly(true);
-                    customTabControl1.SelectedTab = tbPgView;
-                    ucJevAudit.ResetForm();
-                    LoadJevRecords();
-                }
+                Helper.MessageBoxSuccess($"JEV (Transaction No.{trnsctnNo}) has been Approved\nJEV No. {jevNo}");
+                int rowIndex = dgJEV.CurrentCell.RowIndex;
+                int jevId = Convert.ToInt32(dgJEV.Rows[rowIndex].Cells["id"].Value);
+                ucJevView.OnLoad(true, jevId);
+                ucJevView.SetJevReadOnly(true);
+                customTabControl1.SelectedTab = tbPgView;
+                ucJevAudit.ResetForm();
+                LoadJevRecords();
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void btnDisapprove_Click(object sender, EventArgs e)
         {
-            try
+            if (ucJevAudit.DisapproveJev(out string trnsctnNo))
             {
-                if (ucJevAudit.DisapproveJev(out string trnsctnNo))
-                {
-                    Helper.MessageBoxSuccess($"JEV (Transaction No.{trnsctnNo}) has been Disapproved");
-                    int rowIndex = dgJEV.CurrentCell.RowIndex;
-                    int jevId = Convert.ToInt32(dgJEV.Rows[rowIndex].Cells["id"].Value);
-                    ucJevAudit.OnLoad(true, jevId);
-                    ucJevAudit.SetJevReadOnly(true);
-                    LoadJevRecords();
-                }
+                Helper.MessageBoxSuccess($"JEV (Transaction No.{trnsctnNo}) has been Disapproved");
+                int rowIndex = dgJEV.CurrentCell.RowIndex;
+                int jevId = Convert.ToInt32(dgJEV.Rows[rowIndex].Cells["id"].Value);
+                ucJevAudit.OnLoad(true, jevId);
+                ucJevAudit.SetJevReadOnly(true);
+                LoadJevRecords();
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            try
+            if (ucJevAudit.CancelJev(out string trnsctnNo))
             {
-                if (ucJevAudit.CancelJev(out string trnsctnNo))
-                {
-                    Helper.MessageBoxSuccess($"JEV (Transaction No.{trnsctnNo}) has been Cancelled");
-                    int rowIndex = dgJEV.CurrentCell.RowIndex;
-                    int jevId = Convert.ToInt32(dgJEV.Rows[rowIndex].Cells["id"].Value);
-                    ucJevAudit.OnLoad(true, jevId);
-                    ucJevAudit.SetJevReadOnly(true);
-                    LoadJevRecords();
-                }
+                Helper.MessageBoxSuccess($"JEV (Transaction No.{trnsctnNo}) has been Cancelled");
+                int rowIndex = dgJEV.CurrentCell.RowIndex;
+                int jevId = Convert.ToInt32(dgJEV.Rows[rowIndex].Cells["id"].Value);
+                ucJevAudit.OnLoad(true, jevId);
+                ucJevAudit.SetJevReadOnly(true);
+                LoadJevRecords();
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
-            try
-            {
-                string searchTxt = txtSearch.Text;
+            string searchTxt = txtSearch.Text;
 
-                if (searchTxt.Length > 2)
-                {
-                    LoadJevRecords();
-                }
+            if (searchTxt.Length > 2)
+            {
+                LoadJevRecords();
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void cmbxJournals_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            try
-            {
-                LoadJevRecords();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            LoadJevRecords();
         }
 
         private void cmbxFunds_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            try
-            {
-                LoadJevRecords();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            LoadJevRecords();
         }
 
         private void nudYear_ValueChanged(object sender, EventArgs e)
         {
-            try
-            {
-                LoadJevRecords();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            LoadJevRecords();
         }
 
         private void radPending_CheckedChanged(object sender, EventArgs e)
         {
-            try
-            {
-                LoadJevRecords();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            LoadJevRecords();
         }
 
         private void radApproved_CheckedChanged(object sender, EventArgs e)
         {
-            try
-            {
-                LoadJevRecords();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            LoadJevRecords();
         }
 
         private void radDisapproved_CheckedChanged(object sender, EventArgs e)
         {
-            try
-            {
-                LoadJevRecords();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            LoadJevRecords();
         }
 
         private void radCancelled_CheckedChanged(object sender, EventArgs e)
         {
-            try
-            {
-                LoadJevRecords();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            LoadJevRecords();
         }
 
         private void btnFrwdPagination_Click(object sender, EventArgs e)
         {
-            try
-            {
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void btnPrevPagination_Click(object sender, EventArgs e)
         {
-            try
-            {
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }
