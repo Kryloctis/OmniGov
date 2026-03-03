@@ -402,7 +402,6 @@ namespace OmniGov.App.Budget.Views.Obligations
             dtDateRequest.Name = "dtDateRequest";
             dtDateRequest.Size = new Size(239, 23);
             dtDateRequest.TabIndex = 8;
-            dtDateRequest.ValueChanged += dtDateRequest_ValueChanged;
             //
             // label6
             //

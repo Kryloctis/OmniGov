@@ -207,8 +207,6 @@ namespace OmniGov.App.Budget.Views.Obligations
             SetStatus(ObligationRequestModel.Status.draft);
         }
 
-
-
         private void SetStatus(ObligationRequestModel.Status status)
         {
             string _status = status.ToString();
@@ -846,10 +844,6 @@ namespace OmniGov.App.Budget.Views.Obligations
         private void txtPayee_Validated(object sender, EventArgs e)
         {
             Helper.ClearErrorTextBox(errorProvider1, txtPayee);
-        }
-
-        private void dtDateRequest_ValueChanged(object sender, EventArgs e)
-        {
         }
     }
 }
