@@ -27,11 +27,7 @@ namespace OmniGov.App.Accounting.Views.Reports.TrialBalance
 
         private void btnRetrieve_Click(object sender, EventArgs e)
         {
-            try
-            {
-                LoadReport(reportViewer.LocalReport);
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            LoadReport(reportViewer.LocalReport);
         }
 
         private void GetDebitCredit(byte fundId, DateTime dateEntry, ushort generalLedgerId, out decimal balanceDebit, out decimal balanceCredit)
@@ -161,6 +157,3 @@ namespace OmniGov.App.Accounting.Views.Reports.TrialBalance
         }
     }
 }
-
-
-

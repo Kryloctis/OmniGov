@@ -20,11 +20,7 @@ namespace OmniGov.App.Accounting.Views.Reports.TrialBalance
 
         private void btnRetrieve_Click(object sender, EventArgs e)
         {
-            try
-            {
-                LoadReport(reportViewer.LocalReport);
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            LoadReport(reportViewer.LocalReport);
         }
 
         private void RecordsFilter(LocalReport report, byte hideZeroBalance)
@@ -184,14 +180,10 @@ namespace OmniGov.App.Accounting.Views.Reports.TrialBalance
 
         private void cbHideZeroBalance_CheckedChanged(object sender, EventArgs e)
         {
-            try
-            {
-                if (cbHideZeroBalance.Checked)
-                    RecordsFilter(reportViewer.LocalReport, 1);
-                else
-                    RecordsFilter(reportViewer.LocalReport, 0);
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            if (cbHideZeroBalance.Checked)
+                RecordsFilter(reportViewer.LocalReport, 1);
+            else
+                RecordsFilter(reportViewer.LocalReport, 0);
         }
 
         internal void OnLoad()
@@ -201,6 +193,3 @@ namespace OmniGov.App.Accounting.Views.Reports.TrialBalance
         }
     }
 }
-
-
-
