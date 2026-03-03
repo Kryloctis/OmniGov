@@ -24,39 +24,23 @@ namespace OmniGov.App.Views.Manage.BusinessAddOnCharges
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            try
-            {
-                _ = new frmAddBusinessAddOnCharges(this).ShowDialog();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            _ = new frmAddBusinessAddOnCharges(this).ShowDialog();
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            try
-            {
-                int businessAddOnChargesID = Convert.ToInt32(dgBusinessAddOnCharges.SelectedRows[0].Cells[0].Value);
-                _ = new frmEditBusinessAddOnCharges(businessAddOnChargesID, this).ShowDialog();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            int businessAddOnChargesID = Convert.ToInt32(dgBusinessAddOnCharges.SelectedRows[0].Cells[0].Value);
+            _ = new frmEditBusinessAddOnCharges(businessAddOnChargesID, this).ShowDialog();
         }
 
         private void frmBusinessAddOnCharges_Load(object sender, EventArgs e)
         {
-            try
-            {
-                LoadBusinessAddOnCharges();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            LoadBusinessAddOnCharges();
         }
 
         private void toolStripTextBoxSearch_TextChanged(object sender, EventArgs e)
         {
-            try
-            {
-                LoadBusinessAddOnCharges();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            LoadBusinessAddOnCharges();
         }
 
         private void LoadRecordTimeStamp(DataGridView dataGridView)
@@ -70,52 +54,37 @@ namespace OmniGov.App.Views.Manage.BusinessAddOnCharges
 
         private void dgBusinessCategories_SelectionChanged(object sender, EventArgs e)
         {
-            try
-            {
-                Helper.EnableDisableToolStripButtons(dgBusinessAddOnCharges, btnEdit, btnDelete);
-                LoadRecordTimeStamp(dgBusinessAddOnCharges);
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            Helper.EnableDisableToolStripButtons(dgBusinessAddOnCharges, btnEdit, btnDelete);
+            LoadRecordTimeStamp(dgBusinessAddOnCharges);
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            try
-            {
-                int deletedRecordCount;
+            int deletedRecordCount;
 
-                if (DeleteBusinessAddOnCharges(out deletedRecordCount))
-                {
-                    Helper.MessageBoxSuccess($"{deletedRecordCount} record/s has been deleted.");
-                    LoadBusinessAddOnCharges();
-                }
+            if (DeleteBusinessAddOnCharges(out deletedRecordCount))
+            {
+                Helper.MessageBoxSuccess($"{deletedRecordCount} record/s has been deleted.");
+                LoadBusinessAddOnCharges();
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private bool DeleteBusinessAddOnCharges(out int deletedCount)
         {
-            try
-            {
-                var businessAdOnChargesModelList = new List<BusinessAddOnChargesModel>();
-                int rowCount = dgBusinessAddOnCharges.SelectedRows.Count;
+            var businessAdOnChargesModelList = new List<BusinessAddOnChargesModel>();
+            int rowCount = dgBusinessAddOnCharges.SelectedRows.Count;
 
-                if (Helper.MessageBoxConfirmDelete(rowCount))
+            if (Helper.MessageBoxConfirmDelete(rowCount))
+            {
+                foreach (DataGridViewRow row in dgBusinessAddOnCharges.SelectedRows)
                 {
-                    foreach (DataGridViewRow row in dgBusinessAddOnCharges.SelectedRows)
-                    {
-                        int businessAddOnID = Convert.ToInt32(row.Cells["id"].Value);
-                        var model = new BusinessAddOnChargesModel() { BusinessAddOnChargesID = businessAddOnID };
-                        businessAdOnChargesModelList.Add(model);
-                    }
-
-                    deletedCount = rowCount;
-                    return TreasuryFactory.BusinessAddOnChargesRepository().Delete(businessAdOnChargesModelList);
+                    int businessAddOnID = Convert.ToInt32(row.Cells["id"].Value);
+                    var model = new BusinessAddOnChargesModel() { BusinessAddOnChargesID = businessAddOnID };
+                    businessAdOnChargesModelList.Add(model);
                 }
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
+
+                deletedCount = rowCount;
+                return TreasuryFactory.BusinessAddOnChargesRepository().Delete(businessAdOnChargesModelList);
             }
 
             deletedCount = 0;
