@@ -14,9 +14,11 @@ namespace OmniGov.App.Budget.Views.Dashboard
 
         internal string GetFormErrors()
         {
-            var errorArray = new string[1];
+            var errorArray = new string[1]
+            {
+                cmbxFpp.Tag.ToString()
+            };
 
-            errorArray[0] = cmbxFpp.Tag.ToString();
             return Factory.CreateErrors(errorArray).GenerateErrorMessage();
         }
 
@@ -105,16 +107,8 @@ namespace OmniGov.App.Budget.Views.Dashboard
 
         private void CmbxFpp_SelectedValueChanged(object sender, EventArgs e)
         {
-            try
-            {
-                if (!string.IsNullOrWhiteSpace(cmbxFpp.SelectedValue.ToString()))
-                    LoadSubFPP(cmbxFpp.SelectedValue.ToString());
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        private void cmbxFPP_KeyDown(object sender, KeyEventArgs e)
-        {
+            if (!string.IsNullOrWhiteSpace(cmbxFpp.SelectedValue.ToString()))
+                LoadSubFPP(cmbxFpp.SelectedValue.ToString());
         }
 
         private decimal GetAppropriations(string fppId, string subFppId, int fundId, DateTime dateAsOf, int allotmentClassId, byte isContinuing)
@@ -316,11 +310,7 @@ namespace OmniGov.App.Budget.Views.Dashboard
 
         private void btnRefresh_Click(object sender, EventArgs e)
         {
-            try
-            {
-                LoadBudgetDashboardContents();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            LoadBudgetDashboardContents();
         }
     }
 }

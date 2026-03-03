@@ -578,7 +578,6 @@ namespace OmniGov.App.Budget.Views.Dashboard
             cmbxFpp.Size = new System.Drawing.Size(200, 23);
             cmbxFpp.TabIndex = 79;
             cmbxFpp.SelectedValueChanged += CmbxFpp_SelectedValueChanged;
-            cmbxFpp.KeyDown += cmbxFPP_KeyDown;
             // 
             // cmbSubFPP
             // 

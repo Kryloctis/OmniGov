@@ -33,29 +33,17 @@ namespace OmniGov.App.Budget.Views.Dashboard
 
         private void tlStrpBtnAppropriations_Click(object sender, EventArgs e)
         {
-            try
-            {
-                _ = new frmBudgetAppropriations().ShowDialog();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            _ = new frmBudgetAppropriations().ShowDialog();
         }
 
         private void tlStrpBtnAlltmntRelease_Click(object sender, EventArgs e)
         {
-            try
-            {
-                _ = new frmAllotmentReleaseMain().ShowDialog();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            _ = new frmAllotmentReleaseMain().ShowDialog();
         }
 
         private void tlStrpBtnObligations_Click(object sender, EventArgs e)
         {
-            try
-            {
-                _ = new frmObligations().ShowDialog();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            _ = new frmObligations().ShowDialog();
         }
     }
 }
