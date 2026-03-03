@@ -18,11 +18,7 @@ namespace OmniGov.App.Views.Manage.Barangay
 
         private void frmAddBarangay_Load(object sender, EventArgs e)
         {
-            try
-            {
-                uc.OnLoad(false, null);
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            uc.OnLoad(false, null);
         }
 
         private bool SaveData()
@@ -38,7 +34,17 @@ namespace OmniGov.App.Views.Manage.Barangay
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            try
+            if (SaveData())
+            {
+                Helper.MessageBoxSuccess("Barangay has been saved.");
+                frmBarangay.LoadRecords();
+                uc.ResetForm();
+            }
+        }
+
+        private void frmAddBarangay_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.S && e.Control)
             {
                 if (SaveData())
                 {
@@ -47,25 +53,6 @@ namespace OmniGov.App.Views.Manage.Barangay
                     uc.ResetForm();
                 }
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        private void frmAddBarangay_KeyDown(object sender, KeyEventArgs e)
-        {
-            try
-            {
-                if (e.KeyCode == Keys.S && e.Control)
-                {
-                    if (SaveData())
-                    {
-                        Helper.MessageBoxSuccess("Barangay has been saved.");
-                        frmBarangay.LoadRecords();
-                        uc.ResetForm();
-                    }
-                }
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }
-
