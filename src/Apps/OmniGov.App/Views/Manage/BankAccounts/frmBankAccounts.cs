@@ -1,4 +1,3 @@
-using MySql.Data.MySqlClient;
 using OmniGov.App.Helpers;
 using OmniGov.Treasury.Data.Factories;
 using OmniGov.Treasury.Domain.Entities;
@@ -18,24 +17,16 @@ namespace OmniGov.App.Views.Manage.BankAccounts
 
         private void frmBankAccounts_Load(object sender, EventArgs e)
         {
-            try
-            {
-                HelperLoadRecords.ComboboxRowLimitFilter(cmbxRowLimit);
-                LoadRecords();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            HelperLoadRecords.ComboboxRowLimitFilter(cmbxRowLimit);
+            LoadRecords();
         }
 
         private void dgBankAccounts_SelectionChanged(object sender, EventArgs e)
         {
-            try
-            {
-                var columnIndex = new byte[] { 6, 7 };
-                Helper.ShowRecordTimestamp(dgBankAccounts, columnIndex, lblCreatedAt, lblUpdatedAt);
+            var columnIndex = new byte[] { 6, 7 };
+            Helper.ShowRecordTimestamp(dgBankAccounts, columnIndex, lblCreatedAt, lblUpdatedAt);
 
-                Helper.EnableDisableToolStripButtons(dgBankAccounts, btnEdit, btnDelete);
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            Helper.EnableDisableToolStripButtons(dgBankAccounts, btnEdit, btnDelete);
         }
 
         private bool DeleteData()
@@ -58,41 +49,23 @@ namespace OmniGov.App.Views.Manage.BankAccounts
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            try
+            if (DeleteData())
             {
-                if (DeleteData())
-                {
-                    Helper.MessageBoxError($"{dgBankAccounts.SelectedRows.Count} record/s has been deleted.");
-                    LoadRecords();
-                }
+                Helper.MessageBoxError($"{dgBankAccounts.SelectedRows.Count} record/s has been deleted.");
+                LoadRecords();
             }
-            catch (MySqlException ex)
-            {
-                if (ex.Number == 1451)
-                    Helper.MessageBoxError("Can't delete bank account. The record/s has been used as referenced to another record.");
-            }
-            catch (Exception ex)
-            { Helper.MessageBoxError(ex.Message); }
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            try
-            {
-                _ = new frmAddBankAccounts(this).ShowDialog();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            _ = new frmAddBankAccounts(this).ShowDialog();
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            try
-            {
-                int rowIndex = dgBankAccounts.CurrentRow.Index;
-                int bankAccountId = Convert.ToInt32(dgBankAccounts.Rows[rowIndex].Cells["id"].Value);
-                _ = new frmEditBankAccounts(this, bankAccountId).ShowDialog();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            int rowIndex = dgBankAccounts.CurrentRow.Index;
+            int bankAccountId = Convert.ToInt32(dgBankAccounts.Rows[rowIndex].Cells["id"].Value);
+            _ = new frmEditBankAccounts(this, bankAccountId).ShowDialog();
         }
 
         internal void LoadRecords()
@@ -143,20 +116,12 @@ namespace OmniGov.App.Views.Manage.BankAccounts
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            try
-            {
-                LoadRecords();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            LoadRecords();
         }
 
         private void cmbxRowLimit_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            try
-            {
-                LoadRecords();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            LoadRecords();
         }
     }
 }

@@ -18,25 +18,17 @@ namespace OmniGov.App.Views.Manage.BankAccounts
 
         private void frmAddBankAccounts_Load(object sender, EventArgs e)
         {
-            try
-            {
-                uc.OnLoad(false, null);
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            uc.OnLoad(false, null);
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            try
+            if (SaveData())
             {
-                if (SaveData())
-                {
-                    Helper.MessageBoxSuccess("Account has been saved.");
-                    frmBankAccounts.LoadRecords();
-                    uc.ResetForm();
-                }
+                Helper.MessageBoxSuccess("Account has been saved.");
+                frmBankAccounts.LoadRecords();
+                uc.ResetForm();
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private bool SaveData()
@@ -52,19 +44,15 @@ namespace OmniGov.App.Views.Manage.BankAccounts
 
         private void frmAddBankAccounts_KeyDown(object sender, KeyEventArgs e)
         {
-            try
+            if (e.KeyCode == Keys.S && e.Control)
             {
-                if (e.KeyCode == Keys.S && e.Control)
+                if (SaveData())
                 {
-                    if (SaveData())
-                    {
-                        Helper.MessageBoxSuccess("Bank account has been saved.");
-                        frmBankAccounts.LoadRecords();
-                        uc.ResetForm();
-                    }
+                    Helper.MessageBoxSuccess("Bank account has been saved.");
+                    frmBankAccounts.LoadRecords();
+                    uc.ResetForm();
                 }
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }
