@@ -72,60 +72,45 @@ namespace OmniGov.App.Budget.Views.SupplementalAppropriations
 
         private void LoadAccounts()
         {
-            try
+            cmbxAccount.DroppedDown = false;
+
+            if (DatatableAccounts().Rows.Count == 0) return;
+
+            var accountDict = new Dictionary<int, string>();
+            foreach (DataRow item in DatatableAccounts().Rows)
             {
-                cmbxAccount.DroppedDown = false;
+                int accountId = Convert.ToInt32(item["general_ledger_accounts_id"]);
+                string accountName = $"{item["account_code"]} - {item["ledger_name"]}";
 
-                if (DatatableAccounts().Rows.Count == 0) return;
-
-                var accountDict = new Dictionary<int, string>();
-                foreach (DataRow item in DatatableAccounts().Rows)
-                {
-                    int accountId = Convert.ToInt32(item["general_ledger_accounts_id"]);
-                    string accountName = $"{item["account_code"]} - {item["ledger_name"]}";
-
-                    accountDict.Add(accountId, accountName);
-                }
-
-                cmbxAccount.DataSource = new BindingSource(accountDict, null);
-                cmbxAccount.DisplayMember = "value";
-                cmbxAccount.ValueMember = "key";
-                Cursor.Current = Cursors.Default;
-
-                Helper.ClearErrorComboBox(errorProvider1, cmbxAccount);
+                accountDict.Add(accountId, accountName);
             }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
+
+            cmbxAccount.DataSource = new BindingSource(accountDict, null);
+            cmbxAccount.DisplayMember = "value";
+            cmbxAccount.ValueMember = "key";
+            Cursor.Current = Cursors.Default;
+
+            Helper.ClearErrorComboBox(errorProvider1, cmbxAccount);
         }
 
         private void CmbxLedgerAccount_TextChanged(object sender, EventArgs e)
         {
-            try
+            if (string.IsNullOrEmpty(cmbxAccount.Text))
             {
-                if (string.IsNullOrEmpty(cmbxAccount.Text))
-                {
-                    cmbxAccount.TextChanged -= new EventHandler(CmbxLedgerAccount_TextChanged);
-                    LoadAccounts();
-                    cmbxAccount.SelectedIndex = -1;
-                    cmbxAccount.TextChanged += new EventHandler(CmbxLedgerAccount_TextChanged);
-                }
+                cmbxAccount.TextChanged -= new EventHandler(CmbxLedgerAccount_TextChanged);
+                LoadAccounts();
+                cmbxAccount.SelectedIndex = -1;
+                cmbxAccount.TextChanged += new EventHandler(CmbxLedgerAccount_TextChanged);
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void cmbxAccount_KeyDown(object sender, KeyEventArgs e)
         {
-            try
+            if (e.KeyCode == Keys.F1 && cmbxAccount.FindStringExact(cmbxAccount.Text) == -1 && !string.IsNullOrEmpty(cmbxAccount.Text))
             {
-                if (e.KeyCode == Keys.F1 && cmbxAccount.FindStringExact(cmbxAccount.Text) == -1 && !string.IsNullOrEmpty(cmbxAccount.Text))
-                {
-                    LoadAccounts();
-                    cmbxAccount.DroppedDown = true;
-                }
+                LoadAccounts();
+                cmbxAccount.DroppedDown = true;
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void EnableDisableButtons(DataGridView dgv, Button btnEdit, Button btnDelete)
@@ -183,11 +168,7 @@ namespace OmniGov.App.Budget.Views.SupplementalAppropriations
 
         private void dgSupplementalAppropriations_SelectionChanged(object sender, EventArgs e)
         {
-            try
-            {
-                EnableDisableButtons(dgSupplementalAppropriations, btnEdit, btnRemove);
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            EnableDisableButtons(dgSupplementalAppropriations, btnEdit, btnRemove);
         }
 
         private void lnkSelectAll_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -197,11 +178,7 @@ namespace OmniGov.App.Budget.Views.SupplementalAppropriations
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            try
-            {
-                ShowSupplementalAppropriationAdd();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            ShowSupplementalAppropriationAdd();
         }
 
         private void ShowSupplementalAppropriationAdd()
@@ -219,15 +196,11 @@ namespace OmniGov.App.Budget.Views.SupplementalAppropriations
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            try
+            int selectedRowCount = dgSupplementalAppropriations.SelectedRows.Count;
+            if (selectedRowCount == 1)
             {
-                int selectedRowCount = dgSupplementalAppropriations.SelectedRows.Count;
-                if (selectedRowCount == 1)
-                {
-                    ShowSupplementalAppropriationEdit();
-                }
+                ShowSupplementalAppropriationEdit();
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void ShowSupplementalAppropriationEdit()
@@ -253,21 +226,17 @@ namespace OmniGov.App.Budget.Views.SupplementalAppropriations
 
         private void btnRemove_Click(object sender, EventArgs e)
         {
-            try
+            int selectedRowCount = dgSupplementalAppropriations.SelectedRows.Count;
+
+            if (MessageBoxConfirmDelete(selectedRowCount))
             {
-                int selectedRowCount = dgSupplementalAppropriations.SelectedRows.Count;
-
-                if (MessageBoxConfirmDelete(selectedRowCount))
+                foreach (DataGridViewRow row in dgSupplementalAppropriations.SelectedRows)
                 {
-                    foreach (DataGridViewRow row in dgSupplementalAppropriations.SelectedRows)
-                    {
-                        dgSupplementalAppropriations.Rows.RemoveAt(row.Index);
-                    }
-
-                    GetTotalSupplementalAmount();
+                    dgSupplementalAppropriations.Rows.RemoveAt(row.Index);
                 }
+
+                GetTotalSupplementalAmount();
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private bool MessageBoxConfirmDelete(int rowCount)
@@ -287,26 +256,18 @@ namespace OmniGov.App.Budget.Views.SupplementalAppropriations
 
         private void dgSupplementalAppropriations_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
         {
-            try
-            {
-                SetEnableDisableDetailFields(false);
-                GetTotalSupplementalAmount();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            SetEnableDisableDetailFields(false);
+            GetTotalSupplementalAmount();
         }
 
         private void dgSupplementalAppropriations_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
         {
-            try
-            {
-                int rowCount = dgSupplementalAppropriations.RowCount;
+            int rowCount = dgSupplementalAppropriations.RowCount;
 
-                if (rowCount == 0)
-                    SetEnableDisableDetailFields(true);
+            if (rowCount == 0)
+                SetEnableDisableDetailFields(true);
 
-                GetTotalSupplementalAmount();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            GetTotalSupplementalAmount();
         }
 
         internal void SetEnableDisableDetailFields(bool isEnabled)
@@ -392,11 +353,7 @@ namespace OmniGov.App.Budget.Views.SupplementalAppropriations
 
         private void frmSupplementalAppropriationsMain_Load(object sender, EventArgs e)
         {
-            try
-            {
-                OnLoad();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            OnLoad();
         }
 
         private void OnLoad()
@@ -451,22 +408,18 @@ namespace OmniGov.App.Budget.Views.SupplementalAppropriations
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            try
+            if (SaveData())
             {
-                if (SaveData())
-                {
-                    string generalLedgerAccountName = cmbxAccount.Text;
-                    string remarks = txtRemarks.Text;
-                    string objectOfExpenditures = $"   {generalLedgerAccountName}{(string.IsNullOrEmpty(remarks) ? string.Empty : $" ? {remarks}")}";
-                    string subFPP = cmbxSubFPP.Text;
-                    string message = budgetAppropriationId == 0 ? "Supplemental Appropriation has been saved." : "Changes has been saved.";
+                string generalLedgerAccountName = cmbxAccount.Text;
+                string remarks = txtRemarks.Text;
+                string objectOfExpenditures = $"   {generalLedgerAccountName}{(string.IsNullOrEmpty(remarks) ? string.Empty : $" ? {remarks}")}";
+                string subFPP = cmbxSubFPP.Text;
+                string message = budgetAppropriationId == 0 ? "Supplemental Appropriation has been saved." : "Changes has been saved.";
 
-                    Helper.MessageBoxSuccess(message);
-                    _frmBudgetAppropriations.LoadBudgetAppropriationRecords();
-                    _frmBudgetAppropriations.DatagridViewRecordFinder(_frmBudgetAppropriations.dgBudgetAppropriations, objectOfExpenditures, subFPP);
-                }
+                Helper.MessageBoxSuccess(message);
+                _frmBudgetAppropriations.LoadBudgetAppropriationRecords();
+                _frmBudgetAppropriations.DatagridViewRecordFinder(_frmBudgetAppropriations.dgBudgetAppropriations, objectOfExpenditures, subFPP);
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void btnClose_Click(object sender, EventArgs e)
@@ -487,11 +440,7 @@ namespace OmniGov.App.Budget.Views.SupplementalAppropriations
 
         private void cmbxSubFPP_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            try
-            {
-                e.Cancel = SubFPPNameExist(errorProvider1, cmbxSubFPP, "Invalid Sub FPP. Please select on the list.");
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            e.Cancel = SubFPPNameExist(errorProvider1, cmbxSubFPP, "Invalid Sub FPP. Please select on the list.");
         }
 
         private void cmbxSubFPP_Validated(object sender, EventArgs e)
@@ -555,18 +504,14 @@ namespace OmniGov.App.Budget.Views.SupplementalAppropriations
 
         private void cmbxAccount_Validating(object sender, CancelEventArgs e)
         {
-            try
-            {
-                if (string.IsNullOrEmpty(cmbxAccount.Text))
-                    e.Cancel = Helper.ShowErrorComboBoxEmpty(errorProvider1, cmbxAccount, "General Ledger Account");
-                else if (ShowErrorLedgerNameNotExist())
-                    e.Cancel = ShowErrorLedgerNameNotExist();
-                else if (ShowErrorBudgetAppropriationContinuing())
-                    e.Cancel = ShowErrorBudgetAppropriationContinuing();
-                else
-                    e.Cancel = ShowErrorBudgetAppropriationExist();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            if (string.IsNullOrEmpty(cmbxAccount.Text))
+                e.Cancel = Helper.ShowErrorComboBoxEmpty(errorProvider1, cmbxAccount, "General Ledger Account");
+            else if (ShowErrorLedgerNameNotExist())
+                e.Cancel = ShowErrorLedgerNameNotExist();
+            else if (ShowErrorBudgetAppropriationContinuing())
+                e.Cancel = ShowErrorBudgetAppropriationContinuing();
+            else
+                e.Cancel = ShowErrorBudgetAppropriationExist();
         }
 
         private void cmbxAccount_Validated(object sender, EventArgs e)
@@ -575,4 +520,3 @@ namespace OmniGov.App.Budget.Views.SupplementalAppropriations
         }
     }
 }
-
