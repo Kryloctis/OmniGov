@@ -44,19 +44,15 @@ namespace OmniGov.App.Views.Manage.AllotmentClasses
 
         private void frmAddAllotmentClasses_KeyDown(object sender, KeyEventArgs e)
         {
-            try
+            if (e.KeyCode == Keys.S && e.Control)
             {
-                if (e.KeyCode == Keys.S && e.Control)
+                if (SaveData())
                 {
-                    if (SaveData())
-                    {
-                        Helper.MessageBoxSuccess("Allotment class has been saved.");
-                        frmAllotmentClasses.LoadRecords();
-                        uc.ResetForm();
-                    }
+                    Helper.MessageBoxSuccess("Allotment class has been saved.");
+                    frmAllotmentClasses.LoadRecords();
+                    uc.ResetForm();
                 }
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }
