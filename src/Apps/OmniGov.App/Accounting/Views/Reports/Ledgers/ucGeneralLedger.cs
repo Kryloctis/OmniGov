@@ -56,14 +56,10 @@ namespace OmniGov.App.Accounting.Views.Reports.Ledgers
 
         private void CmbxLedgerAccout_TextChanged(object sender, EventArgs e)
         {
-            try
-            {
-                string accountName = cmbxAccount.Text.Trim();
+            string accountName = cmbxAccount.Text.Trim();
 
-                if (string.IsNullOrWhiteSpace(accountName))
-                    LoadAccounts();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            if (string.IsNullOrWhiteSpace(accountName))
+                LoadAccounts();
         }
 
         private void LoadFunds()
@@ -232,49 +228,37 @@ namespace OmniGov.App.Accounting.Views.Reports.Ledgers
 
         private void btnRetrieve_Click(object sender, EventArgs e)
         {
-            try
+            if (!this.ValidateChildren())
             {
-                if (!this.ValidateChildren())
-                {
-                    Helper.MessageBoxError(GetFormErrors());
-                    return;
-                }
-
-                if (!backgroundWorker1.IsBusy)
-                    backgroundWorker1.RunWorkerAsync();
+                Helper.MessageBoxError(GetFormErrors());
+                return;
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+
+            if (!backgroundWorker1.IsBusy)
+                backgroundWorker1.RunWorkerAsync();
         }
 
         private void cmbAccount_KeyDown(object sender, KeyEventArgs e)
         {
-            try
+            string searchText = cmbxAccount.Text.Trim();
+
+            if (e.KeyCode == Keys.Enter)
             {
-                string searchText = cmbxAccount.Text.Trim();
-
-                if (e.KeyCode == Keys.Enter)
-                {
-                    LoadAccounts(searchText, true);
-                    e.Handled = true;
-                    e.SuppressKeyPress = true;
-                }
-
-                if (e.KeyData == (Keys.Control | Keys.V))
-                    LoadAccounts(searchText, true);
+                LoadAccounts(searchText, true);
+                e.Handled = true;
+                e.SuppressKeyPress = true;
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+
+            if (e.KeyData == (Keys.Control | Keys.V))
+                LoadAccounts(searchText, true);
         }
 
         private void backgroundWorker1_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
-            try
-            {
-                Invoke((MethodInvoker)delegate
-                  {
-                      LoadReport(reportViewer.LocalReport);
-                  });
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            Invoke((MethodInvoker)delegate
+              {
+                  LoadReport(reportViewer.LocalReport);
+              });
         }
 
         private void backgroundWorker1_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
@@ -350,6 +334,3 @@ namespace OmniGov.App.Accounting.Views.Reports.Ledgers
         }
     }
 }
-
-
-

@@ -181,44 +181,32 @@ namespace OmniGov.App.Accounting.Views.Reports.Ledgers
 
         private void btnRetrieve_Click(object sender, EventArgs e)
         {
-            try
+            if (!this.ValidateChildren())
             {
-                if (!this.ValidateChildren())
-                {
-                    Helper.MessageBoxError(GetFormErrors());
-                    return;
-                }
-
-                if (!backgroundWorker1.IsBusy)
-                    LoadReport(reportViewer.LocalReport);
+                Helper.MessageBoxError(GetFormErrors());
+                return;
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+
+            if (!backgroundWorker1.IsBusy)
+                LoadReport(reportViewer.LocalReport);
         }
 
         private void cmbxAccount_KeyDown(object sender, KeyEventArgs e)
         {
             string searchText = cmbxAccount.Text.Trim();
 
-            try
+            if (e.KeyCode == Keys.Enter)
             {
-                if (e.KeyCode == Keys.Enter)
-                {
-                    e.Handled = true;
-                    e.SuppressKeyPress = true;
-                    LoadAccounts(searchText, true);
-                }
+                e.Handled = true;
+                e.SuppressKeyPress = true;
+                LoadAccounts(searchText, true);
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void cmbxAccount_TextChanged(object sender, EventArgs e)
         {
-            try
-            {
-                if (string.IsNullOrWhiteSpace(cmbxAccount.Text.Trim()))
-                    LoadAccounts();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            if (string.IsNullOrWhiteSpace(cmbxAccount.Text.Trim()))
+                LoadAccounts();
         }
 
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
@@ -294,6 +282,3 @@ namespace OmniGov.App.Accounting.Views.Reports.Ledgers
         }
     }
 }
-
-
-

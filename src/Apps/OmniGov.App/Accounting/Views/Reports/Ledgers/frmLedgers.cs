@@ -21,12 +21,8 @@ namespace OmniGov.App.Accounting.Views.Reports.Ledgers
 
         private void frmLedgers_Load(object sender, EventArgs e)
         {
-            try
-            {
-                var selectedtTabPage = tabControlLedgers.SelectedTab;
-                ToggleReport(selectedtTabPage);
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            var selectedtTabPage = tabControlLedgers.SelectedTab;
+            ToggleReport(selectedtTabPage);
         }
 
         private void ToggleReport(TabPage tabPage)
@@ -57,12 +53,8 @@ namespace OmniGov.App.Accounting.Views.Reports.Ledgers
 
         private void tabControlLedgers_SelectedIndexChanged(object sender, EventArgs e)
         {
-            try
-            {
-                var selectedtTabPage = tabControlLedgers.SelectedTab;
-                ToggleReport(selectedtTabPage);
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            var selectedtTabPage = tabControlLedgers.SelectedTab;
+            ToggleReport(selectedtTabPage);
         }
     }
 }
