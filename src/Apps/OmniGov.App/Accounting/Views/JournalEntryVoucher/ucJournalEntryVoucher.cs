@@ -424,8 +424,7 @@ namespace OmniGov.App.Accounting.Views.JournalEntryVoucher
         {
             int count = dgAccounts.SelectedRows.Count;
             if (count == 0) return;
-
-            string msg = $"Are you sure you want to remove {(count == 1 ? "the accounting entry" : $"{count} accounting entries"})?";
+            string msg = $"Are you sure you want to remove {(count == 1 ? "the accounting entry" : $"{count} accounting entries")}?";
 
             if (MessageBox.Show(msg, "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
             {
