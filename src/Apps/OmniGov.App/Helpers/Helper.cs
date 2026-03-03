@@ -78,38 +78,28 @@ namespace OmniGov.App.Helpers
                 int decimalPart;
 
                 // separate input number string to 2 parts by "."(if have): integer and decimal
-                try
-                {
-                    int pos = strNum.IndexOf('.');
 
-                    if (pos == -1)
-                    {
-                        integerPart = int.Parse(strNum);
-                        decimalPart = 0;
-                    }
-                    else
-                    {
-                        integerPart = int.Parse(strNum.Substring(0, pos));
+                int pos = strNum.IndexOf('.');
 
-                        string strDecimalPart = strNum.Substring(pos + 1);
-                        if (strDecimalPart == "00")
-                        {
-                            strDecimalPart = "0";
-                        }
-                        if (strDecimalPart.Length == 1 && strDecimalPart[0] != '0')
-                        {
-                            strDecimalPart = strDecimalPart + '0';
-                        }
-                        decimalPart = int.Parse(strDecimalPart);
+                if (pos == -1)
+                {
+                    integerPart = int.Parse(strNum);
+                    decimalPart = 0;
+                }
+                else
+                {
+                    integerPart = int.Parse(strNum.Substring(0, pos));
+
+                    string strDecimalPart = strNum.Substring(pos + 1);
+                    if (strDecimalPart == "00")
+                    {
+                        strDecimalPart = "0";
                     }
-                }
-                catch (OverflowException)
-                {
-                    throw new ArgumentException(UtilConst.IllegalMsgOutOfRange);
-                }
-                catch (FormatException)
-                {
-                    throw new ArgumentException(UtilConst.IllegalMsgCommon);
+                    if (strDecimalPart.Length == 1 && strDecimalPart[0] != '0')
+                    {
+                        strDecimalPart = strDecimalPart + '0';
+                    }
+                    decimalPart = int.Parse(strDecimalPart);
                 }
 
                 // convert integer part to English words
@@ -522,19 +512,15 @@ namespace OmniGov.App.Helpers
         public static Dictionary<string, dynamic> GetUserDataById(int userId)
         {
             var dictUser = new Dictionary<string, dynamic>();
-            try
-            {
-                dictUser = Factory.UsersRepository().GetViewRecordById(userId);
 
-                string prefix = dictUser["prefix"];
-                string suffix = dictUser["suffix"];
+            dictUser = Factory.UsersRepository().GetViewRecordById(userId);
 
-                string userFullName = $" {(string.IsNullOrWhiteSpace(prefix) ? string.Empty : $"{prefix}.")} {dictUser["first_name"]} {dictUser["mid_initial"]}. {dictUser["last_name"]} {(string.IsNullOrWhiteSpace(suffix) ? string.Empty : $", {suffix}")}";
-                dictUser.Add("user_full_name", userFullName);
+            string prefix = dictUser["prefix"];
+            string suffix = dictUser["suffix"];
 
-                return dictUser;
-            }
-            catch (Exception ex) { MessageBoxError(ex.Message); }
+            string userFullName = $" {(string.IsNullOrWhiteSpace(prefix) ? string.Empty : $"{prefix}.")} {dictUser["first_name"]} {dictUser["mid_initial"]}. {dictUser["last_name"]} {(string.IsNullOrWhiteSpace(suffix) ? string.Empty : $", {suffix}")}";
+            dictUser.Add("user_full_name", userFullName);
+
             return dictUser;
         }
 

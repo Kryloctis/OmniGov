@@ -43,12 +43,8 @@ namespace OmniGov.App.Helpers
                 server is "127.0.0.1" or "::1")
                 return true;
 
-            try
-            {
-                using var ping = new Ping();
-                return ping.Send(server, 500)?.Status == IPStatus.Success;
-            }
-            catch { return false; }
+            using var ping = new Ping();
+            return ping.Send(server, 500)?.Status == IPStatus.Success;
         }
 
         public static List<LguProfile> GetAvailableProfiles()
