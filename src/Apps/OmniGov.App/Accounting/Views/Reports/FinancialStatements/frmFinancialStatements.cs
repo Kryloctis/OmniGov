@@ -22,20 +22,12 @@ namespace OmniGov.App.Accounting.Views.Reports.FinancialStatements
 
         private void frmFinancialStatements_Load(object sender, EventArgs e)
         {
-            try
-            {
-                ToggleContents(tabControlFinancialStatements);
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            ToggleContents(tabControlFinancialStatements);
         }
 
         private void tabControlFinancialStatements_SelectedIndexChanged(object sender, EventArgs e)
         {
-            try
-            {
-                ToggleContents(tabControlFinancialStatements);
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            ToggleContents(tabControlFinancialStatements);
         }
 
         private void ToggleContents(TabControl tabControl)

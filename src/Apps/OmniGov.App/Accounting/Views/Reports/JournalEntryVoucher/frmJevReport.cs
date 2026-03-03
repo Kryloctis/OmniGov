@@ -134,74 +134,64 @@ namespace OmniGov.App.Accounting.Views.Reports.JournalEntryVoucher
 
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
-            try
+            int totalCount = 0;
+            int progressCount = 0;
+
+            int jevId = (int)e.Argument;
+            var dtJevAccEntries = new dsLFS.dtJournalVoucherDataTable();
+            var dtJevAccEntriesDb = AccountingFactory.JEVAccountsRepository().GetViewRecordsByJevId(jevId);
+            totalCount = dtJevAccEntriesDb.Rows.Count;
+
+            ParseSignatory(out string CertSignatory, out string CertSignatoryTitle);
+
+            var dictJev = AccountingFactory.JEVRepository().GetViewRecordByJEVId(jevId);
+            int jrnlId = Convert.ToInt32(dictJev["journals_id"]);
+            SetJournalCustomFields(jevId, jrnlId);
+
+            foreach (DataRow item in dtJevAccEntriesDb.Rows)
             {
-                int totalCount = 0;
-                int progressCount = 0;
+                DataRow row = dtJevAccEntries.NewRow();
 
-                int jevId = (int)e.Argument;
-                var dtJevAccEntries = new dsLFS.dtJournalVoucherDataTable();
-                var dtJevAccEntriesDb = AccountingFactory.JEVAccountsRepository().GetViewRecordsByJevId(jevId);
-                totalCount = dtJevAccEntriesDb.Rows.Count;
+                row["fpp"] = item["fpp_code"];
+                row["account_and_explanation"] = item["general_ledger_accounts_name"];
+                row["account_code"] = item["account_code"];
 
-                ParseSignatory(out string CertSignatory, out string CertSignatoryTitle);
+                if (Convert.ToBoolean(item["is_debit"]))
+                    row["debit"] = item["amount"];
+                else
+                    row["credit"] = item["amount"];
 
-                var dictJev = AccountingFactory.JEVRepository().GetViewRecordByJEVId(jevId);
-                int jrnlId = Convert.ToInt32(dictJev["journals_id"]);
-                SetJournalCustomFields(jevId, jrnlId);
-
-                foreach (DataRow item in dtJevAccEntriesDb.Rows)
-                {
-                    DataRow row = dtJevAccEntries.NewRow();
-
-                    row["fpp"] = item["fpp_code"];
-                    row["account_and_explanation"] = item["general_ledger_accounts_name"];
-                    row["account_code"] = item["account_code"];
-
-                    if (Convert.ToBoolean(item["is_debit"]))
-                        row["debit"] = item["amount"];
-                    else
-                        row["credit"] = item["amount"];
-
-                    dtJevAccEntries.Rows.Add(row);
-                    progressCount++;
-                    Helper.ProgressCounter(backgroundWorker1, totalCount, progressCount);
-                }
-
-                e.Result = (dictJev, dtJevAccEntries, CertSignatory, CertSignatoryTitle);
+                dtJevAccEntries.Rows.Add(row);
+                progressCount++;
+                Helper.ProgressCounter(backgroundWorker1, totalCount, progressCount);
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+
+            e.Result = (dictJev, dtJevAccEntries, CertSignatory, CertSignatoryTitle);
         }
 
         private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            try
-            {
-                pbJevRprt.Value = e.ProgressPercentage;
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            pbJevRprt.Value = e.ProgressPercentage;
         }
 
         private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            try
+            var rprtParams = ((Dictionary<string, string> dictJev,
+                            dsLFS.dtJournalVoucherDataTable dtJevAccEntries,
+                            string certSigntry,
+                            string certSigntryTitle))e.Result;
+
+            DateTime dateEntry = Convert.ToDateTime(rprtParams.dictJev["date_entry"]);
+            string fundCode = rprtParams.dictJev["fund_code"];
+            string month = dateEntry.ToString("MM");
+            string year = dateEntry.Year.ToString();
+            string jevNo = rprtParams.dictJev["jev_no"];
+            string fullJevNo = string.IsNullOrWhiteSpace(jevNo) ? "_ - _ - _ - _ " : $"{fundCode}-{year}-{month}-{jevNo}";
+
+            string lguName = $"{(ServerHelper.SelectedProfile?.Name ?? "")} - {(ServerHelper.SelectedProfile?.ProvinceName ?? "")}";
+
+            var parameters = new ReportParameter[]
             {
-                var rprtParams = ((Dictionary<string, string> dictJev,
-                                dsLFS.dtJournalVoucherDataTable dtJevAccEntries,
-                                string certSigntry,
-                                string certSigntryTitle))e.Result;
-
-                DateTime dateEntry = Convert.ToDateTime(rprtParams.dictJev["date_entry"]);
-                string fundCode = rprtParams.dictJev["fund_code"];
-                string month = dateEntry.ToString("MM");
-                string year = dateEntry.Year.ToString();
-                string jevNo = rprtParams.dictJev["jev_no"];
-                string fullJevNo = string.IsNullOrWhiteSpace(jevNo) ? "_ - _ - _ - _ " : $"{fundCode}-{year}-{month}-{jevNo}";
-
-                string lguName = $"{(ServerHelper.SelectedProfile?.Name ?? "")} - {(ServerHelper.SelectedProfile?.ProvinceName ?? "")}";
-
-                var parameters = new ReportParameter[]
-                {
                         new("paramLGU",  lguName),
                         new("paramFund", rprtParams.dictJev["fund_name"]),
                         new("paramJournalType", rprtParams.dictJev["journal_name"]),
@@ -227,25 +217,23 @@ namespace OmniGov.App.Accounting.Views.Reports.JournalEntryVoucher
                         new("paramORNumber", paramORNo),
                         new("paramDVNo", paramDVNo),
                         new("paramDisbursementOfficer", paramOfficer)
-                };
+            };
 
-                var localReport = reportViewer1.LocalReport;
-                localReport.ReportPath = $"{Application.StartupPath}\\Reports\\journal-entry-voucher.rdlc";
-                localReport.DataSources.Clear();
+            var localReport = reportViewer1.LocalReport;
+            localReport.ReportPath = $"{Application.StartupPath}\\Reports\\journal-entry-voucher.rdlc";
+            localReport.DataSources.Clear();
 
-                var dt = (DataTable)rprtParams.dtJevAccEntries;
-                localReport.DataSources.Add(new ReportDataSource("dtJournalVoucher", dt));
-                localReport.SetParameters(parameters);
+            var dt = (DataTable)rprtParams.dtJevAccEntries;
+            localReport.DataSources.Add(new ReportDataSource("dtJournalVoucher", dt));
+            localReport.SetParameters(parameters);
 
-                if (reportViewer1 != null && localReport != null)
-                {
-                    reportViewer1.SetDisplayMode(DisplayMode.PrintLayout);
-                    reportViewer1.ZoomMode = ZoomMode.PageWidth;
-                }
-
-                reportViewer1.RefreshReport();
+            if (reportViewer1 != null && localReport != null)
+            {
+                reportViewer1.SetDisplayMode(DisplayMode.PrintLayout);
+                reportViewer1.ZoomMode = ZoomMode.PageWidth;
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+
+            reportViewer1.RefreshReport();
         }
 
         private void LoadJevCombobox()
@@ -260,29 +248,21 @@ namespace OmniGov.App.Accounting.Views.Reports.JournalEntryVoucher
 
         private void frmJEVReport_Load(object sender, EventArgs e)
         {
-            try
-            {
-                reportViewer1.ShowFindControls = false;
-                LoadJevCombobox();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            reportViewer1.ShowFindControls = false;
+            LoadJevCombobox();
         }
 
         private void btnRunRprt_Click(object sender, EventArgs e)
         {
-            try
+            if (!backgroundWorker1.IsBusy)
             {
-                if (!backgroundWorker1.IsBusy)
+                bool isJevIdValid = int.TryParse(cmbxJev.SelectedValue.ToString(), out int jevId);
+                if (isJevIdValid)
                 {
-                    bool isJevIdValid = int.TryParse(cmbxJev.SelectedValue.ToString(), out int jevId);
-                    if (isJevIdValid)
-                    {
-                        backgroundWorker1.RunWorkerAsync(jevId);
-                        pbJevRprt.Value = 0;
-                    }
+                    backgroundWorker1.RunWorkerAsync(jevId);
+                    pbJevRprt.Value = 0;
                 }
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }

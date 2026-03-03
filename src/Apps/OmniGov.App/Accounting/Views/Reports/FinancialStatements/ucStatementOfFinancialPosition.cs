@@ -157,11 +157,7 @@ namespace OmniGov.App.Accounting.Views.Reports.FinancialStatements
 
         private void btnRetrieve_Click(object sender, EventArgs e)
         {
-            try
-            {
-                LoadReport(reportViewer.LocalReport);
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            LoadReport(reportViewer.LocalReport);
         }
 
         internal void OnLoad()
@@ -170,4 +166,3 @@ namespace OmniGov.App.Accounting.Views.Reports.FinancialStatements
         }
     }
 }
-
