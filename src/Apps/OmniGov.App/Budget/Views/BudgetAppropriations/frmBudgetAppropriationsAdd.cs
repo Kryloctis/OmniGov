@@ -19,36 +19,28 @@ namespace OmniGov.App.Budget.Views.BudgetAppropriations
 
         private bool SaveData()
         {
-            try
+            if (!uc.ValidateChildren())
             {
-                if (!uc.ValidateChildren())
-                {
-                    Helper.MessageBoxError(uc.GetFormErrors());
-                    return false;
-                }
-
-                // proceed to insert
-                var budgetAppropriationsModel = new BudgetAppropriationsModel()
-                {
-                    FundsId = uc.fundId,
-                    FunctionProgramProjectId = uc.fppId,
-                    OthersFPPId = uc.cmbxOthersFPP.SelectedValue == null ? null : Convert.ToInt32(uc.cmbxOthersFPP.SelectedValue),
-                    AllotmentClassesId = uc.allotmentClassId,
-                    GeneralLedgerAccountsId = Convert.ToInt32(uc.cmbxAccount.SelectedValue),
-                    Year = uc.year,
-                    DateEntry = uc.dtDateEntry.Value,
-                    Amount = uc.nudAmount.Value,
-                    Continuing = uc.chckbxContinuing.Checked,
-                    Remarks = uc.txtRemarks.Text.Trim()
-                };
-
-                return BudgetFactory.BudgetAppropriationsRepository().Insert(budgetAppropriationsModel);
+                Helper.MessageBoxError(uc.GetFormErrors());
+                return false;
             }
-            catch (Exception ex)
+
+            // proceed to insert
+            var budgetAppropriationsModel = new BudgetAppropriationsModel()
             {
-                Helper.MessageBoxError(ex.Message);
-            }
-            return false;
+                FundsId = uc.fundId,
+                FunctionProgramProjectId = uc.fppId,
+                OthersFPPId = uc.cmbxOthersFPP.SelectedValue == null ? null : Convert.ToInt32(uc.cmbxOthersFPP.SelectedValue),
+                AllotmentClassesId = uc.allotmentClassId,
+                GeneralLedgerAccountsId = Convert.ToInt32(uc.cmbxAccount.SelectedValue),
+                Year = uc.year,
+                DateEntry = uc.dtDateEntry.Value,
+                Amount = uc.nudAmount.Value,
+                Continuing = uc.chckbxContinuing.Checked,
+                Remarks = uc.txtRemarks.Text.Trim()
+            };
+
+            return BudgetFactory.BudgetAppropriationsRepository().Insert(budgetAppropriationsModel);
         }
 
         private void btnSave_Click(object sender, EventArgs e)

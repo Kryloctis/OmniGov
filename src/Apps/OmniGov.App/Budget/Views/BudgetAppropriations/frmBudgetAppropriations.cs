@@ -1,4 +1,3 @@
-using MySql.Data.MySqlClient;
 using OmniGov.App.Budget.Views.Augmentation;
 using OmniGov.App.Budget.Views.Realignment;
 using OmniGov.App.Budget.Views.SupplementalAppropriations;
@@ -142,8 +141,6 @@ namespace OmniGov.App.Budget.Views.BudgetAppropriations
                 Year = year
             };
 
-            #region Without Others FPP
-
             budgetAppropriationsModel.OthersFPPId = null;
 
             var dtGetViewRecordsByFFPIDByAllotmentClass = BudgetFactory.BudgetAppropriationsRepository().GetViewRecordsByIdsYear(budgetAppropriationsModel);
@@ -153,10 +150,6 @@ namespace OmniGov.App.Budget.Views.BudgetAppropriations
             {
                 FieldData(dataTable, drGetViewRecordsByIds);
             }
-
-            #endregion Without Others FPP
-
-            #region Others FPP
 
             //Initialize Repository Method for others fpp records
             var dtGetRecordsOthersFPP = BudgetFactory.BudgetAppropriationsRepository().GetHeaderOthersFPP(fppId, allotmentClassId, fundId, year);
@@ -180,8 +173,6 @@ namespace OmniGov.App.Budget.Views.BudgetAppropriations
                     FieldData(dataTable, drGetViewRecordsByIds);
                 }
             }
-
-            #endregion Others FPP
 
             static void FieldData(DataTable dataTable, DataRow dataRow)
             {
@@ -269,48 +260,37 @@ namespace OmniGov.App.Budget.Views.BudgetAppropriations
 
         internal void LoadBudgetAppropriationRecords()
         {
-            try
-            {
-                Cursor.Current = Cursors.WaitCursor;
-                int fppID = Convert.ToInt32(cmbxFPP.SelectedValue);
-                int allotmentClassID = Convert.ToInt32(cmbxAllotmentClass.SelectedValue);
-                int fundId = Convert.ToInt32(cmbxFunds.SelectedValue);
-                short year = (short)nudYear.Value;
+            Cursor.Current = Cursors.WaitCursor;
+            int fppID = Convert.ToInt32(cmbxFPP.SelectedValue);
+            int allotmentClassID = Convert.ToInt32(cmbxAllotmentClass.SelectedValue);
+            int fundId = Convert.ToInt32(cmbxFunds.SelectedValue);
+            short year = (short)nudYear.Value;
 
-                HelperLoadRecords.BudgetAppropriationsDatagridView(dgBudgetAppropriations, BudgetAppropriationsDataTable(fppID, allotmentClassID, fundId, year));
-                dgBudgetAppropriations.CurrentCell = dgBudgetAppropriations.FirstDisplayedCell;
-                HighLightHeaders(dgBudgetAppropriations);
-                EnableDisableButtonsLocal(dgBudgetAppropriations);
-                txtTotal.Text = GetTotalApproprations().ToString("N2");
-                lblRecords.Text = rowCount().ToString();
-                lblDateEntry.Text = string.Empty;
-                lblCreatedAt.Text = string.Empty;
-                lblUpdatedAt.Text = string.Empty;
+            HelperLoadRecords.BudgetAppropriationsDatagridView(dgBudgetAppropriations, BudgetAppropriationsDataTable(fppID, allotmentClassID, fundId, year));
+            dgBudgetAppropriations.CurrentCell = dgBudgetAppropriations.FirstDisplayedCell;
+            HighLightHeaders(dgBudgetAppropriations);
+            EnableDisableButtonsLocal(dgBudgetAppropriations);
+            txtTotal.Text = GetTotalApproprations().ToString("N2");
+            lblRecords.Text = rowCount().ToString();
+            lblDateEntry.Text = string.Empty;
+            lblCreatedAt.Text = string.Empty;
+            lblUpdatedAt.Text = string.Empty;
 
-                ShowRecordTimeStamp(dgBudgetAppropriations);
-                Cursor.Current = Cursors.Default;
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            ShowRecordTimeStamp(dgBudgetAppropriations);
+            Cursor.Current = Cursors.Default;
         }
 
         public void LoadComboboxes()
         {
-            try
-            {
-                var dtAllotmentClasses = Factory.AllotmentClassesRepository().GetRecords();
-                HelperLoadRecords.BudgetAppropriationsAllotmentClassCombobox(dtAllotmentClasses, cmbxAllotmentClass, "allotment_code", "id");
+            var dtAllotmentClasses = Factory.AllotmentClassesRepository().GetRecords();
+            HelperLoadRecords.BudgetAppropriationsAllotmentClassCombobox(dtAllotmentClasses, cmbxAllotmentClass, "allotment_code", "id");
 
-                var dtFunds = Factory.FundsRepository().GetRecords();
-                HelperLoadRecords.BudgetAppropriationsTypeOfFundsCombobox(dtFunds, cmbxFunds, "fund_name", "id");
+            var dtFunds = Factory.FundsRepository().GetRecords();
+            HelperLoadRecords.BudgetAppropriationsTypeOfFundsCombobox(dtFunds, cmbxFunds, "fund_name", "id");
 
-                LoadFPP();
-                cmbxFPP.TextChanged += new EventHandler(CmbxFPP_TextChanged);
-                cmbxFPP.SelectedValueChanged += new EventHandler(CmbxFPP_SelectedValueChanged);
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
+            LoadFPP();
+            cmbxFPP.TextChanged += new EventHandler(CmbxFPP_TextChanged);
+            cmbxFPP.SelectedValueChanged += new EventHandler(CmbxFPP_SelectedValueChanged);
         }
 
         internal void EnableDisableButtonsLocal(DataGridView dgv)
@@ -434,43 +414,27 @@ namespace OmniGov.App.Budget.Views.BudgetAppropriations
                     selectedRows += 1;
             }
 
-            try
+            if (selectedRows > 0)
             {
-                if (selectedRows > 0)
+                if (Helper.MessageBoxConfirmDelete(selectedRows))
                 {
-                    if (Helper.MessageBoxConfirmDelete(selectedRows))
+                    foreach (DataGridViewRow row in dgBudgetAppropriations.SelectedRows)
                     {
-                        foreach (DataGridViewRow row in dgBudgetAppropriations.SelectedRows)
+                        if (row.Cells[0].Value != null)
                         {
-                            if (row.Cells[0].Value != null)
+                            int budgetAppID = int.Parse(row.Cells[0].Value.ToString());
+                            var budgetAppropriationsModel = new BudgetAppropriationsModel()
                             {
-                                int budgetAppID = int.Parse(row.Cells[0].Value.ToString());
-                                var budgetAppropriationsModel = new BudgetAppropriationsModel()
-                                {
-                                    Id = budgetAppID
-                                };
+                                Id = budgetAppID
+                            };
 
-                                budgetAppropriationsModelList.Add(budgetAppropriationsModel);
-                            }
+                            budgetAppropriationsModelList.Add(budgetAppropriationsModel);
                         }
-
-                        _ = BudgetFactory.BudgetAppropriationsRepository().Delete(budgetAppropriationsModelList);
-                        LoadBudgetAppropriationRecords();
                     }
+
+                    _ = BudgetFactory.BudgetAppropriationsRepository().Delete(budgetAppropriationsModelList);
+                    LoadBudgetAppropriationRecords();
                 }
-            }
-            catch (MySqlException ex)
-            {
-                switch (ex.Number)
-                {
-                    case 1451:
-                        Helper.MessageBoxError($"Cannot Delete Budget Appropriation.");
-                        break;
-                }
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
             }
         }
 
@@ -489,8 +453,6 @@ namespace OmniGov.App.Budget.Views.BudgetAppropriations
         {
             dgBudgetAppropriations.Columns[e.Column.Index].SortMode = DataGridViewColumnSortMode.NotSortable;
         }
-
-        #region FPP
 
         private DataTable DataTableFPP()
         {
@@ -518,15 +480,8 @@ namespace OmniGov.App.Budget.Views.BudgetAppropriations
 
         internal void LoadFPP()
         {
-            try
-            {
-                HelperLoadRecords.FppCombobox(DataTableFPP(), cmbxFPP, "fpp_code_name", "id");
-                LoadBudgetAppropriationRecords();
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
+            HelperLoadRecords.FppCombobox(DataTableFPP(), cmbxFPP, "fpp_code_name", "id");
+            LoadBudgetAppropriationRecords();
         }
 
         private void CmbxFPP_TextChanged(object sender, EventArgs e)
@@ -557,8 +512,6 @@ namespace OmniGov.App.Budget.Views.BudgetAppropriations
                 cmbxFPP.DroppedDown = true;
             }
         }
-
-        #endregion FPP
 
         private void ShowSupplementalAppropriations()
         {
@@ -600,6 +553,11 @@ namespace OmniGov.App.Budget.Views.BudgetAppropriations
             _ = new frmRealignment().ShowDialog();
         }
 
+        private void btnAugmentation_Click(object sender, EventArgs e)
+        {
+            _ = new frmAugmentation().ShowDialog();
+        }
+
         private void lnkSelectAll_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             dgBudgetAppropriations.SelectAll();
@@ -609,8 +567,6 @@ namespace OmniGov.App.Budget.Views.BudgetAppropriations
         {
             dgBudgetAppropriations.ClearSelection();
         }
-
-        #region Validations
 
         private void cmbxFPP_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
@@ -674,13 +630,6 @@ namespace OmniGov.App.Budget.Views.BudgetAppropriations
         private void nudYear_Validated(object sender, EventArgs e)
         {
             nudYear.Tag = string.Empty;
-        }
-
-        #endregion Validations
-
-        private void btnAugmentation_Click(object sender, EventArgs e)
-        {
-            _ = new frmAugmentation().ShowDialog();
         }
     }
 }
