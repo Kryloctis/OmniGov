@@ -127,20 +127,12 @@ namespace OmniGov.App.Accounting.Views.JournalEntryVoucher.JournalForms
 
         private void cmbxCollctngOffcr_Validating(object sender, CancelEventArgs e)
         {
-            try
-            {
-                Helper.ShowErrorComboBoxEmpty(errorProvider1, cmbxCollctngOffcr, "Collecting Officer");
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            Helper.ShowErrorComboBoxEmpty(errorProvider1, cmbxCollctngOffcr, "Collecting Officer");
         }
 
         private void cmbxCollctngOffcr_Validated(object sender, EventArgs e)
         {
-            try
-            {
-                Helper.ClearErrorComboBox(errorProvider1, cmbxCollctngOffcr);
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            Helper.ClearErrorComboBox(errorProvider1, cmbxCollctngOffcr);
         }
     }
 }
