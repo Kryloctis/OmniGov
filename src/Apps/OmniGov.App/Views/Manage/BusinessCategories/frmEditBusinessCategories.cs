@@ -27,11 +27,7 @@ namespace OmniGov.App.Views.Manage.BusinessCategories
 
         private void frmEditBusinessCategories_Load(object sender, EventArgs e)
         {
-            try
-            {
-                OnLoad();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            OnLoad();
         }
 
         private void LoadSelectedRecord()
@@ -73,17 +69,13 @@ namespace OmniGov.App.Views.Manage.BusinessCategories
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            try
+            if (UpdateBusinessCategories())
             {
-                if (UpdateBusinessCategories())
-                {
-                    Helper.MessageBoxSuccess("Business Categories has been updated.");
-                    _frmBusinessCategories.LoadBusinessCategories();
-                    Helper.DatagridViewRecordFinder(_frmBusinessCategories.dgBusinessCategories, "id", _businessCategoriesID.ToString());
-                    Close();
-                }
+                Helper.MessageBoxSuccess("Business Categories has been updated.");
+                _frmBusinessCategories.LoadBusinessCategories();
+                Helper.DatagridViewRecordFinder(_frmBusinessCategories.dgBusinessCategories, "id", _businessCategoriesID.ToString());
+                Close();
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }

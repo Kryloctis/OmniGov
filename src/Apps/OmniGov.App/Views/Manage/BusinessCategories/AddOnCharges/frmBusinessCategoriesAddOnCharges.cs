@@ -62,11 +62,7 @@ namespace OmniGov.App.Views.Manage.BusinessCategories.AddOnCharges
 
         private void frmBusinessCategoriesAddOnCharges_Load(object sender, EventArgs e)
         {
-            try
-            {
-                OnLoad();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            OnLoad();
         }
 
         private void dataGridView1_ColumnAdded(object sender, DataGridViewColumnEventArgs e)
@@ -97,16 +93,12 @@ namespace OmniGov.App.Views.Manage.BusinessCategories.AddOnCharges
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            try
+            if (Save())
             {
-                if (Save())
-                {
-                    Helper.MessageBoxSuccess("Business Categories Add-on Charges has been saved.");
-                    _frmBusinessCategories.LoadBusinessCategories();
-                    Helper.DatagridViewRecordFinder(_frmBusinessCategories.dgBusinessCategories, "id", _businessCategoriesId.ToString());
-                }
+                Helper.MessageBoxSuccess("Business Categories Add-on Charges has been saved.");
+                _frmBusinessCategories.LoadBusinessCategories();
+                Helper.DatagridViewRecordFinder(_frmBusinessCategories.dgBusinessCategories, "id", _businessCategoriesId.ToString());
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void dataGridView1_CurrentCellDirtyStateChanged(object sender, EventArgs e)
@@ -122,20 +114,12 @@ namespace OmniGov.App.Views.Manage.BusinessCategories.AddOnCharges
 
         private void dataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
-            try
-            {
-                Helper.CheckUncheckCheckBoxHeader(dataGridView1, "is_selected", checkBox1);
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            Helper.CheckUncheckCheckBoxHeader(dataGridView1, "is_selected", checkBox1);
         }
 
         private void checkBox1_MouseClick(object sender, MouseEventArgs e)
         {
-            try
-            {
-                Helper.CheckUncheckCheckBoxRows(dataGridView1, "is_selected", checkBox1.Checked);
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            Helper.CheckUncheckCheckBoxRows(dataGridView1, "is_selected", checkBox1.Checked);
         }
     }
 }

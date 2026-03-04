@@ -1,10 +1,8 @@
-using MySql.Data.MySqlClient;
 using OmniGov.App.Helpers;
 using OmniGov.App.Views.Manage.BusinessCategories.AddOnCharges;
 using OmniGov.Treasury.Data.Factories;
 using OmniGov.Treasury.Domain.Entities;
 using System.Data;
-using System.Diagnostics;
 
 namespace OmniGov.App.Views.Manage.BusinessCategories
 {
@@ -19,11 +17,7 @@ namespace OmniGov.App.Views.Manage.BusinessCategories
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            try
-            {
-                _ = new frmAddBusinessCategories(this).ShowDialog();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            _ = new frmAddBusinessCategories(this).ShowDialog();
         }
 
         private void EnableDisableToolStripButtons(DataGridView dgv, ToolStripButton tsBtnEdit, ToolStripButton tsBtnDelete, ToolStripButton tsBtnAddOnCharges)
@@ -59,11 +53,7 @@ namespace OmniGov.App.Views.Manage.BusinessCategories
 
         private void frmBusinessCategories_Load(object sender, EventArgs e)
         {
-            try
-            {
-                OnLoad();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            OnLoad();
         }
 
         internal void LoadBusinessCategories()
@@ -103,13 +93,9 @@ namespace OmniGov.App.Views.Manage.BusinessCategories
 
         private void dgBusinessCategories_SelectionChanged(object sender, EventArgs e)
         {
-            try
-            {
-                EnableDisableToolStripButtons(dgBusinessCategories, btnEdit, btnDelete, btnAddOnCharges);
-                LoadRecordTimestamp(dgBusinessCategories);
-                LoadBusinessCategoriesAddons(GetCurrentCellId());
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            EnableDisableToolStripButtons(dgBusinessCategories, btnEdit, btnDelete, btnAddOnCharges);
+            LoadRecordTimestamp(dgBusinessCategories);
+            LoadBusinessCategoriesAddons(GetCurrentCellId());
         }
 
         private bool DeleteBusinessCategories(ref int deletedCount)
@@ -134,29 +120,18 @@ namespace OmniGov.App.Views.Manage.BusinessCategories
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            try
-            {
-                int deletedRecordCount = 0;
+            int deletedRecordCount = 0;
 
-                if (DeleteBusinessCategories(ref deletedRecordCount))
-                {
-                    Helper.MessageBoxSuccess($"{deletedRecordCount} record/s has been deleted.");
-                    LoadBusinessCategories();
-                }
+            if (DeleteBusinessCategories(ref deletedRecordCount))
+            {
+                Helper.MessageBoxSuccess($"{deletedRecordCount} record/s has been deleted.");
+                LoadBusinessCategories();
             }
-            catch (MySqlException sqlEx)
-            { Debug.WriteLine(sqlEx.ErrorCode); }
-            catch (Exception ex)
-            { Helper.MessageBoxError(ex.Message); }
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            try
-            {
-                _ = new frmEditBusinessCategories(GetCurrentCellId(), this).ShowDialog();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            _ = new frmEditBusinessCategories(GetCurrentCellId(), this).ShowDialog();
         }
 
         private void toolStripTextBoxSearch_TextChanged(object sender, EventArgs e)
@@ -174,11 +149,7 @@ namespace OmniGov.App.Views.Manage.BusinessCategories
 
         private void btnAddOnCharges_Click(object sender, EventArgs e)
         {
-            try
-            {
-                ShowAddOnCharges();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            ShowAddOnCharges();
         }
     }
 }
