@@ -1,4 +1,3 @@
-using MySql.Data.MySqlClient;
 using OmniGov.App.Helpers;
 using OmniGov.App.Views.Manage.FunctionProgramProject.FunctionalClassification;
 using OmniGov.App.Views.Manage.FunctionProgramProject.FunctionalClassificationService;
@@ -37,13 +36,9 @@ namespace OmniGov.App.Views.Manage.FunctionProgramProject
 
         private void dgFunctionalClassification_SelectionChanged(object sender, EventArgs e)
         {
-            try
-            {
-                byte[] columnIndexTimestamp = { 3, 4 };
-                Helper.ShowRecordTimestamp(dgFunctionalClassification, columnIndexTimestamp, lblCreatedAt, lblUpdatedAt);
-                Helper.EnableDisableToolStripButtons(dgFunctionalClassification, btnEdit, btnDelete);
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            byte[] columnIndexTimestamp = { 3, 4 };
+            Helper.ShowRecordTimestamp(dgFunctionalClassification, columnIndexTimestamp, lblCreatedAt, lblUpdatedAt);
+            Helper.EnableDisableToolStripButtons(dgFunctionalClassification, btnEdit, btnDelete);
         }
 
         #endregion Function Classifications
@@ -78,22 +73,14 @@ namespace OmniGov.App.Views.Manage.FunctionProgramProject
 
         private void cmbSectorName_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            try
-            {
-                LoadFunctionClassificationServices();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            LoadFunctionClassificationServices();
         }
 
         private void dgFuntionalClassificationServices_SelectionChanged(object sender, EventArgs e)
         {
-            try
-            {
-                byte[] columnIndexTimestamp = { 5, 6 };
-                Helper.ShowRecordTimestamp(dgFuntionalClassificationServices, columnIndexTimestamp, lblCreatedAt, lblUpdatedAt);
-                Helper.EnableDisableToolStripButtons(dgFuntionalClassificationServices, btnEdit, btnDelete);
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            byte[] columnIndexTimestamp = { 5, 6 };
+            Helper.ShowRecordTimestamp(dgFuntionalClassificationServices, columnIndexTimestamp, lblCreatedAt, lblUpdatedAt);
+            Helper.EnableDisableToolStripButtons(dgFuntionalClassificationServices, btnEdit, btnDelete);
         }
 
         private DataTable FunctionClassificationServicesDataTable(string searchText, int sectorId)
@@ -210,47 +197,31 @@ namespace OmniGov.App.Views.Manage.FunctionProgramProject
 
         private void CmbServiceName_SelectedValueChanged(object sender, EventArgs e)
         {
-            try
-            {
-                LoadFPP();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            LoadFPP();
         }
 
         private void dgFunctionalProgramProject_SelectionChanged(object sender, EventArgs e)
         {
-            try
-            {
-                byte[] columnIndexTimestamp = { 6, 7 };
-                Helper.ShowRecordTimestamp(dgFunctionalProgramProject, columnIndexTimestamp, lblCreatedAt, lblUpdatedAt);
-                Helper.EnableDisableToolStripButtons(dgFunctionalProgramProject, btnEdit, btnDelete);
+            byte[] columnIndexTimestamp = { 6, 7 };
+            Helper.ShowRecordTimestamp(dgFunctionalProgramProject, columnIndexTimestamp, lblCreatedAt, lblUpdatedAt);
+            Helper.EnableDisableToolStripButtons(dgFunctionalProgramProject, btnEdit, btnDelete);
 
-                if (dgFunctionalProgramProject.SelectedRows.Count == 1)
-                    btnSubFPP.Enabled = true;
-                else if (dgFunctionalProgramProject.SelectedRows.Count < 1)
-                    btnSubFPP.Enabled = false;
-                else
-                    btnSubFPP.Enabled = false;
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            if (dgFunctionalProgramProject.SelectedRows.Count == 1)
+                btnSubFPP.Enabled = true;
+            else if (dgFunctionalProgramProject.SelectedRows.Count < 1)
+                btnSubFPP.Enabled = false;
+            else
+                btnSubFPP.Enabled = false;
         }
 
         private void dgFunctionalProgramProject_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            try
-            {
-                ShowOthersFPP();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            ShowOthersFPP();
         }
 
         private void chckbxSpecial_CheckedChanged(object sender, EventArgs e)
         {
-            try
-            {
-                LoadFPP();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            LoadFPP();
         }
 
         #endregion Function Program Project
@@ -265,20 +236,12 @@ namespace OmniGov.App.Views.Manage.FunctionProgramProject
 
         private void toolStripBtnOthers_Click(object sender, EventArgs e)
         {
-            try
-            {
-                ShowOthersFPP();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            ShowOthersFPP();
         }
 
         private void frmFunctionProgramProject_Load(object sender, EventArgs e)
         {
-            try
-            {
-                OnLoad();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            OnLoad();
         }
 
         private void OnLoad()
@@ -292,71 +255,59 @@ namespace OmniGov.App.Views.Manage.FunctionProgramProject
 
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
-            try
+            switch (tabControlFunctionProgramProject.SelectedTab.Name)
             {
-                switch (tabControlFunctionProgramProject.SelectedTab.Name)
-                {
-                    case "tabFunctionalClassification":
-                        LoadFunctionalClassifications();
-                        break;
+                case "tabFunctionalClassification":
+                    LoadFunctionalClassifications();
+                    break;
 
-                    case "tabFunctionalClassificationService":
-                        LoadFunctionClassificationServices();
-                        break;
+                case "tabFunctionalClassificationService":
+                    LoadFunctionClassificationServices();
+                    break;
 
-                    case "tabFunctionProgramProject":
-                        LoadFPP();
-                        break;
-                }
+                case "tabFunctionProgramProject":
+                    LoadFPP();
+                    break;
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void BtnAdd_Click(object sender, EventArgs e)
         {
-            try
+            switch (tabControlFunctionProgramProject.SelectedTab.Name)
             {
-                switch (tabControlFunctionProgramProject.SelectedTab.Name)
-                {
-                    case "tabFunctionalClassification":
-                        _ = new frmFunctionalClassificationAdd(this).ShowDialog();
-                        break;
+                case "tabFunctionalClassification":
+                    _ = new frmFunctionalClassificationAdd(this).ShowDialog();
+                    break;
 
-                    case "tabFunctionalClassificationService":
-                        _ = new frmFunctionalClassificationServiceAdd(this).ShowDialog();
-                        break;
+                case "tabFunctionalClassificationService":
+                    _ = new frmFunctionalClassificationServiceAdd(this).ShowDialog();
+                    break;
 
-                    case "tabFunctionProgramProject":
-                        _ = new frmFunctionProgramProjectAdd(this).ShowDialog();
-                        break;
-                }
+                case "tabFunctionProgramProject":
+                    _ = new frmFunctionProgramProjectAdd(this).ShowDialog();
+                    break;
             }
-            catch (Exception ex) { Helper.MessageBoxSuccess(ex.Message); }
         }
 
         private void BtnEdit_Click(object sender, EventArgs e)
         {
-            try
+            switch (tabControlFunctionProgramProject.SelectedTab.Name)
             {
-                switch (tabControlFunctionProgramProject.SelectedTab.Name)
-                {
-                    case "tabFunctionalClassification":
-                        byte functionalClassificationId = byte.Parse(dgFunctionalClassification.SelectedCells[0].Value.ToString());
-                        _ = new frmFunctionalClassificationEdit(this, functionalClassificationId).ShowDialog();
-                        break;
+                case "tabFunctionalClassification":
+                    byte functionalClassificationId = byte.Parse(dgFunctionalClassification.SelectedCells[0].Value.ToString());
+                    _ = new frmFunctionalClassificationEdit(this, functionalClassificationId).ShowDialog();
+                    break;
 
-                    case "tabFunctionalClassificationService":
-                        byte functionalClassificationServiceId = byte.Parse(dgFuntionalClassificationServices.SelectedCells[0].Value.ToString());
-                        _ = new frmFunctionalClassificationServiceEdit(this, functionalClassificationServiceId).ShowDialog();
-                        break;
+                case "tabFunctionalClassificationService":
+                    byte functionalClassificationServiceId = byte.Parse(dgFuntionalClassificationServices.SelectedCells[0].Value.ToString());
+                    _ = new frmFunctionalClassificationServiceEdit(this, functionalClassificationServiceId).ShowDialog();
+                    break;
 
-                    case "tabFunctionProgramProject":
-                        byte fppID = byte.Parse(dgFunctionalProgramProject.SelectedCells[0].Value.ToString());
-                        _ = new frmFunctionProgramProjectEdit(this, fppID).ShowDialog();
-                        break;
-                }
+                case "tabFunctionProgramProject":
+                    byte fppID = byte.Parse(dgFunctionalProgramProject.SelectedCells[0].Value.ToString());
+                    _ = new frmFunctionProgramProjectEdit(this, fppID).ShowDialog();
+                    break;
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private bool DeleteFunctionalClassificationRecords()
@@ -415,73 +366,55 @@ namespace OmniGov.App.Views.Manage.FunctionProgramProject
 
         private void BtnDelete_Click(object sender, EventArgs e)
         {
-            try
+            switch (tabControlFunctionProgramProject.SelectedTab.Name)
             {
-                switch (tabControlFunctionProgramProject.SelectedTab.Name)
-                {
-                    case "tabFunctionalClassification":
-                        if (DeleteFunctionalClassificationRecords())
-                        {
-                            LoadFunctionalClassifications();
-                            LoadSectorComboBox();
-                        }
-                        break;
+                case "tabFunctionalClassification":
+                    if (DeleteFunctionalClassificationRecords())
+                    {
+                        LoadFunctionalClassifications();
+                        LoadSectorComboBox();
+                    }
+                    break;
 
-                    case "tabFunctionalClassificationService":
-                        if (DeleteFunctionalClassificationServiceRecords())
-                        {
-                            LoadFunctionClassificationServices();
-                            LoadServiceNameComboBox();
-                        }
-                        break;
+                case "tabFunctionalClassificationService":
+                    if (DeleteFunctionalClassificationServiceRecords())
+                    {
+                        LoadFunctionClassificationServices();
+                        LoadServiceNameComboBox();
+                    }
+                    break;
 
-                    case "tabFunctionProgramProject":
-                        if (DeleteFunctionProgramProjectRecords())
-                        {
-                            LoadFPP();
-                        }
-                        break;
-                }
+                case "tabFunctionProgramProject":
+                    if (DeleteFunctionProgramProjectRecords())
+                    {
+                        LoadFPP();
+                    }
+                    break;
             }
-            catch (MySqlException Mysqlex)
-            {
-                switch (Mysqlex.Number)
-                {
-                    case 1451:
-                        Helper.MessageBoxError($"Cannot delete selected records. It is referenced by atleast one record.");
-                        break;
-                }
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void tabControlFunctionProgramProject_Selected(object sender, TabControlEventArgs e)
         {
-            try
+            switch (tabControlFunctionProgramProject.SelectedTab.Name)
             {
-                switch (tabControlFunctionProgramProject.SelectedTab.Name)
-                {
-                    case "tabFunctionalClassification":
-                        LoadFunctionalClassifications();
-                        toolStripSeparator1.Visible = false;
-                        btnSubFPP.Visible = false;
-                        break;
+                case "tabFunctionalClassification":
+                    LoadFunctionalClassifications();
+                    toolStripSeparator1.Visible = false;
+                    btnSubFPP.Visible = false;
+                    break;
 
-                    case "tabFunctionalClassificationService":
-                        LoadFunctionClassificationServices();
-                        toolStripSeparator1.Visible = false;
-                        btnSubFPP.Visible = false;
-                        break;
+                case "tabFunctionalClassificationService":
+                    LoadFunctionClassificationServices();
+                    toolStripSeparator1.Visible = false;
+                    btnSubFPP.Visible = false;
+                    break;
 
-                    case "tabFunctionProgramProject":
-                        LoadFPP();
-                        toolStripSeparator1.Visible = true;
-                        btnSubFPP.Visible = true;
-                        break;
-                }
+                case "tabFunctionProgramProject":
+                    LoadFPP();
+                    toolStripSeparator1.Visible = true;
+                    btnSubFPP.Visible = true;
+                    break;
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }
-
