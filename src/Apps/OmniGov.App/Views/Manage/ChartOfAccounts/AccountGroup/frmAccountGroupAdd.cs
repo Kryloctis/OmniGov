@@ -1,4 +1,4 @@
-using OmniGov.App.Helpers;
+﻿using OmniGov.App.Helpers;
 using OmniGov.Core.Entities;
 using OmniGov.Core.Factories;
 
@@ -13,6 +13,20 @@ namespace OmniGov.App.Views.Manage.ChartOfAccounts.AccountGroup
             InitializeComponent();
             Helper.LoadFormIcon(this);
             _frmChartOfAccounts = frmChartOfAccounts;
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            if (SaveData())
+            {
+                Helper.MessageBoxSuccess("Account group has been saved.");
+                _frmChartOfAccounts.LoadAccountGroup();
+                ucAccountGroup1.ResetForm();
+            }
+        }
+
+        private void frmAccountGroupAdd_Load(object sender, EventArgs e)
+        {
         }
 
         private bool SaveData()
@@ -33,20 +47,6 @@ namespace OmniGov.App.Views.Manage.ChartOfAccounts.AccountGroup
             };
 
             return Factory.AccountGroupRepository().Insert(accountGroupModel);
-        }
-
-        private void frmAccountGroupAdd_Load(object sender, EventArgs e)
-        {
-        }
-
-        private void btnSave_Click(object sender, EventArgs e)
-        {
-            if (SaveData())
-            {
-                Helper.MessageBoxSuccess("Account group has been saved.");
-                _frmChartOfAccounts.LoadAccountGroup();
-                ucAccountGroup1.ResetForm();
-            }
         }
     }
 }
