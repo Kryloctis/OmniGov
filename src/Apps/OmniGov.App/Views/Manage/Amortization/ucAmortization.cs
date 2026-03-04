@@ -1,4 +1,4 @@
-using OmniGov.Accounting.Data.Factories;
+﻿using OmniGov.Accounting.Data.Factories;
 using OmniGov.Accounting.Domain.Entities;
 using OmniGov.App.Helpers;
 using OmniGov.Core.Factories;
@@ -8,12 +8,38 @@ namespace OmniGov.App.Views.Manage.Amortization
 {
     public partial class ucAmortization : UserControl
     {
-        internal bool isEdit;
         internal int amortizationId;
+        internal bool isEdit;
 
         public ucAmortization()
         {
             InitializeComponent();
+        }
+
+        internal string GetFormErrors()
+        {
+            var errorArray = new string[2]
+            {
+                epAmountRelease.GetError(nudAmountRelease),
+                epBankName.GetError(txtBankName)
+            };
+
+            return Factory.CreateErrors(errorArray).GenerateErrorMessage();
+        }
+
+        internal void LoadSelectedAmortization()
+        {
+            var dicAmortizationRecord = AccountingFactory.AmortizationRepository().GetRecordByID(amortizationId);
+
+            string bankName = dicAmortizationRecord["bank_name"];
+            string amortizationTerm = dicAmortizationRecord["amortization_term"];
+            decimal interest = Convert.ToDecimal(dicAmortizationRecord["interest"]);
+            decimal amountReleased = Convert.ToDecimal(dicAmortizationRecord["amount_released"]);
+
+            txtBankName.Text = bankName;
+            cmbxTerm.Text = amortizationTerm;
+            nudInterest.Value = interest;
+            nudAmountRelease.Value = amountReleased;
         }
 
         internal void ResetForm()
@@ -54,40 +80,9 @@ namespace OmniGov.App.Views.Manage.Amortization
                 return AccountingFactory.AmortizationRepository().Insert(amortizationModel);
         }
 
-        internal void LoadSelectedAmortization()
+        private void nudAmountRelease_Validated(object sender, EventArgs e)
         {
-            var dicAmortizationRecord = AccountingFactory.AmortizationRepository().GetRecordByID(amortizationId);
-
-            string bankName = dicAmortizationRecord["bank_name"];
-            string amortizationTerm = dicAmortizationRecord["amortization_term"];
-            decimal interest = Convert.ToDecimal(dicAmortizationRecord["interest"]);
-            decimal amountReleased = Convert.ToDecimal(dicAmortizationRecord["amount_released"]);
-
-            txtBankName.Text = bankName;
-            cmbxTerm.Text = amortizationTerm;
-            nudInterest.Value = interest;
-            nudAmountRelease.Value = amountReleased;
-        }
-
-        internal string GetFormErrors()
-        {
-            var errorArray = new string[2]
-            {
-                epAmountRelease.GetError(nudAmountRelease),
-                epBankName.GetError(txtBankName)
-            };
-
-            return Factory.CreateErrors(errorArray).GenerateErrorMessage();
-        }
-
-        private void txtBankName_Validating(object sender, CancelEventArgs e)
-        {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(epBankName, txtBankName, "Bank Name");
-        }
-
-        private void txtBankName_Validated(object sender, EventArgs e)
-        {
-            Helper.ClearErrorTextBox(epBankName, txtBankName);
+            Helper.ClearErrorNumericUpDown(epAmountRelease, nudAmountRelease);
         }
 
         private void nudAmountRelease_Validating(object sender, CancelEventArgs e)
@@ -95,21 +90,9 @@ namespace OmniGov.App.Views.Manage.Amortization
             e.Cancel = Helper.ShowErrorNumericUpDownEmpty(epAmountRelease, nudAmountRelease, "Amount Released") || Helper.ShowErrorNumericUpDownZero(epAmountRelease, nudAmountRelease, "Amount Released mus be non-zero");
         }
 
-        private void nudAmountRelease_Validated(object sender, EventArgs e)
+        private void nudInterest_Validated(object sender, EventArgs e)
         {
-            Helper.ClearErrorNumericUpDown(epAmountRelease, nudAmountRelease);
-        }
-
-        private void OnLoad()
-        {
-            cmbxTerm.SelectedIndex = 0;
-        }
-
-        private void ucAmortization_Load(object sender, EventArgs e)
-        {
-            if (!DesignMode)
-            {
-            }
+            Helper.ClearErrorNumericUpDown(epInterest, nudInterest);
         }
 
         private void nudInterest_Validating(object sender, CancelEventArgs e)
@@ -117,9 +100,26 @@ namespace OmniGov.App.Views.Manage.Amortization
             e.Cancel = Helper.ShowErrorNumericUpDownEmpty(epInterest, nudInterest, "Interest");
         }
 
-        private void nudInterest_Validated(object sender, EventArgs e)
+        private void OnLoad()
         {
-            Helper.ClearErrorNumericUpDown(epInterest, nudInterest);
+            cmbxTerm.SelectedIndex = 0;
+        }
+
+        private void txtBankName_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorTextBox(epBankName, txtBankName);
+        }
+
+        private void txtBankName_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(epBankName, txtBankName, "Bank Name");
+        }
+
+        private void ucAmortization_Load(object sender, EventArgs e)
+        {
+            if (!DesignMode)
+            {
+            }
         }
     }
 }

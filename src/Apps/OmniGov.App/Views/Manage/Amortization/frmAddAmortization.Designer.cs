@@ -1,4 +1,4 @@
-using OmniGov.App.Views.Manage.Amortization;
+﻿using OmniGov.App.Views.Manage.Amortization;
 
 namespace OmniGov.App.Views.Manage.Amortization
 {

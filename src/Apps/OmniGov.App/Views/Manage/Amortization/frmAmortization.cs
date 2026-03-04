@@ -1,4 +1,4 @@
-using OmniGov.Accounting.Data.Factories;
+﻿using OmniGov.Accounting.Data.Factories;
 using OmniGov.Accounting.Domain.Entities;
 using OmniGov.App.Helpers;
 using OmniGov.App.Views.Manage.AmortizationSchedule;
@@ -25,15 +25,6 @@ namespace OmniGov.App.Views.Manage.Amortization
             _ = new frmAddAmortization(this).ShowDialog();
         }
 
-        private void btnEdit_Click(object sender, EventArgs e)
-        {
-            int amortizationId = Convert.ToInt32(dgAmortization.CurrentRow.Cells["id"].Value);
-
-            var frmEditAmortization = new frmEditAmortization(this);
-            frmEditAmortization.amortizationId = amortizationId;
-            frmEditAmortization.ShowDialog();
-        }
-
         private void btnAmortizationSched_Click(object sender, EventArgs e)
         {
             int rowIndex = dgAmortization.CurrentRow.Index;
@@ -43,36 +34,30 @@ namespace OmniGov.App.Views.Manage.Amortization
             frmAmortizationSchedule.ShowDialog();
         }
 
-        private void frmAmortization_Load(object sender, EventArgs e)
+        private void btnDelete_Click(object sender, EventArgs e)
         {
-            if (!DesignMode)
+            int selectedRowsCount = dgAmortization.SelectedRows.Count;
+
+            if (selectedRowsCount > 0)
             {
-                LoadAmortizationRecords();
-                EnableDisableButons();
+                if (Helper.MessageBoxConfirmDelete(selectedRowsCount))
+                {
+                    if (DeleteAmortizationRecords())
+                    {
+                        LoadAmortizationRecords();
+                        Helper.MessageBoxSuccess("Amortization/s has been deleted.");
+                    }
+                }
             }
         }
 
-        private void dgAmortization_ColumnAdded(object sender, DataGridViewColumnEventArgs e)
+        private void btnEdit_Click(object sender, EventArgs e)
         {
-            foreach (DataGridViewColumn column in dgAmortization.Columns)
-            {
-                column.SortMode = DataGridViewColumnSortMode.NotSortable;
-            }
-        }
+            int amortizationId = Convert.ToInt32(dgAmortization.CurrentRow.Cells["id"].Value);
 
-        private void EnableDisableButons()
-        {
-            Helper.EnableDisableToolStripButtons(dgAmortization, btnEdit, btnDelete);
-
-            if (dgAmortization.SelectedRows.Count == 1)
-                btnAmortizationSched.Enabled = true;
-            else
-                btnAmortizationSched.Enabled = false;
-        }
-
-        private void dgAmortization_SelectionChanged(object sender, EventArgs e)
-        {
-            EnableDisableButons();
+            var frmEditAmortization = new frmEditAmortization(this);
+            frmEditAmortization.amortizationId = amortizationId;
+            frmEditAmortization.ShowDialog();
         }
 
         private bool DeleteAmortizationRecords()
@@ -93,20 +78,35 @@ namespace OmniGov.App.Views.Manage.Amortization
             return AccountingFactory.AmortizationRepository().Delete(amortizationModelList);
         }
 
-        private void btnDelete_Click(object sender, EventArgs e)
+        private void dgAmortization_ColumnAdded(object sender, DataGridViewColumnEventArgs e)
         {
-            int selectedRowsCount = dgAmortization.SelectedRows.Count;
-
-            if (selectedRowsCount > 0)
+            foreach (DataGridViewColumn column in dgAmortization.Columns)
             {
-                if (Helper.MessageBoxConfirmDelete(selectedRowsCount))
-                {
-                    if (DeleteAmortizationRecords())
-                    {
-                        LoadAmortizationRecords();
-                        Helper.MessageBoxSuccess("Amortization/s has been deleted.");
-                    }
-                }
+                column.SortMode = DataGridViewColumnSortMode.NotSortable;
+            }
+        }
+
+        private void dgAmortization_SelectionChanged(object sender, EventArgs e)
+        {
+            EnableDisableButons();
+        }
+
+        private void EnableDisableButons()
+        {
+            Helper.EnableDisableToolStripButtons(dgAmortization, btnEdit, btnDelete);
+
+            if (dgAmortization.SelectedRows.Count == 1)
+                btnAmortizationSched.Enabled = true;
+            else
+                btnAmortizationSched.Enabled = false;
+        }
+
+        private void frmAmortization_Load(object sender, EventArgs e)
+        {
+            if (!DesignMode)
+            {
+                LoadAmortizationRecords();
+                EnableDisableButons();
             }
         }
     }

@@ -1,13 +1,13 @@
-using OmniGov.Accounting.Data.Factories;
+﻿using OmniGov.Accounting.Data.Factories;
 using OmniGov.App.Helpers;
 
 namespace OmniGov.App.Views.Manage.Amortization
 {
     public partial class frmEditAmortization : Form
     {
-        private ucAmortization uc;
-        private frmAmortization _frmAmortization;
         internal int amortizationId;
+        private frmAmortization _frmAmortization;
+        private ucAmortization uc;
 
         public frmEditAmortization(frmAmortization frmAmortization)
         {
