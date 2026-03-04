@@ -1,4 +1,4 @@
-using OmniGov.App.Helpers;
+﻿using OmniGov.App.Helpers;
 using OmniGov.Treasury.Data.Factories;
 using OmniGov.Treasury.Domain.Entities;
 using System.ComponentModel;
@@ -13,63 +13,6 @@ namespace OmniGov.App.Views.Manage.Banks
             InitializeComponent();
             Helper.LoadFormIcon(this);
             Helper.DatagridFullRowSelectStyle(dgBanks, true);
-        }
-
-        private void frmBanks_Load(object sender, EventArgs e)
-        {
-            HelperLoadRecords.ComboboxRowLimitFilter(cmbxRowLimit);
-            LoadRecords();
-        }
-
-        private void btnAdd_Click(object sender, EventArgs e)
-        {
-            _ = new frmAddBanks(this).ShowDialog();
-        }
-
-        private void btnEdit_Click(object sender, EventArgs e)
-        {
-            int rowIndex = dgBanks.CurrentRow.Index;
-            int bankId = Convert.ToInt32(dgBanks.Rows[rowIndex].Cells["id"].Value);
-            _ = new frmEditBank(this, bankId).ShowDialog();
-        }
-
-        private bool DeleteRecords()
-        {
-            int selectedRowsCount = dgBanks.SelectedRows.Count;
-            if (Helper.MessageBoxConfirmDelete(selectedRowsCount))
-            {
-                var banksModelList = new List<BanksModel>();
-                foreach (DataGridViewRow row in dgBanks.SelectedRows)
-                {
-                    int bankId = Convert.ToInt16(row.Cells["id"].Value.ToString());
-                    banksModelList.Add(new BanksModel() { Id = bankId });
-                }
-
-                return TreasuryFactory.BanksRepository().Delete(banksModelList);
-            }
-
-            return false;
-        }
-
-        private void btnDelete_Click(object sender, EventArgs e)
-        {
-            if (DeleteRecords())
-            {
-                Helper.MessageBoxSuccess($"{dgBanks.SelectedRows.Count} record/s has been deleted.");
-                LoadRecords();
-            }
-        }
-
-        private void dgBanks_SelectionChanged(object sender, EventArgs e)
-        {
-            byte[] columnIndexTimestamp = { 4, 5 };
-            Helper.ShowRecordTimestamp(dgBanks, columnIndexTimestamp, lblCreatedAt, lblUpdatedAt);
-            Helper.EnableDisableToolStripButtons(dgBanks, btnEdit, btnDelete);
-        }
-
-        private void btnSearch_Click(object sender, EventArgs e)
-        {
-            LoadRecords();
         }
 
         internal void LoadRecords()
@@ -156,8 +99,65 @@ namespace OmniGov.App.Views.Manage.Banks
             Helper.EnableDisableToolStripButtons(dgBanks, btnEdit, btnDelete);
         }
 
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            _ = new frmAddBanks(this).ShowDialog();
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            if (DeleteRecords())
+            {
+                Helper.MessageBoxSuccess($"{dgBanks.SelectedRows.Count} record/s has been deleted.");
+                LoadRecords();
+            }
+        }
+
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+            int rowIndex = dgBanks.CurrentRow.Index;
+            int bankId = Convert.ToInt32(dgBanks.Rows[rowIndex].Cells["id"].Value);
+            _ = new frmEditBank(this, bankId).ShowDialog();
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            LoadRecords();
+        }
+
         private void cmbxRowLimit_SelectionChangeCommitted(object sender, EventArgs e)
         {
+            LoadRecords();
+        }
+
+        private bool DeleteRecords()
+        {
+            int selectedRowsCount = dgBanks.SelectedRows.Count;
+            if (Helper.MessageBoxConfirmDelete(selectedRowsCount))
+            {
+                var banksModelList = new List<BanksModel>();
+                foreach (DataGridViewRow row in dgBanks.SelectedRows)
+                {
+                    int bankId = Convert.ToInt16(row.Cells["id"].Value.ToString());
+                    banksModelList.Add(new BanksModel() { Id = bankId });
+                }
+
+                return TreasuryFactory.BanksRepository().Delete(banksModelList);
+            }
+
+            return false;
+        }
+
+        private void dgBanks_SelectionChanged(object sender, EventArgs e)
+        {
+            byte[] columnIndexTimestamp = { 4, 5 };
+            Helper.ShowRecordTimestamp(dgBanks, columnIndexTimestamp, lblCreatedAt, lblUpdatedAt);
+            Helper.EnableDisableToolStripButtons(dgBanks, btnEdit, btnDelete);
+        }
+
+        private void frmBanks_Load(object sender, EventArgs e)
+        {
+            HelperLoadRecords.ComboboxRowLimitFilter(cmbxRowLimit);
             LoadRecords();
         }
     }

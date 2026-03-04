@@ -1,4 +1,4 @@
-using OmniGov.App.Views.Manage.Banks;
+﻿using OmniGov.App.Views.Manage.Banks;
 
 namespace OmniGov.App.Views.Manage.Banks
 {

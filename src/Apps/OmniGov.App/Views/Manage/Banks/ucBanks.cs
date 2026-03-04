@@ -1,4 +1,4 @@
-using OmniGov.App.Helpers;
+﻿using OmniGov.App.Helpers;
 using OmniGov.Core.Factories;
 using OmniGov.Treasury.Data.Factories;
 using OmniGov.Treasury.Domain.Entities;
@@ -16,14 +16,6 @@ namespace OmniGov.App.Views.Manage.Banks
             InitializeComponent();
         }
 
-        private void LoadSelectedRecord(int bankId)
-        {
-            var dictBank = TreasuryFactory.BanksRepository().GetRecordByID(bankId);
-            txtBankCode.Text = dictBank["bank_code"];
-            txtBankName.Text = dictBank["bank_name"];
-            txtBankBranch.Text = dictBank["bank_branch"];
-        }
-
         internal BanksModel BanksModel()
         {
             return new BanksModel()
@@ -32,6 +24,15 @@ namespace OmniGov.App.Views.Manage.Banks
                 BankName = txtBankName.Text.Trim(),
                 BankBranch = txtBankBranch.Text.Trim(),
             };
+        }
+
+        internal string GetFormErrors()
+        {
+            var errorArray = new string[]
+            {
+                errorProvider1.GetError(txtBankName)
+            };
+            return Factory.CreateErrors(errorArray).GenerateErrorMessage();
         }
 
         internal void OnLoad(bool isEdit, int? bankId)
@@ -53,23 +54,22 @@ namespace OmniGov.App.Views.Manage.Banks
             txtBankName.Clear();
         }
 
-        internal string GetFormErrors()
+        private void LoadSelectedRecord(int bankId)
         {
-            var errorArray = new string[]
-            {
-                errorProvider1.GetError(txtBankName)
-            };
-            return Factory.CreateErrors(errorArray).GenerateErrorMessage();
-        }
-
-        private void txtbankname_Validating(object sender, CancelEventArgs e)
-        {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtBankName, "bank name.");
+            var dictBank = TreasuryFactory.BanksRepository().GetRecordByID(bankId);
+            txtBankCode.Text = dictBank["bank_code"];
+            txtBankName.Text = dictBank["bank_name"];
+            txtBankBranch.Text = dictBank["bank_branch"];
         }
 
         private void txtbankname_Validated(object sender, EventArgs e)
         {
             Helper.ClearErrorTextBox(errorProvider1, txtBankName);
+        }
+
+        private void txtbankname_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtBankName, "bank name.");
         }
     }
 }
