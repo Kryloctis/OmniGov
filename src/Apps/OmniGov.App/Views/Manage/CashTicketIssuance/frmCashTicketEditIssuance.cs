@@ -1,12 +1,12 @@
-using OmniGov.App.Helpers;
+﻿using OmniGov.App.Helpers;
 using OmniGov.Treasury.Data.Factories;
 
 namespace OmniGov.App.Views.Manage.CashTicketIssuance
 {
     public partial class frmCashTicketEditIssuance : Form
     {
-        private frmCashTicketIssuance frmCashTicketIssuance;
         private int cashTckIssId;
+        private frmCashTicketIssuance frmCashTicketIssuance;
         private ucCashTicketIssuance uc;
 
         public frmCashTicketEditIssuance(frmCashTicketIssuance frmCashTicketIssuance, int cashTicketIssuanceId)
@@ -17,13 +17,6 @@ namespace OmniGov.App.Views.Manage.CashTicketIssuance
             this.cashTckIssId = cashTicketIssuanceId;
         }
 
-        private void frmCashTicketEditIssuance_Load(object sender, EventArgs e)
-        {
-            var cashTicketIssuedDict = TreasuryFactory.CashTicketsIssuedRepository().GetRecordByID(cashTckIssId);
-            uc.OnLoad(true);
-            uc.LoadSelectedValue(cashTicketIssuedDict);
-        }
-
         private void btnUpdate_Click(object sender, EventArgs e)
         {
             if (SaveData())
@@ -32,6 +25,13 @@ namespace OmniGov.App.Views.Manage.CashTicketIssuance
                 frmCashTicketIssuance.LoadIssuedCashTickets();
                 Close();
             }
+        }
+
+        private void frmCashTicketEditIssuance_Load(object sender, EventArgs e)
+        {
+            var cashTicketIssuedDict = TreasuryFactory.CashTicketsIssuedRepository().GetRecordByID(cashTckIssId);
+            uc.OnLoad(true);
+            uc.LoadSelectedValue(cashTicketIssuedDict);
         }
 
         private bool SaveData()

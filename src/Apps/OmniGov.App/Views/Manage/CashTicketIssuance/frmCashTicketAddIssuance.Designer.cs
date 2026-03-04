@@ -1,4 +1,4 @@
-using OmniGov.App.Views.Manage.CashTicketIssuance;
+﻿using OmniGov.App.Views.Manage.CashTicketIssuance;
 namespace OmniGov.App.Views.Manage.CashTicketIssuance
 {
     partial class frmCashTicketAddIssuance
