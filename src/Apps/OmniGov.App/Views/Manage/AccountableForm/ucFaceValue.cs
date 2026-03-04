@@ -1,4 +1,4 @@
-using OmniGov.App.Helpers;
+﻿using OmniGov.App.Helpers;
 using OmniGov.Core.Factories;
 
 namespace OmniGov.App.Views.Manage.AccountableForm
@@ -8,15 +8,6 @@ namespace OmniGov.App.Views.Manage.AccountableForm
         public ucFaceValue()
         {
             InitializeComponent();
-        }
-
-        internal void LoadSelectedData(int faceValueId)
-        {
-            var dictFaceValue = Factory.FaceValueRepository().GetRecordByID(faceValueId);
-
-            dtDateEffective.Value = Convert.ToDateTime(dictFaceValue["date_effective"]);
-            nudAmount.Value = Convert.ToDecimal(dictFaceValue["amount"]);
-            chckDefault.Checked = Convert.ToBoolean(Convert.ToByte(dictFaceValue["is_default"]));
         }
 
         internal string GetFormErrors()
@@ -29,17 +20,19 @@ namespace OmniGov.App.Views.Manage.AccountableForm
             return Factory.CreateErrors(errorArray).GenerateErrorMessage();
         }
 
+        internal void LoadSelectedData(int faceValueId)
+        {
+            var dictFaceValue = Factory.FaceValueRepository().GetRecordByID(faceValueId);
+
+            dtDateEffective.Value = Convert.ToDateTime(dictFaceValue["date_effective"]);
+            nudAmount.Value = Convert.ToDecimal(dictFaceValue["amount"]);
+            chckDefault.Checked = Convert.ToBoolean(Convert.ToByte(dictFaceValue["is_default"]));
+        }
+
         internal void ResetForm()
         {
             dtDateEffective.Value = Helper.GetCurrentDate();
             nudAmount.Value = 0;
-        }
-
-        #region Validations
-
-        private void nudAmount_Validating(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            e.Cancel = Helper.ShowErrorNumericUpDownZero(errorProvider1, nudAmount, "Amount");
         }
 
         private void nudAmount_Validated(object sender, EventArgs e)
@@ -47,6 +40,9 @@ namespace OmniGov.App.Views.Manage.AccountableForm
             Helper.ClearErrorNumericUpDown(errorProvider1, nudAmount);
         }
 
-        #endregion Validations
+        private void nudAmount_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            e.Cancel = Helper.ShowErrorNumericUpDownZero(errorProvider1, nudAmount, "Amount");
+        }
     }
 }

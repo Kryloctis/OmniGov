@@ -1,4 +1,4 @@
-using OmniGov.App.Helpers;
+﻿using OmniGov.App.Helpers;
 using OmniGov.Core.Factories;
 
 namespace OmniGov.App.Views.Manage.AllotmentClasses
@@ -14,22 +14,6 @@ namespace OmniGov.App.Views.Manage.AllotmentClasses
             Helper.LoadFormIcon(this);
             uc = ucAllotmentClasses1;
             this.frmAllotmentClasses = frmAllotmentClasses;
-        }
-
-        private bool SaveData()
-        {
-            if (!uc.ValidateChildren())
-            {
-                Helper.MessageBoxError(uc.GetFormErrors());
-                return false;
-            }
-
-            return Factory.AllotmentClassesRepository().Insert(uc.AllotmentClassesModel());
-        }
-
-        private void frmAllotmentClassesAdd_Load(object sender, EventArgs e)
-        {
-            uc.OnLoad(false, null);
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -53,6 +37,22 @@ namespace OmniGov.App.Views.Manage.AllotmentClasses
                     uc.ResetForm();
                 }
             }
+        }
+
+        private void frmAllotmentClassesAdd_Load(object sender, EventArgs e)
+        {
+            uc.OnLoad(false, null);
+        }
+
+        private bool SaveData()
+        {
+            if (!uc.ValidateChildren())
+            {
+                Helper.MessageBoxError(uc.GetFormErrors());
+                return false;
+            }
+
+            return Factory.AllotmentClassesRepository().Insert(uc.AllotmentClassesModel());
         }
     }
 }

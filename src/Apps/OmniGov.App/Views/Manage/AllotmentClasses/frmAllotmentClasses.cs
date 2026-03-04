@@ -1,4 +1,4 @@
-using OmniGov.App.Helpers;
+﻿using OmniGov.App.Helpers;
 using OmniGov.Core.Entities;
 using OmniGov.Core.Factories;
 using System.ComponentModel;
@@ -26,6 +26,39 @@ namespace OmniGov.App.Views.Manage.AllotmentClasses
             }
         }
 
+        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
+        {
+            var parameters = ((int rowLimit, string searchKey))e.Argument;
+
+            var dtAllotmentClasses = Factory.AllotmentClassesRepository().GetRecordsBySearch(parameters.rowLimit, parameters.searchKey.Trim());
+            int totalProgressCount = dtAllotmentClasses.Rows.Count;
+            int progressCount = 0;
+
+            dtAllotmentClasses.Rows.Cast<DataRow>().ToList().ForEach(row => { progressCount++; Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount); });
+
+            e.Result = dtAllotmentClasses;
+        }
+
+        private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            progressBar1.Value = e.ProgressPercentage;
+        }
+
+        private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            if (e.Result is not DataTable dataTable)
+                return;
+
+            if (dataTable.Rows.Count < 1)
+            {
+                progressBar1.Value = 100;
+            }
+
+            HelperLoadRecords.AllotmentClassesDatagridView(dataTable, dgAllotmentClasses);
+            dgAllotmentClasses.CurrentCell = dgAllotmentClasses.FirstDisplayedCell;
+            lblRecordCount.Text = dgAllotmentClasses.Rows.Count.ToString();
+        }
+
         private void btnAdd_Click(object sender, EventArgs e)
         {
             _ = new frmAddAllotmentClasses(this).ShowDialog();
@@ -46,6 +79,11 @@ namespace OmniGov.App.Views.Manage.AllotmentClasses
             int allotmentId = Convert.ToInt32(dgAllotmentClasses.Rows[rowIndex].Cells["id"].Value);
 
             _ = new frmEditAllotmentClasses(this, allotmentId).ShowDialog();
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            LoadRecords();
         }
 
         private bool DeleteData()
@@ -80,44 +118,6 @@ namespace OmniGov.App.Views.Manage.AllotmentClasses
         {
             HelperLoadRecords.ComboboxRowLimitFilter(cmbxRowLimit);
             LoadRecords();
-        }
-
-        private void btnSearch_Click(object sender, EventArgs e)
-        {
-            LoadRecords();
-        }
-
-        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
-        {
-            var parameters = ((int rowLimit, string searchKey))e.Argument;
-
-            var dtAllotmentClasses = Factory.AllotmentClassesRepository().GetRecordsBySearch(parameters.rowLimit, parameters.searchKey.Trim());
-            int totalProgressCount = dtAllotmentClasses.Rows.Count;
-            int progressCount = 0;
-
-            dtAllotmentClasses.Rows.Cast<DataRow>().ToList().ForEach(row => { progressCount++; Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount); });
-
-            e.Result = dtAllotmentClasses;
-        }
-
-        private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
-        {
-            progressBar1.Value = e.ProgressPercentage;
-        }
-
-        private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
-            if (e.Result is not DataTable dataTable)
-                return;
-
-            if (dataTable.Rows.Count < 1)
-            {
-                progressBar1.Value = 100;
-            }
-
-            HelperLoadRecords.AllotmentClassesDatagridView(dataTable, dgAllotmentClasses);
-            dgAllotmentClasses.CurrentCell = dgAllotmentClasses.FirstDisplayedCell;
-            lblRecordCount.Text = dgAllotmentClasses.Rows.Count.ToString();
         }
     }
 }

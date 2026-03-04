@@ -1,4 +1,4 @@
-
+﻿
 namespace OmniGov.App.Views.Manage.AllotmentClasses
 {
     partial class frmAllotmentClasses

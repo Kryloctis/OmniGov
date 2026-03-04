@@ -1,4 +1,4 @@
-using OmniGov.App.Helpers;
+﻿using OmniGov.App.Helpers;
 using OmniGov.Core.Entities;
 using OmniGov.Core.Factories;
 using System.ComponentModel;
@@ -9,13 +9,6 @@ namespace OmniGov.App.Views.Manage.AllotmentClasses
     {
         private int allotmentClassId;
         private bool isEdit;
-
-        private void LoadSelectedRecord()
-        {
-            var allotmentData = Factory.AllotmentClassesRepository().GetRecordByID(allotmentClassId);
-            txtName.Text = allotmentData["allotment_name"];
-            txtCode.Text = allotmentData["allotment_code"];
-        }
 
         public ucAllotmentClasses()
         {
@@ -31,17 +24,6 @@ namespace OmniGov.App.Views.Manage.AllotmentClasses
             };
         }
 
-        internal void OnLoad(bool isEdit, int? allotmentClassId)
-        {
-            this.isEdit = isEdit;
-
-            if (isEdit)
-            {
-                this.allotmentClassId = allotmentClassId.Value;
-                LoadSelectedRecord();
-            }
-        }
-
         internal string GetFormErrors()
         {
             var errorArray = new string[]
@@ -53,37 +35,21 @@ namespace OmniGov.App.Views.Manage.AllotmentClasses
             return Factory.CreateErrors(errorArray).GenerateErrorMessage();
         }
 
+        internal void OnLoad(bool isEdit, int? allotmentClassId)
+        {
+            this.isEdit = isEdit;
+
+            if (isEdit)
+            {
+                this.allotmentClassId = allotmentClassId.Value;
+                LoadSelectedRecord();
+            }
+        }
+
         internal void ResetForm()
         {
             txtName.Clear();
             txtCode.Clear();
-        }
-
-        private bool NameValidated()
-        {
-            if (Helper.ShowErrorTextBoxEmpty(errorProvider1, txtName, "Name"))
-                return false;
-
-            string allotmentName = txtName.Text.Trim();
-            bool allotmentNameExist = isEdit ? Factory.AllotmentClassesRepository().NameExist(allotmentName, allotmentClassId) : Factory.AllotmentClassesRepository().NameExist(allotmentName);
-
-            if (allotmentNameExist)
-            {
-                errorProvider1.SetError(txtName, "Name already exist.");
-                return false;
-            }
-
-            return true;
-        }
-
-        private void txtName_Validating(object sender, CancelEventArgs e)
-        {
-            e.Cancel = !NameValidated();
-        }
-
-        private void txtName_Validated(object sender, EventArgs e)
-        {
-            Helper.ClearErrorTextBox(errorProvider1, txtName);
         }
 
         private bool CodeValidated()
@@ -103,14 +69,48 @@ namespace OmniGov.App.Views.Manage.AllotmentClasses
             return true;
         }
 
-        private void txtCode_Validating(object sender, CancelEventArgs e)
+        private void LoadSelectedRecord()
         {
-            e.Cancel = !CodeValidated();
+            var allotmentData = Factory.AllotmentClassesRepository().GetRecordByID(allotmentClassId);
+            txtName.Text = allotmentData["allotment_name"];
+            txtCode.Text = allotmentData["allotment_code"];
+        }
+
+        private bool NameValidated()
+        {
+            if (Helper.ShowErrorTextBoxEmpty(errorProvider1, txtName, "Name"))
+                return false;
+
+            string allotmentName = txtName.Text.Trim();
+            bool allotmentNameExist = isEdit ? Factory.AllotmentClassesRepository().NameExist(allotmentName, allotmentClassId) : Factory.AllotmentClassesRepository().NameExist(allotmentName);
+
+            if (allotmentNameExist)
+            {
+                errorProvider1.SetError(txtName, "Name already exist.");
+                return false;
+            }
+
+            return true;
         }
 
         private void txtCode_Validated(object sender, EventArgs e)
         {
             Helper.ClearErrorTextBox(errorProvider1, txtCode);
+        }
+
+        private void txtCode_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = !CodeValidated();
+        }
+
+        private void txtName_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorTextBox(errorProvider1, txtName);
+        }
+
+        private void txtName_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = !NameValidated();
         }
     }
 }
