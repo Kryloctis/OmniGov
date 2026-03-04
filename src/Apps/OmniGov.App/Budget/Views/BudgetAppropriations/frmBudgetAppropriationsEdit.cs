@@ -1,8 +1,6 @@
-using Budget.Data.Factories;
-using Budget.Domain.Models;
 using OmniGov.App.Helpers;
-using System;
-using System.Windows.Forms;
+using OmniGov.Budget.Data.Factories;
+using OmniGov.Budget.Domain.Entities;
 
 namespace OmniGov.App.Budget.Views.BudgetAppropriations
 {
@@ -21,86 +19,71 @@ namespace OmniGov.App.Budget.Views.BudgetAppropriations
 
         private void LoadSelected()
         {
-            try
-            {
-                int ucBudgetAppropriationId = uc.budgetAppropriationId;
+            int ucBudgetAppropriationId = uc.budgetAppropriationId;
 
-                var selectedBudgetAppropriation = BudgetFactory.BudgetAppropriationsRepository().GetRecordByID(ucBudgetAppropriationId);
+            var selectedBudgetAppropriation = BudgetFactory.BudgetAppropriationsRepository().GetRecordByID(ucBudgetAppropriationId);
 
-                int fundId = Convert.ToInt32(selectedBudgetAppropriation["funds_id"]);
-                int fppId = Convert.ToInt32(selectedBudgetAppropriation["function_program_project_id"]);
-                int? othersFPPId = string.IsNullOrEmpty(selectedBudgetAppropriation["others_fpp_id"]) ? null : Convert.ToInt32(selectedBudgetAppropriation["others_fpp_id"]);
-                int allotmentClassId = Convert.ToInt32(selectedBudgetAppropriation["allotment_classes_id"]);
-                int generalLedgerAccountId = Convert.ToInt32(selectedBudgetAppropriation["general_ledger_accounts_id"]);
-                DateTime dateEntry = Convert.ToDateTime(selectedBudgetAppropriation["date_entry"]);
-                short year = Convert.ToInt16(selectedBudgetAppropriation["year"]);
-                decimal appropriationAmount = Convert.ToDecimal(selectedBudgetAppropriation["amount"]);
+            int fundId = Convert.ToInt32(selectedBudgetAppropriation["funds_id"]);
+            int fppId = Convert.ToInt32(selectedBudgetAppropriation["function_program_project_id"]);
+            int? othersFPPId = string.IsNullOrEmpty(selectedBudgetAppropriation["others_fpp_id"]) ? null : Convert.ToInt32(selectedBudgetAppropriation["others_fpp_id"]);
+            int allotmentClassId = Convert.ToInt32(selectedBudgetAppropriation["allotment_classes_id"]);
+            int generalLedgerAccountId = Convert.ToInt32(selectedBudgetAppropriation["general_ledger_accounts_id"]);
+            DateTime dateEntry = Convert.ToDateTime(selectedBudgetAppropriation["date_entry"]);
+            short year = Convert.ToInt16(selectedBudgetAppropriation["year"]);
+            decimal appropriationAmount = Convert.ToDecimal(selectedBudgetAppropriation["amount"]);
 
-                bool continuing = Convert.ToByte(selectedBudgetAppropriation["continuing"]) == 0 ? false : true;
+            bool continuing = Convert.ToByte(selectedBudgetAppropriation["continuing"]) == 0 ? false : true;
 
-                uc.fundId = fundId;
-                uc.fppId = fppId;
+            uc.fundId = fundId;
+            uc.fppId = fppId;
 
-                if (othersFPPId == null)
-                    uc.cmbxOthersFPP.SelectedIndex = -1;
-                else
-                    uc.cmbxOthersFPP.SelectedValue = othersFPPId;
+            if (othersFPPId == null)
+                uc.cmbxOthersFPP.SelectedIndex = -1;
+            else
+                uc.cmbxOthersFPP.SelectedValue = othersFPPId;
 
-                uc.allotmentClassId = allotmentClassId;
-                uc.cmbxAccount.SelectedValue = generalLedgerAccountId;
-                uc.dtDateEntry.Value = dateEntry;
-                uc.txtYear.Text = year.ToString();
-                uc.year = year;
-                uc.nudAmount.Value = appropriationAmount;
-                uc.chckbxContinuing.Checked = continuing;
-                uc.txtRemarks.Text = selectedBudgetAppropriation["remarks"];
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
+            uc.allotmentClassId = allotmentClassId;
+            uc.cmbxAccount.SelectedValue = generalLedgerAccountId;
+            uc.dtDateEntry.Value = dateEntry;
+            uc.txtYear.Text = year.ToString();
+            uc.year = year;
+            uc.nudAmount.Value = appropriationAmount;
+            uc.chckbxContinuing.Checked = continuing;
+            uc.txtRemarks.Text = selectedBudgetAppropriation["remarks"];
         }
 
         private bool SaveData()
         {
-            try
+            int? othersFPPId;
+
+            //Check Validation
+            if (!uc.ValidateChildren())
             {
-                int? othersFPPId;
-
-                //Check Validation
-                if (!uc.ValidateChildren())
-                {
-                    Helper.MessageBoxError(uc.GetFormErrors());
-                    return false;
-                }
-
-                if (uc.cmbxOthersFPP.SelectedValue == null)
-                    othersFPPId = null;
-                else
-                    othersFPPId = Convert.ToInt32(uc.cmbxOthersFPP.SelectedValue);
-
-                var budgetAppModel = new BudgetAppropriationsModel()
-                {
-                    Id = uc.budgetAppropriationId,
-                    FundsId = uc.fundId,
-                    FunctionProgramProjectId = uc.fppId,
-                    OthersFPPId = othersFPPId,
-                    AllotmentClassesId = uc.allotmentClassId,
-                    GeneralLedgerAccountsId = Convert.ToInt32(uc.cmbxAccount.SelectedValue),
-                    DateEntry = uc.dtDateEntry.Value,
-                    Year = uc.year,
-                    Amount = uc.nudAmount.Value,
-                    Continuing = uc.chckbxContinuing.Checked,
-                    Remarks = uc.txtRemarks.Text.Trim()
-                };
-
-                return BudgetFactory.BudgetAppropriationsRepository().Update(budgetAppModel);
+                Helper.MessageBoxError(uc.GetFormErrors());
+                return false;
             }
-            catch (Exception ex)
+
+            if (uc.cmbxOthersFPP.SelectedValue == null)
+                othersFPPId = null;
+            else
+                othersFPPId = Convert.ToInt32(uc.cmbxOthersFPP.SelectedValue);
+
+            var budgetAppModel = new BudgetAppropriationsModel()
             {
-                Helper.MessageBoxError(ex.Message);
-            }
-            return false;
+                Id = uc.budgetAppropriationId,
+                FundsId = uc.fundId,
+                FunctionProgramProjectId = uc.fppId,
+                OthersFPPId = othersFPPId,
+                AllotmentClassesId = uc.allotmentClassId,
+                GeneralLedgerAccountsId = Convert.ToInt32(uc.cmbxAccount.SelectedValue),
+                DateEntry = uc.dtDateEntry.Value,
+                Year = uc.year,
+                Amount = uc.nudAmount.Value,
+                Continuing = uc.chckbxContinuing.Checked,
+                Remarks = uc.txtRemarks.Text.Trim()
+            };
+
+            return BudgetFactory.BudgetAppropriationsRepository().Update(budgetAppModel);
         }
 
         private void frmBudgetAppropriationsEdit_Load(object sender, EventArgs e)

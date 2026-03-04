@@ -2,12 +2,9 @@ using OmniGov.App.Helpers;
 using OmniGov.App.Views.Transactions.CheckIssuance.Deductions;
 using OmniGov.App.Views.Transactions.CheckIssuance.Obligations;
 using OmniGov.Core.Factories;
-using System;
-using System.Collections.Generic;
+using OmniGov.Treasury.Data.Factories;
 using System.ComponentModel;
 using System.Data;
-using System.Windows.Forms;
-using Treasury.Data.Factories;
 
 namespace OmniGov.App.Views.Transactions.CheckIssuance
 {
@@ -43,17 +40,10 @@ namespace OmniGov.App.Views.Transactions.CheckIssuance
         {
             if (!DesignMode)
             {
-                try
-                {
-                    LoadBanks();
-                    LoadBankAccounts();
-                    LoadFunds();
-                    LoadFPP();
-                }
-                catch (Exception ex)
-                {
-                    Helper.MessageBoxSuccess(ex.Message);
-                }
+                LoadBanks();
+                LoadBankAccounts();
+                LoadFunds();
+                LoadFPP();
             }
         }
 

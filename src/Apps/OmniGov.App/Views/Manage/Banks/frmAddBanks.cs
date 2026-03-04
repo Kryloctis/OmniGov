@@ -1,7 +1,5 @@
 using OmniGov.App.Helpers;
-using System;
-using System.Windows.Forms;
-using Treasury.Data.Factories;
+using OmniGov.Treasury.Data.Factories;
 
 namespace OmniGov.App.Views.Manage.Banks
 {
@@ -31,7 +29,17 @@ namespace OmniGov.App.Views.Manage.Banks
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            try
+            if (SaveData())
+            {
+                Helper.MessageBoxSuccess("Bank has been saved.");
+                frmBanks.LoadRecords();
+                ucBanks1.ResetForm();
+            }
+        }
+
+        private void frmAddBanks_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.S && e.Control)
             {
                 if (SaveData())
                 {
@@ -40,33 +48,11 @@ namespace OmniGov.App.Views.Manage.Banks
                     ucBanks1.ResetForm();
                 }
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        private void frmAddBanks_KeyDown(object sender, KeyEventArgs e)
-        {
-            try
-            {
-                if (e.KeyCode == Keys.S && e.Control)
-                {
-                    if (SaveData())
-                    {
-                        Helper.MessageBoxSuccess("Bank has been saved.");
-                        frmBanks.LoadRecords();
-                        ucBanks1.ResetForm();
-                    }
-                }
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void frmAddBanks_Load(object sender, EventArgs e)
         {
-            try
-            {
-                uc.OnLoad(false, null);
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            uc.OnLoad(false, null);
         }
     }
 }

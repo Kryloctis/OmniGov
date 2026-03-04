@@ -41,6 +41,17 @@ namespace OmniGov.Core.Services
             command.Parameters.Add(dbParameter);
         }
 
+        private void AddDbParameters(MySqlCommand command, IDataParameter[] parameters)
+        {
+            if (parameters != null)
+            {
+                foreach (var param in parameters)
+                {
+                    command.Parameters.Add(param);
+                }
+            }
+        }
+
         public DataTable Fill(string query, DataTable dataTable)
         {
             using (var connection = new MySqlConnection(GetConnectionString()))
@@ -53,7 +64,7 @@ namespace OmniGov.Core.Services
             return dataTable;
         }
 
-        public DataTable FillBySearch(string query, DataTable dataTable, params object[][] parameters)
+        public DataTable FillBySearch(string query, DataTable dataTable, object[][] parameters)
         {
             using (var connection = new MySqlConnection(GetConnectionString()))
             {
@@ -70,7 +81,22 @@ namespace OmniGov.Core.Services
             return dataTable;
         }
 
-        public bool ExecuteNonQuery(string query, params object[][] parameters)
+        public DataTable FillBySearch(string query, DataTable dataTable, params IDataParameter[] parameters)
+        {
+            using (var connection = new MySqlConnection(GetConnectionString()))
+            {
+                var adapter = new MySqlDataAdapter();
+                using (adapter.SelectCommand = new MySqlCommand(query, connection))
+                {
+                    AddDbParameters(adapter.SelectCommand, parameters);
+                    adapter.Fill(dataTable);
+                }
+            }
+
+            return dataTable;
+        }
+
+        public bool ExecuteNonQuery(string query, object[][] parameters)
         {
             using (var connection = new MySqlConnection(GetConnectionString()))
             {
@@ -88,7 +114,25 @@ namespace OmniGov.Core.Services
             }
         }
 
-        public int ExecuteNonQueryId(string query, params object[][] parameters)
+        public bool ExecuteNonQuery(string query, params IDataParameter[] parameters)
+        {
+            using (var connection = new MySqlConnection(GetConnectionString()))
+            {
+                using (var command = new MySqlCommand(query, connection))
+                {
+                    AddDbParameters(command, parameters);
+                    connection.Open();
+                    return command.ExecuteNonQuery() > 0;
+                }
+            }
+        }
+
+        public bool ExecuteNonQuery(string query)
+        {
+            return ExecuteNonQuery(query, Array.Empty<IDataParameter>());
+        }
+
+        public int ExecuteNonQueryId(string query, object[][] parameters)
         {
             using (var connection = new MySqlConnection(GetConnectionString()))
             {
@@ -103,6 +147,26 @@ namespace OmniGov.Core.Services
                     return 0;
                 }
             }
+        }
+
+        public int ExecuteNonQueryId(string query, params IDataParameter[] parameters)
+        {
+            using (var connection = new MySqlConnection(GetConnectionString()))
+            {
+                using (var command = new MySqlCommand(query, connection))
+                {
+                    AddDbParameters(command, parameters);
+                    connection.Open();
+                    if (command.ExecuteNonQuery() > 0)
+                        return (int)command.LastInsertedId;
+                    return 0;
+                }
+            }
+        }
+
+        public int ExecuteNonQueryId(string query)
+        {
+            return ExecuteNonQueryId(query, Array.Empty<IDataParameter>());
         }
 
         public DataTable ExecuteReader(string query, object[][] parameters)
@@ -124,7 +188,29 @@ namespace OmniGov.Core.Services
             }
         }
 
-        public string ExecuteScalar(string query, params object[][] parameters)
+        public DataTable ExecuteReader(string query, IDataParameter[] parameters)
+        {
+            using (var connection = new MySqlConnection(GetConnectionString()))
+            {
+                using (var command = new MySqlCommand(query, connection))
+                {
+                    AddDbParameters(command, parameters);
+                    connection.Open();
+                    var reader = command.ExecuteReader();
+                    var dataTable = new DataTable();
+                    dataTable.Load(reader);
+
+                    return dataTable;
+                }
+            }
+        }
+
+        public DataTable ExecuteReader(string query)
+        {
+            return ExecuteReader(query, Array.Empty<IDataParameter>());
+        }
+
+        public string ExecuteScalar(string query, object[][] parameters)
         {
             using (var connection = new MySqlConnection(GetConnectionString()))
             {
@@ -140,6 +226,25 @@ namespace OmniGov.Core.Services
                     return string.Empty;
                 }
             }
+        }
+
+        public string ExecuteScalar(string query, params IDataParameter[] parameters)
+        {
+            using (var connection = new MySqlConnection(GetConnectionString()))
+            {
+                using (var command = new MySqlCommand(query, connection))
+                {
+                    AddDbParameters(command, parameters);
+                    connection.Open();
+                    var result = command.ExecuteScalar();
+                    return result != null ? result.ToString() : string.Empty;
+                }
+            }
+        }
+
+        public string ExecuteScalar(string query)
+        {
+            return ExecuteScalar(query, Array.Empty<IDataParameter>());
         }
 
         public bool TestConnection(string connectionString)

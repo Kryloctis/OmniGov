@@ -1,13 +1,13 @@
-using Budget.Domain.Models;
+using OmniGov.Budget.Domain.Entities;
 using OmniGov.Core.Interfaces.Repositories;
 using System.Data;
 
-namespace Budget.Domain.Interfaces
+namespace OmniGov.Budget.Domain.Interfaces
 {
     public interface IObligationRequestRepository : IRepository<ObligationRequestModel>
     {
         DataTable GetRecords(string srchKey,
-                            string status,
+                            ObligationRequestModel.Status status,
                             DateTime dtFrom,
                             DateTime dtTo,
                             int rowLimit);
@@ -17,7 +17,7 @@ namespace Budget.Domain.Interfaces
         DataTable GetViewRecordsById(int Id);
 
         DataTable GetViewRecordsBySearchAndStatus(string searchText,
-                                                string status,
+                                                ObligationRequestModel.Status status,
                                                 int fundId,
                                                 int allotmentClassId,
                                                 DateTime dateOfRequest);
@@ -30,23 +30,13 @@ namespace Budget.Domain.Interfaces
 
         decimal GetSumObligationsByBudgetAppropriationAndStatus(int budgetAppropriationsId);
 
-        decimal GetSumObligationsById(int obligationRequestId);
-
-        bool ObligationRequestNoExist(string obligationNo);
-
-        bool ObligationRequestNoExist(int Id, string obligationNo);
-
         bool Insert(ObligationRequestModel entity, List<ObligationAccountModel> obligationAccountModels);
 
         bool Update(ObligationRequestModel entity, List<ObligationAccountModel> obligationAccountModels);
 
         bool DeleteById(int obligationRequestId);
 
-        bool SetObligationRequestStatus(int obligationRequestId, string status, string dissaprovalMessage = null);
-
-        string GetObligationRequestStatus(int obligationRequestId);
-
-        string GetLeastOblgtnNo();
+        bool SetStatus(int id, ObligationRequestModel.Status status, string? remarks);
 
         public string GetTransactionNo(int year);
     }

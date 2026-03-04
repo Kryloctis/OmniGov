@@ -2,13 +2,10 @@ using MySql.Data.MySqlClient;
 using OmniGov.App.Helpers;
 using OmniGov.Core.Entities;
 using OmniGov.Core.Factories;
-using System;
-using System.Collections.Generic;
+using OmniGov.Treasury.Data.Factories;
+using OmniGov.Treasury.Domain.Entities;
 using System.ComponentModel;
 using System.Data;
-using System.Windows.Forms;
-using Treasury.Data.Factories;
-using Treasury.Domain.Entities;
 
 namespace OmniGov.App.Views.Manage.AccountableForm
 {
@@ -24,28 +21,15 @@ namespace OmniGov.App.Views.Manage.AccountableForm
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            try
-            {
-                _ = new frmAddAccountableForm(this).ShowDialog();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            _ = new frmAddAccountableForm(this).ShowDialog();
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            try
+            if (DeleteData())
             {
-                if (DeleteData())
-                {
-                    LoadRecords();
-                }
+                LoadRecords();
             }
-            catch (MySqlException ex)
-            {
-                if (ex.Number == 1451)
-                    Helper.MessageBoxError("Can't delete accountable form/s. The record/s has been used as reference to different record.");
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
@@ -95,31 +79,19 @@ namespace OmniGov.App.Views.Manage.AccountableForm
 
         private void dgAccountableForm_SelectionChanged(object sender, EventArgs e)
         {
-            try
-            {
-                EnableDisableContent();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            EnableDisableContent();
         }
 
         private void frmAccountable_Load(object sender, EventArgs e)
         {
-            try
-            {
-                LoadRecords();
-                EnableDisableContent();
-                Helper.EnableDisableToolStripButtons(dgfacevalue, btnEditFV, btnDeleteFV);
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            LoadRecords();
+            EnableDisableContent();
+            Helper.EnableDisableToolStripButtons(dgfacevalue, btnEditFV, btnDeleteFV);
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            try
-            {
-                LoadRecords();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            LoadRecords();
         }
 
         private DataColumn[] AccountableFormColumns()
@@ -147,48 +119,44 @@ namespace OmniGov.App.Views.Manage.AccountableForm
 
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
-            try
+            if (e.Argument is not string searchText)
+                return;
+
+            var dataTable = new DataTable();
+            dataTable.Columns.AddRange(AccountableFormColumns());
+
+            DataTable dtAccountableFormsFromDb = TreasuryFactory.AccountableFormsRepository().GetRecordsBySearch(searchText); ;
+
+            if (dtAccountableFormsFromDb.Rows.Count < 1)
             {
-                if (e.Argument is not string searchText)
-                    return;
-
-                var dataTable = new DataTable();
-                dataTable.Columns.AddRange(AccountableFormColumns());
-
-                DataTable dtAccountableFormsFromDb = TreasuryFactory.AccountableFormsRepository().GetRecordsBySearch(searchText); ;
-
-                if (dtAccountableFormsFromDb.Rows.Count < 1)
-                {
-                    backgroundWorker1.ReportProgress(100);
-                    e.Result = dataTable;
-                    return;
-                }
-
-                int totalProgressCount = dtAccountableFormsFromDb.Rows.Count;
-                int progressCount = 0;
-
-                foreach (DataRow row in dtAccountableFormsFromDb.Rows)
-                {
-                    var newRow = dataTable.NewRow();
-                    int id = Convert.ToInt32(row["id"]);
-                    string accountableFormCode = row["acc_form_no"].ToString();
-                    string accountableFormDesc = row["acc_form_desc"].ToString();
-                    decimal accountableFormFaceValue = row.IsNull("amount") ? 0 : Convert.ToDecimal(row["amount"]);
-
-                    newRow["id"] = id;
-                    newRow["form_code"] = accountableFormCode;
-                    newRow["form_description"] = accountableFormDesc;
-                    newRow["form_face_value"] = accountableFormFaceValue;
-
-                    progressCount++;
-                    dataTable.Rows.Add(newRow);
-
-                    Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
-                }
-
+                backgroundWorker1.ReportProgress(100);
                 e.Result = dataTable;
+                return;
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+
+            int totalProgressCount = dtAccountableFormsFromDb.Rows.Count;
+            int progressCount = 0;
+
+            foreach (DataRow row in dtAccountableFormsFromDb.Rows)
+            {
+                var newRow = dataTable.NewRow();
+                int id = Convert.ToInt32(row["id"]);
+                string accountableFormCode = row["acc_form_no"].ToString();
+                string accountableFormDesc = row["acc_form_desc"].ToString();
+                decimal accountableFormFaceValue = row.IsNull("amount") ? 0 : Convert.ToDecimal(row["amount"]);
+
+                newRow["id"] = id;
+                newRow["form_code"] = accountableFormCode;
+                newRow["form_description"] = accountableFormDesc;
+                newRow["form_face_value"] = accountableFormFaceValue;
+
+                progressCount++;
+                dataTable.Rows.Add(newRow);
+
+                Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
+            }
+
+            e.Result = dataTable;
         }
 
         private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
@@ -253,28 +221,20 @@ namespace OmniGov.App.Views.Manage.AccountableForm
 
         private void btnAddFV_Click(object sender, EventArgs e)
         {
-            try
-            {
-                int index = dgAccountableForm.CurrentCell.RowIndex;
-                int accountableFormId = Convert.ToInt32(dgAccountableForm.Rows[index].Cells["id"].Value);
+            int index = dgAccountableForm.CurrentCell.RowIndex;
+            int accountableFormId = Convert.ToInt32(dgAccountableForm.Rows[index].Cells["id"].Value);
 
-                _ = new frmAddFaceValue(this, accountableFormId).ShowDialog();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            _ = new frmAddFaceValue(this, accountableFormId).ShowDialog();
         }
 
         private void btnEditFV_Click(object sender, EventArgs e)
         {
-            try
-            {
-                int indexFaceValue = dgfacevalue.CurrentCell.RowIndex;
-                int indexAccForm = dgAccountableForm.CurrentCell.RowIndex;
-                int accountableFormId = Convert.ToInt32(dgAccountableForm.Rows[indexAccForm].Cells["id"].Value);
-                int faceValueId = Convert.ToInt32(dgfacevalue.Rows[indexFaceValue].Cells["id"].Value);
+            int indexFaceValue = dgfacevalue.CurrentCell.RowIndex;
+            int indexAccForm = dgAccountableForm.CurrentCell.RowIndex;
+            int accountableFormId = Convert.ToInt32(dgAccountableForm.Rows[indexAccForm].Cells["id"].Value);
+            int faceValueId = Convert.ToInt32(dgfacevalue.Rows[indexFaceValue].Cells["id"].Value);
 
-                _ = new frmEditFaceValue(this, accountableFormId, faceValueId).ShowDialog();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            _ = new frmEditFaceValue(this, accountableFormId, faceValueId).ShowDialog();
         }
 
         private bool DeleteFaceValue()
@@ -310,11 +270,7 @@ namespace OmniGov.App.Views.Manage.AccountableForm
 
         private void dgfacevalue_SelectionChanged(object sender, EventArgs e)
         {
-            try
-            {
-                Helper.EnableDisableToolStripButtons(dgfacevalue, btnEditFV, btnDeleteFV);
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            Helper.EnableDisableToolStripButtons(dgfacevalue, btnEditFV, btnDeleteFV);
         }
     }
 }

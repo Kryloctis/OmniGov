@@ -1,10 +1,8 @@
-using Accounting.Data.Factories;
-using Accounting.Domain.Entities;
+using OmniGov.Accounting.Data.Factories;
+using OmniGov.Accounting.Domain.Entities;
 using OmniGov.App.Helpers;
 using OmniGov.Core.Factories;
-using System;
 using System.ComponentModel;
-using System.Windows.Forms;
 
 namespace OmniGov.App.Views.Manage.Amortization
 {
@@ -28,56 +26,47 @@ namespace OmniGov.App.Views.Manage.Amortization
 
         internal bool SaveData()
         {
-            try
+            if (!ValidateChildren())
             {
-                if (!ValidateChildren())
-                {
-                    Helper.MessageBoxError(GetFormErrors());
-                    return false;
-                }
-
-                string bankName = txtBankName.Text.Trim();
-                string amortizationTerm = cmbxTerm.Text.Trim();
-                int interest = (int)nudInterest.Value;
-                decimal amountReleased = nudAmountRelease.Value;
-
-                var amortizationModel = new AmortizationModel()
-                {
-                    BankName = bankName,
-                    AmortizationTerm = amortizationTerm,
-                    Interest = interest,
-                    AmountReleased = amountReleased
-                };
-
-                if (isEdit)
-                {
-                    amortizationModel.Id = amortizationId;
-                    return AccountingFactory.AmortizationRepository().Update(amortizationModel);
-                }
-                else
-                    return AccountingFactory.AmortizationRepository().Insert(amortizationModel);
+                Helper.MessageBoxError(GetFormErrors());
+                return false;
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-            return false;
+
+            string bankName = txtBankName.Text.Trim();
+            string amortizationTerm = cmbxTerm.Text.Trim();
+            int interest = (int)nudInterest.Value;
+            decimal amountReleased = nudAmountRelease.Value;
+
+            var amortizationModel = new AmortizationModel()
+            {
+                BankName = bankName,
+                AmortizationTerm = amortizationTerm,
+                Interest = interest,
+                AmountReleased = amountReleased
+            };
+
+            if (isEdit)
+            {
+                amortizationModel.Id = amortizationId;
+                return AccountingFactory.AmortizationRepository().Update(amortizationModel);
+            }
+            else
+                return AccountingFactory.AmortizationRepository().Insert(amortizationModel);
         }
 
         internal void LoadSelectedAmortization()
         {
-            try
-            {
-                var dicAmortizationRecord = AccountingFactory.AmortizationRepository().GetRecordByID(amortizationId);
+            var dicAmortizationRecord = AccountingFactory.AmortizationRepository().GetRecordByID(amortizationId);
 
-                string bankName = dicAmortizationRecord["bank_name"];
-                string amortizationTerm = dicAmortizationRecord["amortization_term"];
-                decimal interest = Convert.ToDecimal(dicAmortizationRecord["interest"]);
-                decimal amountReleased = Convert.ToDecimal(dicAmortizationRecord["amount_released"]);
+            string bankName = dicAmortizationRecord["bank_name"];
+            string amortizationTerm = dicAmortizationRecord["amortization_term"];
+            decimal interest = Convert.ToDecimal(dicAmortizationRecord["interest"]);
+            decimal amountReleased = Convert.ToDecimal(dicAmortizationRecord["amount_released"]);
 
-                txtBankName.Text = bankName;
-                cmbxTerm.Text = amortizationTerm;
-                nudInterest.Value = interest;
-                nudAmountRelease.Value = amountReleased;
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            txtBankName.Text = bankName;
+            cmbxTerm.Text = amortizationTerm;
+            nudInterest.Value = interest;
+            nudAmountRelease.Value = amountReleased;
         }
 
         internal string GetFormErrors()
@@ -113,11 +102,7 @@ namespace OmniGov.App.Views.Manage.Amortization
 
         private void OnLoad()
         {
-            try
-            {
-                cmbxTerm.SelectedIndex = 0;
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            cmbxTerm.SelectedIndex = 0;
         }
 
         private void ucAmortization_Load(object sender, EventArgs e)

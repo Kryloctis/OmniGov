@@ -1,16 +1,16 @@
-using Accounting.Domain.Entities;
-using Accounting.Domain.Interfaces;
+using OmniGov.Accounting.Domain.Entities;
+using OmniGov.Accounting.Domain.Interfaces;
 using OmniGov.Core.Interfaces.Services;
 using System.Data;
 
-namespace Accounting.Data.Repositories
+namespace OmniGov.Accounting.Data.Repositories
 {
-    public class ADADisbursementsJournalRepository : IADADisbursementsJournalRepository
+    public class AdaDisbursementsJournalRepository : IAdaDisbursementsJournalRepository
     {
         private const string tableName = "ada_disbursement_journal";
         private readonly IGenericCommands _genericCommands;
 
-        public ADADisbursementsJournalRepository(IGenericCommands genericCommands)
+        public AdaDisbursementsJournalRepository(IGenericCommands genericCommands)
         {
             _genericCommands = genericCommands ?? throw new ArgumentNullException(nameof(genericCommands));
         }

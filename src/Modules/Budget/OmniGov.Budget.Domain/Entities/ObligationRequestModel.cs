@@ -1,4 +1,4 @@
-namespace Budget.Domain.Models
+namespace OmniGov.Budget.Domain.Entities
 {
     public class ObligationRequestModel
     {
@@ -12,9 +12,10 @@ namespace Budget.Domain.Models
         public string Explanation { get; set; }
         public string ReferenceNo { get; set; }
         public DateTime DateRequested { get; set; }
-        public bool IsApproved { get; set; }
-        public bool IsDisapproved { get; set; }
-        public bool IsCancelled { get; set; }
+        public enum Status
+        { draft, pending, approved, disapproved, cancelled }
+
+        public Status ObligationStatus { get; set; }
         public string Remarks { get; set; }
         public int CreatedBy { get; set; }
         public int UpdatedBy { get; set; }

@@ -1,8 +1,6 @@
-using Accounting.Data.Factories;
+using OmniGov.Accounting.Data.Factories;
 using OmniGov.App.Helpers;
 using OmniGov.Core.Factories;
-using System;
-using System.Windows.Forms;
 
 namespace OmniGov.App.Accounting.Views.Dashboard
 {
@@ -93,12 +91,7 @@ namespace OmniGov.App.Accounting.Views.Dashboard
 
         private void numdYear_ValueChanged(object sender, EventArgs e)
         {
-            try
-            {
-                LoadCounters();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            LoadCounters();
         }
     }
 }
-

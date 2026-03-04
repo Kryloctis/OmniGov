@@ -1,9 +1,7 @@
 using OmniGov.App.Helpers;
 using OmniGov.Core.Entities;
 using OmniGov.Core.Factories;
-using System;
 using System.ComponentModel;
-using System.Windows.Forms;
 
 namespace OmniGov.App.Views.Manage.AllotmentClasses
 {
@@ -80,11 +78,7 @@ namespace OmniGov.App.Views.Manage.AllotmentClasses
 
         private void txtName_Validating(object sender, CancelEventArgs e)
         {
-            try
-            {
-                e.Cancel = !NameValidated();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            e.Cancel = !NameValidated();
         }
 
         private void txtName_Validated(object sender, EventArgs e)
@@ -111,11 +105,7 @@ namespace OmniGov.App.Views.Manage.AllotmentClasses
 
         private void txtCode_Validating(object sender, CancelEventArgs e)
         {
-            try
-            {
-                e.Cancel = !CodeValidated();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            e.Cancel = !CodeValidated();
         }
 
         private void txtCode_Validated(object sender, EventArgs e)

@@ -1,9 +1,6 @@
 using OmniGov.App.Helpers;
-using System;
-using System.Collections.Generic;
-using System.Windows.Forms;
-using Treasury.Data.Factories;
-using Treasury.Domain.Entities;
+using OmniGov.Treasury.Data.Factories;
+using OmniGov.Treasury.Domain.Entities;
 
 namespace OmniGov.App.Views.Transactions.ReceiptsIssued
 {
@@ -72,16 +69,12 @@ namespace OmniGov.App.Views.Transactions.ReceiptsIssued
 
         private void frmReceiptsEdit_Load(object sender, EventArgs e)
         {
-            try
-            {
-                uc.isEdit = true;
-                uc.receiptIssuedId = receiptIssuedID;
-                uc.LoadReceipts();
-                uc.ControlsConfiguration();
-                LoadSelectedValue();
-                CheckReceiptsIssuedStatus();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            uc.isEdit = true;
+            uc.receiptIssuedId = receiptIssuedID;
+            uc.LoadReceipts();
+            uc.ControlsConfiguration();
+            LoadSelectedValue();
+            CheckReceiptsIssuedStatus();
         }
 
         private bool SaveData()
@@ -117,16 +110,12 @@ namespace OmniGov.App.Views.Transactions.ReceiptsIssued
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            try
+            if (SaveData())
             {
-                if (SaveData())
-                {
-                    Helper.MessageBoxSuccess("Receipt Issued has been updated.");
-                    frmReceiptsIssued.LoadRecords();
-                    Close();
-                }
+                Helper.MessageBoxSuccess("Receipt Issued has been updated.");
+                frmReceiptsIssued.LoadRecords();
+                Close();
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }

@@ -1,11 +1,7 @@
-using MySql.Data.MySqlClient;
 using OmniGov.App.Helpers;
 using OmniGov.App.Views.Manage.Journals.DefaultAccounts;
 using OmniGov.Core.Entities;
 using OmniGov.Core.Factories;
-using System;
-using System.Collections.Generic;
-using System.Windows.Forms;
 
 namespace OmniGov.App.Views.Manage.Journals
 {
@@ -25,11 +21,7 @@ namespace OmniGov.App.Views.Manage.Journals
 
         private void frmJournals_Load(object sender, EventArgs e)
         {
-            try
-            {
-                OnLoad();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            OnLoad();
         }
 
         private void OnLoad()
@@ -40,35 +32,23 @@ namespace OmniGov.App.Views.Manage.Journals
 
         private void dgJournals_SelectionChanged(object sender, EventArgs e)
         {
-            try
-            {
-                byte[] columnIndexTimestamp = { 3, 4 };
-                Helper.ShowRecordTimestamp(dgJournals, columnIndexTimestamp, lblCreatedAt, lblUpdatedAt);
-                Helper.EnableDisableToolStripButtons(dgJournals, btnEdit, btnDelete);
-                int journalId = Convert.ToInt32(dgJournals.CurrentRow.Cells["id"].Value);
-                if (journalId == 1) btnDefaultAccounts.Enabled = false;
-                else btnDefaultAccounts.Enabled = true;
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            byte[] columnIndexTimestamp = { 3, 4 };
+            Helper.ShowRecordTimestamp(dgJournals, columnIndexTimestamp, lblCreatedAt, lblUpdatedAt);
+            Helper.EnableDisableToolStripButtons(dgJournals, btnEdit, btnDelete);
+            int journalId = Convert.ToInt32(dgJournals.CurrentRow.Cells["id"].Value);
+            if (journalId == 1) btnDefaultAccounts.Enabled = false;
+            else btnDefaultAccounts.Enabled = true;
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            try
-            {
-                _ = new frmJournalsAdd(this).ShowDialog();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            _ = new frmJournalsAdd(this).ShowDialog();
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            try
-            {
-                int journalId = int.Parse(dgJournals.SelectedCells[0].Value.ToString());
-                _ = new frmJournalsEdit(this, journalId).ShowDialog();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            int journalId = int.Parse(dgJournals.SelectedCells[0].Value.ToString());
+            _ = new frmJournalsEdit(this, journalId).ShowDialog();
         }
 
         private bool DeleteData()
@@ -93,21 +73,8 @@ namespace OmniGov.App.Views.Manage.Journals
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            try
-            {
-                if (DeleteData())
-                    LoadRecords();
-            }
-            catch (MySqlException ex)
-            {
-                switch (ex.Number)
-                {
-                    case 1451:
-                        Helper.MessageBoxError($"Cannot delete record. Journal was referenced.");
-                        break;
-                }
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            if (DeleteData())
+                LoadRecords();
         }
 
         private void showDefaultAccounts()
@@ -120,12 +87,7 @@ namespace OmniGov.App.Views.Manage.Journals
 
         private void btnDefaultAccounts_Click(object sender, EventArgs e)
         {
-            try
-            {
-                showDefaultAccounts();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            showDefaultAccounts();
         }
     }
 }
-

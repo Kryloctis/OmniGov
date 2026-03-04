@@ -1,6 +1,4 @@
 using OmniGov.App.Helpers;
-using System;
-using System.Windows.Forms;
 
 namespace OmniGov.App.Accounting.Views.Reports.TrialBalance
 {
@@ -36,20 +34,12 @@ namespace OmniGov.App.Accounting.Views.Reports.TrialBalance
 
         private void frmTrialBalance_Load(object sender, EventArgs e)
         {
-            try
-            {
-                ToggleContents(tabControlTrialBalance);
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            ToggleContents(tabControlTrialBalance);
         }
 
         private void tabControlTrialBalance_SelectedIndexChanged(object sender, EventArgs e)
         {
-            try
-            {
-                ToggleContents(tabControlTrialBalance);
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            ToggleContents(tabControlTrialBalance);
         }
     }
 }

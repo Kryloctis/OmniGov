@@ -1,10 +1,7 @@
 using OmniGov.App.Helpers;
 using OmniGov.Core.Factories;
-using System;
-using System.Collections.Generic;
+using OmniGov.Treasury.Data.Factories;
 using System.ComponentModel;
-using System.Windows.Forms;
-using Treasury.Data.Factories;
 
 namespace OmniGov.App.Views.Manage.CollectingOfficer
 {
@@ -115,50 +112,38 @@ namespace OmniGov.App.Views.Manage.CollectingOfficer
 
         private void chckLinkAcc_CheckedChanged(object sender, EventArgs e)
         {
-            try
+            if (!chckLinkAcc.Checked)
             {
-                if (!chckLinkAcc.Checked)
-                {
-                    chckLinkAcc.Image = Properties.Resources.link_14px;
-                    cmbxLinkedAcc.Enabled = false;
-                    cmbxLinkedAcc.SelectedIndex = -1;
-                    cmbxLinkedAcc.Text = string.Empty;
-                    errorProvider1.SetError(chckLinkAcc, string.Empty);
-                    ResetForm();
-                }
-                else
-                {
-                    chckLinkAcc.Image = Properties.Resources.link_cancel_2_14px;
-                    cmbxLinkedAcc.Enabled = true;
-                }
+                chckLinkAcc.Image = Properties.Resources.link_14px;
+                cmbxLinkedAcc.Enabled = false;
+                cmbxLinkedAcc.SelectedIndex = -1;
+                cmbxLinkedAcc.Text = string.Empty;
+                errorProvider1.SetError(chckLinkAcc, string.Empty);
+                ResetForm();
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            else
+            {
+                chckLinkAcc.Image = Properties.Resources.link_cancel_2_14px;
+                cmbxLinkedAcc.Enabled = true;
+            }
         }
 
         private void ucCollectingOfficer_Load(object sender, EventArgs e)
         {
-            try
-            {
-                OnLoad();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            OnLoad();
         }
 
         private void cmbxLinkedAcc_KeyDown(object sender, KeyEventArgs e)
         {
-            try
+            if (e.KeyCode == Keys.Enter && ActiveControl == cmbxLinkedAcc)
             {
-                if (e.KeyCode == Keys.Enter && ActiveControl == cmbxLinkedAcc)
-                {
-                    LoadUsers(true);
-                    e.Handled = true;
-                    e.SuppressKeyPress = true;
-                }
-
-                if (e.KeyData == (Keys.Control | Keys.V))
-                    LoadUsers(true);
+                LoadUsers(true);
+                e.Handled = true;
+                e.SuppressKeyPress = true;
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+
+            if (e.KeyData == (Keys.Control | Keys.V))
+                LoadUsers(true);
         }
 
         internal void LoadSelectedRecord()
@@ -202,12 +187,8 @@ namespace OmniGov.App.Views.Manage.CollectingOfficer
 
         private void cmbxLinkedAcc_Validating(object sender, CancelEventArgs e)
         {
-            try
-            {
-                if (chckLinkAcc.Checked)
-                    e.Cancel = !LinkedUserValidated(errorProvider1, "Invalid linked user", chckLinkAcc);
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            if (chckLinkAcc.Checked)
+                e.Cancel = !LinkedUserValidated(errorProvider1, "Invalid linked user", chckLinkAcc);
         }
 
         private void cmbxLinkedAcc_Validated(object sender, EventArgs e)
@@ -234,4 +215,3 @@ namespace OmniGov.App.Views.Manage.CollectingOfficer
         }
     }
 }
-

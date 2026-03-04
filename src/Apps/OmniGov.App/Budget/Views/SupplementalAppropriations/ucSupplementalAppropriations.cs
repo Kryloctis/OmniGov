@@ -1,7 +1,5 @@
 using OmniGov.App.Helpers;
 using OmniGov.Core.Factories;
-using System;
-using System.Windows.Forms;
 
 namespace OmniGov.App.Budget.Views.SupplementalAppropriations
 {
@@ -57,11 +55,7 @@ namespace OmniGov.App.Budget.Views.SupplementalAppropriations
 
         private void ucSupplementalAppropriations_Load(object sender, EventArgs e)
         {
-            try
-            {
-                OnLoad();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            OnLoad();
         }
 
         private void OnLoad()
@@ -94,4 +88,3 @@ namespace OmniGov.App.Budget.Views.SupplementalAppropriations
         }
     }
 }
-

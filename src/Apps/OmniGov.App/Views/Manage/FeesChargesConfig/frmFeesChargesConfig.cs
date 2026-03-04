@@ -1,14 +1,10 @@
 using OmniGov.App.Helpers;
 using OmniGov.App.Views.Manage.FeesChargesConfig.Classification;
 using OmniGov.App.Views.Manage.FeesChargesConfig.FeesCharges;
-using System;
-using System.Collections.Generic;
+using OmniGov.Treasury.Data.Factories;
+using OmniGov.Treasury.Domain.Entities;
 using System.ComponentModel;
 using System.Data;
-using System.Linq;
-using System.Windows.Forms;
-using Treasury.Data.Factories;
-using Treasury.Domain.Entities;
 
 namespace OmniGov.App.Views.Manage.FeesChargesConfig
 {
@@ -79,75 +75,71 @@ namespace OmniGov.App.Views.Manage.FeesChargesConfig
 
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
-            try
+            var mainTreeView = new TreeNode()
             {
-                var mainTreeView = new TreeNode()
+                Text = "Classifications",
+                Tag = null,
+                ImageKey = "classification",
+            };
+
+            mainTreeView.ExpandAll();
+
+            var dataTable = TreasuryFactory.TaxTypesRepository().GetRecords();
+
+            EnumerableRowCollection<DataRow> parentNodes = dataTable.AsEnumerable().Where(row => row.Field<dynamic>("parent") == null);
+
+            int progressCount = 0;
+            int totalProgressCount = dataTable.Rows.Count;
+
+            foreach (DataRow parentRow in parentNodes)
+            {
+                bool isParentDeleted = parentRow.Field<sbyte>("is_deleted") == 1 ? true : false;
+                string parentRawName = parentRow.Field<string>("description");
+                string parentNodeName = isParentDeleted ? $"{parentRawName} (Deleted)" : parentRawName;
+                TreeNode parentNode = new TreeNode(parentNodeName);
+                parentNode.Tag = $"classification-{parentRow.Field<int>("id")}";
+
+                var parentImageKey = isParentDeleted ? "classification_disabled" : "classification_active";
+                var parentForeColor = isParentDeleted ? System.Drawing.Color.Gray : parentNode.ForeColor;
+
+                parentNode.ImageKey = parentImageKey;
+                parentNode.SelectedImageKey = parentImageKey;
+                parentNode.ForeColor = parentForeColor;
+
+                mainTreeView.Nodes.Add(parentNode);
+                LoadFeesChargesNodes(parentRow.Field<int>("id"), isParentDeleted, parentNode);
+
+                progressCount++;
+                Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
+
+                EnumerableRowCollection<DataRow> childNodes = dataTable.AsEnumerable().Where(row => row.Field<dynamic>("parent") != null && row.Field<int>("parent") == parentRow.Field<int>("id"));
+
+                foreach (DataRow childRow in childNodes)
                 {
-                    Text = "Classifications",
-                    Tag = null,
-                    ImageKey = "classification",
-                };
+                    string childRawName = childRow.Field<string>("description");
+                    bool isChildDeleted = childRow.Field<sbyte>("is_deleted") == 1 ? true : false;
 
-                mainTreeView.ExpandAll();
+                    string childNodeName = isChildDeleted ? $"{childRawName} (Deleted)" : childRawName;
+                    TreeNode childNode = new TreeNode(childNodeName);
+                    childNode.Tag = $"classification-{childRow.Field<int>("id")}";
 
-                var dataTable = TreasuryFactory.TaxTypesRepository().GetRecords();
+                    var childImageKey = isChildDeleted ? "classification_disabled" : "classification_active";
+                    var childForeColor = isChildDeleted ? System.Drawing.Color.Gray : childNode.ForeColor;
 
-                EnumerableRowCollection<DataRow> parentNodes = dataTable.AsEnumerable().Where(row => row.Field<dynamic>("parent") == null);
+                    childNode.ImageKey = childImageKey;
+                    childNode.SelectedImageKey = childImageKey;
+                    childNode.ForeColor = childForeColor;
 
-                int progressCount = 0;
-                int totalProgressCount = dataTable.Rows.Count;
+                    parentNode.Nodes.Add(childNode);
 
-                foreach (DataRow parentRow in parentNodes)
-                {
-                    bool isParentDeleted = parentRow.Field<sbyte>("is_deleted") == 1 ? true : false;
-                    string parentRawName = parentRow.Field<string>("description");
-                    string parentNodeName = isParentDeleted ? $"{parentRawName} (Deleted)" : parentRawName;
-                    TreeNode parentNode = new TreeNode(parentNodeName);
-                    parentNode.Tag = $"classification-{parentRow.Field<int>("id")}";
-
-                    var parentImageKey = isParentDeleted ? "classification_disabled" : "classification_active";
-                    var parentForeColor = isParentDeleted ? System.Drawing.Color.Gray : parentNode.ForeColor;
-
-                    parentNode.ImageKey = parentImageKey;
-                    parentNode.SelectedImageKey = parentImageKey;
-                    parentNode.ForeColor = parentForeColor;
-
-                    mainTreeView.Nodes.Add(parentNode);
-                    LoadFeesChargesNodes(parentRow.Field<int>("id"), isParentDeleted, parentNode);
+                    LoadFeesChargesNodes(childRow.Field<int>("id"), isChildDeleted, childNode);
 
                     progressCount++;
                     Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
-
-                    EnumerableRowCollection<DataRow> childNodes = dataTable.AsEnumerable().Where(row => row.Field<dynamic>("parent") != null && row.Field<int>("parent") == parentRow.Field<int>("id"));
-
-                    foreach (DataRow childRow in childNodes)
-                    {
-                        string childRawName = childRow.Field<string>("description");
-                        bool isChildDeleted = childRow.Field<sbyte>("is_deleted") == 1 ? true : false;
-
-                        string childNodeName = isChildDeleted ? $"{childRawName} (Deleted)" : childRawName;
-                        TreeNode childNode = new TreeNode(childNodeName);
-                        childNode.Tag = $"classification-{childRow.Field<int>("id")}";
-
-                        var childImageKey = isChildDeleted ? "classification_disabled" : "classification_active";
-                        var childForeColor = isChildDeleted ? System.Drawing.Color.Gray : childNode.ForeColor;
-
-                        childNode.ImageKey = childImageKey;
-                        childNode.SelectedImageKey = childImageKey;
-                        childNode.ForeColor = childForeColor;
-
-                        parentNode.Nodes.Add(childNode);
-
-                        LoadFeesChargesNodes(childRow.Field<int>("id"), isChildDeleted, childNode);
-
-                        progressCount++;
-                        Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
-                    }
                 }
-
-                e.Result = mainTreeView;
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+
+            e.Result = mainTreeView;
         }
 
         private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
@@ -207,35 +199,23 @@ namespace OmniGov.App.Views.Manage.FeesChargesConfig
 
         private void treeViewFeesCharges_AfterSelect(object sender, TreeViewEventArgs e)
         {
-            try
-            {
-                ToggleButtons(treeViewFeesCharges);
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            ToggleButtons(treeViewFeesCharges);
         }
 
         private void btnNewClassification_Click(object sender, EventArgs e)
         {
-            try
-            {
-                int? parentId = null;
-                TreeNode selectedNode = treeViewFeesCharges.SelectedNode;
-                if (selectedNode is not null && selectedNode.Tag is not null)
-                    parentId = GetNodeParameters(selectedNode).paramId;
+            int? parentId = null;
+            TreeNode selectedNode = treeViewFeesCharges.SelectedNode;
+            if (selectedNode is not null && selectedNode.Tag is not null)
+                parentId = GetNodeParameters(selectedNode).paramId;
 
-                _ = new frmAddFeesChargesClassification(parentId, this).ShowDialog();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            _ = new frmAddFeesChargesClassification(parentId, this).ShowDialog();
         }
 
         private void btnNewFeesCharges_Click(object sender, EventArgs e)
         {
-            try
-            {
-                var nodeParameter = GetNodeParameters(treeViewFeesCharges.SelectedNode);
-                _ = new frmAddFeesCharges(nodeParameter.paramId, this).ShowDialog();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            var nodeParameter = GetNodeParameters(treeViewFeesCharges.SelectedNode);
+            _ = new frmAddFeesCharges(nodeParameter.paramId, this).ShowDialog();
         }
 
         private (string paramRef, int paramId) GetNodeParameters(TreeNode treeNode)
@@ -266,11 +246,7 @@ namespace OmniGov.App.Views.Manage.FeesChargesConfig
 
         private void btnModify_Click(object sender, EventArgs e)
         {
-            try
-            {
-                ShowModifyForm(treeViewFeesCharges);
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            ShowModifyForm(treeViewFeesCharges);
         }
 
         private bool DeleteRecord(out string deleteMessage)
@@ -307,16 +283,12 @@ namespace OmniGov.App.Views.Manage.FeesChargesConfig
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            try
+            string deleteMessage;
+            if (DeleteRecord(out deleteMessage))
             {
-                string deleteMessage;
-                if (DeleteRecord(out deleteMessage))
-                {
-                    LoadFeesCharges();
-                    Helper.MessageBoxSuccess($"{deleteMessage} has been deleted");
-                }
+                LoadFeesCharges();
+                Helper.MessageBoxSuccess($"{deleteMessage} has been deleted");
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private bool UndeleteClassification(System.Windows.Forms.TreeView treeView)
@@ -340,15 +312,11 @@ namespace OmniGov.App.Views.Manage.FeesChargesConfig
 
         private void btnUndelete_Click(object sender, EventArgs e)
         {
-            try
+            if (UndeleteClassification(treeViewFeesCharges))
             {
-                if (UndeleteClassification(treeViewFeesCharges))
-                {
-                    LoadFeesCharges();
-                    Helper.MessageBoxSuccess("Fees & Charges Classification undeleted.");
-                }
+                LoadFeesCharges();
+                Helper.MessageBoxSuccess("Fees & Charges Classification undeleted.");
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void btnSearch_Click(object sender, EventArgs e)

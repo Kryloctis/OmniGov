@@ -1,11 +1,9 @@
 using OmniGov.Core.Interfaces.Services;
-using PropertyAssessment.Domain.Entities;
-using PropertyAssessment.Domain.Interfaces;
-using System;
-using System.Collections.Generic;
+using OmniGov.PropertyAssessment.Domain.Entities;
+using OmniGov.PropertyAssessment.Domain.Interfaces;
 using System.Data;
 
-namespace PropertyAssessment.Data.Repositories
+namespace OmniGov.PropertyAssessment.Data.Repositories
 {
     public class BuildingDetailsRepository : IBuildingDetailsRepository
     {

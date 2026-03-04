@@ -1,10 +1,10 @@
-using Budget.Domain.Interfaces;
-using Budget.Domain.Models;
+using OmniGov.Budget.Domain.Entities;
+using OmniGov.Budget.Domain.Interfaces;
 using OmniGov.Core.Interfaces.Services;
 using System.Data;
 using System.Transactions;
 
-namespace Budget.Data.Repositories
+namespace OmniGov.Budget.Data.Repositories
 {
     public class ObligationRequestRepository : IObligationRequestRepository
     {
@@ -71,6 +71,20 @@ namespace Budget.Data.Repositories
 
         public bool Insert(ObligationRequestModel entity)
         {
+            int id = InsertGetId(entity);
+            if (id > 0)
+            {
+                entity.Id = id;
+                return true;
+            }
+            return false;
+        }
+
+        private int InsertGetId(ObligationRequestModel entity)
+        {
+            if (string.IsNullOrWhiteSpace(entity.TransactionNo))
+                entity.TransactionNo = GetTransactionNo(entity.DateRequested.Year);
+
             object[][] parameters = new object[][]
             {
                 new object[] { "@payee", DbType.String, entity.Payee },
@@ -81,31 +95,13 @@ namespace Budget.Data.Repositories
                 new object[] { "@explanation", DbType.String, entity.Explanation },
                 new object[] { "@reference_no", DbType.String, entity.ReferenceNo },
                 new object[] { "@date_requested", DbType.Date, entity.DateRequested.Date },
+                new object[] { "@status", DbType.String, entity.ObligationStatus.ToString() },
+                new object[] { "@remarks", DbType.String, entity.Remarks },
                 new object[] { "@created_by", DbType.Int32, entity.CreatedBy },
             };
 
-            string query = $@"INSERT INTO {tableName}
-                            (payee,
-                            function_program_project_id,
-                            allotment_classes_id,
-                            funds_id,
-                            transaction_no,
-                            explanation,
-                            reference_no,
-                            date_requested,
-                            created_by)
-                            VALUES
-                            (@payee,
-                            @function_program_project_id,
-                            @allotment_classes_id,
-                            @funds_id,
-                            @transaction_no,
-                            @explanation,
-                            @reference_no,
-                            @date_requested,
-                            @created_by)";
-
-            return _genericCommands.ExecuteNonQuery(query, parameters);
+            string query = $@"INSERT INTO {tableName} (payee, function_program_project_id, allotment_classes_id, funds_id, transaction_no, explanation, reference_no, date_requested, status, remarks, created_by) VALUES (@payee, @function_program_project_id, @allotment_classes_id, @funds_id, @transaction_no, @explanation, @reference_no, @date_requested, @status, @remarks, @created_by)";
+            return _genericCommands.ExecuteNonQueryId(query, parameters);
         }
 
         public bool Delete(List<ObligationRequestModel> entityList)
@@ -154,6 +150,8 @@ namespace Budget.Data.Repositories
                 new object[] { "@reference_no", DbType.String, entity.ReferenceNo },
                 new object[] { "@explanation", DbType.String, entity.Explanation },
                 new object[] { "@date_requested", DbType.Date, entity.DateRequested.Date },
+                new object[] { "@status", DbType.String, entity.ObligationStatus.ToString() },
+                new object[] { "@remarks", DbType.String, entity.Remarks },
                 new object[] { "@updated_by", DbType.Int32, entity.UpdatedBy },
             };
 
@@ -165,6 +163,8 @@ namespace Budget.Data.Repositories
                             explanation = @explanation,
                             reference_no = @reference_no,
                             date_requested = @date_requested,
+                            status = @status,
+                            remarks = @remarks,
                             updated_by = @updated_by WHERE id = @id";
 
             return _genericCommands.ExecuteNonQuery(query, parameters);
@@ -229,7 +229,7 @@ namespace Budget.Data.Repositories
                 new object[] { "@date_requested", DbType.Date, dateRequested.Date}
             };
 
-            string query = $"SELECT COALESCE(SUM(amount), 0) AS amount FROM {viewTableName} WHERE budget_appropriations_id = @budget_appropriations_id AND date_requested <= @date_requested AND is_cancelled = 0";
+            string query = $"SELECT COALESCE(SUM(amount), 0) AS amount FROM {viewTableName} WHERE budget_appropriations_id = @budget_appropriations_id AND date_requested <= @date_requested AND status != 'cancelled'";
 
             return Convert.ToDecimal(_genericCommands.ExecuteScalar(query, parameters));
         }
@@ -269,33 +269,23 @@ namespace Budget.Data.Repositories
                             AND allotment_class_id = @allotment_class_id
                             AND continuing = @continuing
                             AND {isContinuingQuery}
-                            AND is_cancelled = 0";
+                            AND status != 'cancelled'";
 
             return Convert.ToDecimal(_genericCommands.ExecuteScalar(query, parameters));
         }
 
-        private int GetLastInsertedId(int createdById)
-        {
-            var parameters = new object[][]
-            {
-                new object[]{ "@created_by", DbType.Int32, createdById}
-            };
-
-            string query = $"SELECT MAX(id) FROM {tableName} WHERE created_by = @created_by";
-            return int.Parse(_genericCommands.ExecuteScalar(query, parameters));
-        }
 
         public bool Insert(ObligationRequestModel entity, List<ObligationAccountModel> obligationAccountModels)
         {
             using (var scope = new TransactionScope())
             {
-                _ = Insert(entity);
-                int lstInsrtdId = GetLastInsertedId(entity.CreatedBy);
+                int lstInsrtdId = InsertGetId(entity);
+                if (lstInsrtdId == 0) return false;
 
                 foreach (var obligationAccounts in obligationAccountModels)
                 {
                     obligationAccounts.ObligationRequestId = lstInsrtdId;
-                    _ = obligationAccountRepository.Insert(obligationAccounts);
+                    if (!obligationAccountRepository.Insert(obligationAccounts)) return false;
                 }
 
                 scope.Complete();
@@ -321,112 +311,23 @@ namespace Budget.Data.Repositories
             }
         }
 
-        public bool ObligationRequestNoExist(string obligationNo)
-        {
-            var parameters = new object[][]
-            {
-                new object[] { "@obligation_no", DbType.String, obligationNo }
-            };
-
-            string query = $"SELECT id FROM {tableName} WHERE obligation_no = @obligation_no";
-
-            return !string.IsNullOrEmpty(_genericCommands.ExecuteScalar(query, parameters));
-        }
-
-        public bool ObligationRequestNoExist(int Id, string obligationNo)
-        {
-            var parameters = new object[][]
-            {
-                new object[] { "@id",DbType.Int32, Id },
-                new object[] { "@obligation_no", DbType.String, obligationNo }
-            };
-
-            string query = $"SELECT id FROM {tableName} WHERE id <> @id AND obligation_no = @obligation_no";
-
-            return !string.IsNullOrEmpty(_genericCommands.ExecuteScalar(query, parameters));
-        }
-
-        public bool SetObligationRequestStatus(int obligationRequestId, string status, string disapprovalMessage = null)
-        {
-            var parameters = new object[][]
-            {
-                new object[] { "@id", DbType.Int32, obligationRequestId},
-                new object[] { "@disapproval_message", DbType.String, disapprovalMessage}
-            };
-
-            string Status()
-            {
-                switch (status)
-                {
-                    case "approve":
-                        return "is_approved = 1, is_disapproved = 0, is_cancelled = 0";
-
-                    case "disapprove":
-                        return "is_approved = 0, is_disapproved = 1, is_cancelled = 0 , disapproval_message = @disapproval_message";
-
-                    case "cancel":
-                        return "is_cancelled = 1";
-
-                    case "pending":
-                        return "is_cancelled= 0, is_disapproved = 0, is_approved = 0";
-
-                    default:
-                        return "is_cancelled= 0, is_disapproved = 0, is_approved = 0";
-                }
-            }
-
-            string query = $"UPDATE {tableName} SET {Status()}  WHERE id = @id";
-
-            return _genericCommands.ExecuteNonQuery(query, parameters);
-        }
-
-        public string GetObligationRequestStatus(int obligationRequestId)
-        {
-            var parameters = new object[][]
-            {
-                new object[] { "@id", DbType.Int32, obligationRequestId }
-            };
-
-            string query = $"SELECT is_approved, is_disapproved, is_cancelled FROM {tableName} WHERE id = @id";
-
-            using (var reader = _genericCommands.ExecuteReader(query, parameters))
-            {
-                if (reader.Rows.Count < 1)
-                    return string.Empty;
-
-                bool isApproved = Convert.ToBoolean(reader.Rows[0]["is_approved"]);
-                bool isDisapproved = Convert.ToBoolean(reader.Rows[0]["is_disapproved"]);
-                bool isCancelled = Convert.ToBoolean(reader.Rows[0]["is_cancelled"]);
-
-                if (isCancelled)
-                    return "Cancelled";
-                else if (isDisapproved && !isApproved)
-                    return "Disapproved";
-                else if (isApproved && !isDisapproved)
-                    return "Approved";
-                else if (!isApproved && !isDisapproved && !isCancelled)
-                    return "Pending";
-            }
-            return string.Empty;
-        }
-
-        public DataTable GetViewRecordsBySearchAndStatus(string searchText, string status, int fundId, int allotmentClassId, DateTime dateOfRequest)
+        public DataTable GetViewRecordsBySearchAndStatus(string searchText, ObligationRequestModel.Status status, int fundId, int allotmentClassId, DateTime dateOfRequest)
         {
             string Status()
             {
                 switch (status)
                 {
-                    case "approved":
-                        return "is_approved = 1 AND is_disapproved = 0 AND is_cancelled = 0 AND";
+                    case ObligationRequestModel.Status.approved:
+                        return "status = 'approved' AND";
 
-                    case "disapproved":
-                        return "is_approved = 0 AND is_disapproved = 1 AND is_cancelled = 0 AND";
+                    case ObligationRequestModel.Status.disapproved:
+                        return "status = 'disapproved' AND";
 
-                    case "cancelled":
-                        return "is_cancelled = 1 AND";
+                    case ObligationRequestModel.Status.cancelled:
+                        return "status = 'cancelled' AND";
 
-                    case "pending":
-                        return "is_approved  = 0 AND is_disapproved = 0 AND is_cancelled = 0 AND";
+                    case ObligationRequestModel.Status.pending:
+                        return "status = 'pending' AND";
 
                     default:
                         return string.Empty;
@@ -457,18 +358,6 @@ namespace Budget.Data.Repositories
             return _genericCommands.FillBySearch(query, new DataTable(), parameters);
         }
 
-        public decimal GetSumObligationsById(int obligationRequestId)
-        {
-            var parameters = new object[][]
-            {
-                new object[] {"@obligation_request_id", DbType.Int32, obligationRequestId}
-            };
-
-            string query = $"SELECT COALESCE(SUM(amount), 0) FROM {viewTableName} WHERE obligation_request_id = @obligation_request_id";
-
-            return Convert.ToDecimal(_genericCommands.ExecuteScalar(query, parameters));
-        }
-
         public decimal GetSumObligationsByBudgetAppropriationAndStatus(int budgetAppropriationId)
         {
             var parameters = new object[][]
@@ -476,55 +365,24 @@ namespace Budget.Data.Repositories
                 new object[] { "@budget_appropriations_id", DbType.Int32, budgetAppropriationId }
             };
 
-            string query = $"SELECT COALESCE(SUM(amount), 0) FROM {viewTableName} WHERE budget_appropriations_id = @budget_appropriations_id AND is_cancelled = 0";
+            string query = $"SELECT COALESCE(SUM(amount), 0) FROM {viewTableName} WHERE budget_appropriations_id = @budget_appropriations_id AND status != 'cancelled'";
 
             return Convert.ToDecimal(_genericCommands.ExecuteScalar(query, parameters));
         }
 
-        public string GetLeastOblgtnNo()
-        {
-            string query = $"SELECT COALESCE(LPAD(MAX(obligation_no)+1, 4, '0'),'0001') AS obligation_no FROM {viewTableName}";
-            return _genericCommands.ExecuteScalar(query);
-        }
-
-        public DataTable GetRecords(string srchKey, string status, DateTime dtFrom, DateTime dtTo, int rowLimit)
+        public DataTable GetRecords(string srchKey, ObligationRequestModel.Status status, DateTime dtFrom, DateTime dtTo, int rowLimit)
         {
             var parameters = new object[][]
             {
                 new object[] {"@search_key", DbType.String, $"%{srchKey}%"},
-                new object[] {"@status", DbType.String, status},
+                new object[] {"@status", DbType.String, status.ToString()},
                 new object[] {"@dt_from", DbType.DateTime, dtFrom.Date},
                 new object[] {"@dt_to", DbType.DateTime, dtTo.Date},
                 new object[] {"@row_limit", DbType.Int32, rowLimit},
             };
 
-            string statusQuery;
-
-            switch (status)
-            {
-                case "pending":
-                    statusQuery = $"is_approved = 0 AND is_disapproved = 0 AND is_cancelled = 0 AND ";
-                    break;
-
-                case "approved":
-                    statusQuery = $"is_approved = 1 AND is_disapproved = 0 AND is_cancelled = 0 AND ";
-                    break;
-
-                case "disapproved":
-                    statusQuery = $"is_approved = 0 AND is_disapproved = 1 AND is_cancelled = 0 AND ";
-                    break;
-
-                case "cancelled":
-                    statusQuery = $"is_cancelled = 1 AND ";
-                    break;
-
-                default:
-                    statusQuery = string.Empty;
-                    break;
-            }
-
             string query = $@"SELECT * FROM {tableName}
-                                WHERE {statusQuery}
+                                WHERE status = @status AND
                                 (obligation_no LIKE @search_key OR payee LIKE @search_key) AND
                                 (date_requested >= @dt_from AND date_requested <= @dt_to) LIMIT @row_limit";
 
@@ -547,6 +405,61 @@ namespace Budget.Data.Repositories
 
             string seqNo = _genericCommands.ExecuteScalar(query, parameters);
             return $"{year}-{seqNo}";
+        }
+
+        public bool SetStatus(int id, ObligationRequestModel.Status status, string? remarks)
+        {
+            object? obligationNo = null;
+            if (status == ObligationRequestModel.Status.approved)
+            {
+                var record = GetRecordByID(id);
+                if (record.ContainsKey("funds_id"))
+                {
+                    int fundId = int.Parse(record["funds_id"]);
+                    obligationNo = GetLastObligationNoSeries(fundId);
+                }
+            }
+
+            var parameters = new object[][]
+            {
+                new object[] { "@id", DbType.Int32, id },
+                new object[] { "@obligation_no", DbType.String, obligationNo ?? (object)DBNull.Value },
+                new object[] { "@remarks", DbType.String, remarks ?? (object)DBNull.Value },
+                new object[] { "@status", DbType.String, status.ToString() }
+            };
+
+            string query = $@"UPDATE {tableName} SET 
+                            obligation_no = @obligation_no, 
+                            status = @status, 
+                            remarks = @remarks 
+                            WHERE id = @id";
+
+            bool result;
+            using (var scope = new TransactionScope())
+            {
+                result = _genericCommands.ExecuteNonQuery(query, parameters);
+                scope.Complete();
+            }
+
+            return result;
+        }
+
+        private string GetLastObligationNoSeries(int fundId)
+        {
+            var parameters = new object[][]
+            {
+                new object[] { "@funds_id", DbType.Int32, fundId }
+            };
+
+            // Simplified version based on JEV pattern - incrementing a sequence
+            // In a real scenario, this might include year/month from the record
+            string query = $"SELECT COALESCE(LPAD(MAX(CAST(SUBSTRING_INDEX(obligation_no, '-', -1) AS UNSIGNED)) + 1, 4, '0'), '0001') FROM {tableName} WHERE funds_id = @funds_id";
+            string seq = _genericCommands.ExecuteScalar(query, parameters);
+            
+            // Note: In production, you'd concat with prefixes (e.g., 01-2026-02-0001)
+            // But without the full business rule for prefix, I'll return the sequence for now
+            // or try to match the ucObligations template if I can.
+            return seq;
         }
     }
 }

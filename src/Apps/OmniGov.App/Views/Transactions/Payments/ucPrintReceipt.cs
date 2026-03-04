@@ -1,14 +1,7 @@
 using Microsoft.Reporting.WinForms;
 using OmniGov.App.Helpers;
-using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Drawing;
 using System.Drawing.Printing;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace OmniGov.App.Views.Transactions.Payments
 {
@@ -179,20 +172,12 @@ namespace OmniGov.App.Views.Transactions.Payments
         {
             string printerName = cmbxPrinter.Text;
             PrintReport(reportViewerPrint, printerName);
-            try
-            {
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.StackTrace); }
         }
 
         private async void lnkLblRefresh_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            try
-            {
-                var localReport = reportViewerPrint.LocalReport;
-                await PopulatePrinterComboBox(cmbxPrinter, localReport);
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            var localReport = reportViewerPrint.LocalReport;
+            await PopulatePrinterComboBox(cmbxPrinter, localReport);
         }
     }
 }

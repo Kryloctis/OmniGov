@@ -1,10 +1,11 @@
-using Budget.Domain.Interfaces;
-using Budget.Domain.Models;
+using MySql.Data.MySqlClient;
+using OmniGov.Budget.Domain.Entities;
+using OmniGov.Budget.Domain.Interfaces;
 using OmniGov.Core.Interfaces.Services;
 using System.Data;
 using System.Transactions;
 
-namespace Budget.Data.Repositories
+namespace OmniGov.Budget.Data.Repositories
 {
     public class BudgetAppropriationsHasRealignmentsRepository : IBudgetAppropriationsHasRealignments
     {
@@ -22,7 +23,11 @@ namespace Budget.Data.Repositories
             {
                 foreach (var item in entityList)
                 {
-                    var parameters = new object[] { new object[] { "@id", DbType.Int32, item.Id } };
+                    var parameters = new MySqlParameter[]
+                    {
+                        new("@id", item.Id),
+                    };
+
                     string query = $"DELETE FROM {tableName} WHERE id = @id";
                     _ = _genericCommands.ExecuteNonQuery(query, parameters);
                 }
@@ -54,12 +59,12 @@ namespace Budget.Data.Repositories
 
         public bool Insert(BudgetAppropriationsHasRealignmentsModel entity)
         {
-            var parameters = new object[][]
+            var parameters = new MySqlParameter[]
             {
-                new object[] { "@realignments_id", DbType.Int32, entity.RealignmentsId},
-                new object[] { "@budget_appropriations_id", DbType.Int32, entity.BudgetAppropriationsId},
-                new object[] { "@date_entry", DbType.DateTime, entity.DateEntry},
-                new object[] { "@remarks", DbType.String, entity.Remarks},
+                new("@realignments_id", entity.RealignmentsId),
+                new("@budget_appropriations_id", entity.BudgetAppropriationsId),
+                new("@date_entry", entity.DateEntry),
+                new("@remarks", entity.Remarks),
             };
 
             string query = $"INSERT INTO {tableName} (realignments_id, budget_appropriations_id, date_entry, remarks) VALUES (@realignments_id, @budget_appropriations_id, @date_entry, @remarks)";

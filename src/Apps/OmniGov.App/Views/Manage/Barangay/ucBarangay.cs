@@ -1,9 +1,7 @@
 ﻿using OmniGov.App.Helpers;
 using OmniGov.Core.Entities;
 using OmniGov.Core.Factories;
-using System;
 using System.ComponentModel;
-using System.Windows.Forms;
 
 namespace OmniGov.App.Views.Manage.Barangay
 {
@@ -97,11 +95,7 @@ namespace OmniGov.App.Views.Manage.Barangay
 
         private void txtBarangay_Validating(object sender, CancelEventArgs e)
         {
-            try
-            {
-                e.Cancel = !BarangayNameValidated(errorProvider1, txtName);
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            e.Cancel = !BarangayNameValidated(errorProvider1, txtName);
         }
 
         private void txtBarangay_Validated(object sender, EventArgs e)
@@ -111,11 +105,7 @@ namespace OmniGov.App.Views.Manage.Barangay
 
         private void txtCode_Validating(object sender, CancelEventArgs e)
         {
-            try
-            {
-                e.Cancel = !BarangayCodeValidated(errorProvider1, txtCode);
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            e.Cancel = !BarangayCodeValidated(errorProvider1, txtCode);
         }
 
         private void txtCode_Validated(object sender, EventArgs e)
@@ -124,6 +114,3 @@ namespace OmniGov.App.Views.Manage.Barangay
         }
     }
 }
-
-
-

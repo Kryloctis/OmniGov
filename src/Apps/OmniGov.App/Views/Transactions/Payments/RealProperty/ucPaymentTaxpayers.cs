@@ -1,10 +1,8 @@
 using OmniGov.App.Helpers;
 using OmniGov.Core.Factories;
-using System;
+using OmniGov.Treasury.Data.Factories;
 using System.ComponentModel;
 using System.Data;
-using System.Windows.Forms;
-using Treasury.Data.Factories;
 
 namespace OmniGov.App.Views.Transactions.Payments.RealProperty
 {
@@ -146,20 +144,12 @@ namespace OmniGov.App.Views.Transactions.Payments.RealProperty
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            try
-            {
-                LoadTaxpayers();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            LoadTaxpayers();
         }
 
         private void CmbxRowFiter_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            try
-            {
-                LoadTaxpayers();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            LoadTaxpayers();
         }
     }
 }

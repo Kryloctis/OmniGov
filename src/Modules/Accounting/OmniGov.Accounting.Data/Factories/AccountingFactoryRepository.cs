@@ -1,8 +1,8 @@
-﻿using Accounting.Domain.Interfaces;
-using Accounting.Domain.Interfaces.Factories;
+﻿using OmniGov.Accounting.Domain.Interfaces;
+using OmniGov.Accounting.Domain.Interfaces.Factories;
 using OmniGov.Core.Interfaces.Services;
 
-namespace Accounting.Data.Repositories
+namespace OmniGov.Accounting.Data.Factories
 {
     /// <summary>
     /// Instance-based factory for creating Core repository instances with dependency injection
@@ -16,37 +16,37 @@ namespace Accounting.Data.Repositories
             _genericCommands = genericCommands ?? throw new ArgumentNullException(nameof(genericCommands));
         }
 
-        public IADADisbursementsJournalRepository adaDisbursementsJournalRepository() => new Repositories.ADADisbursementsJournalRepository(_genericCommands);
+        public IAdaDisbursementsJournalRepository adaDisbursementsJournalRepository() => new OmniGov.Accounting.Data.Repositories.AdaDisbursementsJournalRepository(_genericCommands);
 
         public IAmortizationRepository amortizationRepository()
-        => new Repositories.AmortizationRepository(_genericCommands);
+        => new OmniGov.Accounting.Data.Repositories.AmortizationRepository(_genericCommands);
 
         public IAmortizationScheduleRepository amortizationScheduleRepository()
-        => new Repositories.AmortizationScheduleRepository(_genericCommands);
+        => new OmniGov.Accounting.Data.Repositories.AmortizationScheduleRepository(_genericCommands);
 
         public IBeginningBalancesRepository beginningBalancesRepository()
-        => new Repositories.BeginningBalancesRepository(_genericCommands);
+        => new OmniGov.Accounting.Data.Repositories.BeginningBalancesRepository(_genericCommands);
 
         public ICashDisbursementsJournalRepository cashDisbursementsJournalRepository()
-        => new Repositories.CashDisbursementsJournalRepository(_genericCommands);
+        => new OmniGov.Accounting.Data.Repositories.CashDisbursementsJournalRepository(_genericCommands);
 
         public ICashReceiptsJournalRepository cashReceiptsJournalRepository()
-        => new Repositories.CashReceiptsJournalRepository(_genericCommands);
+        => new OmniGov.Accounting.Data.Repositories.CashReceiptsJournalRepository(_genericCommands);
 
         public ICheckDisbursementsJournalRepository checkDisbursementsJournalRepository()
-        => new Repositories.CheckDisbursementsJournalRepository(_genericCommands);
+        => new OmniGov.Accounting.Data.Repositories.CheckDisbursementsJournalRepository(_genericCommands);
 
         public IGeneralJournalRepository generalJournalRepository()
-        => new Repositories.GeneralJournalRepository(_genericCommands);
+        => new OmniGov.Accounting.Data.Repositories.GeneralJournalRepository(_genericCommands);
 
         public IGeneralLedgerAccountsRepository generalLedgerAccountsRepository()
-        => new Repositories.GeneralLedgerAccountsRepository(_genericCommands);
+        => new OmniGov.Accounting.Data.Repositories.GeneralLedgerAccountsRepository(_genericCommands);
 
-        public IJEVAccountsRepository jEVAccountsRepository()
-        => new Repositories.JEVAccountsRepository(_genericCommands);
+        public IJevAccountsRepository jEVAccountsRepository()
+        => new OmniGov.Accounting.Data.Repositories.JevAccountsRepository(_genericCommands);
 
-        public IJEVRepository jevRepository()
-        => new Repositories.JEVRepository(_genericCommands,
+        public IJevRepository jevRepository()
+        => new OmniGov.Accounting.Data.Repositories.JevRepository(_genericCommands,
                                             jEVAccountsRepository(),
                                             checkDisbursementsJournalRepository(),
                                             cashReceiptsJournalRepository(),
@@ -55,6 +55,6 @@ namespace Accounting.Data.Repositories
                                             generalJournalRepository());
 
         public ISubsidiaryLedgerAccountsRepository subsidiaryLedgerAccountsRepository()
-        => new Repositories.SubsidiaryLedgerAccountsRepository(_genericCommands);
+        => new OmniGov.Accounting.Data.Repositories.SubsidiaryLedgerAccountsRepository(_genericCommands);
     }
 }

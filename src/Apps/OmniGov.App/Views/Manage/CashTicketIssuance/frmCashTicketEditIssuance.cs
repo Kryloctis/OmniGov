@@ -1,7 +1,5 @@
 using OmniGov.App.Helpers;
-using System;
-using System.Windows.Forms;
-using Treasury.Data.Factories;
+using OmniGov.Treasury.Data.Factories;
 
 namespace OmniGov.App.Views.Manage.CashTicketIssuance
 {
@@ -21,27 +19,19 @@ namespace OmniGov.App.Views.Manage.CashTicketIssuance
 
         private void frmCashTicketEditIssuance_Load(object sender, EventArgs e)
         {
-            try
-            {
-                var cashTicketIssuedDict = TreasuryFactory.CashTicketsIssuedRepository().GetRecordByID(cashTckIssId);
-                uc.OnLoad(true);
-                uc.LoadSelectedValue(cashTicketIssuedDict);
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            var cashTicketIssuedDict = TreasuryFactory.CashTicketsIssuedRepository().GetRecordByID(cashTckIssId);
+            uc.OnLoad(true);
+            uc.LoadSelectedValue(cashTicketIssuedDict);
         }
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-            try
+            if (SaveData())
             {
-                if (SaveData())
-                {
-                    Helper.MessageBoxSuccess("Cash Ticket Issued has been updated.");
-                    frmCashTicketIssuance.LoadIssuedCashTickets();
-                    Close();
-                }
+                Helper.MessageBoxSuccess("Cash Ticket Issued has been updated.");
+                frmCashTicketIssuance.LoadIssuedCashTickets();
+                Close();
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private bool SaveData()

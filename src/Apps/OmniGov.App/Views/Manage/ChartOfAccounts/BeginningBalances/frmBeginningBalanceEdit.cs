@@ -1,10 +1,7 @@
-using Accounting.Data.Factories;
-using Accounting.Domain.Entities;
+using OmniGov.Accounting.Data.Factories;
+using OmniGov.Accounting.Domain.Entities;
 using OmniGov.App.Helpers;
 using OmniGov.App.Views.Manage.ChartOfAccounts.Subsidiary;
-using System;
-using System.Collections.Generic;
-using System.Windows.Forms;
 
 namespace OmniGov.App.Views.Manage.ChartOfAccounts.BeginningBalances
 {
@@ -89,27 +86,19 @@ namespace OmniGov.App.Views.Manage.ChartOfAccounts.BeginningBalances
 
         private void frmBeginningBalanceEdit_Load(object sender, EventArgs e)
         {
-            try
-            {
-                OnLoad();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            OnLoad();
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            try
+            if (UpdateData())
             {
-                if (UpdateData())
-                {
-                    Helper.MessageBoxSuccess("Balance has been saved.");
+                Helper.MessageBoxSuccess("Balance has been saved.");
 
-                    if (_frmSubsidiary != null) _frmSubsidiary.LoadSubsidiaryRecordsByFundAndGeneralLedger();
-                    if (_frmChartOfAccounts != null) _frmChartOfAccounts.LoadGeneralLedgers(30);
-                    Close();
-                }
+                if (_frmSubsidiary != null) _frmSubsidiary.LoadSubsidiaryRecordsByFundAndGeneralLedger();
+                if (_frmChartOfAccounts != null) _frmChartOfAccounts.LoadGeneralLedgers(30);
+                Close();
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private bool Delete()
@@ -123,17 +112,13 @@ namespace OmniGov.App.Views.Manage.ChartOfAccounts.BeginningBalances
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            try
+            if (Delete())
             {
-                if (Delete())
-                {
-                    Helper.MessageBoxSuccess($"Balance has been deleted.");
-                    if (_frmSubsidiary != null) _frmSubsidiary.LoadSubsidiaryRecordsByFundAndGeneralLedger();
-                    if (_frmChartOfAccounts != null) _frmChartOfAccounts.LoadGeneralLedgers(30);
-                }
-                Close();
+                Helper.MessageBoxSuccess($"Balance has been deleted.");
+                if (_frmSubsidiary != null) _frmSubsidiary.LoadSubsidiaryRecordsByFundAndGeneralLedger();
+                if (_frmChartOfAccounts != null) _frmChartOfAccounts.LoadGeneralLedgers(30);
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            Close();
         }
     }
 }

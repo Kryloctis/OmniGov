@@ -1,12 +1,9 @@
-﻿using Accounting.Data.Factories;
-using Microsoft.Reporting.WinForms;
+﻿using Microsoft.Reporting.WinForms;
+using OmniGov.Accounting.Data.Factories;
 using OmniGov.App.Helpers;
 using OmniGov.Core.Factories;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Windows.Forms;
 
 namespace OmniGov.App.Accounting.Views.Reports.Ledgers
 {
@@ -46,8 +43,6 @@ namespace OmniGov.App.Accounting.Views.Reports.Ledgers
             nudYear.Value = currentYear;
         }
 
-        #region Accounts
-
         private DataTable DatatableAccounts()
         {
             DataTable dtAccounts = AccountingFactory.GeneralLedgerAccountsRepository().GetViewRecords();
@@ -84,41 +79,25 @@ namespace OmniGov.App.Accounting.Views.Reports.Ledgers
 
         private void cmbxAccount_SelectedValueChanged(object sender, EventArgs e)
         {
-            try
-            {
-                LoadSubsidiaryAccounts();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            LoadSubsidiaryAccounts();
         }
 
         private void cmbxAccount_TextChanged(object sender, EventArgs e)
         {
-            try
-            {
-                if (string.IsNullOrWhiteSpace(cmbxAccount.Text.Trim()))
-                    LoadAccounts();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            if (string.IsNullOrWhiteSpace(cmbxAccount.Text.Trim()))
+                LoadAccounts();
         }
 
         private void cmbxAccount_KeyDown(object sender, KeyEventArgs e)
         {
-            try
+            string searchText = cmbxAccount.Text.Trim();
+            if (e.KeyCode == Keys.Enter && cmbxAccount.Focused)
             {
-                string searchText = cmbxAccount.Text.Trim();
-                if (e.KeyCode == Keys.Enter && cmbxAccount.Focused)
-                {
-                    LoadAccounts(searchText, true);
-                    e.Handled = true;
-                    e.SuppressKeyPress = true;
-                }
+                LoadAccounts(searchText, true);
+                e.Handled = true;
+                e.SuppressKeyPress = true;
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
-
-        #endregion Accounts
-
-        #region Subsidiary Ledgers
 
         private DataTable SubsidiaryLedgerDataTable()
         {
@@ -160,32 +139,22 @@ namespace OmniGov.App.Accounting.Views.Reports.Ledgers
 
         private void cmbxSubsidiaryLedger_KeyDown(object sender, KeyEventArgs e)
         {
-            try
+            string searchText = cmbxSubsidiaryLedger.Text.Trim();
+            if (e.KeyCode == Keys.Enter && cmbxSubsidiaryLedger.Focused)
             {
-                string searchText = cmbxSubsidiaryLedger.Text.Trim();
-                if (e.KeyCode == Keys.Enter && cmbxSubsidiaryLedger.Focused)
-                {
-                    LoadSubsidiaryAccounts(searchText, true);
-                    e.Handled = true;
-                    e.SuppressKeyPress = true;
-                }
+                LoadSubsidiaryAccounts(searchText, true);
+                e.Handled = true;
+                e.SuppressKeyPress = true;
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void cmbSubsidiaryLedger_TextChanged(object sender, EventArgs e)
         {
-            try
-            {
-                string searchText = cmbxSubsidiaryLedger.Text.Trim();
+            string searchText = cmbxSubsidiaryLedger.Text.Trim();
 
-                if (string.IsNullOrWhiteSpace(searchText))
-                    LoadSubsidiaryAccounts();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            if (string.IsNullOrWhiteSpace(searchText))
+                LoadSubsidiaryAccounts();
         }
-
-        #endregion Subsidiary Ledgers
 
         private static void ValidateDebitCreditRow(DataRow item, DataRow row)
         {
@@ -300,18 +269,14 @@ namespace OmniGov.App.Accounting.Views.Reports.Ledgers
 
         private void btnRetrieve_Click(object sender, EventArgs e)
         {
-            try
+            if (!this.ValidateChildren())
             {
-                if (!this.ValidateChildren())
-                {
-                    Helper.MessageBoxError(GetFormErrors());
-                    return;
-                }
-
-                if (!backgroundWorker1.IsBusy)
-                    backgroundWorker1.RunWorkerAsync();
+                Helper.MessageBoxError(GetFormErrors());
+                return;
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+
+            if (!backgroundWorker1.IsBusy)
+                backgroundWorker1.RunWorkerAsync();
         }
 
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
@@ -330,8 +295,6 @@ namespace OmniGov.App.Accounting.Views.Reports.Ledgers
         private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
         }
-
-        #region Validations
 
         private string GetFormErrors()
         {
@@ -422,10 +385,5 @@ namespace OmniGov.App.Accounting.Views.Reports.Ledgers
         {
             cmbxSubsidiaryLedger.Tag = string.Empty;
         }
-
-        #endregion Validations
     }
 }
-
-
-

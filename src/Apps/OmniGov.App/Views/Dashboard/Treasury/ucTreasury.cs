@@ -22,8 +22,6 @@ using OmniGov.App.Views.Transactions.Payments.PaymentHistory;
 using OmniGov.App.Views.Transactions.Payments.RealProperty;
 using OmniGov.App.Views.Transactions.ReceiptsIssued;
 using OmniGov.App.Views.Transactions.ReleasedAndUnReleasedChecks;
-using System;
-using System.Windows.Forms;
 
 namespace OmniGov.App.Views.Dashboard.Treasury
 {
@@ -59,227 +57,127 @@ namespace OmniGov.App.Views.Dashboard.Treasury
 
         private void taxpayersTstrpMnuItm_Click(object sender, EventArgs e)
         {
-            try
-            {
-                _ = new frmTaxpayers().ShowDialog();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            _ = new frmTaxpayers().ShowDialog();
         }
 
         private void realPropertiesTstrpMnuItm_Click(object sender, EventArgs e)
         {
-            try
-            {
-                _ = new frmRealProperties().ShowDialog();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            _ = new frmRealProperties().ShowDialog();
         }
 
         private void collectingOfficersTstrpMnuItm_Click(object sender, EventArgs e)
         {
-            try
-            {
-                _ = new frmCollectingOfficer().ShowDialog();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            _ = new frmCollectingOfficer().ShowDialog();
         }
 
         private void disbursementOfficersTstrpMnuItm_Click(object sender, EventArgs e)
         {
-            try
-            {
-                _ = new frmDisbursingOfficer().ShowDialog();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            _ = new frmDisbursingOfficer().ShowDialog();
         }
 
         private void feesChargesTstrpMnuItm_Click(object sender, EventArgs e)
         {
-            try
-            {
-                _ = new frmFeesChargesConfig().ShowDialog();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            _ = new frmFeesChargesConfig().ShowDialog();
         }
 
         private void af56TstrpMnuItm_Click(object sender, EventArgs e)
         {
-            try
-            {
-                _ = new frmPaymentRpt().ShowDialog();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            _ = new frmPaymentRpt().ShowDialog();
         }
 
         private void af5157TstrpMnuItm_Click(object sender, EventArgs e)
         {
-            try
-            {
-                _ = new frmAF51And57().ShowDialog();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            _ = new frmAF51And57().ShowDialog();
         }
 
         private void af54TstrpMnuItm_Click(object sender, EventArgs e)
         {
-            try
-            {
-                _ = new frmMarriageLicense().ShowDialog();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            _ = new frmMarriageLicense().ShowDialog();
         }
 
         private void af58TstrpMnuItm_Click(object sender, EventArgs e)
         {
-            try
-            {
-                _ = new frmBurialPermit().ShowDialog();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            _ = new frmBurialPermit().ShowDialog();
         }
 
         private void af53TstrpMnuItm_Click(object sender, EventArgs e)
         {
-            try
-            {
-                _ = new frmCattleOwnership().ShowDialog();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            _ = new frmCattleOwnership().ShowDialog();
         }
 
         private void af52TstrpMnuItm_Click(object sender, EventArgs e)
         {
-            try
-            {
-                _ = new frmCattleTransfer().ShowDialog();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            _ = new frmCattleTransfer().ShowDialog();
         }
 
         private void pymntHstoryTstrpMnuItm_Click(object sender, EventArgs e)
         {
-            try
-            {
-                _ = new frmPaymentHistory().ShowDialog();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            _ = new frmPaymentHistory().ShowDialog();
         }
 
         private void auctionTstrpMnuItm_Click(object sender, EventArgs e)
         {
-            try
-            {
-                _ = new frmAuction().ShowDialog();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            _ = new frmAuction().ShowDialog();
         }
 
         private void biddingTstrpMnuItm_Click(object sender, EventArgs e)
         {
-            try
-            {
-                _ = new frmBiddings().ShowDialog();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            _ = new frmBiddings().ShowDialog();
         }
 
         private void checkIssuanceTstrpMnuItm_Click(object sender, EventArgs e)
         {
-            try
-            {
-                _ = new frmRCI().ShowDialog();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            _ = new frmRCI().ShowDialog();
         }
 
         private void releasedAndUnreleaseChecksTstrpMnuItm_Click(object sender, EventArgs e)
         {
-            try
-            {
-                _ = new frmReleasedAndUnreleaseChecks().ShowDialog();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            _ = new frmReleasedAndUnreleaseChecks().ShowDialog();
         }
 
         private void bankDepositTstrpMnuItm_Click(object sender, EventArgs e)
         {
-            try
-            {
-                _ = new frmBankDeposits().ShowDialog();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            _ = new frmBankDeposits().ShowDialog();
         }
 
         private void receiptInventoryTstrpMnuItm_Click(object sender, EventArgs e)
         {
-            try
-            {
-                _ = new frmReceipts().ShowDialog();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            _ = new frmReceipts().ShowDialog();
         }
 
         private void recieiptIssuanceTstrpMnuItm_Click(object sender, EventArgs e)
         {
-            try
-            {
-                _ = new frmReceiptsIssued().ShowDialog();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            _ = new frmReceiptsIssued().ShowDialog();
         }
 
         private void propertyAssessmentToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            try
-            {
-                _ = new frmRptDelinquencyNotices().ShowDialog();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            _ = new frmRptDelinquencyNotices().ShowDialog();
         }
 
         private void propertyTaxPostingToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            try
-            {
-                _ = new frmPrptyTaxPosting().ShowDialog();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            _ = new frmPrptyTaxPosting().ShowDialog();
         }
 
         private void warrantsOfLevyToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            try
-            {
-                _ = new frmWarrantLevy().ShowDialog();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            _ = new frmWarrantLevy().ShowDialog();
         }
 
         private void aF41CommunityTaxToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            try
-            {
-                _ = new frmCommunityTaxCertificate().ShowDialog();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            _ = new frmCommunityTaxCertificate().ShowDialog();
         }
 
         private void inventoryToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            try
-            {
-                _ = new frmCashTickets().ShowDialog();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            _ = new frmCashTickets().ShowDialog();
         }
 
         private void issuanceToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            try
-            {
-                _ = new frmCashTicketIssuance().ShowDialog();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            _ = new frmCashTicketIssuance().ShowDialog();
         }
     }
 }

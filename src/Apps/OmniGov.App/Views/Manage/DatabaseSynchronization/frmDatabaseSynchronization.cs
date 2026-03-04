@@ -1,12 +1,9 @@
 using OmniGov.App.Helpers;
 using OmniGov.Core.Entities;
-using PropertyAssessment.Data.Factories;
-using System;
-using System.Collections.Generic;
+using OmniGov.PropertyAssessment.Data.Factories;
+using OmniGov.Treasury.Data.Factories;
+using OmniGov.Treasury.Domain.Entities;
 using System.Data;
-using System.Windows.Forms;
-using Treasury.Data.Factories;
-using Treasury.Domain.Entities;
 
 namespace OmniGov.App.Views.Manage.DatabaseSynchronization
 {

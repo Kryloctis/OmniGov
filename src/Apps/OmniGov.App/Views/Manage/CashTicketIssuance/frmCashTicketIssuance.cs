@@ -1,12 +1,8 @@
-using MySql.Data.MySqlClient;
 using OmniGov.App.Helpers;
-using System;
-using System.Collections.Generic;
+using OmniGov.Treasury.Data.Factories;
+using OmniGov.Treasury.Domain.Entities;
 using System.ComponentModel;
 using System.Data;
-using System.Windows.Forms;
-using Treasury.Data.Factories;
-using Treasury.Domain.Entities;
 
 namespace OmniGov.App.Views.Manage.CashTicketIssuance
 {
@@ -21,31 +17,19 @@ namespace OmniGov.App.Views.Manage.CashTicketIssuance
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            try
-            {
-                _ = new frmCashTicketAddIssuance(this).ShowDialog();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            _ = new frmCashTicketAddIssuance(this).ShowDialog();
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            try
-            {
-                int cashTicketIssuedID = Convert.ToInt32(dgCashTicketIssued.SelectedRows[0].Cells["id"].Value);
-                _ = new frmCashTicketEditIssuance(this, cashTicketIssuedID).ShowDialog();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            int cashTicketIssuedID = Convert.ToInt32(dgCashTicketIssued.SelectedRows[0].Cells["id"].Value);
+            _ = new frmCashTicketEditIssuance(this, cashTicketIssuedID).ShowDialog();
         }
 
         private void frmCashTicketIssuance_Load(object sender, EventArgs e)
         {
-            try
-            {
-                HelperLoadRecords.ComboboxRowLimitFilter(cmbxRowFilter);
-                LoadIssuedCashTickets();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            HelperLoadRecords.ComboboxRowLimitFilter(cmbxRowFilter);
+            LoadIssuedCashTickets();
         }
 
         internal void LoadIssuedCashTickets()
@@ -62,52 +46,48 @@ namespace OmniGov.App.Views.Manage.CashTicketIssuance
 
         private void bgwLoadIssuedCashTickets_DoWork(object sender, DoWorkEventArgs e)
         {
-            try
-            {
-                var parameters = ((DateTime dateIssued, string searchKey, int rowLimit))e.Argument;
+            var parameters = ((DateTime dateIssued, string searchKey, int rowLimit))e.Argument;
 
-                var dataColumns = new DataColumn[]
-                {
+            var dataColumns = new DataColumn[]
+            {
                     new DataColumn("id", typeof(int)),
                     new DataColumn("cash_tickets_desc", typeof(string)),
                     new DataColumn("quantity", typeof(int)),
                     new DataColumn("date_issued", typeof(DateTime)),
                     new DataColumn("collecting_officer", typeof(string)),
                     new DataColumn("issued_by", typeof(string)),
-                };
+            };
 
-                var dataTable = new DataTable();
-                dataTable.Columns.AddRange(dataColumns);
-                DataTable dtCashTicketDb = TreasuryFactory.CashTicketsIssuedRepository().GetViewRecordsBySearch(parameters.dateIssued, parameters.searchKey, parameters.rowLimit);
+            var dataTable = new DataTable();
+            dataTable.Columns.AddRange(dataColumns);
+            DataTable dtCashTicketDb = TreasuryFactory.CashTicketsIssuedRepository().GetViewRecordsBySearch(parameters.dateIssued, parameters.searchKey, parameters.rowLimit);
 
-                int totalProgressCount = dtCashTicketDb.Rows.Count;
-                int progressCount = 0;
+            int totalProgressCount = dtCashTicketDb.Rows.Count;
+            int progressCount = 0;
 
-                foreach (DataRow row in dtCashTicketDb.Rows)
-                {
-                    int id = Convert.ToInt32(row["id"]);
-                    string cashTicket = row["cash_tickets_desc"].ToString();
-                    int quantity = Convert.ToInt32(row["quantity"]);
-                    DateTime dateIssued = Convert.ToDateTime(row["date_issued"]);
-                    string collectingOfficer = CollectingOfficerFullName(row);
-                    string issuedBy = row["issued_by"].ToString();
+            foreach (DataRow row in dtCashTicketDb.Rows)
+            {
+                int id = Convert.ToInt32(row["id"]);
+                string cashTicket = row["cash_tickets_desc"].ToString();
+                int quantity = Convert.ToInt32(row["quantity"]);
+                DateTime dateIssued = Convert.ToDateTime(row["date_issued"]);
+                string collectingOfficer = CollectingOfficerFullName(row);
+                string issuedBy = row["issued_by"].ToString();
 
-                    var newRow = dataTable.NewRow();
-                    newRow["id"] = id;
-                    newRow["cash_tickets_desc"] = cashTicket;
-                    newRow["quantity"] = quantity;
-                    newRow["date_issued"] = dateIssued;
-                    newRow["collecting_officer"] = collectingOfficer;
-                    newRow["issued_by"] = issuedBy;
+                var newRow = dataTable.NewRow();
+                newRow["id"] = id;
+                newRow["cash_tickets_desc"] = cashTicket;
+                newRow["quantity"] = quantity;
+                newRow["date_issued"] = dateIssued;
+                newRow["collecting_officer"] = collectingOfficer;
+                newRow["issued_by"] = issuedBy;
 
-                    dataTable.Rows.Add(newRow);
-                    progressCount++;
-                    Helper.ProgressCounter(bgwLoadIssuedCashTickets, totalProgressCount, progressCount);
-                }
-
-                e.Result = dataTable;
+                dataTable.Rows.Add(newRow);
+                progressCount++;
+                Helper.ProgressCounter(bgwLoadIssuedCashTickets, totalProgressCount, progressCount);
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+
+            e.Result = dataTable;
         }
 
         private void bgwLoadIssuedCashTickets_ProgressChanged(object sender, ProgressChangedEventArgs e)
@@ -117,23 +97,19 @@ namespace OmniGov.App.Views.Manage.CashTicketIssuance
 
         private void bgwLoadIssuedCashTickets_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            try
+            if (e.Result is not DataTable dataTable)
             {
-                if (e.Result is not DataTable dataTable)
-                {
-                    pbLoadRecords.Value = 100;
-                    return;
-                }
-
-                if (dataTable.Rows.Count < 1)
-                    pbLoadRecords.Value = 100;
-
-                HelperLoadRecords.CashTicketIssuedDatagridView(dataTable, dgCashTicketIssued);
-                dgCashTicketIssued.CurrentCell = dgCashTicketIssued.FirstDisplayedCell;
-                lblRecordCount.Text = dgCashTicketIssued.Rows.Count.ToString();
-                Helper.EnableDisableToolStripButtons(dgCashTicketIssued, btnEdit, btnDelete);
+                pbLoadRecords.Value = 100;
+                return;
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+
+            if (dataTable.Rows.Count < 1)
+                pbLoadRecords.Value = 100;
+
+            HelperLoadRecords.CashTicketIssuedDatagridView(dataTable, dgCashTicketIssued);
+            dgCashTicketIssued.CurrentCell = dgCashTicketIssued.FirstDisplayedCell;
+            lblRecordCount.Text = dgCashTicketIssued.Rows.Count.ToString();
+            Helper.EnableDisableToolStripButtons(dgCashTicketIssued, btnEdit, btnDelete);
         }
 
         private string CollectingOfficerFullName(DataRow row)
@@ -160,20 +136,11 @@ namespace OmniGov.App.Views.Manage.CashTicketIssuance
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            try
+            if (DeleteRecords())
             {
-                if (DeleteRecords())
-                {
-                    Helper.MessageBoxSuccess("Issued Cash Tickets has been deleted.");
-                    LoadIssuedCashTickets();
-                }
+                Helper.MessageBoxSuccess("Issued Cash Tickets has been deleted.");
+                LoadIssuedCashTickets();
             }
-            catch (MySqlException ex)
-            {
-                if (ex.Number == 1451)
-                    Helper.MessageBoxError("Can't delete issued tickets. The tickets was already used by a collecting officer.");
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private bool DeleteRecords()
@@ -197,11 +164,7 @@ namespace OmniGov.App.Views.Manage.CashTicketIssuance
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            try
-            {
-                LoadIssuedCashTickets();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            LoadIssuedCashTickets();
         }
     }
 }

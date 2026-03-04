@@ -64,11 +64,7 @@ namespace OmniGov.App.Views.Dashboard
 
         private void radBudget_CheckedChanged(object sender, EventArgs e)
         {
-            try
-            {
-                tabControlMain.SelectedTab = tabPageBudget;
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            tabControlMain.SelectedTab = tabPageBudget;
         }
 
         private void LoadTabPagesContents(TabControl tabControl)
@@ -109,45 +105,29 @@ namespace OmniGov.App.Views.Dashboard
 
         private void Dashboard_Load(object sender, EventArgs e)
         {
-            try
-            {
-                tlStrpLblServer.Text = $"Server: {ServerHelper.SelectedProfile?.Name} ({ServerHelper.SelectedProfile?.ProvinceName})";
-                tlStrpLblVersion.Text = $"Version:{Helper.version}";
-                tlStrpLblLoggedUser.Text = $"Logged User:{UserHelper.loggedUser?.FullName ?? "Unknown"}";
-                VerifyUserPrivileges();
-                LoadTabPagesContents(tabControlMain);
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            tlStrpLblServer.Text = $"Server: {ServerHelper.SelectedProfile?.Name} ({ServerHelper.SelectedProfile?.ProvinceName})";
+            tlStrpLblVersion.Text = $"Version:{Helper.version}";
+            tlStrpLblLoggedUser.Text = $"Logged User:{UserHelper.loggedUser?.FullName ?? "Unknown"}";
+            VerifyUserPrivileges();
+            LoadTabPagesContents(tabControlMain);
         }
 
         private void radAccounting_CheckedChanged(object sender, EventArgs e)
         {
-            try
-            {
-                tabControlMain.SelectedTab = tabPageAccounting;
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            tabControlMain.SelectedTab = tabPageAccounting;
         }
 
         private void radTreasury_CheckedChanged(object sender, EventArgs e)
         {
-            try
-            {
-                tabControlMain.SelectedTab = tabPageTreasury;
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            tabControlMain.SelectedTab = tabPageTreasury;
         }
 
         private void btnLogout_Click(object sender, EventArgs e)
         {
-            try
+            if (Helper.MessageBoxConfirm("Logout Now?"))
             {
-                if (Helper.MessageBoxConfirm("Logout Now?"))
-                {
-                    this.Close();
-                }
+                this.Close();
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void Dashboard_FormClosed(object sender, FormClosedEventArgs e)
@@ -157,51 +137,31 @@ namespace OmniGov.App.Views.Dashboard
 
         private void radManage_CheckedChanged(object sender, EventArgs e)
         {
-            try
-            {
-                tabControlMain.SelectedTab = tabPageManage;
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            tabControlMain.SelectedTab = tabPageManage;
         }
 
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            try
-            {
-                LoadTabPagesContents(tabControlMain);
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            LoadTabPagesContents(tabControlMain);
         }
 
         private void radReports_CheckedChanged(object sender, EventArgs e)
         {
-            try
-            {
-                tabControlMain.SelectedTab = tabPageReports;
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            tabControlMain.SelectedTab = tabPageReports;
         }
 
         private void radioBtnMyAccount_CheckedChanged(object sender, EventArgs e)
         {
-            try
-            {
-                tabControlMain.SelectedTab = tabPageMyAccount;
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            tabControlMain.SelectedTab = tabPageMyAccount;
         }
 
         private void tlStrpWhatsNew_Click(object sender, EventArgs e)
         {
-            try
+            Process.Start(new ProcessStartInfo
             {
-                Process.Start(new ProcessStartInfo
-                {
-                    FileName = Helper.updateReleaseLnk,
-                    UseShellExecute = true
-                });
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+                FileName = Helper.updateReleaseLnk,
+                UseShellExecute = true
+            });
         }
     }
 }

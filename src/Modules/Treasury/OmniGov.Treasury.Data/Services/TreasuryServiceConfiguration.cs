@@ -1,10 +1,10 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using Treasury.Data.Factories;
-using Treasury.Data.Repositories;
-using Treasury.Domain.Interfaces;
-using Treasury.Domain.Interfaces.Factories;
+using OmniGov.Treasury.Data.Factories;
+using OmniGov.Treasury.Data.Repositories;
+using OmniGov.Treasury.Domain.Interfaces;
+using OmniGov.Treasury.Domain.Interfaces.Factories;
 
-namespace Treasury.Data.Services
+namespace OmniGov.Treasury.Data.Services
 {
     public static class TreasuryServiceConfiguration
     {

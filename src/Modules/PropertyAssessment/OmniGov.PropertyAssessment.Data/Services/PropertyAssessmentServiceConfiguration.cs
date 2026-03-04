@@ -1,12 +1,12 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using OmniGov.Core.Interfaces.Services;
 using OmniGov.Core.Services;
-using PropertyAssessment.Data.Factories;
-using PropertyAssessment.Data.Repositories;
-using PropertyAssessment.Domain.Interfaces;
-using PropertyAssessment.Domain.Interfaces.Factories;
+using OmniGov.PropertyAssessment.Data.Factories;
+using OmniGov.PropertyAssessment.Data.Repositories;
+using OmniGov.PropertyAssessment.Domain.Interfaces;
+using OmniGov.PropertyAssessment.Domain.Interfaces.Factories;
 
-namespace PropertyAssessment.Data.Services
+namespace OmniGov.PropertyAssessment.Data.Services
 {
     public static class PropertyAssessmentServiceConfiguration
     {

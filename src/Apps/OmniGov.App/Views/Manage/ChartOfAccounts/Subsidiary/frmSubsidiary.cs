@@ -1,12 +1,8 @@
-using Accounting.Data.Factories;
-using Accounting.Domain.Entities;
-using MySql.Data.MySqlClient;
+using OmniGov.Accounting.Data.Factories;
+using OmniGov.Accounting.Domain.Entities;
 using OmniGov.App.Helpers;
 using OmniGov.App.Views.Manage.ChartOfAccounts.BeginningBalances;
 using OmniGov.Core.Factories;
-using System;
-using System.Collections.Generic;
-using System.Windows.Forms;
 
 namespace OmniGov.App.Views.Manage.ChartOfAccounts.Subsidiary
 {
@@ -58,11 +54,7 @@ namespace OmniGov.App.Views.Manage.ChartOfAccounts.Subsidiary
 
         private void frmSubsidiary_Load(object sender, EventArgs e)
         {
-            try
-            {
-                OnLoad();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            OnLoad();
         }
 
         private void EnableDisableButtons()
@@ -80,11 +72,7 @@ namespace OmniGov.App.Views.Manage.ChartOfAccounts.Subsidiary
 
         private void dgSubsidiary_SelectionChanged(object sender, EventArgs e)
         {
-            try
-            {
-                EnableDisableButtons();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            EnableDisableButtons();
         }
 
         private void BtnAdd_Click(object sender, EventArgs e)
@@ -94,16 +82,12 @@ namespace OmniGov.App.Views.Manage.ChartOfAccounts.Subsidiary
 
         private void BtnEdit_Click(object sender, EventArgs e)
         {
-            try
+            if (dgSubsidiary.SelectedRows.Count == 1)
             {
-                if (dgSubsidiary.SelectedRows.Count == 1)
-                {
-                    ushort subsidiaryLedgerId = Convert.ToUInt16(dgSubsidiary.SelectedCells[0].Value);
+                ushort subsidiaryLedgerId = Convert.ToUInt16(dgSubsidiary.SelectedCells[0].Value);
 
-                    _ = new frmSubsidiaryEdit(this, fundId, generalLedgerId, subsidiaryLedgerId).ShowDialog();
-                }
+                _ = new frmSubsidiaryEdit(this, fundId, generalLedgerId, subsidiaryLedgerId).ShowDialog();
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private bool DeleteData()
@@ -129,48 +113,26 @@ namespace OmniGov.App.Views.Manage.ChartOfAccounts.Subsidiary
 
         private void BtnDelete_Click(object sender, EventArgs e)
         {
-            try
-            {
-                if (DeleteData())
-                    LoadSubsidiaryRecordsByFundAndGeneralLedger();
-            }
-            catch (MySqlException mysqlEx)
-            {
-                switch (mysqlEx.Number)
-                {
-                    case 1451:
-                        Helper.MessageBoxError("Cannot delete this record. It is referenced by atleast one record.");
-                        break;
-
-                    default:
-                        Helper.MessageBoxError(mysqlEx.Message);
-                        break;
-                }
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            if (DeleteData())
+                LoadSubsidiaryRecordsByFundAndGeneralLedger();
         }
 
         private void BtnSetBalance_Click(object sender, EventArgs e)
         {
-            try
+            if (dgSubsidiary.SelectedRows.Count == 1)
             {
-                if (dgSubsidiary.SelectedRows.Count == 1)
+                ushort subsidiaryLedgerId = Convert.ToUInt16(dgSubsidiary.SelectedCells[0].Value);
+
+                var subsidiaryLedgerBalanceExist = AccountingFactory.BeginningBalancesRepository().SubsidiaryLedgerBalanceExist(fundId, generalLedgerId, year, subsidiaryLedgerId);
+
+                if (subsidiaryLedgerBalanceExist)
                 {
-                    ushort subsidiaryLedgerId = Convert.ToUInt16(dgSubsidiary.SelectedCells[0].Value);
-
-                    var subsidiaryLedgerBalanceExist = AccountingFactory.BeginningBalancesRepository().SubsidiaryLedgerBalanceExist(fundId, generalLedgerId, year, subsidiaryLedgerId);
-
-                    if (subsidiaryLedgerBalanceExist)
-                    {
-                        _ = new frmBeginningBalanceEdit(_frmChartOfAccounts, this, fundId, generalLedgerId, year, subsidiaryLedgerId).ShowDialog();
-                        return;
-                    }
-
-                    _ = new frmBeginningBalanceAdd(_frmChartOfAccounts, this, fundId, generalLedgerId, year, subsidiaryLedgerId).ShowDialog();
+                    _ = new frmBeginningBalanceEdit(_frmChartOfAccounts, this, fundId, generalLedgerId, year, subsidiaryLedgerId).ShowDialog();
+                    return;
                 }
+
+                _ = new frmBeginningBalanceAdd(_frmChartOfAccounts, this, fundId, generalLedgerId, year, subsidiaryLedgerId).ShowDialog();
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }
-

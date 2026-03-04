@@ -1,8 +1,6 @@
 using OmniGov.App.Helpers;
 using OmniGov.Core.Entities;
 using OmniGov.Core.Factories;
-using System;
-using System.Windows.Forms;
 
 namespace OmniGov.App.Views.Manage.AccountableForm
 {
@@ -54,11 +52,7 @@ namespace OmniGov.App.Views.Manage.AccountableForm
 
         private void frmEditFaceValue_Load(object sender, EventArgs e)
         {
-            try
-            {
-                uc.LoadSelectedData(faceValueId);
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            uc.LoadSelectedData(faceValueId);
         }
     }
 }

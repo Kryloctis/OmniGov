@@ -1,7 +1,5 @@
 using OmniGov.App.Helpers;
-using System;
-using System.Windows.Forms;
-using Treasury.Data.Factories;
+using OmniGov.Treasury.Data.Factories;
 
 namespace OmniGov.App.Views.Manage.CashTickets
 {
@@ -21,25 +19,17 @@ namespace OmniGov.App.Views.Manage.CashTickets
 
         private void FrmCashTicketEdit_Load(object sender, EventArgs e)
         {
-            try
-            {
-                uc.OnLoad(true, cashTicketId);
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            uc.OnLoad(true, cashTicketId);
         }
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-            try
+            if (UpdateData())
             {
-                if (UpdateData())
-                {
-                    Helper.MessageBoxSuccess("Cash Ticket has been updated.");
-                    frmCashTickets.LoadCashTickets();
-                    Close();
-                }
+                Helper.MessageBoxSuccess("Cash Ticket has been updated.");
+                frmCashTickets.LoadCashTickets();
+                Close();
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private bool UpdateData()

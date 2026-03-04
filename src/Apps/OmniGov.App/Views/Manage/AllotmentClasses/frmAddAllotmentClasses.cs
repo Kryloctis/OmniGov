@@ -1,7 +1,5 @@
 using OmniGov.App.Helpers;
 using OmniGov.Core.Factories;
-using System;
-using System.Windows.Forms;
 
 namespace OmniGov.App.Views.Manage.AllotmentClasses
 {
@@ -31,11 +29,7 @@ namespace OmniGov.App.Views.Manage.AllotmentClasses
 
         private void frmAllotmentClassesAdd_Load(object sender, EventArgs e)
         {
-            try
-            {
-                uc.OnLoad(false, null);
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            uc.OnLoad(false, null);
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -50,19 +44,15 @@ namespace OmniGov.App.Views.Manage.AllotmentClasses
 
         private void frmAddAllotmentClasses_KeyDown(object sender, KeyEventArgs e)
         {
-            try
+            if (e.KeyCode == Keys.S && e.Control)
             {
-                if (e.KeyCode == Keys.S && e.Control)
+                if (SaveData())
                 {
-                    if (SaveData())
-                    {
-                        Helper.MessageBoxSuccess("Allotment class has been saved.");
-                        frmAllotmentClasses.LoadRecords();
-                        uc.ResetForm();
-                    }
+                    Helper.MessageBoxSuccess("Allotment class has been saved.");
+                    frmAllotmentClasses.LoadRecords();
+                    uc.ResetForm();
                 }
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }

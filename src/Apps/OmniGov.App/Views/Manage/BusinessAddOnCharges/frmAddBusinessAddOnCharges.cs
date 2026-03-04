@@ -1,8 +1,6 @@
 using OmniGov.App.Helpers;
-using System;
-using System.Windows.Forms;
-using Treasury.Data.Factories;
-using Treasury.Domain.Entities;
+using OmniGov.Treasury.Data.Factories;
+using OmniGov.Treasury.Domain.Entities;
 
 namespace OmniGov.App.Views.Manage.BusinessAddOnCharges
 {
@@ -44,16 +42,12 @@ namespace OmniGov.App.Views.Manage.BusinessAddOnCharges
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            try
+            if (SaveData())
             {
-                if (SaveData())
-                {
-                    Helper.MessageBoxSuccess("Business Add-on has been saved.");
-                    _frmBusinessAddOnCharges.LoadBusinessAddOnCharges();
-                    _ucBusinessAddOnCharges.ResetForm();
-                }
+                Helper.MessageBoxSuccess("Business Add-on has been saved.");
+                _frmBusinessAddOnCharges.LoadBusinessAddOnCharges();
+                _ucBusinessAddOnCharges.ResetForm();
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }

@@ -1,7 +1,5 @@
-using Budget.Data.Factories;
 using OmniGov.App.Helpers;
-using System;
-using System.Windows.Forms;
+using OmniGov.Budget.Data.Factories;
 
 namespace OmniGov.App.Budget.Views.AllotmentRelease.Old
 {
@@ -25,41 +23,33 @@ namespace OmniGov.App.Budget.Views.AllotmentRelease.Old
 
         private bool AddAllotmentRelease()
         {
-            try
+            if (!uc.ValidateChildren())
             {
-                if (!uc.ValidateChildren())
-                {
-                    Helper.MessageBoxError(uc.GetFormErrors());
-                    return false;
-                }
-
-                int budgetAppropriationId = Convert.ToInt32(uc.cmbxBudgetAppropriations.SelectedValue);
-                var budgetAppropriationsDict = BudgetFactory.BudgetAppropriationsRepository().GetViewRecordByID(budgetAppropriationId);
-
-                string remarks = string.IsNullOrEmpty(budgetAppropriationsDict["remarks"].ToString()) ? string.Empty : $"({budgetAppropriationsDict["remarks"]})";
-                string accountName = $"{budgetAppropriationsDict["general_ledger_accounts_name"]} {remarks}";
-                string accountCode = budgetAppropriationsDict["account_code"].ToString();
-                decimal amount = uc.nudAmount.Value;
-                short year = (short)uc.nudYear.Value;
-
-                var items = new object[]
-                {
-                    year,
-                    budgetAppropriationId,
-                    accountName,
-                    accountCode,
-                    amount
-                };
-
-                _ucAllotmentReleaseMain.dgAllotmentRelease.Rows.Add(items);
-                _ucAllotmentReleaseMain.DisplayTotalAllotmentRelease();
-                return true;
+                Helper.MessageBoxError(uc.GetFormErrors());
+                return false;
             }
-            catch (Exception ex)
+
+            int budgetAppropriationId = Convert.ToInt32(uc.cmbxBudgetAppropriations.SelectedValue);
+            var budgetAppropriationsDict = BudgetFactory.BudgetAppropriationsRepository().GetViewRecordByID(budgetAppropriationId);
+
+            string remarks = string.IsNullOrEmpty(budgetAppropriationsDict["remarks"].ToString()) ? string.Empty : $"({budgetAppropriationsDict["remarks"]})";
+            string accountName = $"{budgetAppropriationsDict["general_ledger_accounts_name"]} {remarks}";
+            string accountCode = budgetAppropriationsDict["account_code"].ToString();
+            decimal amount = uc.nudAmount.Value;
+            short year = (short)uc.nudYear.Value;
+
+            var items = new object[]
             {
-                Helper.MessageBoxError(ex.Message);
-            }
-            return false;
+                year,
+                budgetAppropriationId,
+                accountName,
+                accountCode,
+                amount
+            };
+
+            _ucAllotmentReleaseMain.dgAllotmentRelease.Rows.Add(items);
+            _ucAllotmentReleaseMain.DisplayTotalAllotmentRelease();
+            return true;
         }
 
         private void BtnAddToList_Click(object sender, EventArgs e)

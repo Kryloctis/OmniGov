@@ -1,9 +1,7 @@
 using OmniGov.App.Helpers;
 using OmniGov.Core.Factories;
-using System;
 using System.ComponentModel;
 using System.Data;
-using System.Windows.Forms;
 
 namespace OmniGov.App.Views.Transactions.Payments.MarriageLicense
 {
@@ -84,17 +82,13 @@ namespace OmniGov.App.Views.Transactions.Payments.MarriageLicense
 
         private void cmbxRegistry_KeyPress(object sender, KeyPressEventArgs e)
         {
-            try
+            if (ModifierKeys == Keys.Shift && e.KeyChar == (char)Keys.Enter)
             {
-                if (ModifierKeys == Keys.Shift && e.KeyChar == (char)Keys.Enter)
-                {
-                    LoadRegistry();
-                    cmbxRegistry.DroppedDown = cmbxRegistry.DroppedDown ? false : true;
-                    cmbxRegistry.DroppedDown = true;
-                    e.Handled = true;
-                }
+                LoadRegistry();
+                cmbxRegistry.DroppedDown = cmbxRegistry.DroppedDown ? false : true;
+                cmbxRegistry.DroppedDown = true;
+                e.Handled = true;
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void nudAge_Validating(object sender, CancelEventArgs e)
@@ -186,8 +180,7 @@ namespace OmniGov.App.Views.Transactions.Payments.MarriageLicense
             txtMiddleName.Text = dictRegistry["middle_name"];
             txtLastName.Text = dictRegistry["last_name"];
             radMale.Checked = dictRegistry["sex"].ToLower() == "male";
-            radFemale.Checked = dictRegistry["sex"].ToLower() ==
-                "female";
+            radFemale.Checked = dictRegistry["sex"].ToLower() == "female";
             dtBirthDate.Value = Convert.ToDateTime(dictRegistry["birth_date"]);
             txtNationality.Text = dictRegistry["nationality"];
             txtMunicipality.Text = dictRegistry["municipality"];
@@ -199,13 +192,9 @@ namespace OmniGov.App.Views.Transactions.Payments.MarriageLicense
 
         private void cmbxRegistry_SelectedValueChanged(object sender, EventArgs e)
         {
-            try
-            {
-                if (cmbxRegistry.SelectedValue is null)
-                    return;
-                LoadSelectedRegistryInfo();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            if (cmbxRegistry.SelectedValue is null)
+                return;
+            LoadSelectedRegistryInfo();
         }
     }
 }

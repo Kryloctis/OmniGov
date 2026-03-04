@@ -1,10 +1,7 @@
 using OmniGov.App.Helpers;
-using System;
-using System.Collections.Generic;
+using OmniGov.Treasury.Data.Factories;
+using OmniGov.Treasury.Domain.Entities;
 using System.Data;
-using System.Windows.Forms;
-using Treasury.Data.Factories;
-using Treasury.Domain.Entities;
 
 namespace OmniGov.App.Views.Manage.DisbursingOfficer
 {
@@ -78,11 +75,7 @@ namespace OmniGov.App.Views.Manage.DisbursingOfficer
 
         private void frmDisbursingOfficer_Load(object sender, EventArgs e)
         {
-            try
-            {
-                LoadRecords();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            LoadRecords();
         }
 
         private void BtnAdd_Click(object sender, EventArgs e)
@@ -92,15 +85,11 @@ namespace OmniGov.App.Views.Manage.DisbursingOfficer
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            try
+            if (dgDisbursingOfficer.Rows.Count > 0)
             {
-                if (dgDisbursingOfficer.Rows.Count > 0)
-                {
-                    int disbursingOfficerId = int.Parse(dgDisbursingOfficer.SelectedCells[0].Value.ToString());
-                    _ = new frmDisbursingOfficerEdit(this, disbursingOfficerId).ShowDialog();
-                }
+                int disbursingOfficerId = int.Parse(dgDisbursingOfficer.SelectedCells[0].Value.ToString());
+                _ = new frmDisbursingOfficerEdit(this, disbursingOfficerId).ShowDialog();
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private bool DeleteData()
@@ -122,37 +111,25 @@ namespace OmniGov.App.Views.Manage.DisbursingOfficer
 
         private void BtnDelete_Click(object sender, EventArgs e)
         {
-            try
-            {
-                int selectedRows = dgDisbursingOfficer.SelectedRows.Count;
+            int selectedRows = dgDisbursingOfficer.SelectedRows.Count;
 
-                if (DeleteData())
-                {
-                    Helper.MessageBoxSuccess($"{selectedRows} record/s has been deleted");
-                    LoadRecords();
-                }
+            if (DeleteData())
+            {
+                Helper.MessageBoxSuccess($"{selectedRows} record/s has been deleted");
+                LoadRecords();
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void dgDisbursingOfficer_SelectionChanged(object sender, EventArgs e)
         {
-            try
-            {
-                byte[] columnIndexTimestamp = { 3, 4 };
-                Helper.ShowRecordTimestamp(dgDisbursingOfficer, columnIndexTimestamp, lblCreatedAt, lblUpdatedAt);
-                Helper.EnableDisableToolStripButtons(dgDisbursingOfficer, btnEdit, btnDelete);
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            byte[] columnIndexTimestamp = { 3, 4 };
+            Helper.ShowRecordTimestamp(dgDisbursingOfficer, columnIndexTimestamp, lblCreatedAt, lblUpdatedAt);
+            Helper.EnableDisableToolStripButtons(dgDisbursingOfficer, btnEdit, btnDelete);
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            try
-            {
-                LoadRecords();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            LoadRecords();
         }
     }
 }

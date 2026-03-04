@@ -1,9 +1,7 @@
-using Accounting.Data.Factories;
-using Accounting.Domain.Entities;
+using OmniGov.Accounting.Data.Factories;
+using OmniGov.Accounting.Domain.Entities;
 using OmniGov.App.Helpers;
 using OmniGov.App.Views.Manage.ChartOfAccounts.Subsidiary;
-using System;
-using System.Windows.Forms;
 
 namespace OmniGov.App.Views.Manage.ChartOfAccounts.BeginningBalances
 {
@@ -57,27 +55,19 @@ namespace OmniGov.App.Views.Manage.ChartOfAccounts.BeginningBalances
 
         private void frmBeginningBalanceAdd_Load(object sender, EventArgs e)
         {
-            try
-            {
-                OnLoad();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            OnLoad();
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            try
+            if (SaveData())
             {
-                if (SaveData())
-                {
-                    Helper.MessageBoxSuccess("Beginning balance has been saved.");
+                Helper.MessageBoxSuccess("Beginning balance has been saved.");
 
-                    if (_frmSubsidiary != null) _frmSubsidiary.LoadSubsidiaryRecordsByFundAndGeneralLedger();
-                    if (_frmChartOfAccounts != null) _frmChartOfAccounts.LoadGeneralLedgers(30);
-                    Close();
-                }
+                if (_frmSubsidiary != null) _frmSubsidiary.LoadSubsidiaryRecordsByFundAndGeneralLedger();
+                if (_frmChartOfAccounts != null) _frmChartOfAccounts.LoadGeneralLedgers(30);
+                Close();
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }

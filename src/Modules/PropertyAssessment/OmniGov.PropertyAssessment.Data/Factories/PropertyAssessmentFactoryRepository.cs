@@ -1,10 +1,9 @@
 ﻿using OmniGov.Core.Interfaces.Services;
-using PropertyAssessment.Data.Repositories;
-using PropertyAssessment.Domain.Interfaces;
-using PropertyAssessment.Domain.Interfaces.Factories;
-using System;
+using OmniGov.PropertyAssessment.Data.Repositories;
+using OmniGov.PropertyAssessment.Domain.Interfaces;
+using OmniGov.PropertyAssessment.Domain.Interfaces.Factories;
 
-namespace PropertyAssessment.Data.Factories
+namespace OmniGov.PropertyAssessment.Data.Factories
 {
     public class PropertyAssessmentFactoryRepository : IPropertyAssessmentFactory
     {

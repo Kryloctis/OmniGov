@@ -1,13 +1,9 @@
-using MySql.Data.MySqlClient;
 using OmniGov.App.Helpers;
 using OmniGov.Core.Entities;
 using OmniGov.Core.Factories;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Text;
-using System.Windows.Forms;
 
 namespace OmniGov.App.Views.Manage.Roles
 {
@@ -26,13 +22,9 @@ namespace OmniGov.App.Views.Manage.Roles
 
         private void frmRoles_Load(object sender, EventArgs e)
         {
-            try
-            {
-                HelperLoadRecords.ComboboxRowLimitFilter(cmbxRowLimit);
-                LoadRoles();
-                Helper.EnableDisableToolStripButtons(dgRoles, btnEdit, btnDelete);
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            HelperLoadRecords.ComboboxRowLimitFilter(cmbxRowLimit);
+            LoadRoles();
+            Helper.EnableDisableToolStripButtons(dgRoles, btnEdit, btnDelete);
         }
 
         private void ToggleCrud(bool isEdit)
@@ -61,20 +53,12 @@ namespace OmniGov.App.Views.Manage.Roles
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            try
-            {
-                ToggleCrud(false);
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            ToggleCrud(false);
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            try
-            {
-                ToggleCrud(true);
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            ToggleCrud(true);
         }
 
         private bool DeleteData()
@@ -97,33 +81,16 @@ namespace OmniGov.App.Views.Manage.Roles
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            try
+            if (DeleteData())
             {
-                if (DeleteData())
-                {
-                    Helper.MessageBoxSuccess($"{dgRoles.SelectedRows.Count} record/s has been deleted");
-                    LoadRoles();
-                }
+                Helper.MessageBoxSuccess($"{dgRoles.SelectedRows.Count} record/s has been deleted");
+                LoadRoles();
             }
-            catch (MySqlException mysqlEx)
-            {
-                switch (mysqlEx.Number)
-                {
-                    case 1451:
-                        Helper.MessageBoxError("Can't delete role, The role was referenced to a user.");
-                        break;
-                }
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void cmbxRowLimit_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            try
-            {
-                LoadRoles();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            LoadRoles();
         }
 
         internal void LoadRoles()
@@ -140,89 +107,73 @@ namespace OmniGov.App.Views.Manage.Roles
 
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
-            try
-            {
-                var parameters = ((int rowLimit, string searchKey))e.Argument;
-                var dbDataTable = Factory.RolesRepository().GetRecords(parameters.rowLimit, parameters.searchKey);
-                int totalProgressCount = dbDataTable.Rows.Count;
-                int progressCount = 0;
+            var parameters = ((int rowLimit, string searchKey))e.Argument;
+            var dbDataTable = Factory.RolesRepository().GetRecords(parameters.rowLimit, parameters.searchKey);
+            int totalProgressCount = dbDataTable.Rows.Count;
+            int progressCount = 0;
 
-                var dataTable = new DataTable();
-                var dataColumns = new DataColumn[]
-                {
+            var dataTable = new DataTable();
+            var dataColumns = new DataColumn[]
+            {
                     new DataColumn("id", typeof(int)),
                     new DataColumn("role_name", typeof(string)),
                     new DataColumn("created_at", typeof(string)),
                     new DataColumn("updated_at", typeof(string))
-                };
-                dataTable.Columns.AddRange(dataColumns);
+            };
+            dataTable.Columns.AddRange(dataColumns);
 
-                foreach (DataRow dataRow in dbDataTable.Rows)
-                {
-                    var newRow = dataTable.NewRow();
+            foreach (DataRow dataRow in dbDataTable.Rows)
+            {
+                var newRow = dataTable.NewRow();
 
-                    byte roleId = Convert.ToByte(dataRow["id"]);
-                    newRow["id"] = roleId;
-                    newRow["role_name"] = dataRow["role_name"];
-                    newRow["created_at"] = dataRow["created_at"];
-                    newRow["updated_at"] = dataRow["updated_at"];
+                byte roleId = Convert.ToByte(dataRow["id"]);
+                newRow["id"] = roleId;
+                newRow["role_name"] = dataRow["role_name"];
+                newRow["created_at"] = dataRow["created_at"];
+                newRow["updated_at"] = dataRow["updated_at"];
 
-                    dataTable.Rows.Add(newRow);
-                    progressCount++;
-                    Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
-                }
-
-                e.Result = dataTable;
+                dataTable.Rows.Add(newRow);
+                progressCount++;
+                Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+
+            e.Result = dataTable;
         }
 
         private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            try
-            {
-                progressBar1.Value = e.ProgressPercentage;
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            progressBar1.Value = e.ProgressPercentage;
         }
 
         private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            try
-            {
-                if (e.Result is not DataTable dataTable)
-                    return;
+            if (e.Result is not DataTable dataTable)
+                return;
 
-                if (dataTable.Rows.Count < 1)
-                    progressBar1.Value = 100;
+            if (dataTable.Rows.Count < 1)
+                progressBar1.Value = 100;
 
-                HelperLoadRecords.DgvRoles(dataTable, dgRoles);
-                dgRoles.CurrentCell = dgRoles.FirstDisplayedCell;
-                lblRecordCount.Text = dgRoles.Rows.Count.ToString();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            HelperLoadRecords.DgvRoles(dataTable, dgRoles);
+            dgRoles.CurrentCell = dgRoles.FirstDisplayedCell;
+            lblRecordCount.Text = dgRoles.Rows.Count.ToString();
         }
 
         private void dgRoles_SelectionChanged(object sender, EventArgs e)
         {
-            try
+            if (dgRoles.SelectedRows.Count == 1)
             {
-                if (dgRoles.SelectedRows.Count == 1)
+                int rowIndex = dgRoles.CurrentRow.Index;
+                bool isValidRoleId = int.TryParse(dgRoles.Rows[rowIndex].Cells["id"].Value.ToString(), out int roleId);
+
+                if (isValidRoleId)
                 {
-                    int rowIndex = dgRoles.CurrentRow.Index;
-                    bool isValidRoleId = int.TryParse(dgRoles.Rows[rowIndex].Cells["id"].Value.ToString(), out int roleId);
-
-                    if (isValidRoleId)
-                    {
-                        var permissions = LoadPrivileges(roleId);
-                        rchTxtBxPrivileges.Text = permissions;
-                    }
+                    var permissions = LoadPrivileges(roleId);
+                    rchTxtBxPrivileges.Text = permissions;
                 }
-
-                Helper.ShowRecordTimestampMod(dgRoles, lblCreatedAt, lblUpdatedAt);
-                Helper.EnableDisableToolStripButtons(dgRoles, btnEdit, btnDelete);
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+
+            Helper.ShowRecordTimestampMod(dgRoles, lblCreatedAt, lblUpdatedAt);
+            Helper.EnableDisableToolStripButtons(dgRoles, btnEdit, btnDelete);
         }
 
         private string LoadPrivileges(int? roleId)
@@ -257,20 +208,12 @@ namespace OmniGov.App.Views.Manage.Roles
 
         private void btnShowSidePanel_Click(object sender, EventArgs e)
         {
-            try
-            {
-                TogglePreviewPermissions();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            TogglePreviewPermissions();
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            try
-            {
-                LoadRoles();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            LoadRoles();
         }
 
         private void SaveRole(bool isEdit)
@@ -304,21 +247,12 @@ namespace OmniGov.App.Views.Manage.Roles
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            try
-            {
-                SaveRole(isEdit);
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            SaveRole(isEdit);
         }
 
         private void tlStrpBtnBack_Click(object sender, EventArgs e)
         {
-            try
-            {
-                customTabControl1.SelectedTab = tbPgList;
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            customTabControl1.SelectedTab = tbPgList;
         }
     }
 }
-

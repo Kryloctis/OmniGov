@@ -1,12 +1,9 @@
-using Budget.Data.Factories;
 using OmniGov.App.Budget.Helpers;
 using OmniGov.App.Helpers;
+using OmniGov.Budget.Data.Factories;
 using OmniGov.Core.Factories;
-using System;
 using System.ComponentModel;
 using System.Data;
-using System.Linq;
-using System.Windows.Forms;
 
 namespace OmniGov.App.Budget.Views.BudgetAppropriations
 {
@@ -95,30 +92,22 @@ namespace OmniGov.App.Budget.Views.BudgetAppropriations
 
         private void CmbxLedgerAccout_TextChanged(object sender, EventArgs e)
         {
-            try
+            if (string.IsNullOrEmpty(cmbxAccount.Text))
             {
-                if (string.IsNullOrEmpty(cmbxAccount.Text))
-                {
-                    cmbxAccount.TextChanged -= new EventHandler(CmbxLedgerAccout_TextChanged);
-                    LoadAccounts();
-                    cmbxAccount.SelectedIndex = -1;
-                    cmbxAccount.TextChanged += new EventHandler(CmbxLedgerAccout_TextChanged);
-                }
+                cmbxAccount.TextChanged -= new EventHandler(CmbxLedgerAccout_TextChanged);
+                LoadAccounts();
+                cmbxAccount.SelectedIndex = -1;
+                cmbxAccount.TextChanged += new EventHandler(CmbxLedgerAccout_TextChanged);
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void cmbxAccount_KeyDown(object sender, KeyEventArgs e)
         {
-            try
+            if (e.KeyCode == Keys.F1 && cmbxAccount.FindStringExact(cmbxAccount.Text) == -1 && !string.IsNullOrEmpty(cmbxAccount.Text))
             {
-                if (e.KeyCode == Keys.F1 && cmbxAccount.FindStringExact(cmbxAccount.Text) == -1 && !string.IsNullOrEmpty(cmbxAccount.Text))
-                {
-                    LoadAccounts();
-                    cmbxAccount.DroppedDown = true;
-                }
+                LoadAccounts();
+                cmbxAccount.DroppedDown = true;
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void OnLoad()
@@ -143,14 +132,10 @@ namespace OmniGov.App.Budget.Views.BudgetAppropriations
 
         private void ucBudgetAppropriations_Load(object sender, EventArgs e)
         {
-            try
+            if (!DesignMode)
             {
-                if (!DesignMode)
-                {
-                    OnLoad();
-                }
+                OnLoad();
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private bool ShowErrorOthersFPPNameExist(ErrorProvider ep, ComboBox comboBox, string fieldText)
@@ -166,11 +151,7 @@ namespace OmniGov.App.Budget.Views.BudgetAppropriations
 
         private void cmbxOthersFPP_Validating(object sender, CancelEventArgs e)
         {
-            try
-            {
-                e.Cancel = ShowErrorOthersFPPNameExist(epOthersFunctionProgramProject, cmbxOthersFPP, "Invalid Others FPP. Please select on the list.");
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            e.Cancel = ShowErrorOthersFPPNameExist(epOthersFunctionProgramProject, cmbxOthersFPP, "Invalid Others FPP. Please select on the list.");
         }
 
         private void cmbxOthersFPP_Validated(object sender, EventArgs e)
@@ -234,18 +215,14 @@ namespace OmniGov.App.Budget.Views.BudgetAppropriations
 
         private void cmbxAccount_Validating(object sender, CancelEventArgs e)
         {
-            try
-            {
-                if (string.IsNullOrEmpty(cmbxAccount.Text))
-                    e.Cancel = Helper.ShowErrorComboBoxEmpty(epGeneralLedgerAcc, cmbxAccount, "General Ledger Account");
-                else if (ShowErrorLedgerNameNotExist())
-                    e.Cancel = ShowErrorLedgerNameNotExist();
-                else if (ShowErrorBudgetAppropriationContinuing())
-                    e.Cancel = ShowErrorBudgetAppropriationContinuing();
-                else
-                    e.Cancel = ShowErrorBudgetAppropriationExist();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            if (string.IsNullOrEmpty(cmbxAccount.Text))
+                e.Cancel = Helper.ShowErrorComboBoxEmpty(epGeneralLedgerAcc, cmbxAccount, "General Ledger Account");
+            else if (ShowErrorLedgerNameNotExist())
+                e.Cancel = ShowErrorLedgerNameNotExist();
+            else if (ShowErrorBudgetAppropriationContinuing())
+                e.Cancel = ShowErrorBudgetAppropriationContinuing();
+            else
+                e.Cancel = ShowErrorBudgetAppropriationExist();
         }
 
         private void cmbxAccount_Validated(object sender, EventArgs e)
@@ -255,11 +232,7 @@ namespace OmniGov.App.Budget.Views.BudgetAppropriations
 
         private void nudAmount_Validating(object sender, CancelEventArgs e)
         {
-            try
-            {
-                AmountValidation(e);
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            AmountValidation(e);
         }
 
         private void AmountValidation(CancelEventArgs e)

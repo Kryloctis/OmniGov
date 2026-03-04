@@ -1,7 +1,5 @@
 using OmniGov.App.Helpers;
 using OmniGov.Core.Factories;
-using System;
-using System.Windows.Forms;
 
 namespace OmniGov.App.Views.Manage.AllotmentClasses
 {
@@ -22,11 +20,7 @@ namespace OmniGov.App.Views.Manage.AllotmentClasses
 
         private void frmAllotmentClassesEdit_Load(object sender, EventArgs e)
         {
-            try
-            {
-                uc.OnLoad(true, allotmentClassId);
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            uc.OnLoad(true, allotmentClassId);
         }
 
         private bool UpdateData()
@@ -45,7 +39,17 @@ namespace OmniGov.App.Views.Manage.AllotmentClasses
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            try
+            if (UpdateData())
+            {
+                Helper.MessageBoxSuccess("Allotment class has been updated.");
+                frmAllotmentClasses.LoadRecords();
+                Close();
+            }
+        }
+
+        private void frmEditAllotmentClasses_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.S && e.Control)
             {
                 if (UpdateData())
                 {
@@ -54,24 +58,6 @@ namespace OmniGov.App.Views.Manage.AllotmentClasses
                     Close();
                 }
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        private void frmEditAllotmentClasses_KeyDown(object sender, KeyEventArgs e)
-        {
-            try
-            {
-                if (e.KeyCode == Keys.S && e.Control)
-                {
-                    if (UpdateData())
-                    {
-                        Helper.MessageBoxSuccess("Allotment class has been updated.");
-                        frmAllotmentClasses.LoadRecords();
-                        Close();
-                    }
-                }
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }

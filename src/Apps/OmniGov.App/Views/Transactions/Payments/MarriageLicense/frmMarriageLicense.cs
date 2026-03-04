@@ -1,10 +1,7 @@
 ﻿using OmniGov.App.Helpers;
 using OmniGov.Core.Factories;
-using System;
-using System.Collections.Generic;
-using System.Windows.Forms;
-using Treasury.Data.Factories;
-using Treasury.Domain.Entities;
+using OmniGov.Treasury.Data.Factories;
+using OmniGov.Treasury.Domain.Entities;
 
 namespace OmniGov.App.Views.Transactions.Payments.MarriageLicense
 {
@@ -42,11 +39,7 @@ namespace OmniGov.App.Views.Transactions.Payments.MarriageLicense
 
         private void frmMarriageLicense_Load(object sender, EventArgs e)
         {
-            try
-            {
-                LoadTabContents();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            LoadTabContents();
         }
 
         private MarriageLicenseModel MarriageLicenseModel()
@@ -242,50 +235,38 @@ namespace OmniGov.App.Views.Transactions.Payments.MarriageLicense
 
         private void btnNextMain_Click(object sender, EventArgs e)
         {
-            try
+            if (!TabValidated())
+                return;
+
+            if (tabControlMain.SelectedTab.Name == "tabPagePayment" && TabValidated())
             {
-                if (!TabValidated())
-                    return;
-
-                if (tabControlMain.SelectedTab.Name == "tabPagePayment" && TabValidated())
+                if (Helper.MessageBoxConfirmCancel("Confirm Payment..."))
                 {
-                    if (Helper.MessageBoxConfirmCancel("Confirm Payment..."))
+                    if (ConfirmPayment())
                     {
-                        if (ConfirmPayment())
-                        {
-                            tabControlMain.SelectedIndex++;
-                        }
+                        tabControlMain.SelectedIndex++;
                     }
-                    return;
                 }
-
-                if (tabControlMain.SelectedTab.Name == "tabPageReceipt")
-                {
-                    ResetForm();
-                    return;
-                }
-
-                tabControlMain.SelectedIndex++;
+                return;
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+
+            if (tabControlMain.SelectedTab.Name == "tabPageReceipt")
+            {
+                ResetForm();
+                return;
+            }
+
+            tabControlMain.SelectedIndex++;
         }
 
         private void btnBackMain_Click(object sender, EventArgs e)
         {
-            try
-            {
-                tabControlMain.SelectedIndex--;
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            tabControlMain.SelectedIndex--;
         }
 
         private void tabControlMain_SelectedIndexChanged(object sender, EventArgs e)
         {
-            try
-            {
-                LoadTabContents();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            LoadTabContents();
         }
 
         private void frmMarriageLicense_FormClosing(object sender, FormClosingEventArgs e)

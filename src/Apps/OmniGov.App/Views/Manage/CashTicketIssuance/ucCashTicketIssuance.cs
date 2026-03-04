@@ -1,12 +1,9 @@
 using OmniGov.App.Helpers;
 using OmniGov.Core.Factories;
-using System;
-using System.Collections.Generic;
+using OmniGov.Treasury.Data.Factories;
+using OmniGov.Treasury.Domain.Entities;
 using System.ComponentModel;
 using System.Data;
-using System.Windows.Forms;
-using Treasury.Data.Factories;
-using Treasury.Domain.Entities;
 
 namespace OmniGov.App.Views.Manage.CashTicketIssuance
 {
@@ -181,36 +178,24 @@ namespace OmniGov.App.Views.Manage.CashTicketIssuance
 
         private void cbCollectingOfficerTypeJO_CheckedChanged(object sender, EventArgs e)
         {
-            try
-            {
-                LoadCollectors();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            LoadCollectors();
         }
 
         private void nudQuantity_Validating(object sender, CancelEventArgs e)
         {
-            try
-            {
-                e.Cancel = Helper.ShowErrorNumericUpDownZero(errorProvider1, nudQuantity, "Quantity");
-                int quantity = Convert.ToInt32(nudQuantity.Value);
+            e.Cancel = Helper.ShowErrorNumericUpDownZero(errorProvider1, nudQuantity, "Quantity");
+            int quantity = Convert.ToInt32(nudQuantity.Value);
 
-                if (unusedCashTcktCount < quantity)
-                {
-                    errorProvider1.SetError(nudQuantity, "Not enough quantity.");
-                    e.Cancel = true;
-                }
+            if (unusedCashTcktCount < quantity)
+            {
+                errorProvider1.SetError(nudQuantity, "Not enough quantity.");
+                e.Cancel = true;
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void nudQuantity_Validated(object sender, EventArgs e)
         {
-            try
-            {
-                Helper.ClearErrorNumericUpDown(errorProvider1, nudQuantity);
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            Helper.ClearErrorNumericUpDown(errorProvider1, nudQuantity);
         }
 
         private void GetCashTckStat()
@@ -232,12 +217,7 @@ namespace OmniGov.App.Views.Manage.CashTicketIssuance
 
         private void cmbxCashTickets_SelectedIndexChanged(object sender, EventArgs e)
         {
-            try
-            {
-                GetCashTckStat();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            GetCashTckStat();
         }
     }
 }
-

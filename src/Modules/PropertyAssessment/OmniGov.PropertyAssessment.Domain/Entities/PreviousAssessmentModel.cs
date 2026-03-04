@@ -1,6 +1,4 @@
-using System;
-
-namespace PropertyAssessment.Domain.Entities
+namespace OmniGov.PropertyAssessment.Domain.Entities
 {
     public class PreviousAssessmentModel
     {

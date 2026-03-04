@@ -292,6 +292,10 @@
 		<PackageReference Include="MySql.Data" />
 		<PackageReference Include="ReportViewerCore.WinForms" />
 		<PackageReference Include="Microsoft.CSharp" />
+		<PackageReference Include="Serilog" />
+		<PackageReference Include="Serilog.Sinks.File" />
+		<PackageReference Include="Serilog.Sinks.Console" />
+		<PackageReference Include="Serilog.Extensions.Logging" />
 	</ItemGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\..\Modules\Accounting\OmniGov.Accounting.Data\OmniGov.Accounting.Data.csproj" />

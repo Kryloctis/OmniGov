@@ -1,7 +1,5 @@
 using OmniGov.App.Helpers;
 using OmniGov.Core.Factories;
-using System;
-using System.Windows.Forms;
 
 namespace OmniGov.App.Views.Manage.Barangay
 {
@@ -37,7 +35,22 @@ namespace OmniGov.App.Views.Manage.Barangay
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            try
+            if (UpdateData())
+            {
+                Helper.MessageBoxSuccess("Barangay has been updated.");
+                frmBarangay.LoadRecords();
+                Close();
+            }
+        }
+
+        private void frmEditBarangay_Load(object sender, EventArgs e)
+        {
+            uc.OnLoad(true, barangayId);
+        }
+
+        private void frmEditBarangay_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.S && e.Control)
             {
                 if (UpdateData())
                 {
@@ -46,34 +59,6 @@ namespace OmniGov.App.Views.Manage.Barangay
                     Close();
                 }
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        private void frmEditBarangay_Load(object sender, EventArgs e)
-        {
-            try
-            {
-                uc.OnLoad(true, barangayId);
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        private void frmEditBarangay_KeyDown(object sender, KeyEventArgs e)
-        {
-            try
-            {
-                if (e.KeyCode == Keys.S && e.Control)
-                {
-                    if (UpdateData())
-                    {
-                        Helper.MessageBoxSuccess("Barangay has been updated.");
-                        frmBarangay.LoadRecords();
-                        Close();
-                    }
-                }
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }
-

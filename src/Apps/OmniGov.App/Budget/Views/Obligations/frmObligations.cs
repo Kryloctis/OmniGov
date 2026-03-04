@@ -1,12 +1,8 @@
-using Budget.Data.Factories;
-using Budget.Domain.Models;
 using OmniGov.App.Helpers;
-using System;
-using System.Collections.Generic;
+using OmniGov.Budget.Data.Factories;
+using OmniGov.Budget.Domain.Entities;
 using System.ComponentModel;
 using System.Data;
-using System.Linq;
-using System.Windows.Forms;
 
 namespace OmniGov.App.Budget.Views.Obligations
 {
@@ -17,31 +13,31 @@ namespace OmniGov.App.Budget.Views.Obligations
             InitializeComponent();
             Helper.LoadFormIcon(this);
             Helper.DatagridFullRowSelectStyle(dgvMain, true);
+
+            btnApprove.Click += btnApprove_Click;
+            btnDisapprove.Click += btnDisapprove_Click;
+            btnCancel.Click += btnCancel_Click;
         }
 
         private void frmObligations_Load(object sender, EventArgs e)
         {
-            try
-            {
-                //HelperLoadRecords.ComboboxRowLimitFilter(tlStrpCmbxLimit.ComboBox);
-                dtPckrFrom.Value = dtPckrTo.Value.AddYears(-1);
+            //HelperLoadRecords.ComboboxRowLimitFilter(tlStrpCmbxLimit.ComboBox);
+            dtPckrFrom.Value = dtPckrTo.Value.AddYears(-1);
 
-                EnableDisableButtons(dgvMain, tlStrpBtnCreate, tlStrpBtnUpdate, tlStrpBtnDelete, tlStrpBtnView, tlStrpBtnReview);
-                LoadOblgtnRecords();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            EnableDisableButtons(dgvMain, tlStrpBtnCreate, tlStrpBtnUpdate, tlStrpBtnDelete, tlStrpBtnView, tlStrpBtnReview);
+            LoadOblgtnRecords();
         }
 
-        private string GetFltrStatus()
+        private ObligationRequestModel.Status GetFltrStatus()
         {
             if (radApproved.Checked)
-                return "Approved";
+                return ObligationRequestModel.Status.approved;
             else if (radDisapproved.Checked)
-                return "Disapproved";
+                return ObligationRequestModel.Status.disapproved;
             else if (radCancelled.Checked)
-                return "Cancelled";
+                return ObligationRequestModel.Status.cancelled;
             else
-                return "Pending";
+                return ObligationRequestModel.Status.pending;
         }
 
         private void EnableDisableButtons(DataGridView dgv, ToolStripButton btnCrt, ToolStripButton btnEdit, ToolStripButton btnDelete, ToolStripButton btnView, ToolStripButton btnReview)
@@ -64,7 +60,7 @@ namespace OmniGov.App.Budget.Views.Obligations
                 return;
             }
 
-            string status = GetFltrStatus()?.ToLower() ?? "";
+            string status = GetFltrStatus().ToString().ToLower();
 
             btnDelete.Text = selected > 0 ? $"Delete ({selected})" : "Delete";
 
@@ -148,15 +144,6 @@ namespace OmniGov.App.Budget.Views.Obligations
             return BudgetFactory.ObligationRequestRepository().Delete(models);
         }
 
-        private string GetUserFullName(string userId)
-        {
-            if (string.IsNullOrEmpty(userId))
-                return string.Empty;
-
-            var userData = Helper.GetUserDataById(Convert.ToInt32(userId));
-            return userData?["user_full_name"] ?? string.Empty;
-        }
-
         private void LoadOblgtnRecords()
         {
             if (!backgroundWorker1.IsBusy)
@@ -164,7 +151,7 @@ namespace OmniGov.App.Budget.Views.Obligations
                 pbLoadRecords.Value = 0;
 
                 (string srchKey,
-                string status,
+                ObligationRequestModel.Status status,
                 DateTime dtFrom,
                 DateTime dtTo,
                 int rowLimit)
@@ -181,240 +168,208 @@ namespace OmniGov.App.Budget.Views.Obligations
             }
         }
 
+        private void tlStrpBtnCreate_Click(object sender, EventArgs e)
+        {
+            ToggleCrud(false);
+        }
+
+        private void tlStrpBtnUpdate_Click(object sender, EventArgs e)
+        {
+            ToggleCrud(true);
+        }
+
+        private void tlStrpBtnView_Click(object sender, EventArgs e)
+        {
+            ToggleView();
+        }
+
+        private void tlStrpBtnAudit_Click(object sender, EventArgs e)
+        {
+            ToggleReview();
+        }
+
+        private void tlStrpBtnDelete_Click(object sender, EventArgs e)
+        {
+            var slctdRow = dgvMain.SelectedRows;
+            List<int> oblgtnRqstIds = dgvMain.SelectedRows
+                                            .Cast<DataGridViewRow>()
+                                            .Select(r => Convert.ToInt32(r.Cells["id"].Value)).ToList();
+
+            if (Helper.MessageBoxConfirmDelete(slctdRow.Count))
+            {
+                if (DeleteData(oblgtnRqstIds))
+                {
+                    LoadOblgtnRecords();
+                    EnableDisableButtons(dgvMain, tlStrpBtnCreate, tlStrpBtnUpdate, tlStrpBtnDelete, tlsStrpBtnBckView, tlStrpBtnReview);
+                }
+            }
+        }
+
+        private void tlStrpBtnCrudBack_Click(object sender, EventArgs e)
+        {
+            customTabControl1.SelectedTab = tbPgMain;
+        }
+
+        private void tlsStrpBtnBckView_Click(object sender, EventArgs e)
+        {
+            customTabControl1.SelectedTab = tbPgMain;
+        }
+
+        private void tlStrpBtnBckAudit_Click(object sender, EventArgs e)
+        {
+            customTabControl1.SelectedTab = tbPgMain;
+        }
+
         private bool SaveOblgtnRqst((ObligationRequestModel oblgtnRqstModel, List<ObligationAccountModel> oblgtnAccModels) models)
         {
+            ucObligationsCrud.ValidateChildren();
+            string errs = ucObligationsCrud.GetFormErrors();
+            if (!string.IsNullOrWhiteSpace(errs))
+            {
+                Helper.MessageBoxError(errs);
+                return false;
+            }
+
             if (models.oblgtnRqstModel.Id == 0)
                 return BudgetFactory.ObligationRequestRepository().Insert(models.oblgtnRqstModel, models.oblgtnAccModels);
             else
                 return BudgetFactory.ObligationRequestRepository().Update(models.oblgtnRqstModel, models.oblgtnAccModels);
         }
 
-        private void tlStrpBtnCreate_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                ToggleCrud(false);
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        private void tlStrpBtnUpdate_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                ToggleCrud(true);
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        private void tlStrpBtnView_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                ToggleView();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        private void tlStrpBtnAudit_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                ToggleReview();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        private void tlStrpBtnDelete_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                var slctdRow = dgvMain.SelectedRows;
-                List<int> oblgtnRqstIds = dgvMain.SelectedRows
-                                                .Cast<DataGridViewRow>()
-                                                .Select(r => Convert.ToInt32(r.Cells["id"].Value)).ToList();
-
-                if (Helper.MessageBoxConfirmDelete(slctdRow.Count))
-                {
-                    if (DeleteData(oblgtnRqstIds))
-                    {
-                        LoadOblgtnRecords();
-                        EnableDisableButtons(dgvMain, tlStrpBtnCreate, tlStrpBtnUpdate, tlStrpBtnDelete, tlsStrpBtnBckView, tlStrpBtnReview);
-                    }
-                }
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        private void tlStrpBtnCrudBack_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                customTabControl1.SelectedTab = tbPgMain;
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        private void tlsStrpBtnBckView_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                customTabControl1.SelectedTab = tbPgMain;
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        private void tlStrpBtnBckAudit_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                customTabControl1.SelectedTab = tbPgMain;
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
         private void btnCrudSubmit_Click(object sender, EventArgs e)
         {
-            try
+            var models = ucObligationsCrud.ObligationRequestModels();
+
+            if (SaveOblgtnRqst(models))
             {
-                var models = ucObligationsCrud.ObligationRequestModel();
+                string message = $"Obligation Request (Transaction No. {models.oblgtnRqstModel.TransactionNo})";
 
-                if (SaveOblgtnRqst(models))
+                if (models.oblgtnRqstModel.Id == 0)
                 {
-                    string message = $"Obligation Request (Transaction No. {models.oblgtnRqstModel.TransactionNo})";
-
-                    if (models.oblgtnRqstModel.Id == 0)
-                    {
-                        Helper.MessageBoxSuccess($"{message} has been submitted");
-                    }
-                    else
-                    {
-                        Helper.MessageBoxSuccess($"{message} modification has been submitted");
-                        customTabControl1.SelectedTab = tbPgMain;
-                    }
-
-                    ucObligationsCrud.ResetForm();
-                    LoadOblgtnRecords();
+                    Helper.MessageBoxSuccess($"{message} has been submitted");
                 }
+                else
+                {
+                    Helper.MessageBoxSuccess($"{message} modification has been submitted");
+                    customTabControl1.SelectedTab = tbPgMain;
+                }
+
+                ucObligationsCrud.ResetForm();
+                LoadOblgtnRecords();
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void dgvMain_SelectionChanged(object sender, EventArgs e)
         {
-            try
-            {
-                EnableDisableButtons(dgvMain, tlStrpBtnCreate, tlStrpBtnUpdate, tlStrpBtnDelete, tlStrpBtnView, tlStrpBtnReview);
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        private void dtPckrFrom_ValueChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                dtPckrTo.MinDate = dtPckrFrom.Value;
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            EnableDisableButtons(dgvMain, tlStrpBtnCreate, tlStrpBtnUpdate, tlStrpBtnDelete, tlStrpBtnView, tlStrpBtnReview);
         }
 
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
-            try
-            {
-                var parameters = ((string srchKey, string status, DateTime dtFrom, DateTime dtTo, int rowLimit))e.Argument;
+            var parameters = ((string srchKey, ObligationRequestModel.Status status, DateTime dtFrom, DateTime dtTo, int rowLimit))e.Argument;
 
-                var service = new OmniGov.App.Budget.Services.ObligationService();
-                e.Result = service.GetObligationRequests(
-                    parameters.srchKey,
-                    parameters.status,
-                    parameters.dtFrom,
-                    parameters.dtTo,
-                    parameters.rowLimit,
-                    (current, total) => Helper.ProgressCounter(backgroundWorker1, total, current)
-                );
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            var service = new OmniGov.App.Budget.Services.ObligationService();
+            e.Result = service.GetObligationRequests(
+                parameters.srchKey,
+                parameters.status,
+                parameters.dtFrom,
+                parameters.dtTo,
+                parameters.rowLimit,
+                (current, total) => Helper.ProgressCounter(backgroundWorker1, total, current)
+            );
         }
 
         private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            try
-            {
-                pbLoadRecords.Value = e.ProgressPercentage;
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            pbLoadRecords.Value = e.ProgressPercentage;
         }
 
         private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            try
+            if (e.Result is DataTable dataTable)
             {
-                if (e.Result is DataTable dataTable)
-                {
-                    if (dataTable.Rows.Count < 1) pbLoadRecords.Value = 100;
-                    HelperLoadRecords.DgvOblgtnRqst(dataTable, dgvMain);
-                    dgvMain.CurrentCell = dgvMain.FirstDisplayedCell;
-                }
+                if (dataTable.Rows.Count < 1) pbLoadRecords.Value = 100;
+                HelperLoadRecords.DgvOblgtnRqst(dataTable, dgvMain);
+                dgvMain.CurrentCell = dgvMain.FirstDisplayedCell;
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void TxtSearch_TextChanged(object sender, EventArgs e)
         {
-            try
-            {
-                string searchTxt = txtSearch.Text.Trim();
+            string searchTxt = txtSearch.Text.Trim();
 
-                if (searchTxt.Length > 3 || searchTxt.Length < 1)
-                    LoadOblgtnRecords();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            if (searchTxt.Length > 3 || searchTxt.Length < 1)
+                LoadOblgtnRecords();
         }
 
         private void radPending_CheckedChanged(object sender, EventArgs e)
         {
-            try
-            {
-                LoadOblgtnRecords();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            LoadOblgtnRecords();
         }
 
         private void radApproved_CheckedChanged(object sender, EventArgs e)
         {
-            try
-            {
-                LoadOblgtnRecords();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            LoadOblgtnRecords();
         }
 
         private void radDisapproved_CheckedChanged(object sender, EventArgs e)
         {
-            try
-            {
-                LoadOblgtnRecords();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            LoadOblgtnRecords();
         }
 
         private void radCancelled_CheckedChanged(object sender, EventArgs e)
         {
-            try
-            {
-                LoadOblgtnRecords();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            LoadOblgtnRecords();
+        }
+
+        private void dtPckrFrom_ValueChanged(object sender, EventArgs e)
+        {
+            dtPckrTo.MinDate = dtPckrFrom.Value;
+            LoadOblgtnRecords();
         }
 
         private void dtPckrTo_ValueChanged(object sender, EventArgs e)
         {
-            try
+            LoadOblgtnRecords();
+        }
+
+        private void btnApprove_Click(object sender, EventArgs e)
+        {
+            if (Helper.MessageBoxConfirm("Are you sure you want to approve this Obligation Request?"))
             {
-                LoadOblgtnRecords();
+                if (ucObligationsAudit.Approve())
+                {
+                    Helper.MessageBoxSuccess("Obligation Request has been approved.");
+                    customTabControl1.SelectedTab = tbPgMain;
+                    LoadOblgtnRecords();
+                }
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void btnDisapprove_Click(object sender, EventArgs e)
+        {
+            if (Helper.MessageBoxConfirm("Are you sure you want to disapprove this Obligation Request?"))
+            {
+                if (ucObligationsAudit.Disapprove())
+                {
+                    Helper.MessageBoxSuccess("Obligation Request has been disapproved.");
+                    customTabControl1.SelectedTab = tbPgMain;
+                    LoadOblgtnRecords();
+                }
+            }
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            if (Helper.MessageBoxConfirm("Are you sure you want to cancel this Obligation Request?"))
+            {
+                if (ucObligationsAudit.Cancel())
+                {
+                    Helper.MessageBoxSuccess("Obligation Request has been cancelled.");
+                    customTabControl1.SelectedTab = tbPgMain;
+                    LoadOblgtnRecords();
+                }
+            }
         }
     }
 }

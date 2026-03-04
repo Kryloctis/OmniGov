@@ -1,10 +1,10 @@
-using ACC.Domain.Interfaces;
-using Budget.Domain.Entities;
+using OmniGov.Budget.Domain.Entities;
+using OmniGov.Budget.Domain.Interfaces;
 using OmniGov.Core.Interfaces.Services;
 using System.Data;
 using System.Transactions;
 
-namespace Budget.Data.Repositories
+namespace OmniGov.Budget.Data.Repositories
 {
     public class RealignmentsRepository : IRealignments
     {

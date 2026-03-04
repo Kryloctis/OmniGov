@@ -1,9 +1,6 @@
-using Accounting.Data.Factories;
-using Accounting.Domain.Entities;
+using OmniGov.Accounting.Data.Factories;
+using OmniGov.Accounting.Domain.Entities;
 using OmniGov.App.Helpers;
-using System;
-using System.Collections.Generic;
-using System.Windows.Forms;
 
 namespace OmniGov.App.Views.Manage.AmortizationSchedule
 {
@@ -65,51 +62,36 @@ namespace OmniGov.App.Views.Manage.AmortizationSchedule
 
         private bool DeleteAmortizationScheduleRecords()
         {
-            try
-            {
-                var amortizationScheduleModelList = new List<AmortizationScheduleModel>();
+            var amortizationScheduleModelList = new List<AmortizationScheduleModel>();
 
-                foreach (DataGridViewRow row in dgAmortizationSched.SelectedRows)
+            foreach (DataGridViewRow row in dgAmortizationSched.SelectedRows)
+            {
+                int amortizationId = int.Parse(row.Cells[0].Value.ToString());
+                var amortizationScheduleModel = new AmortizationScheduleModel()
                 {
-                    int amortizationId = int.Parse(row.Cells[0].Value.ToString());
-                    var amortizationScheduleModel = new AmortizationScheduleModel()
-                    {
-                        Id = amortizationId
-                    };
+                    Id = amortizationId
+                };
 
-                    amortizationScheduleModelList.Add(amortizationScheduleModel);
-                }
+                amortizationScheduleModelList.Add(amortizationScheduleModel);
+            }
 
-                return AccountingFactory.AmortizationScheduleRepository().Delete(amortizationScheduleModelList);
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
-            return false;
+            return AccountingFactory.AmortizationScheduleRepository().Delete(amortizationScheduleModelList);
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            try
-            {
-                int selectedRowsCount = dgAmortizationSched.SelectedRows.Count;
+            int selectedRowsCount = dgAmortizationSched.SelectedRows.Count;
 
-                if (selectedRowsCount > 0)
+            if (selectedRowsCount > 0)
+            {
+                if (Helper.MessageBoxConfirmDelete(selectedRowsCount))
                 {
-                    if (Helper.MessageBoxConfirmDelete(selectedRowsCount))
+                    if (DeleteAmortizationScheduleRecords())
                     {
-                        if (DeleteAmortizationScheduleRecords())
-                        {
-                            LoadRecords();
-                            Helper.MessageBoxSuccess("Amortization Schedule/s has been deleted.");
-                        }
+                        LoadRecords();
+                        Helper.MessageBoxSuccess("Amortization Schedule/s has been deleted.");
                     }
                 }
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
             }
         }
     }

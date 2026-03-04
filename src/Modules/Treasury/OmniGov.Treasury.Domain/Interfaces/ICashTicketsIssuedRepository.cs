@@ -1,8 +1,8 @@
 using OmniGov.Core.Interfaces.Repositories;
+using OmniGov.Treasury.Domain.Entities;
 using System.Data;
-using Treasury.Domain.Entities;
 
-namespace Treasury.Domain.Interfaces
+namespace OmniGov.Treasury.Domain.Interfaces
 {
     public interface ICashTicketsIssuedRepository : IRepository<CashTicketsIssuedModel>
     {

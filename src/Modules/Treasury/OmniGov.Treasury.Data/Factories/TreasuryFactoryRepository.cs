@@ -1,9 +1,9 @@
 ﻿using OmniGov.Core.Interfaces.Services;
-using Treasury.Data.Repositories;
-using Treasury.Domain.Interfaces;
-using Treasury.Domain.Interfaces.Factories;
+using OmniGov.Treasury.Data.Repositories;
+using OmniGov.Treasury.Domain.Interfaces;
+using OmniGov.Treasury.Domain.Interfaces.Factories;
 
-namespace Treasury.Data.Factories
+namespace OmniGov.Treasury.Data.Factories
 {
     public class TreasuryFactoryRepository : ITreasuryFactory
     {

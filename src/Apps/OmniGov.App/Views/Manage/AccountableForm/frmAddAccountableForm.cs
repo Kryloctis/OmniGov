@@ -1,8 +1,6 @@
 using OmniGov.App.Helpers;
-using System;
-using System.Windows.Forms;
-using Treasury.Data.Factories;
-using Treasury.Domain.Entities;
+using OmniGov.Treasury.Data.Factories;
+using OmniGov.Treasury.Domain.Entities;
 
 namespace OmniGov.App.Views.Manage.AccountableForm
 {
@@ -44,16 +42,12 @@ namespace OmniGov.App.Views.Manage.AccountableForm
 
         private void SaveAccountableForm()
         {
-            try
+            if (SaveData())
             {
-                if (SaveData())
-                {
-                    Helper.MessageBoxSuccess("Accountable Form has been saved.");
-                    _frmAccountableForm.LoadRecords();
-                    uc.ResetForm();
-                }
+                Helper.MessageBoxSuccess("Accountable Form has been saved.");
+                _frmAccountableForm.LoadRecords();
+                uc.ResetForm();
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void frmAddAccountableForm_KeyDown(object sender, KeyEventArgs e)

@@ -1,7 +1,8 @@
-﻿using Accounting.Data.Repositories;
-using Accounting.Domain.Interfaces;
-using Accounting.Domain.Interfaces.Factories;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
+using OmniGov.Accounting.Data.Factories;
+using OmniGov.Accounting.Data.Repositories;
+using OmniGov.Accounting.Domain.Interfaces;
+using OmniGov.Accounting.Domain.Interfaces.Factories;
 
 namespace Accounting.Data.Services
 {
@@ -17,7 +18,7 @@ namespace Accounting.Data.Services
 
         private static void RegisterAccountingRepositories(IServiceCollection services)
         {
-            services.AddScoped<IADADisbursementsJournalRepository, ADADisbursementsJournalRepository>();
+            services.AddScoped<IAdaDisbursementsJournalRepository, AdaDisbursementsJournalRepository>();
             services.AddScoped<IAmortizationRepository, AmortizationRepository>();
             services.AddScoped<IAmortizationScheduleRepository, AmortizationScheduleRepository>();
             services.AddScoped<IBeginningBalancesRepository, BeginningBalancesRepository>();
@@ -26,8 +27,8 @@ namespace Accounting.Data.Services
             services.AddScoped<IGeneralLedgerAccountsRepository, GeneralLedgerAccountsRepository>();
             services.AddScoped<ICheckDisbursementsJournalRepository, CheckDisbursementsJournalRepository>();
             services.AddScoped<IGeneralJournalRepository, GeneralJournalRepository>();
-            services.AddScoped<IJEVAccountsRepository, JEVAccountsRepository>();
-            services.AddScoped<IJEVRepository, JEVRepository>();
+            services.AddScoped<IJevAccountsRepository, JevAccountsRepository>();
+            services.AddScoped<IJevRepository, JevRepository>();
             services.AddScoped<ISubsidiaryLedgerAccountsRepository, SubsidiaryLedgerAccountsRepository>();
         }
     }

@@ -1,11 +1,8 @@
-﻿using Accounting.Data.Factories;
-using Microsoft.Reporting.WinForms;
+﻿using Microsoft.Reporting.WinForms;
+using OmniGov.Accounting.Data.Factories;
 using OmniGov.App.Helpers;
 using OmniGov.Core.Factories;
-using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Windows.Forms;
 
 namespace OmniGov.App.Accounting.Views.Reports.TrialBalance
 {
@@ -30,11 +27,7 @@ namespace OmniGov.App.Accounting.Views.Reports.TrialBalance
 
         private void btnRetrieve_Click(object sender, EventArgs e)
         {
-            try
-            {
-                LoadReport(reportViewer.LocalReport);
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            LoadReport(reportViewer.LocalReport);
         }
 
         private void GetDebitCredit(byte fundId, DateTime dateEntry, ushort generalLedgerId, out decimal balanceDebit, out decimal balanceCredit)
@@ -164,6 +157,3 @@ namespace OmniGov.App.Accounting.Views.Reports.TrialBalance
         }
     }
 }
-
-
-

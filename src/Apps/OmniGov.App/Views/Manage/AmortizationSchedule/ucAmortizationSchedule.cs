@@ -1,8 +1,6 @@
-using Accounting.Data.Factories;
-using Accounting.Domain.Entities;
+using OmniGov.Accounting.Data.Factories;
+using OmniGov.Accounting.Domain.Entities;
 using OmniGov.App.Helpers;
-using System;
-using System.Windows.Forms;
 
 namespace OmniGov.App.Views.Manage.AmortizationSchedule
 {
@@ -55,35 +53,27 @@ namespace OmniGov.App.Views.Manage.AmortizationSchedule
 
         internal bool SaveData()
         {
-            try
-            {
-                DateTime date = dtDate.Value;
-                decimal principalAmount = nudPrincipal.Value;
-                decimal interestAmount = nudInterest.Value;
-                decimal grtAmount = nudGRT.Value;
+            DateTime date = dtDate.Value;
+            decimal principalAmount = nudPrincipal.Value;
+            decimal interestAmount = nudInterest.Value;
+            decimal grtAmount = nudGRT.Value;
 
-                var amortizationScheduleModel = new AmortizationScheduleModel()
-                {
-                    AmortizationId = amortizationId,
-                    Date = date,
-                    PrincipalAmount = principalAmount,
-                    InterestAmount = interestAmount,
-                    GRTAmount = grtAmount
-                };
-
-                if (isEdit)
-                {
-                    amortizationScheduleModel.Id = amortizationScheduleId;
-                    return AccountingFactory.AmortizationScheduleRepository().Update(amortizationScheduleModel);
-                }
-                else
-                    return AccountingFactory.AmortizationScheduleRepository().Insert(amortizationScheduleModel);
-            }
-            catch (Exception ex)
+            var amortizationScheduleModel = new AmortizationScheduleModel()
             {
-                Helper.MessageBoxError(ex.Message);
+                AmortizationId = amortizationId,
+                Date = date,
+                PrincipalAmount = principalAmount,
+                InterestAmount = interestAmount,
+                GRTAmount = grtAmount
+            };
+
+            if (isEdit)
+            {
+                amortizationScheduleModel.Id = amortizationScheduleId;
+                return AccountingFactory.AmortizationScheduleRepository().Update(amortizationScheduleModel);
             }
-            return false;
+            else
+                return AccountingFactory.AmortizationScheduleRepository().Insert(amortizationScheduleModel);
         }
 
         private void ucAmortizationSchedule_Load(object sender, EventArgs e)

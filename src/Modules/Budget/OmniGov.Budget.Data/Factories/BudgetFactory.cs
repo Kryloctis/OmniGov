@@ -1,7 +1,6 @@
-using ACC.Domain.Interfaces;
-using Budget.Domain.Interfaces;
+using OmniGov.Budget.Domain.Interfaces;
 
-namespace Budget.Data.Factories
+namespace OmniGov.Budget.Data.Factories
 {
     public class BudgetFactory
     {

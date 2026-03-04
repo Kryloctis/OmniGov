@@ -1,4 +1,4 @@
-﻿namespace Treasury.Domain.Interfaces.Factories
+﻿namespace OmniGov.Treasury.Domain.Interfaces.Factories
 {
     public interface ITreasuryFactory
     {

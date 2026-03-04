@@ -1,4 +1,4 @@
-namespace Budget.Domain.Models
+namespace OmniGov.Budget.Domain.Entities
 {
     public class BudgetAppropriationHasAugmentationsModel
     {

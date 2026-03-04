@@ -1,9 +1,9 @@
-using Accounting.Domain.Entities;
+using OmniGov.Accounting.Domain.Entities;
 using OmniGov.Core.Interfaces.Repositories;
 
-namespace Accounting.Domain.Interfaces
+namespace OmniGov.Accounting.Domain.Interfaces
 {
-    public interface IADADisbursementsJournalRepository : IRepository<ADADisbursementsJournalModel>
+    public interface IAdaDisbursementsJournalRepository : IRepository<ADADisbursementsJournalModel>
     {
         Dictionary<string, string> GetRecordByJevID(int jevId);
 

@@ -1,9 +1,6 @@
 using OmniGov.App.Helpers;
 using OmniGov.Core.Entities;
 using OmniGov.Core.Factories;
-using System;
-using System.Collections.Generic;
-using System.Windows.Forms;
 
 namespace OmniGov.App.Views.Manage.ChartOfAccounts.MajorAccountGroup
 {
@@ -59,16 +56,11 @@ namespace OmniGov.App.Views.Manage.ChartOfAccounts.MajorAccountGroup
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            try
+            if (SaveData())
             {
-                if (SaveData())
-                {
-                    Helper.MessageBoxSuccess("Major account group has been saved.");
-                    _frmChartOfAccounts.LoadMajorAccountGroup();
-                }
+                Helper.MessageBoxSuccess("Major account group has been saved.");
+                _frmChartOfAccounts.LoadMajorAccountGroup();
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }
-

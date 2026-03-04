@@ -1,9 +1,9 @@
-using Budget.Domain.Entities;
-using Budget.Domain.Interfaces;
+using OmniGov.Budget.Domain.Entities;
+using OmniGov.Budget.Domain.Interfaces;
 using OmniGov.Core.Interfaces.Services;
 using System.Data;
 
-namespace Budget.Data.Repositories
+namespace OmniGov.Budget.Data.Repositories
 {
     public class AugmentationsRepository : IAugmentations
     {

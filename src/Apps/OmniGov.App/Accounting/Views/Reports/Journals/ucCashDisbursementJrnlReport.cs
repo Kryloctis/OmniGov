@@ -1,11 +1,8 @@
-﻿using Accounting.Data.Factories;
-using Microsoft.Reporting.WinForms;
+﻿using Microsoft.Reporting.WinForms;
+using OmniGov.Accounting.Data.Factories;
 using OmniGov.App.Helpers;
 using OmniGov.Core.Factories;
-using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Windows.Forms;
 
 namespace OmniGov.App.Accounting.Views.Reports.Journals
 {
@@ -31,11 +28,7 @@ namespace OmniGov.App.Accounting.Views.Reports.Journals
 
         private void btnRunReport_Click(object sender, EventArgs e)
         {
-            try
-            {
-                LoadReport(reportViewer1);
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            LoadReport(reportViewer1);
         }
 
         private Dictionary<string, string> GetDefaultAccount(int journalId, int fundId)
@@ -205,6 +198,3 @@ namespace OmniGov.App.Accounting.Views.Reports.Journals
         }
     }
 }
-
-
-

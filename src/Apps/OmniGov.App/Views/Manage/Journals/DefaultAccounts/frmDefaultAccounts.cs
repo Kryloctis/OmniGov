@@ -1,11 +1,8 @@
-using Accounting.Data.Factories;
+using OmniGov.Accounting.Data.Factories;
 using OmniGov.App.Helpers;
 using OmniGov.Core.Entities;
 using OmniGov.Core.Factories;
-using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Windows.Forms;
 
 namespace OmniGov.App.Views.Manage.Journals.DefaultAccounts
 {
@@ -136,11 +133,7 @@ namespace OmniGov.App.Views.Manage.Journals.DefaultAccounts
 
         private void frmDefaultAccounts_Load(object sender, System.EventArgs e)
         {
-            try
-            {
-                OnLoad();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            OnLoad();
         }
 
         private void OnLoad()
@@ -167,20 +160,12 @@ namespace OmniGov.App.Views.Manage.Journals.DefaultAccounts
 
         private void dgAccounts_SelectionChanged(object sender, System.EventArgs e)
         {
-            try
-            {
-                EnableDisableButtons();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            EnableDisableButtons();
         }
 
         private void dgDefaultAccounts_SelectionChanged(object sender, EventArgs e)
         {
-            try
-            {
-                EnableDisableButtons();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            EnableDisableButtons();
         }
 
         private void SetDefaultAccounts()
@@ -225,20 +210,12 @@ namespace OmniGov.App.Views.Manage.Journals.DefaultAccounts
 
         private void btnSetDefaultAccount_Click(object sender, System.EventArgs e)
         {
-            try
-            {
-                SetDefaultAccounts();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            SetDefaultAccounts();
         }
 
         private void btnRemoveDefaultAccount_Click(object sender, EventArgs e)
         {
-            try
-            {
-                RemoveDefaultAccounts();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            RemoveDefaultAccounts();
         }
 
         private bool Save()
@@ -272,33 +249,25 @@ namespace OmniGov.App.Views.Manage.Journals.DefaultAccounts
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            try
+            if (Save())
             {
-                if (Save())
-                {
-                    Helper.MessageBoxSuccess("Default Accounts has been saved.");
-                    if (txtAccounts.Text.Length > 3)
-                        LoadAccounts();
-                    else
-                        dgAccounts.Rows.Clear();
-                }
+                Helper.MessageBoxSuccess("Default Accounts has been saved.");
+                if (txtAccounts.Text.Length > 3)
+                    LoadAccounts();
+                else
+                    dgAccounts.Rows.Clear();
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void cmbxFunds_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            try
+            if (string.IsNullOrEmpty(cmbxFunds.Text))
             {
-                if (string.IsNullOrEmpty(cmbxFunds.Text))
-                {
-                    e.Cancel = true;
-                    cmbxFunds.Tag = Helper.ErrorMessage("Funds");
-                }
-                else
-                    e.Cancel = false;
+                e.Cancel = true;
+                cmbxFunds.Tag = Helper.ErrorMessage("Funds");
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            else
+                e.Cancel = false;
         }
 
         private void cmbxFunds_Validated(object sender, EventArgs e)
@@ -308,54 +277,37 @@ namespace OmniGov.App.Views.Manage.Journals.DefaultAccounts
 
         private void cmbxFunds_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            try
-            {
-                LoadDefaultAccounts();
-                if (txtAccounts.Text.Length > 3)
-                    LoadAccounts();
-                else
-                    dgAccounts.Rows.Clear();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            LoadDefaultAccounts();
+            if (txtAccounts.Text.Length > 3)
+                LoadAccounts();
+            else
+                dgAccounts.Rows.Clear();
         }
 
         private void txtAccounts_TextChanged(object sender, EventArgs e)
         {
-            try
-            {
-                if (txtAccounts.Text.Length > 3)
-                    LoadAccounts();
-                else
-                    dgAccounts.Rows.Clear();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            if (txtAccounts.Text.Length > 3)
+                LoadAccounts();
+            else
+                dgAccounts.Rows.Clear();
         }
 
         private void radDebit_CheckedChanged(object sender, EventArgs e)
         {
-            try
-            {
-                LoadDefaultAccounts();
-                if (txtAccounts.Text.Length > 3)
-                    LoadAccounts();
-                else
-                    dgAccounts.Rows.Clear();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            LoadDefaultAccounts();
+            if (txtAccounts.Text.Length > 3)
+                LoadAccounts();
+            else
+                dgAccounts.Rows.Clear();
         }
 
         private void radCredit_CheckedChanged(object sender, EventArgs e)
         {
-            try
-            {
-                LoadDefaultAccounts();
-                if (txtAccounts.Text.Length > 3)
-                    LoadAccounts();
-                else
-                    dgAccounts.Rows.Clear();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            LoadDefaultAccounts();
+            if (txtAccounts.Text.Length > 3)
+                LoadAccounts();
+            else
+                dgAccounts.Rows.Clear();
         }
     }
 }
-

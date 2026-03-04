@@ -1,8 +1,6 @@
 using OmniGov.App.Helpers;
-using System;
-using System.Windows.Forms;
-using Treasury.Data.Factories;
-using Treasury.Domain.Entities;
+using OmniGov.Treasury.Data.Factories;
+using OmniGov.Treasury.Domain.Entities;
 
 namespace OmniGov.App.Views.Manage.BusinessCategories
 {
@@ -45,18 +43,14 @@ namespace OmniGov.App.Views.Manage.BusinessCategories
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            try
+            if (SaveData())
             {
-                if (SaveData())
-                {
-                    Helper.MessageBoxSuccess("Business category has been saved.");
-                    _frmBusinessCategories.LoadBusinessCategories();
-                    int lastInsertedId = TreasuryFactory.BusinessCategoriesRepository().GetLastInsertedId();
-                    Helper.DatagridViewRecordFinder(_frmBusinessCategories.dgBusinessCategories, "id", lastInsertedId.ToString());
-                    _ucBusinessCategories.ResetForm();
-                }
+                Helper.MessageBoxSuccess("Business category has been saved.");
+                _frmBusinessCategories.LoadBusinessCategories();
+                int lastInsertedId = TreasuryFactory.BusinessCategoriesRepository().GetLastInsertedId();
+                Helper.DatagridViewRecordFinder(_frmBusinessCategories.dgBusinessCategories, "id", lastInsertedId.ToString());
+                _ucBusinessCategories.ResetForm();
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }

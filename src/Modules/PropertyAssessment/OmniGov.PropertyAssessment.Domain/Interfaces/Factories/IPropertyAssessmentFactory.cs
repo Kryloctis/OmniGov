@@ -1,4 +1,4 @@
-﻿namespace PropertyAssessment.Domain.Interfaces.Factories
+﻿namespace OmniGov.PropertyAssessment.Domain.Interfaces.Factories
 {
     public interface IPropertyAssessmentFactory
     {

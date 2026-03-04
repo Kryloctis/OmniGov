@@ -1,6 +1,6 @@
 using OmniGov.Core.Entities;
 
-namespace Treasury.Domain.Entities
+namespace OmniGov.Treasury.Domain.Entities
 {
     public class RealPropertiesModel
     {

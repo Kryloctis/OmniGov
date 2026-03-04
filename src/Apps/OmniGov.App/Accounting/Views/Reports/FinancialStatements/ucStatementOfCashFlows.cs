@@ -1,10 +1,7 @@
 using Microsoft.Reporting.WinForms;
 using OmniGov.App.Helpers;
 using OmniGov.Core.Factories;
-using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Windows.Forms;
 
 namespace OmniGov.App.Accounting.Views.Reports.FinancialStatements
 {
@@ -119,11 +116,7 @@ namespace OmniGov.App.Accounting.Views.Reports.FinancialStatements
 
         private void btnRetrieve_Click(object sender, EventArgs e)
         {
-            try
-            {
-                LoadReport(reportViewer.LocalReport);
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            LoadReport(reportViewer.LocalReport);
         }
     }
 }

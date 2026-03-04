@@ -1,10 +1,8 @@
 ﻿using Microsoft.Reporting.WinForms;
 using OmniGov.App.Helpers;
-using System;
+using OmniGov.Treasury.Data.Factories;
 using System.ComponentModel;
 using System.Data;
-using System.Windows.Forms;
-using Treasury.Data.Factories;
 
 namespace OmniGov.App.Views.Reports.Cashbook
 {

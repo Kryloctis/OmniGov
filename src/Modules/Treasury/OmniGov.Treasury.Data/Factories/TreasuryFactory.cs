@@ -1,6 +1,6 @@
-using Treasury.Domain.Interfaces;
+using OmniGov.Treasury.Domain.Interfaces;
 
-namespace Treasury.Data.Factories
+namespace OmniGov.Treasury.Data.Factories
 {
     public class TreasuryFactory
     {

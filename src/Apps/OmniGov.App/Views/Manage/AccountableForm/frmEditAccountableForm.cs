@@ -1,8 +1,6 @@
 using OmniGov.App.Helpers;
-using System;
-using System.Windows.Forms;
-using Treasury.Data.Factories;
-using Treasury.Domain.Entities;
+using OmniGov.Treasury.Data.Factories;
+using OmniGov.Treasury.Domain.Entities;
 
 namespace OmniGov.App.Views.Manage.AccountableForm
 {
@@ -30,12 +28,8 @@ namespace OmniGov.App.Views.Manage.AccountableForm
 
         private void frmAccountableEdit_Load(object sender, EventArgs e)
         {
-            try
-            {
-                uc.isEdit = true;
-                LoadSelectedRecord();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            uc.isEdit = true;
+            LoadSelectedRecord();
         }
 
         private bool UpdateData()
@@ -64,16 +58,12 @@ namespace OmniGov.App.Views.Manage.AccountableForm
 
         private void UpdateAccountableForm()
         {
-            try
+            if (UpdateData())
             {
-                if (UpdateData())
-                {
-                    Helper.MessageBoxSuccess("Accountable Form has been updated.");
-                    _frmAccountable.LoadRecords();
-                    this.Close();
-                }
+                Helper.MessageBoxSuccess("Accountable Form has been updated.");
+                _frmAccountable.LoadRecords();
+                this.Close();
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void frmEditAccountableForm_KeyDown(object sender, KeyEventArgs e)

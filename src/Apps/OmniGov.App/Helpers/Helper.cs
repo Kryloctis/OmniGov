@@ -1,13 +1,8 @@
 using OmniGov.Core.Factories;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Drawing;
 using System.Drawing.Imaging;
-using System.IO;
 using System.Reflection;
 using System.Text.RegularExpressions;
-using System.Windows.Forms;
 
 namespace OmniGov.App.Helpers
 {
@@ -15,6 +10,15 @@ namespace OmniGov.App.Helpers
     {
         internal static string updateReleaseLnk = "https://sites.google.com/view/perzeus/products/lfs";
         internal static string version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
+
+        public enum Status
+        {
+            draft,
+            pending,
+            approved,
+            disapproved,
+            cancelled
+        }
 
         public static Dictionary<string, string> GetSigtryByRefDoc(string reference, string documentName)
         {
@@ -74,38 +78,28 @@ namespace OmniGov.App.Helpers
                 int decimalPart;
 
                 // separate input number string to 2 parts by "."(if have): integer and decimal
-                try
-                {
-                    int pos = strNum.IndexOf('.');
 
-                    if (pos == -1)
-                    {
-                        integerPart = int.Parse(strNum);
-                        decimalPart = 0;
-                    }
-                    else
-                    {
-                        integerPart = int.Parse(strNum.Substring(0, pos));
+                int pos = strNum.IndexOf('.');
 
-                        string strDecimalPart = strNum.Substring(pos + 1);
-                        if (strDecimalPart == "00")
-                        {
-                            strDecimalPart = "0";
-                        }
-                        if (strDecimalPart.Length == 1 && strDecimalPart[0] != '0')
-                        {
-                            strDecimalPart = strDecimalPart + '0';
-                        }
-                        decimalPart = int.Parse(strDecimalPart);
+                if (pos == -1)
+                {
+                    integerPart = int.Parse(strNum);
+                    decimalPart = 0;
+                }
+                else
+                {
+                    integerPart = int.Parse(strNum.Substring(0, pos));
+
+                    string strDecimalPart = strNum.Substring(pos + 1);
+                    if (strDecimalPart == "00")
+                    {
+                        strDecimalPart = "0";
                     }
-                }
-                catch (OverflowException)
-                {
-                    throw new ArgumentException(UtilConst.IllegalMsgOutOfRange);
-                }
-                catch (FormatException)
-                {
-                    throw new ArgumentException(UtilConst.IllegalMsgCommon);
+                    if (strDecimalPart.Length == 1 && strDecimalPart[0] != '0')
+                    {
+                        strDecimalPart = strDecimalPart + '0';
+                    }
+                    decimalPart = int.Parse(strDecimalPart);
                 }
 
                 // convert integer part to English words
@@ -379,18 +373,6 @@ namespace OmniGov.App.Helpers
 
         #region Miscellaneous
 
-        public static string GetStatus(bool isApproved, bool isDisapproved, bool isCancelled)
-        {
-            if (isCancelled)
-                return "Cancelled";
-            else if (isDisapproved)
-                return "Disapproved";
-            else if (isApproved)
-                return "Approved";
-            else
-                return "Pending";
-        }
-
         public static void ProgressCounter(BackgroundWorker backgroundWorker, int totalProgressCount, int progressCount, string progressText = "")
         {
             if (totalProgressCount <= 0)
@@ -470,22 +452,22 @@ namespace OmniGov.App.Helpers
 
         public static Color StatusColor(string status)
         {
-            switch (status)
+            switch (status.ToLower())
             {
-                case "Approved":
+                case "approved":
                     return Color.FromArgb(201, 228, 197);
 
-                case "Disapproved":
+                case "disapproved":
                     return Color.FromArgb(246, 169, 169);
 
-                case "Cancelled":
+                case "cancelled":
                     return Color.FromArgb(200, 198, 198);
 
-                case "Pending":
+                case "pending":
                     return Color.FromArgb(255, 230, 153);
 
                 default:
-                    return Color.Black;
+                    return Color.FromKnownColor(KnownColor.ControlDark);
             }
         }
 
@@ -530,19 +512,15 @@ namespace OmniGov.App.Helpers
         public static Dictionary<string, dynamic> GetUserDataById(int userId)
         {
             var dictUser = new Dictionary<string, dynamic>();
-            try
-            {
-                dictUser = Factory.UsersRepository().GetViewRecordById(userId);
 
-                string prefix = dictUser["prefix"];
-                string suffix = dictUser["suffix"];
+            dictUser = Factory.UsersRepository().GetViewRecordById(userId);
 
-                string userFullName = $" {(string.IsNullOrWhiteSpace(prefix) ? string.Empty : $"{prefix}.")} {dictUser["first_name"]} {dictUser["mid_initial"]}. {dictUser["last_name"]} {(string.IsNullOrWhiteSpace(suffix) ? string.Empty : $", {suffix}")}";
-                dictUser.Add("user_full_name", userFullName);
+            string prefix = dictUser["prefix"];
+            string suffix = dictUser["suffix"];
 
-                return dictUser;
-            }
-            catch (Exception ex) { MessageBoxError(ex.Message); }
+            string userFullName = $" {(string.IsNullOrWhiteSpace(prefix) ? string.Empty : $"{prefix}.")} {dictUser["first_name"]} {dictUser["mid_initial"]}. {dictUser["last_name"]} {(string.IsNullOrWhiteSpace(suffix) ? string.Empty : $", {suffix}")}";
+            dictUser.Add("user_full_name", userFullName);
+
             return dictUser;
         }
 
@@ -878,6 +856,15 @@ namespace OmniGov.App.Helpers
                 lblUpdatedAt.Text = string.Empty;
             }
         }
+
+        public static string FormatTransactionNo(string rawTransactionNo)
+        {
+            int dash = rawTransactionNo.IndexOf('-');
+            if (dash <= 2 || dash == rawTransactionNo.Length - 1)
+                throw new FormatException($"Found an invalid transaction number: '{rawTransactionNo}'\nPlease contact your vendor...");
+
+            string transactionNo = $"{rawTransactionNo[2..dash]}-{rawTransactionNo[(dash + 1)..]}";
+            return transactionNo;
+        }
     }
 }
-

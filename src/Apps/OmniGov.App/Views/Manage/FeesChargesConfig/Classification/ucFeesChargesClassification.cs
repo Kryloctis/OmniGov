@@ -1,9 +1,7 @@
 using OmniGov.App.Helpers;
 using OmniGov.Core.Factories;
-using System;
+using OmniGov.Treasury.Data.Factories;
 using System.ComponentModel;
-using System.Windows.Forms;
-using Treasury.Data.Factories;
 
 namespace OmniGov.App.Views.Manage.FeesChargesConfig.Classification
 {

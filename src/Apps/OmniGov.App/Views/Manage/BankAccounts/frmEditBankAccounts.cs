@@ -1,7 +1,5 @@
 using OmniGov.App.Helpers;
-using System;
-using System.Windows.Forms;
-using Treasury.Data.Factories;
+using OmniGov.Treasury.Data.Factories;
 
 namespace OmniGov.App.Views.Manage.BankAccounts
 {
@@ -22,11 +20,7 @@ namespace OmniGov.App.Views.Manage.BankAccounts
 
         private void frmEditBankAccounts_Load(object sender, EventArgs e)
         {
-            try
-            {
-                uc.OnLoad(true, bankAccId);
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            uc.OnLoad(true, bankAccId);
         }
 
         private bool UpdateData()
@@ -45,7 +39,17 @@ namespace OmniGov.App.Views.Manage.BankAccounts
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            try
+            if (UpdateData())
+            {
+                Helper.MessageBoxSuccess("Bank account has been updated.");
+                frmBankAccounts.LoadRecords();
+                Close();
+            }
+        }
+
+        private void frmEditBankAccounts_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.S && e.Control)
             {
                 if (UpdateData())
                 {
@@ -54,24 +58,6 @@ namespace OmniGov.App.Views.Manage.BankAccounts
                     Close();
                 }
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        private void frmEditBankAccounts_KeyDown(object sender, KeyEventArgs e)
-        {
-            try
-            {
-                if (e.KeyCode == Keys.S && e.Control)
-                {
-                    if (UpdateData())
-                    {
-                        Helper.MessageBoxSuccess("Bank account has been updated.");
-                        frmBankAccounts.LoadRecords();
-                        Close();
-                    }
-                }
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }

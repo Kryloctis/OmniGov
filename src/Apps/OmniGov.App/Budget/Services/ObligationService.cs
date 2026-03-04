@@ -1,21 +1,19 @@
-using Budget.Data.Factories;
 using OmniGov.App.Budget.Helpers;
 using OmniGov.App.Helpers;
-using System;
-using System.Collections.Generic;
+using OmniGov.Budget.Data.Factories;
+using OmniGov.Budget.Domain.Entities;
 using System.Data;
-using System.Linq;
 
 namespace OmniGov.App.Budget.Services
 {
     public class ObligationService
     {
-        public DataTable GetObligationRequests(string searchKey, string status, DateTime dateFrom, DateTime dateTo, int rowLimit, Action<int, int> progressCallback = null)
+        public DataTable GetObligationRequests(string searchKey, ObligationRequestModel.Status status, DateTime dateFrom, DateTime dateTo, int rowLimit, Action<int, int> progressCallback = null)
         {
             // 1. Fetch raw data from the repository
             var dtRaw = BudgetFactory.ObligationRequestRepository().GetRecords(
                 searchKey,
-                status.ToLower(),
+                status,
                 dateFrom,
                 dateTo,
                 rowLimit);
