@@ -49,16 +49,12 @@ namespace OmniGov.App.Views.Manage.ChartOfAccounts.Subsidiary
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            try
+            if (SaveData())
             {
-                if (SaveData())
-                {
-                    Helper.MessageBoxSuccess("Subsidiary ledger has been saved.");
-                    frmSubsidiary.LoadSubsidiaryRecordsByFundAndGeneralLedger();
-                    ucSubsidiary1.ResetForm();
-                }
+                Helper.MessageBoxSuccess("Subsidiary ledger has been saved.");
+                frmSubsidiary.LoadSubsidiaryRecordsByFundAndGeneralLedger();
+                ucSubsidiary1.ResetForm();
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }
