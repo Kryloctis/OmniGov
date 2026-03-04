@@ -1,4 +1,4 @@
-using OmniGov.Accounting.Data.Factories;
+﻿using OmniGov.Accounting.Data.Factories;
 using OmniGov.Accounting.Domain.Entities;
 using OmniGov.App.Helpers;
 
@@ -23,17 +23,29 @@ namespace OmniGov.App.Views.Manage.AmortizationSchedule
             HelperLoadRecords.DatagridViewAmortizationSchedule(dtAmortizationSheduleRecords, amortizationTerm, dgAmortizationSched);
         }
 
-        private void frmAmortizationSchedule_Load(object sender, EventArgs e)
-        {
-            LoadRecords();
-        }
-
         private void btnAdd_Click(object sender, EventArgs e)
         {
             var frmAddAmortizationSchedule = new frmAddAmortizationSchedule(this);
             frmAddAmortizationSchedule.amortizationId = amortizationId;
             frmAddAmortizationSchedule.amortizationTerm = amortizationTerm;
             frmAddAmortizationSchedule.ShowDialog();
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            int selectedRowsCount = dgAmortizationSched.SelectedRows.Count;
+
+            if (selectedRowsCount > 0)
+            {
+                if (Helper.MessageBoxConfirmDelete(selectedRowsCount))
+                {
+                    if (DeleteAmortizationScheduleRecords())
+                    {
+                        LoadRecords();
+                        Helper.MessageBoxSuccess("Amortization Schedule/s has been deleted.");
+                    }
+                }
+            }
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
@@ -45,19 +57,6 @@ namespace OmniGov.App.Views.Manage.AmortizationSchedule
             frmEditAmortizationSchedule.amortizationTerm = amortizationTerm;
             frmEditAmortizationSchedule.amortizationScheduleId = Convert.ToInt32(dgAmortizationSched.Rows[rowIndex].Cells["id"].Value);
             frmEditAmortizationSchedule.ShowDialog();
-        }
-
-        private void dgAmortizationSched_ColumnAdded(object sender, DataGridViewColumnEventArgs e)
-        {
-            foreach (DataGridViewColumn column in dgAmortizationSched.Columns)
-            {
-                column.SortMode = DataGridViewColumnSortMode.NotSortable;
-            }
-        }
-
-        private void dgAmortizationSched_SelectionChanged(object sender, EventArgs e)
-        {
-            Helper.EnableDisableToolStripButtons(dgAmortizationSched, btnEdit, btnDelete);
         }
 
         private bool DeleteAmortizationScheduleRecords()
@@ -78,21 +77,22 @@ namespace OmniGov.App.Views.Manage.AmortizationSchedule
             return AccountingFactory.AmortizationScheduleRepository().Delete(amortizationScheduleModelList);
         }
 
-        private void btnDelete_Click(object sender, EventArgs e)
+        private void dgAmortizationSched_ColumnAdded(object sender, DataGridViewColumnEventArgs e)
         {
-            int selectedRowsCount = dgAmortizationSched.SelectedRows.Count;
-
-            if (selectedRowsCount > 0)
+            foreach (DataGridViewColumn column in dgAmortizationSched.Columns)
             {
-                if (Helper.MessageBoxConfirmDelete(selectedRowsCount))
-                {
-                    if (DeleteAmortizationScheduleRecords())
-                    {
-                        LoadRecords();
-                        Helper.MessageBoxSuccess("Amortization Schedule/s has been deleted.");
-                    }
-                }
+                column.SortMode = DataGridViewColumnSortMode.NotSortable;
             }
+        }
+
+        private void dgAmortizationSched_SelectionChanged(object sender, EventArgs e)
+        {
+            Helper.EnableDisableToolStripButtons(dgAmortizationSched, btnEdit, btnDelete);
+        }
+
+        private void frmAmortizationSchedule_Load(object sender, EventArgs e)
+        {
+            LoadRecords();
         }
     }
 }
