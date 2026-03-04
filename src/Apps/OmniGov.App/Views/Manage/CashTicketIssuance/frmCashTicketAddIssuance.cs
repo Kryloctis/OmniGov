@@ -17,25 +17,17 @@ namespace OmniGov.App.Views.Manage.CashTicketIssuance
 
         private void frmCashTicketAddIssuance_Load(object sender, EventArgs e)
         {
-            try
-            {
-                uc.OnLoad(false);
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            uc.OnLoad(false);
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            try
+            if (SaveData())
             {
-                if (SaveData())
-                {
-                    Helper.MessageBoxSuccess("Cash tickets has been issued.");
-                    frmCashTicketIssuance.LoadIssuedCashTickets();
-                    uc.ResetForm();
-                }
+                Helper.MessageBoxSuccess("Cash tickets has been issued.");
+                frmCashTicketIssuance.LoadIssuedCashTickets();
+                uc.ResetForm();
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private bool SaveData()
