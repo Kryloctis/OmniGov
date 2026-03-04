@@ -1,4 +1,4 @@
-namespace OmniGov.App.Views.Manage.BusinessCategories.AddOnCharges
+﻿namespace OmniGov.App.Views.Manage.BusinessCategories.AddOnCharges
 {
     partial class frmBusinessCategoriesAddOnCharges
     {

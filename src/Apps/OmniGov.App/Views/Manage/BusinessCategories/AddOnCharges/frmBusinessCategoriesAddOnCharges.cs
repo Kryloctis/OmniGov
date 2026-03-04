@@ -1,4 +1,4 @@
-using OmniGov.App.Helpers;
+﻿using OmniGov.App.Helpers;
 using OmniGov.Treasury.Data.Factories;
 using OmniGov.Treasury.Domain.Entities;
 using System.Data;
@@ -7,8 +7,8 @@ namespace OmniGov.App.Views.Manage.BusinessCategories.AddOnCharges
 {
     public partial class frmBusinessCategoriesAddOnCharges : Form
     {
-        private readonly frmBusinessCategories _frmBusinessCategories;
         private readonly int _businessCategoriesId;
+        private readonly frmBusinessCategories _frmBusinessCategories;
 
         public frmBusinessCategoriesAddOnCharges(int businessCategoriesId, frmBusinessCategories frmBusinessCategories)
         {
@@ -17,6 +17,27 @@ namespace OmniGov.App.Views.Manage.BusinessCategories.AddOnCharges
             _frmBusinessCategories = frmBusinessCategories;
             _businessCategoriesId = businessCategoriesId;
             Helper.DatagridFullRowSelectStyle(dataGridView1, true, false);
+        }
+
+        internal void LoadRecords()
+        {
+            HelperLoadRecords.BusinessCategorissAddOnsDatagridView(dataGridView1, DataTableAddOnCharges());
+            dataGridView1.CurrentCell = dataGridView1.FirstDisplayedCell;
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            if (Save())
+            {
+                Helper.MessageBoxSuccess("Business Categories Add-on Charges has been saved.");
+                _frmBusinessCategories.LoadBusinessCategories();
+                Helper.DatagridViewRecordFinder(_frmBusinessCategories.dgBusinessCategories, "id", _businessCategoriesId.ToString());
+            }
+        }
+
+        private void checkBox1_MouseClick(object sender, MouseEventArgs e)
+        {
+            Helper.CheckUncheckCheckBoxRows(dataGridView1, "is_selected", checkBox1.Checked);
         }
 
         private DataColumn[] DataColumnsAddOnCharges()
@@ -28,6 +49,28 @@ namespace OmniGov.App.Views.Manage.BusinessCategories.AddOnCharges
                 new DataColumn("code", typeof(string)),
                 new DataColumn("description", typeof(string))
             };
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            dataGridView1.CommitEdit(DataGridViewDataErrorContexts.Commit);
+        }
+
+        private void dataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            Helper.CheckUncheckCheckBoxHeader(dataGridView1, "is_selected", checkBox1);
+        }
+
+        private void dataGridView1_ColumnAdded(object sender, DataGridViewColumnEventArgs e)
+        {
+            if (e.Column.Name != "is_selected")
+                e.Column.ReadOnly = true;
+        }
+
+        private void dataGridView1_CurrentCellDirtyStateChanged(object sender, EventArgs e)
+        {
+            if (dataGridView1.CurrentCell is DataGridViewCheckBoxCell)
+                dataGridView1.CommitEdit(DataGridViewDataErrorContexts.Commit);
         }
 
         private DataTable DataTableAddOnCharges()
@@ -49,26 +92,14 @@ namespace OmniGov.App.Views.Manage.BusinessCategories.AddOnCharges
             return dt;
         }
 
-        internal void LoadRecords()
-        {
-            HelperLoadRecords.BusinessCategorissAddOnsDatagridView(dataGridView1, DataTableAddOnCharges());
-            dataGridView1.CurrentCell = dataGridView1.FirstDisplayedCell;
-        }
-
-        private void OnLoad()
-        {
-            LoadRecords();
-        }
-
         private void frmBusinessCategoriesAddOnCharges_Load(object sender, EventArgs e)
         {
             OnLoad();
         }
 
-        private void dataGridView1_ColumnAdded(object sender, DataGridViewColumnEventArgs e)
+        private void OnLoad()
         {
-            if (e.Column.Name != "is_selected")
-                e.Column.ReadOnly = true;
+            LoadRecords();
         }
 
         private bool Save()
@@ -89,37 +120,6 @@ namespace OmniGov.App.Views.Manage.BusinessCategories.AddOnCharges
                 modeList.Add(model);
             }
             return TreasuryFactory.BusinessCategoriesHasAddOnCharges().Insert(_businessCategoriesId, modeList);
-        }
-
-        private void btnSave_Click(object sender, EventArgs e)
-        {
-            if (Save())
-            {
-                Helper.MessageBoxSuccess("Business Categories Add-on Charges has been saved.");
-                _frmBusinessCategories.LoadBusinessCategories();
-                Helper.DatagridViewRecordFinder(_frmBusinessCategories.dgBusinessCategories, "id", _businessCategoriesId.ToString());
-            }
-        }
-
-        private void dataGridView1_CurrentCellDirtyStateChanged(object sender, EventArgs e)
-        {
-            if (dataGridView1.CurrentCell is DataGridViewCheckBoxCell)
-                dataGridView1.CommitEdit(DataGridViewDataErrorContexts.Commit);
-        }
-
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            dataGridView1.CommitEdit(DataGridViewDataErrorContexts.Commit);
-        }
-
-        private void dataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
-        {
-            Helper.CheckUncheckCheckBoxHeader(dataGridView1, "is_selected", checkBox1);
-        }
-
-        private void checkBox1_MouseClick(object sender, MouseEventArgs e)
-        {
-            Helper.CheckUncheckCheckBoxRows(dataGridView1, "is_selected", checkBox1.Checked);
         }
     }
 }

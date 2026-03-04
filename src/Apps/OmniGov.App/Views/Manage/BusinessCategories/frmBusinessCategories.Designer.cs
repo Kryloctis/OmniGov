@@ -1,4 +1,4 @@
-namespace OmniGov.App.Views.Manage.BusinessCategories
+﻿namespace OmniGov.App.Views.Manage.BusinessCategories
 {
     partial class frmBusinessCategories
     {

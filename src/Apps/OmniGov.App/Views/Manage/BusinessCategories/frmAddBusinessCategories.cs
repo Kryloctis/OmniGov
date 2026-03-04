@@ -1,4 +1,4 @@
-using OmniGov.App.Helpers;
+﻿using OmniGov.App.Helpers;
 using OmniGov.Treasury.Data.Factories;
 using OmniGov.Treasury.Domain.Entities;
 
@@ -15,6 +15,18 @@ namespace OmniGov.App.Views.Manage.BusinessCategories
             _frmBusinessCategories = frmBusinessCategories;
             _ucBusinessCategories = ucBusinessCategories1;
             _ucBusinessCategories.isEdit = false;
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            if (SaveData())
+            {
+                Helper.MessageBoxSuccess("Business category has been saved.");
+                _frmBusinessCategories.LoadBusinessCategories();
+                int lastInsertedId = TreasuryFactory.BusinessCategoriesRepository().GetLastInsertedId();
+                Helper.DatagridViewRecordFinder(_frmBusinessCategories.dgBusinessCategories, "id", lastInsertedId.ToString());
+                _ucBusinessCategories.ResetForm();
+            }
         }
 
         private bool SaveData()
@@ -39,18 +51,6 @@ namespace OmniGov.App.Views.Manage.BusinessCategories
             };
 
             return TreasuryFactory.BusinessCategoriesRepository().Insert(businessCategoriesModel);
-        }
-
-        private void btnSave_Click(object sender, EventArgs e)
-        {
-            if (SaveData())
-            {
-                Helper.MessageBoxSuccess("Business category has been saved.");
-                _frmBusinessCategories.LoadBusinessCategories();
-                int lastInsertedId = TreasuryFactory.BusinessCategoriesRepository().GetLastInsertedId();
-                Helper.DatagridViewRecordFinder(_frmBusinessCategories.dgBusinessCategories, "id", lastInsertedId.ToString());
-                _ucBusinessCategories.ResetForm();
-            }
         }
     }
 }

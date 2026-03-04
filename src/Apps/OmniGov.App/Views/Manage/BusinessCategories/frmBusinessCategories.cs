@@ -1,4 +1,4 @@
-using OmniGov.App.Helpers;
+﻿using OmniGov.App.Helpers;
 using OmniGov.App.Views.Manage.BusinessCategories.AddOnCharges;
 using OmniGov.Treasury.Data.Factories;
 using OmniGov.Treasury.Domain.Entities;
@@ -15,9 +15,70 @@ namespace OmniGov.App.Views.Manage.BusinessCategories
             Helper.DatagridFullRowSelectStyle(dgBusinessCategories, true);
         }
 
+        internal void LoadBusinessCategories()
+        {
+            var searchText = toolStripTextBoxSearch.Text.Trim();
+            var dtBusinessCategories = TreasuryFactory.BusinessCategoriesRepository().GetRecordsBySearch(searchText);
+            var dataTable = dtBusinessCategories.Clone();
+            dataTable.Columns["is_line_of_business"].DataType = typeof(bool);
+            foreach (DataRow row in dtBusinessCategories.Rows) { dataTable.Rows.Add(row.ItemArray); }
+            HelperLoadRecords.BusinessCategoriesDataGridView(dgBusinessCategories, dataTable);
+            dgBusinessCategories.CurrentCell = dgBusinessCategories.FirstDisplayedCell;
+            EnableDisableToolStripButtons(dgBusinessCategories, btnEdit, btnDelete, btnAddOnCharges);
+            toolStripStatusLabelRecordCount.Text = dgBusinessCategories.Rows.Count.ToString();
+        }
+
         private void btnAdd_Click(object sender, EventArgs e)
         {
             _ = new frmAddBusinessCategories(this).ShowDialog();
+        }
+
+        private void btnAddOnCharges_Click(object sender, EventArgs e)
+        {
+            ShowAddOnCharges();
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            int deletedRecordCount = 0;
+
+            if (DeleteBusinessCategories(ref deletedRecordCount))
+            {
+                Helper.MessageBoxSuccess($"{deletedRecordCount} record/s has been deleted.");
+                LoadBusinessCategories();
+            }
+        }
+
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+            _ = new frmEditBusinessCategories(GetCurrentCellId(), this).ShowDialog();
+        }
+
+        private bool DeleteBusinessCategories(ref int deletedCount)
+        {
+            var businessCategoriesModelList = new List<BusinessCategoriesModel>();
+            int rowCount = dgBusinessCategories.SelectedRows.Count;
+
+            if (Helper.MessageBoxConfirmDelete(rowCount))
+            {
+                foreach (DataGridViewRow row in dgBusinessCategories.SelectedRows)
+                {
+                    int businessCategoriesID = Convert.ToInt32(row.Cells["id"].Value);
+                    var model = new BusinessCategoriesModel() { BusinessCategoryID = businessCategoriesID };
+                    businessCategoriesModelList.Add(model);
+                }
+
+                deletedCount = rowCount;
+                return TreasuryFactory.BusinessCategoriesRepository().Delete(businessCategoriesModelList);
+            }
+            return false;
+        }
+
+        private void dgBusinessCategories_SelectionChanged(object sender, EventArgs e)
+        {
+            EnableDisableToolStripButtons(dgBusinessCategories, btnEdit, btnDelete, btnAddOnCharges);
+            LoadRecordTimestamp(dgBusinessCategories);
+            LoadBusinessCategoriesAddons(GetCurrentCellId());
         }
 
         private void EnableDisableToolStripButtons(DataGridView dgv, ToolStripButton tsBtnEdit, ToolStripButton tsBtnDelete, ToolStripButton tsBtnAddOnCharges)
@@ -46,27 +107,9 @@ namespace OmniGov.App.Views.Manage.BusinessCategories
             }
         }
 
-        private void OnLoad()
-        {
-            LoadBusinessCategories();
-        }
-
         private void frmBusinessCategories_Load(object sender, EventArgs e)
         {
             OnLoad();
-        }
-
-        internal void LoadBusinessCategories()
-        {
-            var searchText = toolStripTextBoxSearch.Text.Trim();
-            var dtBusinessCategories = TreasuryFactory.BusinessCategoriesRepository().GetRecordsBySearch(searchText);
-            var dataTable = dtBusinessCategories.Clone();
-            dataTable.Columns["is_line_of_business"].DataType = typeof(bool);
-            foreach (DataRow row in dtBusinessCategories.Rows) { dataTable.Rows.Add(row.ItemArray); }
-            HelperLoadRecords.BusinessCategoriesDataGridView(dgBusinessCategories, dataTable);
-            dgBusinessCategories.CurrentCell = dgBusinessCategories.FirstDisplayedCell;
-            EnableDisableToolStripButtons(dgBusinessCategories, btnEdit, btnDelete, btnAddOnCharges);
-            toolStripStatusLabelRecordCount.Text = dgBusinessCategories.Rows.Count.ToString();
         }
 
         private int GetCurrentCellId()
@@ -91,50 +134,7 @@ namespace OmniGov.App.Views.Manage.BusinessCategories
             Helper.ShowRecordTimestamp(dataGridView, indexes, toolStripStatusLabelCreatedAt, toolStripStatusLabelUpdatedAt);
         }
 
-        private void dgBusinessCategories_SelectionChanged(object sender, EventArgs e)
-        {
-            EnableDisableToolStripButtons(dgBusinessCategories, btnEdit, btnDelete, btnAddOnCharges);
-            LoadRecordTimestamp(dgBusinessCategories);
-            LoadBusinessCategoriesAddons(GetCurrentCellId());
-        }
-
-        private bool DeleteBusinessCategories(ref int deletedCount)
-        {
-            var businessCategoriesModelList = new List<BusinessCategoriesModel>();
-            int rowCount = dgBusinessCategories.SelectedRows.Count;
-
-            if (Helper.MessageBoxConfirmDelete(rowCount))
-            {
-                foreach (DataGridViewRow row in dgBusinessCategories.SelectedRows)
-                {
-                    int businessCategoriesID = Convert.ToInt32(row.Cells["id"].Value);
-                    var model = new BusinessCategoriesModel() { BusinessCategoryID = businessCategoriesID };
-                    businessCategoriesModelList.Add(model);
-                }
-
-                deletedCount = rowCount;
-                return TreasuryFactory.BusinessCategoriesRepository().Delete(businessCategoriesModelList);
-            }
-            return false;
-        }
-
-        private void btnDelete_Click(object sender, EventArgs e)
-        {
-            int deletedRecordCount = 0;
-
-            if (DeleteBusinessCategories(ref deletedRecordCount))
-            {
-                Helper.MessageBoxSuccess($"{deletedRecordCount} record/s has been deleted.");
-                LoadBusinessCategories();
-            }
-        }
-
-        private void btnEdit_Click(object sender, EventArgs e)
-        {
-            _ = new frmEditBusinessCategories(GetCurrentCellId(), this).ShowDialog();
-        }
-
-        private void toolStripTextBoxSearch_TextChanged(object sender, EventArgs e)
+        private void OnLoad()
         {
             LoadBusinessCategories();
         }
@@ -147,9 +147,9 @@ namespace OmniGov.App.Views.Manage.BusinessCategories
             _ = new frmBusinessCategoriesAddOnCharges(categoriesId, this).ShowDialog();
         }
 
-        private void btnAddOnCharges_Click(object sender, EventArgs e)
+        private void toolStripTextBoxSearch_TextChanged(object sender, EventArgs e)
         {
-            ShowAddOnCharges();
+            LoadBusinessCategories();
         }
     }
 }
