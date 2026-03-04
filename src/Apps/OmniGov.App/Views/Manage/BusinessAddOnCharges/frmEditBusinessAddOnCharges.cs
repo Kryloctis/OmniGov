@@ -37,16 +37,12 @@ namespace OmniGov.App.Views.Manage.BusinessAddOnCharges
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            try
+            if (UpdateBusinessAddOnCharges())
             {
-                if (UpdateBusinessAddOnCharges())
-                {
-                    Helper.MessageBoxSuccess("Business Add-on has been updated.");
-                    _frmBusinessAddOnCharges.LoadBusinessAddOnCharges();
-                    Close();
-                }
+                Helper.MessageBoxSuccess("Business Add-on has been updated.");
+                _frmBusinessAddOnCharges.LoadBusinessAddOnCharges();
+                Close();
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private bool UpdateBusinessAddOnCharges()

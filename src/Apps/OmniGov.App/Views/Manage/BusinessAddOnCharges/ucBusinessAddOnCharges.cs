@@ -53,11 +53,7 @@ namespace OmniGov.App.Views.Manage.BusinessAddOnCharges
 
         private void txtDescription_Validating(object sender, CancelEventArgs e)
         {
-            try
-            {
-                e.Cancel = !IsDescriptionValidated(errorProvider1, txtDescription);
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            e.Cancel = !IsDescriptionValidated(errorProvider1, txtDescription);
         }
 
         private void txtDescription_Validated(object sender, EventArgs e)
@@ -66,4 +62,3 @@ namespace OmniGov.App.Views.Manage.BusinessAddOnCharges
         }
     }
 }
-
