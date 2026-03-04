@@ -69,11 +69,7 @@ namespace OmniGov.App.Views.Manage.ChartOfAccounts.AccountGroup
 
         private void txtCode_Validating(object sender, CancelEventArgs e)
         {
-            try
-            {
-                e.Cancel = !CodeValidated(epCode, txtCode);
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            e.Cancel = !CodeValidated(epCode, txtCode);
         }
 
         private void txtName_Validated(object sender, EventArgs e)
@@ -83,12 +79,7 @@ namespace OmniGov.App.Views.Manage.ChartOfAccounts.AccountGroup
 
         private void txtName_Validating(object sender, CancelEventArgs e)
         {
-            try
-            {
-                e.Cancel = !NameValidated(epName, txtName);
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            e.Cancel = !NameValidated(epName, txtName);
         }
     }
 }
-

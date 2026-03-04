@@ -41,17 +41,12 @@ namespace OmniGov.App.Views.Manage.ChartOfAccounts.AccountGroup
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            try
+            if (SaveData())
             {
-                if (SaveData())
-                {
-                    Helper.MessageBoxSuccess("Account group has been saved.");
-                    _frmChartOfAccounts.LoadAccountGroup();
-                    ucAccountGroup1.ResetForm();
-                }
+                Helper.MessageBoxSuccess("Account group has been saved.");
+                _frmChartOfAccounts.LoadAccountGroup();
+                ucAccountGroup1.ResetForm();
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }
-
