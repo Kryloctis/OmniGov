@@ -1,4 +1,4 @@
-using OmniGov.App.Helpers;
+﻿using OmniGov.App.Helpers;
 using OmniGov.Treasury.Data.Factories;
 using OmniGov.Treasury.Domain.Entities;
 
@@ -17,6 +17,29 @@ namespace OmniGov.App.Views.Manage.AccountableForm
             uc = ucAccountable1;
         }
 
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            SaveAccountableForm();
+        }
+
+        private void frmAddAccountableForm_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Modifiers == Keys.Control && e.KeyCode == Keys.S)
+            {
+                SaveAccountableForm();
+            }
+        }
+
+        private void SaveAccountableForm()
+        {
+            if (SaveData())
+            {
+                Helper.MessageBoxSuccess("Accountable Form has been saved.");
+                _frmAccountableForm.LoadRecords();
+                uc.ResetForm();
+            }
+        }
+
         private bool SaveData()
         {
             if (!uc.ValidateChildren())
@@ -33,29 +56,6 @@ namespace OmniGov.App.Views.Manage.AccountableForm
             };
 
             return TreasuryFactory.AccountableFormsRepository().Insert(accModel);
-        }
-
-        private void btnSave_Click(object sender, EventArgs e)
-        {
-            SaveAccountableForm();
-        }
-
-        private void SaveAccountableForm()
-        {
-            if (SaveData())
-            {
-                Helper.MessageBoxSuccess("Accountable Form has been saved.");
-                _frmAccountableForm.LoadRecords();
-                uc.ResetForm();
-            }
-        }
-
-        private void frmAddAccountableForm_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Modifiers == Keys.Control && e.KeyCode == Keys.S)
-            {
-                SaveAccountableForm();
-            }
         }
     }
 }

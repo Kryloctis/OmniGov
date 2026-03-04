@@ -1,4 +1,4 @@
-namespace OmniGov.App.Views.Dialogs
+﻿namespace OmniGov.App.Views.Dialogs
 {
     public partial class dialogPayment : Form
     {
