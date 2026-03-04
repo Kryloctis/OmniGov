@@ -18,32 +18,20 @@ namespace OmniGov.App.Views.Manage.Funds
 
         private void frmFunds_Load(object sender, EventArgs e)
         {
-            try
-            {
-                HelperLoadRecords.ComboboxRowLimitFilter(cmbxFilter);
-                LoadRecords();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            HelperLoadRecords.ComboboxRowLimitFilter(cmbxFilter);
+            LoadRecords();
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            try
-            {
-                _ = new frmFundAdd(this).ShowDialog();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            _ = new frmFundAdd(this).ShowDialog();
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            try
-            {
-                int rowIndex = dgFunds.CurrentRow.Index;
-                int fundId = Convert.ToInt32(dgFunds.Rows[rowIndex].Cells["id"].Value);
-                _ = new frmFundEdit(this, fundId).ShowDialog();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            int rowIndex = dgFunds.CurrentRow.Index;
+            int fundId = Convert.ToInt32(dgFunds.Rows[rowIndex].Cells["id"].Value);
+            _ = new frmFundEdit(this, fundId).ShowDialog();
         }
 
         private bool DeleteData()
@@ -68,44 +56,28 @@ namespace OmniGov.App.Views.Manage.Funds
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            try
+            if (DeleteData())
             {
-                if (DeleteData())
-                {
-                    Helper.MessageBoxError($"{dgFunds.SelectedRows.Count} record/s has been deleted.");
-                    LoadRecords();
-                }
+                Helper.MessageBoxError($"{dgFunds.SelectedRows.Count} record/s has been deleted.");
+                LoadRecords();
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void dgFunds_SelectionChanged(object sender, EventArgs e)
         {
-            try
-            {
-                byte[] columnIndexTimestamp = { 3, 4 };
-                Helper.ShowRecordTimestamp(dgFunds, columnIndexTimestamp, lblCreatedAt, lblUpdatedAt);
-                Helper.EnableDisableToolStripButtons(dgFunds, btnEdit, btnDelete);
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            byte[] columnIndexTimestamp = { 3, 4 };
+            Helper.ShowRecordTimestamp(dgFunds, columnIndexTimestamp, lblCreatedAt, lblUpdatedAt);
+            Helper.EnableDisableToolStripButtons(dgFunds, btnEdit, btnDelete);
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            try
-            {
-                LoadRecords();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            LoadRecords();
         }
 
         private void cmbxFilter_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            try
-            {
-                LoadRecords();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            LoadRecords();
         }
 
         internal void LoadRecords()
@@ -122,17 +94,13 @@ namespace OmniGov.App.Views.Manage.Funds
 
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
-            try
-            {
-                var parameters = ((string searchKey, int rowLimit))e.Argument;
-                DataTable dtFunds = Factory.FundsRepository().GetRecords(parameters.searchKey, parameters.rowLimit);
-                int totalProgressCount = dtFunds.Rows.Count;
-                int progressCount = 0;
+            var parameters = ((string searchKey, int rowLimit))e.Argument;
+            DataTable dtFunds = Factory.FundsRepository().GetRecords(parameters.searchKey, parameters.rowLimit);
+            int totalProgressCount = dtFunds.Rows.Count;
+            int progressCount = 0;
 
-                dtFunds.Rows.Cast<DataRow>().ToList().ForEach(row => { progressCount++; Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount); });
-                e.Result = dtFunds;
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            dtFunds.Rows.Cast<DataRow>().ToList().ForEach(row => { progressCount++; Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount); });
+            e.Result = dtFunds;
         }
 
         private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
@@ -142,20 +110,15 @@ namespace OmniGov.App.Views.Manage.Funds
 
         private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            try
-            {
-                if (e.Result is not DataTable dataTable)
-                    return;
+            if (e.Result is not DataTable dataTable)
+                return;
 
-                if (dataTable.Rows.Count < 1)
-                    progressBar1.Value = 100;
+            if (dataTable.Rows.Count < 1)
+                progressBar1.Value = 100;
 
-                HelperLoadRecords.FundsDatagridView(dataTable, dgFunds);
-                dgFunds.CurrentCell = dgFunds.FirstDisplayedCell;
-                lblRecordCount.Text = dgFunds.Rows.Count.ToString();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            HelperLoadRecords.FundsDatagridView(dataTable, dgFunds);
+            dgFunds.CurrentCell = dgFunds.FirstDisplayedCell;
+            lblRecordCount.Text = dgFunds.Rows.Count.ToString();
         }
     }
 }
-

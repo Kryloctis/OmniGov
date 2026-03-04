@@ -17,34 +17,22 @@ namespace OmniGov.App.Views.Manage.Registry
 
         private void frmRegistry_Load(object sender, EventArgs e)
         {
-            try
-            {
-                HelperLoadRecords.ComboboxRowLimitFilter(cmbxRowFilter);
-                LoadRecords();
-                Helper.EnableDisableToolStripButtons(dataGridView1, btnEdit, btnDelete);
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            HelperLoadRecords.ComboboxRowLimitFilter(cmbxRowFilter);
+            LoadRecords();
+            Helper.EnableDisableToolStripButtons(dataGridView1, btnEdit, btnDelete);
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            try
-            {
-                _ = new frmAddRegistry(this).ShowDialog();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            _ = new frmAddRegistry(this).ShowDialog();
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            try
-            {
-                int index = dataGridView1.CurrentCell.RowIndex;
-                int registryId = Convert.ToInt32(dataGridView1.Rows[index].Cells["id"].Value);
+            int index = dataGridView1.CurrentCell.RowIndex;
+            int registryId = Convert.ToInt32(dataGridView1.Rows[index].Cells["id"].Value);
 
-                _ = new frmEditRegistry(registryId, this).ShowDialog();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            _ = new frmEditRegistry(registryId, this).ShowDialog();
         }
 
         private bool DeleteRegistry(DataGridViewSelectedRowCollection selectedRows)
@@ -63,16 +51,12 @@ namespace OmniGov.App.Views.Manage.Registry
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            try
+            var selectedRows = dataGridView1.SelectedRows;
+            if (DeleteRegistry(selectedRows))
             {
-                var selectedRows = dataGridView1.SelectedRows;
-                if (DeleteRegistry(selectedRows))
-                {
-                    Helper.MessageBoxSuccess($"{selectedRows.Count} Record/s has been deleted");
-                    LoadRecords();
-                }
+                Helper.MessageBoxSuccess($"{selectedRows.Count} Record/s has been deleted");
+                LoadRecords();
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         internal void LoadRecords()
@@ -88,12 +72,10 @@ namespace OmniGov.App.Views.Manage.Registry
 
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
-            try
-            {
-                var parameters = ((int limitCount, string searchKey))e.Argument;
+            var parameters = ((int limitCount, string searchKey))e.Argument;
 
-                var dataColumns = new DataColumn[]
-                {
+            var dataColumns = new DataColumn[]
+            {
                     new DataColumn("id", typeof(int)),
                     new DataColumn("name", typeof(string)),
                     new DataColumn("sex", typeof(string)),
@@ -103,39 +85,37 @@ namespace OmniGov.App.Views.Manage.Registry
                     new DataColumn("contact_info", typeof(string)),
                     new DataColumn("created_at", typeof(string)),
                     new DataColumn("updated_at", typeof(string)),
-                };
+            };
 
-                var dataTable = new DataTable();
-                dataTable.Columns.AddRange(dataColumns);
-                var dtRegistry = Factory.RegistryRepository().GetRecordsBySearh_Limit(parameters.searchKey, parameters.limitCount);
+            var dataTable = new DataTable();
+            dataTable.Columns.AddRange(dataColumns);
+            var dtRegistry = Factory.RegistryRepository().GetRecordsBySearh_Limit(parameters.searchKey, parameters.limitCount);
 
-                int progressCount = 0;
-                int totalProgressCount = dtRegistry.Rows.Count;
+            int progressCount = 0;
+            int totalProgressCount = dtRegistry.Rows.Count;
 
-                foreach (DataRow row in dtRegistry.Rows)
-                {
-                    var newRow = dataTable.NewRow();
-                    string middleName = row["middle_name"].ToString();
-                    string fullName = $"{row["first_name"]} {(!string.IsNullOrEmpty(middleName) ? $"{middleName.Substring(0, 1)}." : "")} {row["last_name"]}";
+            foreach (DataRow row in dtRegistry.Rows)
+            {
+                var newRow = dataTable.NewRow();
+                string middleName = row["middle_name"].ToString();
+                string fullName = $"{row["first_name"]} {(!string.IsNullOrEmpty(middleName) ? $"{middleName.Substring(0, 1)}." : "")} {row["last_name"]}";
 
-                    newRow["id"] = row["id"];
-                    newRow["name"] = fullName;
-                    newRow["sex"] = row["sex"];
-                    newRow["nationality"] = row["nationality"];
-                    newRow["birth_place"] = $"{row["municipality"]}, {row["province"]}, {row["country"]}";
-                    newRow["birth_date"] = row["birth_date"];
-                    newRow["contact_info"] = row["contact_info"];
-                    newRow["created_at"] = row["created_at"];
-                    newRow["updated_at"] = row["updated_at"];
+                newRow["id"] = row["id"];
+                newRow["name"] = fullName;
+                newRow["sex"] = row["sex"];
+                newRow["nationality"] = row["nationality"];
+                newRow["birth_place"] = $"{row["municipality"]}, {row["province"]}, {row["country"]}";
+                newRow["birth_date"] = row["birth_date"];
+                newRow["contact_info"] = row["contact_info"];
+                newRow["created_at"] = row["created_at"];
+                newRow["updated_at"] = row["updated_at"];
 
-                    dataTable.Rows.Add(newRow);
-                    progressCount++;
-                    Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
-                }
-
-                e.Result = dataTable;
+                dataTable.Rows.Add(newRow);
+                progressCount++;
+                Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+
+            e.Result = dataTable;
         }
 
         private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
@@ -145,49 +125,32 @@ namespace OmniGov.App.Views.Manage.Registry
 
         private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            try
-            {
-                if (e.Result is not DataTable dataTable)
-                    return;
+            if (e.Result is not DataTable dataTable)
+                return;
 
-                if (dataTable.Rows.Count < 1)
-                    progressBar1.Value = 100;
+            if (dataTable.Rows.Count < 1)
+                progressBar1.Value = 100;
 
-                HelperLoadRecords.DatagridViewRegistry(dataTable, dataGridView1);
-                dataGridView1.CurrentCell = dataGridView1.FirstDisplayedCell;
-                lblRecordCount.Text = dataGridView1.Rows.Count.ToString();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            HelperLoadRecords.DatagridViewRegistry(dataTable, dataGridView1);
+            dataGridView1.CurrentCell = dataGridView1.FirstDisplayedCell;
+            lblRecordCount.Text = dataGridView1.Rows.Count.ToString();
         }
 
         private void dataGridView1_SelectionChanged(object sender, EventArgs e)
         {
-            try
-            {
-                var stampIndex = new byte[] { 7, 8 };
-                Helper.ShowRecordTimestamp(dataGridView1, stampIndex, lblCreatedAt, lblUpdatedAt);
-                Helper.EnableDisableToolStripButtons(dataGridView1, btnEdit, btnDelete);
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            var stampIndex = new byte[] { 7, 8 };
+            Helper.ShowRecordTimestamp(dataGridView1, stampIndex, lblCreatedAt, lblUpdatedAt);
+            Helper.EnableDisableToolStripButtons(dataGridView1, btnEdit, btnDelete);
         }
 
         private void cmbxRowFilter_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            try
-            {
-                LoadRecords();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            LoadRecords();
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            try
-            {
-                LoadRecords();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            LoadRecords();
         }
     }
 }
-

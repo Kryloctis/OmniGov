@@ -318,84 +318,64 @@ namespace OmniGov.App.Views.Manage.RealProperties
 
         private void cmbxPropertyKind_SelectedValueChanged(object sender, EventArgs e)
         {
-            try
+            string propertyKind = cmbxPropertyKind.Text;
+
+            switch (propertyKind)
             {
-                string propertyKind = cmbxPropertyKind.Text;
+                case "Land":
+                    nudOtherImprv.Enabled = true;
+                    txtLotNo.Enabled = true;
+                    nudArea.Enabled = true;
+                    break;
 
-                switch (propertyKind)
-                {
-                    case "Land":
-                        nudOtherImprv.Enabled = true;
-                        txtLotNo.Enabled = true;
-                        nudArea.Enabled = true;
-                        break;
+                case "Building":
+                    nudOtherImprv.Enabled = false;
+                    txtLotNo.Enabled = false;
+                    nudArea.Enabled = true;
+                    break;
 
-                    case "Building":
-                        nudOtherImprv.Enabled = false;
-                        txtLotNo.Enabled = false;
-                        nudArea.Enabled = true;
-                        break;
-
-                    default:
-                        nudOtherImprv.Enabled = false;
-                        txtLotNo.Enabled = false;
-                        nudArea.Enabled = false;
-                        break;
-                }
+                default:
+                    nudOtherImprv.Enabled = false;
+                    txtLotNo.Enabled = false;
+                    nudArea.Enabled = false;
+                    break;
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void cmbxTaxpayer_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
-            try
-            {
-                if (e.KeyCode == Keys.Enter)
-                    e.IsInputKey = true;
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            if (e.KeyCode == Keys.Enter)
+                e.IsInputKey = true;
         }
 
         private void cmbxTaxpayer_KeyPress(object sender, KeyPressEventArgs e)
         {
-            try
+            if (Control.ModifierKeys == Keys.Shift && e.KeyChar == (char)Keys.Enter)
             {
-                if (Control.ModifierKeys == Keys.Shift && e.KeyChar == (char)Keys.Enter)
-                {
-                    LoadTaxpayers();
-                    cmbxTaxpayer.DroppedDown = cmbxTaxpayer.DroppedDown ? false : true;
-                    cmbxTaxpayer.DroppedDown = true;
-                    e.Handled = true;
-                }
+                LoadTaxpayers();
+                cmbxTaxpayer.DroppedDown = cmbxTaxpayer.DroppedDown ? false : true;
+                cmbxTaxpayer.DroppedDown = true;
+                e.Handled = true;
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void cmbxTaxpayer_SelectedIndexChanged(object sender, EventArgs e)
         {
-            try
-            {
-                if (cmbxTaxpayer.SelectedValue is not int taxpayerId)
-                    return;
+            if (cmbxTaxpayer.SelectedValue is not int taxpayerId)
+                return;
 
-                LoadSelectedTaxpayer(taxpayerId);
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            LoadSelectedTaxpayer(taxpayerId);
         }
 
         private void btnDeleteRptPrev_Click(object sender, EventArgs e)
         {
-            try
+            if (Helper.MessageBoxConfirmCancel("Confirm deletion of previous assessment?"))
             {
-                if (Helper.MessageBoxConfirmCancel("Confirm deletion of previous assessment?"))
-                {
-                    var dataSource = (DataTable)dataGridView1.DataSource;
+                var dataSource = (DataTable)dataGridView1.DataSource;
 
-                    foreach (DataGridViewRow row in dataGridView1.SelectedRows)
-                        dataSource.Rows.RemoveAt(row.Index);
-                }
+                foreach (DataGridViewRow row in dataGridView1.SelectedRows)
+                    dataSource.Rows.RemoveAt(row.Index);
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void cmbxPreviousRpt_KeyPress(object sender, KeyPressEventArgs e)
@@ -412,48 +392,40 @@ namespace OmniGov.App.Views.Manage.RealProperties
 
         private void btnAddPrevRpt_Click(object sender, EventArgs e)
         {
-            try
+            var dataSource = (DataTable)dataGridView1.DataSource;
+            int rptId = Convert.ToInt32(cmbxPreviousRpt.SelectedValue);
+
+            if (IsDuplicateRow(rptId, dataSource))
             {
-                var dataSource = (DataTable)dataGridView1.DataSource;
-                int rptId = Convert.ToInt32(cmbxPreviousRpt.SelectedValue);
+                var errors = new string[] { "Real propertie already recorded to the list" };
+                var errorMessage = Factory.CreateErrors(errors).GenerateErrorMessage();
 
-                if (IsDuplicateRow(rptId, dataSource))
-                {
-                    var errors = new string[] { "Real propertie already recorded to the list" };
-                    var errorMessage = Factory.CreateErrors(errors).GenerateErrorMessage();
-
-                    Helper.MessageBoxWarning(errorMessage);
-                    return;
-                }
-
-                var newRow = dataSource.NewRow();
-                newRow["real_property_id"] = rptId;
-                newRow["complete_arp_no"] = cmbxPreviousRpt.Text;
-                newRow["taxpayers_id"] = Convert.ToInt32(cmbxPreviousTaxpayer.SelectedValue);
-                newRow["taxpayer"] = cmbxPreviousTaxpayer.Text;
-                newRow["pin"] = txtPreviousPin.Text;
-                newRow["assessed_value"] = nudPreviousAssessedValue.Text;
-                newRow["date_of_entry"] = dtpDateOfEntry.Value;
-                newRow["effectivity_quarter"] = nudPreviousEffectivityQuarter.Text;
-                newRow["effectivity_year"] = nudPreviousEffectivityYear.Text;
-                newRow["gr_year"] = nudPreviousGrYear.Text;
-                newRow["recording_person"] = txtRecordingPerson.Text;
-                newRow["is_taxable"] = cbxTaxable.Checked;
-                newRow["is_cancelled"] = cbxCancelled.Checked;
-
-                dataSource.Rows.Add(newRow);
+                Helper.MessageBoxWarning(errorMessage);
+                return;
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+
+            var newRow = dataSource.NewRow();
+            newRow["real_property_id"] = rptId;
+            newRow["complete_arp_no"] = cmbxPreviousRpt.Text;
+            newRow["taxpayers_id"] = Convert.ToInt32(cmbxPreviousTaxpayer.SelectedValue);
+            newRow["taxpayer"] = cmbxPreviousTaxpayer.Text;
+            newRow["pin"] = txtPreviousPin.Text;
+            newRow["assessed_value"] = nudPreviousAssessedValue.Text;
+            newRow["date_of_entry"] = dtpDateOfEntry.Value;
+            newRow["effectivity_quarter"] = nudPreviousEffectivityQuarter.Text;
+            newRow["effectivity_year"] = nudPreviousEffectivityYear.Text;
+            newRow["gr_year"] = nudPreviousGrYear.Text;
+            newRow["recording_person"] = txtRecordingPerson.Text;
+            newRow["is_taxable"] = cbxTaxable.Checked;
+            newRow["is_cancelled"] = cbxCancelled.Checked;
+
+            dataSource.Rows.Add(newRow);
         }
 
         private void txtArpNo_Validating(object sender, CancelEventArgs e)
         {
-            try
-            {
-                string arpNo = txtArpNo.Text.Trim();
-                e.Cancel = !ArpNoValidated(isEdit, arpNo, rptId);
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            string arpNo = txtArpNo.Text.Trim();
+            e.Cancel = !ArpNoValidated(isEdit, arpNo, rptId);
         }
 
         private void txtArpNo_Validated(object sender, EventArgs e)
@@ -558,11 +530,7 @@ namespace OmniGov.App.Views.Manage.RealProperties
 
         private void cmbxTaxpayer_Validating(object sender, CancelEventArgs e)
         {
-            try
-            {
-                e.Cancel = !TaxpayerValidated(errorProvider1, cmbxTaxpayer);
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            e.Cancel = !TaxpayerValidated(errorProvider1, cmbxTaxpayer);
         }
 
         private void cmbxTaxpayer_Validated(object sender, EventArgs e)
@@ -572,18 +540,13 @@ namespace OmniGov.App.Views.Manage.RealProperties
 
         private void cmbxPreviousTaxpayer_KeyPress(object sender, KeyPressEventArgs e)
         {
-            try
+            if (Control.ModifierKeys == Keys.Shift && e.KeyChar == (char)Keys.Enter)
             {
-                if (Control.ModifierKeys == Keys.Shift && e.KeyChar == (char)Keys.Enter)
-                {
-                    LoadTaxpayers();
-                    cmbxPreviousTaxpayer.DroppedDown = cmbxPreviousTaxpayer.DroppedDown ? false : true;
-                    cmbxPreviousTaxpayer.DroppedDown = true;
-                    e.Handled = true;
-                }
+                LoadTaxpayers();
+                cmbxPreviousTaxpayer.DroppedDown = cmbxPreviousTaxpayer.DroppedDown ? false : true;
+                cmbxPreviousTaxpayer.DroppedDown = true;
+                e.Handled = true;
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }
-
