@@ -1,4 +1,4 @@
-using OmniGov.App.Helpers;
+﻿using OmniGov.App.Helpers;
 using OmniGov.Core.Factories;
 using OmniGov.Treasury.Data.Factories;
 using System.ComponentModel;
@@ -7,16 +7,12 @@ namespace OmniGov.App.Views.Manage.BusinessAddOnCharges
 {
     public partial class ucBusinessAddOnCharges : UserControl
     {
-        internal bool isEdit = false;
         internal int id;
+        internal bool isEdit = false;
 
         public ucBusinessAddOnCharges()
         {
             InitializeComponent();
-        }
-
-        private void ucBusinessAdOnCharges_Load(object sender, EventArgs e)
-        {
         }
 
         internal string GetFormErrors()
@@ -51,14 +47,18 @@ namespace OmniGov.App.Views.Manage.BusinessAddOnCharges
                 return true;
         }
 
+        private void txtDescription_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorTextBox(errorProvider1, txtDescription);
+        }
+
         private void txtDescription_Validating(object sender, CancelEventArgs e)
         {
             e.Cancel = !IsDescriptionValidated(errorProvider1, txtDescription);
         }
 
-        private void txtDescription_Validated(object sender, EventArgs e)
+        private void ucBusinessAdOnCharges_Load(object sender, EventArgs e)
         {
-            Helper.ClearErrorTextBox(errorProvider1, txtDescription);
         }
     }
 }
