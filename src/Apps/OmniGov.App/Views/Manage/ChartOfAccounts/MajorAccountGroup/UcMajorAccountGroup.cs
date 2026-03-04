@@ -60,11 +60,7 @@ namespace OmniGov.App.Views.Manage.ChartOfAccounts.MajorAccountGroup
 
         private void cmbAccountGroup_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            try
-            {
-                e.Cancel = !AccountGroupValidated(epAccountGroup, cmbAccountGroup);
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            e.Cancel = !AccountGroupValidated(epAccountGroup, cmbAccountGroup);
         }
 
         private void txtCode_Validated(object sender, EventArgs e)
@@ -88,4 +84,3 @@ namespace OmniGov.App.Views.Manage.ChartOfAccounts.MajorAccountGroup
         }
     }
 }
-

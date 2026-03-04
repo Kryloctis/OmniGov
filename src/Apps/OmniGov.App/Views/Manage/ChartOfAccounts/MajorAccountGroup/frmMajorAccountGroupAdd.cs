@@ -44,17 +44,12 @@ namespace OmniGov.App.Views.Manage.ChartOfAccounts.MajorAccountGroup
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            try
+            if (SaveData())
             {
-                if (SaveData())
-                {
-                    Helper.MessageBoxSuccess("Major account group has been saved.");
-                    uc.ResetForm();
-                    _frmChartOfAccounts.LoadMajorAccountGroup();
-                }
+                Helper.MessageBoxSuccess("Major account group has been saved.");
+                uc.ResetForm();
+                _frmChartOfAccounts.LoadMajorAccountGroup();
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }
-
