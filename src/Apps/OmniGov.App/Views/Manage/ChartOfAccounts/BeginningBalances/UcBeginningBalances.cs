@@ -59,11 +59,7 @@ namespace OmniGov.App.Views.Manage.ChartOfAccounts.BeginningBalances
 
         private void nudAmount_Validating(object sender, CancelEventArgs e)
         {
-            try
-            {
-                e.Cancel = Helper.ShowErrorNumericUpDownZero(epAmount, nudAmount, "Amount") || Helper.ShowErrorNumericUpDownEmpty(epAmount, nudAmount, "amount");
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            e.Cancel = Helper.ShowErrorNumericUpDownZero(epAmount, nudAmount, "Amount") || Helper.ShowErrorNumericUpDownEmpty(epAmount, nudAmount, "amount");
         }
 
         private void OnLoad()
@@ -80,12 +76,7 @@ namespace OmniGov.App.Views.Manage.ChartOfAccounts.BeginningBalances
 
         private void UcBeginningBalances_Load(object sender, EventArgs e)
         {
-            try
-            {
-                OnLoad();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            OnLoad();
         }
     }
 }
-
