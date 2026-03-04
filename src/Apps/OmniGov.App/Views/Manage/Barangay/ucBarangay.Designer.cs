@@ -1,4 +1,4 @@
-namespace OmniGov.App.Views.Manage.Barangay
+﻿namespace OmniGov.App.Views.Manage.Barangay
 {
     partial class ucBarangay
     {

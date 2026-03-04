@@ -1,4 +1,4 @@
-using OmniGov.App.Helpers;
+﻿using OmniGov.App.Helpers;
 using OmniGov.Core.Factories;
 
 namespace OmniGov.App.Views.Manage.Barangay
@@ -14,22 +14,6 @@ namespace OmniGov.App.Views.Manage.Barangay
             Helper.LoadFormIcon(this);
             this.frmBarangay = frmBarangay;
             uc = ucBarangay1;
-        }
-
-        private void frmAddBarangay_Load(object sender, EventArgs e)
-        {
-            uc.OnLoad(false, null);
-        }
-
-        private bool SaveData()
-        {
-            if (!uc.ValidateChildren())
-            {
-                Helper.MessageBoxError(uc.GetFormErrors());
-                return false;
-            }
-
-            return Factory.BarangayRepository().Insert(uc.BarangayModel());
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -53,6 +37,22 @@ namespace OmniGov.App.Views.Manage.Barangay
                     uc.ResetForm();
                 }
             }
+        }
+
+        private void frmAddBarangay_Load(object sender, EventArgs e)
+        {
+            uc.OnLoad(false, null);
+        }
+
+        private bool SaveData()
+        {
+            if (!uc.ValidateChildren())
+            {
+                Helper.MessageBoxError(uc.GetFormErrors());
+                return false;
+            }
+
+            return Factory.BarangayRepository().Insert(uc.BarangayModel());
         }
     }
 }
