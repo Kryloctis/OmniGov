@@ -78,31 +78,27 @@ namespace OmniGov.App.Views.Manage.DisbursingOfficer
 
         private void linkuser_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            try
+            if (UserId > 0)
             {
-                if (UserId > 0)
+                UserId = 0;
+            }
+            else
+            {
+                frmLinkUser fuser = new frmLinkUser();
+                fuser.userType = "disburser";
+                if (fuser.ShowDialog() == DialogResult.OK)
                 {
-                    UserId = 0;
-                }
-                else
-                {
-                    frmLinkUser fuser = new frmLinkUser();
-                    fuser.userType = "disburser";
-                    if (fuser.ShowDialog() == DialogResult.OK)
+                    UserId = fuser.UserId;
+                    if (txtLastName.Text == string.Empty && txtFirstName.Text == string.Empty && txtMidInitial.Text == string.Empty)
                     {
-                        UserId = fuser.UserId;
-                        if (txtLastName.Text == string.Empty && txtFirstName.Text == string.Empty && txtMidInitial.Text == string.Empty)
-                        {
-                            txtPrefix.Text = fuser.prefix;
-                            txtLastName.Text = fuser.lastName;
-                            txtFirstName.Text = fuser.firstName;
-                            txtMidInitial.Text = fuser.middleInitial;
-                            txtSuffix.Text = fuser.suffix;
-                        }
+                        txtPrefix.Text = fuser.prefix;
+                        txtLastName.Text = fuser.lastName;
+                        txtFirstName.Text = fuser.firstName;
+                        txtMidInitial.Text = fuser.middleInitial;
+                        txtSuffix.Text = fuser.suffix;
                     }
                 }
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         internal void LoadLink(int id)
@@ -120,33 +116,25 @@ namespace OmniGov.App.Views.Manage.DisbursingOfficer
 
         private void chckLinkAcc_CheckedChanged(object sender, EventArgs e)
         {
-            try
+            if (!chckLinkAcc.Checked)
             {
-                if (!chckLinkAcc.Checked)
-                {
-                    chckLinkAcc.Image = Properties.Resources.link_14px;
-                    cmbxLinkedAcc.Enabled = false;
-                    cmbxLinkedAcc.SelectedIndex = -1;
-                    cmbxLinkedAcc.Text = string.Empty;
-                    errorProvider1.SetError(chckLinkAcc, string.Empty);
-                    ResetForm();
-                }
-                else
-                {
-                    chckLinkAcc.Image = Properties.Resources.link_cancel_2_14px;
-                    cmbxLinkedAcc.Enabled = true;
-                }
+                chckLinkAcc.Image = Properties.Resources.link_14px;
+                cmbxLinkedAcc.Enabled = false;
+                cmbxLinkedAcc.SelectedIndex = -1;
+                cmbxLinkedAcc.Text = string.Empty;
+                errorProvider1.SetError(chckLinkAcc, string.Empty);
+                ResetForm();
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            else
+            {
+                chckLinkAcc.Image = Properties.Resources.link_cancel_2_14px;
+                cmbxLinkedAcc.Enabled = true;
+            }
         }
 
         private void ucDisbursingOfficer_Load(object sender, EventArgs e)
         {
-            try
-            {
-                OnLoad();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            OnLoad();
         }
 
         private void OnLoad()
@@ -175,19 +163,15 @@ namespace OmniGov.App.Views.Manage.DisbursingOfficer
 
         private void cmbxLinkedAcc_KeyDown(object sender, KeyEventArgs e)
         {
-            try
+            if (e.KeyCode == Keys.Enter && ActiveControl == cmbxLinkedAcc)
             {
-                if (e.KeyCode == Keys.Enter && ActiveControl == cmbxLinkedAcc)
-                {
-                    LoadUsers(true);
-                    e.Handled = true;
-                    e.SuppressKeyPress = true;
-                }
-
-                if (e.KeyData == (Keys.Control | Keys.V))
-                    LoadUsers(true);
+                LoadUsers(true);
+                e.Handled = true;
+                e.SuppressKeyPress = true;
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+
+            if (e.KeyData == (Keys.Control | Keys.V))
+                LoadUsers(true);
         }
 
         private void cmbxLinkedAcc_SelectionChangeCommitted(object sender, EventArgs e)
@@ -209,4 +193,3 @@ namespace OmniGov.App.Views.Manage.DisbursingOfficer
         }
     }
 }
-
