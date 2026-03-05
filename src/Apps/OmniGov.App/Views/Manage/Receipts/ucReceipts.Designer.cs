@@ -1,4 +1,4 @@
-
+﻿
 namespace OmniGov.App.Views.Manage.Receipts
 {
     partial class ucReceipts
