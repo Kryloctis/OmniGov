@@ -1,4 +1,4 @@
-using OmniGov.Accounting.Data.Factories;
+﻿using OmniGov.Accounting.Data.Factories;
 using OmniGov.Accounting.Domain.Entities;
 using OmniGov.App.Helpers;
 using OmniGov.App.Views.Manage.ChartOfAccounts.BeginningBalances;
@@ -23,61 +23,21 @@ namespace OmniGov.App.Views.Manage.ChartOfAccounts.Subsidiary
             this.year = year;
         }
 
-        private void LoadSelectedGeneralLedger()
-        {
-            var dictGeneralLedger = AccountingFactory.GeneralLedgerAccountsRepository().GetViewRecordByID(generalLedgerId);
-            txtCode.Text = dictGeneralLedger["ledger_code"];
-            txtAccount.Text = dictGeneralLedger["ledger_name"];
-        }
-
         internal void LoadSubsidiaryRecordsByFundAndGeneralLedger()
         {
             var dtSubsidiary = AccountingFactory.SubsidiaryLedgerAccountsRepository().GetRecordsByFundAndGeneralLedger(fundId, generalLedgerId);
             HelperLoadRecords.SubsidiaryLedgerAccountsDatagridView(dtSubsidiary, dgSubsidiary, fundId, year);
         }
 
-        private void OnLoad()
-        {
-            Helper.LoadFormIcon(this);
-            Helper.DatagridFullRowSelectStyle(dgSubsidiary, true);
-            LoadSelectedGeneralLedger();
-            LoadSubsidiaryRecordsByFundAndGeneralLedger();
-            var dtFunds = Factory.FundsRepository().GetRecordByID(fundId);
-            txtFund.Text = dtFunds["fund_name"].ToString();
-            txtYear.Text = year.ToString();
-
-            btnEdit.Enabled = false;
-            btnDelete.Enabled = false;
-            btnSetBalance.Enabled = false;
-            EnableDisableButtons();
-        }
-
-        private void frmSubsidiary_Load(object sender, EventArgs e)
-        {
-            OnLoad();
-        }
-
-        private void EnableDisableButtons()
-        {
-            Helper.EnableDisableToolStripButtons(dgSubsidiary, btnEdit, btnDelete);
-
-            if (dgSubsidiary.SelectedRows.Count == 1)
-            {
-                btnSetBalance.Enabled = true;
-                return;
-            }
-
-            btnSetBalance.Enabled = false;
-        }
-
-        private void dgSubsidiary_SelectionChanged(object sender, EventArgs e)
-        {
-            EnableDisableButtons();
-        }
-
         private void BtnAdd_Click(object sender, EventArgs e)
         {
             _ = new frmSubsidiaryAdd(this, fundId, generalLedgerId).ShowDialog();
+        }
+
+        private void BtnDelete_Click(object sender, EventArgs e)
+        {
+            if (DeleteData())
+                LoadSubsidiaryRecordsByFundAndGeneralLedger();
         }
 
         private void BtnEdit_Click(object sender, EventArgs e)
@@ -87,6 +47,24 @@ namespace OmniGov.App.Views.Manage.ChartOfAccounts.Subsidiary
                 ushort subsidiaryLedgerId = Convert.ToUInt16(dgSubsidiary.SelectedCells[0].Value);
 
                 _ = new frmSubsidiaryEdit(this, fundId, generalLedgerId, subsidiaryLedgerId).ShowDialog();
+            }
+        }
+
+        private void BtnSetBalance_Click(object sender, EventArgs e)
+        {
+            if (dgSubsidiary.SelectedRows.Count == 1)
+            {
+                ushort subsidiaryLedgerId = Convert.ToUInt16(dgSubsidiary.SelectedCells[0].Value);
+
+                var subsidiaryLedgerBalanceExist = AccountingFactory.BeginningBalancesRepository().SubsidiaryLedgerBalanceExist(fundId, generalLedgerId, year, subsidiaryLedgerId);
+
+                if (subsidiaryLedgerBalanceExist)
+                {
+                    _ = new frmBeginningBalanceEdit(_frmChartOfAccounts, this, fundId, generalLedgerId, year, subsidiaryLedgerId).ShowDialog();
+                    return;
+                }
+
+                _ = new frmBeginningBalanceAdd(_frmChartOfAccounts, this, fundId, generalLedgerId, year, subsidiaryLedgerId).ShowDialog();
             }
         }
 
@@ -111,28 +89,50 @@ namespace OmniGov.App.Views.Manage.ChartOfAccounts.Subsidiary
             return false;
         }
 
-        private void BtnDelete_Click(object sender, EventArgs e)
+        private void dgSubsidiary_SelectionChanged(object sender, EventArgs e)
         {
-            if (DeleteData())
-                LoadSubsidiaryRecordsByFundAndGeneralLedger();
+            EnableDisableButtons();
         }
 
-        private void BtnSetBalance_Click(object sender, EventArgs e)
+        private void EnableDisableButtons()
         {
+            Helper.EnableDisableToolStripButtons(dgSubsidiary, btnEdit, btnDelete);
+
             if (dgSubsidiary.SelectedRows.Count == 1)
             {
-                ushort subsidiaryLedgerId = Convert.ToUInt16(dgSubsidiary.SelectedCells[0].Value);
-
-                var subsidiaryLedgerBalanceExist = AccountingFactory.BeginningBalancesRepository().SubsidiaryLedgerBalanceExist(fundId, generalLedgerId, year, subsidiaryLedgerId);
-
-                if (subsidiaryLedgerBalanceExist)
-                {
-                    _ = new frmBeginningBalanceEdit(_frmChartOfAccounts, this, fundId, generalLedgerId, year, subsidiaryLedgerId).ShowDialog();
-                    return;
-                }
-
-                _ = new frmBeginningBalanceAdd(_frmChartOfAccounts, this, fundId, generalLedgerId, year, subsidiaryLedgerId).ShowDialog();
+                btnSetBalance.Enabled = true;
+                return;
             }
+
+            btnSetBalance.Enabled = false;
+        }
+
+        private void frmSubsidiary_Load(object sender, EventArgs e)
+        {
+            OnLoad();
+        }
+
+        private void LoadSelectedGeneralLedger()
+        {
+            var dictGeneralLedger = AccountingFactory.GeneralLedgerAccountsRepository().GetViewRecordByID(generalLedgerId);
+            txtCode.Text = dictGeneralLedger["ledger_code"];
+            txtAccount.Text = dictGeneralLedger["ledger_name"];
+        }
+
+        private void OnLoad()
+        {
+            Helper.LoadFormIcon(this);
+            Helper.DatagridFullRowSelectStyle(dgSubsidiary, true);
+            LoadSelectedGeneralLedger();
+            LoadSubsidiaryRecordsByFundAndGeneralLedger();
+            var dtFunds = Factory.FundsRepository().GetRecordByID(fundId);
+            txtFund.Text = dtFunds["fund_name"].ToString();
+            txtYear.Text = year.ToString();
+
+            btnEdit.Enabled = false;
+            btnDelete.Enabled = false;
+            btnSetBalance.Enabled = false;
+            EnableDisableButtons();
         }
     }
 }

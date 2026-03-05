@@ -1,4 +1,4 @@
-using OmniGov.Accounting.Data.Factories;
+﻿using OmniGov.Accounting.Data.Factories;
 using OmniGov.Accounting.Domain.Entities;
 using OmniGov.App.Helpers;
 
@@ -15,6 +15,21 @@ namespace OmniGov.App.Views.Manage.ChartOfAccounts.Subsidiary
             frmSubsidiary = _frmSubsidiary;
             ucSubsidiary1.fundId = fundId;
             ucSubsidiary1.generalLedgerId = generalLedgerId;
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            if (SaveData())
+            {
+                Helper.MessageBoxSuccess("Subsidiary ledger has been saved.");
+                frmSubsidiary.LoadSubsidiaryRecordsByFundAndGeneralLedger();
+                ucSubsidiary1.ResetForm();
+            }
+        }
+
+        private void frmSubsidiaryAdd_Load(object sender, EventArgs e)
+        {
+            Helper.LoadFormIcon(this);
         }
 
         private bool SaveData()
@@ -40,21 +55,6 @@ namespace OmniGov.App.Views.Manage.ChartOfAccounts.Subsidiary
             };
 
             return AccountingFactory.SubsidiaryLedgerAccountsRepository().Insert(subsidiaryLedgerAccountsModel);
-        }
-
-        private void frmSubsidiaryAdd_Load(object sender, EventArgs e)
-        {
-            Helper.LoadFormIcon(this);
-        }
-
-        private void btnSave_Click(object sender, EventArgs e)
-        {
-            if (SaveData())
-            {
-                Helper.MessageBoxSuccess("Subsidiary ledger has been saved.");
-                frmSubsidiary.LoadSubsidiaryRecordsByFundAndGeneralLedger();
-                ucSubsidiary1.ResetForm();
-            }
         }
     }
 }
