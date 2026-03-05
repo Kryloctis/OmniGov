@@ -1,4 +1,4 @@
-using OmniGov.App.Helpers;
+﻿using OmniGov.App.Helpers;
 using OmniGov.Core.Factories;
 using OmniGov.Treasury.Data.Factories;
 using System.ComponentModel;
@@ -28,6 +28,133 @@ namespace OmniGov.App.Views.Manage.CollectingOfficer
             return Factory.CreateErrors(errorArray).GenerateErrorMessage();
         }
 
+        internal void LoadSelectedRecord()
+        {
+            var dictCollectingOfficer = TreasuryFactory.CollectingOfficerRepository().GetRecordByID(Id);
+
+            txtPrefix.Text = dictCollectingOfficer["prefix"];
+            txtFirstName.Text = dictCollectingOfficer["first_name"];
+            txtMiddleInitial.Text = dictCollectingOfficer["mid_initial"];
+            txtLastName.Text = dictCollectingOfficer["last_name"];
+            txtSuffix.Text = dictCollectingOfficer["suffix"];
+            txtJobtitle.Text = dictCollectingOfficer["job_title"];
+            var linkedUserId = dictCollectingOfficer["users_id"];
+
+            if (string.IsNullOrWhiteSpace(linkedUserId))
+                chckLinkAcc.Checked = false;
+            else
+            {
+                chckLinkAcc.Checked = true;
+                cmbxLinkedAcc.SelectedValue = linkedUserId;
+            }
+        }
+
+        internal void ResetForm()
+        {
+            txtPrefix.Clear();
+            txtFirstName.Clear();
+            txtMiddleInitial.Clear();
+            txtLastName.Clear();
+            txtSuffix.Clear();
+            txtJobtitle.Clear();
+        }
+
+        private void chckLinkAcc_CheckedChanged(object sender, EventArgs e)
+        {
+            if (!chckLinkAcc.Checked)
+            {
+                chckLinkAcc.Image = Properties.Resources.link_14px;
+                cmbxLinkedAcc.Enabled = false;
+                cmbxLinkedAcc.SelectedIndex = -1;
+                cmbxLinkedAcc.Text = string.Empty;
+                errorProvider1.SetError(chckLinkAcc, string.Empty);
+                ResetForm();
+            }
+            else
+            {
+                chckLinkAcc.Image = Properties.Resources.link_cancel_2_14px;
+                cmbxLinkedAcc.Enabled = true;
+            }
+        }
+
+        private void cmbxLinkedAcc_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter && ActiveControl == cmbxLinkedAcc)
+            {
+                LoadUsers(true);
+                e.Handled = true;
+                e.SuppressKeyPress = true;
+            }
+
+            if (e.KeyData == (Keys.Control | Keys.V))
+                LoadUsers(true);
+        }
+
+        private void cmbxLinkedAcc_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            LoadUserDetails();
+        }
+
+        private void cmbxLinkedAcc_Validated(object sender, EventArgs e)
+        {
+            errorProvider1.SetError(chckLinkAcc, string.Empty);
+        }
+
+        private void cmbxLinkedAcc_Validating(object sender, CancelEventArgs e)
+        {
+            if (chckLinkAcc.Checked)
+                e.Cancel = !LinkedUserValidated(errorProvider1, "Invalid linked user", chckLinkAcc);
+        }
+
+        private bool CollectorNameValidated(TextBox textBox, ErrorProvider errorProvider, string message)
+        {
+            string firstName = txtFirstName.Text.Trim();
+            string midInitial = txtMiddleInitial.Text.Trim();
+            string lastName = txtLastName.Text.Trim();
+
+            if (Helper.ShowErrorTextBoxEmpty(errorProvider, textBox, message))
+                return false;
+
+            bool fullNameExist = TreasuryFactory.CollectingOfficerRepository().FullNameExist(firstName, midInitial, lastName, Id);
+            if (fullNameExist)
+            {
+                errorProvider.SetError(textBox, "Name already exist.");
+                return false;
+            }
+            return true;
+        }
+
+        private bool LinkedUserValidated(ErrorProvider errorProvider, string message, Control source)
+        {
+            var linkedUserId = cmbxLinkedAcc.SelectedValue;
+
+            if (string.IsNullOrWhiteSpace(cmbxLinkedAcc.Text.Trim()) || linkedUserId == null)
+            {
+                errorProvider.SetError(source, message);
+                return false;
+            }
+            else if (!Factory.UsersRepository().IdExist(Convert.ToInt32(linkedUserId)))
+            {
+                errorProvider.SetError(source, message);
+                return false;
+            }
+
+            return true;
+        }
+
+        private void LoadUserDetails()
+        {
+            int userId = Convert.ToInt32(cmbxLinkedAcc.SelectedValue);
+            var dtUser = Factory.UsersRepository().GetViewRecordById(userId);
+
+            txtPrefix.Text = dtUser["prefix"];
+            txtFirstName.Text = dtUser["first_name"];
+            txtLastName.Text = dtUser["last_name"];
+            txtMiddleInitial.Text = dtUser["mid_initial"];
+            txtSuffix.Text = dtUser["suffix"];
+            txtJobtitle.Text = dtUser["role_name"];
+        }
+
         private void LoadUsers(bool isSearch = false)
         {
             string searchKey = cmbxLinkedAcc.Text.Trim();
@@ -52,37 +179,9 @@ namespace OmniGov.App.Views.Manage.CollectingOfficer
             }
         }
 
-        internal void ResetForm()
-        {
-            txtPrefix.Clear();
-            txtFirstName.Clear();
-            txtMiddleInitial.Clear();
-            txtLastName.Clear();
-            txtSuffix.Clear();
-            txtJobtitle.Clear();
-        }
-
         private void txtFname_Validated(object sender, EventArgs e)
         {
             Helper.ClearErrorTextBox(errorProvider1, txtFirstName);
-        }
-
-        private bool CollectorNameValidated(TextBox textBox, ErrorProvider errorProvider, string message)
-        {
-            string firstName = txtFirstName.Text.Trim();
-            string midInitial = txtMiddleInitial.Text.Trim();
-            string lastName = txtLastName.Text.Trim();
-
-            if (Helper.ShowErrorTextBoxEmpty(errorProvider, textBox, message))
-                return false;
-
-            bool fullNameExist = TreasuryFactory.CollectingOfficerRepository().FullNameExist(firstName, midInitial, lastName, Id);
-            if (fullNameExist)
-            {
-                errorProvider.SetError(textBox, "Name already exist.");
-                return false;
-            }
-            return true;
         }
 
         private void txtFname_Validating(object sender, CancelEventArgs e)
@@ -110,108 +209,9 @@ namespace OmniGov.App.Views.Manage.CollectingOfficer
             e.Cancel = !CollectorNameValidated(txtMiddleInitial, errorProvider1, "middle initial");
         }
 
-        private void chckLinkAcc_CheckedChanged(object sender, EventArgs e)
-        {
-            if (!chckLinkAcc.Checked)
-            {
-                chckLinkAcc.Image = Properties.Resources.link_14px;
-                cmbxLinkedAcc.Enabled = false;
-                cmbxLinkedAcc.SelectedIndex = -1;
-                cmbxLinkedAcc.Text = string.Empty;
-                errorProvider1.SetError(chckLinkAcc, string.Empty);
-                ResetForm();
-            }
-            else
-            {
-                chckLinkAcc.Image = Properties.Resources.link_cancel_2_14px;
-                cmbxLinkedAcc.Enabled = true;
-            }
-        }
-
         private void ucCollectingOfficer_Load(object sender, EventArgs e)
         {
             OnLoad();
-        }
-
-        private void cmbxLinkedAcc_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter && ActiveControl == cmbxLinkedAcc)
-            {
-                LoadUsers(true);
-                e.Handled = true;
-                e.SuppressKeyPress = true;
-            }
-
-            if (e.KeyData == (Keys.Control | Keys.V))
-                LoadUsers(true);
-        }
-
-        internal void LoadSelectedRecord()
-        {
-            var dictCollectingOfficer = TreasuryFactory.CollectingOfficerRepository().GetRecordByID(Id);
-
-            txtPrefix.Text = dictCollectingOfficer["prefix"];
-            txtFirstName.Text = dictCollectingOfficer["first_name"];
-            txtMiddleInitial.Text = dictCollectingOfficer["mid_initial"];
-            txtLastName.Text = dictCollectingOfficer["last_name"];
-            txtSuffix.Text = dictCollectingOfficer["suffix"];
-            txtJobtitle.Text = dictCollectingOfficer["job_title"];
-            var linkedUserId = dictCollectingOfficer["users_id"];
-
-            if (string.IsNullOrWhiteSpace(linkedUserId))
-                chckLinkAcc.Checked = false;
-            else
-            {
-                chckLinkAcc.Checked = true;
-                cmbxLinkedAcc.SelectedValue = linkedUserId;
-            }
-        }
-
-        private bool LinkedUserValidated(ErrorProvider errorProvider, string message, Control source)
-        {
-            var linkedUserId = cmbxLinkedAcc.SelectedValue;
-
-            if (string.IsNullOrWhiteSpace(cmbxLinkedAcc.Text.Trim()) || linkedUserId == null)
-            {
-                errorProvider.SetError(source, message);
-                return false;
-            }
-            else if (!Factory.UsersRepository().IdExist(Convert.ToInt32(linkedUserId)))
-            {
-                errorProvider.SetError(source, message);
-                return false;
-            }
-
-            return true;
-        }
-
-        private void cmbxLinkedAcc_Validating(object sender, CancelEventArgs e)
-        {
-            if (chckLinkAcc.Checked)
-                e.Cancel = !LinkedUserValidated(errorProvider1, "Invalid linked user", chckLinkAcc);
-        }
-
-        private void cmbxLinkedAcc_Validated(object sender, EventArgs e)
-        {
-            errorProvider1.SetError(chckLinkAcc, string.Empty);
-        }
-
-        private void cmbxLinkedAcc_SelectionChangeCommitted(object sender, EventArgs e)
-        {
-            LoadUserDetails();
-        }
-
-        private void LoadUserDetails()
-        {
-            int userId = Convert.ToInt32(cmbxLinkedAcc.SelectedValue);
-            var dtUser = Factory.UsersRepository().GetViewRecordById(userId);
-
-            txtPrefix.Text = dtUser["prefix"];
-            txtFirstName.Text = dtUser["first_name"];
-            txtLastName.Text = dtUser["last_name"];
-            txtMiddleInitial.Text = dtUser["mid_initial"];
-            txtSuffix.Text = dtUser["suffix"];
-            txtJobtitle.Text = dtUser["role_name"];
         }
     }
 }
