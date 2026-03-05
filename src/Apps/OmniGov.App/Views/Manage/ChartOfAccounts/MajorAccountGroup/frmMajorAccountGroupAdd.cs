@@ -1,4 +1,4 @@
-using OmniGov.App.Helpers;
+﻿using OmniGov.App.Helpers;
 using OmniGov.Core.Entities;
 using OmniGov.Core.Factories;
 
@@ -14,6 +14,22 @@ namespace OmniGov.App.Views.Manage.ChartOfAccounts.MajorAccountGroup
             InitializeComponent();
             _frmChartOfAccounts = frmChartOfAccounts;
             uc = ucMajorAccountGroup1;
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            if (SaveData())
+            {
+                Helper.MessageBoxSuccess("Major account group has been saved.");
+                uc.ResetForm();
+                _frmChartOfAccounts.LoadMajorAccountGroup();
+            }
+        }
+
+        private void frmMajorAccountGroupAdd_Load(object sender, EventArgs e)
+        {
+            Helper.LoadFormIcon(this);
+            uc.LoadAccountGroup();
         }
 
         private bool SaveData()
@@ -34,22 +50,6 @@ namespace OmniGov.App.Views.Manage.ChartOfAccounts.MajorAccountGroup
             };
 
             return Factory.MajorAccountGroupRepository().Insert(majorAccountGroupModel);
-        }
-
-        private void frmMajorAccountGroupAdd_Load(object sender, EventArgs e)
-        {
-            Helper.LoadFormIcon(this);
-            uc.LoadAccountGroup();
-        }
-
-        private void btnSave_Click(object sender, EventArgs e)
-        {
-            if (SaveData())
-            {
-                Helper.MessageBoxSuccess("Major account group has been saved.");
-                uc.ResetForm();
-                _frmChartOfAccounts.LoadMajorAccountGroup();
-            }
         }
     }
 }
