@@ -1,4 +1,4 @@
-
+﻿
 namespace OmniGov.App.Views.Manage.ChartOfAccounts.BeginningBalances
 {
     partial class frmBeginningBalanceEdit

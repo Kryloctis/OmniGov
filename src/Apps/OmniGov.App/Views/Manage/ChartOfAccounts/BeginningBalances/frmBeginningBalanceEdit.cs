@@ -1,4 +1,4 @@
-using OmniGov.Accounting.Data.Factories;
+﻿using OmniGov.Accounting.Data.Factories;
 using OmniGov.Accounting.Domain.Entities;
 using OmniGov.App.Helpers;
 using OmniGov.App.Views.Manage.ChartOfAccounts.Subsidiary;
@@ -7,11 +7,11 @@ namespace OmniGov.App.Views.Manage.ChartOfAccounts.BeginningBalances
 {
     public partial class frmBeginningBalanceEdit : Form
     {
-        private readonly UcBeginningBalances uc;
         private readonly byte fundId;
+        private readonly UcBeginningBalances uc;
         private readonly short year;
-        private frmSubsidiary _frmSubsidiary;
         private frmChartOfAccounts _frmChartOfAccounts;
+        private frmSubsidiary _frmSubsidiary;
 
         public frmBeginningBalanceEdit(frmChartOfAccounts frmChartOfAccounts, frmSubsidiary frmSubsidiary, byte fundId, ushort generalLedgerId, short year, ushort subsidiaryLedgerId = 0)
         {
@@ -25,6 +25,54 @@ namespace OmniGov.App.Views.Manage.ChartOfAccounts.BeginningBalances
             uc.subsidiaryLedgerId = subsidiaryLedgerId;
             this.year = year;
             uc.year = year;
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            if (Delete())
+            {
+                Helper.MessageBoxSuccess($"Balance has been deleted.");
+                if (_frmSubsidiary != null) _frmSubsidiary.LoadSubsidiaryRecordsByFundAndGeneralLedger();
+                if (_frmChartOfAccounts != null) _frmChartOfAccounts.LoadGeneralLedgers(30);
+            }
+            Close();
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            if (UpdateData())
+            {
+                Helper.MessageBoxSuccess("Balance has been saved.");
+
+                if (_frmSubsidiary != null) _frmSubsidiary.LoadSubsidiaryRecordsByFundAndGeneralLedger();
+                if (_frmChartOfAccounts != null) _frmChartOfAccounts.LoadGeneralLedgers(30);
+                Close();
+            }
+        }
+
+        private void CheckedDebitCredit(string isDebit)
+        {
+            if (isDebit == "1")
+            {
+                uc.radioDebit.Checked = true;
+                return;
+            }
+
+            uc.radioCredit.Checked = true;
+        }
+
+        private bool Delete()
+        {
+            string message = "Are you sure you want to delete the balance?";
+            if (MessageBox.Show(message, "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                return AccountingFactory.BeginningBalancesRepository().DeleteById(uc.beginningBalanceId);
+
+            return false;
+        }
+
+        private void frmBeginningBalanceEdit_Load(object sender, EventArgs e)
+        {
+            OnLoad();
         }
 
         private void LoadSelectedRecord()
@@ -41,15 +89,13 @@ namespace OmniGov.App.Views.Manage.ChartOfAccounts.BeginningBalances
             uc.nudAmount.Value = Convert.ToDecimal(beginningBalanceDict["amount"]);
         }
 
-        private void CheckedDebitCredit(string isDebit)
+        private void OnLoad()
         {
-            if (isDebit == "1")
-            {
-                uc.radioDebit.Checked = true;
-                return;
-            }
+            Helper.LoadFormIcon(this);
+            uc.LoadSelectedGeneralLedger();
+            uc.LoadSelectedSubsidiaryAccount();
 
-            uc.radioCredit.Checked = true;
+            LoadSelectedRecord();
         }
 
         private bool UpdateData()
@@ -73,52 +119,6 @@ namespace OmniGov.App.Views.Manage.ChartOfAccounts.BeginningBalances
             };
 
             return AccountingFactory.BeginningBalancesRepository().Update(beginningBalanceModel);
-        }
-
-        private void OnLoad()
-        {
-            Helper.LoadFormIcon(this);
-            uc.LoadSelectedGeneralLedger();
-            uc.LoadSelectedSubsidiaryAccount();
-
-            LoadSelectedRecord();
-        }
-
-        private void frmBeginningBalanceEdit_Load(object sender, EventArgs e)
-        {
-            OnLoad();
-        }
-
-        private void btnSave_Click(object sender, EventArgs e)
-        {
-            if (UpdateData())
-            {
-                Helper.MessageBoxSuccess("Balance has been saved.");
-
-                if (_frmSubsidiary != null) _frmSubsidiary.LoadSubsidiaryRecordsByFundAndGeneralLedger();
-                if (_frmChartOfAccounts != null) _frmChartOfAccounts.LoadGeneralLedgers(30);
-                Close();
-            }
-        }
-
-        private bool Delete()
-        {
-            string message = "Are you sure you want to delete the balance?";
-            if (MessageBox.Show(message, "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
-                return AccountingFactory.BeginningBalancesRepository().DeleteById(uc.beginningBalanceId);
-
-            return false;
-        }
-
-        private void btnDelete_Click(object sender, EventArgs e)
-        {
-            if (Delete())
-            {
-                Helper.MessageBoxSuccess($"Balance has been deleted.");
-                if (_frmSubsidiary != null) _frmSubsidiary.LoadSubsidiaryRecordsByFundAndGeneralLedger();
-                if (_frmChartOfAccounts != null) _frmChartOfAccounts.LoadGeneralLedgers(30);
-            }
-            Close();
         }
     }
 }

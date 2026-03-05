@@ -1,4 +1,4 @@
-using OmniGov.Accounting.Data.Factories;
+﻿using OmniGov.Accounting.Data.Factories;
 using OmniGov.Accounting.Domain.Entities;
 using OmniGov.App.Helpers;
 using OmniGov.App.Views.Manage.ChartOfAccounts.Subsidiary;
@@ -8,8 +8,8 @@ namespace OmniGov.App.Views.Manage.ChartOfAccounts.BeginningBalances
     public partial class frmBeginningBalanceAdd : Form
     {
         private readonly UcBeginningBalances uc;
-        private frmSubsidiary _frmSubsidiary;
         private frmChartOfAccounts _frmChartOfAccounts;
+        private frmSubsidiary _frmSubsidiary;
 
         public frmBeginningBalanceAdd(frmChartOfAccounts frmChartOfAccounts, frmSubsidiary frmSubsidiary, byte fundId, ushort generalLedgerId, short year, ushort subsidiaryLedgerId = 0)
         {
@@ -21,6 +21,31 @@ namespace OmniGov.App.Views.Manage.ChartOfAccounts.BeginningBalances
             uc.generalLedgerId = generalLedgerId;
             uc.year = year;
             uc.subsidiaryLedgerId = subsidiaryLedgerId;
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            if (SaveData())
+            {
+                Helper.MessageBoxSuccess("Beginning balance has been saved.");
+
+                if (_frmSubsidiary != null) _frmSubsidiary.LoadSubsidiaryRecordsByFundAndGeneralLedger();
+                if (_frmChartOfAccounts != null) _frmChartOfAccounts.LoadGeneralLedgers(30);
+                Close();
+            }
+        }
+
+        private void frmBeginningBalanceAdd_Load(object sender, EventArgs e)
+        {
+            OnLoad();
+        }
+
+        private void OnLoad()
+        {
+            Helper.LoadFormIcon(this);
+            uc.LoadSelectedGeneralLedger();
+            uc.LoadSelectedSubsidiaryAccount();
+            uc.radioDebit.Checked = true;
         }
 
         private bool SaveData()
@@ -43,31 +68,6 @@ namespace OmniGov.App.Views.Manage.ChartOfAccounts.BeginningBalances
             };
 
             return AccountingFactory.BeginningBalancesRepository().Insert(beginningBalanceModel);
-        }
-
-        private void OnLoad()
-        {
-            Helper.LoadFormIcon(this);
-            uc.LoadSelectedGeneralLedger();
-            uc.LoadSelectedSubsidiaryAccount();
-            uc.radioDebit.Checked = true;
-        }
-
-        private void frmBeginningBalanceAdd_Load(object sender, EventArgs e)
-        {
-            OnLoad();
-        }
-
-        private void btnSave_Click(object sender, EventArgs e)
-        {
-            if (SaveData())
-            {
-                Helper.MessageBoxSuccess("Beginning balance has been saved.");
-
-                if (_frmSubsidiary != null) _frmSubsidiary.LoadSubsidiaryRecordsByFundAndGeneralLedger();
-                if (_frmChartOfAccounts != null) _frmChartOfAccounts.LoadGeneralLedgers(30);
-                Close();
-            }
         }
     }
 }

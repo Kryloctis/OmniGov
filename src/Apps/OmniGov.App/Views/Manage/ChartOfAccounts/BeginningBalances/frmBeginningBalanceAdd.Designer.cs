@@ -1,4 +1,4 @@
-using OmniGov.App.Views.Manage.ChartOfAccounts.BeginningBalances;
+﻿using OmniGov.App.Views.Manage.ChartOfAccounts.BeginningBalances;
 
 namespace OmniGov.App.Views.Manage.ChartOfAccounts.BeginningBalances
 {
