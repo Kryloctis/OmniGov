@@ -1,4 +1,4 @@
-
+﻿
 namespace OmniGov.App.Views.Manage.TaxPayers
 {
     partial class ucTaxPayers
