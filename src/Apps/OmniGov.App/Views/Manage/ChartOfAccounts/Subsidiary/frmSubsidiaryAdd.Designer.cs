@@ -1,4 +1,4 @@
-using OmniGov.App.Views.Manage.ChartOfAccounts.Subsidiary;
+﻿using OmniGov.App.Views.Manage.ChartOfAccounts.Subsidiary;
 
 namespace OmniGov.App.Views.Manage.ChartOfAccounts.Subsidiary
 {
