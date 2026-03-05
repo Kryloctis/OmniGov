@@ -1,9 +1,38 @@
-using OmniGov.Treasury.Data.Factories;
+﻿using OmniGov.Treasury.Data.Factories;
 
 namespace OmniGov.App.Views.Shared
 {
     public static class RealPropertyTaxComputations
     {
+        public static decimal GetBasicTaxDue(decimal basicTaxRate, decimal assessedValue)
+        {
+            decimal basic = assessedValue * basicTaxRate;
+            return basic;
+        }
+
+        public static decimal GetDiscount(decimal discountRate, decimal taxDue)
+        {
+            decimal discount = taxDue * discountRate;
+            return discount;
+        }
+
+        public static decimal GetDiscountRate(DateTime transactionDate, (DateTime postedDate, int assmntYear) currentAssmntParameters)
+        {
+            var annualDiscountRate = TreasuryFactory.RptDiscountRepository().GetRecordByMonth(10, true);
+            var monthlyDiscountRate = TreasuryFactory.RptDiscountRepository().GetRecordByMonth(transactionDate.Month, false);
+
+            if (currentAssmntParameters.assmntYear > transactionDate.Year)
+            {
+                return annualDiscountRate == null ? 0 : Convert.ToDecimal(annualDiscountRate["rate"]);
+            }
+            else if (currentAssmntParameters.postedDate.Year == transactionDate.Year && transactionDate.Month < 3)
+            {
+                return monthlyDiscountRate == null ? 0 : Convert.ToDecimal(monthlyDiscountRate["rate"]);
+            }
+            else
+                return 0;
+        }
+
         public static int GetMonthsBetweenYears(int startYear, int endYear)
         {
             return (endYear - startYear) * 12;
@@ -41,47 +70,18 @@ namespace OmniGov.App.Views.Shared
             return penalty;
         }
 
-        public static decimal GetDiscountRate(DateTime transactionDate, (DateTime postedDate, int assmntYear) currentAssmntParameters)
-        {
-            var annualDiscountRate = TreasuryFactory.RptDiscountRepository().GetRecordByMonth(10, true);
-            var monthlyDiscountRate = TreasuryFactory.RptDiscountRepository().GetRecordByMonth(transactionDate.Month, false);
-
-            if (currentAssmntParameters.assmntYear > transactionDate.Year)
-            {
-                return annualDiscountRate == null ? 0 : Convert.ToDecimal(annualDiscountRate["rate"]);
-            }
-            else if (currentAssmntParameters.postedDate.Year == transactionDate.Year && transactionDate.Month < 3)
-            {
-                return monthlyDiscountRate == null ? 0 : Convert.ToDecimal(monthlyDiscountRate["rate"]);
-            }
-            else
-                return 0;
-        }
-
-        public static decimal GetDiscount(decimal discountRate, decimal taxDue)
-        {
-            decimal discount = taxDue * discountRate;
-            return discount;
-        }
-
-        public static decimal GetSefTaxDue(decimal sefTaxRate, decimal assessedValue)
-        {
-            decimal sef = assessedValue * sefTaxRate;
-            return sef;
-        }
-
-        public static decimal GetBasicTaxDue(decimal basicTaxRate, decimal assessedValue)
-        {
-            decimal basic = assessedValue * basicTaxRate;
-            return basic;
-        }
-
         public static decimal GetSefBasicTotalTaxDue(decimal basicTaxRate, decimal sefTaxRate, decimal assessedValue)
         {
             decimal basicTaxDue = GetBasicTaxDue(basicTaxRate, assessedValue);
             decimal sefTaxDue = GetSefTaxDue(sefTaxRate, assessedValue);
 
             return basicTaxDue + sefTaxDue;
+        }
+
+        public static decimal GetSefTaxDue(decimal sefTaxRate, decimal assessedValue)
+        {
+            decimal sef = assessedValue * sefTaxRate;
+            return sef;
         }
     }
 }

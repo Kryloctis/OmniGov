@@ -1,4 +1,4 @@
-using OmniGov.App.Views.Transactions.Assessment;
+﻿using OmniGov.App.Views.Transactions.Assessment;
 namespace OmniGov.App.Views.Transactions.Assessment
 {
     partial class frmRptDelinquencyNotices
