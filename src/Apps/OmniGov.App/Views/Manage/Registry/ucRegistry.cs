@@ -1,4 +1,4 @@
-using OmniGov.App.Helpers;
+﻿using OmniGov.App.Helpers;
 using OmniGov.Core.Entities;
 using OmniGov.Core.Factories;
 using System.ComponentModel;
@@ -31,18 +31,32 @@ namespace OmniGov.App.Views.Manage.Registry
             return Factory.CreateErrors(errors).GenerateErrorMessage();
         }
 
-        internal void ResetFields()
+        internal void LoadSelectedRecord()
         {
-            txtFirstName.Clear();
-            txtMiddleName.Clear();
-            txtLastName.Clear();
-            radMale.Checked = true;
-            txtNationality.Clear();
-            txtContactInfo.Clear();
-            dtBirthDate.Value = Helper.GetCurrentDate();
-            txtMunicipality.Clear();
-            txtProvince.Clear();
-            txtCountry.Clear();
+            var dictRegistry = Factory.RegistryRepository().GetRecordByID(registryId);
+
+            txtFirstName.Text = dictRegistry["first_name"];
+            txtMiddleName.Text = dictRegistry["middle_name"];
+            txtLastName.Text = dictRegistry["last_name"];
+            radMale.Checked = dictRegistry["sex"] == "Male";
+            radFemale.Checked = dictRegistry["sex"] == "Female";
+            txtNationality.Text = dictRegistry["nationality"];
+            txtContactInfo.Text = dictRegistry["contact_info"];
+            dtBirthDate.Value = Convert.ToDateTime(dictRegistry["birth_date"]);
+            txtMunicipality.Text = dictRegistry["municipality"];
+            txtProvince.Text = dictRegistry["province"];
+            txtCountry.Text = dictRegistry["country"];
+        }
+
+        internal void OnLoad(bool isEdit, int? registryId)
+        {
+            this.isEdit = isEdit;
+
+            if (isEdit)
+            {
+                this.registryId = registryId.Value;
+                LoadSelectedRecord();
+            }
         }
 
         internal RegistryModel RegistryModel()
@@ -62,82 +76,23 @@ namespace OmniGov.App.Views.Manage.Registry
             };
         }
 
-        internal void OnLoad(bool isEdit, int? registryId)
+        internal void ResetFields()
         {
-            this.isEdit = isEdit;
-
-            if (isEdit)
-            {
-                this.registryId = registryId.Value;
-                LoadSelectedRecord();
-            }
+            txtFirstName.Clear();
+            txtMiddleName.Clear();
+            txtLastName.Clear();
+            radMale.Checked = true;
+            txtNationality.Clear();
+            txtContactInfo.Clear();
+            dtBirthDate.Value = Helper.GetCurrentDate();
+            txtMunicipality.Clear();
+            txtProvince.Clear();
+            txtCountry.Clear();
         }
 
-        internal void LoadSelectedRecord()
+        private void txtCountry_Validated(object sender, EventArgs e)
         {
-            var dictRegistry = Factory.RegistryRepository().GetRecordByID(registryId);
-
-            txtFirstName.Text = dictRegistry["first_name"];
-            txtMiddleName.Text = dictRegistry["middle_name"];
-            txtLastName.Text = dictRegistry["last_name"];
-            radMale.Checked = dictRegistry["sex"] == "Male";
-            radFemale.Checked = dictRegistry["sex"] == "Female";
-            txtNationality.Text = dictRegistry["nationality"];
-            txtContactInfo.Text = dictRegistry["contact_info"];
-            dtBirthDate.Value = Convert.ToDateTime(dictRegistry["birth_date"]);
-            txtMunicipality.Text = dictRegistry["municipality"];
-            txtProvince.Text = dictRegistry["province"];
-            txtCountry.Text = dictRegistry["country"];
-        }
-
-        private void txtFirstName_Validating(object sender, CancelEventArgs e)
-        {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtFirstName, "First Name");
-        }
-
-        private void txtFirstName_Validated(object sender, EventArgs e)
-        {
-            Helper.ClearErrorTextBox(errorProvider1, txtFirstName);
-        }
-
-        private void txtLastName_Validating(object sender, CancelEventArgs e)
-        {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtLastName, "Last Name");
-        }
-
-        private void txtLastName_Validated(object sender, EventArgs e)
-        {
-            Helper.ClearErrorTextBox(errorProvider1, txtLastName);
-        }
-
-        private void txtNationality_Validating(object sender, CancelEventArgs e)
-        {
-            Helper.ShowErrorTextBoxEmpty(errorProvider1, txtNationality, "Nationality");
-        }
-
-        private void txtNationality_Validated(object sender, EventArgs e)
-        {
-            Helper.ClearErrorTextBox(errorProvider1, txtNationality);
-        }
-
-        private void txtMunicipality_Validating(object sender, CancelEventArgs e)
-        {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtMunicipality, "Municipality");
-        }
-
-        private void txtMunicipality_Validated(object sender, EventArgs e)
-        {
-            Helper.ClearErrorTextBox(errorProvider1, txtMunicipality);
-        }
-
-        private void txtProvince_Validating(object sender, CancelEventArgs e)
-        {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtProvince, "Province");
-        }
-
-        private void txtProvince_Validated(object sender, EventArgs e)
-        {
-            Helper.ClearErrorTextBox(errorProvider1, txtProvince);
+            Helper.ClearErrorTextBox(errorProvider1, txtCountry);
         }
 
         private void txtCountry_Validating(object sender, CancelEventArgs e)
@@ -145,10 +100,54 @@ namespace OmniGov.App.Views.Manage.Registry
             e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtCountry, "Country");
         }
 
-        private void txtCountry_Validated(object sender, EventArgs e)
+        private void txtFirstName_Validated(object sender, EventArgs e)
         {
-            Helper.ClearErrorTextBox(errorProvider1, txtCountry);
+            Helper.ClearErrorTextBox(errorProvider1, txtFirstName);
+        }
+
+        private void txtFirstName_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtFirstName, "First Name");
+        }
+
+        private void txtLastName_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorTextBox(errorProvider1, txtLastName);
+        }
+
+        private void txtLastName_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtLastName, "Last Name");
+        }
+
+        private void txtMunicipality_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorTextBox(errorProvider1, txtMunicipality);
+        }
+
+        private void txtMunicipality_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtMunicipality, "Municipality");
+        }
+
+        private void txtNationality_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorTextBox(errorProvider1, txtNationality);
+        }
+
+        private void txtNationality_Validating(object sender, CancelEventArgs e)
+        {
+            Helper.ShowErrorTextBoxEmpty(errorProvider1, txtNationality, "Nationality");
+        }
+
+        private void txtProvince_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorTextBox(errorProvider1, txtProvince);
+        }
+
+        private void txtProvince_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtProvince, "Province");
         }
     }
 }
-
