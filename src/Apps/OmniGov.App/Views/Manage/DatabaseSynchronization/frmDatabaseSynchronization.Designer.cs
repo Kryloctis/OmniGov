@@ -1,4 +1,4 @@
-using OmniGov.App.Views.Manage.DatabaseSynchronization;
+﻿using OmniGov.App.Views.Manage.DatabaseSynchronization;
 namespace OmniGov.App.Views.Manage.DatabaseSynchronization
 {
     partial class frmDatabaseSynchronization
