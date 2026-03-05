@@ -1,4 +1,4 @@
-using OmniGov.App.Helpers;
+﻿using OmniGov.App.Helpers;
 using OmniGov.App.Views.Manage.FeesChargesConfig.Classification;
 using OmniGov.App.Views.Manage.FeesChargesConfig.FeesCharges;
 using OmniGov.Treasury.Data.Factories;
@@ -18,12 +18,6 @@ namespace OmniGov.App.Views.Manage.FeesChargesConfig
             Helper.LoadFormIcon(this);
         }
 
-        private void frmFeesChargesConfig_Load(object sender, EventArgs e)
-        {
-            LoadFeesCharges();
-            ToggleButtons(treeViewFeesCharges);
-        }
-
         internal void LoadFeesCharges()
         {
             if (!backgroundWorker1.IsBusy)
@@ -33,44 +27,6 @@ namespace OmniGov.App.Views.Manage.FeesChargesConfig
                 treeViewFeesCharges.Nodes.Clear();
                 backgroundWorker1.RunWorkerAsync();
             }
-        }
-
-        private ImageList ImageList()
-        {
-            ImageList imageList = new ImageList();
-
-            imageList.Images.Add("classification_active", Properties.Resources.folder_filled_20px);
-            imageList.Images.Add("classification_disabled", Properties.Resources.disabled_folder_filled_20px);
-
-            imageList.Images.Add("feescharges_active", Properties.Resources.document_color_green_filled_20px);
-            imageList.Images.Add("feescharges_disabled", Properties.Resources.disabled_document_filled_20px);
-
-            return imageList;
-        }
-
-        private void LoadFeesChargesNodes(int feesChargesClassificationId, bool isDeleted, TreeNode nodeFeesChargesClassification)
-        {
-            var textSearch = txtSearch.Text;
-            var dtFeesCharges = TreasuryFactory.OtherPaymentRatesRepository().GetRecordsByTaxTypeIDAndDescription(feesChargesClassificationId, textSearch);
-            List<TreeNode> nodes = new List<TreeNode>();
-
-            foreach (DataRow row in dtFeesCharges.Rows)
-            {
-                var imageKey = isDeleted ? "feescharges_disabled" : "feescharges_active";
-
-                var feesChargesNode = new TreeNode
-                {
-                    Text = row["description"].ToString(),
-                    Tag = $"feescharges-{row["id"]}",
-                    ImageKey = imageKey,
-                    SelectedImageKey = imageKey,
-                    ForeColor = isDeleted ? System.Drawing.Color.Gray : ForeColor
-                };
-
-                nodes.Add(feesChargesNode);
-            }
-
-            nodeFeesChargesClassification.Nodes.AddRange(nodes.ToArray());
         }
 
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
@@ -158,6 +114,153 @@ namespace OmniGov.App.Views.Manage.FeesChargesConfig
             treeViewFeesCharges.ExpandAll();
         }
 
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            string deleteMessage;
+            if (DeleteRecord(out deleteMessage))
+            {
+                LoadFeesCharges();
+                Helper.MessageBoxSuccess($"{deleteMessage} has been deleted");
+            }
+        }
+
+        private void btnModify_Click(object sender, EventArgs e)
+        {
+            ShowModifyForm(treeViewFeesCharges);
+        }
+
+        private void btnNewClassification_Click(object sender, EventArgs e)
+        {
+            int? parentId = null;
+            TreeNode selectedNode = treeViewFeesCharges.SelectedNode;
+            if (selectedNode is not null && selectedNode.Tag is not null)
+                parentId = GetNodeParameters(selectedNode).paramId;
+
+            _ = new frmAddFeesChargesClassification(parentId, this).ShowDialog();
+        }
+
+        private void btnNewFeesCharges_Click(object sender, EventArgs e)
+        {
+            var nodeParameter = GetNodeParameters(treeViewFeesCharges.SelectedNode);
+            _ = new frmAddFeesCharges(nodeParameter.paramId, this).ShowDialog();
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            LoadFeesCharges();
+        }
+
+        private void btnUndelete_Click(object sender, EventArgs e)
+        {
+            if (UndeleteClassification(treeViewFeesCharges))
+            {
+                LoadFeesCharges();
+                Helper.MessageBoxSuccess("Fees & Charges Classification undeleted.");
+            }
+        }
+
+        private bool DeleteRecord(out string deleteMessage)
+        {
+            var nodeParameter = GetNodeParameters(treeViewFeesCharges.SelectedNode);
+
+            switch (nodeParameter.paramRef)
+            {
+                case "classification":
+                    if (Helper.MessageBoxConfirmCancel("Deleting this classification disable all linked fees & charges. Confirm deletion?"))
+                    {
+                        deleteMessage = "Classification";
+                        return TreasuryFactory.TaxTypesRepository().DeleteTaxType(nodeParameter.paramId);
+                    }
+
+                    deleteMessage = string.Empty;
+                    return false;
+
+                case "feescharges":
+                    if (Helper.MessageBoxConfirmCancel("Confirm permanent deletion?"))
+                    {
+                        var feesChargesModels = new List<OtherPaymentRatesModel>() { new OtherPaymentRatesModel() { Id = nodeParameter.paramId } };
+                        deleteMessage = "Fees & Charges";
+                        return TreasuryFactory.OtherPaymentRatesRepository().Delete(feesChargesModels);
+                    }
+                    deleteMessage = string.Empty;
+                    return false;
+
+                default:
+                    deleteMessage = string.Empty;
+                    return false;
+            }
+        }
+
+        private void frmFeesChargesConfig_Load(object sender, EventArgs e)
+        {
+            LoadFeesCharges();
+            ToggleButtons(treeViewFeesCharges);
+        }
+
+        private (string paramRef, int paramId) GetNodeParameters(TreeNode treeNode)
+        {
+            var nodeTag = treeNode.Tag.ToString();
+            string paramRef = nodeTag.Substring(0, nodeTag.IndexOf('-'));
+            int paramId = Convert.ToInt32(nodeTag.Substring(nodeTag.IndexOf('-') + 1));
+
+            return (paramRef, paramId);
+        }
+
+        private ImageList ImageList()
+        {
+            ImageList imageList = new ImageList();
+
+            imageList.Images.Add("classification_active", Properties.Resources.folder_filled_20px);
+            imageList.Images.Add("classification_disabled", Properties.Resources.disabled_folder_filled_20px);
+
+            imageList.Images.Add("feescharges_active", Properties.Resources.document_color_green_filled_20px);
+            imageList.Images.Add("feescharges_disabled", Properties.Resources.disabled_document_filled_20px);
+
+            return imageList;
+        }
+
+        private void LoadFeesChargesNodes(int feesChargesClassificationId, bool isDeleted, TreeNode nodeFeesChargesClassification)
+        {
+            var textSearch = txtSearch.Text;
+            var dtFeesCharges = TreasuryFactory.OtherPaymentRatesRepository().GetRecordsByTaxTypeIDAndDescription(feesChargesClassificationId, textSearch);
+            List<TreeNode> nodes = new List<TreeNode>();
+
+            foreach (DataRow row in dtFeesCharges.Rows)
+            {
+                var imageKey = isDeleted ? "feescharges_disabled" : "feescharges_active";
+
+                var feesChargesNode = new TreeNode
+                {
+                    Text = row["description"].ToString(),
+                    Tag = $"feescharges-{row["id"]}",
+                    ImageKey = imageKey,
+                    SelectedImageKey = imageKey,
+                    ForeColor = isDeleted ? System.Drawing.Color.Gray : ForeColor
+                };
+
+                nodes.Add(feesChargesNode);
+            }
+
+            nodeFeesChargesClassification.Nodes.AddRange(nodes.ToArray());
+        }
+
+        private void ShowModifyForm(System.Windows.Forms.TreeView treeView)
+        {
+            if (treeView.SelectedNode?.Tag is null)
+                return;
+
+            var parameters = GetNodeParameters(treeView.SelectedNode);
+
+            //if node is a classification go to
+            if (parameters.paramRef == "classification")
+                _ = new frmEditFeesChargesClassification(parameters.paramId, this).ShowDialog();
+            else if (parameters.paramRef == "feescharges")
+            {
+                var getParentNodeParameters = GetNodeParameters(treeView.SelectedNode.Parent);
+                _ = new frmEditFeesCharges(parameters.paramId, getParentNodeParameters.paramId, this).ShowDialog();
+            }
+        }
+
         private void ToggleButtons(System.Windows.Forms.TreeView treeView)
         {
             drpDownBtnNew.Enabled = true;
@@ -202,95 +305,6 @@ namespace OmniGov.App.Views.Manage.FeesChargesConfig
             ToggleButtons(treeViewFeesCharges);
         }
 
-        private void btnNewClassification_Click(object sender, EventArgs e)
-        {
-            int? parentId = null;
-            TreeNode selectedNode = treeViewFeesCharges.SelectedNode;
-            if (selectedNode is not null && selectedNode.Tag is not null)
-                parentId = GetNodeParameters(selectedNode).paramId;
-
-            _ = new frmAddFeesChargesClassification(parentId, this).ShowDialog();
-        }
-
-        private void btnNewFeesCharges_Click(object sender, EventArgs e)
-        {
-            var nodeParameter = GetNodeParameters(treeViewFeesCharges.SelectedNode);
-            _ = new frmAddFeesCharges(nodeParameter.paramId, this).ShowDialog();
-        }
-
-        private (string paramRef, int paramId) GetNodeParameters(TreeNode treeNode)
-        {
-            var nodeTag = treeNode.Tag.ToString();
-            string paramRef = nodeTag.Substring(0, nodeTag.IndexOf('-'));
-            int paramId = Convert.ToInt32(nodeTag.Substring(nodeTag.IndexOf('-') + 1));
-
-            return (paramRef, paramId);
-        }
-
-        private void ShowModifyForm(System.Windows.Forms.TreeView treeView)
-        {
-            if (treeView.SelectedNode?.Tag is null)
-                return;
-
-            var parameters = GetNodeParameters(treeView.SelectedNode);
-
-            //if node is a classification go to
-            if (parameters.paramRef == "classification")
-                _ = new frmEditFeesChargesClassification(parameters.paramId, this).ShowDialog();
-            else if (parameters.paramRef == "feescharges")
-            {
-                var getParentNodeParameters = GetNodeParameters(treeView.SelectedNode.Parent);
-                _ = new frmEditFeesCharges(parameters.paramId, getParentNodeParameters.paramId, this).ShowDialog();
-            }
-        }
-
-        private void btnModify_Click(object sender, EventArgs e)
-        {
-            ShowModifyForm(treeViewFeesCharges);
-        }
-
-        private bool DeleteRecord(out string deleteMessage)
-        {
-            var nodeParameter = GetNodeParameters(treeViewFeesCharges.SelectedNode);
-
-            switch (nodeParameter.paramRef)
-            {
-                case "classification":
-                    if (Helper.MessageBoxConfirmCancel("Deleting this classification disable all linked fees & charges. Confirm deletion?"))
-                    {
-                        deleteMessage = "Classification";
-                        return TreasuryFactory.TaxTypesRepository().DeleteTaxType(nodeParameter.paramId);
-                    }
-
-                    deleteMessage = string.Empty;
-                    return false;
-
-                case "feescharges":
-                    if (Helper.MessageBoxConfirmCancel("Confirm permanent deletion?"))
-                    {
-                        var feesChargesModels = new List<OtherPaymentRatesModel>() { new OtherPaymentRatesModel() { Id = nodeParameter.paramId } };
-                        deleteMessage = "Fees & Charges";
-                        return TreasuryFactory.OtherPaymentRatesRepository().Delete(feesChargesModels);
-                    }
-                    deleteMessage = string.Empty;
-                    return false;
-
-                default:
-                    deleteMessage = string.Empty;
-                    return false;
-            }
-        }
-
-        private void btnDelete_Click(object sender, EventArgs e)
-        {
-            string deleteMessage;
-            if (DeleteRecord(out deleteMessage))
-            {
-                LoadFeesCharges();
-                Helper.MessageBoxSuccess($"{deleteMessage} has been deleted");
-            }
-        }
-
         private bool UndeleteClassification(System.Windows.Forms.TreeView treeView)
         {
             if (treeView.SelectedNode?.Tag is null)
@@ -308,20 +322,6 @@ namespace OmniGov.App.Views.Manage.FeesChargesConfig
             }
 
             return TreasuryFactory.TaxTypesRepository().UnDeleteTaxType(nodeParameters.paramId);
-        }
-
-        private void btnUndelete_Click(object sender, EventArgs e)
-        {
-            if (UndeleteClassification(treeViewFeesCharges))
-            {
-                LoadFeesCharges();
-                Helper.MessageBoxSuccess("Fees & Charges Classification undeleted.");
-            }
-        }
-
-        private void btnSearch_Click(object sender, EventArgs e)
-        {
-            LoadFeesCharges();
         }
     }
 }

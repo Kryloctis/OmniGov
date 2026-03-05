@@ -1,4 +1,4 @@
-namespace OmniGov.App.Views.Manage.FeesChargesConfig
+﻿namespace OmniGov.App.Views.Manage.FeesChargesConfig
 {
     partial class frmFeesChargesConfig
     {

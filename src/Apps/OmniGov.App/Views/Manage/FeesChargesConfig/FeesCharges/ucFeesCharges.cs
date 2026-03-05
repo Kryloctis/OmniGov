@@ -1,4 +1,4 @@
-using OmniGov.App.Helpers;
+﻿using OmniGov.App.Helpers;
 using OmniGov.Core.Factories;
 using OmniGov.Treasury.Data.Factories;
 using System.ComponentModel;
@@ -38,15 +38,14 @@ namespace OmniGov.App.Views.Manage.FeesChargesConfig.FeesCharges
             nudStartingYear.Value = Convert.ToDecimal(dictFeesCharges["starting_year"]);
         }
 
-        private void txtDescription_Validating(object sender, CancelEventArgs e)
-        {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtDescription, "Description");
-        }
-
         private void txtDescription_Validated(object sender, EventArgs e)
         {
             Helper.ClearErrorTextBox(errorProvider1, txtDescription);
         }
+
+        private void txtDescription_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtDescription, "Description");
+        }
     }
 }
-
