@@ -1,4 +1,4 @@
-
+﻿
 namespace OmniGov.App.Views.Reports.AbstractOfGeneralCollection
 {
     partial class AbstractOfGeneralCollection
