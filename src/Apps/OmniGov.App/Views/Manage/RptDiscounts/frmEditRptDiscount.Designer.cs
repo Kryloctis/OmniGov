@@ -1,4 +1,4 @@
-using OmniGov.App.Views.Manage.RptDiscounts;
+﻿using OmniGov.App.Views.Manage.RptDiscounts;
 
 namespace OmniGov.App.Views.Manage.RptDiscounts
 {
