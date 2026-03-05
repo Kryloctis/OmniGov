@@ -1,41 +1,48 @@
-using OmniGov.App.Helpers;
+﻿using OmniGov.App.Helpers;
+
 using OmniGov.Core.Factories;
 
 namespace OmniGov.App.Views.Manage.Funds
+
 {
     public partial class frmFundEdit : Form
+
     {
         private frmFunds frmFunds;
+
         private int fundId;
+
         private ucFunds uc;
 
         public frmFundEdit(frmFunds frmFunds, int fundId)
+
         {
             InitializeComponent();
+
             Helper.LoadFormIcon(this);
 
             this.frmFunds = frmFunds;
+
             this.fundId = fundId;
+
             uc = ucFunds1;
         }
 
-        private bool SaveData()
+        private void btnSave_Click(object sender, EventArgs e)
+
         {
-            if (!uc.ValidateChildren())
+            if (SaveData())
             {
-                Helper.MessageBoxError(uc.GetFormErrors());
-                return false;
+                Helper.MessageBoxSuccess("Fund has been updated.");
+                frmFunds.LoadRecords();
+                Close();
             }
-
-            var fundModel = uc.FundsModel();
-            fundModel.Id = fundId;
-
-            return Factory.FundsRepository().Update(fundModel);
         }
 
-        private void btnSave_Click(object sender, EventArgs e)
+        private void frmFundEdit_KeyDown(object sender, KeyEventArgs e)
+
         {
-            try
+            if (e.KeyCode == Keys.S && e.Control)
             {
                 if (SaveData())
                 {
@@ -44,34 +51,30 @@ namespace OmniGov.App.Views.Manage.Funds
                     Close();
                 }
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void frmFundEdit_Load(object sender, EventArgs e)
+
         {
-            try
-            {
-                uc.OnLoad(true, fundId);
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            uc.OnLoad(true, fundId);
         }
 
-        private void frmFundEdit_KeyDown(object sender, KeyEventArgs e)
+        private bool SaveData()
+
         {
-            try
+            if (!uc.ValidateChildren())
+
             {
-                if (e.KeyCode == Keys.S && e.Control)
-                {
-                    if (SaveData())
-                    {
-                        Helper.MessageBoxSuccess("Fund has been updated.");
-                        frmFunds.LoadRecords();
-                        Close();
-                    }
-                }
+                Helper.MessageBoxError(uc.GetFormErrors());
+
+                return false;
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+
+            var fundModel = uc.FundsModel();
+
+            fundModel.Id = fundId;
+
+            return Factory.FundsRepository().Update(fundModel);
         }
     }
 }
-

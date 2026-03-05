@@ -1,4 +1,4 @@
-using OmniGov.App.Helpers;
+﻿using OmniGov.App.Helpers;
 using OmniGov.Core.Entities;
 using OmniGov.Core.Factories;
 using System.ComponentModel;
@@ -14,70 +14,6 @@ namespace OmniGov.App.Views.Manage.Funds
             WindowState = FormWindowState.Normal;
             Helper.LoadFormIcon(this);
             Helper.DatagridFullRowSelectStyle(dgFunds, true);
-        }
-
-        private void frmFunds_Load(object sender, EventArgs e)
-        {
-            HelperLoadRecords.ComboboxRowLimitFilter(cmbxFilter);
-            LoadRecords();
-        }
-
-        private void btnAdd_Click(object sender, EventArgs e)
-        {
-            _ = new frmFundAdd(this).ShowDialog();
-        }
-
-        private void btnEdit_Click(object sender, EventArgs e)
-        {
-            int rowIndex = dgFunds.CurrentRow.Index;
-            int fundId = Convert.ToInt32(dgFunds.Rows[rowIndex].Cells["id"].Value);
-            _ = new frmFundEdit(this, fundId).ShowDialog();
-        }
-
-        private bool DeleteData()
-        {
-            int selectedRowsCount = dgFunds.SelectedRows.Count;
-            if (selectedRowsCount > 0)
-            {
-                if (Helper.MessageBoxConfirmDelete(selectedRowsCount))
-                {
-                    var fundsModelList = new List<FundsModel>();
-                    foreach (DataGridViewRow row in dgFunds.SelectedRows)
-                    {
-                        int fundId = Convert.ToInt16(row.Cells["id"].Value.ToString());
-                        fundsModelList.Add(new FundsModel() { Id = fundId });
-                    }
-
-                    return Factory.FundsRepository().Delete(fundsModelList);
-                }
-            }
-            return false;
-        }
-
-        private void btnDelete_Click(object sender, EventArgs e)
-        {
-            if (DeleteData())
-            {
-                Helper.MessageBoxError($"{dgFunds.SelectedRows.Count} record/s has been deleted.");
-                LoadRecords();
-            }
-        }
-
-        private void dgFunds_SelectionChanged(object sender, EventArgs e)
-        {
-            byte[] columnIndexTimestamp = { 3, 4 };
-            Helper.ShowRecordTimestamp(dgFunds, columnIndexTimestamp, lblCreatedAt, lblUpdatedAt);
-            Helper.EnableDisableToolStripButtons(dgFunds, btnEdit, btnDelete);
-        }
-
-        private void btnSearch_Click(object sender, EventArgs e)
-        {
-            LoadRecords();
-        }
-
-        private void cmbxFilter_SelectionChangeCommitted(object sender, EventArgs e)
-        {
-            LoadRecords();
         }
 
         internal void LoadRecords()
@@ -119,6 +55,70 @@ namespace OmniGov.App.Views.Manage.Funds
             HelperLoadRecords.FundsDatagridView(dataTable, dgFunds);
             dgFunds.CurrentCell = dgFunds.FirstDisplayedCell;
             lblRecordCount.Text = dgFunds.Rows.Count.ToString();
+        }
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            _ = new frmFundAdd(this).ShowDialog();
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            if (DeleteData())
+            {
+                Helper.MessageBoxError($"{dgFunds.SelectedRows.Count} record/s has been deleted.");
+                LoadRecords();
+            }
+        }
+
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+            int rowIndex = dgFunds.CurrentRow.Index;
+            int fundId = Convert.ToInt32(dgFunds.Rows[rowIndex].Cells["id"].Value);
+            _ = new frmFundEdit(this, fundId).ShowDialog();
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            LoadRecords();
+        }
+
+        private void cmbxFilter_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            LoadRecords();
+        }
+
+        private bool DeleteData()
+        {
+            int selectedRowsCount = dgFunds.SelectedRows.Count;
+            if (selectedRowsCount > 0)
+            {
+                if (Helper.MessageBoxConfirmDelete(selectedRowsCount))
+                {
+                    var fundsModelList = new List<FundsModel>();
+                    foreach (DataGridViewRow row in dgFunds.SelectedRows)
+                    {
+                        int fundId = Convert.ToInt16(row.Cells["id"].Value.ToString());
+                        fundsModelList.Add(new FundsModel() { Id = fundId });
+                    }
+
+                    return Factory.FundsRepository().Delete(fundsModelList);
+                }
+            }
+            return false;
+        }
+
+        private void dgFunds_SelectionChanged(object sender, EventArgs e)
+        {
+            byte[] columnIndexTimestamp = { 3, 4 };
+            Helper.ShowRecordTimestamp(dgFunds, columnIndexTimestamp, lblCreatedAt, lblUpdatedAt);
+            Helper.EnableDisableToolStripButtons(dgFunds, btnEdit, btnDelete);
+        }
+
+        private void frmFunds_Load(object sender, EventArgs e)
+        {
+            HelperLoadRecords.ComboboxRowLimitFilter(cmbxFilter);
+            LoadRecords();
         }
     }
 }
