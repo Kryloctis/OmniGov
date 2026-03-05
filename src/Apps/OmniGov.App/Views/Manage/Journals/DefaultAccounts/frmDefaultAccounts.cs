@@ -1,4 +1,4 @@
-using OmniGov.Accounting.Data.Factories;
+﻿using OmniGov.Accounting.Data.Factories;
 using OmniGov.App.Helpers;
 using OmniGov.Core.Entities;
 using OmniGov.Core.Factories;
@@ -30,6 +30,97 @@ namespace OmniGov.App.Views.Manage.Journals.DefaultAccounts
             return Factory.CreateErrors(errorArray).GenerateErrorMessage();
         }
 
+        private void btnRemoveDefaultAccount_Click(object sender, EventArgs e)
+        {
+            RemoveDefaultAccounts();
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            if (Save())
+            {
+                Helper.MessageBoxSuccess("Default Accounts has been saved.");
+                if (txtAccounts.Text.Length > 3)
+                    LoadAccounts();
+                else
+                    dgAccounts.Rows.Clear();
+            }
+        }
+
+        private void btnSetDefaultAccount_Click(object sender, System.EventArgs e)
+        {
+            SetDefaultAccounts();
+        }
+
+        private void cmbxFunds_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            LoadDefaultAccounts();
+            if (txtAccounts.Text.Length > 3)
+                LoadAccounts();
+            else
+                dgAccounts.Rows.Clear();
+        }
+
+        private void cmbxFunds_Validated(object sender, EventArgs e)
+        {
+            cmbxFunds.Tag = string.Empty;
+        }
+
+        private void cmbxFunds_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (string.IsNullOrEmpty(cmbxFunds.Text))
+            {
+                e.Cancel = true;
+                cmbxFunds.Tag = Helper.ErrorMessage("Funds");
+            }
+            else
+                e.Cancel = false;
+        }
+
+        private void CreateDatagridViewColumns(DataGridView dataGridView)
+        {
+            dataGridView.Columns.Clear();
+            dataGridView.Rows.Clear();
+            dataGridView.Columns.Add("id", "Id");
+            dataGridView.Columns.Add("account_code", "Account Code");
+            dataGridView.Columns.Add("account_name", "Name");
+
+            dataGridView.Columns["id"].Visible = false;
+            dataGridView.Columns["id"].SortMode = DataGridViewColumnSortMode.NotSortable;
+            dataGridView.Columns["account_code"].SortMode = DataGridViewColumnSortMode.NotSortable;
+            dataGridView.Columns["account_name"].SortMode = DataGridViewColumnSortMode.NotSortable;
+            dataGridView.Columns["account_code"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+            dataGridView.RowHeadersVisible = false;
+        }
+
+        private void dgAccounts_SelectionChanged(object sender, System.EventArgs e)
+        {
+            EnableDisableButtons();
+        }
+
+        private void dgDefaultAccounts_SelectionChanged(object sender, EventArgs e)
+        {
+            EnableDisableButtons();
+        }
+
+        private void EnableDisableButtons()
+        {
+            if (dgAccounts.SelectedRows.Count > 0)
+                btnSetDefaultAccount.Enabled = true;
+            else
+                btnSetDefaultAccount.Enabled = false;
+
+            if (dgDefaultAccounts.SelectedRows.Count > 0)
+                btnRemoveDefaultAccount.Enabled = true;
+            else
+                btnRemoveDefaultAccount.Enabled = false;
+        }
+
+        private void frmDefaultAccounts_Load(object sender, System.EventArgs e)
+        {
+            OnLoad();
+        }
+
         private int GetMaxNumberOfDefaultAccounts()
         {
             switch (journalId)
@@ -57,28 +148,6 @@ namespace OmniGov.App.Views.Manage.Journals.DefaultAccounts
                 default:
                     return 0;
             }
-        }
-
-        private void CreateDatagridViewColumns(DataGridView dataGridView)
-        {
-            dataGridView.Columns.Clear();
-            dataGridView.Rows.Clear();
-            dataGridView.Columns.Add("id", "Id");
-            dataGridView.Columns.Add("account_code", "Account Code");
-            dataGridView.Columns.Add("account_name", "Name");
-
-            dataGridView.Columns["id"].Visible = false;
-            dataGridView.Columns["id"].SortMode = DataGridViewColumnSortMode.NotSortable;
-            dataGridView.Columns["account_code"].SortMode = DataGridViewColumnSortMode.NotSortable;
-            dataGridView.Columns["account_name"].SortMode = DataGridViewColumnSortMode.NotSortable;
-            dataGridView.Columns["account_code"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
-            dataGridView.RowHeadersVisible = false;
-        }
-
-        private void LoadFunds()
-        {
-            var dtFunds = Factory.FundsRepository().GetRecords();
-            HelperLoadRecords.FundsComboBox(dtFunds, cmbxFunds, "id", "fund_name");
         }
 
         private void LoadAccounts()
@@ -131,9 +200,10 @@ namespace OmniGov.App.Views.Manage.Journals.DefaultAccounts
             }
         }
 
-        private void frmDefaultAccounts_Load(object sender, System.EventArgs e)
+        private void LoadFunds()
         {
-            OnLoad();
+            var dtFunds = Factory.FundsRepository().GetRecords();
+            HelperLoadRecords.FundsComboBox(dtFunds, cmbxFunds, "id", "fund_name");
         }
 
         private void OnLoad()
@@ -145,27 +215,59 @@ namespace OmniGov.App.Views.Manage.Journals.DefaultAccounts
             lblMaxAccounts.Text = $"Max: {GetMaxNumberOfDefaultAccounts()}";
         }
 
-        private void EnableDisableButtons()
+        private void radCredit_CheckedChanged(object sender, EventArgs e)
         {
-            if (dgAccounts.SelectedRows.Count > 0)
-                btnSetDefaultAccount.Enabled = true;
+            LoadDefaultAccounts();
+            if (txtAccounts.Text.Length > 3)
+                LoadAccounts();
             else
-                btnSetDefaultAccount.Enabled = false;
-
-            if (dgDefaultAccounts.SelectedRows.Count > 0)
-                btnRemoveDefaultAccount.Enabled = true;
-            else
-                btnRemoveDefaultAccount.Enabled = false;
+                dgAccounts.Rows.Clear();
         }
 
-        private void dgAccounts_SelectionChanged(object sender, System.EventArgs e)
+        private void radDebit_CheckedChanged(object sender, EventArgs e)
         {
-            EnableDisableButtons();
+            LoadDefaultAccounts();
+            if (txtAccounts.Text.Length > 3)
+                LoadAccounts();
+            else
+                dgAccounts.Rows.Clear();
         }
 
-        private void dgDefaultAccounts_SelectionChanged(object sender, EventArgs e)
+        private void RemoveDefaultAccounts()
         {
-            EnableDisableButtons();
+            foreach (DataGridViewRow row in dgDefaultAccounts.SelectedRows)
+            {
+                dgDefaultAccounts.Rows.Remove(row);
+            }
+        }
+
+        private bool Save()
+        {
+            if (!ValidateChildren())
+            {
+                Helper.MessageBoxError(GetFormErrors());
+                return false;
+            }
+
+            var journalsDefaulAccountsModelList = new List<JournalsDefaultAccountsModel>();
+            int fundId = Convert.ToInt32(cmbxFunds.SelectedValue);
+            bool isDebit = radDebit.Checked ? true : false;
+
+            foreach (DataGridViewRow item in dgDefaultAccounts.Rows)
+            {
+                int accountId = Convert.ToInt32(item.Cells["id"].Value);
+                var journalsDefaulAccountsModel = new JournalsDefaultAccountsModel()
+                {
+                    JournalId = journalId,
+                    fundId = fundId,
+                    AccountId = accountId,
+                    IsDebit = isDebit
+                };
+
+                journalsDefaulAccountsModelList.Add(journalsDefaulAccountsModel);
+            }
+
+            return Factory.JournalsDefaultAccountsRepository().Insert(journalId, fundId, isDebit, journalsDefaulAccountsModelList);
         }
 
         private void SetDefaultAccounts()
@@ -200,110 +302,8 @@ namespace OmniGov.App.Views.Manage.Journals.DefaultAccounts
             }
         }
 
-        private void RemoveDefaultAccounts()
-        {
-            foreach (DataGridViewRow row in dgDefaultAccounts.SelectedRows)
-            {
-                dgDefaultAccounts.Rows.Remove(row);
-            }
-        }
-
-        private void btnSetDefaultAccount_Click(object sender, System.EventArgs e)
-        {
-            SetDefaultAccounts();
-        }
-
-        private void btnRemoveDefaultAccount_Click(object sender, EventArgs e)
-        {
-            RemoveDefaultAccounts();
-        }
-
-        private bool Save()
-        {
-            if (!ValidateChildren())
-            {
-                Helper.MessageBoxError(GetFormErrors());
-                return false;
-            }
-
-            var journalsDefaulAccountsModelList = new List<JournalsDefaultAccountsModel>();
-            int fundId = Convert.ToInt32(cmbxFunds.SelectedValue);
-            bool isDebit = radDebit.Checked ? true : false;
-
-            foreach (DataGridViewRow item in dgDefaultAccounts.Rows)
-            {
-                int accountId = Convert.ToInt32(item.Cells["id"].Value);
-                var journalsDefaulAccountsModel = new JournalsDefaultAccountsModel()
-                {
-                    JournalId = journalId,
-                    fundId = fundId,
-                    AccountId = accountId,
-                    IsDebit = isDebit
-                };
-
-                journalsDefaulAccountsModelList.Add(journalsDefaulAccountsModel);
-            }
-
-            return Factory.JournalsDefaultAccountsRepository().Insert(journalId, fundId, isDebit, journalsDefaulAccountsModelList);
-        }
-
-        private void btnSave_Click(object sender, EventArgs e)
-        {
-            if (Save())
-            {
-                Helper.MessageBoxSuccess("Default Accounts has been saved.");
-                if (txtAccounts.Text.Length > 3)
-                    LoadAccounts();
-                else
-                    dgAccounts.Rows.Clear();
-            }
-        }
-
-        private void cmbxFunds_Validating(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            if (string.IsNullOrEmpty(cmbxFunds.Text))
-            {
-                e.Cancel = true;
-                cmbxFunds.Tag = Helper.ErrorMessage("Funds");
-            }
-            else
-                e.Cancel = false;
-        }
-
-        private void cmbxFunds_Validated(object sender, EventArgs e)
-        {
-            cmbxFunds.Tag = string.Empty;
-        }
-
-        private void cmbxFunds_SelectionChangeCommitted(object sender, EventArgs e)
-        {
-            LoadDefaultAccounts();
-            if (txtAccounts.Text.Length > 3)
-                LoadAccounts();
-            else
-                dgAccounts.Rows.Clear();
-        }
-
         private void txtAccounts_TextChanged(object sender, EventArgs e)
         {
-            if (txtAccounts.Text.Length > 3)
-                LoadAccounts();
-            else
-                dgAccounts.Rows.Clear();
-        }
-
-        private void radDebit_CheckedChanged(object sender, EventArgs e)
-        {
-            LoadDefaultAccounts();
-            if (txtAccounts.Text.Length > 3)
-                LoadAccounts();
-            else
-                dgAccounts.Rows.Clear();
-        }
-
-        private void radCredit_CheckedChanged(object sender, EventArgs e)
-        {
-            LoadDefaultAccounts();
             if (txtAccounts.Text.Length > 3)
                 LoadAccounts();
             else

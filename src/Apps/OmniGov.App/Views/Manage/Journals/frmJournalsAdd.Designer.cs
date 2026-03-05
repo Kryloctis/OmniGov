@@ -1,4 +1,4 @@
-using OmniGov.App.Views.Manage.Journals;
+﻿using OmniGov.App.Views.Manage.Journals;
 
 namespace OmniGov.App.Views.Manage.Journals
 {
