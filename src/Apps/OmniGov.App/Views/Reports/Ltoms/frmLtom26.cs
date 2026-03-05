@@ -1,150 +1,159 @@
 ﻿using Microsoft.Reporting.WinForms;
+
 using OmniGov.App.DataSets;
+
 using OmniGov.App.Helpers;
+
 using OmniGov.Treasury.Data.Factories;
+
 using OmniGov.Treasury.Domain.Entities;
+
 using System.ComponentModel;
+
 using System.Data;
 
 namespace OmniGov.App.Views.Reports.Ltoms
+
 {
     public partial class frmLtom26 : Form
+
     {
         private int auctionId;
 
         public frmLtom26()
+
         {
             InitializeComponent();
+
             panel1.Controls.Add(reportViewer1);
         }
 
-        private void ToogleRunButton(bool isGenerated)
+        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
+
         {
-            btnRunReport.Text = isGenerated ? "Run Report" : "Generating Report...";
-            btnRunReport.Enabled = isGenerated;
+            int auctionId = (int)e.Argument;
+
+            var auctionModel = new AuctionModel() { Id = auctionId };
+            var rptAuctionModel = new RptAuctionModel() { AuctionId = auctionId };
+
+            var dbRegisteredBidders = TreasuryFactory.BiddersRepository().GetViewRecords();
+            var dtRegisteredBidders = new dsTreasury.dtLtom26_27_28DataTable();
+
+            int totalProgressCount = dbRegisteredBidders.Rows.Count;
+            int progressCount = 0;
+
+            foreach (DataRow dataRow in dbRegisteredBidders.Rows)
+            {
+                var newRow = dtRegisteredBidders.NewRow();
+
+                newRow["assigned_bidders_no"] = dataRow["bidder_no"];
+                newRow["name_of_bidders_or_representative"] = dataRow["name"];
+                newRow["complete_address_or_business_address"] = dataRow["address"];
+                newRow["contact_no"] = dataRow["contact_info"];
+                newRow["official_receipts_no"] = dataRow["receipt_no"];
+
+                dtRegisteredBidders.Rows.Add(newRow);
+                progressCount++;
+                Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
+            }
+            e.Result = dtRegisteredBidders;
+        }
+
+        private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
+
+        {
+            progressBar1.Value = e.ProgressPercentage;
+        }
+
+        private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+
+        {
+            if (e.Cancelled)
+                return;
+            if (e.Result is not DataTable dataTable)
+                return;
+
+            if (dataTable.Rows.Count < 1)
+                progressBar1.Value = 100;
+
+            var reportParameters = new ReportParameter[]
+            {
+                new("paramLGU", (ServerHelper.SelectedProfile?.Name ?? "")),
+                new("paramSignatoryTitle", string.Empty),
+                new("paramSignatory", string.Empty),
+            };
+
+            reportViewer1.Clear();
+            var report = reportViewer1.LocalReport;
+            report.ReportPath = $"{Application.StartupPath}Reports\\Ltoms\\Ltom26ListOfRegisteredBidders.rdlc";
+            report.DataSources.Clear();
+            report.DataSources.Add(new ReportDataSource("dtLtom26_27_28", dataTable));
+            report.SetParameters(reportParameters);
+            report.Refresh();
+
+            reportViewer1.SetDisplayMode(DisplayMode.PrintLayout);
+            reportViewer1.ZoomMode = ZoomMode.FullPage;
+            reportViewer1.Refresh();
+            ToogleRunButton(true);
         }
 
         private void btnRunReport_Click(object sender, System.EventArgs e)
-        {
-            try
-            {
-                ToogleRunButton(false);
-                int auctionId = Convert.ToInt32(cmbxAuctionSchedule.SelectedValue);
-                if (cmbxAuctionSchedule.SelectedIndex == -1)
-                    return;
 
-                LoadReport();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        {
+            ToogleRunButton(false);
+            int auctionId = Convert.ToInt32(cmbxAuctionSchedule.SelectedValue);
+            if (cmbxAuctionSchedule.SelectedIndex == -1)
+                return;
+
+            LoadReport();
+        }
+
+        private void frmLtom26_Load(object sender, EventArgs e)
+
+        {
+            OnLoad();
+        }
+
+        private void LoadAuctionSchedule()
+
+        {
+            DataTable dtAuctionSchedule = TreasuryFactory.AuctionRepository().GetAuctionSchedule();
+
+            HelperLoadRecords.AuctionScheduleCombobox(dtAuctionSchedule, cmbxAuctionSchedule, "date", "id");
         }
 
         private void LoadReport()
+
         {
             if (!backgroundWorker1.IsBusy)
+
             {
                 progressBar1.Value = 0;
+
                 ToogleRunButton(false);
+
                 auctionId = Convert.ToInt32(cmbxAuctionSchedule.SelectedValue);
+
                 backgroundWorker1.RunWorkerAsync(auctionId);
             }
         }
 
         private void OnLoad()
+
         {
             cmbxAuctionSchedule.ResetText();
+
             cmbxAuctionSchedule.SelectedIndex = -1;
 
             LoadAuctionSchedule();
         }
 
-        private void LoadAuctionSchedule()
+        private void ToogleRunButton(bool isGenerated)
+
         {
-            DataTable dtAuctionSchedule = TreasuryFactory.AuctionRepository().GetAuctionSchedule();
-            HelperLoadRecords.AuctionScheduleCombobox(dtAuctionSchedule, cmbxAuctionSchedule, "date", "id");
-        }
+            btnRunReport.Text = isGenerated ? "Run Report" : "Generating Report...";
 
-        private void frmLtom26_Load(object sender, EventArgs e)
-        {
-            try
-            {
-                OnLoad();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
-            try
-            {
-                if (e.Cancelled)
-                    return;
-                if (e.Result is not DataTable dataTable)
-                    return;
-
-                if (dataTable.Rows.Count < 1)
-                    progressBar1.Value = 100;
-
-                var reportParameters = new ReportParameter[]
-                {
-                    new("paramLGU", (ServerHelper.SelectedProfile?.Name ?? "")),
-                    new("paramSignatoryTitle", string.Empty),
-                    new("paramSignatory", string.Empty),
-                };
-
-                reportViewer1.Clear();
-                var report = reportViewer1.LocalReport;
-                report.ReportPath = $"{Application.StartupPath}Reports\\Ltoms\\Ltom26ListOfRegisteredBidders.rdlc";
-                report.DataSources.Clear();
-                report.DataSources.Add(new ReportDataSource("dtLtom26_27_28", dataTable));
-                report.SetParameters(reportParameters);
-                report.Refresh();
-
-                reportViewer1.SetDisplayMode(DisplayMode.PrintLayout);
-                reportViewer1.ZoomMode = ZoomMode.FullPage;
-                reportViewer1.Refresh();
-                ToogleRunButton(true);
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
-        {
-            progressBar1.Value = e.ProgressPercentage;
-        }
-
-        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
-        {
-            try
-            {
-                int auctionId = (int)e.Argument;
-
-                var auctionModel = new AuctionModel() { Id = auctionId };
-                var rptAuctionModel = new RptAuctionModel() { AuctionId = auctionId };
-
-                var dbRegisteredBidders = TreasuryFactory.BiddersRepository().GetViewRecords();
-                var dtRegisteredBidders = new dsTreasury.dtLtom26_27_28DataTable();
-
-                int totalProgressCount = dbRegisteredBidders.Rows.Count;
-                int progressCount = 0;
-
-                foreach (DataRow dataRow in dbRegisteredBidders.Rows)
-                {
-                    var newRow = dtRegisteredBidders.NewRow();
-
-                    newRow["assigned_bidders_no"] = dataRow["bidder_no"];
-                    newRow["name_of_bidders_or_representative"] = dataRow["name"];
-                    newRow["complete_address_or_business_address"] = dataRow["address"];
-                    newRow["contact_no"] = dataRow["contact_info"];
-                    newRow["official_receipts_no"] = dataRow["receipt_no"];
-
-                    dtRegisteredBidders.Rows.Add(newRow);
-                    progressCount++;
-                    Helper.ProgressCounter(backgroundWorker1, totalProgressCount, progressCount);
-                }
-                e.Result = dtRegisteredBidders;
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            btnRunReport.Enabled = isGenerated;
         }
     }
 }
-
