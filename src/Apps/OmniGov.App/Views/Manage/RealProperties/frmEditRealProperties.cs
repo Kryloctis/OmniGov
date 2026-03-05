@@ -1,77 +1,81 @@
-using OmniGov.App.Helpers;
+﻿using OmniGov.App.Helpers;
+
 using OmniGov.Treasury.Data.Factories;
 
 namespace OmniGov.App.Views.Manage.RealProperties
+
 {
     public partial class frmEditRealProperties : Form
+
     {
-        private readonly ucRealProperties uc;
-        private readonly int rptId;
         private readonly frmRealProperties frmRealProperties;
+        private readonly int rptId;
+        private readonly ucRealProperties uc;
 
         public frmEditRealProperties(frmRealProperties frmRealProperties, int rptId)
+
         {
             InitializeComponent();
+
             Helper.LoadFormIcon(this);
+
             this.frmRealProperties = frmRealProperties;
+
             this.rptId = rptId;
+
             uc = ucRealProperties1;
         }
 
-        private bool UpdateRpt()
-        {
-            if (!uc.ValidateChildren())
-            {
-                Helper.MessageBoxError(uc.GetFormError());
-                return false;
-            }
-
-            var rptModel = uc.RealPropertiesModel();
-            rptModel.Id = rptId;
-            rptModel.UpdatedBy = UserHelper.loggedUser.Id;
-
-            return TreasuryFactory.RealPropertiesRepository().UpdateWithPreviousAssessements(rptModel);
-        }
-
-        private void frmEditRealProperties_Load(object sender, EventArgs e)
-        {
-            try
-            {
-                uc.OnLoad(true, rptId);
-                ActiveControl = uc;
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
         private void btnUpdate_Click(object sender, EventArgs e)
+
         {
-            try
+            if (UpdateRpt())
+            {
+                Helper.MessageBoxSuccess("Real property has been updated");
+                frmRealProperties.LoadProperties();
+                Close();
+            }
+        }
+
+        private void frmEditRealProperties_KeyDown(object sender, KeyEventArgs e)
+
+        {
+            if (e.KeyCode == Keys.S && e.Control)
             {
                 if (UpdateRpt())
                 {
-                    Helper.MessageBoxSuccess("Real property has been updated");
+                    Helper.MessageBoxSuccess("Real property has been updated.");
                     frmRealProperties.LoadProperties();
                     Close();
                 }
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private void frmEditRealProperties_KeyDown(object sender, KeyEventArgs e)
+        private void frmEditRealProperties_Load(object sender, EventArgs e)
+
         {
-            try
+            uc.OnLoad(true, rptId);
+            ActiveControl = uc;
+        }
+
+        private bool UpdateRpt()
+
+        {
+            if (!uc.ValidateChildren())
+
             {
-                if (e.KeyCode == Keys.S && e.Control)
-                {
-                    if (UpdateRpt())
-                    {
-                        Helper.MessageBoxSuccess("Real property has been updated.");
-                        frmRealProperties.LoadProperties();
-                        Close();
-                    }
-                }
+                Helper.MessageBoxError(uc.GetFormError());
+
+                return false;
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+
+            var rptModel = uc.RealPropertiesModel();
+
+            rptModel.Id = rptId;
+
+            rptModel.UpdatedBy = UserHelper.loggedUser.Id;
+
+            return TreasuryFactory.RealPropertiesRepository().UpdateWithPreviousAssessements(rptModel);
         }
     }
 }
