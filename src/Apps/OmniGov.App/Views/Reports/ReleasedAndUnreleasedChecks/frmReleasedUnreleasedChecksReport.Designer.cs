@@ -1,4 +1,4 @@
-namespace OmniGov.App.Views.Reports.ReleasedAndUnreleasedChecks
+﻿namespace OmniGov.App.Views.Reports.ReleasedAndUnreleasedChecks
 {
     partial class frmReleasedUnreleasedChecksReport
     {
