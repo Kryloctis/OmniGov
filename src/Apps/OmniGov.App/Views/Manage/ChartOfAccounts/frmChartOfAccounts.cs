@@ -1,5 +1,4 @@
-using MySql.Data.MySqlClient;
-using OmniGov.Accounting.Data.Factories;
+﻿using OmniGov.Accounting.Data.Factories;
 using OmniGov.App.Helpers;
 using OmniGov.App.Views.Manage.ChartOfAccounts.AccountGroup;
 using OmniGov.App.Views.Manage.ChartOfAccounts.BeginningBalances;
@@ -27,80 +26,12 @@ namespace OmniGov.App.Views.Manage.ChartOfAccounts
             BtnSubsidiary.Enabled = false;
         }
 
-        private void VerifyUserPrivileges()
-        {
-            BtnSubsidiary.Visible = PrivilegesHelper.HasPrivilege(Privileges.MngSubsidiaryAcct);
-        }
-
         internal void LoadAccountGroup()
         {
             var dtAccountGroup = Factory.AccountGroupRepository().GetRecords();
             HelperLoadRecords.AccountGroupDatagridView(dtAccountGroup, dgAccountGroup);
             DisplayRecordCount(dgAccountGroup);
             dgAccountGroup.CurrentCell = dgAccountGroup.FirstDisplayedCell;
-        }
-
-        internal void LoadMajorAccountGroup()
-        {
-            byte accountGroupId = Convert.ToByte(cmbAccountGroup.SelectedValue);
-            var dtMajorAccountGroup = Factory.MajorAccountGroupRepository().GetViewRecordsByAccountGroupId(accountGroupId);
-            HelperLoadRecords.MajorAccountGroupDatagridView(dtMajorAccountGroup, dgMajorAccountGroup);
-            DisplayRecordCount(dgMajorAccountGroup);
-            dgMajorAccountGroup.CurrentCell = dgMajorAccountGroup.FirstDisplayedCell;
-        }
-
-        private void LoadSubMajorAccountGroup()
-        {
-            if (!string.IsNullOrWhiteSpace(cmbMajorAccount.Text))
-            {
-                short majorAccountGroupId = short.Parse(cmbMajorAccount.SelectedValue.ToString());
-                var dtSubMajorAccountGroup = Factory.SubMajorAccountGroupRepository().GetViewRecordsByMajorAccountId(majorAccountGroupId);
-                HelperLoadRecords.SubMajorAccountGroupDatagridView(dtSubMajorAccountGroup, dgSubMajorAccount);
-                DisplayRecordCount(dgSubMajorAccount);
-                dgSubMajorAccount.CurrentCell = dgSubMajorAccount.FirstDisplayedCell;
-            }
-        }
-
-        private void LoadTotalBalances()
-        {
-            int fundId = Convert.ToInt32(cmbxFund.SelectedValue);
-            short year = Convert.ToInt16(cmbxYear.Text);
-
-            decimal totalDebit = AccountingFactory.BeginningBalancesRepository().GetSumBalancesBy_FundId_Year_Availablility(fundId, year, true);
-            decimal totalCredit = AccountingFactory.BeginningBalancesRepository().GetSumBalancesBy_FundId_Year_Availablility(fundId, year, false);
-
-            txtTotalCredit.Text = totalCredit.ToString("N2");
-            txtTotalDebit.Text = totalDebit.ToString("N2");
-        }
-
-        private DataTable GeneralLedgersDataTable(int limitSize)
-        {
-            DataTable dataTable;
-            byte fundId = Convert.ToByte(cmbxFund.SelectedValue);
-            short year = Convert.ToInt16(cmbxYear.Text);
-            int accountGroupId = Convert.ToInt32(cmbAccountGroup.SelectedValue);
-            string searchText = txtSearch.Text.Trim();
-
-            if (limitSize > 0)
-                dataTable = AccountingFactory.GeneralLedgerAccountsRepository().GetViewRecordsBy_AccountGroupId_Search_Limited(accountGroupId, searchText, limitSize);
-            else
-                dataTable = AccountingFactory.GeneralLedgerAccountsRepository().GetViewRecordsBy_AccountGroupId_Search(accountGroupId, searchText);
-
-            dataTable.Columns.Add("Debit", typeof(decimal));
-            dataTable.Columns.Add("Credit", typeof(decimal));
-
-            foreach (DataRow item in dataTable.Rows)
-            {
-                ushort generalLedgerId = Convert.ToUInt16(item["general_ledger_accounts_id"]);
-                var beginningBalanceRepository = AccountingFactory.BeginningBalancesRepository();
-                decimal debit = beginningBalanceRepository.GetSumBalancesBy_FundId_GenLedgId_IsDebit_SubLedgId(fundId, generalLedgerId, year, true);
-                decimal credit = beginningBalanceRepository.GetSumBalancesBy_FundId_GenLedgId_IsDebit_SubLedgId(fundId, generalLedgerId, year, false);
-
-                item["Debit"] = debit > credit ? debit - credit : 0;
-                item["Credit"] = credit > debit ? credit - debit : 0;
-            }
-
-            return dataTable;
         }
 
         internal void LoadGeneralLedgers(int limitSize)
@@ -113,27 +44,103 @@ namespace OmniGov.App.Views.Manage.ChartOfAccounts
             LoadTotalBalances();
         }
 
-        private void LoadAccountGroupComboBox()
+        internal void LoadMajorAccountGroup()
         {
-            DataTable dtAccountGroup = Factory.AccountGroupRepository().GetRecords();
-            HelperLoadRecords.AccountGroupComboBox(dtAccountGroup, cmbAccountGroup, "account_group_name", "id");
-            HelperLoadRecords.AccountGroupComboBox(dtAccountGroup, cmbxGenLedgAccountGroup, "account_group_name", "id");
+            byte accountGroupId = Convert.ToByte(cmbAccountGroup.SelectedValue);
+            var dtMajorAccountGroup = Factory.MajorAccountGroupRepository().GetViewRecordsByAccountGroupId(accountGroupId);
+            HelperLoadRecords.MajorAccountGroupDatagridView(dtMajorAccountGroup, dgMajorAccountGroup);
+            DisplayRecordCount(dgMajorAccountGroup);
+            dgMajorAccountGroup.CurrentCell = dgMajorAccountGroup.FirstDisplayedCell;
         }
 
-        private void LoadMajorAccountGroupComboBox()
+        private void BtnAdd_Click(object sender, EventArgs e)
         {
-            DataTable dtAccountGroup = Factory.MajorAccountGroupRepository().GetRecords();
-            HelperLoadRecords.MajorAccountGroupComboBox(dtAccountGroup, cmbMajorAccount, "maj_acc_group_name", "id");
+            if (tabControl1.SelectedTab == tabControl1.TabPages["tabSubsidiaryLedgers"])
+            {
+            }
+            else if (tabControl1.SelectedTab == tabControl1.TabPages["tabGeneralLedgers"])
+            {
+            }
+            else if (tabControl1.SelectedTab == tabControl1.TabPages["tabSubMajorAccount"])
+            {
+            }
+            else if (tabControl1.SelectedTab == tabControl1.TabPages["tabMajorAccount"])
+            {
+                _ = new frmMajorAccountGroupAdd(this).ShowDialog();
+            }
+            else
+                _ = new frmAccountGroupAdd(this).ShowDialog();
         }
 
-        private void LoadFunds()
+        private void BtnDelete_Click(object sender, EventArgs e)
         {
-            HelperLoadRecords.FundsComboBox(Factory.FundsRepository().GetRecords(), cmbxFund, "id", "fund_name");
+            if (tabControl1.SelectedTab == tabControl1.TabPages["tabSubsidiaryLedgers"])
+            {
+            }
+            else if (tabControl1.SelectedTab == tabControl1.TabPages["tabGeneralLedgers"])
+            {
+            }
+            else if (tabControl1.SelectedTab == tabControl1.TabPages["tabSubMajorAccount"])
+            {
+            }
+            else if (tabControl1.SelectedTab == tabControl1.TabPages["tabMajorAccount"])
+            {
+                DeleteMajorAccountGroupRecords();
+            }
+            else
+                DeleteAccountGroupRecords();
         }
 
-        private void LoadYear()
+        private void BtnEdit_Click(object sender, EventArgs e)
         {
-            HelperLoadRecords.YearComboBox(cmbxYear);
+            if (tabControl1.SelectedTab == tabControl1.TabPages["tabSubsidiaryLedgers"])
+            {
+            }
+            else if (tabControl1.SelectedTab == tabControl1.TabPages["tabGeneralLedgers"])
+            {
+            }
+            else if (tabControl1.SelectedTab == tabControl1.TabPages["tabSubMajorAccount"])
+            {
+            }
+            else if (tabControl1.SelectedTab == tabControl1.TabPages["tabMajorAccount"])
+            {
+                short majorAccountGroupId = short.Parse(dgMajorAccountGroup.SelectedCells[0].Value.ToString());
+                _ = new frmMajorAccountGroupEdit(this, majorAccountGroupId).ShowDialog();
+            }
+            else
+            {
+                byte accountGroupId = byte.Parse(dgAccountGroup.SelectedCells[0].Value.ToString());
+                _ = new frmAccountGroupEdit(this, accountGroupId).ShowDialog();
+            }
+        }
+
+        private void btnRetrieveAll_Click(object sender, EventArgs e)
+        {
+            txtSearch.Clear();
+            LoadGeneralLedgers(0);
+        }
+
+        private void BtnSetBalance_Click(object sender, EventArgs e)
+        {
+            if (dgGeneralLedgerAccounts.Rows.Count < 1)
+                return;
+
+            ShowSetBalanceForm();
+        }
+
+        private void BtnSubsidiary_Click(object sender, EventArgs e)
+        {
+            ShowSubsidiaryForm();
+        }
+
+        private void cmbAccountGroup_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            LoadMajorAccountGroup();
+        }
+
+        private void cmbMajorAccount_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            LoadSubMajorAccountGroup();
         }
 
         private void DeleteAccountGroupRecords()
@@ -179,6 +186,142 @@ namespace OmniGov.App.Views.Manage.ChartOfAccounts
             }
         }
 
+        private void dgAccountGroup_SelectionChanged(object sender, EventArgs e)
+        {
+            SetActionControls(dgAccountGroup);
+        }
+
+        private void dgGeneralLedgerAccounts_SelectionChanged(object sender, EventArgs e)
+        {
+            SetActionControls(dgGeneralLedgerAccounts);
+
+            if (dgGeneralLedgerAccounts.SelectedRows.Count == 1)
+            {
+                BtnSubsidiary.Enabled = true;
+                BtnSetBalance.Enabled = true;
+                EnableDisableSubsidiaryButton();
+                return;
+            }
+            BtnSubsidiary.Enabled = false;
+            BtnSetBalance.Enabled = false;
+        }
+
+        private void dgMajorAccountGroup_SelectionChanged(object sender, EventArgs e)
+        {
+            SetActionControls(dgMajorAccountGroup);
+        }
+
+        private void dgSubMajorAccount_SelectionChanged(object sender, EventArgs e)
+        {
+            SetActionControls(dgSubMajorAccount);
+        }
+
+        private void DisableEditDeleteButtons()
+        {
+            btnEdit.Enabled = false;
+            btnDelete.Enabled = false;
+        }
+
+        private void DisplayRecordCount(DataGridView dataGridView)
+        {
+            lblRecordCount.Text = dataGridView.Rows.Count.ToString();
+        }
+
+        private void EnableDisableSubsidiaryButton()
+        {
+            byte fundId = Convert.ToByte(cmbxFund.SelectedValue);
+            ushort generalLedgerId = Convert.ToUInt16(dgGeneralLedgerAccounts.SelectedCells[0].Value);
+            short year = Convert.ToInt16(cmbxYear.Text);
+            bool generalLedgerBalanceExist = AccountingFactory.BeginningBalancesRepository().GeneralLedgerBalanceExist(fundId, generalLedgerId, year);
+
+            if (generalLedgerBalanceExist)
+                BtnSubsidiary.Enabled = false;
+            else
+                BtnSubsidiary.Enabled = true;
+        }
+
+        private void frmChartOfAccounts_Load(object sender, EventArgs e)
+        {
+            OnLoad();
+        }
+
+        private DataTable GeneralLedgersDataTable(int limitSize)
+        {
+            DataTable dataTable;
+            byte fundId = Convert.ToByte(cmbxFund.SelectedValue);
+            short year = Convert.ToInt16(cmbxYear.Text);
+            int accountGroupId = Convert.ToInt32(cmbAccountGroup.SelectedValue);
+            string searchText = txtSearch.Text.Trim();
+
+            if (limitSize > 0)
+                dataTable = AccountingFactory.GeneralLedgerAccountsRepository().GetViewRecordsBy_AccountGroupId_Search_Limited(accountGroupId, searchText, limitSize);
+            else
+                dataTable = AccountingFactory.GeneralLedgerAccountsRepository().GetViewRecordsBy_AccountGroupId_Search(accountGroupId, searchText);
+
+            dataTable.Columns.Add("Debit", typeof(decimal));
+            dataTable.Columns.Add("Credit", typeof(decimal));
+
+            foreach (DataRow item in dataTable.Rows)
+            {
+                ushort generalLedgerId = Convert.ToUInt16(item["general_ledger_accounts_id"]);
+                var beginningBalanceRepository = AccountingFactory.BeginningBalancesRepository();
+                decimal debit = beginningBalanceRepository.GetSumBalancesBy_FundId_GenLedgId_IsDebit_SubLedgId(fundId, generalLedgerId, year, true);
+                decimal credit = beginningBalanceRepository.GetSumBalancesBy_FundId_GenLedgId_IsDebit_SubLedgId(fundId, generalLedgerId, year, false);
+
+                item["Debit"] = debit > credit ? debit - credit : 0;
+                item["Credit"] = credit > debit ? credit - debit : 0;
+            }
+
+            return dataTable;
+        }
+
+        private void LoadAccountGroupComboBox()
+        {
+            DataTable dtAccountGroup = Factory.AccountGroupRepository().GetRecords();
+            HelperLoadRecords.AccountGroupComboBox(dtAccountGroup, cmbAccountGroup, "account_group_name", "id");
+            HelperLoadRecords.AccountGroupComboBox(dtAccountGroup, cmbxGenLedgAccountGroup, "account_group_name", "id");
+        }
+
+        private void LoadFunds()
+        {
+            HelperLoadRecords.FundsComboBox(Factory.FundsRepository().GetRecords(), cmbxFund, "id", "fund_name");
+        }
+
+        private void LoadMajorAccountGroupComboBox()
+        {
+            DataTable dtAccountGroup = Factory.MajorAccountGroupRepository().GetRecords();
+            HelperLoadRecords.MajorAccountGroupComboBox(dtAccountGroup, cmbMajorAccount, "maj_acc_group_name", "id");
+        }
+
+        private void LoadSubMajorAccountGroup()
+        {
+            if (!string.IsNullOrWhiteSpace(cmbMajorAccount.Text))
+            {
+                short majorAccountGroupId = short.Parse(cmbMajorAccount.SelectedValue.ToString());
+                var dtSubMajorAccountGroup = Factory.SubMajorAccountGroupRepository().GetViewRecordsByMajorAccountId(majorAccountGroupId);
+                HelperLoadRecords.SubMajorAccountGroupDatagridView(dtSubMajorAccountGroup, dgSubMajorAccount);
+                DisplayRecordCount(dgSubMajorAccount);
+                dgSubMajorAccount.CurrentCell = dgSubMajorAccount.FirstDisplayedCell;
+            }
+        }
+
+        private void LoadTotalBalances()
+        {
+            int fundId = Convert.ToInt32(cmbxFund.SelectedValue);
+            short year = Convert.ToInt16(cmbxYear.Text);
+
+            decimal totalDebit = AccountingFactory.BeginningBalancesRepository().GetSumBalancesBy_FundId_Year_Availablility(fundId, year, true);
+            decimal totalCredit = AccountingFactory.BeginningBalancesRepository().GetSumBalancesBy_FundId_Year_Availablility(fundId, year, false);
+
+            txtTotalCredit.Text = totalCredit.ToString("N2");
+            txtTotalDebit.Text = totalDebit.ToString("N2");
+        }
+
+        private void LoadYear()
+        {
+            HelperLoadRecords.YearComboBox(cmbxYear);
+        }
+
         private void OnLoad()
         {
             Helper.DatagridFullRowSelectStyle(dgGeneralLedgerAccounts);
@@ -192,84 +335,10 @@ namespace OmniGov.App.Views.Manage.ChartOfAccounts
             LoadYear();
         }
 
-        private void frmChartOfAccounts_Load(object sender, EventArgs e)
+        private void SetActionControls(DataGridView dataGrid)
         {
-            OnLoad();
-        }
-
-        private void BtnAdd_Click(object sender, EventArgs e)
-        {
-            if (tabControl1.SelectedTab == tabControl1.TabPages["tabSubsidiaryLedgers"])
-            {
-            }
-            else if (tabControl1.SelectedTab == tabControl1.TabPages["tabGeneralLedgers"])
-            {
-            }
-            else if (tabControl1.SelectedTab == tabControl1.TabPages["tabSubMajorAccount"])
-            {
-            }
-            else if (tabControl1.SelectedTab == tabControl1.TabPages["tabMajorAccount"])
-            {
-                _ = new frmMajorAccountGroupAdd(this).ShowDialog();
-            }
-            else
-                _ = new frmAccountGroupAdd(this).ShowDialog();
-        }
-
-        private void BtnEdit_Click(object sender, EventArgs e)
-        {
-            if (tabControl1.SelectedTab == tabControl1.TabPages["tabSubsidiaryLedgers"])
-            {
-            }
-            else if (tabControl1.SelectedTab == tabControl1.TabPages["tabGeneralLedgers"])
-            {
-            }
-            else if (tabControl1.SelectedTab == tabControl1.TabPages["tabSubMajorAccount"])
-            {
-            }
-            else if (tabControl1.SelectedTab == tabControl1.TabPages["tabMajorAccount"])
-            {
-                short majorAccountGroupId = short.Parse(dgMajorAccountGroup.SelectedCells[0].Value.ToString());
-                _ = new frmMajorAccountGroupEdit(this, majorAccountGroupId).ShowDialog();
-            }
-            else
-            {
-                byte accountGroupId = byte.Parse(dgAccountGroup.SelectedCells[0].Value.ToString());
-                _ = new frmAccountGroupEdit(this, accountGroupId).ShowDialog();
-            }
-        }
-
-        private void BtnDelete_Click(object sender, EventArgs e)
-        {
-            if (tabControl1.SelectedTab == tabControl1.TabPages["tabSubsidiaryLedgers"])
-            {
-            }
-            else if (tabControl1.SelectedTab == tabControl1.TabPages["tabGeneralLedgers"])
-            {
-            }
-            else if (tabControl1.SelectedTab == tabControl1.TabPages["tabSubMajorAccount"])
-            {
-            }
-            else if (tabControl1.SelectedTab == tabControl1.TabPages["tabMajorAccount"])
-            {
-                DeleteMajorAccountGroupRecords();
-            }
-            else
-                DeleteAccountGroupRecords();
-        }
-
-        private void ShowSubsidiaryForm()
-        {
-            byte fundId = Convert.ToByte(cmbxFund.SelectedValue);
-            short year = Convert.ToInt16(cmbxYear.Text);
-
-            ushort generalLedgerId = Convert.ToUInt16(dgGeneralLedgerAccounts.SelectedCells[0].Value);
-            _ = new frmSubsidiary(this, fundId, generalLedgerId, year).ShowDialog();
-        }
-
-        private void BtnSubsidiary_Click(object sender, EventArgs e)
-        {
-            ShowSubsidiaryForm();
+            Helper.ShowRecordTimestampMod(dataGrid, lblCreatedAt, lblUpdatedAt);
+            Helper.EnableDisableToolStripButtons(dataGrid, btnEdit, btnDelete);
         }
 
         private void ShowSetBalanceForm()
@@ -297,18 +366,13 @@ namespace OmniGov.App.Views.Manage.ChartOfAccounts
             _ = new frmBeginningBalanceAdd(this, null, fundId, generalLedgerId, year).ShowDialog();
         }
 
-        private void BtnSetBalance_Click(object sender, EventArgs e)
+        private void ShowSubsidiaryForm()
         {
-            if (dgGeneralLedgerAccounts.Rows.Count < 1)
-                return;
+            byte fundId = Convert.ToByte(cmbxFund.SelectedValue);
+            short year = Convert.ToInt16(cmbxYear.Text);
 
-            ShowSetBalanceForm();
-        }
-
-        private void DisableEditDeleteButtons()
-        {
-            btnEdit.Enabled = false;
-            btnDelete.Enabled = false;
+            ushort generalLedgerId = Convert.ToUInt16(dgGeneralLedgerAccounts.SelectedCells[0].Value);
+            _ = new frmSubsidiary(this, fundId, generalLedgerId, year).ShowDialog();
         }
 
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
@@ -346,65 +410,6 @@ namespace OmniGov.App.Views.Manage.ChartOfAccounts
             }
         }
 
-        private void DisplayRecordCount(DataGridView dataGridView)
-        {
-            lblRecordCount.Text = dataGridView.Rows.Count.ToString();
-        }
-
-        private void SetActionControls(DataGridView dataGrid)
-        {
-            Helper.ShowRecordTimestampMod(dataGrid, lblCreatedAt, lblUpdatedAt);
-            Helper.EnableDisableToolStripButtons(dataGrid, btnEdit, btnDelete);
-        }
-
-        private void EnableDisableSubsidiaryButton()
-        {
-            byte fundId = Convert.ToByte(cmbxFund.SelectedValue);
-            ushort generalLedgerId = Convert.ToUInt16(dgGeneralLedgerAccounts.SelectedCells[0].Value);
-            short year = Convert.ToInt16(cmbxYear.Text);
-            bool generalLedgerBalanceExist = AccountingFactory.BeginningBalancesRepository().GeneralLedgerBalanceExist(fundId, generalLedgerId, year);
-
-            if (generalLedgerBalanceExist)
-                BtnSubsidiary.Enabled = false;
-            else
-                BtnSubsidiary.Enabled = true;
-        }
-
-        private void dgGeneralLedgerAccounts_SelectionChanged(object sender, EventArgs e)
-        {
-            SetActionControls(dgGeneralLedgerAccounts);
-
-            if (dgGeneralLedgerAccounts.SelectedRows.Count == 1)
-            {
-                BtnSubsidiary.Enabled = true;
-                BtnSetBalance.Enabled = true;
-                EnableDisableSubsidiaryButton();
-                return;
-            }
-            BtnSubsidiary.Enabled = false;
-            BtnSetBalance.Enabled = false;
-        }
-
-        private void dgAccountGroup_SelectionChanged(object sender, EventArgs e)
-        {
-            SetActionControls(dgAccountGroup);
-        }
-
-        private void dgMajorAccountGroup_SelectionChanged(object sender, EventArgs e)
-        {
-            SetActionControls(dgMajorAccountGroup);
-        }
-
-        private void cmbAccountGroup_SelectionChangeCommitted(object sender, EventArgs e)
-        {
-            LoadMajorAccountGroup();
-        }
-
-        private void cmbMajorAccount_SelectionChangeCommitted(object sender, EventArgs e)
-        {
-            LoadSubMajorAccountGroup();
-        }
-
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
             if (txtSearch.TextLength > 2)
@@ -417,15 +422,9 @@ namespace OmniGov.App.Views.Manage.ChartOfAccounts
             }
         }
 
-        private void btnRetrieveAll_Click(object sender, EventArgs e)
+        private void VerifyUserPrivileges()
         {
-            txtSearch.Clear();
-            LoadGeneralLedgers(0);
-        }
-
-        private void dgSubMajorAccount_SelectionChanged(object sender, EventArgs e)
-        {
-            SetActionControls(dgSubMajorAccount);
+            BtnSubsidiary.Visible = PrivilegesHelper.HasPrivilege(Privileges.MngSubsidiaryAcct);
         }
     }
 }
