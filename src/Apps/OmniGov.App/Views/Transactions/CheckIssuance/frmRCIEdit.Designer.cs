@@ -1,4 +1,4 @@
-using OmniGov.App.Views.Transactions.CheckIssuance;
+﻿using OmniGov.App.Views.Transactions.CheckIssuance;
 
 namespace OmniGov.App.Views.Transactions.CheckIssuance
 {

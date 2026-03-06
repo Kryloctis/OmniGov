@@ -1,4 +1,4 @@
-using OmniGov.App.Views.Transactions.Biddings;
+﻿using OmniGov.App.Views.Transactions.Biddings;
 namespace OmniGov.App.Views.Transactions.Biddings
 {
     partial class frmBiddings

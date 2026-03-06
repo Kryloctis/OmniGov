@@ -1,4 +1,4 @@
-using OmniGov.App.Helpers;
+﻿using OmniGov.App.Helpers;
 using OmniGov.Core.Factories;
 using OmniGov.Treasury.Data.Factories;
 using OmniGov.Treasury.Domain.Entities;
@@ -29,15 +29,17 @@ namespace OmniGov.App.Views.Transactions.Biddings
             return Factory.CreateErrors(errors).GenerateErrorMessage();
         }
 
-        internal bool ValidateInput()
+        internal void OnLoad(bool isEdit, int? biddingId)
         {
-            if (!ValidateChildren())
+            this.biddingId = biddingId;
+            this.isEdit = isEdit;
+            if (isEdit)
             {
-                Helper.MessageBoxError(GetFormErrors());
-                return false;
+                LoadSelectedRecord(biddingId.Value);
+                nudBidAmount.Enabled = false;
             }
-
-            return true;
+            else ResetForm();
+            errorProvider1.Clear();
         }
 
         internal void ResetForm()
@@ -59,85 +61,15 @@ namespace OmniGov.App.Views.Transactions.Biddings
             LoadProperties();
         }
 
-        internal void OnLoad(bool isEdit, int? biddingId)
+        internal bool ValidateInput()
         {
-            this.biddingId = biddingId;
-            this.isEdit = isEdit;
-            if (isEdit)
+            if (!ValidateChildren())
             {
-                LoadSelectedRecord(biddingId.Value);
-                nudBidAmount.Enabled = false;
+                Helper.MessageBoxError(GetFormErrors());
+                return false;
             }
-            else ResetForm();
-            errorProvider1.Clear();
-        }
 
-        private void LoadSelectedRecord(int biddingId)
-        {
-            var dictBid = TreasuryFactory.BidRepository().GetViewRecordById(biddingId);
-
-            cmbxAuctionSchedule.SelectedValue = Convert.ToInt32(dictBid["auction_id"]);
-            cmbxProperty.SelectedValue = Convert.ToInt32(dictBid["rpt_auction_id"]);
-            dtpDate.Value = Convert.ToDateTime(dictBid["date"]);
-            txtOrdinanceNo.Text = dictBid["ordinance_no"].ToString();
-            txtAssignedBidderNo.Text = dictBid["bidder_no"].ToString();
-            nudBidAmount.Value = Convert.ToDecimal(dictBid["bid_amount"]);
-        }
-
-        private void LoadProperties()
-        {
-            int auctionId = Convert.ToInt32(cmbxAuctionSchedule.SelectedValue);
-            var rptAuctionModel = new RptAuctionModel() { AuctionId = auctionId };
-            var auctionProperties = TreasuryFactory.RptAuctionRepository().GetAuctionProperties(rptAuctionModel);
-
-            cmbxProperty.ValueMember = "rpt_auction_id";
-            cmbxProperty.DisplayMember = "complete_arp_no";
-            cmbxProperty.DataSource = auctionProperties;
-        }
-
-        private void LoadAuctionSchedule()
-        {
-            var dtAuctionSchedules = TreasuryFactory.AuctionRepository().GetAuctionSchedule();
-            HelperLoadRecords.AuctionScheduleCombobox(dtAuctionSchedules, cmbxAuctionSchedule, "date", "id");
-        }
-
-        private void cmbxAuctionSchedule_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            LoadProperties();
-        }
-
-        private void nudBidAmount_ValueChanged(object sender, EventArgs e)
-        {
-        }
-
-        private void cmbxAuctionSchedule_Validating(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            e.Cancel = Helper.ShowErrorComboBoxEmpty(errorProvider1, cmbxAuctionSchedule, "Auction Schedule.");
-        }
-
-        private void cmbxAuctionSchedule_Validated(object sender, EventArgs e)
-        {
-            Helper.ClearErrorComboBox(errorProvider1, cmbxAuctionSchedule);
-        }
-
-        private void cmbxProperty_Validating(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            e.Cancel = Helper.ShowErrorComboBoxEmpty(errorProvider1, cmbxProperty, "Property.");
-        }
-
-        private void cmbxProperty_Validated(object sender, EventArgs e)
-        {
-            Helper.ClearErrorComboBox(errorProvider1, cmbxProperty);
-        }
-
-        private void txtOrdinanceNo_Validating(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtOrdinanceNo, "Ordinance No.");
-        }
-
-        private void txtOrdinanceNo_Validated(object sender, EventArgs e)
-        {
-            Helper.ClearErrorTextBox(errorProvider1, txtOrdinanceNo);
+            return true;
         }
 
         private bool AssignedBidderNoValidated(ErrorProvider errorProvider, TextBox textBox)
@@ -154,14 +86,63 @@ namespace OmniGov.App.Views.Transactions.Biddings
             return isValidated;
         }
 
-        private void txtAssignedBidderNo_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        private void cmbxAuctionSchedule_SelectedIndexChanged(object sender, EventArgs e)
         {
-            e.Cancel = !AssignedBidderNoValidated(errorProvider1, txtAssignedBidderNo);
+            LoadProperties();
         }
 
-        private void txtAssignedBidderNo_Validated(object sender, EventArgs e)
+        private void cmbxAuctionSchedule_Validated(object sender, EventArgs e)
         {
-            Helper.ClearErrorTextBox(errorProvider1, txtAssignedBidderNo);
+            Helper.ClearErrorComboBox(errorProvider1, cmbxAuctionSchedule);
+        }
+
+        private void cmbxAuctionSchedule_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            e.Cancel = Helper.ShowErrorComboBoxEmpty(errorProvider1, cmbxAuctionSchedule, "Auction Schedule.");
+        }
+
+        private void cmbxProperty_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorComboBox(errorProvider1, cmbxProperty);
+        }
+
+        private void cmbxProperty_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            e.Cancel = Helper.ShowErrorComboBoxEmpty(errorProvider1, cmbxProperty, "Property.");
+        }
+
+        private void LoadAuctionSchedule()
+        {
+            var dtAuctionSchedules = TreasuryFactory.AuctionRepository().GetAuctionSchedule();
+            HelperLoadRecords.AuctionScheduleCombobox(dtAuctionSchedules, cmbxAuctionSchedule, "date", "id");
+        }
+
+        private void LoadProperties()
+        {
+            int auctionId = Convert.ToInt32(cmbxAuctionSchedule.SelectedValue);
+            var rptAuctionModel = new RptAuctionModel() { AuctionId = auctionId };
+            var auctionProperties = TreasuryFactory.RptAuctionRepository().GetAuctionProperties(rptAuctionModel);
+
+            cmbxProperty.ValueMember = "rpt_auction_id";
+            cmbxProperty.DisplayMember = "complete_arp_no";
+            cmbxProperty.DataSource = auctionProperties;
+        }
+
+        private void LoadSelectedRecord(int biddingId)
+        {
+            var dictBid = TreasuryFactory.BidRepository().GetViewRecordById(biddingId);
+
+            cmbxAuctionSchedule.SelectedValue = Convert.ToInt32(dictBid["auction_id"]);
+            cmbxProperty.SelectedValue = Convert.ToInt32(dictBid["rpt_auction_id"]);
+            dtpDate.Value = Convert.ToDateTime(dictBid["date"]);
+            txtOrdinanceNo.Text = dictBid["ordinance_no"].ToString();
+            txtAssignedBidderNo.Text = dictBid["bidder_no"].ToString();
+            nudBidAmount.Value = Convert.ToDecimal(dictBid["bid_amount"]);
+        }
+
+        private void nudBidAmount_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorNumericUpDown(errorProvider1, nudBidAmount);
         }
 
         private void nudBidAmount_Validating(object sender, System.ComponentModel.CancelEventArgs e)
@@ -169,9 +150,28 @@ namespace OmniGov.App.Views.Transactions.Biddings
             e.Cancel = Helper.ShowErrorNumericUpDownZero(errorProvider1, nudBidAmount, "Bid Amount.");
         }
 
-        private void nudBidAmount_Validated(object sender, EventArgs e)
+        private void nudBidAmount_ValueChanged(object sender, EventArgs e)
         {
-            Helper.ClearErrorNumericUpDown(errorProvider1, nudBidAmount);
+        }
+
+        private void txtAssignedBidderNo_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorTextBox(errorProvider1, txtAssignedBidderNo);
+        }
+
+        private void txtAssignedBidderNo_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            e.Cancel = !AssignedBidderNoValidated(errorProvider1, txtAssignedBidderNo);
+        }
+
+        private void txtOrdinanceNo_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorTextBox(errorProvider1, txtOrdinanceNo);
+        }
+
+        private void txtOrdinanceNo_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtOrdinanceNo, "Ordinance No.");
         }
     }
 }
