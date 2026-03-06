@@ -1,4 +1,4 @@
-using OmniGov.App.Views.Transactions.BankDeposits;
+﻿using OmniGov.App.Views.Transactions.BankDeposits;
 
 namespace OmniGov.App.Views.Transactions.BankDeposits
 {

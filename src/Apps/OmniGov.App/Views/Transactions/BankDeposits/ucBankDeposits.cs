@@ -1,184 +1,250 @@
-using OmniGov.App.Helpers;
+﻿using OmniGov.App.Helpers;
+
 using OmniGov.Core.Factories;
+
 using OmniGov.Treasury.Data.Factories;
+
 using OmniGov.Treasury.Domain.Entities;
+
 using System.ComponentModel;
+
 using System.Data;
 
 namespace OmniGov.App.Views.Transactions.BankDeposits
+
 {
     public partial class ucBankDeposits : UserControl
+
     {
-        private bool isEdit;
         private int? bankDepositId;
+        private bool isEdit;
 
         public ucBankDeposits()
+
         {
             InitializeComponent();
         }
 
         internal string GetFormErrors()
+
         {
             var errorArray = new string[]
+
             {
                 errorProvider1.GetError(cmbBank),
+
                 errorProvider1.GetError(cmbFund),
+
                 errorProvider1.GetError(txtReferenceNumber),
+
                 errorProvider1.GetError(nudAmount)
             };
 
             return Factory.CreateErrors(errorArray).GenerateErrorMessage();
         }
 
-        private void LoadSelectedRecords()
-        {
-            var dictBankDeposits = TreasuryFactory.BankDepositsRepository().GetViewRecordById(bankDepositId.Value);
-            txtAccountableOfficer.Text = Helper.GetUserDataById(Convert.ToInt32(dictBankDeposits["created_by"]))["user_full_name"];
-            cmbFund.SelectedValue = dictBankDeposits["funds_id"];
-            cmbBank.SelectedValue = dictBankDeposits["banks_id"];
-            cmbBankAccounts.SelectedValue = dictBankDeposits["bank_accounts_id"];
-            txtReferenceNumber.Text = dictBankDeposits["reference"];
-            dtDate.Value = Convert.ToDateTime(dictBankDeposits["date"]);
-            nudAmount.Value = Convert.ToDecimal(dictBankDeposits["amount"]);
-            errorProvider1.Clear();
-        }
-
         internal void OnLoad(bool isEdit, int? bankDepositId)
+
         {
             if (!DesignMode)
+
             {
                 this.isEdit = isEdit;
+
                 this.bankDepositId = bankDepositId;
+
                 LoadBanks();
+
                 LoadBankAccounts();
+
                 LoadFunds();
 
                 if (isEdit)
+
                 {
                     LoadSelectedRecords();
                 }
                 else
+
                 {
                     ResetForm();
+
                     txtAccountableOfficer.Text = UserHelper.loggedUser.FullName;
                 }
             }
         }
 
-        private BankDepositsModel BankDepositsModel()
+        internal void ResetForm()
+
         {
-            return new BankDepositsModel()
-            {
-                Reference = txtReferenceNumber.Text.Trim(),
-                Date = dtDate.Value,
-                FundId = Convert.ToInt32(cmbFund.SelectedValue),
-                BankAccountsID = Convert.ToInt32(cmbBankAccounts.SelectedValue),
-                Amount = nudAmount.Value,
-            };
+            txtReferenceNumber.Clear();
+
+            dtDate.Value = Helper.GetCurrentDate();
+
+            nudAmount.Value = 0;
+
+            LoadBanks();
+
+            LoadBankAccounts();
+
+            LoadFunds();
+
+            errorProvider1.Clear();
         }
 
         internal bool Save(ref bool isEdit)
+
         {
             isEdit = this.isEdit;
 
             if (!this.ValidateChildren())
+
             {
                 Helper.MessageBoxError(GetFormErrors());
+
                 return false;
             }
 
             if (this.isEdit)
+
             {
                 var model = BankDepositsModel();
+
                 model.Id = bankDepositId.Value;
+
                 model.UpdatedBy = UserHelper.loggedUser.Id;
+
                 return TreasuryFactory.BankDepositsRepository().Update(model);
             }
             else
+
             {
                 var model = BankDepositsModel();
+
                 model.CreatedBy = UserHelper.loggedUser.Id;
+
                 return TreasuryFactory.BankDepositsRepository().Insert(model);
             }
         }
 
-        internal void ResetForm()
+        private BankDepositsModel BankDepositsModel()
+
         {
-            txtReferenceNumber.Clear();
-            dtDate.Value = Helper.GetCurrentDate();
-            nudAmount.Value = 0;
-            LoadBanks();
+            return new BankDepositsModel()
+
+            {
+                Reference = txtReferenceNumber.Text.Trim(),
+
+                Date = dtDate.Value,
+
+                FundId = Convert.ToInt32(cmbFund.SelectedValue),
+
+                BankAccountsID = Convert.ToInt32(cmbBankAccounts.SelectedValue),
+
+                Amount = nudAmount.Value,
+            };
+        }
+
+        private void cmbBank_SelectionChangeCommitted(object sender, EventArgs e)
+
+        {
             LoadBankAccounts();
-            LoadFunds();
-            errorProvider1.Clear();
-        }
-
-        private void LoadBanks()
-        {
-            var dataTable = TreasuryFactory.BanksRepository().GetRecords();
-            HelperLoadRecords.BankComboBox(dataTable, cmbBank, "id", "bank_name");
-        }
-
-        private void LoadFunds()
-        {
-            var dataTable = Factory.FundsRepository().GetRecords();
-            HelperLoadRecords.FundsComboBox(dataTable, cmbFund, "id", "fund_name");
-        }
-
-        private void cmbbanks_Validating(object sender, CancelEventArgs e)
-        {
-            e.Cancel = Helper.ShowErrorComboBoxEmpty(errorProvider1, cmbBank, "Banks.");
         }
 
         private void cmbbanks_Validated(object sender, EventArgs e)
+
         {
             Helper.ClearErrorComboBox(errorProvider1, cmbBank);
         }
 
-        private void cmbfunds_Validating(object sender, CancelEventArgs e)
+        private void cmbbanks_Validating(object sender, CancelEventArgs e)
+
         {
-            e.Cancel = Helper.ShowErrorComboBoxEmpty(errorProvider1, cmbFund, "Fund.");
+            e.Cancel = Helper.ShowErrorComboBoxEmpty(errorProvider1, cmbBank, "Banks.");
         }
 
         private void cmbfunds_Validated(object sender, EventArgs e)
+
         {
             Helper.ClearErrorComboBox(errorProvider1, cmbFund);
         }
 
-        private void txtreference_Validating(object sender, CancelEventArgs e)
+        private void cmbfunds_Validating(object sender, CancelEventArgs e)
+
         {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtReferenceNumber, "Reference.");
+            e.Cancel = Helper.ShowErrorComboBoxEmpty(errorProvider1, cmbFund, "Fund.");
         }
 
-        private void txtreference_Validated(object sender, EventArgs e)
+        private void LoadBankAccounts()
+
         {
-            Helper.ClearErrorTextBox(errorProvider1, txtReferenceNumber);
+            int bankID = Convert.ToInt32(cmbBank.SelectedValue);
+
+            DataTable dtBankAccounts = TreasuryFactory.BankAccountsRepository().GetBankAccountsByBankID(bankID);
+
+            HelperLoadRecords.BankAccountsComboBox(dtBankAccounts, cmbBankAccounts, "id", "account_no");
         }
 
-        private void nudAmount_Validating(object sender, CancelEventArgs e)
+        private void LoadBanks()
+
         {
-            e.Cancel = Helper.ShowErrorNumericUpDownZero(errorProvider1, nudAmount, "Amount.");
+            var dataTable = TreasuryFactory.BanksRepository().GetRecords();
+
+            HelperLoadRecords.BankComboBox(dataTable, cmbBank, "id", "bank_name");
+        }
+
+        private void LoadFunds()
+
+        {
+            var dataTable = Factory.FundsRepository().GetRecords();
+
+            HelperLoadRecords.FundsComboBox(dataTable, cmbFund, "id", "fund_name");
+        }
+
+        private void LoadSelectedRecords()
+
+        {
+            var dictBankDeposits = TreasuryFactory.BankDepositsRepository().GetViewRecordById(bankDepositId.Value);
+
+            txtAccountableOfficer.Text = Helper.GetUserDataById(Convert.ToInt32(dictBankDeposits["created_by"]))["user_full_name"];
+
+            cmbFund.SelectedValue = dictBankDeposits["funds_id"];
+
+            cmbBank.SelectedValue = dictBankDeposits["banks_id"];
+
+            cmbBankAccounts.SelectedValue = dictBankDeposits["bank_accounts_id"];
+
+            txtReferenceNumber.Text = dictBankDeposits["reference"];
+
+            dtDate.Value = Convert.ToDateTime(dictBankDeposits["date"]);
+
+            nudAmount.Value = Convert.ToDecimal(dictBankDeposits["amount"]);
+
+            errorProvider1.Clear();
         }
 
         private void nudAmount_Validated(object sender, EventArgs e)
+
         {
             Helper.ClearErrorNumericUpDown(errorProvider1, nudAmount);
         }
 
-        private void cmbBank_SelectionChangeCommitted(object sender, EventArgs e)
+        private void nudAmount_Validating(object sender, CancelEventArgs e)
+
         {
-            try
-            {
-                LoadBankAccounts();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            e.Cancel = Helper.ShowErrorNumericUpDownZero(errorProvider1, nudAmount, "Amount.");
         }
 
-        private void LoadBankAccounts()
+        private void txtreference_Validated(object sender, EventArgs e)
+
         {
-            int bankID = Convert.ToInt32(cmbBank.SelectedValue);
-            DataTable dtBankAccounts = TreasuryFactory.BankAccountsRepository().GetBankAccountsByBankID(bankID);
-            HelperLoadRecords.BankAccountsComboBox(dtBankAccounts, cmbBankAccounts, "id", "account_no");
+            Helper.ClearErrorTextBox(errorProvider1, txtReferenceNumber);
+        }
+
+        private void txtreference_Validating(object sender, CancelEventArgs e)
+
+        {
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtReferenceNumber, "Reference.");
         }
     }
 }
