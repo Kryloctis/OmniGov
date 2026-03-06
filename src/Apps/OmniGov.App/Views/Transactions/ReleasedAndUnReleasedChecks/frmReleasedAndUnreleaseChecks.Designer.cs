@@ -1,4 +1,4 @@
-using OmniGov.App.Views.Transactions.ReleasedAndUnReleasedChecks;
+﻿using OmniGov.App.Views.Transactions.ReleasedAndUnReleasedChecks;
 
 namespace OmniGov.App.Views.Transactions.ReleasedAndUnReleasedChecks
 {

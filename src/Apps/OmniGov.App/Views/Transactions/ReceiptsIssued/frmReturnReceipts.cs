@@ -1,4 +1,4 @@
-using OmniGov.App.Helpers;
+﻿using OmniGov.App.Helpers;
 using OmniGov.Treasury.Data.Factories;
 using OmniGov.Treasury.Domain.Entities;
 
@@ -19,6 +19,16 @@ namespace OmniGov.App.Views.Transactions.ReceiptsIssued
             txtReceiptNumberTo.Text = returnSerialNumberTo.ToString("D8");
         }
 
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            if (SaveData())
+            {
+                Helper.MessageBoxSuccess("Receipt successfully returned.");
+                frmReceiptsIssued.LoadRecords();
+                Close();
+            }
+        }
+
         private bool SaveData()
         {
             var receiptIssuedRepository = TreasuryFactory.ReceiptsIssuedRepository();
@@ -30,16 +40,6 @@ namespace OmniGov.App.Views.Transactions.ReceiptsIssued
             };
 
             return receiptIssuedRepository.UpdateReturnedReceipt(riModel);
-        }
-
-        private void btnSave_Click(object sender, EventArgs e)
-        {
-            if (SaveData())
-            {
-                Helper.MessageBoxSuccess("Receipt successfully returned.");
-                frmReceiptsIssued.LoadRecords();
-                Close();
-            }
         }
     }
 }

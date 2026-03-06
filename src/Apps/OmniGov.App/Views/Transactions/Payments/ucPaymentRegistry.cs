@@ -1,4 +1,4 @@
-using OmniGov.App.Helpers;
+﻿using OmniGov.App.Helpers;
 using OmniGov.App.Views.Manage.TaxPayers;
 using OmniGov.Core.Factories;
 using OmniGov.Treasury.Data.Factories;
@@ -9,24 +9,14 @@ namespace OmniGov.App.Views.Transactions.Payments
 {
     public partial class ucPaymentRegistry : UserControl
     {
-        private string error;
         private readonly ucTaxPayers ucTaxPayers;
+        private string error;
 
         public ucPaymentRegistry()
         {
             InitializeComponent();
             ucTaxPayers = ucTaxPayers1;
             Helper.DatagridFullRowSelectStyle(dgRegistry, true);
-        }
-
-        internal string GetFormErrors()
-        {
-            var errors = new string[]
-            {
-                error
-            };
-
-            return Factory.CreateErrors(errors).GenerateErrorMessage();
         }
 
         internal bool FormValidated(string fieldName)
@@ -54,8 +44,14 @@ namespace OmniGov.App.Views.Transactions.Payments
             return true;
         }
 
-        private void OnLoad()
+        internal string GetFormErrors()
         {
+            var errors = new string[]
+            {
+                error
+            };
+
+            return Factory.CreateErrors(errors).GenerateErrorMessage();
         }
 
         internal void LoadRegistry()
@@ -67,19 +63,6 @@ namespace OmniGov.App.Views.Transactions.Payments
                 progressBar1.Value = 0;
                 backgroundWorker1.RunWorkerAsync(dtRegistry);
             }
-        }
-
-        private DataColumn[] RegistryColumns()
-        {
-            return new DataColumn[]
-            {
-                new DataColumn("taxpayers_id", typeof (int)),
-                new DataColumn("taxpayer_type_code", typeof(string)),
-                new DataColumn("taxpayers_tin", typeof(string)),
-                new DataColumn("taxpayers_name", typeof(string)),
-                new DataColumn("taxpayers_address", typeof(string)),
-                new DataColumn("taxpayers_contact_info", typeof(string)),
-            };
         }
 
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
@@ -138,15 +121,9 @@ namespace OmniGov.App.Views.Transactions.Payments
             HelperLoadRecords.DatagridViewPayees(dgRegistry, dataTable);
         }
 
-        private void btnSearch_Click(object sender, EventArgs e)
+        private void btnBack_Click(object sender, EventArgs e)
         {
-            LoadRegistry();
-        }
-
-        private void ucRegistry_Load(object sender, EventArgs e)
-        {
-            OnLoad();
-            ucTaxPayers1.chckIsActive.Enabled = false;
+            tabControlRegistry.SelectedTab = tabRegistryList;
         }
 
         private void btnRegister_Click(object sender, EventArgs e)
@@ -154,9 +131,32 @@ namespace OmniGov.App.Views.Transactions.Payments
             tabControlRegistry.SelectedTab = tabRegister;
         }
 
-        private void btnBack_Click(object sender, EventArgs e)
+        private void btnSearch_Click(object sender, EventArgs e)
         {
-            tabControlRegistry.SelectedTab = tabRegistryList;
+            LoadRegistry();
+        }
+
+        private void OnLoad()
+        {
+        }
+
+        private DataColumn[] RegistryColumns()
+        {
+            return new DataColumn[]
+            {
+                new DataColumn("taxpayers_id", typeof (int)),
+                new DataColumn("taxpayer_type_code", typeof(string)),
+                new DataColumn("taxpayers_tin", typeof(string)),
+                new DataColumn("taxpayers_name", typeof(string)),
+                new DataColumn("taxpayers_address", typeof(string)),
+                new DataColumn("taxpayers_contact_info", typeof(string)),
+            };
+        }
+
+        private void ucRegistry_Load(object sender, EventArgs e)
+        {
+            OnLoad();
+            ucTaxPayers1.chckIsActive.Enabled = false;
         }
     }
 }

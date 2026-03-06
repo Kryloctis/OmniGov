@@ -1,4 +1,4 @@
-using OmniGov.App.Helpers;
+﻿using OmniGov.App.Helpers;
 using OmniGov.Treasury.Data.Factories;
 using OmniGov.Treasury.Domain.Entities;
 
@@ -15,6 +15,16 @@ namespace OmniGov.App.Views.Transactions.ReceiptsIssued
             Helper.LoadFormIcon(this);
             _frmReceiptIssued = frmReceiptsIssued;
             uc = ucReceipts1;
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            if (SaveData())
+            {
+                Helper.MessageBoxSuccess("Receipt issued has been saved.");
+                _frmReceiptIssued.LoadRecords();
+                uc.ResetForm();
+            }
         }
 
         private void frmReceiptsAdd_Load(object sender, EventArgs e)
@@ -54,16 +64,6 @@ namespace OmniGov.App.Views.Transactions.ReceiptsIssued
                 receiptIssuedModel.CollectorId = TreasuryFactory.CollectingOfficerHasJobOrdersRepository().GetCollectingOfficerIDByJobOrderId(collectorId);
             }
             return TreasuryFactory.ReceiptsIssuedRepository().Insert(receiptIssuedModel);
-        }
-
-        private void btnSave_Click(object sender, EventArgs e)
-        {
-            if (SaveData())
-            {
-                Helper.MessageBoxSuccess("Receipt issued has been saved.");
-                _frmReceiptIssued.LoadRecords();
-                uc.ResetForm();
-            }
         }
     }
 }
