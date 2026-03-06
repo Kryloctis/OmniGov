@@ -1,4 +1,4 @@
-namespace OmniGov.App.Views.Transactions.Payments.CattleTransferOfOwnership
+﻿namespace OmniGov.App.Views.Transactions.Payments.CattleTransferOfOwnership
 {
     partial class frmCattleTransfer
     {

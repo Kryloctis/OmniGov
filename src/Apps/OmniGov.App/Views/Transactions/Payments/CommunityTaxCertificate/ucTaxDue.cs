@@ -1,4 +1,4 @@
-using OmniGov.Core.Factories;
+﻿using OmniGov.Core.Factories;
 
 namespace OmniGov.App.Views.Transactions.Payments.CommunityTaxCertificate
 {
@@ -7,6 +7,18 @@ namespace OmniGov.App.Views.Transactions.Payments.CommunityTaxCertificate
         public ucTaxDue()
         {
             InitializeComponent();
+        }
+
+        internal decimal AdditionalCommunityTaxSum()
+        {
+            return nudAdditionalBasicTax.Value + nudGrossReceipt.Value + nudSalary.Value + nudIncomeFromRpt.Value;
+        }
+
+        internal decimal ComputeTotalAmountPayable()
+        {
+            decimal totalAmountPayable = 0;
+
+            return totalAmountPayable += nudBasicTax.Value + nudAdditionalBasicTax.Value + nudGrossReceipt.Value + nudSalary.Value + nudIncomeFromRpt.Value;
         }
 
         internal string GetFormErrors()
@@ -27,18 +39,6 @@ namespace OmniGov.App.Views.Transactions.Payments.CommunityTaxCertificate
             nudGrossReceipt.Value = 0;
             nudSalary.Value = 0;
             nudIncomeFromRpt.Value = 0;
-        }
-
-        internal decimal ComputeTotalAmountPayable()
-        {
-            decimal totalAmountPayable = 0;
-
-            return totalAmountPayable += nudBasicTax.Value + nudAdditionalBasicTax.Value + nudGrossReceipt.Value + nudSalary.Value + nudIncomeFromRpt.Value;
-        }
-
-        internal decimal AdditionalCommunityTaxSum()
-        {
-            return nudAdditionalBasicTax.Value + nudGrossReceipt.Value + nudSalary.Value + nudIncomeFromRpt.Value;
         }
 
         private void ucTaxDue_Load(object sender, EventArgs e)

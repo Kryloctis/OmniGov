@@ -1,4 +1,4 @@
-using OmniGov.App.Helpers;
+﻿using OmniGov.App.Helpers;
 using OmniGov.Core.Factories;
 using OmniGov.Treasury.Data.Factories;
 using OmniGov.Treasury.Domain.Entities;
@@ -11,22 +11,6 @@ namespace OmniGov.App.Views.Transactions.Payments.CattleOwnership
         public ucCattleOwnership()
         {
             InitializeComponent();
-        }
-
-        internal void OnLoad()
-        {
-            LoadOwners();
-            LoadCattle();
-        }
-
-        internal void ResetForm()
-        {
-            LoadOwners();
-            LoadCattle();
-            nudAge.Value = nudAge.Minimum;
-            nudYears.Value = nudYears.Minimum;
-            radCattleMale.Checked = true;
-            txtDescription.Clear();
         }
 
         internal CattleOwnershipModel CattleOwnershipModel()
@@ -56,10 +40,50 @@ namespace OmniGov.App.Views.Transactions.Payments.CattleOwnership
             return Factory.CreateErrors(errorArray).GenerateErrorMessage();
         }
 
-        private void LoadOwners()
+        internal void OnLoad()
         {
-            var dtRegistry = TreasuryFactory.TaxpayersRepository().GetRecords();
-            HelperLoadRecords.SearchableCombobox2(dtRegistry, cmbxOwner, "id", "name");
+            LoadOwners();
+            LoadCattle();
+        }
+
+        internal void ResetForm()
+        {
+            LoadOwners();
+            LoadCattle();
+            nudAge.Value = nudAge.Minimum;
+            nudYears.Value = nudYears.Minimum;
+            radCattleMale.Checked = true;
+            txtDescription.Clear();
+        }
+
+        private void cmbxOwner_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Enter && (Control.ModifierKeys & Keys.Shift) != 0)
+            {
+                LoadOwners();
+                cmbxOwner.DroppedDown = cmbxOwner.DroppedDown ? false : true;
+                e.Handled = true;
+            }
+        }
+
+        private void cmbxOwner_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorComboBox(errorProvider1, cmbxOwner);
+        }
+
+        private void cmbxOwner_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = !OwnerValidated(errorProvider1, cmbxOwner);
+        }
+
+        private void cmbxType_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorComboBox(errorProvider1, cmbxType);
+        }
+
+        private void cmbxType_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = Helper.ShowErrorComboBoxEmpty(errorProvider1, cmbxType, "Type");
         }
 
         private void LoadCattle()
@@ -68,24 +92,20 @@ namespace OmniGov.App.Views.Transactions.Payments.CattleOwnership
             HelperLoadRecords.SearchableCombobox2(dataTable, cmbxType, "id", "cattle_name");
         }
 
-        private void cmbxType_Validating(object sender, CancelEventArgs e)
+        private void LoadOwners()
         {
-            e.Cancel = Helper.ShowErrorComboBoxEmpty(errorProvider1, cmbxType, "Type");
-        }
-
-        private void cmbxType_Validated(object sender, EventArgs e)
-        {
-            Helper.ClearErrorComboBox(errorProvider1, cmbxType);
-        }
-
-        private void nudYears_Validating(object sender, CancelEventArgs e)
-        {
-            e.Cancel = Helper.ShowErrorNumericUpDownEmpty(errorProvider1, nudYears, "Price");
+            var dtRegistry = TreasuryFactory.TaxpayersRepository().GetRecords();
+            HelperLoadRecords.SearchableCombobox2(dtRegistry, cmbxOwner, "id", "name");
         }
 
         private void nudYears_Validated(object sender, EventArgs e)
         {
             Helper.ClearErrorNumericUpDown(errorProvider1, nudYears);
+        }
+
+        private void nudYears_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = Helper.ShowErrorNumericUpDownEmpty(errorProvider1, nudYears, "Price");
         }
 
         private bool OwnerValidated(ErrorProvider errorProvider, ComboBox comboBox)
@@ -99,26 +119,6 @@ namespace OmniGov.App.Views.Transactions.Payments.CattleOwnership
             }
 
             return true;
-        }
-
-        private void cmbxOwner_Validating(object sender, CancelEventArgs e)
-        {
-            e.Cancel = !OwnerValidated(errorProvider1, cmbxOwner);
-        }
-
-        private void cmbxOwner_Validated(object sender, EventArgs e)
-        {
-            Helper.ClearErrorComboBox(errorProvider1, cmbxOwner);
-        }
-
-        private void cmbxOwner_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (e.KeyChar == (char)Keys.Enter && (Control.ModifierKeys & Keys.Shift) != 0)
-            {
-                LoadOwners();
-                cmbxOwner.DroppedDown = cmbxOwner.DroppedDown ? false : true;
-                e.Handled = true;
-            }
         }
     }
 }

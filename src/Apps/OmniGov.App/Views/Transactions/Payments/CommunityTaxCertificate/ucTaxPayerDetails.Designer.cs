@@ -1,4 +1,4 @@
-namespace OmniGov.App.Views.Transactions.Payments.CommunityTaxCertificate
+﻿namespace OmniGov.App.Views.Transactions.Payments.CommunityTaxCertificate
 {
     partial class ucTaxPayerDetails
     {
