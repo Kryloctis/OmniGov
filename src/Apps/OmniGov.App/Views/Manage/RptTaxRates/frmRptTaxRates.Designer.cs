@@ -1,4 +1,4 @@
-
+﻿
 namespace OmniGov.App.Views.Manage.RptTaxRates
 {
     partial class frmRptTaxRates

@@ -1,4 +1,4 @@
-
+﻿
 namespace OmniGov.App.Views.Transactions.CheckIssuance.Obligations
 {
     partial class frmChckIssOblgtns

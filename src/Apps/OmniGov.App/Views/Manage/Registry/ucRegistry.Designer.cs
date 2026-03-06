@@ -1,4 +1,4 @@
-namespace OmniGov.App.Views.Manage.Registry
+﻿namespace OmniGov.App.Views.Manage.Registry
 {
     partial class ucRegistry
     {

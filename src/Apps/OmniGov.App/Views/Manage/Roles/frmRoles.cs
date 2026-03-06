@@ -1,4 +1,4 @@
-using OmniGov.App.Helpers;
+﻿using OmniGov.App.Helpers;
 using OmniGov.Core.Entities;
 using OmniGov.Core.Factories;
 using System.ComponentModel;
@@ -18,79 +18,6 @@ namespace OmniGov.App.Views.Manage.Roles
             uc = ucRoles1;
             Helper.LoadFormIcon(this);
             Helper.DatagridFullRowSelectStyle(dgRoles, true, true, false, false);
-        }
-
-        private void frmRoles_Load(object sender, EventArgs e)
-        {
-            HelperLoadRecords.ComboboxRowLimitFilter(cmbxRowLimit);
-            LoadRoles();
-            Helper.EnableDisableToolStripButtons(dgRoles, btnEdit, btnDelete);
-        }
-
-        private void ToggleCrud(bool isEdit)
-        {
-            this.isEdit = isEdit;
-
-            if (this.isEdit)
-            {
-                int rowIndex = dgRoles.CurrentRow.Index;
-                bool isValid = sbyte.TryParse(dgRoles.Rows[rowIndex].Cells["id"].Value.ToString(), out sbyte roleId);
-
-                lblTitle.Text = "Update Role";
-
-                if (isValid)
-                    uc.OnLoad(true, (byte)roleId);
-            }
-            else
-            {
-                lblTitle.Text = "Create Role";
-                uc.OnLoad(false);
-                uc.ResetForm();
-            }
-
-            customTabControl1.SelectedTab = tbPgCrud;
-        }
-
-        private void btnAdd_Click(object sender, EventArgs e)
-        {
-            ToggleCrud(false);
-        }
-
-        private void btnEdit_Click(object sender, EventArgs e)
-        {
-            ToggleCrud(true);
-        }
-
-        private bool DeleteData()
-        {
-            int selectedRowsCount = dgRoles.SelectedRows.Count;
-
-            if (Helper.MessageBoxConfirmDelete(selectedRowsCount))
-            {
-                var rolesModelList = new List<RolesModel>();
-                foreach (DataGridViewRow row in dgRoles.SelectedRows)
-                {
-                    byte roleId = Convert.ToByte(row.Cells["id"].Value.ToString());
-                    rolesModelList.Add(new RolesModel() { Id = roleId });
-                }
-
-                return Factory.RolesRepository().Delete(rolesModelList);
-            }
-            return false;
-        }
-
-        private void btnDelete_Click(object sender, EventArgs e)
-        {
-            if (DeleteData())
-            {
-                Helper.MessageBoxSuccess($"{dgRoles.SelectedRows.Count} record/s has been deleted");
-                LoadRoles();
-            }
-        }
-
-        private void cmbxRowLimit_SelectionChangeCommitted(object sender, EventArgs e)
-        {
-            LoadRoles();
         }
 
         internal void LoadRoles()
@@ -158,6 +85,63 @@ namespace OmniGov.App.Views.Manage.Roles
             lblRecordCount.Text = dgRoles.Rows.Count.ToString();
         }
 
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            ToggleCrud(false);
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            if (DeleteData())
+            {
+                Helper.MessageBoxSuccess($"{dgRoles.SelectedRows.Count} record/s has been deleted");
+                LoadRoles();
+            }
+        }
+
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+            ToggleCrud(true);
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            SaveRole(isEdit);
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            LoadRoles();
+        }
+
+        private void btnShowSidePanel_Click(object sender, EventArgs e)
+        {
+            TogglePreviewPermissions();
+        }
+
+        private void cmbxRowLimit_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            LoadRoles();
+        }
+
+        private bool DeleteData()
+        {
+            int selectedRowsCount = dgRoles.SelectedRows.Count;
+
+            if (Helper.MessageBoxConfirmDelete(selectedRowsCount))
+            {
+                var rolesModelList = new List<RolesModel>();
+                foreach (DataGridViewRow row in dgRoles.SelectedRows)
+                {
+                    byte roleId = Convert.ToByte(row.Cells["id"].Value.ToString());
+                    rolesModelList.Add(new RolesModel() { Id = roleId });
+                }
+
+                return Factory.RolesRepository().Delete(rolesModelList);
+            }
+            return false;
+        }
+
         private void dgRoles_SelectionChanged(object sender, EventArgs e)
         {
             if (dgRoles.SelectedRows.Count == 1)
@@ -176,6 +160,13 @@ namespace OmniGov.App.Views.Manage.Roles
             Helper.EnableDisableToolStripButtons(dgRoles, btnEdit, btnDelete);
         }
 
+        private void frmRoles_Load(object sender, EventArgs e)
+        {
+            HelperLoadRecords.ComboboxRowLimitFilter(cmbxRowLimit);
+            LoadRoles();
+            Helper.EnableDisableToolStripButtons(dgRoles, btnEdit, btnDelete);
+        }
+
         private string LoadPrivileges(int? roleId)
         {
             if (roleId is null) return string.Empty;
@@ -188,32 +179,6 @@ namespace OmniGov.App.Views.Manage.Roles
             if (sb.Length < 1) sb.AppendLine("- No Privileges");
 
             return sb.ToString();
-        }
-
-        private void TogglePreviewPermissions()
-        {
-            switch (splitContainer1.Panel2Collapsed)
-            {
-                case true:
-                    splitContainer1.Panel2Collapsed = false;
-                    btnShowSidePanel.Text = "?";
-                    break;
-
-                case false:
-                    splitContainer1.Panel2Collapsed = true;
-                    btnShowSidePanel.Text = "?";
-                    break;
-            }
-        }
-
-        private void btnShowSidePanel_Click(object sender, EventArgs e)
-        {
-            TogglePreviewPermissions();
-        }
-
-        private void btnSearch_Click(object sender, EventArgs e)
-        {
-            LoadRoles();
         }
 
         private void SaveRole(bool isEdit)
@@ -245,14 +210,49 @@ namespace OmniGov.App.Views.Manage.Roles
             }
         }
 
-        private void btnSave_Click(object sender, EventArgs e)
-        {
-            SaveRole(isEdit);
-        }
-
         private void tlStrpBtnBack_Click(object sender, EventArgs e)
         {
             customTabControl1.SelectedTab = tbPgList;
+        }
+
+        private void ToggleCrud(bool isEdit)
+        {
+            this.isEdit = isEdit;
+
+            if (this.isEdit)
+            {
+                int rowIndex = dgRoles.CurrentRow.Index;
+                bool isValid = sbyte.TryParse(dgRoles.Rows[rowIndex].Cells["id"].Value.ToString(), out sbyte roleId);
+
+                lblTitle.Text = "Update Role";
+
+                if (isValid)
+                    uc.OnLoad(true, (byte)roleId);
+            }
+            else
+            {
+                lblTitle.Text = "Create Role";
+                uc.OnLoad(false);
+                uc.ResetForm();
+            }
+
+            customTabControl1.SelectedTab = tbPgCrud;
+        }
+
+        private void TogglePreviewPermissions()
+        {
+            switch (splitContainer1.Panel2Collapsed)
+            {
+                case true:
+                    splitContainer1.Panel2Collapsed = false;
+                    btnShowSidePanel.Text = "?";
+                    break;
+
+                case false:
+                    splitContainer1.Panel2Collapsed = true;
+                    btnShowSidePanel.Text = "?";
+                    break;
+            }
         }
     }
 }

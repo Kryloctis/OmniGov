@@ -1,4 +1,4 @@
-using OmniGov.App.Helpers;
+﻿using OmniGov.App.Helpers;
 using OmniGov.Core.Factories;
 using OmniGov.Treasury.Data.Factories;
 using System.ComponentModel;
@@ -7,8 +7,8 @@ namespace OmniGov.App.Views.Manage.BusinessCategories
 {
     public partial class ucBusinessCategories : UserControl
     {
-        internal bool isEdit;
         internal int businessCategoryID;
+        internal bool isEdit;
 
         public ucBusinessCategories()
         {
@@ -34,10 +34,6 @@ namespace OmniGov.App.Views.Manage.BusinessCategories
             txtCode.Focus();
         }
 
-        private void ucBusinessCategories_Load(object sender, EventArgs e)
-        {
-        }
-
         private bool DescriptionValidated(ErrorProvider errorProvider, TextBox textBox)
         {
             bool descriptionExist;
@@ -54,14 +50,18 @@ namespace OmniGov.App.Views.Manage.BusinessCategories
                 return true;
         }
 
+        private void txtDescription_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorTextBox(errorProvider1, txtDescription);
+        }
+
         private void txtDescription_Validating(object sender, CancelEventArgs e)
         {
             e.Cancel = !DescriptionValidated(errorProvider1, txtDescription);
         }
 
-        private void txtDescription_Validated(object sender, EventArgs e)
+        private void ucBusinessCategories_Load(object sender, EventArgs e)
         {
-            Helper.ClearErrorTextBox(errorProvider1, txtDescription);
         }
     }
 }

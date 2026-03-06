@@ -1,4 +1,4 @@
-using OmniGov.App.Views.Manage.BusinessCategories;
+﻿using OmniGov.App.Views.Manage.BusinessCategories;
 namespace OmniGov.App.Views.Manage.BusinessCategories
 {
     partial class frmAddBusinessCategories

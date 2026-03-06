@@ -1,4 +1,4 @@
-using OmniGov.App.Helpers;
+﻿using OmniGov.App.Helpers;
 using OmniGov.Core.Factories;
 using System.ComponentModel;
 
@@ -9,20 +9,6 @@ namespace OmniGov.App.Views.Transactions.Payments.MarriageLicense
         public ucMarriageDetails()
         {
             InitializeComponent();
-        }
-
-        internal void ResetForm()
-        {
-            txtLicenseNo.Clear();
-            txtRegistrationNumber.Clear();
-            dtpPublishedDate.Value = Helper.GetCurrentDate();
-            dtpIssuedDate.Value = Helper.GetCurrentDate();
-        }
-
-        internal void OnLoad()
-        {
-            dtpIssuedDate.Value = Helper.GetCurrentDate();
-            dtpPublishedDate.Value = Helper.GetCurrentDate();
         }
 
         internal string GetFormErrors()
@@ -46,12 +32,26 @@ namespace OmniGov.App.Views.Transactions.Payments.MarriageLicense
             return (licenseNumber, registrationNumber, publishedDate, issuedDate);
         }
 
-        private void TxtRegistrationNumber_Validating(object sender, CancelEventArgs e) => e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtRegistrationNumber, "registration no.");
+        internal void OnLoad()
+        {
+            dtpIssuedDate.Value = Helper.GetCurrentDate();
+            dtpPublishedDate.Value = Helper.GetCurrentDate();
+        }
 
-        private void TxtRegistrationNumber_Validated(object sender, EventArgs e) => Helper.ClearErrorTextBox(errorProvider1, txtRegistrationNumber);
+        internal void ResetForm()
+        {
+            txtLicenseNo.Clear();
+            txtRegistrationNumber.Clear();
+            dtpPublishedDate.Value = Helper.GetCurrentDate();
+            dtpIssuedDate.Value = Helper.GetCurrentDate();
+        }
+
+        private void txtLicenseNo_Validated(object sender, EventArgs e) => Helper.ClearErrorTextBox(errorProvider1, txtLicenseNo);
 
         private void txtLicenseNo_Validating(object sender, CancelEventArgs e) => e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtLicenseNo, "license no.");
 
-        private void txtLicenseNo_Validated(object sender, EventArgs e) => Helper.ClearErrorTextBox(errorProvider1, txtLicenseNo);
+        private void TxtRegistrationNumber_Validated(object sender, EventArgs e) => Helper.ClearErrorTextBox(errorProvider1, txtRegistrationNumber);
+
+        private void TxtRegistrationNumber_Validating(object sender, CancelEventArgs e) => e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtRegistrationNumber, "registration no.");
     }
 }

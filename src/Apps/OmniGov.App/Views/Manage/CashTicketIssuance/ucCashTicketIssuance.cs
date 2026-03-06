@@ -1,4 +1,4 @@
-using OmniGov.App.Helpers;
+﻿using OmniGov.App.Helpers;
 using OmniGov.Core.Factories;
 using OmniGov.Treasury.Data.Factories;
 using OmniGov.Treasury.Domain.Entities;
@@ -9,14 +9,29 @@ namespace OmniGov.App.Views.Manage.CashTicketIssuance
 {
     public partial class ucCashTicketIssuance : UserControl
     {
-        private bool isEdit;
-
         internal int unusedCashTcktCount;
         internal int usedCashTcktCount;
+        private bool isEdit;
 
         public ucCashTicketIssuance()
         {
             InitializeComponent();
+        }
+
+        internal CashTicketsIssuedModel CashTicketsIssuedModel()
+        {
+            var collectorsId = GetCollectorsId();
+            var model = new CashTicketsIssuedModel()
+            {
+                CollectorId = collectorsId.coId,
+                DateIssued = dtpDateIssued.Value,
+                IssuedBy = UserHelper.loggedUser.Id,
+                CashTicketId = Convert.ToInt32(cmbxCashTickets.SelectedValue),
+                JobOrderId = collectorsId.joId,
+                Quantity = (int)nudQuantity.Value
+            };
+
+            return model;
         }
 
         internal string GetFormErrors()
@@ -29,26 +44,6 @@ namespace OmniGov.App.Views.Manage.CashTicketIssuance
             };
 
             return Factory.CreateErrors(errorArray).GenerateErrorMessage();
-        }
-
-        private void LoadCollectors()
-        {
-            DataTable dataTable = cbCollectingOfficerTypeJO.Checked ? DataTableJobOrderCollectionOfficers() : DataTableRegularCollectingOfficers();
-            HelperLoadRecords.CollectingOfficerComboBox(dataTable, cmbCollector, "full_name", "id");
-        }
-
-        private void LoadCashTickets()
-        {
-            DataTable cashTicketsDT = TreasuryFactory.CashTicketsRepository().GetRecords();
-
-            foreach (DataRow row in cashTicketsDT.Rows)
-            {
-                int cashTicketId = Convert.ToInt32(row["id"]);
-                string description = row["description"].ToString();
-                int cashTicketStockQty = Convert.ToInt32(row["quantity"]);
-            }
-
-            HelperLoadRecords.CashTicketsCmbx(cmbxCashTickets, cashTicketsDT);
         }
 
         internal void LoadSelectedValue(Dictionary<string, string> dictSelectedData)
@@ -79,43 +74,22 @@ namespace OmniGov.App.Views.Manage.CashTicketIssuance
             GetCashTckStat();
         }
 
-        private (int coId, int? joId) GetCollectorsId()
-        {
-            bool isJo = cbCollectingOfficerTypeJO.Checked;
-            int CoJoId = Convert.ToInt32(cmbCollector.SelectedValue);
-            (int coId, int? joId) collectorsId = (isJo ? (GetCoId(CoJoId), CoJoId) : (CoJoId, null));
-
-            int GetCoId(int joId)
-            {
-                var coId = TreasuryFactory.CollectingOfficerHasJobOrdersRepository().GetCollectingOfficerIDByJobOrderId(joId);
-                return coId;
-            }
-
-            return collectorsId;
-        }
-
-        internal CashTicketsIssuedModel CashTicketsIssuedModel()
-        {
-            var collectorsId = GetCollectorsId();
-            var model = new CashTicketsIssuedModel()
-            {
-                CollectorId = collectorsId.coId,
-                DateIssued = dtpDateIssued.Value,
-                IssuedBy = UserHelper.loggedUser.Id,
-                CashTicketId = Convert.ToInt32(cmbxCashTickets.SelectedValue),
-                JobOrderId = collectorsId.joId,
-                Quantity = (int)nudQuantity.Value
-            };
-
-            return model;
-        }
-
         internal void ResetForm()
         {
             nudQuantity.Value = 0;
             dtpDateIssued.Value = DateTime.Today;
             LoadCollectors();
             LoadCashTickets();
+        }
+
+        private void cbCollectingOfficerTypeJO_CheckedChanged(object sender, EventArgs e)
+        {
+            LoadCollectors();
+        }
+
+        private void cmbxCashTickets_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            GetCashTckStat();
         }
 
         private DataColumn[] DataColumnsCollectingOfficers()
@@ -125,30 +99,6 @@ namespace OmniGov.App.Views.Manage.CashTicketIssuance
                 new DataColumn(Name = "id", typeof(int)),
                 new DataColumn(Name = "full_name", typeof(string))
             };
-        }
-
-        private DataTable DataTableRegularCollectingOfficers()
-        {
-            DataTable dataTable = new DataTable();
-            dataTable.Columns.AddRange(DataColumnsCollectingOfficers());
-            DataTable dtCollectingOfficers = TreasuryFactory.CollectingOfficerRepository().GetRecords();
-
-            foreach (DataRow row in dtCollectingOfficers.Rows)
-            {
-                var newRow = dataTable.NewRow();
-                int Id = Convert.ToInt32(row["id"]);
-                string prefix = row["prefix"].ToString();
-                string firstName = row["first_name"].ToString();
-                string middleInitial = row["mid_initial"].ToString();
-                string lastName = row["last_name"].ToString();
-                string suffix = row["suffix"].ToString();
-                string fullName = Helper.GenerateFullName(prefix, firstName, middleInitial, lastName, suffix);
-
-                newRow["id"] = Id;
-                newRow["full_name"] = fullName;
-                dataTable.Rows.Add(newRow);
-            }
-            return dataTable;
         }
 
         private DataTable DataTableJobOrderCollectionOfficers()
@@ -176,26 +126,28 @@ namespace OmniGov.App.Views.Manage.CashTicketIssuance
             return dataTable;
         }
 
-        private void cbCollectingOfficerTypeJO_CheckedChanged(object sender, EventArgs e)
+        private DataTable DataTableRegularCollectingOfficers()
         {
-            LoadCollectors();
-        }
+            DataTable dataTable = new DataTable();
+            dataTable.Columns.AddRange(DataColumnsCollectingOfficers());
+            DataTable dtCollectingOfficers = TreasuryFactory.CollectingOfficerRepository().GetRecords();
 
-        private void nudQuantity_Validating(object sender, CancelEventArgs e)
-        {
-            e.Cancel = Helper.ShowErrorNumericUpDownZero(errorProvider1, nudQuantity, "Quantity");
-            int quantity = Convert.ToInt32(nudQuantity.Value);
-
-            if (unusedCashTcktCount < quantity)
+            foreach (DataRow row in dtCollectingOfficers.Rows)
             {
-                errorProvider1.SetError(nudQuantity, "Not enough quantity.");
-                e.Cancel = true;
-            }
-        }
+                var newRow = dataTable.NewRow();
+                int Id = Convert.ToInt32(row["id"]);
+                string prefix = row["prefix"].ToString();
+                string firstName = row["first_name"].ToString();
+                string middleInitial = row["mid_initial"].ToString();
+                string lastName = row["last_name"].ToString();
+                string suffix = row["suffix"].ToString();
+                string fullName = Helper.GenerateFullName(prefix, firstName, middleInitial, lastName, suffix);
 
-        private void nudQuantity_Validated(object sender, EventArgs e)
-        {
-            Helper.ClearErrorNumericUpDown(errorProvider1, nudQuantity);
+                newRow["id"] = Id;
+                newRow["full_name"] = fullName;
+                dataTable.Rows.Add(newRow);
+            }
+            return dataTable;
         }
 
         private void GetCashTckStat()
@@ -215,9 +167,56 @@ namespace OmniGov.App.Views.Manage.CashTicketIssuance
             lblCashTcktStat.Text = cashTcktStat;
         }
 
-        private void cmbxCashTickets_SelectedIndexChanged(object sender, EventArgs e)
+        private (int coId, int? joId) GetCollectorsId()
         {
-            GetCashTckStat();
+            bool isJo = cbCollectingOfficerTypeJO.Checked;
+            int CoJoId = Convert.ToInt32(cmbCollector.SelectedValue);
+            (int coId, int? joId) collectorsId = (isJo ? (GetCoId(CoJoId), CoJoId) : (CoJoId, null));
+
+            int GetCoId(int joId)
+            {
+                var coId = TreasuryFactory.CollectingOfficerHasJobOrdersRepository().GetCollectingOfficerIDByJobOrderId(joId);
+                return coId;
+            }
+
+            return collectorsId;
+        }
+
+        private void LoadCashTickets()
+        {
+            DataTable cashTicketsDT = TreasuryFactory.CashTicketsRepository().GetRecords();
+
+            foreach (DataRow row in cashTicketsDT.Rows)
+            {
+                int cashTicketId = Convert.ToInt32(row["id"]);
+                string description = row["description"].ToString();
+                int cashTicketStockQty = Convert.ToInt32(row["quantity"]);
+            }
+
+            HelperLoadRecords.CashTicketsCmbx(cmbxCashTickets, cashTicketsDT);
+        }
+
+        private void LoadCollectors()
+        {
+            DataTable dataTable = cbCollectingOfficerTypeJO.Checked ? DataTableJobOrderCollectionOfficers() : DataTableRegularCollectingOfficers();
+            HelperLoadRecords.CollectingOfficerComboBox(dataTable, cmbCollector, "full_name", "id");
+        }
+
+        private void nudQuantity_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorNumericUpDown(errorProvider1, nudQuantity);
+        }
+
+        private void nudQuantity_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = Helper.ShowErrorNumericUpDownZero(errorProvider1, nudQuantity, "Quantity");
+            int quantity = Convert.ToInt32(nudQuantity.Value);
+
+            if (unusedCashTcktCount < quantity)
+            {
+                errorProvider1.SetError(nudQuantity, "Not enough quantity.");
+                e.Cancel = true;
+            }
         }
     }
 }

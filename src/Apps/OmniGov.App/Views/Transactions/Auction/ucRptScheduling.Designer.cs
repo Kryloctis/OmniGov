@@ -1,4 +1,4 @@
-namespace OmniGov.App.Views.Transactions.Auction
+﻿namespace OmniGov.App.Views.Transactions.Auction
 {
     partial class ucRptScheduling
     {

@@ -1,4 +1,4 @@
-namespace OmniGov.App.Views.Transactions.Payments.CattleOwnership
+﻿namespace OmniGov.App.Views.Transactions.Payments.CattleOwnership
 {
     partial class ucCattleOwnership
     {

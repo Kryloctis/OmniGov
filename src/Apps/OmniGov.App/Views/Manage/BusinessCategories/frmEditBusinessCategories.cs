@@ -1,4 +1,4 @@
-using OmniGov.App.Helpers;
+﻿using OmniGov.App.Helpers;
 using OmniGov.Treasury.Data.Factories;
 using OmniGov.Treasury.Domain.Entities;
 
@@ -6,9 +6,9 @@ namespace OmniGov.App.Views.Manage.BusinessCategories
 {
     public partial class frmEditBusinessCategories : Form
     {
-        private int _businessCategoriesID;
         private readonly frmBusinessCategories _frmBusinessCategories;
         private readonly ucBusinessCategories _ucBusinessCategories;
+        private int _businessCategoriesID;
 
         public frmEditBusinessCategories(int businessCategoriesID, frmBusinessCategories frmBusinessCategories)
         {
@@ -20,9 +20,15 @@ namespace OmniGov.App.Views.Manage.BusinessCategories
             _ucBusinessCategories.isEdit = true;
         }
 
-        private void OnLoad()
+        private void btnSave_Click(object sender, EventArgs e)
         {
-            LoadSelectedRecord();
+            if (UpdateBusinessCategories())
+            {
+                Helper.MessageBoxSuccess("Business Categories has been updated.");
+                _frmBusinessCategories.LoadBusinessCategories();
+                Helper.DatagridViewRecordFinder(_frmBusinessCategories.dgBusinessCategories, "id", _businessCategoriesID.ToString());
+                Close();
+            }
         }
 
         private void frmEditBusinessCategories_Load(object sender, EventArgs e)
@@ -40,6 +46,11 @@ namespace OmniGov.App.Views.Manage.BusinessCategories
             _ucBusinessCategories.txtOrdinanceReferenceNo.Text = dictBusinessCategories["ordinance_ref_no"];
             _ucBusinessCategories.txtDescription.Text = dictBusinessCategories["description"];
             _ucBusinessCategories.cbxLineOfBusiness.Checked = Convert.ToBoolean(isLineOfBusiness);
+        }
+
+        private void OnLoad()
+        {
+            LoadSelectedRecord();
         }
 
         private bool UpdateBusinessCategories()
@@ -65,17 +76,6 @@ namespace OmniGov.App.Views.Manage.BusinessCategories
             };
 
             return TreasuryFactory.BusinessCategoriesRepository().Update(businessCategoriesModel);
-        }
-
-        private void btnSave_Click(object sender, EventArgs e)
-        {
-            if (UpdateBusinessCategories())
-            {
-                Helper.MessageBoxSuccess("Business Categories has been updated.");
-                _frmBusinessCategories.LoadBusinessCategories();
-                Helper.DatagridViewRecordFinder(_frmBusinessCategories.dgBusinessCategories, "id", _businessCategoriesID.ToString());
-                Close();
-            }
         }
     }
 }

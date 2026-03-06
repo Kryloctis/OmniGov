@@ -1,4 +1,4 @@
-
+﻿
 namespace OmniGov.App.Views.Manage.Amortization
 {
     partial class ucAmortization

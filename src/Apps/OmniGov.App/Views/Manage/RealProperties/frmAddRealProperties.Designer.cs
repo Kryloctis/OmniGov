@@ -1,4 +1,4 @@
-namespace OmniGov.App.Views.Manage.RealProperties
+﻿namespace OmniGov.App.Views.Manage.RealProperties
 {
     partial class frmAddRealProperties
     {

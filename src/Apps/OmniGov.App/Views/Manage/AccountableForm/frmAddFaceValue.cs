@@ -1,4 +1,4 @@
-using OmniGov.App.Helpers;
+﻿using OmniGov.App.Helpers;
 using OmniGov.Core.Entities;
 using OmniGov.Core.Factories;
 
@@ -6,9 +6,9 @@ namespace OmniGov.App.Views.Manage.AccountableForm
 {
     public partial class frmAddFaceValue : Form
     {
-        private ucFaceValue uc;
         private int accountableFormId;
         private frmAccountableForm frmAccountableForm;
+        private ucFaceValue uc;
 
         public frmAddFaceValue(frmAccountableForm frmAccountableForm, int accountableFormId)
         {
@@ -16,6 +16,16 @@ namespace OmniGov.App.Views.Manage.AccountableForm
             uc = ucFaceValue1;
             this.accountableFormId = accountableFormId;
             this.frmAccountableForm = frmAccountableForm;
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            if (Save())
+            {
+                Helper.MessageBoxSuccess("Face Value has been saved.");
+                frmAccountableForm.LoadFaceValues(accountableFormId);
+                uc.ResetForm();
+            }
         }
 
         private bool Save()
@@ -35,16 +45,6 @@ namespace OmniGov.App.Views.Manage.AccountableForm
             };
 
             return Factory.FaceValueRepository().Insert(model);
-        }
-
-        private void btnSave_Click(object sender, EventArgs e)
-        {
-            if (Save())
-            {
-                Helper.MessageBoxSuccess("Face Value has been saved.");
-                frmAccountableForm.LoadFaceValues(accountableFormId);
-                uc.ResetForm();
-            }
         }
     }
 }

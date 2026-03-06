@@ -1,11 +1,11 @@
-using OmniGov.App.Helpers;
+﻿using OmniGov.App.Helpers;
 
 namespace OmniGov.App.Views.Manage.Amortization
 {
     public partial class frmAddAmortization : Form
     {
-        private ucAmortization uc;
         private frmAmortization _frmAmortization;
+        private ucAmortization uc;
 
         public frmAddAmortization(frmAmortization frmAmortization)
         {

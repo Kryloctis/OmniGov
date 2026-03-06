@@ -1,4 +1,4 @@
-using OmniGov.App.Views.Manage.CollectingOfficer;
+﻿using OmniGov.App.Views.Manage.CollectingOfficer;
 
 namespace OmniGov.App.Views.Manage.CollectingOfficer
 {

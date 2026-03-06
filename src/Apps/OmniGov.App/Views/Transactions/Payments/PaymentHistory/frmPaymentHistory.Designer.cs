@@ -1,4 +1,4 @@
-namespace OmniGov.App.Views.Transactions.Payments.PaymentHistory
+﻿namespace OmniGov.App.Views.Transactions.Payments.PaymentHistory
 {
     partial class frmPaymentHistory
     {

@@ -1,4 +1,4 @@
-namespace OmniGov.App.Views.Transactions.Auction.AuctionReports
+﻿namespace OmniGov.App.Views.Transactions.Auction.AuctionReports
 {
     partial class ucDeclarationOfForfeitureOfDelinquentProperty
     {

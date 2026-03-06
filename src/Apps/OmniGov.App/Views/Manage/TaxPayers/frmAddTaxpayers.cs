@@ -1,38 +1,44 @@
-using OmniGov.App.Helpers;
+﻿using OmniGov.App.Helpers;
+
 using OmniGov.Treasury.Data.Factories;
 
 namespace OmniGov.App.Views.Manage.TaxPayers
+
 {
     public partial class frmAddTaxpayers : Form
+
     {
         private readonly ucTaxPayers uc;
+
         private frmTaxpayers frmTaxpayers;
 
         public frmAddTaxpayers(frmTaxpayers frmTaxpayers)
+
         {
             InitializeComponent();
+
             Helper.LoadFormIcon(this);
+
             this.frmTaxpayers = frmTaxpayers;
+
             uc = ucTaxPayers1;
         }
 
-        private bool SaveTaxpayer()
+        private void btnSave_Click(object sender, EventArgs e)
+
         {
-            if (!uc.ValidateChildren())
+            if (SaveTaxpayer())
             {
-                Helper.MessageBoxError(uc.GetFormErrors());
-                return false;
+                Helper.MessageBoxSuccess("Taxpayer has been saved.");
+                frmTaxpayers.LoadTaxpayers();
+                uc.ResetForm();
             }
-
-            var taxpayersModel = uc.TaxpayersModel();
-            taxpayersModel.CreatedBy = UserHelper.loggedUser.Id;
-
-            return TreasuryFactory.TaxpayersRepository().Insert(taxpayersModel);
         }
 
-        private void btnSave_Click(object sender, EventArgs e)
+        private void frmAddTaxpayers_KeyDown(object sender, KeyEventArgs e)
+
         {
-            try
+            if (e.KeyCode == Keys.S && e.Control)
             {
                 if (SaveTaxpayer())
                 {
@@ -41,34 +47,31 @@ namespace OmniGov.App.Views.Manage.TaxPayers
                     uc.ResetForm();
                 }
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void frmAddTaxpayers_Load(object sender, EventArgs e)
+
         {
-            try
-            {
-                uc.OnLoad(false);
-                ActiveControl = uc;
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            uc.OnLoad(false);
+            ActiveControl = uc;
         }
 
-        private void frmAddTaxpayers_KeyDown(object sender, KeyEventArgs e)
+        private bool SaveTaxpayer()
+
         {
-            try
+            if (!uc.ValidateChildren())
+
             {
-                if (e.KeyCode == Keys.S && e.Control)
-                {
-                    if (SaveTaxpayer())
-                    {
-                        Helper.MessageBoxSuccess("Taxpayer has been saved.");
-                        frmTaxpayers.LoadTaxpayers();
-                        uc.ResetForm();
-                    }
-                }
+                Helper.MessageBoxError(uc.GetFormErrors());
+
+                return false;
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+
+            var taxpayersModel = uc.TaxpayersModel();
+
+            taxpayersModel.CreatedBy = UserHelper.loggedUser.Id;
+
+            return TreasuryFactory.TaxpayersRepository().Insert(taxpayersModel);
         }
     }
 }

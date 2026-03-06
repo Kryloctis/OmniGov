@@ -1,4 +1,4 @@
-
+﻿
 namespace OmniGov.App.Views.Transactions.CheckIssuance.Deductions
 {
     partial class frmDeductions

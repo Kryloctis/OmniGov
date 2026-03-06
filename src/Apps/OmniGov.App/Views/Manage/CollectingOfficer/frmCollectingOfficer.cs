@@ -1,4 +1,4 @@
-using OmniGov.App.Helpers;
+﻿using OmniGov.App.Helpers;
 using OmniGov.App.Views.Manage.JobOrders;
 using OmniGov.Treasury.Data.Factories;
 using OmniGov.Treasury.Domain.Entities;
@@ -14,98 +14,6 @@ namespace OmniGov.App.Views.Manage.CollectingOfficer
             InitializeComponent();
             Helper.LoadFormIcon(this);
             Helper.DatagridFullRowSelectStyle(dgCollectingOfficer, true);
-        }
-
-        private void OnLoad()
-        {
-            LoadCollectingOfficers();
-        }
-
-        private void frmCollectingOfficer_Load(object sender, EventArgs e)
-        {
-            OnLoad();
-        }
-
-        private void btnAdd_Click(object sender, EventArgs e)
-        {
-            _ = new frmCollectingOfficerAdd(this).ShowDialog();
-        }
-
-        private void btnEdit_Click(object sender, EventArgs e)
-        {
-            int index = dgCollectingOfficer.CurrentRow.Index;
-            int collectingOfficerId = Convert.ToInt32(dgCollectingOfficer.Rows[index].Cells["id"].Value);
-            _ = new frmCollectingOfficerEdit(this, collectingOfficerId).ShowDialog();
-        }
-
-        private bool DeleteRecord()
-        {
-            int selectedRowsCount = dgCollectingOfficer.SelectedRows.Count;
-
-            if (selectedRowsCount > 0)
-            {
-                if (Helper.MessageBoxConfirmDelete(selectedRowsCount))
-                {
-                    var modelList = new List<CollectingOfficerModel>();
-                    foreach (DataGridViewRow row in dgCollectingOfficer.SelectedRows)
-                    {
-                        int collectingOfficerID = Convert.ToInt16(row.Cells["id"].Value.ToString());
-                        if (!TreasuryFactory.ReceiptsIssuedRepository().CollectingOfficerHasReceiptAssigned(collectingOfficerID))
-                            modelList.Add(new CollectingOfficerModel() { Id = collectingOfficerID });
-                    }
-                    return TreasuryFactory.CollectingOfficerRepository().Delete(modelList);
-                }
-            }
-            return false;
-        }
-
-        private void btnDelete_Click(object sender, EventArgs e)
-        {
-            if (DeleteRecord())
-                LoadCollectingOfficers();
-        }
-
-        private void dgCollectingOfficer_SelectionChanged(object sender, EventArgs e)
-        {
-            int selectedRowCount = dgCollectingOfficer.SelectedRows.Count;
-            if (dgCollectingOfficer.SelectedRows.Count < 1)
-                return;
-
-            int id = int.Parse(dgCollectingOfficer.CurrentRow.Cells["id"].Value.ToString());
-            byte[] columnIndexTimestamp = { 4, 5 };
-
-            lblJOCount.Text = TreasuryFactory.CollectingOfficerRepository().CollectingOfficerJOCount(id).ToString();
-
-            Helper.ShowRecordTimestamp(dgCollectingOfficer, columnIndexTimestamp, lblCreatedAt, lblUpdatedAt);
-            Helper.EnableDisableToolStripButtons(dgCollectingOfficer, btnEdit, btnDelete);
-
-            btnDelete.Enabled = TreasuryFactory.ReceiptsIssuedRepository().CollectingOfficerHasReceiptAssigned(id) ? false : true;
-            btnJobOrder.Enabled = selectedRowCount == 1;
-        }
-
-        private void btnJobOrder_Click(object sender, EventArgs e)
-        {
-            int index = dgCollectingOfficer.CurrentRow.Index;
-            int collectingOfficerId = int.Parse(dgCollectingOfficer.Rows[index].Cells["id"].Value.ToString());
-            _ = new frmJobOrder(collectingOfficerId).ShowDialog();
-        }
-
-        private void btnSearch_Click(object sender, EventArgs e)
-        {
-            LoadCollectingOfficers();
-        }
-
-        private DataColumn[] DataColumnsCollectingOfficers()
-        {
-            return new DataColumn[]
-            {
-                new DataColumn(Name = "id", typeof(int)),
-                new DataColumn(Name = "full_name", typeof(string)),
-                new DataColumn(Name = "job_title", typeof(string)),
-                new DataColumn(Name = "is_deleted", typeof(bool)),
-                new DataColumn(Name = "created_at", typeof(string)),
-                new DataColumn(Name = "updated_at", typeof(string))
-            };
         }
 
         internal void LoadCollectingOfficers()
@@ -183,6 +91,98 @@ namespace OmniGov.App.Views.Manage.CollectingOfficer
             HelperLoadRecords.CollectingOfficerDatagridView(dataTable, dgCollectingOfficer);
             dgCollectingOfficer.CurrentCell = dgCollectingOfficer.FirstDisplayedCell;
             lblRecordCount.Text = dgCollectingOfficer.Rows.Count.ToString();
+        }
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            _ = new frmCollectingOfficerAdd(this).ShowDialog();
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            if (DeleteRecord())
+                LoadCollectingOfficers();
+        }
+
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+            int index = dgCollectingOfficer.CurrentRow.Index;
+            int collectingOfficerId = Convert.ToInt32(dgCollectingOfficer.Rows[index].Cells["id"].Value);
+            _ = new frmCollectingOfficerEdit(this, collectingOfficerId).ShowDialog();
+        }
+
+        private void btnJobOrder_Click(object sender, EventArgs e)
+        {
+            int index = dgCollectingOfficer.CurrentRow.Index;
+            int collectingOfficerId = int.Parse(dgCollectingOfficer.Rows[index].Cells["id"].Value.ToString());
+            _ = new frmJobOrder(collectingOfficerId).ShowDialog();
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            LoadCollectingOfficers();
+        }
+
+        private DataColumn[] DataColumnsCollectingOfficers()
+        {
+            return new DataColumn[]
+            {
+                new DataColumn(Name = "id", typeof(int)),
+                new DataColumn(Name = "full_name", typeof(string)),
+                new DataColumn(Name = "job_title", typeof(string)),
+                new DataColumn(Name = "is_deleted", typeof(bool)),
+                new DataColumn(Name = "created_at", typeof(string)),
+                new DataColumn(Name = "updated_at", typeof(string))
+            };
+        }
+
+        private bool DeleteRecord()
+        {
+            int selectedRowsCount = dgCollectingOfficer.SelectedRows.Count;
+
+            if (selectedRowsCount > 0)
+            {
+                if (Helper.MessageBoxConfirmDelete(selectedRowsCount))
+                {
+                    var modelList = new List<CollectingOfficerModel>();
+                    foreach (DataGridViewRow row in dgCollectingOfficer.SelectedRows)
+                    {
+                        int collectingOfficerID = Convert.ToInt16(row.Cells["id"].Value.ToString());
+                        if (!TreasuryFactory.ReceiptsIssuedRepository().CollectingOfficerHasReceiptAssigned(collectingOfficerID))
+                            modelList.Add(new CollectingOfficerModel() { Id = collectingOfficerID });
+                    }
+                    return TreasuryFactory.CollectingOfficerRepository().Delete(modelList);
+                }
+            }
+            return false;
+        }
+
+        private void dgCollectingOfficer_SelectionChanged(object sender, EventArgs e)
+        {
+            int selectedRowCount = dgCollectingOfficer.SelectedRows.Count;
+            if (dgCollectingOfficer.SelectedRows.Count < 1)
+                return;
+
+            int id = int.Parse(dgCollectingOfficer.CurrentRow.Cells["id"].Value.ToString());
+            byte[] columnIndexTimestamp = { 4, 5 };
+
+            lblJOCount.Text = TreasuryFactory.CollectingOfficerRepository().CollectingOfficerJOCount(id).ToString();
+
+            Helper.ShowRecordTimestamp(dgCollectingOfficer, columnIndexTimestamp, lblCreatedAt, lblUpdatedAt);
+            Helper.EnableDisableToolStripButtons(dgCollectingOfficer, btnEdit, btnDelete);
+
+            btnDelete.Enabled = TreasuryFactory.ReceiptsIssuedRepository().CollectingOfficerHasReceiptAssigned(id) ? false : true;
+            btnJobOrder.Enabled = selectedRowCount == 1;
+        }
+
+        private void frmCollectingOfficer_Load(object sender, EventArgs e)
+        {
+            OnLoad();
+        }
+
+        private void OnLoad()
+        {
+            LoadCollectingOfficers();
         }
     }
 }

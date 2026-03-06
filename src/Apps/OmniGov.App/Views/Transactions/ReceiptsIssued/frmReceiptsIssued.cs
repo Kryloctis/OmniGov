@@ -1,4 +1,4 @@
-using MySql.Data.MySqlClient;
+﻿using MySql.Data.MySqlClient;
 using OmniGov.App.Helpers;
 using OmniGov.Treasury.Data.Factories;
 using OmniGov.Treasury.Domain.Entities;
@@ -14,93 +14,6 @@ namespace OmniGov.App.Views.Transactions.ReceiptsIssued
             InitializeComponent();
             Helper.LoadFormIcon(this);
             Helper.DatagridFullRowSelectStyle(dgReceiptIssued, true);
-        }
-
-        private void btnAdd_Click(object sender, EventArgs e)
-        {
-            _ = new frmReceiptsIssuedAdd(this).ShowDialog();
-        }
-
-        private bool DeleteRecords()
-        {
-            int selectedRowsCount = dgReceiptIssued.SelectedRows.Count;
-
-            if (Helper.MessageBoxConfirmDelete(selectedRowsCount))
-            {
-                var receiptModelList = new List<ReceiptsIssuedModel>();
-
-                foreach (DataGridViewRow row in dgReceiptIssued.SelectedRows)
-                {
-                    int receiptIssuedId = Convert.ToInt32(row.Cells["id"].Value);
-                    receiptModelList.Add(new ReceiptsIssuedModel() { Id = receiptIssuedId });
-                }
-
-                return TreasuryFactory.ReceiptsIssuedRepository().Delete(receiptModelList);
-            }
-            return false;
-        }
-
-        private void btnDelete_Click(object sender, EventArgs e)
-        {
-            if (DeleteRecords())
-            {
-                Helper.MessageBoxSuccess("Issued receipts has been deleted.");
-                LoadRecords();
-            }
-        }
-
-        private void ShowRecordTimeStamp()
-        {
-        }
-
-        private void dgissue_SelectionChanged(object sender, EventArgs e)
-        {
-            Helper.EnableDisableToolStripButtons(dgReceiptIssued, btnEdit, btnDelete);
-        }
-
-        private void btnEdit_Click(object sender, EventArgs e)
-        {
-       
-            int receiptIssuedID = Convert.ToInt32(dgReceiptIssued.SelectedRows[0].Cells["id"].Value);
-            _ = new frmReceiptsIssuedEdit(this, receiptIssuedID).ShowDialog();
-         
-        }
-
-        private void btnReturn_Click(object sender, EventArgs e)
-        {
-         
-                int issuanceId = Convert.ToInt32(dgReceiptIssued.CurrentRow.Cells["id"].Value);
-                int lastIssued = string.IsNullOrEmpty(dgReceiptIssued.CurrentRow.Cells["last_issued"].Value.ToString()) ? 0 : Convert.ToInt32(dgReceiptIssued.CurrentRow.Cells["last_issued"].Value);
-                //int lastIssued = string.IsNullOrEmpty(dgReceiptIssued.CurrentRow.Cells["last_issued"].Value.ToString()) ? 0 : Convert.ToInt32(dgReceiptIssued.CurrentRow.Cells["last_issued"].Value);
-
-                //int issuedSerialNoFrom = string.IsNullOrEmpty(dgReceiptIssued.CurrentRow.Cells["serial_number_from"].ToString()) ? 0 : Convert.ToInt32(dgReceiptIssued.CurrentRow.Cells["serial_number_from"].Value);
-
-                //int returnSerialNoFrom = lastIssued == 0 ? issuedSerialNoFrom : lastIssued + 1;
-                //int returnSerialNoTo = string.IsNullOrEmpty(dgReceiptIssued.CurrentRow.Cells["serial_number_to"].ToString()) ? 0 : Convert.ToInt32(dgReceiptIssued.CurrentRow.Cells["serial_number_to"].Value);
-
-                //_ = new frmReturnReceipts(this, issuanceId, returnSerialNoFrom, returnSerialNoTo).ShowDialog();
-        }
-
-        private string CollectingOfficerFullName(DataRow row)
-        {
-            string jobOrdersID = row["job_orders_id"].ToString();
-
-            string prefix = row["collecting_officers_prefix"].ToString();
-            string firstName = row["collecting_officers_first_name"].ToString();
-            string midInitial = row["collecting_officers_mid_initial"].ToString();
-            string lastName = row["collecting_officers_last_name"].ToString();
-            string suffix = row["collecting_officers_suffix"].ToString();
-
-            if (!string.IsNullOrEmpty(jobOrdersID))
-            {
-                prefix = row["job_orders_prefix"].ToString();
-                firstName = row["job_orders_first_name"].ToString();
-                midInitial = row["job_orders_mid_initial"].ToString();
-                lastName = row["job_orders_last_name"].ToString();
-                suffix = row["job_orders_suffix"].ToString();
-            }
-
-            return Helper.GenerateFullName(prefix, firstName, midInitial, lastName, suffix);
         }
 
         internal void LoadRecords()
@@ -190,15 +103,94 @@ namespace OmniGov.App.Views.Transactions.ReceiptsIssued
             Helper.EnableDisableToolStripButtons(dgReceiptIssued, btnEdit, btnDelete);
         }
 
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            _ = new frmReceiptsIssuedAdd(this).ShowDialog();
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            if (DeleteRecords())
+            {
+                Helper.MessageBoxSuccess("Issued receipts has been deleted.");
+                LoadRecords();
+            }
+        }
+
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+            int receiptIssuedID = Convert.ToInt32(dgReceiptIssued.SelectedRows[0].Cells["id"].Value);
+            _ = new frmReceiptsIssuedEdit(this, receiptIssuedID).ShowDialog();
+        }
+
+        private void btnReturn_Click(object sender, EventArgs e)
+        {
+            int issuanceId = Convert.ToInt32(dgReceiptIssued.CurrentRow.Cells["id"].Value);
+            int lastIssued = string.IsNullOrEmpty(dgReceiptIssued.CurrentRow.Cells["last_issued"].Value.ToString()) ? 0 : Convert.ToInt32(dgReceiptIssued.CurrentRow.Cells["last_issued"].Value);
+            //int lastIssued = string.IsNullOrEmpty(dgReceiptIssued.CurrentRow.Cells["last_issued"].Value.ToString()) ? 0 : Convert.ToInt32(dgReceiptIssued.CurrentRow.Cells["last_issued"].Value);
+
+            //int issuedSerialNoFrom = string.IsNullOrEmpty(dgReceiptIssued.CurrentRow.Cells["serial_number_from"].ToString()) ? 0 : Convert.ToInt32(dgReceiptIssued.CurrentRow.Cells["serial_number_from"].Value);
+
+            //int returnSerialNoFrom = lastIssued == 0 ? issuedSerialNoFrom : lastIssued + 1;
+            //int returnSerialNoTo = string.IsNullOrEmpty(dgReceiptIssued.CurrentRow.Cells["serial_number_to"].ToString()) ? 0 : Convert.ToInt32(dgReceiptIssued.CurrentRow.Cells["serial_number_to"].Value);
+
+            //_ = new frmReturnReceipts(this, issuanceId, returnSerialNoFrom, returnSerialNoTo).ShowDialog();
+        }
+
         private void btnSearch_Click(object sender, EventArgs e)
         {
             LoadRecords();
         }
 
-        private void frmReceiptsIssued_Load(object sender, EventArgs e)
+        private void cmbxRowFilter_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            HelperLoadRecords.ComboboxRowLimitFilter(cmbxRowFilter);
             LoadRecords();
+        }
+
+        private string CollectingOfficerFullName(DataRow row)
+        {
+            string jobOrdersID = row["job_orders_id"].ToString();
+
+            string prefix = row["collecting_officers_prefix"].ToString();
+            string firstName = row["collecting_officers_first_name"].ToString();
+            string midInitial = row["collecting_officers_mid_initial"].ToString();
+            string lastName = row["collecting_officers_last_name"].ToString();
+            string suffix = row["collecting_officers_suffix"].ToString();
+
+            if (!string.IsNullOrEmpty(jobOrdersID))
+            {
+                prefix = row["job_orders_prefix"].ToString();
+                firstName = row["job_orders_first_name"].ToString();
+                midInitial = row["job_orders_mid_initial"].ToString();
+                lastName = row["job_orders_last_name"].ToString();
+                suffix = row["job_orders_suffix"].ToString();
+            }
+
+            return Helper.GenerateFullName(prefix, firstName, midInitial, lastName, suffix);
+        }
+
+        private bool DeleteRecords()
+        {
+            int selectedRowsCount = dgReceiptIssued.SelectedRows.Count;
+
+            if (Helper.MessageBoxConfirmDelete(selectedRowsCount))
+            {
+                var receiptModelList = new List<ReceiptsIssuedModel>();
+
+                foreach (DataGridViewRow row in dgReceiptIssued.SelectedRows)
+                {
+                    int receiptIssuedId = Convert.ToInt32(row.Cells["id"].Value);
+                    receiptModelList.Add(new ReceiptsIssuedModel() { Id = receiptIssuedId });
+                }
+
+                return TreasuryFactory.ReceiptsIssuedRepository().Delete(receiptModelList);
+            }
+            return false;
+        }
+
+        private void dgissue_SelectionChanged(object sender, EventArgs e)
+        {
+            Helper.EnableDisableToolStripButtons(dgReceiptIssued, btnEdit, btnDelete);
         }
 
         private void dtpDateIssued_ValueChanged(object sender, EventArgs e)
@@ -206,8 +198,9 @@ namespace OmniGov.App.Views.Transactions.ReceiptsIssued
             LoadRecords();
         }
 
-        private void cmbxRowFilter_SelectionChangeCommitted(object sender, EventArgs e)
+        private void frmReceiptsIssued_Load(object sender, EventArgs e)
         {
+            HelperLoadRecords.ComboboxRowLimitFilter(cmbxRowFilter);
             LoadRecords();
         }
     }

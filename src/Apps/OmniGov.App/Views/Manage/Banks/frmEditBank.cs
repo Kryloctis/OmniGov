@@ -1,13 +1,13 @@
-using OmniGov.App.Helpers;
+﻿using OmniGov.App.Helpers;
 using OmniGov.Treasury.Data.Factories;
 
 namespace OmniGov.App.Views.Manage.Banks
 {
     public partial class frmEditBank : Form
     {
-        private int bankId;
         private readonly frmBanks frmBanks;
         private readonly ucBanks uc;
+        private int bankId;
 
         public frmEditBank(frmBanks frmBanks, int bankId)
         {
@@ -16,25 +16,6 @@ namespace OmniGov.App.Views.Manage.Banks
             this.frmBanks = frmBanks;
             this.bankId = bankId;
             uc = ucBanks1;
-        }
-
-        private void frmBankEdit_Load(object sender, EventArgs e)
-        {
-            uc.OnLoad(true, bankId);
-        }
-
-        private bool UpdateData()
-        {
-            if (!uc.ValidateChildren())
-            {
-                Helper.MessageBoxError(uc.GetFormErrors());
-                return false;
-            }
-
-            var banksModel = uc.BanksModel();
-            banksModel.Id = bankId;
-
-            return TreasuryFactory.BanksRepository().Update(banksModel);
         }
 
         private void btnUpdate_Click(object sender, EventArgs e)
@@ -46,6 +27,11 @@ namespace OmniGov.App.Views.Manage.Banks
                 uc.ResetForm();
                 Close();
             }
+        }
+
+        private void frmBankEdit_Load(object sender, EventArgs e)
+        {
+            uc.OnLoad(true, bankId);
         }
 
         private void frmEditBank_KeyDown(object sender, KeyEventArgs e)
@@ -60,6 +46,20 @@ namespace OmniGov.App.Views.Manage.Banks
                     Close();
                 }
             }
+        }
+
+        private bool UpdateData()
+        {
+            if (!uc.ValidateChildren())
+            {
+                Helper.MessageBoxError(uc.GetFormErrors());
+                return false;
+            }
+
+            var banksModel = uc.BanksModel();
+            banksModel.Id = bankId;
+
+            return TreasuryFactory.BanksRepository().Update(banksModel);
         }
     }
 }

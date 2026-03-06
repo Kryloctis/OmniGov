@@ -1,4 +1,4 @@
-namespace OmniGov.App.Views.Transactions.Biddings.BiddingReports
+﻿namespace OmniGov.App.Views.Transactions.Biddings.BiddingReports
 {
     partial class ucRulesAndRegulation
     {

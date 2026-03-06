@@ -1,4 +1,4 @@
-using OmniGov.App.Helpers;
+﻿using OmniGov.App.Helpers;
 using OmniGov.Treasury.Data.Factories;
 
 namespace OmniGov.App.Views.Manage.Banks
@@ -14,17 +14,6 @@ namespace OmniGov.App.Views.Manage.Banks
             Helper.LoadFormIcon(this);
             this.frmBanks = frmBanks;
             uc = ucBanks1;
-        }
-
-        private bool SaveData()
-        {
-            if (!uc.ValidateChildren())
-            {
-                Helper.MessageBoxError(uc.GetFormErrors());
-                return false;
-            }
-
-            return TreasuryFactory.BanksRepository().Insert(uc.BanksModel());
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -53,6 +42,17 @@ namespace OmniGov.App.Views.Manage.Banks
         private void frmAddBanks_Load(object sender, EventArgs e)
         {
             uc.OnLoad(false, null);
+        }
+
+        private bool SaveData()
+        {
+            if (!uc.ValidateChildren())
+            {
+                Helper.MessageBoxError(uc.GetFormErrors());
+                return false;
+            }
+
+            return TreasuryFactory.BanksRepository().Insert(uc.BanksModel());
         }
     }
 }

@@ -1,4 +1,4 @@
-using OmniGov.App.Helpers;
+﻿using OmniGov.App.Helpers;
 using OmniGov.Treasury.Data.Factories;
 using OmniGov.Treasury.Domain.Entities;
 using System.ComponentModel;
@@ -13,45 +13,6 @@ namespace OmniGov.App.Views.Manage.Receipts
             InitializeComponent();
             Helper.LoadFormIcon(this);
             Helper.DatagridFullRowSelectStyle(dgReceipts, true);
-        }
-
-        private void btnAdd_Click(object sender, EventArgs e)
-        {
-            _ = new frmReceiptsAdd(this).ShowDialog();
-        }
-
-        private void btnEdit_Click(object sender, EventArgs e)
-        {
-            int index = dgReceipts.CurrentRow.Index;
-            int receiptId = Convert.ToInt32(dgReceipts.Rows[index].Cells["id"].Value);
-            _ = new frmReceiptsEdit(this, receiptId).ShowDialog();
-        }
-
-        private bool DeleteRecords()
-        {
-            int selectedRowsCount = dgReceipts.SelectedRows.Count;
-
-            if (Helper.MessageBoxConfirmDelete(selectedRowsCount))
-            {
-                var receiptModelList = new List<ReceiptsModel>();
-                foreach (DataGridViewRow row in dgReceipts.SelectedRows)
-                {
-                    int receiptId = Convert.ToInt32(row.Cells["id"].Value);
-                    receiptModelList.Add(new ReceiptsModel() { Id = receiptId });
-                }
-                return TreasuryFactory.ReceiptsRepository().Delete(receiptModelList);
-            }
-
-            return false;
-        }
-
-        private void btnDelete_Click(object sender, EventArgs e)
-        {
-            if (DeleteRecords())
-            {
-                Helper.MessageBoxSuccess("Receipt/s has been deleted.");
-                LoadReceipts();
-            }
         }
 
         internal void LoadReceipts()
@@ -139,9 +100,53 @@ namespace OmniGov.App.Views.Manage.Receipts
             Helper.EnableDisableToolStripButtons(dgReceipts, btnEdit, btnDelete);
         }
 
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            _ = new frmReceiptsAdd(this).ShowDialog();
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            if (DeleteRecords())
+            {
+                Helper.MessageBoxSuccess("Receipt/s has been deleted.");
+                LoadReceipts();
+            }
+        }
+
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+            int index = dgReceipts.CurrentRow.Index;
+            int receiptId = Convert.ToInt32(dgReceipts.Rows[index].Cells["id"].Value);
+            _ = new frmReceiptsEdit(this, receiptId).ShowDialog();
+        }
+
         private void btnSearch_Click(object sender, EventArgs e)
         {
             LoadReceipts();
+        }
+
+        private void cmbxRowFilter_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            LoadReceipts();
+        }
+
+        private bool DeleteRecords()
+        {
+            int selectedRowsCount = dgReceipts.SelectedRows.Count;
+
+            if (Helper.MessageBoxConfirmDelete(selectedRowsCount))
+            {
+                var receiptModelList = new List<ReceiptsModel>();
+                foreach (DataGridViewRow row in dgReceipts.SelectedRows)
+                {
+                    int receiptId = Convert.ToInt32(row.Cells["id"].Value);
+                    receiptModelList.Add(new ReceiptsModel() { Id = receiptId });
+                }
+                return TreasuryFactory.ReceiptsRepository().Delete(receiptModelList);
+            }
+
+            return false;
         }
 
         private void dgReceipts_SelectionChanged(object sender, EventArgs e)
@@ -156,19 +161,14 @@ namespace OmniGov.App.Views.Manage.Receipts
             }
         }
 
+        private void dtpReceivedDate_ValueChanged(object sender, EventArgs e)
+        {
+            LoadReceipts();
+        }
+
         private void frmReceipts_Load(object sender, EventArgs e)
         {
             HelperLoadRecords.ComboboxRowLimitFilter(cmbxRowFilter);
-            LoadReceipts();
-        }
-
-        private void cmbxRowFilter_SelectionChangeCommitted(object sender, EventArgs e)
-        {
-            LoadReceipts();
-        }
-
-        private void dtpReceivedDate_ValueChanged(object sender, EventArgs e)
-        {
             LoadReceipts();
         }
     }

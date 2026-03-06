@@ -1,4 +1,4 @@
-using OmniGov.App.Helpers;
+﻿using OmniGov.App.Helpers;
 using OmniGov.Treasury.Data.Factories;
 using OmniGov.Treasury.Domain.Entities;
 
@@ -15,6 +15,16 @@ namespace OmniGov.App.Views.Manage.BusinessAddOnCharges
             _frmBusinessAddOnCharges = frmBusinessAdOnCharges;
             _ucBusinessAddOnCharges = ucBusinessAdOnCharges1;
             _ucBusinessAddOnCharges.isEdit = false;
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            if (SaveData())
+            {
+                Helper.MessageBoxSuccess("Business Add-on has been saved.");
+                _frmBusinessAddOnCharges.LoadBusinessAddOnCharges();
+                _ucBusinessAddOnCharges.ResetForm();
+            }
         }
 
         private bool SaveData()
@@ -38,16 +48,6 @@ namespace OmniGov.App.Views.Manage.BusinessAddOnCharges
             };
 
             return TreasuryFactory.BusinessAddOnChargesRepository().Insert(businessAdOnChargesModel);
-        }
-
-        private void btnSave_Click(object sender, EventArgs e)
-        {
-            if (SaveData())
-            {
-                Helper.MessageBoxSuccess("Business Add-on has been saved.");
-                _frmBusinessAddOnCharges.LoadBusinessAddOnCharges();
-                _ucBusinessAddOnCharges.ResetForm();
-            }
         }
     }
 }

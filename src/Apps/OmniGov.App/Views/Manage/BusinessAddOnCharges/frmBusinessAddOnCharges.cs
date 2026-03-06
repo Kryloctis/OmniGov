@@ -1,4 +1,4 @@
-using OmniGov.App.Helpers;
+﻿using OmniGov.App.Helpers;
 using OmniGov.Treasury.Data.Factories;
 using OmniGov.Treasury.Domain.Entities;
 
@@ -27,37 +27,6 @@ namespace OmniGov.App.Views.Manage.BusinessAddOnCharges
             _ = new frmAddBusinessAddOnCharges(this).ShowDialog();
         }
 
-        private void btnEdit_Click(object sender, EventArgs e)
-        {
-            int businessAddOnChargesID = Convert.ToInt32(dgBusinessAddOnCharges.SelectedRows[0].Cells[0].Value);
-            _ = new frmEditBusinessAddOnCharges(businessAddOnChargesID, this).ShowDialog();
-        }
-
-        private void frmBusinessAddOnCharges_Load(object sender, EventArgs e)
-        {
-            LoadBusinessAddOnCharges();
-        }
-
-        private void toolStripTextBoxSearch_TextChanged(object sender, EventArgs e)
-        {
-            LoadBusinessAddOnCharges();
-        }
-
-        private void LoadRecordTimeStamp(DataGridView dataGridView)
-        {
-            var createdAtColumnIndex = dataGridView.Columns["created_at"].Index;
-            var updatedAtColumnIndex = dataGridView.Columns["updated_at"].Index;
-
-            byte[] indexes = { (byte)createdAtColumnIndex, (byte)updatedAtColumnIndex };
-            Helper.ShowRecordTimestamp(dataGridView, indexes, toolStripStatusLabelCreatedAt, toolStripStatusLabelUpdatedAt);
-        }
-
-        private void dgBusinessCategories_SelectionChanged(object sender, EventArgs e)
-        {
-            Helper.EnableDisableToolStripButtons(dgBusinessAddOnCharges, btnEdit, btnDelete);
-            LoadRecordTimeStamp(dgBusinessAddOnCharges);
-        }
-
         private void btnDelete_Click(object sender, EventArgs e)
         {
             int deletedRecordCount;
@@ -67,6 +36,12 @@ namespace OmniGov.App.Views.Manage.BusinessAddOnCharges
                 Helper.MessageBoxSuccess($"{deletedRecordCount} record/s has been deleted.");
                 LoadBusinessAddOnCharges();
             }
+        }
+
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+            int businessAddOnChargesID = Convert.ToInt32(dgBusinessAddOnCharges.SelectedRows[0].Cells[0].Value);
+            _ = new frmEditBusinessAddOnCharges(businessAddOnChargesID, this).ShowDialog();
         }
 
         private bool DeleteBusinessAddOnCharges(out int deletedCount)
@@ -89,6 +64,31 @@ namespace OmniGov.App.Views.Manage.BusinessAddOnCharges
 
             deletedCount = 0;
             return false;
+        }
+
+        private void dgBusinessCategories_SelectionChanged(object sender, EventArgs e)
+        {
+            Helper.EnableDisableToolStripButtons(dgBusinessAddOnCharges, btnEdit, btnDelete);
+            LoadRecordTimeStamp(dgBusinessAddOnCharges);
+        }
+
+        private void frmBusinessAddOnCharges_Load(object sender, EventArgs e)
+        {
+            LoadBusinessAddOnCharges();
+        }
+
+        private void LoadRecordTimeStamp(DataGridView dataGridView)
+        {
+            var createdAtColumnIndex = dataGridView.Columns["created_at"].Index;
+            var updatedAtColumnIndex = dataGridView.Columns["updated_at"].Index;
+
+            byte[] indexes = { (byte)createdAtColumnIndex, (byte)updatedAtColumnIndex };
+            Helper.ShowRecordTimestamp(dataGridView, indexes, toolStripStatusLabelCreatedAt, toolStripStatusLabelUpdatedAt);
+        }
+
+        private void toolStripTextBoxSearch_TextChanged(object sender, EventArgs e)
+        {
+            LoadBusinessAddOnCharges();
         }
     }
 }

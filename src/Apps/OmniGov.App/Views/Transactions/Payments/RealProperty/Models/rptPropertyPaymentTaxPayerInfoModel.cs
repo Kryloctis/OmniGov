@@ -1,4 +1,4 @@
-namespace OmniGov.App.Views.Transactions.Payments.RealProperty.Models
+﻿namespace OmniGov.App.Views.Transactions.Payments.RealProperty.Models
 {
     public class rptPropertyPaymentTaxPayerInfoModel
     {

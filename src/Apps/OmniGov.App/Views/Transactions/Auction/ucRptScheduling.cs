@@ -1,4 +1,4 @@
-using OmniGov.App.Helpers;
+﻿using OmniGov.App.Helpers;
 using OmniGov.Core.Factories;
 using OmniGov.Treasury.Data.Factories;
 using OmniGov.Treasury.Domain.Entities;
@@ -49,6 +49,26 @@ namespace OmniGov.App.Views.Transactions.Auction
             }
 
             return isEdit ? TreasuryFactory.RptAuctionRepository().Update(RptAuctionModel()) : TreasuryFactory.RptAuctionRepository().Insert(RptAuctionModel());
+        }
+
+        private void cmbxAuctionSchedule_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorComboBox(errorProvider1, cmbxAuctionSchedule);
+        }
+
+        private void cmbxAuctionSchedule_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            e.Cancel = Helper.ShowErrorComboBoxEmpty(errorProvider1, cmbxAuctionSchedule, "Auction Schedule.");
+        }
+
+        private void cmbxProperty_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorComboBox(errorProvider1, cmbxProperty);
+        }
+
+        private void cmbxProperty_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            e.Cancel = Helper.ShowErrorComboBoxEmpty(errorProvider1, cmbxProperty, "Real Property.");
         }
 
         private void LoadAuctionSchedule()
@@ -117,26 +137,6 @@ namespace OmniGov.App.Views.Transactions.Auction
             if (isEdit) model.Id = rptScheduleId.Value;
 
             return model;
-        }
-
-        private void cmbxAuctionSchedule_Validating(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            e.Cancel = Helper.ShowErrorComboBoxEmpty(errorProvider1, cmbxAuctionSchedule, "Auction Schedule.");
-        }
-
-        private void cmbxAuctionSchedule_Validated(object sender, EventArgs e)
-        {
-            Helper.ClearErrorComboBox(errorProvider1, cmbxAuctionSchedule);
-        }
-
-        private void cmbxProperty_Validating(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            e.Cancel = Helper.ShowErrorComboBoxEmpty(errorProvider1, cmbxProperty, "Real Property.");
-        }
-
-        private void cmbxProperty_Validated(object sender, EventArgs e)
-        {
-            Helper.ClearErrorComboBox(errorProvider1, cmbxProperty);
         }
 
         private void ucRptScheduling_Load(object sender, EventArgs e)

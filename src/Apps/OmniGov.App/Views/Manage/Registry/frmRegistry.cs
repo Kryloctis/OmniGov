@@ -1,4 +1,4 @@
-using OmniGov.App.Helpers;
+﻿using OmniGov.App.Helpers;
 using OmniGov.Core.Entities;
 using OmniGov.Core.Factories;
 using System.ComponentModel;
@@ -13,50 +13,6 @@ namespace OmniGov.App.Views.Manage.Registry
             InitializeComponent();
             Helper.LoadFormIcon(this);
             Helper.DatagridFullRowSelectStyle(dataGridView1, true);
-        }
-
-        private void frmRegistry_Load(object sender, EventArgs e)
-        {
-            HelperLoadRecords.ComboboxRowLimitFilter(cmbxRowFilter);
-            LoadRecords();
-            Helper.EnableDisableToolStripButtons(dataGridView1, btnEdit, btnDelete);
-        }
-
-        private void btnAdd_Click(object sender, EventArgs e)
-        {
-            _ = new frmAddRegistry(this).ShowDialog();
-        }
-
-        private void btnEdit_Click(object sender, EventArgs e)
-        {
-            int index = dataGridView1.CurrentCell.RowIndex;
-            int registryId = Convert.ToInt32(dataGridView1.Rows[index].Cells["id"].Value);
-
-            _ = new frmEditRegistry(registryId, this).ShowDialog();
-        }
-
-        private bool DeleteRegistry(DataGridViewSelectedRowCollection selectedRows)
-        {
-            if (Helper.MessageBoxConfirmDelete(selectedRows.Count))
-            {
-                var registryModels = new List<RegistryModel>();
-
-                foreach (DataGridViewRow row in selectedRows)
-                    registryModels.Add(new RegistryModel() { Id = Convert.ToInt32(row.Cells["id"].Value) });
-
-                return Factory.RegistryRepository().Delete(registryModels);
-            }
-            return false;
-        }
-
-        private void btnDelete_Click(object sender, EventArgs e)
-        {
-            var selectedRows = dataGridView1.SelectedRows;
-            if (DeleteRegistry(selectedRows))
-            {
-                Helper.MessageBoxSuccess($"{selectedRows.Count} Record/s has been deleted");
-                LoadRecords();
-            }
         }
 
         internal void LoadRecords()
@@ -136,11 +92,32 @@ namespace OmniGov.App.Views.Manage.Registry
             lblRecordCount.Text = dataGridView1.Rows.Count.ToString();
         }
 
-        private void dataGridView1_SelectionChanged(object sender, EventArgs e)
+        private void btnAdd_Click(object sender, EventArgs e)
         {
-            var stampIndex = new byte[] { 7, 8 };
-            Helper.ShowRecordTimestamp(dataGridView1, stampIndex, lblCreatedAt, lblUpdatedAt);
-            Helper.EnableDisableToolStripButtons(dataGridView1, btnEdit, btnDelete);
+            _ = new frmAddRegistry(this).ShowDialog();
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            var selectedRows = dataGridView1.SelectedRows;
+            if (DeleteRegistry(selectedRows))
+            {
+                Helper.MessageBoxSuccess($"{selectedRows.Count} Record/s has been deleted");
+                LoadRecords();
+            }
+        }
+
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+            int index = dataGridView1.CurrentCell.RowIndex;
+            int registryId = Convert.ToInt32(dataGridView1.Rows[index].Cells["id"].Value);
+
+            _ = new frmEditRegistry(registryId, this).ShowDialog();
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            LoadRecords();
         }
 
         private void cmbxRowFilter_SelectionChangeCommitted(object sender, EventArgs e)
@@ -148,9 +125,32 @@ namespace OmniGov.App.Views.Manage.Registry
             LoadRecords();
         }
 
-        private void btnSearch_Click(object sender, EventArgs e)
+        private void dataGridView1_SelectionChanged(object sender, EventArgs e)
         {
+            var stampIndex = new byte[] { 7, 8 };
+            Helper.ShowRecordTimestamp(dataGridView1, stampIndex, lblCreatedAt, lblUpdatedAt);
+            Helper.EnableDisableToolStripButtons(dataGridView1, btnEdit, btnDelete);
+        }
+
+        private bool DeleteRegistry(DataGridViewSelectedRowCollection selectedRows)
+        {
+            if (Helper.MessageBoxConfirmDelete(selectedRows.Count))
+            {
+                var registryModels = new List<RegistryModel>();
+
+                foreach (DataGridViewRow row in selectedRows)
+                    registryModels.Add(new RegistryModel() { Id = Convert.ToInt32(row.Cells["id"].Value) });
+
+                return Factory.RegistryRepository().Delete(registryModels);
+            }
+            return false;
+        }
+
+        private void frmRegistry_Load(object sender, EventArgs e)
+        {
+            HelperLoadRecords.ComboboxRowLimitFilter(cmbxRowFilter);
             LoadRecords();
+            Helper.EnableDisableToolStripButtons(dataGridView1, btnEdit, btnDelete);
         }
     }
 }

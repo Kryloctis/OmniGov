@@ -1,4 +1,4 @@
-using Microsoft.Reporting.WinForms;
+﻿using Microsoft.Reporting.WinForms;
 using OmniGov.App.Helpers;
 using System.Data;
 using System.Drawing.Printing;
@@ -15,86 +15,6 @@ namespace OmniGov.App.Views.Transactions.Payments
             reportViewerPrint.SetDisplayMode(DisplayMode.PrintLayout);
             panel1.Controls.Add(reportViewerPrint);
             reportViewerPrint.Visible = false;
-        }
-
-        private Task PopulatePrinterComboBox(ComboBox comboBox, LocalReport localReport)
-        {
-            comboBox.DataSource = null;
-            TogglePrintComponents(false, "Searching for valid Printer/s...");
-
-            return Task.Run(() =>
-            {
-                var localReportSize = localReport.GetDefaultPageSettings().PaperSize;
-                var printers = PrinterSettings.InstalledPrinters.Cast<string>()
-                 .Where(printerName =>
-                 {
-                     var printerSettings = new PrinterSettings { PrinterName = printerName };
-
-                     if (!printerSettings.IsValid)
-                         return false;
-
-                     return printerSettings.PaperSizes.Cast<PaperSize>().Any(paperSize =>
-                         paperSize.Width == localReportSize.Width && paperSize.Height == localReportSize.Height);
-                 })
-                 .ToList();
-
-                Invoke(new MethodInvoker(() =>
-                {
-                    comboBox.DataSource = printers;
-                    bool hasPrinter = cmbxPrinter.Items.Count > 0;
-                    var message = !hasPrinter
-                       ? "No valid printers found..."
-                       : $"You are all set!\nFound {cmbxPrinter.Items.Count} valid printer/s";
-                    TogglePrintComponents(true, message);
-                }));
-            });
-        }
-
-        private Task LoadReceiptAsync(string reportPath, Dictionary<string, string> dictParameters, ReportDataSource reportDataSource)
-        {
-            TogglePrintComponents(false, "Preparing...");
-
-            return Task.Run(() =>
-            {
-                var localReportReceipt = reportViewerPrint.LocalReport;
-                var reportParameters = new List<ReportParameter>();
-                foreach (var item in dictParameters)
-                {
-                    var reportParameter = new ReportParameter(item.Key, item.Value);
-                    reportParameters.Add(reportParameter);
-                }
-
-                if (reportDataSource is not null)
-                {
-                    localReportReceipt.DataSources.Clear();
-                    localReportReceipt.DataSources.Add(reportDataSource);
-                }
-
-                localReportReceipt.ReportPath = reportPath;
-                localReportReceipt.SetParameters(reportParameters);
-            });
-        }
-
-        private void TogglePrintComponents(bool isTrue, string status)
-        {
-            lblStatus.Text = status;
-            btnPrintReceipt.Enabled = isTrue;
-            cmbxPrinter.Enabled = isTrue;
-        }
-
-        private async Task MotherTask(string reportPath, Dictionary<string, string> reportParameters, ReportDataSource reportDataSource)
-        {
-            await LoadReceiptAsync(reportPath, reportParameters, reportDataSource);
-            lblStatus.Text = "Receipt is all set!";
-            reportViewerPrint.RefreshReport();
-
-            var localReport = reportViewerPrint.LocalReport;
-            await PopulatePrinterComboBox(cmbxPrinter, localReport);
-        }
-
-        internal async void Onload(string reportPath, Dictionary<string, string> reportParameters, ReportDataSource reportDataSource = null)
-        {
-            await MotherTask(reportPath, reportParameters, reportDataSource);
         }
 
         public void PrintReport(ReportViewer reportViewer, string printerName)
@@ -168,6 +88,11 @@ namespace OmniGov.App.Views.Transactions.Payments
             }
         }
 
+        internal async void Onload(string reportPath, Dictionary<string, string> reportParameters, ReportDataSource reportDataSource = null)
+        {
+            await MotherTask(reportPath, reportParameters, reportDataSource);
+        }
+
         private void btnPrint_Click(object sender, EventArgs e)
         {
             string printerName = cmbxPrinter.Text;
@@ -178,6 +103,81 @@ namespace OmniGov.App.Views.Transactions.Payments
         {
             var localReport = reportViewerPrint.LocalReport;
             await PopulatePrinterComboBox(cmbxPrinter, localReport);
+        }
+
+        private Task LoadReceiptAsync(string reportPath, Dictionary<string, string> dictParameters, ReportDataSource reportDataSource)
+        {
+            TogglePrintComponents(false, "Preparing...");
+
+            return Task.Run(() =>
+            {
+                var localReportReceipt = reportViewerPrint.LocalReport;
+                var reportParameters = new List<ReportParameter>();
+                foreach (var item in dictParameters)
+                {
+                    var reportParameter = new ReportParameter(item.Key, item.Value);
+                    reportParameters.Add(reportParameter);
+                }
+
+                if (reportDataSource is not null)
+                {
+                    localReportReceipt.DataSources.Clear();
+                    localReportReceipt.DataSources.Add(reportDataSource);
+                }
+
+                localReportReceipt.ReportPath = reportPath;
+                localReportReceipt.SetParameters(reportParameters);
+            });
+        }
+
+        private async Task MotherTask(string reportPath, Dictionary<string, string> reportParameters, ReportDataSource reportDataSource)
+        {
+            await LoadReceiptAsync(reportPath, reportParameters, reportDataSource);
+            lblStatus.Text = "Receipt is all set!";
+            reportViewerPrint.RefreshReport();
+
+            var localReport = reportViewerPrint.LocalReport;
+            await PopulatePrinterComboBox(cmbxPrinter, localReport);
+        }
+
+        private Task PopulatePrinterComboBox(ComboBox comboBox, LocalReport localReport)
+        {
+            comboBox.DataSource = null;
+            TogglePrintComponents(false, "Searching for valid Printer/s...");
+
+            return Task.Run(() =>
+            {
+                var localReportSize = localReport.GetDefaultPageSettings().PaperSize;
+                var printers = PrinterSettings.InstalledPrinters.Cast<string>()
+                 .Where(printerName =>
+                 {
+                     var printerSettings = new PrinterSettings { PrinterName = printerName };
+
+                     if (!printerSettings.IsValid)
+                         return false;
+
+                     return printerSettings.PaperSizes.Cast<PaperSize>().Any(paperSize =>
+                         paperSize.Width == localReportSize.Width && paperSize.Height == localReportSize.Height);
+                 })
+                 .ToList();
+
+                Invoke(new MethodInvoker(() =>
+                {
+                    comboBox.DataSource = printers;
+                    bool hasPrinter = cmbxPrinter.Items.Count > 0;
+                    var message = !hasPrinter
+                       ? "No valid printers found..."
+                       : $"You are all set!\nFound {cmbxPrinter.Items.Count} valid printer/s";
+                    TogglePrintComponents(true, message);
+                }));
+            });
+        }
+
+        private void TogglePrintComponents(bool isTrue, string status)
+        {
+            lblStatus.Text = status;
+            btnPrintReceipt.Enabled = isTrue;
+            cmbxPrinter.Enabled = isTrue;
         }
     }
 }

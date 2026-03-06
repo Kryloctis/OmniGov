@@ -1,4 +1,4 @@
-using OmniGov.App.Helpers;
+﻿using OmniGov.App.Helpers;
 using OmniGov.Core.Entities;
 using OmniGov.Core.Factories;
 
@@ -14,53 +14,6 @@ namespace OmniGov.App.Views.Manage.AccountableForm
             InitializeComponent();
             Helper.DatagridFullRowSelectStyle(dgfacevalue);
             this.accountableFormId = accountableFormId;
-        }
-
-        private void frmFaceValue_Load(object sender, EventArgs e)
-        {
-            LoadList();
-        }
-
-        private void LoadList()
-        {
-            if (accountableFormId != 0)
-            {
-                var facevaluerepo = Factory.FaceValueRepository();
-                var dtFaceValue = facevaluerepo.GetRecordsByAccountableFormId(accountableFormId);
-
-                HelperLoadRecords.FaceValueDatagridView(dtFaceValue, dgfacevalue);
-            }
-        }
-
-        private void dgfacevalue_SelectionChanged(object sender, EventArgs e)
-        {
-            if (dgfacevalue.Rows.Count > 0 && dgfacevalue.SelectedRows.Count > 0)
-            {
-                btnEdit.Enabled = true;
-                btnDelete.Enabled = true;
-            }
-            else
-            {
-                btnEdit.Enabled = false;
-                btnDelete.Enabled = false;
-            }
-
-            byte[] columnIndexTimestamp = { 4, 5 };
-            Helper.ShowRecordTimestamp(dgfacevalue, columnIndexTimestamp, lblCreatedAt, lblUpdatedAt);
-        }
-
-        private void btnEdit_Click(object sender, EventArgs e)
-        {
-            if (dgfacevalue.SelectedRows.Count > 0)
-            {
-                int Id = int.Parse(dgfacevalue.SelectedCells[0].Value.ToString());
-
-                var facevaluerepo = Factory.FaceValueRepository();
-                var faceval = facevaluerepo.GetRecordByID(Id);
-                faceValueId = int.Parse(faceval["id"]);
-                dtdate.Value = Convert.ToDateTime(faceval["date"]);
-                txtamount.Value = decimal.Parse(faceval["amount"]);
-            }
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
@@ -84,6 +37,20 @@ namespace OmniGov.App.Views.Manage.AccountableForm
             }
         }
 
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+            if (dgfacevalue.SelectedRows.Count > 0)
+            {
+                int Id = int.Parse(dgfacevalue.SelectedCells[0].Value.ToString());
+
+                var facevaluerepo = Factory.FaceValueRepository();
+                var faceval = facevaluerepo.GetRecordByID(Id);
+                faceValueId = int.Parse(faceval["id"]);
+                dtdate.Value = Convert.ToDateTime(faceval["date"]);
+                txtamount.Value = decimal.Parse(faceval["amount"]);
+            }
+        }
+
         private void btnsave_Click(object sender, EventArgs e)
         {
             if (faceValueId != 0)
@@ -92,26 +59,37 @@ namespace OmniGov.App.Views.Manage.AccountableForm
                 UpdateFaceValue();
         }
 
-        private void UpdateFaceValue()
+        private void dgfacevalue_SelectionChanged(object sender, EventArgs e)
         {
-            if (txtamount.Value == 0)
+            if (dgfacevalue.Rows.Count > 0 && dgfacevalue.SelectedRows.Count > 0)
             {
-                errorProvider.SetError(txtamount, "Please set face value amount.");
-                txtamount.Focus();
+                btnEdit.Enabled = true;
+                btnDelete.Enabled = true;
+            }
+            else
+            {
+                btnEdit.Enabled = false;
+                btnDelete.Enabled = false;
             }
 
-            var facemodel = new FaceValueModel()
-            {
-                accountable_forms_id = accountableFormId,
-                facedate = dtdate.Value,
-                facevalue = txtamount.Value
-            };
-            var facevaluerepo = Factory.FaceValueRepository();
-            if (facevaluerepo.Insert(facemodel))
-                faceValueId = 0;
-            dtdate.Value = DateTime.Now;
-            txtamount.Value = 0;
+            byte[] columnIndexTimestamp = { 4, 5 };
+            Helper.ShowRecordTimestamp(dgfacevalue, columnIndexTimestamp, lblCreatedAt, lblUpdatedAt);
+        }
+
+        private void frmFaceValue_Load(object sender, EventArgs e)
+        {
             LoadList();
+        }
+
+        private void LoadList()
+        {
+            if (accountableFormId != 0)
+            {
+                var facevaluerepo = Factory.FaceValueRepository();
+                var dtFaceValue = facevaluerepo.GetRecordsByAccountableFormId(accountableFormId);
+
+                HelperLoadRecords.FaceValueDatagridView(dtFaceValue, dgfacevalue);
+            }
         }
 
         private void SaveFaceValue()
@@ -133,6 +111,28 @@ namespace OmniGov.App.Views.Manage.AccountableForm
 
             var facevaluerepo = Factory.FaceValueRepository();
             if (facevaluerepo.Update(facemodel))
+                faceValueId = 0;
+            dtdate.Value = DateTime.Now;
+            txtamount.Value = 0;
+            LoadList();
+        }
+
+        private void UpdateFaceValue()
+        {
+            if (txtamount.Value == 0)
+            {
+                errorProvider.SetError(txtamount, "Please set face value amount.");
+                txtamount.Focus();
+            }
+
+            var facemodel = new FaceValueModel()
+            {
+                accountable_forms_id = accountableFormId,
+                facedate = dtdate.Value,
+                facevalue = txtamount.Value
+            };
+            var facevaluerepo = Factory.FaceValueRepository();
+            if (facevaluerepo.Insert(facemodel))
                 faceValueId = 0;
             dtdate.Value = DateTime.Now;
             txtamount.Value = 0;

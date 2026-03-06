@@ -1,5 +1,4 @@
-using MySql.Data.MySqlClient;
-using OmniGov.App.Helpers;
+﻿using OmniGov.App.Helpers;
 using OmniGov.Core.Entities;
 using OmniGov.Core.Factories;
 using OmniGov.Treasury.Data.Factories;
@@ -19,79 +18,42 @@ namespace OmniGov.App.Views.Manage.AccountableForm
             Helper.DatagridFullRowSelectStyle(dgfacevalue, true);
         }
 
-        private void btnAdd_Click(object sender, EventArgs e)
+        internal void LoadFaceValues(int accountableFormId)
         {
-            _ = new frmAddAccountableForm(this).ShowDialog();
-        }
+            var dataTable = new DataTable();
+            dataTable.Columns.AddRange(FaceValueDataColumns());
 
-        private void btnDelete_Click(object sender, EventArgs e)
-        {
-            if (DeleteData())
+            var dtFaceValue = Factory.FaceValueRepository().GetRecordsByAccountableFormId(accountableFormId);
+
+            foreach (DataRow row in dtFaceValue.Rows)
             {
-                LoadRecords();
+                var newRow = dataTable.NewRow();
+                int id = Convert.ToInt32(row["id"]);
+                int accFormId = Convert.ToInt32(row["accountable_forms_id"]);
+                DateTime date = Convert.ToDateTime(row["date_effective"]);
+                decimal amount = Convert.ToDecimal(row["amount"]);
+                bool isDefault = Convert.ToBoolean(row["is_default"]);
+
+                newRow["id"] = id;
+                newRow["accountable_forms_id"] = accFormId;
+                newRow["date_effective"] = date;
+                newRow["amount"] = amount;
+                newRow["is_default"] = isDefault;
+
+                dataTable.Rows.Add(newRow);
             }
+
+            HelperLoadRecords.FaceValueDatagridView(dataTable, dgfacevalue);
         }
 
-        private void btnEdit_Click(object sender, EventArgs e)
+        internal void LoadRecords()
         {
-            int rowIndex = dgAccountableForm.CurrentRow.Index;
-            int accountableFormId = Convert.ToInt32(dgAccountableForm.Rows[rowIndex].Cells["id"].Value.ToString());
-
-            _ = new frmEditAccountableForm(this, accountableFormId).ShowDialog();
-        }
-
-        private bool DeleteData()
-        {
-            int selectedrowscount = dgAccountableForm.SelectedRows.Count;
-
-            if (Helper.MessageBoxConfirmDelete(selectedrowscount))
+            if (!backgroundWorker1.IsBusy)
             {
-                var accModelList = new List<AccountableFormsModel>();
-                foreach (DataGridViewRow row in dgAccountableForm.SelectedRows)
-                {
-                    int rowId = Convert.ToInt16(row.Cells["id"].Value.ToString());
-                    accModelList.Add(new AccountableFormsModel() { Id = rowId });
-                }
-
-                return TreasuryFactory.AccountableFormsRepository().Delete(accModelList);
+                pbLoadRecords.Value = 0;
+                string searchKey = txtSearch.Text.Trim();
+                backgroundWorker1.RunWorkerAsync(searchKey);
             }
-            return false;
-        }
-
-        private void EnableDisableContent()
-        {
-            Helper.EnableDisableToolStripButtons(dgAccountableForm, btnEdit, btnDelete);
-            int selectedRowCount = dgAccountableForm.SelectedRows.Count;
-
-            if (selectedRowCount == 1)
-            {
-                int index = dgAccountableForm.CurrentCell.RowIndex;
-                int accountableFormId = Convert.ToInt32(dgAccountableForm.Rows[index].Cells["id"].Value);
-                groupBox2.Enabled = true;
-
-                LoadFaceValues(accountableFormId);
-            }
-            else
-            {
-                groupBox2.Enabled = false;
-            }
-        }
-
-        private void dgAccountableForm_SelectionChanged(object sender, EventArgs e)
-        {
-            EnableDisableContent();
-        }
-
-        private void frmAccountable_Load(object sender, EventArgs e)
-        {
-            LoadRecords();
-            EnableDisableContent();
-            Helper.EnableDisableToolStripButtons(dgfacevalue, btnEditFV, btnDeleteFV);
-        }
-
-        private void btnSearch_Click(object sender, EventArgs e)
-        {
-            LoadRecords();
         }
 
         private DataColumn[] AccountableFormColumns()
@@ -105,16 +67,6 @@ namespace OmniGov.App.Views.Manage.AccountableForm
             };
 
             return dataColumns;
-        }
-
-        internal void LoadRecords()
-        {
-            if (!backgroundWorker1.IsBusy)
-            {
-                pbLoadRecords.Value = 0;
-                string searchKey = txtSearch.Text.Trim();
-                backgroundWorker1.RunWorkerAsync(searchKey);
-            }
         }
 
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
@@ -177,46 +129,9 @@ namespace OmniGov.App.Views.Manage.AccountableForm
             lblRecordCount.Text = dgAccountableForm.RowCount.ToString();
         }
 
-        //Face Value
-
-        private DataColumn[] FaceValueDataColumns()
+        private void btnAdd_Click(object sender, EventArgs e)
         {
-            return new DataColumn[]
-            {
-                new DataColumn(Name = "id", typeof(int)),
-                new DataColumn(Name = "accountable_forms_id", typeof(int)),
-                new DataColumn(Name = "date_effective", typeof(DateTime)),
-                new DataColumn(Name = "amount", typeof(decimal)),
-                new DataColumn(Name = "is_default", typeof(bool))
-            };
-        }
-
-        internal void LoadFaceValues(int accountableFormId)
-        {
-            var dataTable = new DataTable();
-            dataTable.Columns.AddRange(FaceValueDataColumns());
-
-            var dtFaceValue = Factory.FaceValueRepository().GetRecordsByAccountableFormId(accountableFormId);
-
-            foreach (DataRow row in dtFaceValue.Rows)
-            {
-                var newRow = dataTable.NewRow();
-                int id = Convert.ToInt32(row["id"]);
-                int accFormId = Convert.ToInt32(row["accountable_forms_id"]);
-                DateTime date = Convert.ToDateTime(row["date_effective"]);
-                decimal amount = Convert.ToDecimal(row["amount"]);
-                bool isDefault = Convert.ToBoolean(row["is_default"]);
-
-                newRow["id"] = id;
-                newRow["accountable_forms_id"] = accFormId;
-                newRow["date_effective"] = date;
-                newRow["amount"] = amount;
-                newRow["is_default"] = isDefault;
-
-                dataTable.Rows.Add(newRow);
-            }
-
-            HelperLoadRecords.FaceValueDatagridView(dataTable, dgfacevalue);
+            _ = new frmAddAccountableForm(this).ShowDialog();
         }
 
         private void btnAddFV_Click(object sender, EventArgs e)
@@ -227,6 +142,34 @@ namespace OmniGov.App.Views.Manage.AccountableForm
             _ = new frmAddFaceValue(this, accountableFormId).ShowDialog();
         }
 
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            if (DeleteData())
+            {
+                LoadRecords();
+            }
+        }
+
+        private void btnDeleteFV_Click(object sender, EventArgs e)
+        {
+            if (DeleteFaceValue())
+            {
+                int index = dgAccountableForm.CurrentCell.RowIndex;
+                int accountableFormId = Convert.ToInt32(dgAccountableForm.Rows[index].Cells["id"].Value);
+
+                Helper.MessageBoxSuccess("Face Value/s has been deleted");
+                LoadFaceValues(accountableFormId);
+            }
+        }
+
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+            int rowIndex = dgAccountableForm.CurrentRow.Index;
+            int accountableFormId = Convert.ToInt32(dgAccountableForm.Rows[rowIndex].Cells["id"].Value.ToString());
+
+            _ = new frmEditAccountableForm(this, accountableFormId).ShowDialog();
+        }
+
         private void btnEditFV_Click(object sender, EventArgs e)
         {
             int indexFaceValue = dgfacevalue.CurrentCell.RowIndex;
@@ -235,6 +178,29 @@ namespace OmniGov.App.Views.Manage.AccountableForm
             int faceValueId = Convert.ToInt32(dgfacevalue.Rows[indexFaceValue].Cells["id"].Value);
 
             _ = new frmEditFaceValue(this, accountableFormId, faceValueId).ShowDialog();
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            LoadRecords();
+        }
+
+        private bool DeleteData()
+        {
+            int selectedrowscount = dgAccountableForm.SelectedRows.Count;
+
+            if (Helper.MessageBoxConfirmDelete(selectedrowscount))
+            {
+                var accModelList = new List<AccountableFormsModel>();
+                foreach (DataGridViewRow row in dgAccountableForm.SelectedRows)
+                {
+                    int rowId = Convert.ToInt16(row.Cells["id"].Value.ToString());
+                    accModelList.Add(new AccountableFormsModel() { Id = rowId });
+                }
+
+                return TreasuryFactory.AccountableFormsRepository().Delete(accModelList);
+            }
+            return false;
         }
 
         private bool DeleteFaceValue()
@@ -256,20 +222,51 @@ namespace OmniGov.App.Views.Manage.AccountableForm
             return false;
         }
 
-        private void btnDeleteFV_Click(object sender, EventArgs e)
+        private void dgAccountableForm_SelectionChanged(object sender, EventArgs e)
         {
-            if (DeleteFaceValue())
-            {
-                int index = dgAccountableForm.CurrentCell.RowIndex;
-                int accountableFormId = Convert.ToInt32(dgAccountableForm.Rows[index].Cells["id"].Value);
-
-                Helper.MessageBoxSuccess("Face Value/s has been deleted");
-                LoadFaceValues(accountableFormId);
-            }
+            EnableDisableContent();
         }
 
         private void dgfacevalue_SelectionChanged(object sender, EventArgs e)
         {
+            Helper.EnableDisableToolStripButtons(dgfacevalue, btnEditFV, btnDeleteFV);
+        }
+
+        private void EnableDisableContent()
+        {
+            Helper.EnableDisableToolStripButtons(dgAccountableForm, btnEdit, btnDelete);
+            int selectedRowCount = dgAccountableForm.SelectedRows.Count;
+
+            if (selectedRowCount == 1)
+            {
+                int index = dgAccountableForm.CurrentCell.RowIndex;
+                int accountableFormId = Convert.ToInt32(dgAccountableForm.Rows[index].Cells["id"].Value);
+                groupBox2.Enabled = true;
+
+                LoadFaceValues(accountableFormId);
+            }
+            else
+            {
+                groupBox2.Enabled = false;
+            }
+        }
+
+        private DataColumn[] FaceValueDataColumns()
+        {
+            return new DataColumn[]
+            {
+                new DataColumn(Name = "id", typeof(int)),
+                new DataColumn(Name = "accountable_forms_id", typeof(int)),
+                new DataColumn(Name = "date_effective", typeof(DateTime)),
+                new DataColumn(Name = "amount", typeof(decimal)),
+                new DataColumn(Name = "is_default", typeof(bool))
+            };
+        }
+
+        private void frmAccountable_Load(object sender, EventArgs e)
+        {
+            LoadRecords();
+            EnableDisableContent();
             Helper.EnableDisableToolStripButtons(dgfacevalue, btnEditFV, btnDeleteFV);
         }
     }

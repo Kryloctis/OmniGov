@@ -1,4 +1,4 @@
-using OmniGov.App.Views.Manage.AllotmentClasses;
+﻿using OmniGov.App.Views.Manage.AllotmentClasses;
 
 namespace OmniGov.App.Views.Manage.AllotmentClasses
 {

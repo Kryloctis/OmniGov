@@ -1,4 +1,4 @@
-using OmniGov.App.Helpers;
+﻿using OmniGov.App.Helpers;
 
 namespace OmniGov.App.Views.Transactions.CheckIssuance.Obligations
 
@@ -14,11 +14,6 @@ namespace OmniGov.App.Views.Transactions.CheckIssuance.Obligations
             _uc = uc;
         }
 
-        private void frmObligations_Load(object sender, EventArgs e)
-        {
-            HelperLoadRecords.RCIObligationDatagridview(_uc.dtObligations, dgObligation);
-        }
-
         private void btnAdd_Click(object sender, EventArgs e)
         {
             _uc.dtObligations.Rows.Add(txtObno.Text.Trim(), dtpDateEntry.Value.ToString("MMMM-dd-yyyy"));
@@ -26,10 +21,14 @@ namespace OmniGov.App.Views.Transactions.CheckIssuance.Obligations
             txtObno.Text = string.Empty;
         }
 
-        private void txtObno_TextChanged(object sender, EventArgs e)
+        private void btnConfirmObligation_Click(object sender, EventArgs e)
         {
-            bool isTextBoxEmpty = !String.IsNullOrEmpty(txtObno.Text.Trim());
-            btnAddObligations.Enabled = isTextBoxEmpty;
+            sbyte totalObligationNumberCount = (sbyte)dgObligation.Rows.Count;
+            if (Helper.MessageBoxConfirmCancel($"Confirm {totalObligationNumberCount} obligation number/s ?"))
+            {
+                _uc.SetObligationLabel();
+                this.Close();
+            }
         }
 
         private void btnRemove_Click(object sender, EventArgs e)
@@ -46,19 +45,20 @@ namespace OmniGov.App.Views.Transactions.CheckIssuance.Obligations
             btnConfirmObligation.Enabled = hasRowSelected;
         }
 
-        private void btnConfirmObligation_Click(object sender, EventArgs e)
-        {
-            sbyte totalObligationNumberCount = (sbyte)dgObligation.Rows.Count;
-            if (Helper.MessageBoxConfirmCancel($"Confirm {totalObligationNumberCount} obligation number/s ?"))
-            {
-                _uc.SetObligationLabel();
-                this.Close();
-            }
-        }
-
         private void frmObligations_FormClosing(object sender, FormClosingEventArgs e)
         {
             _uc.SetObligationLabel();
+        }
+
+        private void frmObligations_Load(object sender, EventArgs e)
+        {
+            HelperLoadRecords.RCIObligationDatagridview(_uc.dtObligations, dgObligation);
+        }
+
+        private void txtObno_TextChanged(object sender, EventArgs e)
+        {
+            bool isTextBoxEmpty = !String.IsNullOrEmpty(txtObno.Text.Trim());
+            btnAddObligations.Enabled = isTextBoxEmpty;
         }
     }
 }

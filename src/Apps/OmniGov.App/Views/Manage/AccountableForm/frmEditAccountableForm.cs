@@ -1,4 +1,4 @@
-using OmniGov.App.Helpers;
+﻿using OmniGov.App.Helpers;
 using OmniGov.Treasury.Data.Factories;
 using OmniGov.Treasury.Domain.Entities;
 
@@ -18,6 +18,25 @@ namespace OmniGov.App.Views.Manage.AccountableForm
             uc.accountableFormId = accountableFormId;
         }
 
+        private void btnUpdate_Click(object sender, EventArgs e)
+        {
+            UpdateAccountableForm();
+        }
+
+        private void frmAccountableEdit_Load(object sender, EventArgs e)
+        {
+            uc.isEdit = true;
+            LoadSelectedRecord();
+        }
+
+        private void frmEditAccountableForm_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Modifiers == Keys.Control && e.KeyCode == Keys.S)
+            {
+                UpdateAccountableForm();
+            }
+        }
+
         private void LoadSelectedRecord()
         {
             var uc = ucAccountable1;
@@ -26,10 +45,14 @@ namespace OmniGov.App.Views.Manage.AccountableForm
             uc.txtFormDescription.Text = accData["acc_form_desc"];
         }
 
-        private void frmAccountableEdit_Load(object sender, EventArgs e)
+        private void UpdateAccountableForm()
         {
-            uc.isEdit = true;
-            LoadSelectedRecord();
+            if (UpdateData())
+            {
+                Helper.MessageBoxSuccess("Accountable Form has been updated.");
+                _frmAccountable.LoadRecords();
+                this.Close();
+            }
         }
 
         private bool UpdateData()
@@ -49,29 +72,6 @@ namespace OmniGov.App.Views.Manage.AccountableForm
             };
 
             return TreasuryFactory.AccountableFormsRepository().Update(accModel);
-        }
-
-        private void btnUpdate_Click(object sender, EventArgs e)
-        {
-            UpdateAccountableForm();
-        }
-
-        private void UpdateAccountableForm()
-        {
-            if (UpdateData())
-            {
-                Helper.MessageBoxSuccess("Accountable Form has been updated.");
-                _frmAccountable.LoadRecords();
-                this.Close();
-            }
-        }
-
-        private void frmEditAccountableForm_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Modifiers == Keys.Control && e.KeyCode == Keys.S)
-            {
-                UpdateAccountableForm();
-            }
         }
     }
 }

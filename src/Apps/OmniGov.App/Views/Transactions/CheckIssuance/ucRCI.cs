@@ -1,4 +1,4 @@
-using OmniGov.App.Helpers;
+﻿using OmniGov.App.Helpers;
 using OmniGov.App.Views.Transactions.CheckIssuance.Deductions;
 using OmniGov.App.Views.Transactions.CheckIssuance.Obligations;
 using OmniGov.Core.Factories;
@@ -10,14 +10,14 @@ namespace OmniGov.App.Views.Transactions.CheckIssuance
 {
     public partial class ucRCI : UserControl
     {
-        internal int Id;
         internal int bankId;
-        internal int fundsId;
+        internal DataTable dtDeductions = new();
+        internal DataTable dtObligations = new();
         internal int fppId;
+        internal int fundsId;
+        internal int Id;
         internal short obligationNumberCount;
         internal decimal totalDeduction;
-        internal DataTable dtObligations = new();
-        internal DataTable dtDeductions = new();
 
         public ucRCI()
         {
@@ -25,36 +25,40 @@ namespace OmniGov.App.Views.Transactions.CheckIssuance
             CreateObligationAndDeductionsColumns();
         }
 
-        private void CreateObligationAndDeductionsColumns()
+        internal void cmbxFPP_TextChanged(object sender, EventArgs e)
         {
-            //obligations
-            dtObligations.Columns.Add("obligation_no", typeof(string));
-            dtObligations.Columns.Add("date_entry", typeof(DateTime));
-
-            //deductions
-            dtDeductions.Columns.Add("description", typeof(string));
-            dtDeductions.Columns.Add("amount", typeof(decimal));
-        }
-
-        private void ucRCI_Load(object sender, EventArgs e)
-        {
-            if (!DesignMode)
+            if (string.IsNullOrEmpty(cmbFPP.Text))
             {
-                LoadBanks();
-                LoadBankAccounts();
-                LoadFunds();
+                cmbFPP.TextChanged -= new EventHandler(cmbxFPP_TextChanged);
                 LoadFPP();
+                cmbFPP.SelectedIndex = -1;
+                cmbFPP.TextChanged += new EventHandler(cmbxFPP_TextChanged);
             }
         }
 
-        private void LoadBankAccounts()
+        internal string GetFormErrors()
         {
-            int bankID = Convert.ToInt32(cmbBank.SelectedValue);
-            DataTable dtBankAccounts = TreasuryFactory.BankAccountsRepository().GetBankAccountsByBankID(bankID);
+            var errorArray = new string[]
+            {
+                errorProvider1.GetError(cmbFund),
+                errorProvider1.GetError(cmbBank),
+                errorProvider1.GetError(cmbBankAccounts),
+                errorProvider1.GetError(txtCheckNo),
+                errorProvider1.GetError(cmbFPP),
+                errorProvider1.GetError(dtCheckDate),
+                errorProvider1.GetError(txtPayee),
+                errorProvider1.GetError(txtNatureOfPayment),
+                errorProvider1.GetError(nudNetAmount)
+            };
 
-            cmbBankAccounts.DataSource = dtBankAccounts;
-            cmbBankAccounts.ValueMember = "id";
-            cmbBankAccounts.DisplayMember = "account_no";
+            return Factory.CreateErrors(errorArray).GenerateErrorMessage();
+        }
+
+        internal void LoadBanks()
+        {
+            var banksRepository = TreasuryFactory.BanksRepository();
+            var dtBank = banksRepository.GetRecords();
+            HelperLoadRecords.BankComboBox(dtBank, cmbBank, "id", "bank_name");
         }
 
         internal void LoadFPP()
@@ -78,16 +82,11 @@ namespace OmniGov.App.Views.Transactions.CheckIssuance
             cmbFPP.ValueMember = "key";
         }
 
-        private DataTable DataTableFPP()
+        internal void LoadFunds()
         {
-            DataTable dtFPP;
-
-            if (string.IsNullOrEmpty(cmbFPP.Text))
-                dtFPP = Factory.FunctionProgramProjectRepository().GetViewRecords();
-            else
-                dtFPP = Factory.FunctionProgramProjectRepository().GetRecordsByCodeName(cmbFPP.Text);
-
-            return dtFPP;
+            var fundRepository = Factory.FundsRepository();
+            var dtFunds = fundRepository.GetRecords();
+            HelperLoadRecords.FundsComboBox(dtFunds, cmbFund, "id", "fund_name");
         }
 
         internal void ResetForm()
@@ -111,18 +110,19 @@ namespace OmniGov.App.Views.Transactions.CheckIssuance
             btnAddDeductions.Text = "Click to add deductions.";
         }
 
-        internal void LoadFunds()
+        internal void SetDeductionLabel()
         {
-            var fundRepository = Factory.FundsRepository();
-            var dtFunds = fundRepository.GetRecords();
-            HelperLoadRecords.FundsComboBox(dtFunds, cmbFund, "id", "fund_name");
+            foreach (DataRow row in dtDeductions.Rows)
+                totalDeduction += Convert.ToDecimal(row[1].ToString());
+
+            btnAddDeductions.Text = $"({totalDeduction:N2}) total deductions.";
+            totalDeduction = 0;
         }
 
-        internal void LoadBanks()
+        internal void SetObligationLabel()
         {
-            var banksRepository = TreasuryFactory.BanksRepository();
-            var dtBank = banksRepository.GetRecords();
-            HelperLoadRecords.BankComboBox(dtBank, cmbBank, "id", "bank_name");
+            obligationNumberCount = (short)dtObligations.Rows.Count;
+            btnAddObligation.Text = $"({obligationNumberCount}) obligation/s number added.";
         }
 
         internal void SetSelectedValue(int Id, string table)
@@ -138,15 +138,9 @@ namespace OmniGov.App.Views.Transactions.CheckIssuance
             }
         }
 
-        internal void cmbxFPP_TextChanged(object sender, EventArgs e)
+        private void btnAddDeductions_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(cmbFPP.Text))
-            {
-                cmbFPP.TextChanged -= new EventHandler(cmbxFPP_TextChanged);
-                LoadFPP();
-                cmbFPP.SelectedIndex = -1;
-                cmbFPP.TextChanged += new EventHandler(cmbxFPP_TextChanged);
-            }
+            _ = new frmDeductions(this).ShowDialog();
         }
 
         private void btnAddObligation_Click(object sender, EventArgs e)
@@ -154,62 +148,9 @@ namespace OmniGov.App.Views.Transactions.CheckIssuance
             _ = new frmChckIssOblgtns(this).ShowDialog();
         }
 
-        private void btnAddDeductions_Click(object sender, EventArgs e)
+        private void cmbbank_Validated(object sender, EventArgs e)
         {
-            _ = new frmDeductions(this).ShowDialog();
-        }
-
-        internal void SetObligationLabel()
-        {
-            obligationNumberCount = (short)dtObligations.Rows.Count;
-            btnAddObligation.Text = $"({obligationNumberCount}) obligation/s number added.";
-        }
-
-        internal void SetDeductionLabel()
-        {
-            foreach (DataRow row in dtDeductions.Rows)
-                totalDeduction += Convert.ToDecimal(row[1].ToString());
-
-            btnAddDeductions.Text = $"({totalDeduction:N2}) total deductions.";
-            totalDeduction = 0;
-        }
-
-        internal string GetFormErrors()
-        {
-            var errorArray = new string[]
-            {
-                errorProvider1.GetError(cmbFund),
-                errorProvider1.GetError(cmbBank),
-                errorProvider1.GetError(cmbBankAccounts),
-                errorProvider1.GetError(txtCheckNo),
-                errorProvider1.GetError(cmbFPP),
-                errorProvider1.GetError(dtCheckDate),
-                errorProvider1.GetError(txtPayee),
-                errorProvider1.GetError(txtNatureOfPayment),
-                errorProvider1.GetError(nudNetAmount)
-            };
-
-            return Factory.CreateErrors(errorArray).GenerateErrorMessage();
-        }
-
-        private void txtdvno_Validating(object sender, CancelEventArgs e)
-        {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtDVNo, "Disbursement No.");
-        }
-
-        private void txtdvno_Validated(object sender, EventArgs e)
-        {
-            Helper.ClearErrorTextBox(errorProvider1, txtDVNo);
-        }
-
-        private void cmbfund_Validating(object sender, CancelEventArgs e)
-        {
-            e.Cancel = Helper.ShowErrorComboBoxEmpty(errorProvider1, cmbFund, "Fund.");
-        }
-
-        private void cmbfund_Validated(object sender, EventArgs e)
-        {
-            Helper.ClearErrorComboBox(errorProvider1, cmbFund);
+            Helper.ClearErrorComboBox(errorProvider1, cmbBank);
         }
 
         private void cmbbank_Validating(object sender, CancelEventArgs e)
@@ -217,9 +158,9 @@ namespace OmniGov.App.Views.Transactions.CheckIssuance
             e.Cancel = Helper.ShowErrorComboBoxEmpty(errorProvider1, cmbBank, "Bank.");
         }
 
-        private void cmbbank_Validated(object sender, EventArgs e)
+        private void cmbBankAccounts_Validated(object sender, EventArgs e)
         {
-            Helper.ClearErrorComboBox(errorProvider1, cmbBank);
+            Helper.ClearErrorComboBox(errorProvider1, cmbBankAccounts);
         }
 
         private void cmbBankAccounts_Validating(object sender, CancelEventArgs e)
@@ -227,19 +168,47 @@ namespace OmniGov.App.Views.Transactions.CheckIssuance
             e.Cancel = Helper.ShowErrorComboBoxEmpty(errorProvider1, cmbBankAccounts, "Bank Account.");
         }
 
-        private void cmbBankAccounts_Validated(object sender, EventArgs e)
+        private void cmbFPP_Validated(object sender, EventArgs e)
         {
-            Helper.ClearErrorComboBox(errorProvider1, cmbBankAccounts);
+            Helper.ClearErrorComboBox(errorProvider1, cmbFPP);
         }
 
-        private void txtcheckno_Validating(object sender, CancelEventArgs e)
+        private void cmbFPP_Validating(object sender, CancelEventArgs e)
         {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtCheckNo, "Check No.");
+            e.Cancel = FPPNameNotExist();
         }
 
-        private void txtcheckno_Validated(object sender, EventArgs e)
+        private void cmbfund_Validated(object sender, EventArgs e)
         {
-            Helper.ClearErrorTextBox(errorProvider1, txtCheckNo);
+            Helper.ClearErrorComboBox(errorProvider1, cmbFund);
+        }
+
+        private void cmbfund_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = Helper.ShowErrorComboBoxEmpty(errorProvider1, cmbFund, "Fund.");
+        }
+
+        private void CreateObligationAndDeductionsColumns()
+        {
+            //obligations
+            dtObligations.Columns.Add("obligation_no", typeof(string));
+            dtObligations.Columns.Add("date_entry", typeof(DateTime));
+
+            //deductions
+            dtDeductions.Columns.Add("description", typeof(string));
+            dtDeductions.Columns.Add("amount", typeof(decimal));
+        }
+
+        private DataTable DataTableFPP()
+        {
+            DataTable dtFPP;
+
+            if (string.IsNullOrEmpty(cmbFPP.Text))
+                dtFPP = Factory.FunctionProgramProjectRepository().GetViewRecords();
+            else
+                dtFPP = Factory.FunctionProgramProjectRepository().GetRecordsByCodeName(cmbFPP.Text);
+
+            return dtFPP;
         }
 
         private bool FPPNameNotExist()
@@ -255,34 +224,19 @@ namespace OmniGov.App.Views.Transactions.CheckIssuance
             return false;
         }
 
-        private void cmbFPP_Validating(object sender, CancelEventArgs e)
+        private void LoadBankAccounts()
         {
-            e.Cancel = FPPNameNotExist();
+            int bankID = Convert.ToInt32(cmbBank.SelectedValue);
+            DataTable dtBankAccounts = TreasuryFactory.BankAccountsRepository().GetBankAccountsByBankID(bankID);
+
+            cmbBankAccounts.DataSource = dtBankAccounts;
+            cmbBankAccounts.ValueMember = "id";
+            cmbBankAccounts.DisplayMember = "account_no";
         }
 
-        private void cmbFPP_Validated(object sender, EventArgs e)
+        private void txtamount_Validated(object sender, EventArgs e)
         {
-            Helper.ClearErrorComboBox(errorProvider1, cmbFPP);
-        }
-
-        private void txtpayee_Validating(object sender, CancelEventArgs e)
-        {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtPayee, "Payee.");
-        }
-
-        private void txtpayee_Validated(object sender, EventArgs e)
-        {
-            Helper.ClearErrorTextBox(errorProvider1, txtPayee);
-        }
-
-        private void txtnature_Validating(object sender, CancelEventArgs e)
-        {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtNatureOfPayment, "Nature of Payment.");
-        }
-
-        private void txtnature_Validated(object sender, EventArgs e)
-        {
-            Helper.ClearErrorTextBox(errorProvider1, txtNatureOfPayment);
+            Helper.ClearErrorNumericUpDown(errorProvider1, nudNetAmount);
         }
 
         private void txtamount_Validating(object sender, CancelEventArgs e)
@@ -290,9 +244,55 @@ namespace OmniGov.App.Views.Transactions.CheckIssuance
             e.Cancel = Helper.ShowErrorNumericUpDownZero(errorProvider1, nudNetAmount, "Net Amount.");
         }
 
-        private void txtamount_Validated(object sender, EventArgs e)
+        private void txtcheckno_Validated(object sender, EventArgs e)
         {
-            Helper.ClearErrorNumericUpDown(errorProvider1, nudNetAmount);
+            Helper.ClearErrorTextBox(errorProvider1, txtCheckNo);
+        }
+
+        private void txtcheckno_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtCheckNo, "Check No.");
+        }
+
+        private void txtdvno_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorTextBox(errorProvider1, txtDVNo);
+        }
+
+        private void txtdvno_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtDVNo, "Disbursement No.");
+        }
+
+        private void txtnature_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorTextBox(errorProvider1, txtNatureOfPayment);
+        }
+
+        private void txtnature_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtNatureOfPayment, "Nature of Payment.");
+        }
+
+        private void txtpayee_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorTextBox(errorProvider1, txtPayee);
+        }
+
+        private void txtpayee_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtPayee, "Payee.");
+        }
+
+        private void ucRCI_Load(object sender, EventArgs e)
+        {
+            if (!DesignMode)
+            {
+                LoadBanks();
+                LoadBankAccounts();
+                LoadFunds();
+                LoadFPP();
+            }
         }
     }
 }

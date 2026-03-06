@@ -1,37 +1,41 @@
-using OmniGov.App.Helpers;
+﻿using OmniGov.App.Helpers;
+
 using OmniGov.Treasury.Data.Factories;
 
 namespace OmniGov.App.Views.Manage.RealProperties
+
 {
     public partial class frmAddRealProperties : Form
+
     {
-        private readonly frmRealProperties frmRealProperties;
         internal readonly ucRealProperties uc;
+        private readonly frmRealProperties frmRealProperties;
 
         public frmAddRealProperties(frmRealProperties frmRealProperties)
+
         {
             InitializeComponent();
+
             this.frmRealProperties = frmRealProperties;
+
             uc = ucRealProperties1;
         }
 
-        private bool SaveRpt()
+        private void btnSave_Click(object sender, EventArgs e)
+
         {
-            if (!uc.ValidateChildren())
+            if (SaveRpt())
             {
-                Helper.MessageBoxError(uc.GetFormError());
-                return false;
+                Helper.MessageBoxSuccess("Real property has been saved.");
+                frmRealProperties.LoadProperties();
+                uc.ResetForm();
             }
-
-            var rptModel = uc.RealPropertiesModel();
-            rptModel.CreatedBy = UserHelper.loggedUser.Id;
-
-            return TreasuryFactory.RealPropertiesRepository().InsertWithPreviousAssessments(rptModel);
         }
 
-        private void btnSave_Click(object sender, EventArgs e)
+        private void frmAddRealProperties_KeyDown(object sender, KeyEventArgs e)
+
         {
-            try
+            if (e.KeyCode == Keys.S && e.Control)
             {
                 if (SaveRpt())
                 {
@@ -40,34 +44,31 @@ namespace OmniGov.App.Views.Manage.RealProperties
                     uc.ResetForm();
                 }
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void frmAddRealProperties_Load(object sender, EventArgs e)
+
         {
-            try
-            {
-                uc.OnLoad(false);
-                ActiveControl = uc;
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            uc.OnLoad(false);
+            ActiveControl = uc;
         }
 
-        private void frmAddRealProperties_KeyDown(object sender, KeyEventArgs e)
+        private bool SaveRpt()
+
         {
-            try
+            if (!uc.ValidateChildren())
+
             {
-                if (e.KeyCode == Keys.S && e.Control)
-                {
-                    if (SaveRpt())
-                    {
-                        Helper.MessageBoxSuccess("Real property has been saved.");
-                        frmRealProperties.LoadProperties();
-                        uc.ResetForm();
-                    }
-                }
+                Helper.MessageBoxError(uc.GetFormError());
+
+                return false;
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+
+            var rptModel = uc.RealPropertiesModel();
+
+            rptModel.CreatedBy = UserHelper.loggedUser.Id;
+
+            return TreasuryFactory.RealPropertiesRepository().InsertWithPreviousAssessments(rptModel);
         }
     }
 }

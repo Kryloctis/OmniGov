@@ -1,4 +1,4 @@
-using OmniGov.App.Helpers;
+﻿using OmniGov.App.Helpers;
 using OmniGov.Core.Entities;
 using OmniGov.Core.Factories;
 
@@ -6,10 +6,10 @@ namespace OmniGov.App.Views.Manage.AccountableForm
 {
     public partial class frmEditFaceValue : Form
     {
-        private ucFaceValue uc;
-        private int faceValueId;
         private int accountableFormId;
+        private int faceValueId;
         private frmAccountableForm frmAccountableForm;
+        private ucFaceValue uc;
 
         public frmEditFaceValue(frmAccountableForm frmAccountableForm, int accountableFormId, int faceValueId)
         {
@@ -18,6 +18,21 @@ namespace OmniGov.App.Views.Manage.AccountableForm
             this.faceValueId = faceValueId;
             this.accountableFormId = accountableFormId;
             this.frmAccountableForm = frmAccountableForm;
+        }
+
+        private void btnUpdate_Click(object sender, EventArgs e)
+        {
+            if (UpdateData())
+            {
+                Helper.MessageBoxSuccess("Face Value has been updated.");
+                frmAccountableForm.LoadFaceValues(accountableFormId);
+                Close();
+            }
+        }
+
+        private void frmEditFaceValue_Load(object sender, EventArgs e)
+        {
+            uc.LoadSelectedData(faceValueId);
         }
 
         private bool UpdateData()
@@ -38,21 +53,6 @@ namespace OmniGov.App.Views.Manage.AccountableForm
             };
 
             return Factory.FaceValueRepository().Update(model);
-        }
-
-        private void btnUpdate_Click(object sender, EventArgs e)
-        {
-            if (UpdateData())
-            {
-                Helper.MessageBoxSuccess("Face Value has been updated.");
-                frmAccountableForm.LoadFaceValues(accountableFormId);
-                Close();
-            }
-        }
-
-        private void frmEditFaceValue_Load(object sender, EventArgs e)
-        {
-            uc.LoadSelectedData(faceValueId);
         }
     }
 }

@@ -1,4 +1,4 @@
-
+﻿
 namespace OmniGov.App.Views.Transactions.CheckIssuance
 {
     partial class frmRCI

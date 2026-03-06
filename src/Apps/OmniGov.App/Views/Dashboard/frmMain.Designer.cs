@@ -1,4 +1,4 @@
-namespace OmniGov.App.Views.Dashboard
+﻿namespace OmniGov.App.Views.Dashboard
 {
     partial class frmMain
     {

@@ -1,4 +1,4 @@
-using OmniGov.App.Helpers;
+﻿using OmniGov.App.Helpers;
 using OmniGov.Core.Factories;
 
 namespace OmniGov.App.Views.Manage.AllotmentClasses
@@ -18,9 +18,32 @@ namespace OmniGov.App.Views.Manage.AllotmentClasses
             uc = ucAllotmentClasses1;
         }
 
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            if (UpdateData())
+            {
+                Helper.MessageBoxSuccess("Allotment class has been updated.");
+                frmAllotmentClasses.LoadRecords();
+                Close();
+            }
+        }
+
         private void frmAllotmentClassesEdit_Load(object sender, EventArgs e)
         {
             uc.OnLoad(true, allotmentClassId);
+        }
+
+        private void frmEditAllotmentClasses_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.S && e.Control)
+            {
+                if (UpdateData())
+                {
+                    Helper.MessageBoxSuccess("Allotment class has been updated.");
+                    frmAllotmentClasses.LoadRecords();
+                    Close();
+                }
+            }
         }
 
         private bool UpdateData()
@@ -35,29 +58,6 @@ namespace OmniGov.App.Views.Manage.AllotmentClasses
             allotmentModel.Id = allotmentClassId;
 
             return Factory.AllotmentClassesRepository().Update(allotmentModel);
-        }
-
-        private void btnSave_Click(object sender, EventArgs e)
-        {
-            if (UpdateData())
-            {
-                Helper.MessageBoxSuccess("Allotment class has been updated.");
-                frmAllotmentClasses.LoadRecords();
-                Close();
-            }
-        }
-
-        private void frmEditAllotmentClasses_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.S && e.Control)
-            {
-                if (UpdateData())
-                {
-                    Helper.MessageBoxSuccess("Allotment class has been updated.");
-                    frmAllotmentClasses.LoadRecords();
-                    Close();
-                }
-            }
         }
     }
 }

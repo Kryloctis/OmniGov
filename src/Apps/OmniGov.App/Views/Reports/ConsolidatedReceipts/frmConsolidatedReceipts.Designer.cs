@@ -1,4 +1,4 @@
-
+﻿
 namespace OmniGov.App.Views.Reports.ConsolidatedReceipts
 {
     partial class frmConsolidatedReceipts

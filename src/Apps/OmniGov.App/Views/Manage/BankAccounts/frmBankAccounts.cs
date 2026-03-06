@@ -1,4 +1,4 @@
-using OmniGov.App.Helpers;
+﻿using OmniGov.App.Helpers;
 using OmniGov.Treasury.Data.Factories;
 using OmniGov.Treasury.Domain.Entities;
 using System.ComponentModel;
@@ -13,59 +13,6 @@ namespace OmniGov.App.Views.Manage.BankAccounts
             InitializeComponent();
             Helper.LoadFormIcon(this);
             Helper.DatagridFullRowSelectStyle(dgBankAccounts, true, true);
-        }
-
-        private void frmBankAccounts_Load(object sender, EventArgs e)
-        {
-            HelperLoadRecords.ComboboxRowLimitFilter(cmbxRowLimit);
-            LoadRecords();
-        }
-
-        private void dgBankAccounts_SelectionChanged(object sender, EventArgs e)
-        {
-            var columnIndex = new byte[] { 6, 7 };
-            Helper.ShowRecordTimestamp(dgBankAccounts, columnIndex, lblCreatedAt, lblUpdatedAt);
-
-            Helper.EnableDisableToolStripButtons(dgBankAccounts, btnEdit, btnDelete);
-        }
-
-        private bool DeleteData()
-        {
-            int selectedRowsCount = dgBankAccounts.SelectedRows.Count;
-
-            if (Helper.MessageBoxConfirmDelete(selectedRowsCount))
-            {
-                var bankAccountsModelList = new List<BankAccountsModel>();
-                foreach (DataGridViewRow row in dgBankAccounts.SelectedRows)
-                {
-                    int bankAccountID = Convert.ToInt16(row.Cells["id"].Value.ToString());
-                    bankAccountsModelList.Add(new BankAccountsModel() { Id = bankAccountID });
-                }
-
-                return TreasuryFactory.BankAccountsRepository().Delete(bankAccountsModelList);
-            }
-            return false;
-        }
-
-        private void btnDelete_Click(object sender, EventArgs e)
-        {
-            if (DeleteData())
-            {
-                Helper.MessageBoxError($"{dgBankAccounts.SelectedRows.Count} record/s has been deleted.");
-                LoadRecords();
-            }
-        }
-
-        private void btnAdd_Click(object sender, EventArgs e)
-        {
-            _ = new frmAddBankAccounts(this).ShowDialog();
-        }
-
-        private void btnEdit_Click(object sender, EventArgs e)
-        {
-            int rowIndex = dgBankAccounts.CurrentRow.Index;
-            int bankAccountId = Convert.ToInt32(dgBankAccounts.Rows[rowIndex].Cells["id"].Value);
-            _ = new frmEditBankAccounts(this, bankAccountId).ShowDialog();
         }
 
         internal void LoadRecords()
@@ -114,6 +61,27 @@ namespace OmniGov.App.Views.Manage.BankAccounts
             toolStripStatusLabelRecordCount.Text = dgBankAccounts.Rows.Count.ToString();
         }
 
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            _ = new frmAddBankAccounts(this).ShowDialog();
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            if (DeleteData())
+            {
+                Helper.MessageBoxError($"{dgBankAccounts.SelectedRows.Count} record/s has been deleted.");
+                LoadRecords();
+            }
+        }
+
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+            int rowIndex = dgBankAccounts.CurrentRow.Index;
+            int bankAccountId = Convert.ToInt32(dgBankAccounts.Rows[rowIndex].Cells["id"].Value);
+            _ = new frmEditBankAccounts(this, bankAccountId).ShowDialog();
+        }
+
         private void btnSearch_Click(object sender, EventArgs e)
         {
             LoadRecords();
@@ -121,6 +89,38 @@ namespace OmniGov.App.Views.Manage.BankAccounts
 
         private void cmbxRowLimit_SelectionChangeCommitted(object sender, EventArgs e)
         {
+            LoadRecords();
+        }
+
+        private bool DeleteData()
+        {
+            int selectedRowsCount = dgBankAccounts.SelectedRows.Count;
+
+            if (Helper.MessageBoxConfirmDelete(selectedRowsCount))
+            {
+                var bankAccountsModelList = new List<BankAccountsModel>();
+                foreach (DataGridViewRow row in dgBankAccounts.SelectedRows)
+                {
+                    int bankAccountID = Convert.ToInt16(row.Cells["id"].Value.ToString());
+                    bankAccountsModelList.Add(new BankAccountsModel() { Id = bankAccountID });
+                }
+
+                return TreasuryFactory.BankAccountsRepository().Delete(bankAccountsModelList);
+            }
+            return false;
+        }
+
+        private void dgBankAccounts_SelectionChanged(object sender, EventArgs e)
+        {
+            var columnIndex = new byte[] { 6, 7 };
+            Helper.ShowRecordTimestamp(dgBankAccounts, columnIndex, lblCreatedAt, lblUpdatedAt);
+
+            Helper.EnableDisableToolStripButtons(dgBankAccounts, btnEdit, btnDelete);
+        }
+
+        private void frmBankAccounts_Load(object sender, EventArgs e)
+        {
+            HelperLoadRecords.ComboboxRowLimitFilter(cmbxRowLimit);
             LoadRecords();
         }
     }

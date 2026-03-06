@@ -1,4 +1,4 @@
-using OmniGov.App.Helpers;
+﻿using OmniGov.App.Helpers;
 using OmniGov.Core.Factories;
 using OmniGov.Treasury.Data.Factories;
 using System.ComponentModel;
@@ -54,14 +54,9 @@ namespace OmniGov.App.Views.Manage.AccountableForm
             return true;
         }
 
-        private void txtformno_Validating(object sender, CancelEventArgs e)
+        private void txtformdesc_Validated(object sender, EventArgs e)
         {
-            e.Cancel = !FormNoValidated();
-        }
-
-        private void txtformno_Validated(object sender, EventArgs e)
-        {
-            Helper.ClearErrorTextBox(errorProvider1, txtFormNo);
+            Helper.ClearErrorTextBox(errorProvider1, txtFormDescription);
         }
 
         private void txtformdesc_Validating(object sender, CancelEventArgs e)
@@ -69,9 +64,14 @@ namespace OmniGov.App.Views.Manage.AccountableForm
             e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtFormDescription, "Form Description.");
         }
 
-        private void txtformdesc_Validated(object sender, EventArgs e)
+        private void txtformno_Validated(object sender, EventArgs e)
         {
-            Helper.ClearErrorTextBox(errorProvider1, txtFormDescription);
+            Helper.ClearErrorTextBox(errorProvider1, txtFormNo);
+        }
+
+        private void txtformno_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = !FormNoValidated();
         }
     }
 }

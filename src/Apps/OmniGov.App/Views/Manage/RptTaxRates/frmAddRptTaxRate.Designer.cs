@@ -1,4 +1,4 @@
-using OmniGov.App.Views.Manage.RptTaxRates;
+﻿using OmniGov.App.Views.Manage.RptTaxRates;
 
 namespace OmniGov.App.Views.Manage.RptTaxRates
 {

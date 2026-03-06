@@ -1,4 +1,4 @@
-namespace OmniGov.App.Views.Dashboard.Reports
+﻿namespace OmniGov.App.Views.Dashboard.Reports
 {
     partial class ucReports
     {

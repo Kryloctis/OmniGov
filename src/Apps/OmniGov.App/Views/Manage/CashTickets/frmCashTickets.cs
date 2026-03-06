@@ -1,4 +1,4 @@
-using OmniGov.App.Helpers;
+﻿using OmniGov.App.Helpers;
 using OmniGov.Treasury.Data.Factories;
 using OmniGov.Treasury.Domain.Entities;
 using System.ComponentModel;
@@ -13,24 +13,6 @@ namespace OmniGov.App.Views.Manage.CashTickets
             InitializeComponent();
             Helper.LoadFormIcon(this);
             Helper.DatagridFullRowSelectStyle(dgCashTickets, true);
-        }
-
-        private void btnAdd_Click(object sender, EventArgs e)
-        {
-            _ = new frmCashTicketsAdd(this).ShowDialog();
-        }
-
-        private void btnEdit_Click(object sender, EventArgs e)
-        {
-            int rowIdex = dgCashTickets.CurrentRow.Index;
-            int cashTicketId = Convert.ToInt32(dgCashTickets.Rows[rowIdex].Cells["id"].Value);
-            _ = new frmCashTicketEdit(this, cashTicketId).ShowDialog();
-        }
-
-        private void frmCashTickets_Load(object sender, EventArgs e)
-        {
-            HelperLoadRecords.ComboboxRowLimitFilter(cmbxRowFilter);
-            LoadCashTickets();
         }
 
         internal void LoadCashTickets()
@@ -110,9 +92,9 @@ namespace OmniGov.App.Views.Manage.CashTickets
             Helper.EnableDisableToolStripButtons(dgCashTickets, btnEdit, btnDelete);
         }
 
-        private void btnSearch_Click(object sender, EventArgs e)
+        private void btnAdd_Click(object sender, EventArgs e)
         {
-            LoadCashTickets();
+            _ = new frmCashTicketsAdd(this).ShowDialog();
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
@@ -122,6 +104,18 @@ namespace OmniGov.App.Views.Manage.CashTickets
                 Helper.MessageBoxSuccess("Cash Ticket/s has been deleted.");
                 LoadCashTickets();
             }
+        }
+
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+            int rowIdex = dgCashTickets.CurrentRow.Index;
+            int cashTicketId = Convert.ToInt32(dgCashTickets.Rows[rowIdex].Cells["id"].Value);
+            _ = new frmCashTicketEdit(this, cashTicketId).ShowDialog();
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            LoadCashTickets();
         }
 
         private bool DeleteRecords()
@@ -140,6 +134,12 @@ namespace OmniGov.App.Views.Manage.CashTickets
             }
 
             return false;
+        }
+
+        private void frmCashTickets_Load(object sender, EventArgs e)
+        {
+            HelperLoadRecords.ComboboxRowLimitFilter(cmbxRowFilter);
+            LoadCashTickets();
         }
     }
 }

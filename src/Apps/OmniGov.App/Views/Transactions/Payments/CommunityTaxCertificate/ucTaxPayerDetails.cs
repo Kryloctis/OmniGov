@@ -1,4 +1,4 @@
-using OmniGov.Core.Factories;
+﻿using OmniGov.Core.Factories;
 
 namespace OmniGov.App.Views.Transactions.Payments.CommunityTaxCertificate
 {
@@ -21,14 +21,6 @@ namespace OmniGov.App.Views.Transactions.Payments.CommunityTaxCertificate
             return Factory.CreateErrors(errors).GenerateErrorMessage();
         }
 
-        private void ucTaxPayerDetails_Load(object sender, EventArgs e)
-        {
-        }
-
-        private void radioButton3_CheckedChanged(object sender, EventArgs e)
-        {
-        }
-
         internal void ResetForm()
         {
             nudYear.Value = DateTime.Now.Year;
@@ -48,6 +40,14 @@ namespace OmniGov.App.Views.Transactions.Payments.CommunityTaxCertificate
             nudHeight.Value = 0;
             nudWeight.Value = 0;
             txtOccupation.Clear();
+        }
+
+        private void radioButton3_CheckedChanged(object sender, EventArgs e)
+        {
+        }
+
+        private void ucTaxPayerDetails_Load(object sender, EventArgs e)
+        {
         }
     }
 }

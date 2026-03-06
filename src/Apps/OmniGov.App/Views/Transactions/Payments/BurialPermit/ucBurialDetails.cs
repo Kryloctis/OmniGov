@@ -1,4 +1,4 @@
-using OmniGov.App.Helpers;
+﻿using OmniGov.App.Helpers;
 using OmniGov.Core.Factories;
 using System.ComponentModel;
 
@@ -9,33 +9,6 @@ namespace OmniGov.App.Views.Transactions.Payments.BurialPermit
         public ucBurialDetails()
         {
             InitializeComponent();
-        }
-
-        internal void OnLoad()
-        {
-            dtDeathDate.Value = Helper.GetCurrentDate();
-        }
-
-        internal string GetFormErrors()
-        {
-            var errors = new string[]
-            {
-                errorProvider1.GetError(txtCauseOfDeath),
-                errorProvider1.GetError(txtCemetery)
-            };
-
-            return Factory.CreateErrors(errors).GenerateErrorMessage();
-        }
-
-        internal void ResetForm()
-        {
-            dtDeathDate.Value = Helper.GetCurrentDate();
-            txtCauseOfDeath.Clear();
-            txtCemetery.Clear();
-            txtDisposition.Clear();
-            txtDisinterment.Clear();
-            radInfectiousNo.Checked = true;
-            radEmbalmedYes.Checked = true;
         }
 
         internal (bool isInfectious, bool isEmbalmed, DateTime deathDate, string causeOfDeath, string cemetery, string disinterment, string disposition) GetBurialDetails()
@@ -51,9 +24,31 @@ namespace OmniGov.App.Views.Transactions.Payments.BurialPermit
             return (infectious, embalmed, deathDate, causeOfDeath, cemetery, disinterment, disposition);
         }
 
-        private void txtCauseOfDeath_Validating(object sender, CancelEventArgs e)
+        internal string GetFormErrors()
         {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtCauseOfDeath, "Cause of death.");
+            var errors = new string[]
+            {
+                errorProvider1.GetError(txtCauseOfDeath),
+                errorProvider1.GetError(txtCemetery)
+            };
+
+            return Factory.CreateErrors(errors).GenerateErrorMessage();
+        }
+
+        internal void OnLoad()
+        {
+            dtDeathDate.Value = Helper.GetCurrentDate();
+        }
+
+        internal void ResetForm()
+        {
+            dtDeathDate.Value = Helper.GetCurrentDate();
+            txtCauseOfDeath.Clear();
+            txtCemetery.Clear();
+            txtDisposition.Clear();
+            txtDisinterment.Clear();
+            radInfectiousNo.Checked = true;
+            radEmbalmedYes.Checked = true;
         }
 
         private void txtCauseOfDeath_Validated(object sender, EventArgs e)
@@ -61,14 +56,19 @@ namespace OmniGov.App.Views.Transactions.Payments.BurialPermit
             Helper.ClearErrorTextBox(errorProvider1, txtCauseOfDeath);
         }
 
-        private void txtCemetery_Validating(object sender, CancelEventArgs e)
+        private void txtCauseOfDeath_Validating(object sender, CancelEventArgs e)
         {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtCemetery, "Cemetery");
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtCauseOfDeath, "Cause of death.");
         }
 
         private void txtCemetery_Validated(object sender, EventArgs e)
         {
             Helper.ClearErrorTextBox(errorProvider1, txtCemetery);
+        }
+
+        private void txtCemetery_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtCemetery, "Cemetery");
         }
     }
 }

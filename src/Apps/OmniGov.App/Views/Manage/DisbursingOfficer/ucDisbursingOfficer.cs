@@ -1,4 +1,4 @@
-using OmniGov.App.Helpers;
+﻿using OmniGov.App.Helpers;
 using OmniGov.App.Views.Manage.LinkUser;
 using OmniGov.Core.Factories;
 using System.ComponentModel;
@@ -28,6 +28,19 @@ namespace OmniGov.App.Views.Manage.DisbursingOfficer
             return Factory.CreateErrors(errorArray).GenerateErrorMessage();
         }
 
+        internal void LoadLink(int id)
+        {
+            var data = Factory.UsersRepository().GetViewRecordById(id);
+            if (data.Count > 0)
+            {
+                UserId = id;
+            }
+            else
+            {
+                UserId = 0;
+            }
+        }
+
         internal void ResetForm()
         {
             txtFirstName.Clear();
@@ -36,44 +49,40 @@ namespace OmniGov.App.Views.Manage.DisbursingOfficer
             txtJobTitle.Clear();
         }
 
-        private void txtFirstName_Validating(object sender, CancelEventArgs e)
+        private void chckLinkAcc_CheckedChanged(object sender, EventArgs e)
         {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtFirstName, lblFirstName.Text);
+            if (!chckLinkAcc.Checked)
+            {
+                chckLinkAcc.Image = Properties.Resources.link_14px;
+                cmbxLinkedAcc.Enabled = false;
+                cmbxLinkedAcc.SelectedIndex = -1;
+                cmbxLinkedAcc.Text = string.Empty;
+                errorProvider1.SetError(chckLinkAcc, string.Empty);
+                ResetForm();
+            }
+            else
+            {
+                chckLinkAcc.Image = Properties.Resources.link_cancel_2_14px;
+                cmbxLinkedAcc.Enabled = true;
+            }
         }
 
-        private void txtFirstName_Validated(object sender, EventArgs e)
+        private void cmbxLinkedAcc_KeyDown(object sender, KeyEventArgs e)
         {
-            Helper.ClearErrorTextBox(errorProvider1, txtFirstName);
+            if (e.KeyCode == Keys.Enter && ActiveControl == cmbxLinkedAcc)
+            {
+                LoadUsers(true);
+                e.Handled = true;
+                e.SuppressKeyPress = true;
+            }
+
+            if (e.KeyData == (Keys.Control | Keys.V))
+                LoadUsers(true);
         }
 
-        private void txtMidInitial_Validating(object sender, CancelEventArgs e)
+        private void cmbxLinkedAcc_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtMidInitial, lblMidInitial.Text);
-        }
-
-        private void txtMidInitial_Validated(object sender, EventArgs e)
-        {
-            Helper.ClearErrorTextBox(errorProvider1, txtMidInitial);
-        }
-
-        private void txtLastName_Validating(object sender, CancelEventArgs e)
-        {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtLastName, lblLastName.Text);
-        }
-
-        private void txtLastName_Validated(object sender, EventArgs e)
-        {
-            Helper.ClearErrorTextBox(errorProvider1, txtLastName);
-        }
-
-        private void txtJobTitle_Validating(object sender, CancelEventArgs e)
-        {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtJobTitle, lblJobTitle.Text);
-        }
-
-        private void txtJobTitle_Validated(object sender, EventArgs e)
-        {
-            Helper.ClearErrorTextBox(errorProvider1, txtJobTitle);
+            LoadUserDetails();
         }
 
         private void linkuser_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -101,48 +110,17 @@ namespace OmniGov.App.Views.Manage.DisbursingOfficer
             }
         }
 
-        internal void LoadLink(int id)
+        private void LoadUserDetails()
         {
-            var data = Factory.UsersRepository().GetViewRecordById(id);
-            if (data.Count > 0)
-            {
-                UserId = id;
-            }
-            else
-            {
-                UserId = 0;
-            }
-        }
+            int userId = Convert.ToInt32(cmbxLinkedAcc.SelectedValue);
+            var dtUser = Factory.UsersRepository().GetViewRecordById(userId);
 
-        private void chckLinkAcc_CheckedChanged(object sender, EventArgs e)
-        {
-            if (!chckLinkAcc.Checked)
-            {
-                chckLinkAcc.Image = Properties.Resources.link_14px;
-                cmbxLinkedAcc.Enabled = false;
-                cmbxLinkedAcc.SelectedIndex = -1;
-                cmbxLinkedAcc.Text = string.Empty;
-                errorProvider1.SetError(chckLinkAcc, string.Empty);
-                ResetForm();
-            }
-            else
-            {
-                chckLinkAcc.Image = Properties.Resources.link_cancel_2_14px;
-                cmbxLinkedAcc.Enabled = true;
-            }
-        }
-
-        private void ucDisbursingOfficer_Load(object sender, EventArgs e)
-        {
-            OnLoad();
-        }
-
-        private void OnLoad()
-        {
-            if (!DesignMode)
-            {
-                LoadUsers();
-            }
+            txtPrefix.Text = dtUser["prefix"];
+            txtFirstName.Text = dtUser["first_name"];
+            txtLastName.Text = dtUser["last_name"];
+            txtMidInitial.Text = dtUser["mid_initial"];
+            txtSuffix.Text = dtUser["suffix"];
+            txtJobTitle.Text = dtUser["role_name"];
         }
 
         private void LoadUsers(bool isSearch = false)
@@ -161,35 +139,57 @@ namespace OmniGov.App.Views.Manage.DisbursingOfficer
             HelperLoadRecords.SearchableComboboxParameters(cmbxLinkedAcc, dtUsers, "id", "first_name", searchSources, searchKey, isSearch);
         }
 
-        private void cmbxLinkedAcc_KeyDown(object sender, KeyEventArgs e)
+        private void OnLoad()
         {
-            if (e.KeyCode == Keys.Enter && ActiveControl == cmbxLinkedAcc)
+            if (!DesignMode)
             {
-                LoadUsers(true);
-                e.Handled = true;
-                e.SuppressKeyPress = true;
+                LoadUsers();
             }
-
-            if (e.KeyData == (Keys.Control | Keys.V))
-                LoadUsers(true);
         }
 
-        private void cmbxLinkedAcc_SelectionChangeCommitted(object sender, EventArgs e)
+        private void txtFirstName_Validated(object sender, EventArgs e)
         {
-            LoadUserDetails();
+            Helper.ClearErrorTextBox(errorProvider1, txtFirstName);
         }
 
-        private void LoadUserDetails()
+        private void txtFirstName_Validating(object sender, CancelEventArgs e)
         {
-            int userId = Convert.ToInt32(cmbxLinkedAcc.SelectedValue);
-            var dtUser = Factory.UsersRepository().GetViewRecordById(userId);
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtFirstName, lblFirstName.Text);
+        }
 
-            txtPrefix.Text = dtUser["prefix"];
-            txtFirstName.Text = dtUser["first_name"];
-            txtLastName.Text = dtUser["last_name"];
-            txtMidInitial.Text = dtUser["mid_initial"];
-            txtSuffix.Text = dtUser["suffix"];
-            txtJobTitle.Text = dtUser["role_name"];
+        private void txtJobTitle_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorTextBox(errorProvider1, txtJobTitle);
+        }
+
+        private void txtJobTitle_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtJobTitle, lblJobTitle.Text);
+        }
+
+        private void txtLastName_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorTextBox(errorProvider1, txtLastName);
+        }
+
+        private void txtLastName_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtLastName, lblLastName.Text);
+        }
+
+        private void txtMidInitial_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorTextBox(errorProvider1, txtMidInitial);
+        }
+
+        private void txtMidInitial_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtMidInitial, lblMidInitial.Text);
+        }
+
+        private void ucDisbursingOfficer_Load(object sender, EventArgs e)
+        {
+            OnLoad();
         }
     }
 }

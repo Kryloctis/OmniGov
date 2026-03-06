@@ -1,4 +1,4 @@
-using OmniGov.App.Helpers;
+﻿using OmniGov.App.Helpers;
 using OmniGov.Core.Factories;
 using OmniGov.Treasury.Data.Factories;
 using OmniGov.Treasury.Domain.Entities;
@@ -17,13 +17,6 @@ namespace OmniGov.App.Views.Manage.BankAccounts
             InitializeComponent();
         }
 
-        private void LoadSelectedRecord(int bankAccId)
-        {
-            var dictBankAccounts = TreasuryFactory.BankAccountsRepository().GetRecordByID(bankAccId);
-            cmbxBank.SelectedValue = dictBankAccounts["banks_id"];
-            txtAccountNo.Text = dictBankAccounts["account_no"];
-        }
-
         internal BankAccountsModel BankAccountsModel()
         {
             return new BankAccountsModel()
@@ -31,6 +24,17 @@ namespace OmniGov.App.Views.Manage.BankAccounts
                 BanksModel = new BanksModel() { Id = Convert.ToInt32(cmbxBank.SelectedValue) },
                 AccountNumber = txtAccountNo.Text.Trim(),
             };
+        }
+
+        internal string GetFormErrors()
+        {
+            var errorArray = new string[]
+            {
+                errorProvider1.GetError(cmbxBank),
+                errorProvider1.GetError(txtAccountNo)
+            };
+
+            return Factory.CreateErrors(errorArray).GenerateErrorMessage();
         }
 
         internal void OnLoad(bool isEdit, int? bankAccId)
@@ -51,32 +55,27 @@ namespace OmniGov.App.Views.Manage.BankAccounts
             txtAccountNo.Clear();
         }
 
-        internal string GetFormErrors()
-        {
-            var errorArray = new string[]
-            {
-                errorProvider1.GetError(cmbxBank),
-                errorProvider1.GetError(txtAccountNo)
-            };
-
-            return Factory.CreateErrors(errorArray).GenerateErrorMessage();
-        }
-
         private void LoadBanks()
         {
             DataTable dataTable = TreasuryFactory.BanksRepository().GetRecords();
             HelperLoadRecords.BankComboBox(dataTable, cmbxBank, "id", "bank_name");
         }
 
-        private void txtAccountNo_Validating(object sender, CancelEventArgs e)
+        private void LoadSelectedRecord(int bankAccId)
         {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtAccountNo, "Account Number");
+            var dictBankAccounts = TreasuryFactory.BankAccountsRepository().GetRecordByID(bankAccId);
+            cmbxBank.SelectedValue = dictBankAccounts["banks_id"];
+            txtAccountNo.Text = dictBankAccounts["account_no"];
         }
 
         private void txtAccountNo_Validated(object sender, EventArgs e)
         {
             Helper.ClearErrorTextBox(errorProvider1, txtAccountNo);
         }
+
+        private void txtAccountNo_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtAccountNo, "Account Number");
+        }
     }
 }
-

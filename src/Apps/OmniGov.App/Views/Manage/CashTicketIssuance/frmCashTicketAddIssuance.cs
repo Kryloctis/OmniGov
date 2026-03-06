@@ -1,4 +1,4 @@
-using OmniGov.App.Helpers;
+﻿using OmniGov.App.Helpers;
 using OmniGov.Treasury.Data.Factories;
 
 namespace OmniGov.App.Views.Manage.CashTicketIssuance
@@ -15,11 +15,6 @@ namespace OmniGov.App.Views.Manage.CashTicketIssuance
             this.frmCashTicketIssuance = frmCashTicketIssuance;
         }
 
-        private void frmCashTicketAddIssuance_Load(object sender, EventArgs e)
-        {
-            uc.OnLoad(false);
-        }
-
         private void btnSave_Click(object sender, EventArgs e)
         {
             if (SaveData())
@@ -28,6 +23,11 @@ namespace OmniGov.App.Views.Manage.CashTicketIssuance
                 frmCashTicketIssuance.LoadIssuedCashTickets();
                 uc.ResetForm();
             }
+        }
+
+        private void frmCashTicketAddIssuance_Load(object sender, EventArgs e)
+        {
+            uc.OnLoad(false);
         }
 
         private bool SaveData()

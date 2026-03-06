@@ -1,4 +1,4 @@
-using OmniGov.App.Views.Manage.RptPenalties;
+﻿using OmniGov.App.Views.Manage.RptPenalties;
 
 namespace OmniGov.App.Views.Manage.RptPenalties
 {

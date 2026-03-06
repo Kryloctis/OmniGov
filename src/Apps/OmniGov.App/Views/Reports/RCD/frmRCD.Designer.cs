@@ -1,4 +1,4 @@
-using OmniGov.App.Views.Reports.RCD;
+﻿using OmniGov.App.Views.Reports.RCD;
 namespace OmniGov.App.Views.Reports.RCD
 {
     partial class frmRcd

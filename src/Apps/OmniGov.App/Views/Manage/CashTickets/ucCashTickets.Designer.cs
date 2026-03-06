@@ -1,4 +1,4 @@
-namespace OmniGov.App.Views.Manage.CashTickets
+﻿namespace OmniGov.App.Views.Manage.CashTickets
 {
     partial class ucCashTickets
     {

@@ -1,52 +1,55 @@
-using OmniGov.App.Helpers;
+﻿using OmniGov.App.Helpers;
+
 using OmniGov.Treasury.Data.Factories;
 
 namespace OmniGov.App.Views.Manage.ReturnedReceipts
+
 {
     public partial class frmReturnedReceipts : Form
+
     {
         public frmReturnedReceipts()
+
         {
             InitializeComponent();
+
             Helper.DatagridFullRowSelectStyle(dgReturnedReceipts, true);
+
             Helper.LoadFormIcon(this);
         }
 
         private void frmReturnedReceipts_Load(object sender, EventArgs e)
-        {
-            try
-            {
-                OnLoad();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
 
-        private void OnLoad()
         {
-            LoadRecords();
+            OnLoad();
         }
 
         private void LoadRecords()
+
         {
             var returnedReceiptDt = TreasuryFactory.ReceiptsIssuedRepository().GetReturnedReceipts();
 
             HelperLoadRecords.ReturnedReceiptsDatagridView(returnedReceiptDt, dgReturnedReceipts);
+
             lblRecordCounts.Text = dgReturnedReceipts.Rows.Count.ToString();
         }
 
-        private void txtsearch_TextChanged(object sender, EventArgs e)
+        private void OnLoad()
+
         {
-            try
-            {
-                var searchKey = txtSearch.Text.Trim();
+            LoadRecords();
+        }
 
-                var receiptIssuedRepo = TreasuryFactory.ReceiptsIssuedRepository();
-                var returnedReceiptDt = receiptIssuedRepo.GetReturnedReceiptsBySearch(searchKey);
+        private void txtsearch_TextChanged(object sender, EventArgs e)
 
-                HelperLoadRecords.ReturnedReceiptsDatagridView(returnedReceiptDt, dgReturnedReceipts);
-                lblRecordCounts.Text = dgReturnedReceipts.Rows.Count.ToString();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        {
+            var searchKey = txtSearch.Text.Trim();
+
+            var receiptIssuedRepo = TreasuryFactory.ReceiptsIssuedRepository();
+            var returnedReceiptDt = receiptIssuedRepo.GetReturnedReceiptsBySearch(searchKey);
+
+            HelperLoadRecords.ReturnedReceiptsDatagridView(returnedReceiptDt, dgReturnedReceipts);
+            lblRecordCounts.Text = dgReturnedReceipts.Rows.Count.ToString();
         }
     }
 }

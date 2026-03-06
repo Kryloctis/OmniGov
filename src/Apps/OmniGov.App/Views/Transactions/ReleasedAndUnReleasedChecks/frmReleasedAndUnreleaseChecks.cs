@@ -1,4 +1,4 @@
-using OmniGov.App.Helpers;
+﻿using OmniGov.App.Helpers;
 using OmniGov.Core.Factories;
 using OmniGov.Treasury.Data.Factories;
 using OmniGov.Treasury.Domain.Entities;
@@ -17,21 +17,6 @@ namespace OmniGov.App.Views.Transactions.ReleasedAndUnReleasedChecks
             Helper.DatagridFullRowSelectStyle(dgReleasedAndUnreleaseCheques, false);
         }
 
-        private void frmReleasedAndUnreleaseChecks_Load(object sender, EventArgs e)
-        {
-            cmbxBank.SelectedValueChanged -= new EventHandler(cmbxBank_SelectedValueChanged);
-            cmbxBankAccountNo.SelectedValueChanged -= new EventHandler(cmbxBankAccountNo_SelectedValueChanged);
-            cmbxFund.SelectedValueChanged -= new EventHandler(cmbxFund_SelectedValueChanged);
-
-            LoadBanks();
-            LoadFunds();
-            LoadChecks();
-
-            cmbxBank.SelectedValueChanged += new EventHandler(cmbxBank_SelectedValueChanged);
-            cmbxBankAccountNo.SelectedValueChanged += new EventHandler(cmbxBankAccountNo_SelectedValueChanged);
-            cmbxFund.SelectedValueChanged += new EventHandler(cmbxFund_SelectedValueChanged);
-        }
-
         internal void LoadBanks()
         {
             var bankRepository = TreasuryFactory.BanksRepository();
@@ -39,27 +24,6 @@ namespace OmniGov.App.Views.Transactions.ReleasedAndUnReleasedChecks
             cmbxBank.DataSource = dtBank;
             cmbxBank.ValueMember = "id";
             cmbxBank.DisplayMember = "bank_name";
-            LoadBankAccounts();
-        }
-
-        private void LoadBankAccounts()
-        {
-            int bankID = Convert.ToInt32(cmbxBank.SelectedValue);
-            DataTable dtBankAccounts = TreasuryFactory.BankAccountsRepository().GetBankAccountsByBankID(bankID);
-
-            cmbxBankAccountNo.DataSource = dtBankAccounts;
-            cmbxBankAccountNo.ValueMember = "id";
-            cmbxBankAccountNo.DisplayMember = "account_no";
-        }
-
-        private void LoadFunds()
-        {
-            var dtFunds = Factory.FundsRepository().GetRecords();
-            HelperLoadRecords.FundsComboBox(dtFunds, cmbxFund, "id", "fund_name");
-        }
-
-        private void cmbxBank_SelectionChangeCommitted(object sender, EventArgs e)
-        {
             LoadBankAccounts();
         }
 
@@ -117,6 +81,96 @@ namespace OmniGov.App.Views.Transactions.ReleasedAndUnReleasedChecks
             lblRecordCount.Text = dtViewReleasedCheques.Rows.Count.ToString();
         }
 
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            if (dgReleasedAndUnreleaseCheques.SelectedRows.Count == 0)
+                return;
+
+            if (Helper.MessageBoxConfirmCancel("Release Cheque?"))
+            {
+                if (ReleasedCheque())
+                {
+                    Helper.MessageBoxSuccess("Cheque has been released.");
+                    LoadChecks();
+                }
+            }
+
+            return;
+        }
+
+        private void btnApplyFilter_Click(object sender, EventArgs e)
+        {
+            LoadChecks();
+        }
+
+        private void btnToggleFilter_Click(object sender, EventArgs e)
+        {
+            TogglePreviewPermissions();
+        }
+
+        private void cbxShowReleasedChecks_CheckedChanged(object sender, EventArgs e)
+        {
+            LoadChecks();
+        }
+
+        private void cmbxBank_SelectedValueChanged(object sender, EventArgs e)
+        {
+            LoadBankAccounts();
+            LoadChecks();
+        }
+
+        private void cmbxBank_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            LoadBankAccounts();
+        }
+
+        private void cmbxBankAccountNo_SelectedValueChanged(object sender, EventArgs e)
+        {
+            LoadChecks();
+        }
+
+        private void cmbxFund_SelectedValueChanged(object sender, EventArgs e)
+        {
+            LoadChecks();
+        }
+
+        private void dgReleasedAndUnreleaseCheques_SelectionChanged(object sender, EventArgs e)
+        {
+            int selectedRowCount = dgReleasedAndUnreleaseCheques.SelectedRows.Count;
+            btnAdd.Text = $"Release({selectedRowCount})";
+        }
+
+        private void frmReleasedAndUnreleaseChecks_Load(object sender, EventArgs e)
+        {
+            cmbxBank.SelectedValueChanged -= new EventHandler(cmbxBank_SelectedValueChanged);
+            cmbxBankAccountNo.SelectedValueChanged -= new EventHandler(cmbxBankAccountNo_SelectedValueChanged);
+            cmbxFund.SelectedValueChanged -= new EventHandler(cmbxFund_SelectedValueChanged);
+
+            LoadBanks();
+            LoadFunds();
+            LoadChecks();
+
+            cmbxBank.SelectedValueChanged += new EventHandler(cmbxBank_SelectedValueChanged);
+            cmbxBankAccountNo.SelectedValueChanged += new EventHandler(cmbxBankAccountNo_SelectedValueChanged);
+            cmbxFund.SelectedValueChanged += new EventHandler(cmbxFund_SelectedValueChanged);
+        }
+
+        private void LoadBankAccounts()
+        {
+            int bankID = Convert.ToInt32(cmbxBank.SelectedValue);
+            DataTable dtBankAccounts = TreasuryFactory.BankAccountsRepository().GetBankAccountsByBankID(bankID);
+
+            cmbxBankAccountNo.DataSource = dtBankAccounts;
+            cmbxBankAccountNo.ValueMember = "id";
+            cmbxBankAccountNo.DisplayMember = "account_no";
+        }
+
+        private void LoadFunds()
+        {
+            var dtFunds = Factory.FundsRepository().GetRecords();
+            HelperLoadRecords.FundsComboBox(dtFunds, cmbxFund, "id", "fund_name");
+        }
+
         private DataColumn[] ReleasedAndUnreleaseChequesColumn()
         {
             var dataColumns = new DataColumn[]
@@ -140,23 +194,6 @@ namespace OmniGov.App.Views.Transactions.ReleasedAndUnReleasedChecks
             return dataColumns;
         }
 
-        private void btnAdd_Click(object sender, EventArgs e)
-        {
-            if (dgReleasedAndUnreleaseCheques.SelectedRows.Count == 0)
-                return;
-
-            if (Helper.MessageBoxConfirmCancel("Release Cheque?"))
-            {
-                if (ReleasedCheque())
-                {
-                    Helper.MessageBoxSuccess("Cheque has been released.");
-                    LoadChecks();
-                }
-            }
-
-            return;
-        }
-
         private bool ReleasedCheque()
         {
             int selectedrowindex = dgReleasedAndUnreleaseCheques.SelectedCells[0].RowIndex;
@@ -173,27 +210,6 @@ namespace OmniGov.App.Views.Transactions.ReleasedAndUnReleasedChecks
             return releasedChequesRepository.Insert(releasedChequesModel);
         }
 
-        private void cmbxBank_SelectedValueChanged(object sender, EventArgs e)
-        {
-            LoadBankAccounts();
-            LoadChecks();
-        }
-
-        private void cmbxBankAccountNo_SelectedValueChanged(object sender, EventArgs e)
-        {
-            LoadChecks();
-        }
-
-        private void cmbxFund_SelectedValueChanged(object sender, EventArgs e)
-        {
-            LoadChecks();
-        }
-
-        private void cbxShowReleasedChecks_CheckedChanged(object sender, EventArgs e)
-        {
-            LoadChecks();
-        }
-
         private void TogglePreviewPermissions()
         {
             switch (pnlFilter.Visible)
@@ -208,22 +224,6 @@ namespace OmniGov.App.Views.Transactions.ReleasedAndUnReleasedChecks
                     btnToggleFilter.Text = "?";
                     break;
             }
-        }
-
-        private void btnToggleFilter_Click(object sender, EventArgs e)
-        {
-            TogglePreviewPermissions();
-        }
-
-        private void btnApplyFilter_Click(object sender, EventArgs e)
-        {
-            LoadChecks();
-        }
-
-        private void dgReleasedAndUnreleaseCheques_SelectionChanged(object sender, EventArgs e)
-        {
-            int selectedRowCount = dgReleasedAndUnreleaseCheques.SelectedRows.Count;
-            btnAdd.Text = $"Release({selectedRowCount})";
         }
     }
 }

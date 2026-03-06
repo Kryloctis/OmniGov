@@ -1,4 +1,4 @@
-namespace OmniGov.App.Views.SignIn
+﻿namespace OmniGov.App.Views.SignIn
 {
     partial class frmDatabaseConfig
     {

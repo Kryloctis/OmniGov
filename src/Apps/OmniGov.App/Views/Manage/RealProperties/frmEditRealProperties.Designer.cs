@@ -1,4 +1,4 @@
-using OmniGov.App.Views.Manage.RealProperties;
+﻿using OmniGov.App.Views.Manage.RealProperties;
 namespace OmniGov.App.Views.Manage.RealProperties
 {
     partial class frmEditRealProperties

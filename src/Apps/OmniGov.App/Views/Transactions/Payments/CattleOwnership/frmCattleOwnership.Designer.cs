@@ -1,4 +1,4 @@
-using OmniGov.App.Views.Transactions.Payments;
+﻿using OmniGov.App.Views.Transactions.Payments;
 using OmniGov.App.Views.Transactions.Payments.CattleOwnership;
 
 namespace OmniGov.App.Views.Transactions.Payments.CattleOwnership

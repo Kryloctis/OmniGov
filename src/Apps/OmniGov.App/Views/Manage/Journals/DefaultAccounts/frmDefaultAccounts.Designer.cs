@@ -1,4 +1,4 @@
-
+﻿
 namespace OmniGov.App.Views.Manage.Journals.DefaultAccounts
 {
     partial class frmDefaultAccounts

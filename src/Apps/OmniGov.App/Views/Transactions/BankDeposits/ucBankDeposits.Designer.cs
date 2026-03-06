@@ -1,4 +1,4 @@
-
+﻿
 namespace OmniGov.App.Views.Transactions.BankDeposits
 {
     partial class ucBankDeposits

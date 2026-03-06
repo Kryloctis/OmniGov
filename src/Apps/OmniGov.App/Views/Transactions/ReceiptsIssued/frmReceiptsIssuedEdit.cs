@@ -1,4 +1,4 @@
-using OmniGov.App.Helpers;
+﻿using OmniGov.App.Helpers;
 using OmniGov.Treasury.Data.Factories;
 using OmniGov.Treasury.Domain.Entities;
 
@@ -6,9 +6,9 @@ namespace OmniGov.App.Views.Transactions.ReceiptsIssued
 {
     public partial class frmReceiptsIssuedEdit : Form
     {
-        private int receiptIssuedID;
-        private frmReceiptsIssued frmReceiptsIssued;
         private readonly ucReceiptsIssued uc;
+        private frmReceiptsIssued frmReceiptsIssued;
+        private int receiptIssuedID;
 
         public frmReceiptsIssuedEdit(frmReceiptsIssued frmReceiptsIssued, int receiptIssuedID)
         {
@@ -17,6 +17,29 @@ namespace OmniGov.App.Views.Transactions.ReceiptsIssued
             this.frmReceiptsIssued = frmReceiptsIssued;
             uc = ucReceipts1;
             this.receiptIssuedID = receiptIssuedID;
+        }
+
+        internal void CheckReceiptsIssuedStatus()
+        {
+            var receiptDict = TreasuryFactory.ReceiptsRepository().GetRecordByID(uc.selectedReceiptID);
+            bool isUsed = false;
+
+            int accountableFormID = Convert.ToInt32(receiptDict["accountable_forms_id"]);
+            int receiptNumberFrom = Convert.ToInt32(uc.txtReceiptIssuedFrom.Text);
+            int receiptNumberTo = Convert.ToInt32(uc.txtReceiptIssuedTo.Text);
+
+            while (receiptNumberFrom <= receiptNumberTo)
+            {
+                isUsed = TreasuryFactory.PaymentCollectionsRepository().ReceiptAlreadyUsed(accountableFormID, receiptNumberFrom);
+                receiptNumberFrom++;
+
+                if (isUsed)
+                    break;
+            }
+
+            uc.cmbReceipt.Enabled = !isUsed;
+            uc.txtReceiptIssuedFrom.Enabled = !isUsed;
+            uc.txtReceiptIssuedTo.Enabled = !isUsed;
         }
 
         internal void LoadSelectedValue()
@@ -44,27 +67,14 @@ namespace OmniGov.App.Views.Transactions.ReceiptsIssued
             uc.txtReceiptQuantity.Text = quantity.ToString();
         }
 
-        internal void CheckReceiptsIssuedStatus()
+        private void btnSave_Click(object sender, EventArgs e)
         {
-            var receiptDict = TreasuryFactory.ReceiptsRepository().GetRecordByID(uc.selectedReceiptID);
-            bool isUsed = false;
-
-            int accountableFormID = Convert.ToInt32(receiptDict["accountable_forms_id"]);
-            int receiptNumberFrom = Convert.ToInt32(uc.txtReceiptIssuedFrom.Text);
-            int receiptNumberTo = Convert.ToInt32(uc.txtReceiptIssuedTo.Text);
-
-            while (receiptNumberFrom <= receiptNumberTo)
+            if (SaveData())
             {
-                isUsed = TreasuryFactory.PaymentCollectionsRepository().ReceiptAlreadyUsed(accountableFormID, receiptNumberFrom);
-                receiptNumberFrom++;
-
-                if (isUsed)
-                    break;
+                Helper.MessageBoxSuccess("Receipt Issued has been updated.");
+                frmReceiptsIssued.LoadRecords();
+                Close();
             }
-
-            uc.cmbReceipt.Enabled = !isUsed;
-            uc.txtReceiptIssuedFrom.Enabled = !isUsed;
-            uc.txtReceiptIssuedTo.Enabled = !isUsed;
         }
 
         private void frmReceiptsEdit_Load(object sender, EventArgs e)
@@ -106,16 +116,6 @@ namespace OmniGov.App.Views.Transactions.ReceiptsIssued
             };
 
             return receiptIssuedRepository.Update(receiptIssuedModel);
-        }
-
-        private void btnSave_Click(object sender, EventArgs e)
-        {
-            if (SaveData())
-            {
-                Helper.MessageBoxSuccess("Receipt Issued has been updated.");
-                frmReceiptsIssued.LoadRecords();
-                Close();
-            }
         }
     }
 }

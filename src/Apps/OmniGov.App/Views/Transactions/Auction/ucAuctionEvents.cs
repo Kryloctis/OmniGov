@@ -1,4 +1,4 @@
-using OmniGov.App.Helpers;
+﻿using OmniGov.App.Helpers;
 using OmniGov.Core.Factories;
 using OmniGov.Treasury.Data.Factories;
 using OmniGov.Treasury.Domain.Entities;
@@ -33,15 +33,6 @@ namespace OmniGov.App.Views.Transactions.Auction
             this.isEdit = isEdit;
             if (isEdit) LoadSelectedRecord(auctionId.Value); else ResetForm();
             errorProvider1.Clear();
-        }
-
-        private void LoadSelectedRecord(int auctionId)
-        {
-            var dictAuction = TreasuryFactory.AuctionRepository().GetRecordById(auctionId);
-
-            dtpStartDate.Value = Convert.ToDateTime(dictAuction["start_date"]);
-            dtpEndDate.Value = Convert.ToDateTime(dictAuction["end_date"]);
-            txtLocation.Text = dictAuction["location"];
         }
 
         internal void ResetForm()
@@ -79,11 +70,23 @@ namespace OmniGov.App.Views.Transactions.Auction
             return model;
         }
 
+        private void dtpStartDate_ValueChanged(object sender, EventArgs e)
+        {
+            dtpEndDate.MinDate = dtpStartDate.Value;
+        }
+
+        private void LoadSelectedRecord(int auctionId)
+        {
+            var dictAuction = TreasuryFactory.AuctionRepository().GetRecordById(auctionId);
+
+            dtpStartDate.Value = Convert.ToDateTime(dictAuction["start_date"]);
+            dtpEndDate.Value = Convert.ToDateTime(dictAuction["end_date"]);
+            txtLocation.Text = dictAuction["location"];
+        }
+
         private void ucAuction_Load(object sender, EventArgs e)
         {
         }
-
-        #region Validation
 
         private void dtpStartDate_Validated(object sender, EventArgs e)
         {
@@ -112,13 +115,6 @@ namespace OmniGov.App.Views.Transactions.Auction
         private void txtLocation_Validating(object sender, CancelEventArgs e)
         {
             e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtLocation, "Location");
-        }
-
-        #endregion Validation
-
-        private void dtpStartDate_ValueChanged(object sender, EventArgs e)
-        {
-            dtpEndDate.MinDate = dtpStartDate.Value;
         }
     }
 }

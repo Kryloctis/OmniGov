@@ -1,15 +1,15 @@
-using OmniGov.Accounting.Data.Factories;
+﻿using OmniGov.Accounting.Data.Factories;
 using OmniGov.App.Helpers;
 
 namespace OmniGov.App.Views.Manage.AmortizationSchedule
 {
     public partial class frmEditAmortizationSchedule : Form
     {
-        private ucAmortizationSchedule uc;
         internal int amortizationId;
+        internal int amortizationScheduleId;
         internal string amortizationTerm;
         private frmAmortizationSchedule _frmAmortizationSchedule;
-        internal int amortizationScheduleId;
+        private ucAmortizationSchedule uc;
 
         public frmEditAmortizationSchedule(frmAmortizationSchedule frmAmortizationSchedule)
         {
@@ -19,14 +19,14 @@ namespace OmniGov.App.Views.Manage.AmortizationSchedule
             uc.isEdit = true;
         }
 
-        private void LoadSelectedAmortizationSchedule()
+        private void btnSave_Click(object sender, EventArgs e)
         {
-            var dicAmortizationScheduleRecord = AccountingFactory.AmortizationScheduleRepository().GetRecordByID(amortizationScheduleId);
-
-            uc.dtDate.Value = Convert.ToDateTime(dicAmortizationScheduleRecord["date"]);
-            uc.nudPrincipal.Value = Convert.ToDecimal(dicAmortizationScheduleRecord["principal_amount"]);
-            uc.nudInterest.Value = Convert.ToDecimal(dicAmortizationScheduleRecord["interest_amount"]);
-            uc.nudGRT.Value = Convert.ToDecimal(dicAmortizationScheduleRecord["grt_amount"]);
+            if (uc.SaveData())
+            {
+                Helper.MessageBoxSuccess("Amortization Schedule has been updated");
+                _frmAmortizationSchedule.LoadRecords();
+                Close();
+            }
         }
 
         private void frmEditAmortizationSchedule_Load(object sender, EventArgs e)
@@ -38,14 +38,14 @@ namespace OmniGov.App.Views.Manage.AmortizationSchedule
             LoadSelectedAmortizationSchedule();
         }
 
-        private void btnSave_Click(object sender, EventArgs e)
+        private void LoadSelectedAmortizationSchedule()
         {
-            if (uc.SaveData())
-            {
-                Helper.MessageBoxSuccess("Amortization Schedule has been updated");
-                _frmAmortizationSchedule.LoadRecords();
-                Close();
-            }
+            var dicAmortizationScheduleRecord = AccountingFactory.AmortizationScheduleRepository().GetRecordByID(amortizationScheduleId);
+
+            uc.dtDate.Value = Convert.ToDateTime(dicAmortizationScheduleRecord["date"]);
+            uc.nudPrincipal.Value = Convert.ToDecimal(dicAmortizationScheduleRecord["principal_amount"]);
+            uc.nudInterest.Value = Convert.ToDecimal(dicAmortizationScheduleRecord["interest_amount"]);
+            uc.nudGRT.Value = Convert.ToDecimal(dicAmortizationScheduleRecord["grt_amount"]);
         }
     }
 }

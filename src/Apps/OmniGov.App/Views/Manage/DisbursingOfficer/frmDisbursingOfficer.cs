@@ -1,4 +1,4 @@
-using OmniGov.App.Helpers;
+﻿using OmniGov.App.Helpers;
 using OmniGov.Treasury.Data.Factories;
 using OmniGov.Treasury.Domain.Entities;
 using System.Data;
@@ -12,6 +12,44 @@ namespace OmniGov.App.Views.Manage.DisbursingOfficer
             InitializeComponent();
             Helper.LoadFormIcon(this);
             Helper.DatagridFullRowSelectStyle(dgDisbursingOfficer, true);
+        }
+
+        internal void LoadRecords()
+        {
+            string searchText = txtBoxSearch.Text.Trim();
+            HelperLoadRecords.DisbursingOfficerDatagridView(DataTableDisbursingOfficer(searchText), dgDisbursingOfficer);
+            lblRecordCount.Text = dgDisbursingOfficer.Rows.Count.ToString();
+            dgDisbursingOfficer.CurrentCell = dgDisbursingOfficer.FirstDisplayedCell;
+        }
+
+        private void BtnAdd_Click(object sender, EventArgs e)
+        {
+            _ = new frmDisbursingOfficerAdd(this).ShowDialog();
+        }
+
+        private void BtnDelete_Click(object sender, EventArgs e)
+        {
+            int selectedRows = dgDisbursingOfficer.SelectedRows.Count;
+
+            if (DeleteData())
+            {
+                Helper.MessageBoxSuccess($"{selectedRows} record/s has been deleted");
+                LoadRecords();
+            }
+        }
+
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+            if (dgDisbursingOfficer.Rows.Count > 0)
+            {
+                int disbursingOfficerId = int.Parse(dgDisbursingOfficer.SelectedCells[0].Value.ToString());
+                _ = new frmDisbursingOfficerEdit(this, disbursingOfficerId).ShowDialog();
+            }
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            LoadRecords();
         }
 
         private DataTable DataTableDisbursingOfficer(string searchText)
@@ -65,33 +103,6 @@ namespace OmniGov.App.Views.Manage.DisbursingOfficer
             return dataTable;
         }
 
-        internal void LoadRecords()
-        {
-            string searchText = txtBoxSearch.Text.Trim();
-            HelperLoadRecords.DisbursingOfficerDatagridView(DataTableDisbursingOfficer(searchText), dgDisbursingOfficer);
-            lblRecordCount.Text = dgDisbursingOfficer.Rows.Count.ToString();
-            dgDisbursingOfficer.CurrentCell = dgDisbursingOfficer.FirstDisplayedCell;
-        }
-
-        private void frmDisbursingOfficer_Load(object sender, EventArgs e)
-        {
-            LoadRecords();
-        }
-
-        private void BtnAdd_Click(object sender, EventArgs e)
-        {
-            _ = new frmDisbursingOfficerAdd(this).ShowDialog();
-        }
-
-        private void btnEdit_Click(object sender, EventArgs e)
-        {
-            if (dgDisbursingOfficer.Rows.Count > 0)
-            {
-                int disbursingOfficerId = int.Parse(dgDisbursingOfficer.SelectedCells[0].Value.ToString());
-                _ = new frmDisbursingOfficerEdit(this, disbursingOfficerId).ShowDialog();
-            }
-        }
-
         private bool DeleteData()
         {
             int selectedRowsCount = dgDisbursingOfficer.SelectedRows.Count;
@@ -109,17 +120,6 @@ namespace OmniGov.App.Views.Manage.DisbursingOfficer
             return false;
         }
 
-        private void BtnDelete_Click(object sender, EventArgs e)
-        {
-            int selectedRows = dgDisbursingOfficer.SelectedRows.Count;
-
-            if (DeleteData())
-            {
-                Helper.MessageBoxSuccess($"{selectedRows} record/s has been deleted");
-                LoadRecords();
-            }
-        }
-
         private void dgDisbursingOfficer_SelectionChanged(object sender, EventArgs e)
         {
             byte[] columnIndexTimestamp = { 3, 4 };
@@ -127,7 +127,7 @@ namespace OmniGov.App.Views.Manage.DisbursingOfficer
             Helper.EnableDisableToolStripButtons(dgDisbursingOfficer, btnEdit, btnDelete);
         }
 
-        private void btnSearch_Click(object sender, EventArgs e)
+        private void frmDisbursingOfficer_Load(object sender, EventArgs e)
         {
             LoadRecords();
         }

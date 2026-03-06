@@ -1,4 +1,4 @@
-
+﻿
 namespace OmniGov.App.Views.Reports.RCI
 {
     partial class frmRciReport

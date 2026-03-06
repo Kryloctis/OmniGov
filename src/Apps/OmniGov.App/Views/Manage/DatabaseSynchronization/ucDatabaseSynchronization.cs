@@ -1,4 +1,4 @@
-namespace OmniGov.App.Views.Manage.DatabaseSynchronization
+﻿namespace OmniGov.App.Views.Manage.DatabaseSynchronization
 {
     public partial class ucDatabaseSynchronization : UserControl
     {

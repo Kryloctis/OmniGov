@@ -1,13 +1,13 @@
-using OmniGov.App.Helpers;
+﻿using OmniGov.App.Helpers;
 
 namespace OmniGov.App.Views.Manage.AmortizationSchedule
 {
     public partial class frmAddAmortizationSchedule : Form
     {
-        private ucAmortizationSchedule uc;
         internal int amortizationId;
         internal string amortizationTerm;
         private frmAmortizationSchedule _frmAmortizationSchedule;
+        private ucAmortizationSchedule uc;
 
         public frmAddAmortizationSchedule(frmAmortizationSchedule frmAmortizationSchedule)
         {

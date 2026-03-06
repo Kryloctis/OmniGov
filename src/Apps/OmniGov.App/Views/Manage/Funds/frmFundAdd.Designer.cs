@@ -1,4 +1,4 @@
-using OmniGov.App.Views.Manage.Funds;
+﻿using OmniGov.App.Views.Manage.Funds;
 
 namespace OmniGov.App.Views.Manage.Funds
 {

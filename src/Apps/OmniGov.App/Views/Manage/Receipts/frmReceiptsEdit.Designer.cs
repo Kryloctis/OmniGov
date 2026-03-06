@@ -1,4 +1,4 @@
-using OmniGov.App.Views.Manage.Receipts;
+﻿using OmniGov.App.Views.Manage.Receipts;
 
 namespace OmniGov.App.Views.Manage.Receipts
 {

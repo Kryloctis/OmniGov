@@ -1,12 +1,12 @@
-using OmniGov.App.Helpers;
+﻿using OmniGov.App.Helpers;
 using OmniGov.Treasury.Data.Factories;
 
 namespace OmniGov.App.Views.Manage.BankAccounts
 {
     public partial class frmAddBankAccounts : Form
     {
-        private readonly ucBankAccounts uc;
         private readonly frmBankAccounts frmBankAccounts;
+        private readonly ucBankAccounts uc;
 
         public frmAddBankAccounts(frmBankAccounts frmBankAccounts)
         {
@@ -14,11 +14,6 @@ namespace OmniGov.App.Views.Manage.BankAccounts
             Helper.LoadFormIcon(this);
             this.frmBankAccounts = frmBankAccounts;
             uc = ucBankAccounts1;
-        }
-
-        private void frmAddBankAccounts_Load(object sender, EventArgs e)
-        {
-            uc.OnLoad(false, null);
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -29,17 +24,6 @@ namespace OmniGov.App.Views.Manage.BankAccounts
                 frmBankAccounts.LoadRecords();
                 uc.ResetForm();
             }
-        }
-
-        private bool SaveData()
-        {
-            if (!uc.ValidateChildren())
-            {
-                Helper.MessageBoxError(uc.GetFormErrors());
-                return false;
-            }
-
-            return TreasuryFactory.BankAccountsRepository().Insert(uc.BankAccountsModel());
         }
 
         private void frmAddBankAccounts_KeyDown(object sender, KeyEventArgs e)
@@ -53,6 +37,22 @@ namespace OmniGov.App.Views.Manage.BankAccounts
                     uc.ResetForm();
                 }
             }
+        }
+
+        private void frmAddBankAccounts_Load(object sender, EventArgs e)
+        {
+            uc.OnLoad(false, null);
+        }
+
+        private bool SaveData()
+        {
+            if (!uc.ValidateChildren())
+            {
+                Helper.MessageBoxError(uc.GetFormErrors());
+                return false;
+            }
+
+            return TreasuryFactory.BankAccountsRepository().Insert(uc.BankAccountsModel());
         }
     }
 }

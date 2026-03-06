@@ -1,4 +1,4 @@
-using OmniGov.App.Helpers;
+﻿using OmniGov.App.Helpers;
 using OmniGov.Core.Entities;
 using OmniGov.Core.Factories;
 
@@ -17,12 +17,31 @@ namespace OmniGov.App.Views.Manage.ChartOfAccounts.AccountGroup
             uc.accountGroupId = _accountGroupId;
         }
 
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            if (SaveData())
+            {
+                Helper.MessageBoxSuccess("Account group has been saved.");
+                _frmChartOfAccounts.LoadAccountGroup();
+            }
+        }
+
+        private void frmAccountGroupEdit_Load(object sender, EventArgs e)
+        {
+            OnLoad();
+        }
+
         private void LoadSelectedRecord()
         {
             Dictionary<string, string> accountGroupData = Factory.AccountGroupRepository().GetRecordByID(uc.accountGroupId);
 
             uc.txtCode.Text = accountGroupData["account_group_code"];
             uc.txtName.Text = accountGroupData["account_group_name"];
+        }
+
+        private void OnLoad()
+        {
+            LoadSelectedRecord();
         }
 
         private bool SaveData()
@@ -43,25 +62,6 @@ namespace OmniGov.App.Views.Manage.ChartOfAccounts.AccountGroup
             };
 
             return Factory.AccountGroupRepository().Update(accountGroupModel);
-        }
-
-        private void OnLoad()
-        {
-            LoadSelectedRecord();
-        }
-
-        private void frmAccountGroupEdit_Load(object sender, EventArgs e)
-        {
-            OnLoad();
-        }
-
-        private void btnSave_Click(object sender, EventArgs e)
-        {
-            if (SaveData())
-            {
-                Helper.MessageBoxSuccess("Account group has been saved.");
-                _frmChartOfAccounts.LoadAccountGroup();
-            }
         }
     }
 }

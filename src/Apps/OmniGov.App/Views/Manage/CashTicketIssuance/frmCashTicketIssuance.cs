@@ -1,4 +1,4 @@
-using OmniGov.App.Helpers;
+﻿using OmniGov.App.Helpers;
 using OmniGov.Treasury.Data.Factories;
 using OmniGov.Treasury.Domain.Entities;
 using System.ComponentModel;
@@ -13,23 +13,6 @@ namespace OmniGov.App.Views.Manage.CashTicketIssuance
             InitializeComponent();
             Helper.LoadFormIcon(this);
             Helper.DatagridFullRowSelectStyle(dgCashTicketIssued, true);
-        }
-
-        private void btnAdd_Click(object sender, EventArgs e)
-        {
-            _ = new frmCashTicketAddIssuance(this).ShowDialog();
-        }
-
-        private void btnEdit_Click(object sender, EventArgs e)
-        {
-            int cashTicketIssuedID = Convert.ToInt32(dgCashTicketIssued.SelectedRows[0].Cells["id"].Value);
-            _ = new frmCashTicketEditIssuance(this, cashTicketIssuedID).ShowDialog();
-        }
-
-        private void frmCashTicketIssuance_Load(object sender, EventArgs e)
-        {
-            HelperLoadRecords.ComboboxRowLimitFilter(cmbxRowFilter);
-            LoadIssuedCashTickets();
         }
 
         internal void LoadIssuedCashTickets()
@@ -112,6 +95,31 @@ namespace OmniGov.App.Views.Manage.CashTicketIssuance
             Helper.EnableDisableToolStripButtons(dgCashTicketIssued, btnEdit, btnDelete);
         }
 
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            _ = new frmCashTicketAddIssuance(this).ShowDialog();
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            if (DeleteRecords())
+            {
+                Helper.MessageBoxSuccess("Issued Cash Tickets has been deleted.");
+                LoadIssuedCashTickets();
+            }
+        }
+
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+            int cashTicketIssuedID = Convert.ToInt32(dgCashTicketIssued.SelectedRows[0].Cells["id"].Value);
+            _ = new frmCashTicketEditIssuance(this, cashTicketIssuedID).ShowDialog();
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            LoadIssuedCashTickets();
+        }
+
         private string CollectingOfficerFullName(DataRow row)
         {
             string jobOrdersID = row["jo_id"].ToString();
@@ -134,15 +142,6 @@ namespace OmniGov.App.Views.Manage.CashTicketIssuance
             return Helper.GenerateFullName(prefix, firstName, midInitial, lastName, suffix);
         }
 
-        private void btnDelete_Click(object sender, EventArgs e)
-        {
-            if (DeleteRecords())
-            {
-                Helper.MessageBoxSuccess("Issued Cash Tickets has been deleted.");
-                LoadIssuedCashTickets();
-            }
-        }
-
         private bool DeleteRecords()
         {
             int selectedRowsCount = dgCashTicketIssued.SelectedRows.Count;
@@ -162,8 +161,9 @@ namespace OmniGov.App.Views.Manage.CashTicketIssuance
             return false;
         }
 
-        private void btnSearch_Click(object sender, EventArgs e)
+        private void frmCashTicketIssuance_Load(object sender, EventArgs e)
         {
+            HelperLoadRecords.ComboboxRowLimitFilter(cmbxRowFilter);
             LoadIssuedCashTickets();
         }
     }

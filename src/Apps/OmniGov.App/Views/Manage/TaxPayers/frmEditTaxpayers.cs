@@ -1,41 +1,47 @@
-using OmniGov.App.Helpers;
+﻿using OmniGov.App.Helpers;
+
 using OmniGov.Treasury.Data.Factories;
 
 namespace OmniGov.App.Views.Manage.TaxPayers
+
 {
     public partial class frmEditTaxpayers : Form
+
     {
         internal readonly ucTaxPayers uc;
-        private readonly int taxpayerId;
+
         private readonly frmTaxpayers frmTaxpayers;
+        private readonly int taxpayerId;
 
         public frmEditTaxpayers(int taxpayerId, frmTaxpayers frmTaxpayers)
+
         {
             InitializeComponent();
+
             Helper.LoadFormIcon(this);
+
             this.taxpayerId = taxpayerId;
+
             this.frmTaxpayers = frmTaxpayers;
+
             uc = ucTaxPayers1;
         }
 
-        private bool UpdateTaxpayer()
+        private void btnUpdate_Click(object sender, EventArgs e)
+
         {
-            if (!uc.ValidateChildren())
+            if (UpdateTaxpayer())
             {
-                Helper.MessageBoxError(uc.GetFormErrors());
-                return false;
+                Helper.MessageBoxSuccess("Taxpayer has been updated.");
+                frmTaxpayers.LoadTaxpayers();
+                Close();
             }
-
-            var taxpayersModel = uc.TaxpayersModel();
-            taxpayersModel.Id = taxpayerId;
-            taxpayersModel.UpdatedBy = UserHelper.loggedUser.Id;
-
-            return TreasuryFactory.TaxpayersRepository().Update(taxpayersModel);
         }
 
-        private void btnUpdate_Click(object sender, EventArgs e)
+        private void frmEditTaxpayers_KeyDown(object sender, KeyEventArgs e)
+
         {
-            try
+            if (e.KeyCode == Keys.S && e.Control)
             {
                 if (UpdateTaxpayer())
                 {
@@ -44,34 +50,33 @@ namespace OmniGov.App.Views.Manage.TaxPayers
                     Close();
                 }
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void frmEditTaxpayers_Load(object sender, EventArgs e)
+
         {
-            try
-            {
-                uc.OnLoad(true, taxpayerId);
-                ActiveControl = uc;
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            uc.OnLoad(true, taxpayerId);
+            ActiveControl = uc;
         }
 
-        private void frmEditTaxpayers_KeyDown(object sender, KeyEventArgs e)
+        private bool UpdateTaxpayer()
+
         {
-            try
+            if (!uc.ValidateChildren())
+
             {
-                if (e.KeyCode == Keys.S && e.Control)
-                {
-                    if (UpdateTaxpayer())
-                    {
-                        Helper.MessageBoxSuccess("Taxpayer has been updated.");
-                        frmTaxpayers.LoadTaxpayers();
-                        Close();
-                    }
-                }
+                Helper.MessageBoxError(uc.GetFormErrors());
+
+                return false;
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+
+            var taxpayersModel = uc.TaxpayersModel();
+
+            taxpayersModel.Id = taxpayerId;
+
+            taxpayersModel.UpdatedBy = UserHelper.loggedUser.Id;
+
+            return TreasuryFactory.TaxpayersRepository().Update(taxpayersModel);
         }
     }
 }

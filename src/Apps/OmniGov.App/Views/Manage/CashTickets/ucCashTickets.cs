@@ -1,4 +1,4 @@
-using OmniGov.Core.Factories;
+﻿using OmniGov.Core.Factories;
 using OmniGov.Treasury.Data.Factories;
 using OmniGov.Treasury.Domain.Entities;
 
@@ -12,41 +12,6 @@ namespace OmniGov.App.Views.Manage.CashTickets
         public ucCashTickets()
         {
             InitializeComponent();
-        }
-
-        internal string GetFormErrors()
-        {
-            var errorArray = new string[]
-            {
-                errorProvider1.GetError(txtDescription),
-                errorProvider1.GetError(nudQuantity),
-                errorProvider1.GetError(dtpReceivedDate)
-            };
-
-            return Factory.CreateErrors(errorArray).GenerateErrorMessage();
-        }
-
-        internal void ResetForm()
-        {
-            txtDescription.Clear();
-            dtpReceivedDate.Value = DateTime.Today;
-            nudQuantity.Value = 0;
-            txtRemark.Clear();
-        }
-
-        internal void LoadSelectedValue()
-        {
-            Dictionary<string, string> dictReceipts = TreasuryFactory.CashTicketsRepository().GetRecordByID(cashTicketId.Value);
-
-            var description = dictReceipts["description"].ToString();
-            var dateReceived = Convert.ToDateTime(dictReceipts["received_date"]);
-            var quantity = Convert.ToInt32(dictReceipts["quantity"]);
-            var remarks = dictReceipts["remarks"].ToString();
-
-            txtDescription.Text = description;
-            dtpReceivedDate.Value = dateReceived;
-            nudQuantity.Value = quantity;
-            txtRemark.Text = remarks;
         }
 
         internal CashTicketsModel CashTicketsModel()
@@ -64,6 +29,33 @@ namespace OmniGov.App.Views.Manage.CashTickets
             return model;
         }
 
+        internal string GetFormErrors()
+        {
+            var errorArray = new string[]
+            {
+                errorProvider1.GetError(txtDescription),
+                errorProvider1.GetError(nudQuantity),
+                errorProvider1.GetError(dtpReceivedDate)
+            };
+
+            return Factory.CreateErrors(errorArray).GenerateErrorMessage();
+        }
+
+        internal void LoadSelectedValue()
+        {
+            Dictionary<string, string> dictReceipts = TreasuryFactory.CashTicketsRepository().GetRecordByID(cashTicketId.Value);
+
+            var description = dictReceipts["description"].ToString();
+            var dateReceived = Convert.ToDateTime(dictReceipts["received_date"]);
+            var quantity = Convert.ToInt32(dictReceipts["quantity"]);
+            var remarks = dictReceipts["remarks"].ToString();
+
+            txtDescription.Text = description;
+            dtpReceivedDate.Value = dateReceived;
+            nudQuantity.Value = quantity;
+            txtRemark.Text = remarks;
+        }
+
         internal void OnLoad(bool isEdit, int? cashTicketId)
         {
             this.isEdit = isEdit;
@@ -71,6 +63,13 @@ namespace OmniGov.App.Views.Manage.CashTickets
 
             if (isEdit) LoadSelectedValue();
         }
+
+        internal void ResetForm()
+        {
+            txtDescription.Clear();
+            dtpReceivedDate.Value = DateTime.Today;
+            nudQuantity.Value = 0;
+            txtRemark.Clear();
+        }
     }
 }
-
