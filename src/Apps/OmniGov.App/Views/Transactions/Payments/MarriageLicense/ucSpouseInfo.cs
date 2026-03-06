@@ -1,4 +1,4 @@
-using OmniGov.App.Helpers;
+﻿using OmniGov.App.Helpers;
 using OmniGov.Core.Factories;
 using System.ComponentModel;
 using System.Data;
@@ -10,15 +10,6 @@ namespace OmniGov.App.Views.Transactions.Payments.MarriageLicense
         public ucSpouseInfo()
         {
             InitializeComponent();
-        }
-
-        internal void ResetForm()
-        {
-            LoadRegistry();
-            nudAge.Value = 0;
-            nudMonths.Value = 0;
-            txtReligion.Clear();
-            txtCurrenResidence.Clear();
         }
 
         internal string GetFormErrors()
@@ -33,6 +24,72 @@ namespace OmniGov.App.Views.Transactions.Payments.MarriageLicense
             };
 
             return Factory.CreateErrors(errors).GenerateErrorMessage();
+        }
+
+        internal (int SpouseRegistryId, int age, int months, string religion, string currentResidence) GetSpouseInfo()
+        {
+            int registryId = Convert.ToInt32(cmbxRegistry.SelectedValue);
+            int age = (int)nudAge.Value;
+            int months = (int)nudMonths.Value;
+            string religion = txtReligion.Text.Trim();
+            string currentResidence = txtCurrenResidence.Text.Trim();
+
+            return (registryId, age, months, religion, currentResidence);
+        }
+
+        internal void OnLoad()
+        {
+            LoadRegistry();
+        }
+
+        internal void ResetForm()
+        {
+            LoadRegistry();
+            nudAge.Value = 0;
+            nudMonths.Value = 0;
+            txtReligion.Clear();
+            txtCurrenResidence.Clear();
+        }
+
+        private void ClearSpouseInfo()
+        {
+            txtFirstName.Clear();
+            txtMiddleName.Clear();
+            txtLastName.Clear();
+            radMale.Checked = true;
+            txtNationality.Clear();
+            txtMunicipality.Clear();
+            txtProvince.Clear();
+            txtCountry.Clear();
+            txtContactInfo.Clear();
+        }
+
+        private void cmbxRegistry_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (ModifierKeys == Keys.Shift && e.KeyChar == (char)Keys.Enter)
+            {
+                LoadRegistry();
+                cmbxRegistry.DroppedDown = cmbxRegistry.DroppedDown ? false : true;
+                cmbxRegistry.DroppedDown = true;
+                e.Handled = true;
+            }
+        }
+
+        private void cmbxRegistry_SelectedValueChanged(object sender, EventArgs e)
+        {
+            if (cmbxRegistry.SelectedValue is null)
+                return;
+            LoadSelectedRegistryInfo();
+        }
+
+        private void cmbxRegistry_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorComboBox(errorProvider1, cmbxRegistry);
+        }
+
+        private void cmbxRegistry_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = !RegistryValidated(errorProvider1, cmbxRegistry);
         }
 
         private void LoadRegistry()
@@ -64,113 +121,6 @@ namespace OmniGov.App.Views.Transactions.Payments.MarriageLicense
             HelperLoadRecords.SearchableCombobox2(dataTable, cmbxRegistry, "id", "name");
         }
 
-        internal void OnLoad()
-        {
-            LoadRegistry();
-        }
-
-        internal (int SpouseRegistryId, int age, int months, string religion, string currentResidence) GetSpouseInfo()
-        {
-            int registryId = Convert.ToInt32(cmbxRegistry.SelectedValue);
-            int age = (int)nudAge.Value;
-            int months = (int)nudMonths.Value;
-            string religion = txtReligion.Text.Trim();
-            string currentResidence = txtCurrenResidence.Text.Trim();
-
-            return (registryId, age, months, religion, currentResidence);
-        }
-
-        private void cmbxRegistry_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (ModifierKeys == Keys.Shift && e.KeyChar == (char)Keys.Enter)
-            {
-                LoadRegistry();
-                cmbxRegistry.DroppedDown = cmbxRegistry.DroppedDown ? false : true;
-                cmbxRegistry.DroppedDown = true;
-                e.Handled = true;
-            }
-        }
-
-        private void nudAge_Validating(object sender, CancelEventArgs e)
-        {
-            e.Cancel = Helper.ShowErrorNumericUpDownZero(errorProvider1, nudAge, "Age") || Helper.ShowErrorNumericUpDownEmpty(errorProvider1, nudAge, "Age");
-        }
-
-        private void nudAge_Validated(object sender, EventArgs e)
-        {
-            Helper.ClearErrorNumericUpDown(errorProvider1, nudAge);
-        }
-
-        private void nudMonths_Validating(object sender, CancelEventArgs e)
-        {
-            e.Cancel = Helper.ShowErrorNumericUpDownZero(errorProvider1, nudAge, "Age") || Helper.ShowErrorNumericUpDownEmpty(errorProvider1, nudAge, "Age");
-        }
-
-        private void nudMonths_Validated(object sender, EventArgs e)
-        {
-            Helper.ClearErrorNumericUpDown(errorProvider1, nudMonths);
-        }
-
-        private void txtReligion_Validating(object sender, CancelEventArgs e)
-        {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtReligion, "Religion");
-        }
-
-        private void txtReligion_Validated(object sender, EventArgs e)
-        {
-            Helper.ClearErrorTextBox(errorProvider1, txtReligion);
-        }
-
-        private void txtCurrenResidence_Validating(object sender, CancelEventArgs e)
-        {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtCurrenResidence, "Current Residence");
-        }
-
-        private void txtCurrenResidence_Validated(object sender, EventArgs e)
-        {
-            Helper.ClearErrorTextBox(errorProvider1, txtCurrenResidence);
-        }
-
-        private bool RegistryValidated(ErrorProvider errorProvider, ComboBox comboBox)
-        {
-            if (Helper.ShowErrorComboBoxEmpty(errorProvider, comboBox, "Registry  not found"))
-            {
-                ClearSpouseInfo();
-                return false;
-            }
-            else if (comboBox.SelectedIndex < 0)
-            {
-                errorProvider.SetError(comboBox, "Registry not found");
-                ClearSpouseInfo();
-                return false;
-            }
-
-            return true;
-        }
-
-        private void cmbxRegistry_Validating(object sender, CancelEventArgs e)
-        {
-            e.Cancel = !RegistryValidated(errorProvider1, cmbxRegistry);
-        }
-
-        private void cmbxRegistry_Validated(object sender, EventArgs e)
-        {
-            Helper.ClearErrorComboBox(errorProvider1, cmbxRegistry);
-        }
-
-        private void ClearSpouseInfo()
-        {
-            txtFirstName.Clear();
-            txtMiddleName.Clear();
-            txtLastName.Clear();
-            radMale.Checked = true;
-            txtNationality.Clear();
-            txtMunicipality.Clear();
-            txtProvince.Clear();
-            txtCountry.Clear();
-            txtContactInfo.Clear();
-        }
-
         private void LoadSelectedRegistryInfo()
         {
             int registryId = Convert.ToInt32(cmbxRegistry.SelectedValue);
@@ -190,11 +140,61 @@ namespace OmniGov.App.Views.Transactions.Payments.MarriageLicense
             nudAge.Value = Math.Max(0, (int)((Helper.GetCurrentDate() - dtBirthDate.Value).TotalDays / 365));
         }
 
-        private void cmbxRegistry_SelectedValueChanged(object sender, EventArgs e)
+        private void nudAge_Validated(object sender, EventArgs e)
         {
-            if (cmbxRegistry.SelectedValue is null)
-                return;
-            LoadSelectedRegistryInfo();
+            Helper.ClearErrorNumericUpDown(errorProvider1, nudAge);
+        }
+
+        private void nudAge_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = Helper.ShowErrorNumericUpDownZero(errorProvider1, nudAge, "Age") || Helper.ShowErrorNumericUpDownEmpty(errorProvider1, nudAge, "Age");
+        }
+
+        private void nudMonths_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorNumericUpDown(errorProvider1, nudMonths);
+        }
+
+        private void nudMonths_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = Helper.ShowErrorNumericUpDownZero(errorProvider1, nudAge, "Age") || Helper.ShowErrorNumericUpDownEmpty(errorProvider1, nudAge, "Age");
+        }
+
+        private bool RegistryValidated(ErrorProvider errorProvider, ComboBox comboBox)
+        {
+            if (Helper.ShowErrorComboBoxEmpty(errorProvider, comboBox, "Registry  not found"))
+            {
+                ClearSpouseInfo();
+                return false;
+            }
+            else if (comboBox.SelectedIndex < 0)
+            {
+                errorProvider.SetError(comboBox, "Registry not found");
+                ClearSpouseInfo();
+                return false;
+            }
+
+            return true;
+        }
+
+        private void txtCurrenResidence_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorTextBox(errorProvider1, txtCurrenResidence);
+        }
+
+        private void txtCurrenResidence_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtCurrenResidence, "Current Residence");
+        }
+
+        private void txtReligion_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorTextBox(errorProvider1, txtReligion);
+        }
+
+        private void txtReligion_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtReligion, "Religion");
         }
     }
 }

@@ -1,4 +1,4 @@
-namespace OmniGov.App.Views.Transactions.Payments.MarriageLicense
+﻿namespace OmniGov.App.Views.Transactions.Payments.MarriageLicense
 {
     partial class ucSpouseInfo
     {

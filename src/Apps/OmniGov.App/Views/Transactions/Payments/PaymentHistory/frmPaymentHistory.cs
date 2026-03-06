@@ -1,4 +1,4 @@
-using OmniGov.App.Helpers;
+﻿using OmniGov.App.Helpers;
 using OmniGov.Treasury.Data.Factories;
 using OmniGov.Treasury.Domain.Entities;
 using System.ComponentModel;
@@ -13,6 +13,109 @@ namespace OmniGov.App.Views.Transactions.Payments.PaymentHistory
             InitializeComponent();
             Helper.LoadFormIcon(this);
             Helper.DatagridFullRowSelectStyle(dgPaymentHistory, true);
+        }
+
+        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
+        {
+            var dataTable = new DataTable();
+            dataTable.Columns.AddRange(DataColumns());
+
+            if (e.Argument is not DataTable dtSourceDb)
+                return;
+
+            int totalProgress = dtSourceDb.Rows.Count;
+            int progressCount = 0;
+
+            foreach (DataRow row in dtSourceDb.Rows)
+            {
+                var newRow = dataTable.NewRow();
+
+                newRow["id"] = row["id"];
+                newRow["receipt_no"] = row["receipt_no"];
+                newRow["payee"] = row["payee"];
+                newRow["payment_date"] = row["payment_date"];
+                newRow["amount"] = row["amount"];
+                newRow["is_cancelled"] = row["is_cancelled"];
+
+                progressCount++;
+                dataTable.Rows.Add(newRow);
+                Helper.ProgressCounter(backgroundWorker1, totalProgress, progressCount);
+            }
+
+            e.Result = dataTable;
+        }
+
+        private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            progressBar1.Value = e.ProgressPercentage;
+        }
+
+        private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            if (e.Cancelled)
+                return;
+            if (e.Result is not DataTable dataTable)
+                return;
+
+            if (dataTable.Rows.Count < 1)
+                progressBar1.Value = 100;
+
+            lblRecordCount.Text = dataTable.Rows.Count.ToString();
+            HelperLoadRecords.DatagridViewPaymentHistory(dataTable, dgPaymentHistory);
+        }
+
+        private void btnMarkAsVoid_Click(object sender, EventArgs e)
+        {
+            if (Helper.MessageBoxConfirmCancel("Do you want to void this payment?"))
+            {
+                if (VoidPayment())
+                {
+                    Helper.MessageBoxSuccess("Payment has been voided.");
+                    LoadRecords();
+                }
+            }
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            LoadRecords();
+        }
+
+        private void cmbxRowFilter_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            LoadRecords();
+        }
+
+        private DataColumn[] DataColumns()
+        {
+            return new DataColumn[]
+            {
+                new DataColumn(Name = "id", typeof(int)),
+                new DataColumn(Name = "receipt_no", typeof(string)),
+                new DataColumn(Name = "payee", typeof(string)),
+                new DataColumn(Name = "payment_date", typeof(DateTime)),
+                new DataColumn(Name = "amount", typeof(decimal)),
+                new DataColumn(Name = "is_cancelled", typeof(bool)),
+            };
+        }
+
+        private void dgPaymentHistory_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dgPaymentHistory.SelectedRows.Count != 0)
+                btnMarkAsVoid.Enabled = true;
+            else
+                btnMarkAsVoid.Enabled = false;
+        }
+
+        private void frmPaymentHistory_Load(object sender, EventArgs e)
+        {
+            OnLoad();
+        }
+
+        private void LoadAccountableForms()
+        {
+            var dtAccForms = TreasuryFactory.AccountableFormsRepository().GetRecords();
+            HelperLoadRecords.AccountableFormsCombobox(cmbxAccForm.ComboBox, dtAccForms, "id", "acc_form_desc");
         }
 
         private void LoadCollectors()
@@ -65,25 +168,6 @@ namespace OmniGov.App.Views.Transactions.Payments.PaymentHistory
             cmbxCollector.ComboBox.ValueMember = "id";
         }
 
-        private void LoadAccountableForms()
-        {
-            var dtAccForms = TreasuryFactory.AccountableFormsRepository().GetRecords();
-            HelperLoadRecords.AccountableFormsCombobox(cmbxAccForm.ComboBox, dtAccForms, "id", "acc_form_desc");
-        }
-
-        private void OnLoad()
-        {
-            HelperLoadRecords.ComboboxRowLimitFilter(cmbxRowFilter);
-            LoadCollectors();
-            LoadAccountableForms();
-            LoadRecords();
-        }
-
-        private void frmPaymentHistory_Load(object sender, EventArgs e)
-        {
-            OnLoad();
-        }
-
         private void LoadRecords()
         {
             if (!backgroundWorker1.IsBusy)
@@ -114,88 +198,12 @@ namespace OmniGov.App.Views.Transactions.Payments.PaymentHistory
             }
         }
 
-        private DataColumn[] DataColumns()
+        private void OnLoad()
         {
-            return new DataColumn[]
-            {
-                new DataColumn(Name = "id", typeof(int)),
-                new DataColumn(Name = "receipt_no", typeof(string)),
-                new DataColumn(Name = "payee", typeof(string)),
-                new DataColumn(Name = "payment_date", typeof(DateTime)),
-                new DataColumn(Name = "amount", typeof(decimal)),
-                new DataColumn(Name = "is_cancelled", typeof(bool)),
-            };
-        }
-
-        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
-        {
-            var dataTable = new DataTable();
-            dataTable.Columns.AddRange(DataColumns());
-
-            if (e.Argument is not DataTable dtSourceDb)
-                return;
-
-            int totalProgress = dtSourceDb.Rows.Count;
-            int progressCount = 0;
-
-            foreach (DataRow row in dtSourceDb.Rows)
-            {
-                var newRow = dataTable.NewRow();
-
-                newRow["id"] = row["id"];
-                newRow["receipt_no"] = row["receipt_no"];
-                newRow["payee"] = row["payee"];
-                newRow["payment_date"] = row["payment_date"];
-                newRow["amount"] = row["amount"];
-                newRow["is_cancelled"] = row["is_cancelled"];
-
-                progressCount++;
-                dataTable.Rows.Add(newRow);
-                Helper.ProgressCounter(backgroundWorker1, totalProgress, progressCount);
-            }
-
-            e.Result = dataTable;
-        }
-
-        private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
-        {
-            progressBar1.Value = e.ProgressPercentage;
-        }
-
-        private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
-            if (e.Cancelled)
-                return;
-            if (e.Result is not DataTable dataTable)
-                return;
-
-            if (dataTable.Rows.Count < 1)
-                progressBar1.Value = 100;
-
-            lblRecordCount.Text = dataTable.Rows.Count.ToString();
-            HelperLoadRecords.DatagridViewPaymentHistory(dataTable, dgPaymentHistory);
-        }
-
-        private void btnSearch_Click(object sender, EventArgs e)
-        {
+            HelperLoadRecords.ComboboxRowLimitFilter(cmbxRowFilter);
+            LoadCollectors();
+            LoadAccountableForms();
             LoadRecords();
-        }
-
-        private void cmbxRowFilter_SelectionChangeCommitted(object sender, EventArgs e)
-        {
-            LoadRecords();
-        }
-
-        private void btnMarkAsVoid_Click(object sender, EventArgs e)
-        {
-            if (Helper.MessageBoxConfirmCancel("Do you want to void this payment?"))
-            {
-                if (VoidPayment())
-                {
-                    Helper.MessageBoxSuccess("Payment has been voided.");
-                    LoadRecords();
-                }
-            }
         }
 
         private bool VoidPayment()
@@ -210,14 +218,6 @@ namespace OmniGov.App.Views.Transactions.Payments.PaymentHistory
             };
 
             return TreasuryFactory.PaymentCollectionsRepository().VoidPayment(paymentCollectionModel);
-        }
-
-        private void dgPaymentHistory_SelectionChanged(object sender, EventArgs e)
-        {
-            if (dgPaymentHistory.SelectedRows.Count != 0)
-                btnMarkAsVoid.Enabled = true;
-            else
-                btnMarkAsVoid.Enabled = false;
         }
     }
 }

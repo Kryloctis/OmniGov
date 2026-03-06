@@ -1,4 +1,4 @@
-using OmniGov.App.Helpers;
+﻿using OmniGov.App.Helpers;
 using OmniGov.Core.Factories;
 using OmniGov.Treasury.Data.Factories;
 using System.ComponentModel;
@@ -14,23 +14,16 @@ namespace OmniGov.App.Views.Transactions.Payments.RealProperty
             Helper.DatagridFullRowSelectStyle(dataGridView1, true);
         }
 
-        internal void ResetForm()
-        {
-            txtSearch.Clear();
-            LoadTaxpayers();
-        }
-
-        internal void OnLoad()
-        {
-            HelperLoadRecords.ComboboxRowLimitFilter(cmbxRowFilter.ComboBox);
-            cmbxRowFilter.ComboBox.SelectionChangeCommitted += new EventHandler(CmbxRowFiter_SelectionChangeCommitted);
-            LoadTaxpayers();
-        }
-
         internal string GetFormErrors()
         {
             var errors = new string[] { this.Tag == null ? string.Empty : this.Tag.ToString() };
             return Factory.CreateErrors(errors).GenerateErrorMessage();
+        }
+
+        internal int GetSelectedTaxpayerId()
+        {
+            int index = dataGridView1.CurrentRow.Index;
+            return Convert.ToInt32(dataGridView1.Rows[index].Cells["taxpayers_id"].Value);
         }
 
         internal bool IsValidated()
@@ -45,38 +38,17 @@ namespace OmniGov.App.Views.Transactions.Payments.RealProperty
             return true;
         }
 
-        internal int GetSelectedTaxpayerId()
+        internal void OnLoad()
         {
-            int index = dataGridView1.CurrentRow.Index;
-            return Convert.ToInt32(dataGridView1.Rows[index].Cells["taxpayers_id"].Value);
+            HelperLoadRecords.ComboboxRowLimitFilter(cmbxRowFilter.ComboBox);
+            cmbxRowFilter.ComboBox.SelectionChangeCommitted += new EventHandler(CmbxRowFiter_SelectionChangeCommitted);
+            LoadTaxpayers();
         }
 
-        private void LoadTaxpayers()
+        internal void ResetForm()
         {
-            if (!backgroundWorker1.IsBusy)
-            {
-                progressBar1.Value = 0;
-                string searchKey = txtSearch.Text.Trim();
-                int rowFilter = Convert.ToInt32(cmbxRowFilter.ComboBox.SelectedValue);
-                backgroundWorker1.RunWorkerAsync((searchKey, rowFilter));
-            }
-        }
-
-        private DataColumn[] TaxpayersColumns()
-        {
-            return new DataColumn[]
-            {
-                new DataColumn("taxpayers_id", typeof (int)),
-                new DataColumn("taxpayers_name", typeof(string)),
-                new DataColumn("taxpayer_type", typeof(string)),
-                new DataColumn("taxpayers_tin", typeof(string)),
-                new DataColumn("taxpayers_address", typeof(string)),
-                new DataColumn("taxpayers_contact_info", typeof(string)),
-                new DataColumn("representative_name", typeof(string)),
-                new DataColumn("is_active", typeof(bool)),
-                new DataColumn("created_at", typeof(string)),
-                new DataColumn("updated_at", typeof(string))
-            };
+            txtSearch.Clear();
+            LoadTaxpayers();
         }
 
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
@@ -150,6 +122,34 @@ namespace OmniGov.App.Views.Transactions.Payments.RealProperty
         private void CmbxRowFiter_SelectionChangeCommitted(object sender, EventArgs e)
         {
             LoadTaxpayers();
+        }
+
+        private void LoadTaxpayers()
+        {
+            if (!backgroundWorker1.IsBusy)
+            {
+                progressBar1.Value = 0;
+                string searchKey = txtSearch.Text.Trim();
+                int rowFilter = Convert.ToInt32(cmbxRowFilter.ComboBox.SelectedValue);
+                backgroundWorker1.RunWorkerAsync((searchKey, rowFilter));
+            }
+        }
+
+        private DataColumn[] TaxpayersColumns()
+        {
+            return new DataColumn[]
+            {
+                new DataColumn("taxpayers_id", typeof (int)),
+                new DataColumn("taxpayers_name", typeof(string)),
+                new DataColumn("taxpayer_type", typeof(string)),
+                new DataColumn("taxpayers_tin", typeof(string)),
+                new DataColumn("taxpayers_address", typeof(string)),
+                new DataColumn("taxpayers_contact_info", typeof(string)),
+                new DataColumn("representative_name", typeof(string)),
+                new DataColumn("is_active", typeof(bool)),
+                new DataColumn("created_at", typeof(string)),
+                new DataColumn("updated_at", typeof(string))
+            };
         }
     }
 }

@@ -1,119 +1,176 @@
 ﻿using Microsoft.Reporting.WinForms;
+
 using OmniGov.App.DataSets;
+
 using OmniGov.App.Helpers;
+
 using OmniGov.Treasury.Data.Factories;
+
 using OmniGov.Treasury.Domain.Entities;
+
 using System.Data;
 
 namespace OmniGov.App.Views.Transactions.Payments.RealProperty
+
 {
     public partial class frmPaymentRpt : Form
+
     {
         private readonly ucPaymentTaxpayers ucPaymentTaxpayers;
-        private ucPaymentRptTaxDues ucPaymentRptTaxDues;
+
         private ucPayment ucPayment;
+        private ucPaymentRptTaxDues ucPaymentRptTaxDues;
         private ucPrintReceipt ucPrintReceipt;
 
         public frmPaymentRpt()
+
         {
             InitializeComponent();
+
             Helper.LoadFormIcon(this);
+
             Helper.RemoveTabcontrolTabs(tabControlMain);
+
             ucPaymentTaxpayers = ucPaymentTaxpayers1;
+
             ucPaymentRptTaxDues = ucPaymentRptTaxDues1;
+
             ucPayment = ucPayment1;
+
             ucPrintReceipt = ucPrintReceipt1;
         }
 
-        private void ResetForm()
+        private void btnBack_Click(object sender, EventArgs e)
+
         {
-            ucPayment.ResetForm();
-            ucPaymentTaxpayers.ResetForm();
-            ucPaymentRptTaxDues.ResetForm();
-            tabControlMain.SelectedIndex = 0;
+            tabControlMain.SelectedIndex--;
         }
 
-        private void LoadTabContents()
-        {
-            if (tabControlMain.SelectedIndex == 0)
-                btnBackMain.Enabled = false;
-            else
-                btnBackMain.Enabled = true;
+        private void btnNext_Click(object sender, EventArgs e)
 
-            switch (tabControlMain.SelectedTab.Name)
+        {
+            if (!TabValidated())
+
+                return;
+
+            if (tabControlMain.SelectedTab.Name == "tabPagePayment" && TabValidated())
+
             {
-                case "tabPageTaxpayer":
-                    LoadTaxpayerTab();
-                    break;
+                if (Helper.MessageBoxConfirmCancel("Confirm Payment..."))
 
-                case "tabPageTaxDues":
-                    LoadTaxDuesTab();
-                    break;
+                {
+                    if (ConfirmPayment())
 
-                case "tabPagePayment":
-                    LoadPaymentTab();
-                    break;
+                    {
+                        tabControlMain.SelectedIndex++;
+                    }
+                }
 
-                case "tabPageReceipt":
-                    LoadReceiptTab();
-                    break;
+                return;
             }
+
+            if (tabControlMain.SelectedTab.Name == "tabPageReceipt")
+
+            {
+                ResetForm();
+
+                return;
+            }
+
+            tabControlMain.SelectedIndex++;
         }
 
-        private void LoadTaxpayerTab()
+        private bool ConfirmPayment()
+
         {
-            radTaxpayer.Checked = true;
-            btnNext.Text = "Next";
+            var rptPaymentsModel = new RptPaymentsModel() { PostedBy = UserHelper.loggedUser.Id, };
+
+            return TreasuryFactory.PaymentCollectionsRepository().InsertWithRptPayment(ucPayment.PaymentCollectionsModel(), null, rptPaymentsModel, ucPaymentRptTaxDues.RptTaxDuesModelList());
         }
 
-        private void LoadTaxDuesTab()
+        private void frmPaymentRpt_FormClosing(object sender, FormClosingEventArgs e)
+
         {
-            radTaxDues.Checked = true;
-            btnNext.Text = "Proceed to Payment";
+            bool isInReceiptTab = tabControlMain.SelectedTab.Name == "tabPageReceipt";
+
+            string promptMessage = isInReceiptTab ? "Are you sure you want to close the form?" : "The transaction cannot be saved.\nAre you sure you want to close the form?";
+
+            bool confirmation = Helper.MessageBoxConfirmCancel(promptMessage);
+
+            if (confirmation)
+
+            {
+                e.Cancel = false;
+
+                return;
+            }
+
+            e.Cancel = true;
+        }
+
+        private void frmRptPayments_Load(object sender, EventArgs e)
+
+        {
+            LoadTabContents();
+            ucPaymentTaxpayers.OnLoad();
         }
 
         private void LoadPaymentTab()
+
         {
             radPayment.Checked = true;
 
             if (!ucPaymentRptTaxDues.ValidateChildren())
+
             {
                 Helper.MessageBoxError(ucPaymentRptTaxDues.GetFormErrors());
+
                 return;
             }
 
             radPayment.Checked = true;
+
             btnNext.Text = "Confirm Payment";
+
             decimal totalPayment = ucPaymentRptTaxDues.GetTotalTaxDue();
+
             ucPayment.OnLoad(UserHelper.loggedUser.Id, "56", totalPayment);
         }
 
-        private void LoadReceiptTab()
-        {
-            btnNext.Text = "New Transaction";
-            LoadReceipt();
-        }
-
         private void LoadReceipt()
+
         {
             var dtAf56 = new dsTreasury.dtAF56DataTable().Clone();
+
             var taxpayerId = ucPaymentTaxpayers.GetSelectedTaxpayerId();
+
             var dataSource = (DataTable)ucPaymentRptTaxDues.dgTaxDues.DataSource;
+
             var filteredRows = dataSource.AsEnumerable().Where(row => row.Field<bool>("is_selected")).CopyToDataTable();
+
             var dictTaxpayer = TreasuryFactory.TaxpayersRepository().GetRecordByID(taxpayerId);
 
             foreach (DataRow row in filteredRows.Rows)
+
             {
                 var newRow = dtAf56.NewRow();
 
                 newRow["owner"] = dictTaxpayer["name"];
+
                 newRow["location"] = "sample";
+
                 newRow["block_lot_no"] = "sample";
+
                 newRow["tax_dec_no"] = row["complete_arp_no"];
+
                 newRow["assessed_value"] = 100;
+
                 newRow["type"] = row["type"];
+
                 newRow["tax_due"] = row["tax_due_amount"];
+
                 newRow["penalt_discount"] = row["penalty_discount"];
+
                 newRow["total"] = row["total_payment"];
 
                 dtAf56.Rows.Add(newRow);
@@ -126,35 +183,136 @@ namespace OmniGov.App.Views.Transactions.Payments.RealProperty
             string lguName = $"{(ServerHelper.SelectedProfile?.Name ?? "")}";
 
             var dictParameters = new Dictionary<string, string>()
+
             {
                 { "paramAmountInFigures", $"{new Helper.AmountToWords().ConvertAmountToWords(totalPayment.ToString("N2"))} only."},
+
                 { "paramSumOf", totalPayment.ToString()},
+
                 { "paramReceivedFrom", ucPayment.txtPayee.Text.Trim()},
+
                 { "paramMunicipality", lguName},
+
                 { "paramDate", ucPayment.dtPaymentDate.Value.ToString()},
+
                 { "paramCalendarYear", ucPaymentRptTaxDues.nudCalendarYear.Value.ToString()},
+
                 { "paramMunicipalTreasurer", string.Empty},
+
                 { "paramProvincialTreasurer", string.Empty},
+
                 { "paramPaidCash", totalPayment.ToString()},
+
                 { "paramCheckNo", string.Empty},
+
                 { "paramTwPmo", string.Empty},
+
                 { "paramTotalPaid", totalPayment.ToString()},
+
                 { "paramTotalPayment", totalPayment.ToString()},
+
                 { "paramBankDate", string.Empty},
             };
 
             string reportPath = $"{Application.StartupPath}\\Receipts\\AF56.rdlc";
+
             ucPrintReceipt.Onload(reportPath, dictParameters, reportDataSource);
         }
 
-        private bool TabValidated()
+        private void LoadReceiptTab()
+
         {
+            btnNext.Text = "New Transaction";
+
+            LoadReceipt();
+        }
+
+        private void LoadTabContents()
+
+        {
+            if (tabControlMain.SelectedIndex == 0)
+
+                btnBackMain.Enabled = false;
+            else
+
+                btnBackMain.Enabled = true;
+
             switch (tabControlMain.SelectedTab.Name)
+
             {
                 case "tabPageTaxpayer":
+
+                    LoadTaxpayerTab();
+
+                    break;
+
+                case "tabPageTaxDues":
+
+                    LoadTaxDuesTab();
+
+                    break;
+
+                case "tabPagePayment":
+
+                    LoadPaymentTab();
+
+                    break;
+
+                case "tabPageReceipt":
+
+                    LoadReceiptTab();
+
+                    break;
+            }
+        }
+
+        private void LoadTaxDuesTab()
+
+        {
+            radTaxDues.Checked = true;
+
+            btnNext.Text = "Proceed to Payment";
+        }
+
+        private void LoadTaxpayerTab()
+
+        {
+            radTaxpayer.Checked = true;
+
+            btnNext.Text = "Next";
+        }
+
+        private void ResetForm()
+
+        {
+            ucPayment.ResetForm();
+
+            ucPaymentTaxpayers.ResetForm();
+
+            ucPaymentRptTaxDues.ResetForm();
+
+            tabControlMain.SelectedIndex = 0;
+        }
+
+        private void tabControlMain_SelectedIndexChanged(object sender, EventArgs e)
+
+        {
+            LoadTabContents();
+        }
+
+        private bool TabValidated()
+
+        {
+            switch (tabControlMain.SelectedTab.Name)
+
+            {
+                case "tabPageTaxpayer":
+
                     if (!ucPaymentTaxpayers.IsValidated())
+
                     {
                         Helper.MessageBoxError(ucPaymentTaxpayers.GetFormErrors());
+
                         return false;
                     }
 
@@ -163,104 +321,33 @@ namespace OmniGov.App.Views.Transactions.Payments.RealProperty
                     return true;
 
                 case "tabPageTaxDues":
+
                     if (!ucPaymentRptTaxDues.ValidateChildren())
+
                     {
                         Helper.MessageBoxError(ucPaymentRptTaxDues.GetFormErrors());
+
                         return false;
                     }
+
                     return true;
 
                 case "tabPagePayment":
+
                     if (!ucPayment.ValidateChildren())
+
                     {
                         Helper.MessageBoxError(ucPayment.GetFormErrors());
+
                         return false;
                     }
+
                     return true;
 
                 default:
+
                     return true;
             }
         }
-
-        private void btnNext_Click(object sender, EventArgs e)
-        {
-            if (!TabValidated())
-                return;
-
-            if (tabControlMain.SelectedTab.Name == "tabPagePayment" && TabValidated())
-            {
-                if (Helper.MessageBoxConfirmCancel("Confirm Payment..."))
-                {
-                    if (ConfirmPayment())
-                    {
-                        tabControlMain.SelectedIndex++;
-                    }
-                }
-                return;
-            }
-
-            if (tabControlMain.SelectedTab.Name == "tabPageReceipt")
-            {
-                ResetForm();
-                return;
-            }
-
-            try
-            {
-                tabControlMain.SelectedIndex++;
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        private bool ConfirmPayment()
-        {
-            var rptPaymentsModel = new RptPaymentsModel() { PostedBy = UserHelper.loggedUser.Id, };
-
-            return TreasuryFactory.PaymentCollectionsRepository().InsertWithRptPayment(ucPayment.PaymentCollectionsModel(), null, rptPaymentsModel, ucPaymentRptTaxDues.RptTaxDuesModelList());
-        }
-
-        private void btnBack_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                tabControlMain.SelectedIndex--;
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        private void frmRptPayments_Load(object sender, EventArgs e)
-        {
-            try
-            {
-                LoadTabContents();
-                ucPaymentTaxpayers.OnLoad();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        private void tabControlMain_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                LoadTabContents();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        private void frmPaymentRpt_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            bool isInReceiptTab = tabControlMain.SelectedTab.Name == "tabPageReceipt";
-            string promptMessage = isInReceiptTab ? "Are you sure you want to close the form?" : "The transaction cannot be saved.\nAre you sure you want to close the form?";
-            bool confirmation = Helper.MessageBoxConfirmCancel(promptMessage);
-
-            if (confirmation)
-            {
-                e.Cancel = false;
-                return;
-            }
-            e.Cancel = true;
-        }
     }
 }
-
