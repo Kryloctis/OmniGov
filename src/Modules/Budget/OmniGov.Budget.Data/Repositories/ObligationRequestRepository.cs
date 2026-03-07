@@ -1,6 +1,7 @@
 using OmniGov.Budget.Domain.Entities;
 using OmniGov.Budget.Domain.Interfaces;
 using OmniGov.Core.Interfaces.Services;
+    using System.Collections.Generic;
 using System.Data;
 using System.Transactions;
 
@@ -149,12 +150,12 @@ namespace OmniGov.Budget.Data.Repositories
                 new object[] { "@payee", DbType.String, entity.Payee },
                 new object[] { "@reference_no", DbType.String, entity.ReferenceNo },
                 new object[] { "@explanation", DbType.String, entity.Explanation },
-                new object[] { "@date_requested", DbType.Date, entity.DateRequested.Date },
                 new object[] { "@status", DbType.String, entity.ObligationStatus.ToString() },
-                new object[] { "@remarks", DbType.String, entity.Remarks },
+                new object[] { "@date_requested", DbType.Date, entity.DateRequested.Date },
                 new object[] { "@updated_by", DbType.Int32, entity.UpdatedBy },
             };
 
+            //set remarks back to null when updating a record
             string query = $@"UPDATE {tableName} SET
                             function_program_project_id = @function_program_project_id,
                             allotment_classes_id = @allotment_classes_id,
@@ -164,7 +165,7 @@ namespace OmniGov.Budget.Data.Repositories
                             reference_no = @reference_no,
                             date_requested = @date_requested,
                             status = @status,
-                            remarks = @remarks,
+                            remarks = NULL,
                             updated_by = @updated_by WHERE id = @id";
 
             return _genericCommands.ExecuteNonQuery(query, parameters);

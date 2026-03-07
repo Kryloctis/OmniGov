@@ -1,5 +1,7 @@
 using OmniGov.Accounting.Data.Factories;
 using System.Data;
+using System.Diagnostics;
+using System.Text;
 using System.Text.RegularExpressions;
 
 namespace OmniGov.App.Budget.Helpers
@@ -52,6 +54,14 @@ namespace OmniGov.App.Budget.Helpers
             string x = $"{match.Groups[1].Value}-{match.Groups[2].Value}";
 
             return x;
+        }
+
+        internal static string GenObligationNo(string seriesNo, DateTime dateRequested, string fundCode)
+        {
+            string month = dateRequested.ToString("MM");
+            string year = dateRequested.ToString("yy");
+
+            return $"{seriesNo}-{month}-{year}-{fundCode}";
         }
     }
 }

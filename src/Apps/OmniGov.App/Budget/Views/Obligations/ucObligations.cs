@@ -14,7 +14,7 @@ namespace OmniGov.App.Budget.Views.Obligations
     public partial class ucObligations : UserControl
     {
         private bool isEdit;
-        private int oblgtnRqstId;
+        private int _oblgtnRqstId;
         private int fundId;
 
         public ucObligations()
@@ -47,10 +47,10 @@ namespace OmniGov.App.Budget.Views.Obligations
             OnLoad();
             if (isEdit)
             {
-                this.oblgtnRqstId = oblgtnRqstId.Value;
+                this._oblgtnRqstId = oblgtnRqstId.Value;
                 var exemptCtrls = new List<Control>() { txtExplanation };
                 SetControlsReadOnly(true, panel3, exemptCtrls);
-                LoadSelectedRecord(oblgtnRqstId.Value);
+                LoadUpdateRecord(oblgtnRqstId.Value);
                 txtRemarks.Enabled = true;
             }
             else
@@ -61,19 +61,19 @@ namespace OmniGov.App.Budget.Views.Obligations
 
         internal void LoadViewMode(int oblgtnRqstId)
         {
-            this.oblgtnRqstId = oblgtnRqstId;
+            this._oblgtnRqstId = oblgtnRqstId;
             OnLoad();
             SetControlsReadOnly(true, tbControlDetailsEntries, null);
-            LoadSelectedRecord(oblgtnRqstId);
+            LoadViewRecord(oblgtnRqstId, dgvEntries);
         }
 
         internal void LoadReviewMode(int oblgtnRqstId)
         {
-            this.oblgtnRqstId = oblgtnRqstId;
+            this._oblgtnRqstId = oblgtnRqstId;
             var exemptCtrls = new List<Control>() { txtRemarks };
             OnLoad();
             SetControlsReadOnly(true, tbControlDetailsEntries, exemptCtrls);
-            LoadSelectedRecord(oblgtnRqstId);
+            LoadReviewRecord(oblgtnRqstId, dgvEntries);
         }
 
         //Models
@@ -81,7 +81,7 @@ namespace OmniGov.App.Budget.Views.Obligations
         {
             var oblgtnRqst = new ObligationRequestModel()
             {
-                Id = this.oblgtnRqstId,
+                Id = this._oblgtnRqstId,
                 FppId = Convert.ToInt32(cmbxFPP.SelectedValue),
                 AllotmentClassId = Convert.ToInt32(cmbxAlltmntClss.SelectedValue),
                 FundId = Convert.ToInt32(cmbxFund.SelectedValue),
@@ -115,11 +115,37 @@ namespace OmniGov.App.Budget.Views.Obligations
             return (oblgtnRqst, oblgtnAccs);
         }
 
-        /// <summary>
-        /// Loads the selected record.
-        /// </summary>
-        /// <param name="oblgtnRqstId">The oblgtn RQST identifier.</param>
-        private void LoadSelectedRecord(int oblgtnRqstId)
+        private void LoadViewRecord(int oblgtnRqstId, DataGridView dgvEntries)
+        {
+            var dictOblgtnRqst = BudgetFactory.ObligationRequestRepository().GetViewRecordById(oblgtnRqstId);
+            Enum.TryParse<ObligationRequestModel.Status>(dictOblgtnRqst["status"], out var status);
+            int.TryParse(dictOblgtnRqst["fpp_id"], out int fppId);
+
+            string seriesNo = dictOblgtnRqst["obligation_no"];
+            DateTime dateRqstd = Convert.ToDateTime(dictOblgtnRqst["date_requested"]);
+            string fundCode = dictOblgtnRqst["fund_code"];
+            string obligationNo = BudgetHelper.GenObligationNo(seriesNo, dateRqstd, fundCode);
+
+            //Load Fields
+            mskTxtTransNo.Text = BudgetHelper.GenTransactionNo(dictOblgtnRqst["transaction_no"]);
+            cmbxFPP.SelectedValue = fppId;
+            cmbxFund.SelectedValue = dictOblgtnRqst["funds_id"];
+            cmbxAlltmntClss.SelectedValue = dictOblgtnRqst["allotment_class_id"];
+            txtPayee.Text = dictOblgtnRqst["payee"];
+            dtDateRequest.Value = dateRqstd;
+            txtReferenceNo.Text = dictOblgtnRqst["reference_no"];
+            txtExplanation.Text = dictOblgtnRqst["explanation"];
+            txtRemarks.Text = dictOblgtnRqst["remarks"];
+            mskTxtOblgtnNo.Text = obligationNo;
+
+            //Load Status
+            SetStatus(status);
+
+            //Load Obligation Entries
+            LoadOblgtnEntries(oblgtnRqstId, dgvEntries);
+        }
+
+        private void LoadUpdateRecord(int oblgtnRqstId)
         {
             var dictOblgtnRqst = BudgetFactory.ObligationRequestRepository().GetViewRecordById(oblgtnRqstId);
             Enum.TryParse<ObligationRequestModel.Status>(dictOblgtnRqst["status"], out var status);
@@ -131,11 +157,9 @@ namespace OmniGov.App.Budget.Views.Obligations
             cmbxFund.SelectedValue = dictOblgtnRqst["funds_id"];
             cmbxAlltmntClss.SelectedValue = dictOblgtnRqst["allotment_class_id"];
             txtPayee.Text = dictOblgtnRqst["payee"];
-            dtDateRequest.Value = Convert.ToDateTime(dictOblgtnRqst["date_requested"]);
             txtReferenceNo.Text = dictOblgtnRqst["reference_no"];
             txtExplanation.Text = dictOblgtnRqst["explanation"];
             txtRemarks.Text = dictOblgtnRqst["remarks"];
-            mskTxtOblgtnNo.Text = dictOblgtnRqst["obligation_no"];
 
             //Load Status
             SetStatus(status);
@@ -144,25 +168,48 @@ namespace OmniGov.App.Budget.Views.Obligations
             LoadOblgtnEntries(oblgtnRqstId, dgvEntries);
         }
 
-        private void LoadOblgtnEntries(int oblgtnRqstId, DataGridView dgv)
+        private void LoadReviewRecord(int oblgtnRqstId, DataGridView dgvEntries)
+        {
+            var dictOblgtnRqst = BudgetFactory.ObligationRequestRepository().GetViewRecordById(oblgtnRqstId);
+            Enum.TryParse<ObligationRequestModel.Status>(dictOblgtnRqst["status"], out var status);
+            int.TryParse(dictOblgtnRqst["fpp_id"], out int fppId);
+
+            //Load Fields
+            mskTxtTransNo.Text = BudgetHelper.GenTransactionNo(dictOblgtnRqst["transaction_no"]);
+            cmbxFPP.SelectedValue = fppId;
+            cmbxFund.SelectedValue = dictOblgtnRqst["funds_id"];
+            cmbxAlltmntClss.SelectedValue = dictOblgtnRqst["allotment_class_id"];
+            txtPayee.Text = dictOblgtnRqst["payee"];
+            txtReferenceNo.Text = dictOblgtnRqst["reference_no"];
+            txtExplanation.Text = dictOblgtnRqst["explanation"];
+            txtRemarks.Text = dictOblgtnRqst["remarks"];
+
+            //Load Status
+            SetStatus(status);
+
+            //Load Obligation Entries
+            LoadOblgtnEntries(oblgtnRqstId, dgvEntries);
+        }
+
+        private void LoadOblgtnEntries(int oblgtnRqstId, DataGridView dgvEntries)
         {
             var dtOblgtnAccs = BudgetFactory.ObligationRequestRepository().GetViewRecordsById(oblgtnRqstId);
-            dgv.Rows.Clear();
+            dgvEntries.Rows.Clear();
 
             foreach (DataRow dtRow in dtOblgtnAccs.Rows)
             {
-                int rowIndex = dgv.Rows.Add();
-                dgv.Rows[rowIndex].Cells["others_fpp"].Value = dtRow.IsNull("others_fpp_id") ? 0 : Convert.ToInt32(dtRow["others_fpp_id"]);
+                int rowIndex = dgvEntries.Rows.Add();
+                dgvEntries.Rows[rowIndex].Cells["others_fpp"].Value = dtRow.IsNull("others_fpp_id") ? 0 : Convert.ToInt32(dtRow["others_fpp_id"]);
 
                 // Triggering cascades manually to ensure IDs match
-                PopulateAllotmentReleaseCell(rowIndex, dgv);
-                dgv.Rows[rowIndex].Cells["aro_no"].Value = Convert.ToInt32(dtRow["allotment_release_id"]);
+                PopulateAllotmentReleaseCell(rowIndex, dgvEntries);
+                dgvEntries.Rows[rowIndex].Cells["aro_no"].Value = Convert.ToInt32(dtRow["allotment_release_id"]);
 
-                PopulateAccountsCell(rowIndex, dgv);
-                dgv.Rows[rowIndex].Cells["account"].Value = Convert.ToInt32(dtRow["allotment_account_id"]);
+                PopulateAccountsCell(rowIndex, dgvEntries);
+                dgvEntries.Rows[rowIndex].Cells["account"].Value = Convert.ToInt32(dtRow["allotment_account_id"]);
 
-                dgv.Rows[rowIndex].Cells["amount"].Value = Convert.ToDecimal(dtRow["amount"]);
-                GetUnobligatedBalance(rowIndex, dgv);
+                dgvEntries.Rows[rowIndex].Cells["amount"].Value = Convert.ToDecimal(dtRow["amount"]);
+                GetUnobligatedBalance(rowIndex, dgvEntries);
             }
         }
 
@@ -184,7 +231,7 @@ namespace OmniGov.App.Budget.Views.Obligations
 
         internal void ResetForm()
         {
-            this.oblgtnRqstId = 0;
+            this._oblgtnRqstId = 0;
             this.isEdit = false;
 
             LoadFPP();
@@ -254,7 +301,7 @@ namespace OmniGov.App.Budget.Views.Obligations
 
         private bool SetAuditStatus(ObligationRequestModel.Status status, string remarks)
         {
-            return BudgetFactory.ObligationRequestRepository().SetStatus(oblgtnRqstId, status, remarks);
+            return BudgetFactory.ObligationRequestRepository().SetStatus(_oblgtnRqstId, status, remarks);
         }
 
         private void SetControlsReadOnly(bool isReadOnly, Control parent, List<Control> exemptCtrls = null)
