@@ -7,51 +7,46 @@ namespace OmniGov.Core.Repositories
 {
     public class DocumentsRepository : IDocuments
     {
-        private IGenericCommands mySqlGenericCommands;
+        private IGenericCommands _genericCommands;
 
-        public DocumentsRepository(IGenericCommands mySqlGenericCommands)
+        public DocumentsRepository(IGenericCommands genericCommands)
         {
-            this.mySqlGenericCommands = mySqlGenericCommands;
-        }
-
-        public int CountRecords()
-        {
-            throw new System.NotImplementedException();
+            this._genericCommands = genericCommands;
         }
 
         public bool Delete(List<DocumentsModel> entityList)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public Dictionary<string, string> GetRecordByID(int Id)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public DataTable GetRecords()
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public DataTable GetRecordsBySearch(string searchText)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public bool IdExist(int id)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public bool Insert(DocumentsModel entity)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public bool Update(DocumentsModel entity)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
     }
 }

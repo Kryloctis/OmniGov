@@ -9,11 +9,11 @@ namespace OmniGov.Core.Repositories
     public class JournalsRepository : IJournalsRepository
     {
         private readonly string tableName = "journals";
-        private IGenericCommands mySqlGenericCommands;
+        private IGenericCommands _genericCommands;
 
-        public JournalsRepository(IGenericCommands mySqlGenericCommands)
+        public JournalsRepository(IGenericCommands genericCommands)
         {
-            this.mySqlGenericCommands = mySqlGenericCommands;
+            this._genericCommands = genericCommands;
         }
 
         public Dictionary<string, string> GetRecordByID(int Id)
@@ -27,7 +27,7 @@ namespace OmniGov.Core.Repositories
 
             string query = $"SELECT journal_name, is_special, created_at, updated_at FROM {tableName} WHERE id = @id";
 
-            DataTable dataTable = mySqlGenericCommands.ExecuteReader(query, parameters);
+            DataTable dataTable = _genericCommands.ExecuteReader(query, parameters);
 
             if (dataTable.Rows.Count > 0)
             {
@@ -44,7 +44,7 @@ namespace OmniGov.Core.Repositories
         public DataTable GetRecords()
         {
             string query = $"SELECT * FROM {tableName}";
-            return mySqlGenericCommands.Fill(query, new DataTable());
+            return _genericCommands.Fill(query, new DataTable());
         }
 
         public DataTable GetRecordsBySearch(string searchText)
@@ -61,7 +61,7 @@ namespace OmniGov.Core.Repositories
             };
 
             string query = $"INSERT INTO {tableName} (journal_name, is_special) VALUES (@journal_name, @is_special)";
-            return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+            return _genericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public bool Update(JournalsModel entity)
@@ -74,7 +74,7 @@ namespace OmniGov.Core.Repositories
             };
 
             string query = $"UPDATE {tableName} SET journal_name = @journal_name, is_special = @is_special WHERE id = @id";
-            return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+            return _genericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public bool Delete(List<JournalsModel> entityList)
@@ -89,7 +89,7 @@ namespace OmniGov.Core.Repositories
                     };
 
                     string query = $"DELETE FROM {tableName} WHERE id = @id";
-                    _ = mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+                    _ = _genericCommands.ExecuteNonQuery(query, parameters);
                 }
 
                 scope.Complete();
@@ -106,8 +106,7 @@ namespace OmniGov.Core.Repositories
 
             string query = $"SELECT id FROM {tableName} WHERE id = @id";
 
-            // if query is not null, means found some record, so true
-            return !string.IsNullOrEmpty(mySqlGenericCommands.ExecuteScalar(query, parameters));
+            return !string.IsNullOrEmpty(_genericCommands.ExecuteScalar(query, parameters));
         }
 
         public bool NameExist(string journalName)
@@ -119,8 +118,7 @@ namespace OmniGov.Core.Repositories
 
             string query = $"SELECT journal_name FROM {tableName} WHERE journal_name = @journal_name";
 
-            // if query is not null, means found some record, so true
-            return !string.IsNullOrEmpty(mySqlGenericCommands.ExecuteScalar(query, parameters));
+            return !string.IsNullOrEmpty(_genericCommands.ExecuteScalar(query, parameters));
         }
 
         public bool NameExist(string journalName, int journalId)
@@ -133,8 +131,7 @@ namespace OmniGov.Core.Repositories
 
             string query = $"SELECT journal_name FROM {tableName} WHERE id <> @id AND journal_name = @journal_name";
 
-            // if query is not null, means found some record, so true
-            return string.IsNullOrEmpty(mySqlGenericCommands.ExecuteScalar(query, parameters));
+            return string.IsNullOrEmpty(_genericCommands.ExecuteScalar(query, parameters));
         }
     }
 }

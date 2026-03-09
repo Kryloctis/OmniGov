@@ -81,29 +81,12 @@ namespace OmniGov.App.Views.Transactions.CheckIssuance
         private void btnDelete_Click(object sender, EventArgs e)
 
         {
-            try
+            if (DeleteRci())
 
             {
-                if (DeleteRci())
+                Helper.MessageBoxSuccess($"{dgRCI.SelectedRows.Count} has been deleted");
 
-                {
-                    Helper.MessageBoxSuccess($"{dgRCI.SelectedRows.Count} has been deleted");
-
-                    LoadRci();
-                }
-            }
-            catch (MySqlException Mysqlex)
-
-            {
-                switch (Mysqlex.Number)
-
-                {
-                    case 1451:
-
-                        Helper.MessageBoxError($"Cannot delete selected records. It has been used as referenced to different record.");
-
-                        break;
-                }
+                LoadRci();
             }
         }
 

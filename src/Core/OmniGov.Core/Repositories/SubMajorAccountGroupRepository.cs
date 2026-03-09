@@ -16,11 +16,6 @@ namespace OmniGov.Core.Repositories
             _dbGenericCommands = dbGenericCommands;
         }
 
-        public int CountRecords()
-        {
-            throw new NotImplementedException();
-        }
-
         public bool Delete(List<SubMajorAccountGroupModel> entityList)
         {
             throw new NotImplementedException();
@@ -38,21 +33,14 @@ namespace OmniGov.Core.Repositories
 
         public DataTable GetRecordsByMajorAccountId(short majorAccountId)
         {
-            try
+            var parameters = new object[][]
             {
-                var parameters = new object[][]
-                {
                     new object[] { "@id", DbType.Byte, majorAccountId},
-                };
+            };
 
-                string query = $"SELECT * FROM {tableName} WHERE major_account_group_id =  @id";
+            string query = $"SELECT * FROM {tableName} WHERE major_account_group_id =  @id";
 
-                return _dbGenericCommands.ExecuteReader(query, parameters);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            return _dbGenericCommands.ExecuteReader(query, parameters);
         }
 
         public DataTable GetRecordsBySearch(string searchText)

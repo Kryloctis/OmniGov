@@ -7,18 +7,13 @@ namespace OmniGov.Core.Repositories
 {
     public class DocumentReferencesRepository : IDocumentReferences
     {
-        private IGenericCommands mySqlGenericCommands;
+        private IGenericCommands _genericCommands;
         private const string tableName = "document_references";
         private const string viewTableName = "view_document_references";
 
-        public DocumentReferencesRepository(IGenericCommands mySqlGenericCommands)
+        public DocumentReferencesRepository(IGenericCommands genericCommands)
         {
-            this.mySqlGenericCommands = mySqlGenericCommands;
-        }
-
-        public int CountRecords()
-        {
-            throw new NotImplementedException();
+            _genericCommands = genericCommands;
         }
 
         public bool Delete(List<DocumentReferencesModel> entityList)
@@ -33,16 +28,9 @@ namespace OmniGov.Core.Repositories
 
         public DataTable GetRecords()
         {
-            try
-            {
-                string query = $"Select * FROM {tableName}";
-                var dataTable = new DataTable();
-                return mySqlGenericCommands.Fill(query, dataTable);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            string query = $"Select * FROM {tableName}";
+            var dataTable = new DataTable();
+            return _genericCommands.Fill(query, dataTable);
         }
 
         public DataTable GetRecordsBySearch(string searchText)
@@ -68,8 +56,7 @@ namespace OmniGov.Core.Repositories
         public DataTable GetViewRecords()
         {
             string query = $"SELECT * FROM {viewTableName}";
-            var dataTable = new DataTable();
-            return mySqlGenericCommands.Fill(query, dataTable);
+            return _genericCommands.Fill(query, new DataTable());
         }
 
         public DataTable GetViewRecordsByOffice(string office)
@@ -88,8 +75,7 @@ namespace OmniGov.Core.Repositories
             }
 
             string query = $"SELECT * FROM {viewTableName} {Filter()}";
-            var dataTable = new DataTable();
-            return mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
+            return _genericCommands.FillBySearch(query, new DataTable(), parameters);
         }
     }
 }

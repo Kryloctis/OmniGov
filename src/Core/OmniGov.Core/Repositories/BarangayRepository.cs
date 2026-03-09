@@ -8,13 +8,13 @@ namespace OmniGov.Core.Repositories
 {
     public class BarangayRepository : IBarangayRepository
     {
-        private IGenericCommands mySqlGenericCommands;
+        private IGenericCommands _genericCommands;
         private readonly string tableName = "barangays";
         private readonly string viewTableName = "view_barangays";
 
-        public BarangayRepository(IGenericCommands mySqlGenericCommandsRPT)
+        public BarangayRepository(IGenericCommands genericCommands)
         {
-            mySqlGenericCommands = mySqlGenericCommandsRPT;
+            _genericCommands = genericCommands;
         }
 
         public bool CodeExist(string code)
@@ -25,7 +25,7 @@ namespace OmniGov.Core.Repositories
             };
 
             string query = $"SELECT code FROM {tableName} WHERE code = @code";
-            string result = mySqlGenericCommands.ExecuteScalar(query, parameters);
+            string result = _genericCommands.ExecuteScalar(query, parameters);
             return !string.IsNullOrEmpty(result);
         }
 
@@ -38,7 +38,7 @@ namespace OmniGov.Core.Repositories
             };
 
             string query = $"SELECT code FROM {tableName} WHERE id <> @id AND code = @code";
-            string result = mySqlGenericCommands.ExecuteScalar(query, parameters);
+            string result = _genericCommands.ExecuteScalar(query, parameters);
             return !string.IsNullOrEmpty(result);
         }
 
@@ -56,7 +56,7 @@ namespace OmniGov.Core.Repositories
                     var parameters = new object[][] { new object[] { @"id", DbType.Int32, entity.Id } };
 
                     string query = $"DELETE FROM {tableName} WHERE id = @id";
-                    _ = mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+                    _ = _genericCommands.ExecuteNonQuery(query, parameters);
                 }
 
                 scope.Complete();
@@ -74,7 +74,7 @@ namespace OmniGov.Core.Repositories
 
             string query = $"SELECT * FROM {tableName} WHERE id = @barangay_id";
 
-            DataTable dataTable = mySqlGenericCommands.ExecuteReader(query, parameters);
+            DataTable dataTable = _genericCommands.ExecuteReader(query, parameters);
 
             if (dataTable.Rows.Count > 0)
             {
@@ -91,7 +91,7 @@ namespace OmniGov.Core.Repositories
         public DataTable GetRecords()
         {
             string query = $"SELECT id, code, name FROM {tableName}";
-            return mySqlGenericCommands.Fill(query, new DataTable());
+            return _genericCommands.Fill(query, new DataTable());
         }
 
         public DataTable GetRecordsBySearch(string searchText)
@@ -113,7 +113,7 @@ namespace OmniGov.Core.Repositories
             };
 
             string query = $"INSERT INTO barangays (code, name, municipalities_id) VALUES (@barangay_code, @barangay_name, @municipalities_id)";
-            return mySqlGenericCommands.ExecuteNonQuery(query, parameter);
+            return _genericCommands.ExecuteNonQuery(query, parameter);
         }
 
         public bool Update(BarangayModel entity)
@@ -126,7 +126,7 @@ namespace OmniGov.Core.Repositories
             };
 
             string query = $"UPDATE {tableName} SET code = @code, name = @name WHERE id = @barangay_id";
-            return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+            return _genericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public int GetIdByName_MunicipalitiesName_ProvincesName(string name, string municipalityName, string provinceName)
@@ -138,7 +138,7 @@ namespace OmniGov.Core.Repositories
                 new object[] { "@provinces_name", DbType.String, provinceName}
             };
             string query = $"SELECT barangays_id FROM {viewTableName} WHERE barangays_name = @barangays_name AND municipalities_name = @municipalities_name AND provinces_name = @provinces_name";
-            return Convert.ToInt32(mySqlGenericCommands.ExecuteScalar(query, parameters));
+            return Convert.ToInt32(_genericCommands.ExecuteScalar(query, parameters));
         }
 
         public bool NameExistByMunicipalitiesName_ProvincesName(string name, string municipalityName, string provinceName)
@@ -151,7 +151,7 @@ namespace OmniGov.Core.Repositories
             };
 
             string query = $"SELECT barangays_name FROM {viewTableName} WHERE barangays_name = @barangays_name AND municipalities_name = @municipalities_name AND provinces_name = @provinces_name";
-            string result = mySqlGenericCommands.ExecuteScalar(query, parameters);
+            string result = _genericCommands.ExecuteScalar(query, parameters);
             return !string.IsNullOrEmpty(result);
         }
 
@@ -166,7 +166,7 @@ namespace OmniGov.Core.Repositories
             };
 
             string query = $"SELECT barangays_name FROM {viewTableName} WHERE barangays_id <> @barangays_id AND barangays_name = @barangays_name AND municipalities_name = @municipalities_name AND provinces_name = @provinces_name";
-            string result = mySqlGenericCommands.ExecuteScalar(query, parameters);
+            string result = _genericCommands.ExecuteScalar(query, parameters);
             return !string.IsNullOrEmpty(result);
         }
 
@@ -178,7 +178,7 @@ namespace OmniGov.Core.Repositories
             };
 
             string query = $"SELECT barangays_name FROM {viewTableName} WHERE barangays_name = @barangays_name";
-            string result = mySqlGenericCommands.ExecuteScalar(query, parameters);
+            string result = _genericCommands.ExecuteScalar(query, parameters);
             return !string.IsNullOrEmpty(result);
         }
 
@@ -191,7 +191,7 @@ namespace OmniGov.Core.Repositories
             };
 
             string query = $"SELECT name FROM {tableName} WHERE id <> @id AND name = @name";
-            string result = mySqlGenericCommands.ExecuteScalar(query, parameters);
+            string result = _genericCommands.ExecuteScalar(query, parameters);
             return !string.IsNullOrEmpty(result);
         }
 
@@ -205,7 +205,7 @@ namespace OmniGov.Core.Repositories
 
             string query = $"SELECT * FROM {viewTableName} WHERE barangays_id = @barangays_id";
 
-            DataTable dataTable = mySqlGenericCommands.ExecuteReader(query, parameters);
+            DataTable dataTable = _genericCommands.ExecuteReader(query, parameters);
 
             if (dataTable.Rows.Count > 0)
             {
@@ -222,7 +222,7 @@ namespace OmniGov.Core.Repositories
         public int GetLastInsertedId()
         {
             string query = $"SELECT MAX(id) FROM {tableName}";
-            return Convert.ToInt32(mySqlGenericCommands.ExecuteScalar(query));
+            return Convert.ToInt32(_genericCommands.ExecuteScalar(query));
         }
 
         public DataTable GetRecordsBySearch(int rowLimit, string searchText, int municipalityId)
@@ -235,7 +235,7 @@ namespace OmniGov.Core.Repositories
             };
 
             string query = $"SELECT * FROM {tableName} WHERE (code LIKE @search_text OR name LIKE @search_text) AND municipalities_id = @municipalities_id LIMIT @row_limit";
-            return mySqlGenericCommands.FillBySearch(query, new DataTable(), parameters);
+            return _genericCommands.FillBySearch(query, new DataTable(), parameters);
         }
     }
 }

@@ -153,29 +153,12 @@ namespace OmniGov.App.Views.Manage.Users
         private void btnDelete_Click(object sender, EventArgs e)
 
         {
-            try
+            if (DeleteData())
 
             {
-                if (DeleteData())
+                Helper.MessageBoxSuccess($"{dgUsers.SelectedRows.Count} record/s has beend deleted.");
 
-                {
-                    Helper.MessageBoxSuccess($"{dgUsers.SelectedRows.Count} record/s has beend deleted.");
-
-                    LoadRecords();
-                }
-            }
-            catch (MySqlException mysqlEx)
-
-            {
-                switch (mysqlEx.Number)
-
-                {
-                    case 1451:
-
-                        Helper.MessageBoxError("Cannot delete user because it is referenced to another record.");
-
-                        break;
-                }
+                LoadRecords();
             }
         }
 

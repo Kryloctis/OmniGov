@@ -57,8 +57,7 @@ namespace OmniGov.Treasury.Data.Repositories
 
             string query = $"SELECT * FROM {viewTableName} WHERE bank_accounts_id = @bank_accounts_id AND funds_id = @funds_id AND (cheque_no LIKE  @search_text OR payee LIKE @search_text) {showReleasedOnlyQuery}";
 
-            var dtRCI = new DataTable();
-            return _genericCommands.FillBySearch(query, dtRCI, parameters);
+            return _genericCommands.FillBySearch(query, new DataTable(), parameters);
         }
 
         public DataTable GetViewRecordsByBankAccountID(int bankAccountIDID)
@@ -69,6 +68,7 @@ namespace OmniGov.Treasury.Data.Repositories
             };
 
             string query = $"SELECT * FROM {viewTableName} WHERE bank_accounts_id = @bank_accouns_id";
+
             return _genericCommands.ExecuteReader(query, parameters);
         }
 
@@ -81,6 +81,7 @@ namespace OmniGov.Treasury.Data.Repositories
             };
 
             string query = $"SELECT * FROM {viewTableName} WHERE bank_accounts_id = @bank_accouns_id AND date_released <= @date_released";
+
             return _genericCommands.ExecuteReader(query, parameters);
         }
 
@@ -93,6 +94,7 @@ namespace OmniGov.Treasury.Data.Repositories
             };
 
             string query = $"SELECT * FROM {viewTableName} WHERE bank_accounts_id = @bank_accouns_id AND date_released IS NULL AND cheque_date <= @cheque_date";
+
             return _genericCommands.ExecuteReader(query, parameters);
         }
 
@@ -103,21 +105,15 @@ namespace OmniGov.Treasury.Data.Repositories
 
         public bool Insert(ReleasedChequesModel entity)
         {
-            try
+            var parameters = new object[][]
             {
-                var parameters = new object[][]
-                {
-                    new object[] { "@rci_id", DbType.Int32, entity.RCIID },
-                    new object[] { "@date_released", DbType.String, entity.DateReleased.ToString("yyyy-MM-dd") },
-                };
+                new object[] { "@rci_id", DbType.Int32, entity.RCIID },
+                new object[] { "@date_released", DbType.String, entity.DateReleased.ToString("yyyy-MM-dd") },
+            };
 
-                string query = $"INSERT INTO {tableName} (rci_id, date_released) VALUES (@rci_id, @date_released)";
-                return _genericCommands.ExecuteNonQuery(query, parameters);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            string query = $"INSERT INTO {tableName} (rci_id, date_released) VALUES (@rci_id, @date_released)";
+
+            return _genericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public bool ReleasedCheque(int chequedID)

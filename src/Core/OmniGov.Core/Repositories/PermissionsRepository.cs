@@ -8,11 +8,11 @@ namespace OmniGov.Core.Repositories
     public class PermissionsRepository : IPermissionsRepository
     {
         private readonly string tableName = "permissions";
-        private IGenericCommands mySqlGenericCommands;
+        private IGenericCommands _genericCommands;
 
-        public PermissionsRepository(IGenericCommands mySqlGenericCommands)
+        public PermissionsRepository(IGenericCommands genericCommands)
         {
-            this.mySqlGenericCommands = mySqlGenericCommands;
+            _genericCommands = genericCommands;
         }
 
         public Dictionary<string, string> GetRecordByID(int Id)
@@ -26,7 +26,7 @@ namespace OmniGov.Core.Repositories
 
             string query = $"SELECT permission_name FROM {tableName} WHERE id = @id";
 
-            DataTable dataTable = mySqlGenericCommands.ExecuteReader(query, parameters);
+            DataTable dataTable = _genericCommands.ExecuteReader(query, parameters);
 
             if (dataTable.Rows.Count > 0)
             {
@@ -43,7 +43,7 @@ namespace OmniGov.Core.Repositories
         public DataTable GetRecords()
         {
             string query = $"SELECT * FROM {tableName} ORDER BY permission_name";
-            return mySqlGenericCommands.Fill(query, new DataTable());
+            return _genericCommands.Fill(query, new DataTable());
         }
 
         public DataTable GetRecordsBySearch(string searchText)
@@ -54,7 +54,7 @@ namespace OmniGov.Core.Repositories
             };
 
             string query = $"SELECT * FROM {tableName} WHERE permission_name  LIKE @search_txt";
-            return mySqlGenericCommands.Fill(query, new DataTable());
+            return _genericCommands.Fill(query, new DataTable());
         }
 
         public bool Insert(PermissionsModel entity)
@@ -80,7 +80,7 @@ namespace OmniGov.Core.Repositories
             };
 
             string query = $"SELECT id FROM {tableName} WHERE id = @id";
-            string queryResult = mySqlGenericCommands.ExecuteScalar(query, parameters);
+            string queryResult = _genericCommands.ExecuteScalar(query, parameters);
 
             return !string.IsNullOrEmpty(queryResult);
         }

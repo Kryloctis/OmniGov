@@ -10,11 +10,11 @@ namespace OmniGov.Core.Repositories
     {
         private readonly string tableName = "users";
         private readonly string viewTableName = "view_users";
-        private IGenericCommands genericCommands;
+        private IGenericCommands _genericCommands;
 
         public UsersRepository(IGenericCommands genericCommands)
         {
-            this.genericCommands = genericCommands;
+            _genericCommands = genericCommands;
         }
 
         public Dictionary<string, string> GetRecordByID(int Id)
@@ -28,7 +28,7 @@ namespace OmniGov.Core.Repositories
 
             string query = $"SELECT * FROM {tableName} WHERE id = @id";
 
-            DataTable dataTable = genericCommands.ExecuteReader(query, parameters);
+            DataTable dataTable = _genericCommands.ExecuteReader(query, parameters);
 
             if (dataTable.Rows.Count > 0)
             {
@@ -56,60 +56,37 @@ namespace OmniGov.Core.Repositories
 
             string query = $"SELECT id, roles_id, prefix, first_name, mid_initial, last_name, suffix, CONCAT(first_name, ' ', mid_initial , ' ', last_name) AS user_full_name, username, password, is_deleted, created_at, updated_at, role_name, permission_name, permission_office FROM {viewTableName} WHERE role_name LIKE '%collect%' AND last_name LIKE @text_search AND first_name LIKE @text_search AND id NOT IN (SELECT users_id FROM job_orders WHERE is_deleted = 0) AND id NOT IN (SELECT users_id FROM collecting_officers) GROUP BY id";
 
-            var dtUsers = new DataTable();
-            return genericCommands.FillBySearch(query, dtUsers, parameters);
+            return _genericCommands.FillBySearch(query, new DataTable(), parameters);
         }
 
         public DataTable GetLinksJOCollectingOfficers()
         {
-            string query = $"SELECT " +
-                            $"id, " +
-                            $"roles_id, " +
-                            $"prefix, " +
-                            $"first_name, " +
-                            $"mid_initial, " +
-                            $"last_name, " +
-                            $"suffix, " +
-                            $"CONCAT(first_name, ' ', mid_initial , ' ', last_name) AS user_full_name, " +
-                            $"username, " +
-                            $"password, " +
-                            $"is_deleted, " +
-                            $"created_at, " +
-                            $"updated_at, " +
-                            $"role_name, " +
-                            $"permission_name, " +
-                            $"FROM view_users " +
-                            $"WHERE role_name LIKE '%collect%' " +
-                            $"AND id NOT IN (SELECT users_id FROM collecting_officers) " +
-                            $"AND id NOT IN (SELECT users_id FROM job_orders WHERE is_deleted = 0) " +
-                            $"GROUP BY id";
+            string query = $"SELECT id, roles_id, prefix, first_name, mid_initial, last_name, suffix, CONCAT(first_name, ' ', mid_initial, ' ', last_name) AS user_full_name, username, password, is_deleted, created_at, updated_at, role_name, permission_name, FROM view_users WHERE role_name LIKE '%collect%' AND id NOT IN(SELECT users_id FROM collecting_officers) AND id NOT IN(SELECT users_id FROM job_orders WHERE is_deleted = 0) GROUP BY id";
 
-            var dtUsers = new DataTable();
-            return genericCommands.Fill(query, dtUsers);
+            return _genericCommands.Fill(query, new DataTable());
         }
 
         public DataTable GetLinksDisbursingOfficers()
         {
-            string query = $"SELECT " +
-                $"id, " +
-                $"roles_id, " +
-                $"prefix, " +
-                $"first_name, " +
-                $"mid_initial, " +
-                $"last_name, " +
-                $"suffix, " +
-                $"CONCAT(first_name, ' ', mid_initial , ' ', last_name) AS user_full_name, " +
-                $"username, " +
-                $"password, " +
-                $"is_deleted, " +
-                $"created_at, " +
-                $"updated_at, " +
-                $"role_name, " +
-                $"permission_name, " +
-                $"FROM {viewTableName} WHERE role_name LIKE '%disburs%' GROUP BY id";
+            string query = $@"SELECT
+                            id,
+                            roles_id,
+                            prefix,
+                            first_name,
+                            mid_initial,
+                            last_name,
+                            suffix,
+                            CONCAT(first_name, ' ', mid_initial , ' ', last_name) AS user_full_name,
+                            username,
+                            password,
+                            is_deleted,
+                            created_at,
+                            updated_at,
+                            role_name,
+                            permission_name,
+                            FROM {viewTableName} WHERE role_name LIKE '%disburs%' GROUP BY id";
 
-            var dtUsers = new DataTable();
-            return genericCommands.Fill(query, dtUsers);
+            return _genericCommands.Fill(query, new DataTable());
         }
 
         public DataTable GetRecordsBySearch(string searchText)
@@ -121,7 +98,7 @@ namespace OmniGov.Core.Repositories
 
             string query = $"SELECT a.id, a.prefix, a.first_name, a.mid_initial, a.last_name, a.suffix, a.username, b.role_name, a.created_at, a.updated_at FROM {tableName} a INNER JOIN roles b on a.roles_id  = b.id WHERE (a.last_name LIKE @search_text OR a.first_name LIKE @search_text OR a.mid_initial LIKE @search_text OR b.role_name LIKE @search_text)";
 
-            return genericCommands.FillBySearch(query, new DataTable(), parameters);
+            return _genericCommands.FillBySearch(query, new DataTable(), parameters);
         }
 
         public bool Insert(UsersModel entity)
@@ -139,7 +116,8 @@ namespace OmniGov.Core.Repositories
             };
 
             string query = $"INSERT INTO {tableName} ( roles_id, prefix, first_name, mid_initial, last_name, suffix, username, password) VALUES (@roles_id, @prefix, @first_name, @mid_initial, @last_name, @suffix, @username, sha2(@password, 224))";
-            return genericCommands.ExecuteNonQuery(query, parameters);
+
+            return _genericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public bool Update(UsersModel entity)
@@ -157,7 +135,8 @@ namespace OmniGov.Core.Repositories
             };
 
             string query = $"UPDATE {tableName} SET roles_id = @roles_id, prefix = @prefix, first_name = @first_name, mid_initial = @mid_initial, last_name = @last_name, suffix = @suffix, username = @username WHERE id = @id";
-            return genericCommands.ExecuteNonQuery(query, parameters);
+
+            return _genericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public bool UpdateWithPassword(UsersModel entity)
@@ -176,7 +155,8 @@ namespace OmniGov.Core.Repositories
             };
 
             string query = $"UPDATE {tableName} SET roles_id = @roles_id, prefix = @prefix, first_name = @first_name, mid_initial = @mid_initial, last_name = @last_name, suffix = @suffix, username = @username, password = sha2(@password, 224) WHERE id = @id";
-            return genericCommands.ExecuteNonQuery(query, parameters);
+
+            return _genericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public bool Delete(List<UsersModel> entityList)
@@ -187,7 +167,7 @@ namespace OmniGov.Core.Repositories
                 {
                     var parameters = new object[][] { new object[] { "@id", DbType.Int16, entity.Id }, };
                     string query = $"DELETE FROM {tableName} WHERE id = @id";
-                    _ = genericCommands.ExecuteNonQuery(query, parameters);
+                    _ = _genericCommands.ExecuteNonQuery(query, parameters);
                 }
 
                 scope.Complete();
@@ -203,10 +183,8 @@ namespace OmniGov.Core.Repositories
             };
 
             string query = $"SELECT id FROM {tableName} WHERE id = @id";
-            string queryResult = genericCommands.ExecuteScalar(query, parameters);
 
-            // if query is not null, means found some record, so true
-            return !string.IsNullOrEmpty(queryResult);
+            return !string.IsNullOrEmpty(_genericCommands.ExecuteScalar(query, parameters));
         }
 
         public bool NameExist(string userName)
@@ -217,36 +195,21 @@ namespace OmniGov.Core.Repositories
             };
 
             string query = $"SELECT username FROM {tableName} WHERE username = @username";
-            string queryResult = genericCommands.ExecuteScalar(query, parameters);
 
-            // if query is not null, means found some record, so true
-            if (!string.IsNullOrEmpty(queryResult)) return true;
-            return false;
+            return !string.IsNullOrEmpty(_genericCommands.ExecuteScalar(query, parameters));
         }
 
         public bool NameExist(string userName, int userId)
         {
-            try
+            var parameters = new object[][]
             {
-                var parameters = new object[][]
-                {
-                    new object[] { "@id", DbType.Int16, userId },
-                    new object[] { "@username", DbType.String, userName },
-                };
+                new object[] { "@id", DbType.Int16, userId },
+                new object[] { "@username", DbType.String, userName },
+            };
 
-                string query = $"SELECT username FROM {tableName} WHERE id <> @id AND username = @username";
-                string queryResult = genericCommands.ExecuteScalar(query, parameters);
+            string query = $"SELECT username FROM {tableName} WHERE id <> @id AND username = @username";
 
-                // if query is not null, means found some record, so true
-                if (!string.IsNullOrEmpty(queryResult)) return true;
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-            ;
-
-            return false;
+            return !string.IsNullOrEmpty(_genericCommands.ExecuteScalar(query, parameters));
         }
 
         public Dictionary<string, string> GetUserRecordByAcc(string username, string password)
@@ -261,7 +224,7 @@ namespace OmniGov.Core.Repositories
 
             string query = $"SELECT * FROM {viewTableName} WHERE is_deleted = 0 AND username = @username AND password = sha2(@password, 224)";
 
-            DataTable dataTable = genericCommands.ExecuteReader(query, parameters);
+            DataTable dataTable = _genericCommands.ExecuteReader(query, parameters);
 
             if (dataTable.Rows.Count > 0)
             {
@@ -285,7 +248,7 @@ namespace OmniGov.Core.Repositories
 
             string query = $"SELECT * FROM {viewTableName} WHERE (last_name LIKE @searchTxt OR first_name LIKE @searchTxt OR mid_initial LIKE @searchTxt OR username LIKE @searchTxt OR role_name LIKE @searchTxt) AND is_super = 0 GROUP BY id LIMIT @row_limit";
 
-            return genericCommands.FillBySearch(query, new DataTable(), parameters);
+            return _genericCommands.FillBySearch(query, new DataTable(), parameters);
         }
 
         public bool AccIsValidated(string username, string password)
@@ -297,7 +260,7 @@ namespace OmniGov.Core.Repositories
             };
 
             string query = $"SELECT id FROM {tableName} WHERE is_deleted = 0 AND username = @username AND password = sha2(@password, 224)";
-            return !string.IsNullOrEmpty(genericCommands.ExecuteScalar(query, parameters));
+            return !string.IsNullOrEmpty(_genericCommands.ExecuteScalar(query, parameters));
         }
 
         public Dictionary<string, dynamic> GetViewRecordById(int Id)
@@ -311,7 +274,7 @@ namespace OmniGov.Core.Repositories
 
             string query = $"SELECT * FROM {viewTableName} WHERE id = @id";
 
-            DataTable dataTable = genericCommands.ExecuteReader(query, parameters);
+            DataTable dataTable = _genericCommands.ExecuteReader(query, parameters);
 
             if (dataTable.Rows.Count > 0)
             {
@@ -328,7 +291,7 @@ namespace OmniGov.Core.Repositories
         public DataTable GetViewRecords()
         {
             string query = $"SELECT * FROM {viewTableName}";
-            return genericCommands.Fill(query, new DataTable());
+            return _genericCommands.Fill(query, new DataTable());
         }
     }
 }

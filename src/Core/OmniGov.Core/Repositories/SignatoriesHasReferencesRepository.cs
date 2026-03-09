@@ -7,13 +7,13 @@ namespace OmniGov.Core.Repositories
 {
     public class SignatoriesHasReferencesRepository : ISignatoriesHasReferences
     {
-        private IGenericCommands mySqlGenericCommands;
+        private IGenericCommands _genericCommands;
         private readonly string tableName = "signatories_has_document_references";
         private readonly string viewTableName = "view_signatories_has_document_references";
 
-        public SignatoriesHasReferencesRepository(IGenericCommands mySqlGenericCommands)
+        public SignatoriesHasReferencesRepository(IGenericCommands genericCommands)
         {
-            this.mySqlGenericCommands = mySqlGenericCommands;
+            this._genericCommands = genericCommands;
         }
 
         public bool Delete(List<SignatoriesHasReferencesModel> entityList)
@@ -50,7 +50,7 @@ namespace OmniGov.Core.Repositories
             };
 
             string query = $"INSERT INTO {tableName} (signatories_id, document_references_id) VALUES (@signatories_id, @document_references_id)";
-            return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+            return _genericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public bool Update(SignatoriesHasReferencesModel entity)
@@ -66,7 +66,7 @@ namespace OmniGov.Core.Repositories
             };
 
             string query = $"SELECT * FROM {tableName} WHERE signatories_id = @signatories_id";
-            return mySqlGenericCommands.FillBySearch(query, new DataTable(), parameters);
+            return _genericCommands.FillBySearch(query, new DataTable(), parameters);
         }
 
         public bool DeleteBySignatoryId(int signatoryId)
@@ -77,7 +77,7 @@ namespace OmniGov.Core.Repositories
             };
 
             string query = $"DELETE FROM {tableName} WHERE signatories_id = @signatories_id";
-            return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+            return _genericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public bool IsReferencedBySignatory(int documentReferenceId, int signatories_id)
@@ -89,7 +89,7 @@ namespace OmniGov.Core.Repositories
             };
 
             string query = $"SELECT document_references_id FROM {tableName} WHERE document_references_id = @document_references_id AND signatories_id = @signatories_id";
-            string result = mySqlGenericCommands.ExecuteScalar(query, parameters);
+            string result = _genericCommands.ExecuteScalar(query, parameters);
             return !string.IsNullOrEmpty(result);
         }
 
@@ -101,7 +101,7 @@ namespace OmniGov.Core.Repositories
             };
 
             string query = $"SELECT document_references_id FROM {tableName} WHERE document_references_id = @document_references_id";
-            string result = mySqlGenericCommands.ExecuteScalar(query, parameters);
+            string result = _genericCommands.ExecuteScalar(query, parameters);
             return !string.IsNullOrEmpty(result);
         }
 
@@ -114,7 +114,7 @@ namespace OmniGov.Core.Repositories
             };
 
             string query = $"SELECT document_references_id FROM {tableName} WHERE signatories_id <> @signatories_id AND  document_references_id = @document_references_id";
-            string result = mySqlGenericCommands.ExecuteScalar(query, parameters);
+            string result = _genericCommands.ExecuteScalar(query, parameters);
             return !string.IsNullOrEmpty(result);
         }
 
@@ -126,7 +126,7 @@ namespace OmniGov.Core.Repositories
             };
 
             string query = $"SELECT * FROM {viewTableName} WHERE signatories_id = @signatories_id GROUP BY documents_id";
-            return mySqlGenericCommands.FillBySearch(query, new DataTable(), parameters);
+            return _genericCommands.FillBySearch(query, new DataTable(), parameters);
         }
 
         public Dictionary<string, string> GetSigntryByRefDoc(string reference, string documentName)
@@ -141,7 +141,7 @@ namespace OmniGov.Core.Repositories
 
             string query = $"SELECT * FROM {viewTableName} WHERE document_references_name = @document_references_name AND documents_name = @documents_name";
 
-            DataTable dataTable = mySqlGenericCommands.ExecuteReader(query, parameters);
+            DataTable dataTable = _genericCommands.ExecuteReader(query, parameters);
 
             if (dataTable.Rows.Count > 0)
             {

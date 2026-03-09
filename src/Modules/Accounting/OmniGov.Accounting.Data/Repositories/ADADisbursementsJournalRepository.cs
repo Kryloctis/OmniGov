@@ -123,26 +123,14 @@ namespace OmniGov.Accounting.Data.Repositories
 
         public bool JevIdExist(int jevId)
         {
-            try
+            var parameters = new object[][]
             {
-                var parameters = new object[][]
-                {
-                    new object[] { "@jev_id", DbType.Int32, jevId },
-                };
+                new object[] { "@jev_id", DbType.Int32, jevId },
+            };
 
-                string query = $"SELECT id FROM {tableName} WHERE jev_id = @jev_id";
-                string queryResult = _genericCommands.ExecuteScalar(query, parameters);
+            string query = $"SELECT id FROM {tableName} WHERE jev_id = @jev_id";
 
-                // if query is not null, means found some record, so true
-                if (!string.IsNullOrEmpty(queryResult)) return true;
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-            ;
-
-            return false;
+            return !string.IsNullOrEmpty(_genericCommands.ExecuteScalar(query, parameters));
         }
 
         public bool DeleteByJevId(int jevId)

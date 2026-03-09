@@ -8,17 +8,12 @@ namespace OmniGov.Core.Repositories
 {
     public class ClassificationCodesRepository : IClassificationCodes
     {
-        private IGenericCommands _mySqlGenericCommands;
+        private IGenericCommands _genericCommands;
         private readonly string tableName = "classification_codes";
 
-        public ClassificationCodesRepository(IGenericCommands mySqlGenericCommands)
+        public ClassificationCodesRepository(IGenericCommands genericCommands)
         {
-            _mySqlGenericCommands = mySqlGenericCommands;
-        }
-
-        public int CountRecords()
-        {
-            throw new NotImplementedException();
+            _genericCommands = genericCommands;
         }
 
         public bool Delete(List<ClassificationCodesModel> entityList)
@@ -29,7 +24,7 @@ namespace OmniGov.Core.Repositories
                 {
                     var parameters = new object[][] { new object[] { "@id", DbType.Int32, model.Id } };
                     string query = $"DELETE FROM {tableName} WHERE id = @id";
-                    _ = _mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+                    _ = _genericCommands.ExecuteNonQuery(query, parameters);
                 }
 
                 scope.Complete();
@@ -43,7 +38,7 @@ namespace OmniGov.Core.Repositories
             var parameters = new object[][] { new object[] { "@id", DbType.Int32, Id } };
             string query = $"SELECT code, name, is_special FROM {tableName} WHERE id = @id";
 
-            using (var reader = _mySqlGenericCommands.ExecuteReader(query, parameters))
+            using (var reader = _genericCommands.ExecuteReader(query, parameters))
             {
                 if (reader.Rows.Count < 1)
                     return dictionary;
@@ -63,7 +58,7 @@ namespace OmniGov.Core.Repositories
         {
             string query = $"SELECT * FROM {tableName}";
             var dataTable = new DataTable();
-            return _mySqlGenericCommands.Fill(query, dataTable);
+            return _genericCommands.Fill(query, dataTable);
         }
 
         public DataTable GetRecordsBySearch(string searchText)
@@ -71,7 +66,7 @@ namespace OmniGov.Core.Repositories
             var parameters = new object[][] { new object[] { "@search_text", DbType.String, $"%{searchText}%" } };
             string query = $"SELECT * FROM {tableName} WHERE code LIKE @code OR name LIKE @name";
             var dataTable = new DataTable();
-            return _mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
+            return _genericCommands.FillBySearch(query, dataTable, parameters);
         }
 
         public bool IdExist(int id)
@@ -89,7 +84,7 @@ namespace OmniGov.Core.Repositories
             };
 
             string query = $"INSERT INTO {tableName} (code, name, is_special) VALUES (@code, @name, @is_special)";
-            return _mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+            return _genericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public bool Update(ClassificationCodesModel entity)
@@ -103,14 +98,14 @@ namespace OmniGov.Core.Repositories
             };
 
             string query = $"UPDATE {tableName} SET code = @code, name = @name, is_special = @is_special WHERE id = @id";
-            return _mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+            return _genericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public bool NameExist(string name)
         {
             var parameters = new object[][] { new object[] { "@name", DbType.String, name } };
             string query = $"SELECT id FROM {tableName} WHERE name = @name";
-            string result = _mySqlGenericCommands.ExecuteScalar(query, parameters);
+            string result = _genericCommands.ExecuteScalar(query, parameters);
             if (!string.IsNullOrEmpty(result))
                 return true;
             return false;
@@ -124,7 +119,7 @@ namespace OmniGov.Core.Repositories
                 new object[] { "@name", DbType.String, name }
             };
             string query = $"SELECT id FROM {tableName} WHERE id <> id AND name = @name";
-            string result = _mySqlGenericCommands.ExecuteScalar(query, parameters);
+            string result = _genericCommands.ExecuteScalar(query, parameters);
             if (!string.IsNullOrEmpty(result))
                 return true;
             return false;
@@ -133,14 +128,14 @@ namespace OmniGov.Core.Repositories
         public int GetLastInsertedId()
         {
             string query = $"SELECT MAX(id) FROM {tableName}";
-            return Convert.ToInt32(_mySqlGenericCommands.ExecuteScalar(query));
+            return Convert.ToInt32(_genericCommands.ExecuteScalar(query));
         }
 
         public int GetIdByName(string name)
         {
             var parameters = new object[][] { new object[] { "@name", DbType.String, name } };
             string query = $"SELECT id FROM {tableName} WHERE name = @name";
-            return Convert.ToInt32(_mySqlGenericCommands.ExecuteScalar(query, parameters));
+            return Convert.ToInt32(_genericCommands.ExecuteScalar(query, parameters));
         }
     }
 }
